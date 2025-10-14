@@ -57,13 +57,16 @@ cd excursiones-juntos
 
 Primero, necesitamos poner en marcha el servidor de la API.
 
-```bash
+
 # 1. Navega al directorio del servidor
+```bash
 cd testserver
+```
 
 # 2. Instala las dependencias
+```bash
 npm install
-
+```
 # 3. Crea y configura el archivo de variables de entorno
 
 ```env
