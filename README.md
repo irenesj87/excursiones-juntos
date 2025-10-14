@@ -10,7 +10,6 @@ Una aplicación web completa construida con React y Node.js/Express que permite 
 - **Autenticación de Usuarios:** Sistema completo de registro, inicio de sesión y cierre de sesión con JWT.
 - **Gestión de Perfil:** Los usuarios pueden ver y actualizar su información personal.
 - **Interacción con Excursiones:** Los usuarios autenticados pueden apuntarse a las excursiones.
-- **Tema Claro/Oscuro:** Soporte para cambiar entre temas, con persistencia en `localStorage` y sin parpadeos (FOUC).
 
 ### Backend (Node.js/Express)
 
@@ -65,9 +64,7 @@ cd testserver
 # 2. Instala las dependencias
 npm install
 
-# 3. Crea y. configura el archivo de variables de entorno
-
-Abre el archivo `.env` recién creado y añade las siguientes variables. **Recuerda usar una clave secreta fuerte y aleatoria.**
+# 3. Crea y configura el archivo de variables de entorno
 
 ```env
 # Clave secreta para firmar los JSON Web Tokens (JWT)
