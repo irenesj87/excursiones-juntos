@@ -169,6 +169,7 @@ function NavigationBarComponent({
 		<Navbar
 			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
 			expand="lg" // El menú se expande en breakpoints grandes.
+			variant="dark" // Indica a Bootstrap que el fondo es oscuro, para que use colores de texto e iconos claros.
 			className={`${styles.customNavbar} ${
 				// Se comprueba si estamos en la página de excursiones para saber si tenemos que eliminar el borde inferior.
 				isOnExcursionsPage ? styles.onExcursionsPage : ""

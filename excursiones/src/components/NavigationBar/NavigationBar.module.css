@@ -20,13 +20,11 @@
 
 .offcanvasMenu {
 	max-width: 300px;
-	background-color: var(--excursion-card-bg); /* Fondo para el menú lateral */
 }
 
 /* Elimina el borde del botón de hamburguesa y su sombra al enfocarlo */
 .navbarToggler,
 .navbarToggler:focus {
-	color: var(--offcanvas-text-color);
 	border: none;
 	box-shadow: none;
 }

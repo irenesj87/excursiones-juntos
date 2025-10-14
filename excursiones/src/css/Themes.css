@@ -43,11 +43,6 @@
 	--color-success-dark: hsl(145, 50%, 60%);
 	--color-warning-dark: hsl(43, 80%, 65%);
 	--color-danger-dark: hsl(355, 75%, 70%);
-
-	/* Icono de hamburguesa para el tema claro (color blanco #ffffff) */
-	--navbar-toggler-icon-bg-light: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	/* Icono de hamburguesa para el tema oscuro (color blanco #ffffff) */
-	--navbar-toggler-icon-bg-dark: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 /* ======================================== */
@@ -78,7 +73,7 @@ html.light {
 	--navbar-brand-color: var(--color-white);
 	--navbar-toggler-icon-color: var(--color-white);
 	--navbar-toggler-border-color: rgba(255, 255, 255, 0.25);
-	--bs-navbar-toggler-icon-bg: var(--navbar-toggler-icon-bg-light);
+	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
 
 	/* --- Bordes y Separadores --- */
@@ -210,20 +205,27 @@ html.dark {
 	--navbar-brand-color: var(--color-white);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
-	--bs-navbar-toggler-icon-bg: var(--navbar-toggler-icon-bg-dark);
+	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(139, 192, 165, 0.5); /* Primitiva RGB de --color-green-100 */
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-border-subtle);
 
 	/* --- Botones y Enlaces --- */
-	--login-btn-text: var(
-		--navbar-color
-	); /* Cambiado para que sea legible en la navbar */
-	--login-btn-bg: var(--color-primary);
-	--login-btn-border: var(--color-primary);
-	--login-btn-bg-hover: var(--color-primary-hover);
-	--login-btn-border-hover: var(--color-primary-hover);
+	--login-btn-text: var(--color-text-on-primary);
+	--login-btn-bg: transparent; /* Fondo transparente para estilo outline */
+	--login-btn-border: var(
+		--separator-color
+	); /* Borde sutil como otros elementos */
+	--login-btn-bg-hover: rgba(
+		255,
+		255,
+		255,
+		0.1
+	); /* Mismo hover que 'Registrarse' */
+	--login-btn-border-hover: var(
+		--separator-color
+	); /* El borde no cambia en hover */
 
 	--register-link-color: var(
 		--navbar-color
@@ -359,8 +361,8 @@ html.dark .btn-close {
 
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
-	background-color: var(--color-background-body);
-	color: var(--color-text-base);
+	background-color: var(--excursion-card-bg); /* Unifica el fondo con el body */
+	color: var(--color-text-base); /* Mantiene el color del texto del tema */
 	border-bottom: 1px solid var(--separator-color);
 }
 
@@ -370,6 +372,7 @@ html.dark .btn-close {
 
 /* Estilos específicos para los enlaces dentro del Offcanvas de navegación (identificado por su ID) */
 #offcanvasNavbar .offcanvas-body .nav-link {
+	/* En modo oscuro, el texto de los botones de acción debe ser claro */
 	color: var(--color-text-base);
 }
 
