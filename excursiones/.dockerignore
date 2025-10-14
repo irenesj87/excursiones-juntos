@@ -1,9 +1,0 @@
-# Ignorar dependencias de desarrollo local
-node_modules
-
-# Ignorar la carpeta de build (se genera dentro del contenedor)
-build
-
-# Ignorar archivos de Git y de entorno
-.git
-.env

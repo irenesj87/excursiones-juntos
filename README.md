@@ -1,50 +1,103 @@
 # 🏔️ Proyecto "Excursiones Juntos"
 
-Este repositorio contiene la aplicación completa "Excursiones Juntos", que consta de un frontend desarrollado en React y un backend en Node.js con Express.
+Una aplicación web completa construida con React y Node.js/Express que permite a los usuarios descubrir, buscar y apuntarse a excursiones. El proyecto está dividido en un frontend moderno y una API RESTful segura.
 
-## 📂 Estructura del Proyecto
+## ✨ Características Principales
 
-- **/excursiones**: Contiene el código fuente de la aplicación frontend.
-- **/testserver**: Contiene el código fuente de la API del backend.
+### Frontend (React)
 
-## 🚀 Puesta en Marcha con Docker (Recomendado)
+- **Búsqueda y Filtrado Dinámico:** Busca excursiones por texto y filtra por zona, dificultad y duración.
+- **Autenticación de Usuarios:** Sistema completo de registro, inicio de sesión y cierre de sesión con JWT.
+- **Gestión de Perfil:** Los usuarios pueden ver y actualizar su información personal.
+- **Interacción con Excursiones:** Los usuarios autenticados pueden apuntarse a las excursiones.
+- **Tema Claro/Oscuro:** Soporte para cambiar entre temas, con persistencia en `localStorage` y sin parpadeos (FOUC).
 
-Con Docker Compose, puedes levantar tanto el frontend como el backend con un solo comando.
+### Backend (Node.js/Express)
 
-### ✅ Requisitos Previos
+- **API RESTful:** Endpoints bien definidos para gestionar usuarios, excursiones y autenticación.
+- **Seguridad:**
+  - Autenticación basada en **JSON Web Tokens (JWT)**.
+  - Contraseñas hasheadas con `bcrypt`.
+  - **Rate Limiting** para prevenir ataques de fuerza bruta y abuso de la API.
+  - Configuración segura de **CORS** basada en una lista blanca (whitelist).
+  - Validación de entradas en todos los endpoints.
+  - Variables de entorno seguras con `dotenv`.
 
-- Instala Docker en tu sistema.
+## 🛠️ Tecnologías Utilizadas
 
-### ⚙️ Pasos
+| Área         | Tecnología                                                                                     |
+| :----------- | :--------------------------------------------------------------------------------------------- |
+| **Frontend** | React, React Router, Redux Toolkit, React Bootstrap, CSS Modules, Jest, React Testing Library. |
+| **Backend**  | Node.js, Express, JWT, Bcrypt, Express-Rate-Limit, CORS.                                       |
+| **DevOps**   | SonarQube (para análisis de código estático).                                                  |
 
-1.  **Clona el repositorio:**
+## 📁 Estructura del Proyecto
 
-    ```bash
-    git clone <URL_DEL_REPOSITORIO>
-    cd excursiones-juntos
-    ```
+El repositorio está organizado en dos directorios principales:
 
-2.  **Configura las variables de entorno del backend:**
-    Crea el archivo `.env` para el servidor a partir del ejemplo proporcionado `.env.example`.
+- `/excursiones`: Contiene la aplicación de frontend desarrollada con Create React App.
+- `/testserver`: Contiene la API de backend desarrollada con Express.
 
-    ```bash
-    cp testserver/.env.example testserver/.env
-    ```
+## 🚀 Cómo Empezar
 
-    Abre `testserver/.env` y rellena **todas** las variables que estén vacías:
+Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local.
 
-    - `JWT_SECRET`: Genera una cadena de texto larga y aleatoria.
-    - `CORS_ALLOWED_ORIGINS`: Para el entorno de desarrollo con Docker, el valor debe ser `http://localhost:3000`.
+### Prerrequisitos
 
-3.  **Levanta la aplicación:**
-    Desde el directorio raíz (`excursiones-juntos`), ejecuta el siguiente comando:
-    ```bash
-    docker compose up --build
-    ```
+- Node.js (versión 14 o superior)
+- npm (generalmente se instala con Node.js)
 
-Una vez finalizado, podrás acceder a:
+### 1. Clonar el Repositorio
 
-- **Frontend**: `http://localhost:3000`
-- **Backend**: `http://localhost:3001`
+```bash
+git clone https://github.com/irenesanjose/excursiones-juntos.git
+cd excursiones-juntos
+```
 
-Para detener la aplicación, presiona `Ctrl + C` en la terminal donde se está ejecutando `docker compose`.
+### 2. Configurar y Ejecutar el Backend
+
+Primero, necesitamos poner en marcha el servidor de la API.
+
+```bash
+# 1. Navega al directorio del servidor
+cd testserver
+
+# 2. Instala las dependencias
+npm install
+
+# 3. Crea y. configura el archivo de variables de entorno
+
+Abre el archivo `.env` recién creado y añade las siguientes variables. **Recuerda usar una clave secreta fuerte y aleatoria.**
+
+```env
+# Clave secreta para firmar los JSON Web Tokens (JWT)
+JWT_SECRET=tu_clave_secreta_muy_larga_y_aleatoria_aqui
+
+# Orígenes permitidos para las peticiones CORS (el puerto de tu app de React)
+CORS_ALLOWED_ORIGINS=http://localhost:3000
+```
+
+```bash
+# 4. Inicia el servidor (se ejecutará en http://localhost:3001)
+npm start
+```
+
+### 3. Configurar y Ejecutar el Frontend
+
+Ahora, en una **nueva terminal**, vamos a iniciar la aplicación de React.
+
+```bash
+# 1. Navega al directorio del frontend (desde la raíz del proyecto)
+cd excursiones
+
+# 2. Instala las dependencias
+npm install
+
+# 3. Inicia la aplicación de React (se abrirá en http://localhost:3000)
+npm start
+```
+
+## 🧪 Ejecutar Tests
+
+- **Para el Frontend:** `cd excursiones && npm test`
+- **Para el Backend:** Los tests para el backend aún no están implementados.

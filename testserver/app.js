@@ -1,6 +1,8 @@
+const dotenv = require("dotenv");
+
 // Cargar las variables de entorno desde el archivo .env
 if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config();
+	dotenv.config();
 }
 
 // Verificación de seguridad crítica: Asegurarse de que la clave secreta para JWT está definida.
