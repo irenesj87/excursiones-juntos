@@ -4,8 +4,8 @@ Este repositorio contiene la aplicación completa "Excursiones Juntos", que cons
 
 ## 📂 Estructura del Proyecto
 
-- **/excursiones**: Contiene el código fuente de la aplicación frontend (cliente React).
-- **/testserver**: Contiene el código fuente de la API del backend (servidor Node.js).
+- **/excursiones**: Contiene el código fuente de la aplicación frontend.
+- **/testserver**: Contiene el código fuente de la API del backend.
 
 ## 🚀 Puesta en Marcha con Docker (Recomendado)
 
@@ -25,7 +25,7 @@ Con Docker Compose, puedes levantar tanto el frontend como el backend con un sol
     ```
 
 2.  **Configura las variables de entorno del backend:**
-    Crea el archivo `.env` para el servidor a partir del ejemplo proporcionado.
+    Crea el archivo `.env` para el servidor a partir del ejemplo proporcionado `.env.example`.
 
     ```bash
     cp testserver/.env.example testserver/.env
