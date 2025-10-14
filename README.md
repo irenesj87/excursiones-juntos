@@ -53,7 +53,7 @@ git clone https://github.com/irenesanjose/excursiones-juntos.git
 cd excursiones-juntos
 ```
 
-## 2. Configurar y Ejecutar el Backend
+## Configurar y Ejecutar el Backend
 
 Primero, necesitamos poner en marcha el servidor de la API.
 
@@ -66,7 +66,7 @@ cd testserver
 ```bash
 npm install
 ```
-### 3. Crea y configura el archivo de variables de entorno
+### 3. Crea y configura el archivo de variables de entorno `.env`
 
 ```env
 # Clave secreta para firmar los JSON Web Tokens (JWT)
@@ -76,23 +76,28 @@ JWT_SECRET=tu_clave_secreta_muy_larga_y_aleatoria_aqui
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
 
+### 4. Inicia el servidor (se ejecutará en http://localhost:3001)
 ```bash
-# 4. Inicia el servidor (se ejecutará en http://localhost:3001)
 npm start
 ```
 
-### 3. Configurar y Ejecutar el Frontend
+## Configurar y Ejecutar el Frontend
 
 Ahora, en una **nueva terminal**, vamos a iniciar la aplicación de React.
 
+### 1. Navega al directorio del frontend (desde la raíz del proyecto)
+
 ```bash
-# 1. Navega al directorio del frontend (desde la raíz del proyecto)
 cd excursiones
+```
+### 2. Instala las dependencias
 
-# 2. Instala las dependencias
+```bash
 npm install
+```
+### 3. Inicia la aplicación de React (se abrirá en http://localhost:3000)
 
-# 3. Inicia la aplicación de React (se abrirá en http://localhost:3000)
+```bash
 npm start
 ```
 
