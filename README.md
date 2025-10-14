@@ -53,21 +53,20 @@ git clone https://github.com/irenesanjose/excursiones-juntos.git
 cd excursiones-juntos
 ```
 
-### 2. Configurar y Ejecutar el Backend
+## 2. Configurar y Ejecutar el Backend
 
 Primero, necesitamos poner en marcha el servidor de la API.
 
-
-# 1. Navega al directorio del servidor
+### 1. Navega al directorio del servidor
 ```bash
 cd testserver
 ```
 
-# 2. Instala las dependencias
+### 2. Instala las dependencias
 ```bash
 npm install
 ```
-# 3. Crea y configura el archivo de variables de entorno
+### 3. Crea y configura el archivo de variables de entorno
 
 ```env
 # Clave secreta para firmar los JSON Web Tokens (JWT)
