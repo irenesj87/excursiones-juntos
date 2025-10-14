@@ -72,9 +72,15 @@ npm install
 # Clave secreta para firmar los JSON Web Tokens (JWT)
 JWT_SECRET=tu_clave_secreta_muy_larga_y_aleatoria_aqui
 
++Nota: Este comando instalará las versiones excatas de las dependencias especificadas en `package-lock.json`para garantizar un entorno consistente.
+
 # Orígenes permitidos para las peticiones CORS (el puerto de tu app de React)
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
+### 3. Configura las variables de entorno + 
+
++Copia el archivo de ejemplo .env.example a un nuevo archivo llamado .env. +```bash +cp .env.example .env
++Luego, abre el archivo `.env` y modifica la variable `JWT_SECRET` con un valor seguro y único.
 
 ### 4. Inicia el servidor (se ejecutará en http://localhost:3001)
 ```bash
