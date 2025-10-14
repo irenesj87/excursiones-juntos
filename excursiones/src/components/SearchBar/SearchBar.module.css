@@ -1,0 +1,60 @@
+.searchContainer {
+	position: relative;
+	width: 100%;
+}
+
+.searchInput {
+	/* Aumentamos el padding para dar más espacio y mejorar la legibilidad */
+	padding: 0.6rem 1rem 0.6rem 2.75rem; /* Padding izquierdo para el icono */
+	border-radius: 25px; /* Bordes redondeados para un look más suave */
+	border: 1px solid var(--separator-color);
+	background-color: var(--excursion-card-bg);
+	color: var(--color-text-base);
+	width: 100%;
+	height: 48px; /* Altura fija para consistencia */
+}
+
+/* Eliminamos el estilo por defecto del navegador para el icono de 'limpiar' en inputs de tipo search */
+.searchInput::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+/* Estilo de foco mejorado */
+.searchInput:focus {
+	border-color: var(--color-primary);
+	box-shadow: 0 0 0 3px
+		color-mix(in srgb, var(--color-primary) 25%, transparent);
+	outline: none;
+	border-radius: 25px; /* Mantenemos los bordes redondeados en el foco */
+}
+
+.searchIcon {
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--color-text-muted);
+	pointer-events: none; /* Evita que el icono intercepte clics */
+	font-size: 1.1rem;
+}
+
+.clearButton {
+	position: absolute;
+	right: 0.75rem;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	color: var(--color-text-muted);
+	cursor: pointer;
+	padding: 0.5rem;
+	font-size: 1.2rem;
+	transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.clearButton:hover,
+.clearButton:focus-visible {
+	color: var(--color-text-base);
+	transform: translateY(-50%) scale(1.1);
+}

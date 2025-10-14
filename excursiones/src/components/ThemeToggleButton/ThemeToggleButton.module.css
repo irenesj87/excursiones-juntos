@@ -1,0 +1,24 @@
+.themeToggleBtn {
+	background-color: transparent;
+	color: var(--theme-toggle-btn-color);
+	border: none;
+	padding: 3px 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	transition: transform 0.2s ease-in-out;
+}
+
+.themeIcon {
+	font-size: 1.2rem; /* Tamaño base del icono */
+}
+
+.themeToggleBtn:hover,
+.themeToggleBtn:focus-visible {
+	background-color: transparent;
+	color: var(
+		--theme-toggle-btn-color
+	); /* Aseguramos que el color no cambie por los estilos por defecto de Bootstrap */
+	transform: scale(1.15) translateY(-1px); /* Escalamos y elevamos ligeramente el botón */
+}

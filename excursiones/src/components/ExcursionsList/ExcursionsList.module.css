@@ -1,0 +1,26 @@
+.excursionsContainer {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.title {
+	margin-top: 0; /* Reseteamos el margen superior, lo controla el contenedor */
+	margin-bottom: 2rem;
+	padding-bottom: 0;
+	color: var(--heading-color);
+	font-size: 1.6rem;
+	font-weight: bold;
+	text-align: left;
+	text-transform: uppercase;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 991.98px) {
+	/* Para breakpoints 'md' hacia abajo  */
+	.title {
+		text-align: center;
+	}
+}

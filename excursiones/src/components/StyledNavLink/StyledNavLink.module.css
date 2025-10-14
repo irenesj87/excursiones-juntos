@@ -1,0 +1,58 @@
+/* ======================================== */
+/* ESTILOS PARA LOS ENLACES DE NAVEGACIÓN   */
+/* ======================================== */
+.styledNavLink {
+	/* --- Estilos base del enlace --- */
+	font-weight: 500; /* Un grosor de fuente semibold para que destaque ligeramente */
+	padding: 0.5rem 1rem;
+	border-radius: 0.375rem; /* Bordes redondeados para un look más suave */
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+		border-color 0.2s ease-in-out; /* Transición suave para los cambios de estado */
+	text-decoration: none; /* Quitamos el subrayado por defecto */
+	border: 2px solid transparent; /* Borde transparente para evitar saltos de layout en :focus-visible */
+	display: inline-block; /* Asegura que el padding y otras propiedades de bloque se apliquen correctamente */
+	text-align: center;
+}
+
+/* --- Variante de Enlace de Texto (por defecto) --- */
+.textLink {
+	/* La clase .nav-link es de react-bootstrap. Al añadirla, aumentamos la especificidad
+	   de nuestra regla para que anule el color por defecto de bootstrap sin necesidad de !important. */
+	color: var(--navbar-color);
+}
+
+/* --- Estado Hover (cuando el ratón está encima) --- */
+.styledNavLink:hover {
+	background-color: var(--register-link-bg-hover);
+}
+
+/* --- Estado de Foco (accesibilidad con teclado) --- */
+/* Se activa solo al navegar con teclado para no ser intrusivo */
+.styledNavLink:focus-visible {
+	outline: none; /* Quitamos el outline por defecto */
+	border-color: var(--navbar-toggler-focus-shadow);
+	box-shadow: 0 0 0 0.2rem var(--navbar-toggler-focus-shadow);
+}
+
+/* --- Estado Activo (cuando el enlace corresponde a la página actual) --- */
+.styledNavLink.active {
+	background-color: var(--nav-link-active-bg);
+	border-color: var(--nav-link-active-border);
+}
+
+/* --- Variante de Botón (para "Iniciar sesión") --- */
+.buttonLink {
+	/* Usamos colores fijos para que este botón siempre parezca "claro" */
+	background-color: var(--color-white);
+	color: var(
+		--color-gray-green-900
+	); /* Texto oscuro para contraste sobre fondo blanco */
+	font-weight: 600;
+}
+
+.buttonLink:hover {
+	background-color: var(
+		--color-gray-neutral-300
+	); /* Un gris claro para el hover */
+	color: var(--color-gray-green-900);
+}

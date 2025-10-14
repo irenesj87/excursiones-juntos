@@ -1,0 +1,15 @@
+.logoContainer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+}
+
+.logoText {
+	font-family: inherit;
+	font-size: 1.7rem;
+	font-weight: 700;
+	color: var(--navbar-brand-color);
+	transition: none;
+	letter-spacing: -0.5px;
+}

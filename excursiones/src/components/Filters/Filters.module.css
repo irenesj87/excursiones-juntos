@@ -1,0 +1,56 @@
+.filtersContainer {
+	background-color: var(--filter-container-bg);
+	border-right: 1px solid var(--separator-color);
+}
+
+/* Contenedor para el contenido principal de los filtros, permite el scroll */
+.scrollableContent {
+	flex-grow: 1; /* Ocupa todo el espacio vertical disponible */
+	overflow-y: auto;
+	padding: 1.5rem;
+}
+
+/* Título principal para la vista de escritorio */
+.desktopTitle {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 0 0 2rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 1px solid var(--separator-color);
+	color: var(--filter-title-color);
+}
+
+.filterSection:not(:last-child) {
+	margin-bottom: 1.75rem;
+}
+
+.filterTitle {
+	font-size: 1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--filter-title-color, inherit);
+}
+
+.filterIcon {
+	font-size: 1.2rem;
+}
+
+/* Footer que contiene el botón de limpiar, se mantiene en la parte inferior */
+.filtersFooter {
+	padding: 1rem 1.5rem;
+	border-top: 1px solid var(--separator-color);
+	background-color: var(
+		--filter-container-bg
+	); /* Asegura que tenga fondo si el contenido hace scroll por detrás */
+	flex-shrink: 0; /* Evita que el footer se encoja */
+}
+
+@media (max-width: 767.98px) {
+	.filtersContainer {
+		border-right: none;
+	}
+}

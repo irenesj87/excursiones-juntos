@@ -1,0 +1,10 @@
+# Dependencias
+# Ignora la carpeta de módulos de Node, ya que se pueden reinstalar con `npm install`
+/node_modules
+
+# Variables de entorno
+# Nunca subas este archivo a un repositorio público por seguridad.
+.env
+
+# Archivos del sistema operativo macOS
+.DS_Store

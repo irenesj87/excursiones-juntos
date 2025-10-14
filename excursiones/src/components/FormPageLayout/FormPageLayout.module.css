@@ -1,0 +1,71 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-grow: 1; /* Asegura que el contenedor ocupe el espacio vertical disponible */
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+/* Media query para breakpoints pequeños (xs breakpoint de Bootstrap es <576px) */
+@media (max-width: 575.98px) {
+	.container {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+	}
+}
+
+.cardTitle {
+	color: var(--heading-color);
+	font-weight: bold;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 1.6rem;
+	letter-spacing: 0.5px;
+	padding-bottom: 0.75rem;
+	margin-bottom: 0.5rem; /* Reduce el espacio inferior para acercar el subtítulo */
+}
+
+.cardSubtitle {
+	color: var(--text-color);
+	font-size: 1.2rem;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 2.5rem; /* Espacio después del subtítulo y antes del formulario */
+}
+
+.switcher {
+	text-align: center;
+	background-color: transparent;
+	border-top: 1px solid var(--separator-color);
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	color: var(--text-color);
+}
+
+.switcherLink {
+	font-weight: 600;
+	color: var(--switcher-link-color, var(--bs-link-color));
+	text-decoration: none;
+}
+
+.switcherLink:hover {
+	text-decoration: underline;
+}
+
+.contentPane {
+	/* Usa variables de tema para adaptarse al modo claro/oscuro */
+	background-color: var(
+		--excursion-card-bg
+			/* Reutilizamos el fondo de las tarjetas, como en ExcursionCard */
+	);
+	color: var(--text-color);
+	border: var(--excursion-card-border);
+	box-shadow: var(
+		--excursion-card-shadow
+	); /* Aplicamos la misma sombra que las tarjetas de excursión */
+	border-radius: var(--border-radius-lg);
+	overflow: hidden; /* Asegura que el contenido (como el footer) respete los bordes redondeados */
+}

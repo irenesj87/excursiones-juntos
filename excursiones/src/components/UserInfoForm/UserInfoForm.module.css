@@ -1,0 +1,49 @@
+.profileCard {
+	background-color: var(--excursion-card-bg);
+	border: var(--excursion-card-border);
+	color: var(--text-color);
+	border-radius: var(
+		--border-radius-lg
+	); /* Usamos el mismo radio de borde que las tarjetas de excursión */
+	box-shadow: var(
+		--excursion-card-shadow
+	); /* Aplicamos la misma sombra que las tarjetas de excursión */
+}
+
+.cardHeader {
+	background-color: var(--primary-color);
+	color: white;
+	font-size: 1.1rem; /* Ajustamos el tamaño para que no sea tan grande */
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 1rem 1.25rem;
+	border-bottom: 1px solid var(--separator-color);
+}
+
+.cardBody {
+	background-color: transparent; /* Aseguramos que el cuerpo de la tarjeta no sobreescriba el fondo */
+	padding: 1.5rem;
+	font-size: 1.1rem;
+}
+
+.editButton,
+.cancelButton,
+.saveButton {
+	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+/* Alinea los iconos con el texto en los botones del formulario */
+.editButton svg,
+.cancelButton svg,
+.saveButton svg {
+	margin-right: 0.5rem;
+	vertical-align: -0.125em;
+	font-size: 1.1em;
+}
+
+/* Alinea los iconos con el texto en las etiquetas del formulario */
+.cardBody .form-label svg {
+	margin-right: 0.5rem;
+	vertical-align: -0.125em;
+	color: var(--accent-color); /* Usamos el color de acento para los iconos */
+}

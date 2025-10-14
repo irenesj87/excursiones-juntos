@@ -1,0 +1,256 @@
+import React, {
+	useState,
+	useLayoutEffect,
+	lazy,
+	Suspense,
+	memo,
+	useRef,
+	useCallback,
+} from "react";
+import { Container, Navbar, Offcanvas } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useAuthContext } from "../../context/AuthContext";
+import Logo from "../Logo";
+import SearchBar from "../SearchBar";
+import ErrorBoundary from "../ErrorBoundary";
+import UserNavSkeleton from "../UserNav/UserNavSkeleton";
+import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
+import ThemeToggleButton from "../ThemeToggleButton";
+import styles from "./NavigationBar.module.css";
+import "../../css/Themes.css";
+
+/** @typedef {import('types.js').RootState} RootState */
+
+/**
+ * @typedef {import('types.js').Excursion} Excursion
+ */
+
+// Estos componentes se cargan de forma perezosa (lazy).
+const UserNav = lazy(() => import("../UserNav"));
+const GuestNav = lazy(() => import("../GuestNav"));
+
+/**
+ * Obtiene de manera segura el estado de autenticación inicial de sessionStorage.
+ * @returns {boolean} - True si es probable que haya un token, false en otros casos.
+ */
+const getInitialAuthState = () => {
+	if (globalThis.window === undefined) {
+		return false;
+	}
+	return !!sessionStorage.getItem("token");
+};
+
+/**
+ * @typedef {object} NavigationBarProps
+ * @property {(excursions: Excursion[]) => void} onFetchSuccess - Función para actualizar el estado de la lista de excursiones.
+ * @property {() => void} onExcursionsFetchStart - Callback que se ejecuta al iniciar la búsqueda de excursiones.
+ * @property {(error: Error | null) => void} onExcursionsFetchEnd - Callback que se ejecuta al finalizar la búsqueda de excursiones.
+ * @property {boolean} isOnExcursionsPage - Indica si la página actual es la de excursiones.
+ */
+
+/**
+ * Componente para la barra de navegación.
+ * @param {NavigationBarProps} props - Las propiedades del componente.
+ * @returns {React.ReactElement} - El componente de la barra de navegación.
+ */
+function NavigationBarComponent({
+	onFetchSuccess,
+	onExcursionsFetchStart,
+	onExcursionsFetchEnd,
+	isOnExcursionsPage,
+}) {
+	// Estado global de Redux para saber si el usuario está autenticado.
+	const { login: isLoggedIn } = useSelector(
+		(state) => /** @type {RootState} */ (state).loginReducer
+	);
+	// Estado del contexto de autenticación para saber si la comprobación inicial de autenticación ha finalizado.
+	// Dependiendo de ellos se muestra el esuqeleto para el invitado o para el usuario
+	const { isAuthCheckComplete } = useAuthContext();
+
+	// Estado que indica si probablemente el usuario está autenticado basándonos en sessionStorage.
+	const [likelyLoggedIn] = useState(getInitialAuthState);
+
+	/**
+	 * Estado que guarda el texto que el usuario escribe en la barra de búsqueda.
+	 * @type {[string, React.Dispatch<React.SetStateAction<string>>]}
+	 */
+	const [searchTerm, setSearchTerm] = useState("");
+	/**
+	 * Estado para controlar la visibilidad del componente Offcanvas (menú lateral).
+	 * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+	 */
+	const [showMenu, setShowMenu] = useState(false);
+	const navRef = useRef(null);
+
+	// Usamos useLayoutEffect para medir la altura de la barra de navegación después de que el DOM se haya actualizado,
+	// pero antes de que el navegador pinte la pantalla. Esto evita parpadeos.
+	// El resultado se guarda en --navbar-height.
+	// ¿Por qué se hace esto?: Como la barra es sticky, otros elementos de la página necesitan saber su altura para no quedar
+	// ocultos debajo de ella.
+	useLayoutEffect(() => {
+		// navRef.current: Referencia al elemento DOM de la barra de navegación.
+		const navElement = navRef.current;
+		if (!navElement) return;
+
+		// Función para medir la altura actual de la barra de navegación (offsetHeight) y la guarda en la variable CSS.
+		const updateHeight = () => {
+			const height = navElement.offsetHeight;
+			document.documentElement.style.setProperty(
+				"--navbar-height",
+				`${height}px`
+			);
+		};
+
+		// El ResizeObserver es la forma moderna y eficiente de reaccionar a cambios de tamaño.
+		const observer = new ResizeObserver(() => {
+			// Si la altura de la barra de navegación cambia se vuelve a ejecutar la función updateHeight.
+			window.requestAnimationFrame(updateHeight);
+		});
+
+		updateHeight(); // Medimos la altura inicial
+		// Iniciamos la observación de cambios de tamaño en el elemento de la barra de navegación.
+		observer.observe(navElement);
+
+		// Limpiamos el observador cuando el componente se desmonta para evitar fugas de memoria.
+		return () => observer.disconnect();
+	}, []);
+
+	/**
+	 * Cierra el menú lateral (Offcanvas).
+	 * @type {() => void}
+	 */
+	const handleCloseMenu = useCallback(() => setShowMenu(false), []);
+
+	/**
+	 * Abre el menú lateral (Offcanvas).
+	 * @type {() => void}
+	 */
+	const handleShowMenu = useCallback(() => setShowMenu(true), []);
+
+	/**
+	 * Renderiza los botones de usuario o invitado.
+	 * @returns {React.ReactElement} - El contenido de navegación.
+	 */
+	const renderNavContent = () => {
+		// Mientras no se sabe si el usuario está autenticado, se muestra un esqueleto de carga.
+		// Depende de likelyLoggedIn. Si es true, se muestra el esqueleto de usuario, si es false, el de invitado.
+		if (!isAuthCheckComplete) {
+			return (
+				<div className="d-flex align-items-center">
+					<div className="ms-2">
+						{likelyLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
+					</div>
+				</div>
+			);
+		}
+		// Una vez se sabe si el usuario está autenticado, se muestra el contenido real.
+		// Se usa ErrorBoundary para capturar cualquier error en los componentes lazy-loaded.
+		// Si hay un error, se muestra el esqueleto correspondiente.
+		// El esqueleto de invitado se usa como fallback inicial mientras se carga el componente.
+		// Si el usuario está autenticado, se muestra UserNav, si no, GuestNav.
+		// Ambos reciben la función handleCloseMenu para cerrar el menú al hacer alguna acción.
+		return (
+			<ErrorBoundary fallback={<GuestNavSkeleton />}>
+				<Suspense
+					fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
+				>
+					{isLoggedIn ? (
+						<UserNav onCloseMenu={handleCloseMenu} />
+					) : (
+						<GuestNav onCloseMenu={handleCloseMenu} />
+					)}
+				</Suspense>
+			</ErrorBoundary>
+		);
+	};
+
+	// Componente principal de la barra de navegación.
+	return (
+		<Navbar
+			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
+			expand="lg" // El menú se expande en breakpoints grandes.
+			className={`${styles.customNavbar} ${
+				// Se comprueba si estamos en la página de excursiones para saber si tenemos que eliminar el borde inferior.
+				isOnExcursionsPage ? styles.onExcursionsPage : ""
+			}`}
+			sticky="top"
+		>
+			<Container fluid>
+				{/* Agrupados con d-flex */}
+				<div className="d-flex flex-wrap align-items-center">
+					{/* Logo (siempre visible) */}
+					<Navbar.Brand onClick={handleCloseMenu}>
+						<Logo />
+					</Navbar.Brand>
+				</div>
+				{/* --- Barra de búsqueda --- */}
+				<div className="d-none d-md-flex justify-content-center flex-grow-1 px-md-3 px-lg-5 order-md-2 order-lg-2 me-md-3">
+					<div style={{ maxWidth: "900px", width: "100%" }}>
+						<SearchBar
+							onFetchSuccess={onFetchSuccess}
+							id="searchBar-md-lg"
+							onFetchStart={onExcursionsFetchStart}
+							onFetchEnd={onExcursionsFetchEnd}
+							searchValue={searchTerm}
+							onSearchChange={setSearchTerm}
+						/>
+					</div>
+				</div>
+				{/* --- Contenedor de la derecha: controles de usuario, tema y menú --- */}
+				<div className="d-flex align-items-center ms-auto ms-md-0 order-md-3 order-lg-3 me-2">
+					{/* Botón de tema */}
+					<ThemeToggleButton />
+
+					{/* Contenido de navegación para breakpoints grandes (lg y superior) */}
+					<div className="d-none d-lg-flex align-items-center">
+						{renderNavContent()}
+					</div>
+
+					{/* Botón para abrir el menú Offcanvas (solo visible en pantallas pequeñas) */}
+					<Navbar.Toggle
+						aria-controls="offcanvasNavbar"
+						label="Abrir menú de navegación"
+						onClick={handleShowMenu}
+						className={`d-lg-none ${styles.navbarToggler}`}
+					/>
+				</div>
+				{/* Barra de búsqueda en breakpoints pequeños. Ocupa toda la anchura */}
+				{/* order-last: Asegura que esté al final del contenedor */}
+				<div className="d-md-none w-100 mt-2 order-last">
+					<SearchBar
+						onFetchSuccess={onFetchSuccess}
+						id="searchBar-sm"
+						onFetchStart={onExcursionsFetchStart}
+						onFetchEnd={onExcursionsFetchEnd}
+						searchValue={searchTerm}
+						onSearchChange={setSearchTerm}
+					/>
+				</div>
+				{/* --- Componente Offcanvas --- */}
+				<Offcanvas
+					show={showMenu}
+					onHide={handleCloseMenu}
+					placement="end"
+					id="offcanvasNavbar"
+					scroll={true}
+					className={styles.offcanvasMenu}
+					backdrop={true}
+					aria-label="Menú"
+				>
+					<Offcanvas.Header closeButton closeLabel="Cerrar menú">
+						<Offcanvas.Title>Menú</Offcanvas.Title>
+					</Offcanvas.Header>
+					<Offcanvas.Body>
+						{/* La clase d-flex y flex-column asegura que los elementos se apilen verticalmente */}
+						<div className="d-lg-none d-flex flex-column pt-2 align-items-start gap-3">
+							{renderNavContent()}
+						</div>
+					</Offcanvas.Body>
+				</Offcanvas>
+			</Container>
+		</Navbar>
+	);
+}
+
+const NavigationBar = memo(NavigationBarComponent);
+export default NavigationBar;
