@@ -13,7 +13,7 @@ Con Docker Compose, puedes levantar tanto el frontend como el backend con un sol
 
 ### ✅ Requisitos Previos
 
-- Instala [Docker](https://www.docker.com/products/docker-desktop/) en tu sistema.
+- Instala Docker en tu sistema.
 
 ### ⚙️ Pasos
 
