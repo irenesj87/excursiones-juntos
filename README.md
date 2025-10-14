@@ -31,12 +31,15 @@ Con Docker Compose, puedes levantar tanto el frontend como el backend con un sol
     cp testserver/.env.example testserver/.env
     ```
 
-    Abre `testserver/.env` y rellena los valores necesarios (como `JWT_SECRET`).
+    Abre `testserver/.env` y rellena **todas** las variables que estén vacías:
+
+    - `JWT_SECRET`: Genera una cadena de texto larga y aleatoria.
+    - `CORS_ALLOWED_ORIGINS`: Para el entorno de desarrollo con Docker, el valor debe ser `http://localhost:3000`.
 
 3.  **Levanta la aplicación:**
     Desde el directorio raíz (`excursiones-juntos`), ejecuta el siguiente comando:
     ```bash
-    docker-compose up --build
+    docker compose up --build
     ```
 
 Una vez finalizado, podrás acceder a:
@@ -44,4 +47,4 @@ Una vez finalizado, podrás acceder a:
 - **Frontend**: `http://localhost:3000`
 - **Backend**: `http://localhost:3001`
 
-Para detener la aplicación, presiona `Ctrl + C` en la terminal donde se está ejecutando `docker-compose`.
+Para detener la aplicación, presiona `Ctrl + C` en la terminal donde se está ejecutando `docker compose`.

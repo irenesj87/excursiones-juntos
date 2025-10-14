@@ -15,6 +15,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001" # Mapea el puerto 3001 de tu máquina al 3001 del contenedor
-    env_file: ./testserver/.env 
+    env_file: ./testserver/.env
     environment:
       - NODE_ENV=development
+    stdin_open: true # Mantiene el contenedor en ejecución
+    tty: true # Asigna un pseudo-TTY
