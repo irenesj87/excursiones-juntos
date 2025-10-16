@@ -13,12 +13,12 @@ import styles from "./ExcursionsLoading.module.css";
  * @returns {React.ReactElement} Componente de carga de excursiones.
  */
 const ExcursionsLoading = () => {
-	const { login: isLoggedIn } = useSelector(
+	const isLoggedIn = useSelector(
 		/**
 		 * @param {RootState} state - El estado global de Redux.
-		 * @returns {{login: boolean}} - El estado del loginReducer.
+		 * @returns {boolean} - El estado del login.
 		 */
-		(state) => state.loginReducer
+		(state) => state.loginReducer.login
 	);
 	const skeletonThemeProps = useSkeletonTheme();
 	return (
