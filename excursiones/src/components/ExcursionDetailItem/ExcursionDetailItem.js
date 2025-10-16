@@ -7,7 +7,7 @@ import styles from "./ExcursionDetailItem.module.css";
  * @param {object} props - Las propiedades del componente.
  * @param {React.ComponentType<React.SVGProps<SVGSVGElement>>} [props.IconComponent] - El componente de icono a renderizar.
  * @param {string} [props.text] - El valor del detalle a mostrar (ej. "Media", "4 horas").
- * @param {string} props.label - Etiqueta descriptiva para accesibilidad y tooltips (ej. "Dificultad").
+ * @param {string} [props.label] - Etiqueta descriptiva para accesibilidad y tooltips (ej. "Dificultad").
  * @param {React.ReactNode} [props.children] - Nodos hijos para renderizar contenido personalizado en lugar del texto.
  * ¡ADVERTENCIA DE SEGURIDAD! Si el contenido de `children` proviene de una fuente externa (API, usuario),
  * debe ser sanitizado para prevenir ataques XSS.

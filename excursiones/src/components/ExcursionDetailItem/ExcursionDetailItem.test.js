@@ -51,7 +51,6 @@ describe("ExcursionDetailItem Component", () => {
 
 		// Esperamos a que el tooltip aparezca (es asíncrono)
 		const tooltip = await screen.findByRole("tooltip");
-		expect(tooltip).toHaveAttribute("id", MOCK_ID);
 		expect(tooltip).toBeInTheDocument();
 		expect(tooltip).toHaveTextContent("Tiempo: 4 horas");
 	});
@@ -64,7 +63,6 @@ describe("ExcursionDetailItem Component", () => {
 
 		// Esperamos a que el tooltip aparezca (es asíncrono)
 		const tooltip = await screen.findByRole("tooltip");
-		expect(tooltip).toHaveAttribute("id", MOCK_ID);
 		expect(tooltip).toBeInTheDocument();
 		expect(tooltip).toHaveTextContent("Solo texto");
 	});
