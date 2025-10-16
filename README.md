@@ -24,8 +24,8 @@ Una aplicación web construida con React.js y Node.js que permite a los usuarios
 
 | Área         | Tecnología                                                                                     |
 | :----------- | :--------------------------------------------------------------------------------------------- |
-| **Frontend** | React, React Router, Redux Toolkit, React Bootstrap, CSS Modules, Jest, React Testing Library. |
-| **Backend**  | Node.js, Express, JWT, Bcrypt, Express-Rate-Limit, CORS.                                       |
+| **Frontend** | React, React Router, Redux Toolkit, React Bootstrap. |
+| **Backend**  | Node.js, Express, JWT, Bcrypt.                                       |
 | **DevOps**   | SonarQube.                                                                                     |
 
 ## 📁 Estructura del Proyecto
