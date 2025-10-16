@@ -1,5 +1,6 @@
 import React, {
 	useMemo,
+	memo,
 	useCallback,
 	useState,
 	useEffect,
@@ -28,7 +29,7 @@ import styles from "./ExcursionsList.module.css";
  * @param {Error | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones. Se evalúa su veracidad.
  * @returns {React.ReactElement} El componente de la lista de excursiones.
  */
-function ExcursionsList({ excursionData = [], isLoading, error }) {
+function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	// Se obtiene el estado del loginReducer, el objeto usuario y el token
 	const {
 		login: isLoggedIn,
@@ -168,4 +169,5 @@ function ExcursionsList({ excursionData = [], isLoading, error }) {
 	);
 }
 
+const ExcursionsList = memo(ExcursionsListComponent);
 export default ExcursionsList;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { SkeletonTheme } from "react-loading-skeleton";
@@ -12,7 +12,7 @@ import styles from "./ExcursionsLoading.module.css";
  * Componente para mostrar el esqueleto mientras las excursiones se cargan.
  * @returns {React.ReactElement} Componente de carga de excursiones.
  */
-const ExcursionsLoading = () => {
+const ExcursionsLoadingComponent = () => {
 	const isLoggedIn = useSelector(
 		/**
 		 * @param {RootState} state - El estado global de Redux.
@@ -49,4 +49,5 @@ const ExcursionsLoading = () => {
 	);
 };
 
+const ExcursionsLoading = memo(ExcursionsLoadingComponent);
 export default ExcursionsLoading;
