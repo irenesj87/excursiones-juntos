@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useId } from "react";
+import React, { memo, useCallback } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "./ExcursionDetailItem.module.css";
 
@@ -19,10 +19,6 @@ function ExcursionDetailItemComponent({
 	label,
 	children,
 }) {
-	// Genera un ID único y seguro para la accesibilidad del tooltip.
-	// Esto previene vulnerabilidades de inyección de atributos si `label` contiene datos no seguros.
-	const tooltipId = useId();
-
 	/**
 	 * Renderiza el Tooltip para el detalle de la excursión.
 	 * Se memoiza con `useCallback` para evitar que se recree en cada renderizado.
@@ -31,11 +27,9 @@ function ExcursionDetailItemComponent({
 	 */
 	const renderTooltip = useCallback(
 		(props) => (
-			<Tooltip id={tooltipId} {...props}>
-				{label ? `${label}: ${text}` : text}
-			</Tooltip>
+			<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 		),
-		[label, text, tooltipId]
+		[label, text]
 	);
 
 	// Si no hay texto ni hijos para mostrar, no renderizamos nada.
