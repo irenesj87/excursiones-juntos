@@ -1,17 +1,25 @@
-import { memo } from "react";
+import React, { memo } from "react";
+import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../../hooks/useSkeletonTheme";
 import ExcursionCardSkeleton from "../../ExcursionCard/ExcursionCardSkeleton";
 import styles from "./ExcursionsLoading.module.css";
 
+/** @typedef {import('../../../types').RootState} RootState */
+
 /**
  * Componente para mostrar el esqueleto mientras las excursiones se cargan.
- * @param {ExcursionsLoadingProps} props
- * @typedef {object} ExcursionsLoadingProps
- * @property {boolean} isLoggedIn - Indica si el usuario ha iniciado sesión.
+ * @returns {React.ReactElement} Componente de carga de excursiones.
  */
-const ExcursionsLoadingComponent = ({ isLoggedIn }) => {
+const ExcursionsLoadingComponent = () => {
+	const isLoggedIn = useSelector(
+		/**
+		 * @param {RootState} state - El estado global de Redux.
+		 * @returns {boolean} - El estado del login.
+		 */
+		(state) => state.loginReducer.login
+	);
 	const skeletonThemeProps = useSkeletonTheme();
 	return (
 		<SkeletonTheme {...skeletonThemeProps}>
@@ -42,5 +50,4 @@ const ExcursionsLoadingComponent = ({ isLoggedIn }) => {
 };
 
 const ExcursionsLoading = memo(ExcursionsLoadingComponent);
-
 export default ExcursionsLoading;

@@ -1,6 +1,6 @@
 import React, {
-	memo,
 	useMemo,
+	memo,
 	useCallback,
 	useState,
 	useEffect,
@@ -26,7 +26,7 @@ import styles from "./ExcursionsList.module.css";
  * @param {object} props - Las propiedades del componente.
  * @param {Excursion[]} [props.excursionData] - Array de excursiones a mostrar. El valor por defecto es un array vacío.
  * @param {boolean} props.isLoading - Indica si los datos de las excursiones se están cargando.
- * @param {Error | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones.
+ * @param {Error | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones. Se evalúa su veracidad.
  * @returns {React.ReactElement} El componente de la lista de excursiones.
  */
 function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
@@ -58,12 +58,11 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 		if (isLoading) {
 			return;
 		}
-
 		// Cuando la carga finaliza, actualizamos las excursiones mostradas.
 		setDisplayedExcursions(excursionData);
 
-		// Anunciar el resultado de la búsqueda a los lectores de pantalla, pero solo
-		// después de la carga inicial para evitar ruido innecesario.
+		// Anunciar el resultado de la búsqueda a los lectores de pantalla, pero solo después de la carga inicial para evitar
+		// ruido innecesario.
 		if (isInitialLoad.current) {
 			isInitialLoad.current = false; // Marcar la carga inicial como completada.
 		} else if (excursionData.length > 0) {
@@ -80,23 +79,25 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	const joinExcursion = useCallback(
 		async (excursionId) => {
 			try {
-				/* Llamamos al servicio para unirse a la excursión. Este es el que hace la petición al servidor para apuntar
-				 * al usuario a la excursión. El 'await' le dice a JavaScript que pause la ejecución de la función
-				 * 'joinExcursion'hasta que 'joinExcursionService' termine y retorne una respuesta o un error.
-				 * Si la petición es exitosa, 'updateUser' contendrá la info actualizada del usuario (con la nueva excursión
-				 * en su lista), y se actualizará el estado del usuario en Redux, lo que hará que los componentes que
-				 * dependen de este estado se re-rendericen automáticamente con la información actualizada, (por ejemplo, el
-				 * botón 'Apuntarse' cambiará a 'Apuntado').
-				 */
+				// Llamada al servicio para unirse a la excursión.
 				const updatedUser = await joinExcursionService(
 					user?.mail,
 					excursionId,
 					token
 				);
+				// Actualiza el estado global del usuario con la nueva información.
 				loginDispatch(updateUser({ user: updatedUser }));
-				// Si hay un error, se captura y se maneja en el componente ExcursionCard, que es el que llama esta función.
-			} catch (error) {
-				console.error("Error técnico al unirse a la excursión:", error);
+			} catch (caughtError) {
+				// En desarrollo, muestra el error completo para facilitar la depuración.
+				if (process.env.NODE_ENV === "development") {
+					console.error("Error detallado (dev):", caughtError);
+				} else {
+					// En producción o test, registramos un mensaje controlado para no exponer detalles.
+					console.error(
+						"Error técnico al unirse a la excursión:",
+						caughtError.message || "Error desconocido"
+					);
+				}
 				// Relanzamos un nuevo error con un mensaje más amigable para el usuario.
 				// Este error será capturado y mostrado por el componente ExcursionCard.
 				throw new Error(
@@ -121,7 +122,7 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 				const isJoined = isLoggedIn && user?.excursions?.includes(excursion.id);
 				return (
 					<Col
-						as="li" // Renderizar como un elemento de lista para mejorar la semántica
+						as="li"
 						xs={12}
 						md={6}
 						lg={4}
@@ -148,7 +149,7 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	}
 	// Si las excursiones se están cargando y no hay excursiones, mostrar el esqueleto de carga.
 	if (isLoading && displayedExcursions.length === 0) {
-		return <ExcursionsLoading isLoggedIn={isLoggedIn} />;
+		return <ExcursionsLoading />;
 	}
 	// Si no se está cargando y no hay excursiones, mostrar el componente de "no encontrado".
 	if (!isLoading && excursionData.length === 0) {
@@ -157,7 +158,6 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	// Por defecto, mostrar las excursiones.
 	return (
 		<div className={styles.excursionsContainer}>
-			{/* La etiqueta <output> anuncia semánticamente los resultados a los lectores de pantalla. */}
 			<output aria-live="polite" className="visually-hidden">
 				{announcement}
 			</output>
