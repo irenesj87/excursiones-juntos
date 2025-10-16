@@ -1,16 +1,16 @@
-import { memo } from "react";
+import React from "react";
 import { FiSearch } from "react-icons/fi";
 import styles from "./NoExcursionsFound.module.css";
 
 /**
  * Componente que muestra un mensaje cuando no se encuentran excursiones que coincidan con los criterios de búsqueda.
+ * @returns {React.ReactElement} - Componente que indica que no se encontraron excursiones.
  */
-const NoExcursionsFoundComponent = () => (
-	<div className={`${styles.excursionsContainer} ${styles.centeredStatus}`}>
+const NoExcursionsFound = () => (
+	<div className={styles.excursionsContainer}>
 		<output aria-live="polite" className={styles.messageNotFound}>
 			<FiSearch
 				className={styles.messageIcon}
-				data-testid="search-icon"
 				aria-hidden="true"
 			/>
 			<p className={styles.primaryMessage}>
@@ -23,5 +23,4 @@ const NoExcursionsFoundComponent = () => (
 	</div>
 );
 
-const NoExcursionsFound = memo(NoExcursionsFoundComponent);
 export default NoExcursionsFound;
