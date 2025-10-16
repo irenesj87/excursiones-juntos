@@ -26,7 +26,7 @@ import styles from "./ExcursionsList.module.css";
  * @param {object} props - Las propiedades del componente.
  * @param {Excursion[]} [props.excursionData] - Array de excursiones a mostrar. El valor por defecto es un array vacío.
  * @param {boolean} props.isLoading - Indica si los datos de las excursiones se están cargando.
- * @param {(Error & { secondaryMessage?: string }) | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones.
+ * @param {Error | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones.
  * @returns {React.ReactElement} El componente de la lista de excursiones.
  */
 function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
@@ -144,7 +144,7 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	// --- Lógica de Renderizado Condicional ---
 	// Si hay un error, mostrar el componente de error.
 	if (error) {
-		return <ExcursionsError error={error} />;
+		return <ExcursionsError />;
 	}
 	// Si las excursiones se están cargando y no hay excursiones, mostrar el esqueleto de carga.
 	if (isLoading && displayedExcursions.length === 0) {

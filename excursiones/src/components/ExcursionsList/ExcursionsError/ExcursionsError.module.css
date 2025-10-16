@@ -1,9 +1,12 @@
-.excursionsContainer {
+.errorContainer {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 	margin-top: 2rem;
 	margin-bottom: 2rem;
+	align-items: center; /* Centra horizontalmente */
+	justify-content: center; /* Centra verticalmente */
+	min-height: 400px;
 }
 
 .messageNotFound {
@@ -16,21 +19,6 @@
 	border-radius: 0.5rem;
 	padding: 1rem 1.5rem;
 	max-width: 500px;
-}
-
-.primaryMessage {
-	font-size: 1.4rem;
-	font-weight: 600;
-	color: var(--color-text-danger);
-	text-align: center;
-	margin-bottom: 0;
-}
-
-.secondaryMessage {
-	font-size: 1rem;
-	color: var(--text-secondary);
-	text-align: center;
-	margin-bottom: 0;
 }
 
 .messageIcon {
@@ -50,13 +38,4 @@
 	100% {
 		transform: scale(1);
 	}
-}
-
-.centeredStatus {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	align-items: center; /* Centra horizontalmente */
-	justify-content: center; /* Centra verticalmente */
-	min-height: 400px;
 }
