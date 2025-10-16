@@ -1,6 +1,6 @@
 # 🏔️ Proyecto "Excursiones Juntos"
 
-Una aplicación web construida con React.js y Node.js que permite a los usuarios descubrir, buscar y apuntarse a excursiones. El proyecto está dividido en un frontend(excursiones) y una API RESTful(testserver).
+Una aplicación web construida con React.js y Node.js que permite a los usuarios descubrir, buscar y apuntarse a excursiones. El proyecto está dividido en un frontend (excursiones) y una API RESTful (testserver).
 
 ## ✨ Características Principales
 
