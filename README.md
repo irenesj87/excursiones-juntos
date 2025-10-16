@@ -106,7 +106,3 @@ npm install
 npm start
 ```
 
-## 🧪 Ejecutar Tests
-
-- **Para el Frontend:** `cd excursiones && npm test`
-- **Para el Backend:** Los tests para el backend aún no están implementados.
