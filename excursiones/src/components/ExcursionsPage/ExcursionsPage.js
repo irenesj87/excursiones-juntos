@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Col, Button, Offcanvas, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { FiFilter } from "react-icons/fi";
@@ -22,15 +22,15 @@ const ExcursionsPage = ({ excursionsState }) => {
 	 */
 	const [showFilters, setShowFilters] = useState(false);
 	/**
-	 * Cierra el menú de filtros. Memoizada con `useCallback`.
+	 * Cierra el menú de filtros.
 	 * @type {() => void}
 	 */
-	const handleCloseFilters = useCallback(() => setShowFilters(false), []);
+	const handleCloseFilters = () => setShowFilters(false);
 	/**
-	 * Muestra el menú de filtros. Memoizada con `useCallback`.
+	 * Muestra el menú de filtros.
 	 * @type {() => void}
 	 */
-	const handleShowFilters = useCallback(() => setShowFilters(true), []);
+	const handleShowFilters = () => setShowFilters(true);
 
 	/**
 	 * Calcula el número total de filtros activos (área, dificultad, tiempo) desde el estado de Redux.

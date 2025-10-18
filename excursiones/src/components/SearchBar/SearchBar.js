@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import { FiSearch, FiX } from "react-icons/fi";
 import cn from "classnames";
@@ -76,11 +76,9 @@ function SearchBar({
 	}, [searchValue]);
 
 	/**
-	 * Función memoizada con useCallback para realizar la petición de búsqueda de excursiones.
-	 * useCallback evita que esta función se recree en cada renderizado, optimizando el rendimiento.
-	 * Ahora solo se volverá a crear si alguna de sus dependencias (debouncedSearch, area, etc.) cambia.
+	 * Realiza la petición de búsqueda de excursiones. El compilador de React se encargará de memoizar esta función.
 	 */
-	const fetchData = useCallback(async () => {
+	const fetchData = async () => {
 		// Llama a la función onFetchStart si se proporcionó, para indicar que la carga de excursiones ha comenzado.
 		onFetchStart?.();
 		try {
@@ -129,21 +127,13 @@ function SearchBar({
 			// Pasamos el error amigable a la UI para que se muestre
 			onFetchEnd?.(userFriendlyError);
 		}
-	}, [
-		debouncedSearch,
-		area,
-		difficulty,
-		time,
-		onFetchSuccess,
-		onFetchStart,
-		onFetchEnd,
-	]);
+	};
 
 	// Este efecto se ejecuta cada vez que el término de búsqueda "debounced" o los filtros cambian.
 	// De esta forma, los filtros se aplican instantáneamente, mientras que la búsqueda por texto espera.
 	useEffect(() => {
 		fetchData();
-	}, [fetchData]);
+	}, [debouncedSearch, area, difficulty, time]);
 
 	return (
 		<form

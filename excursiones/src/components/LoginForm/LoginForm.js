@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import {
 	validateMail,
@@ -21,16 +21,13 @@ export function LoginForm() {
 	const [mail, setMail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const formValues = useMemo(() => ({ mail, password }), [mail, password]);
+	const formValues = { mail, password };
 
 	/**
 	 * Comprueba si el formulario es válido.
 	 * @returns {boolean} - `true` si el formulario es válido, `false` en caso contrario.
 	 */
-	const isFormValid = useCallback(
-		() => validateMail(mail) && isNotEmpty(password),
-		[mail, password]
-	);
+	const isFormValid = () => validateMail(mail) && isNotEmpty(password);
 
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
 		// El hook espera los argumentos para la API en el mismo orden.

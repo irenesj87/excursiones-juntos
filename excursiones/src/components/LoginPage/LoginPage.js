@@ -1,9 +1,14 @@
+import React from "react";
 import LoginForm from "../LoginForm";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
 import "bootstrap/dist/css/bootstrap.css";
 
-// Componente que representa la página de inicio de sesión.
+/**
+ * Componente que representa la página de inicio de sesión.
+ * Utiliza el layout de formulario genérico y renderiza el formulario de login.
+ * @returns {React.ReactElement} - El componente de la página de inicio de sesión.
+ */
 function LoginPage() {
 	return (
 		<FormPageLayout

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import styles from "./StyledNavLink.module.css";
@@ -17,7 +17,7 @@ import styles from "./StyledNavLink.module.css";
  * @param {StyledNavLinkProps} props - Las propiedades del componente.
  * @returns {React.ReactElement} - El componente de enlace de navegación estilizado.
  */
-function StyledNavLinkComponent({
+function StyledNavLink({
 	children,
 	className = "",
 	variant = "link",
@@ -35,7 +35,5 @@ function StyledNavLinkComponent({
 		</Nav.Link>
 	);
 }
-
-const StyledNavLink = memo(StyledNavLinkComponent);
 
 export default StyledNavLink;

@@ -3,9 +3,7 @@ import React, {
 	useLayoutEffect,
 	lazy,
 	Suspense,
-	memo,
 	useRef,
-	useCallback,
 } from "react";
 import { Container, Navbar, Offcanvas } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -53,7 +51,7 @@ const getInitialAuthState = () => {
  * @param {NavigationBarProps} props - Las propiedades del componente.
  * @returns {React.ReactElement} - El componente de la barra de navegación.
  */
-function NavigationBarComponent({
+function NavigationBar({
 	onFetchSuccess,
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
@@ -104,7 +102,7 @@ function NavigationBarComponent({
 		// El ResizeObserver es la forma moderna y eficiente de reaccionar a cambios de tamaño.
 		const observer = new ResizeObserver(() => {
 			// Si la altura de la barra de navegación cambia se vuelve a ejecutar la función updateHeight.
-			window.requestAnimationFrame(updateHeight);
+			globalThis.requestAnimationFrame(updateHeight);
 		});
 
 		updateHeight(); // Medimos la altura inicial
@@ -119,13 +117,13 @@ function NavigationBarComponent({
 	 * Cierra el menú lateral (Offcanvas).
 	 * @type {() => void}
 	 */
-	const handleCloseMenu = useCallback(() => setShowMenu(false), []);
+	const handleCloseMenu = () => setShowMenu(false);
 
 	/**
 	 * Abre el menú lateral (Offcanvas).
 	 * @type {() => void}
 	 */
-	const handleShowMenu = useCallback(() => setShowMenu(true), []);
+	const handleShowMenu = () => setShowMenu(true);
 
 	/**
 	 * Renderiza los botones de usuario o invitado.
@@ -253,5 +251,4 @@ function NavigationBarComponent({
 	);
 }
 
-const NavigationBar = memo(NavigationBarComponent);
 export default NavigationBar;

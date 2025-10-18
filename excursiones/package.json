@@ -51,6 +51,7 @@
 		"react-error-overlay": "6.0.10"
 	},
 	"devDependencies": {
+		"babel-plugin-react-compiler": "^1.0.0",
 		"eslint-plugin-jsdoc": "^60.5.0",
 		"redux-mock-store": "^1.5.5"
 	}

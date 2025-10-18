@@ -1,11 +1,4 @@
-import React, {
-	useMemo,
-	memo,
-	useCallback,
-	useState,
-	useEffect,
-	useRef,
-} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../slices/loginSlice";
@@ -29,7 +22,7 @@ import styles from "./ExcursionsList.module.css";
  * @param {Error | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones. Se evalúa su veracidad.
  * @returns {React.ReactElement} El componente de la lista de excursiones.
  */
-function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
+function ExcursionsList({ excursionData = [], isLoading, error }) {
 	// Se obtiene el estado del loginReducer, el objeto usuario y el token
 	const {
 		login: isLoggedIn,
@@ -80,71 +73,59 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	 * Función asíncrona para unirse a una excursión.
 	 * @param {string | number} excursionId - El ID de la excursión a la que el usuario desea unirse.
 	 */
-	const joinExcursion = useCallback(
-		async (excursionId) => {
-			try {
-				// Llamada al servicio para unirse a la excursión.
-				const updatedUser = await joinExcursionService(
-					user?.mail,
-					excursionId,
-					token
-				);
-				// Actualiza el estado global del usuario con la nueva información.
-				loginDispatch(updateUser({ user: updatedUser }));
-			} catch (caughtError) {
-				// En desarrollo, muestra el error completo para facilitar la depuración.
-				if (process.env.NODE_ENV === "development") {
-					console.error("Error detallado (dev):", caughtError);
-				} else {
-					// En producción o test, registramos un mensaje controlado para no exponer detalles.
-					console.error(
-						"Error técnico al unirse a la excursión:",
-						caughtError.message || "Error desconocido"
-					);
-				}
-				// Relanzamos un nuevo error con un mensaje más amigable para el usuario.
-				// Este error será capturado y mostrado por el componente ExcursionCard.
-				throw new Error(
-					"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde."
+	const joinExcursion = async (excursionId) => {
+		try {
+			// Llamada al servicio para unirse a la excursión.
+			const updatedUser = await joinExcursionService(
+				user?.mail,
+				excursionId,
+				token
+			);
+			// Actualiza el estado global del usuario con la nueva información.
+			loginDispatch(updateUser({ user: updatedUser }));
+		} catch (caughtError) {
+			// En desarrollo, muestra el error completo para facilitar la depuración.
+			if (process.env.NODE_ENV === "development") {
+				console.error("Error detallado (dev):", caughtError);
+			} else {
+				// En producción o test, registramos un mensaje controlado para no exponer detalles.
+				console.error(
+					"Error técnico al unirse a la excursión:",
+					caughtError.message || "Error desconocido"
 				);
 			}
-		},
-		// `token` se añade como dependencia para asegurar que la función tiene la versión más reciente.
-		[user?.mail, token, loginDispatch]
-	);
+			// Relanzamos un nuevo error con un mensaje más amigable para el usuario.
+			// Este error será capturado y mostrado por el componente ExcursionCard.
+			throw new Error(
+				"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde."
+			);
+		}
+	};
 
 	/**
-	 * Componentes de las tarjetas de excursión, memoizados para optimizar el rendimiento, ya que el mapear un array a
-	 * componentes puede ser costoso si hay muchas excursiones.
-	 * Cada tarjeta recibe las propiedades necesarias y se encarga de mostrar la información de la excursión.
-	 * Además, se comprueba si el usuario ha iniciado sesión y si ya está apuntado a la excursión para mostrar el botón
-	 * de unirse o no.
+	 * Componentes de las tarjetas de excursión. El compilador de React se encargará de memoizar este cálculo si es necesario.
 	 */
-	const excursionComponents = useMemo(
-		() =>
-			displayedExcursions.map((excursion) => {
-				const isJoined = isLoggedIn && user?.excursions?.includes(excursion.id);
-				return (
-					<Col
-						as="li"
-						xs={12}
-						md={6}
-						lg={4}
-						key={excursion.id}
-						xl={3}
-						className="d-flex" // d-flex para que las cards se estiren y ocupen toda la altura
-					>
-						<ExcursionCard
-							{...excursion}
-							isLoggedIn={isLoggedIn}
-							isJoined={isJoined}
-							onJoin={joinExcursion}
-						/>
-					</Col>
-				);
-			}),
-		[displayedExcursions, isLoggedIn, user?.excursions, joinExcursion]
-	);
+	const excursionComponents = displayedExcursions.map((excursion) => {
+		const isJoined = isLoggedIn && user?.excursions?.includes(excursion.id);
+		return (
+			<Col
+				as="li"
+				xs={12}
+				md={6}
+				lg={4}
+				key={excursion.id}
+				xl={3}
+				className="d-flex" // d-flex para que las cards se estiren y ocupen toda la altura
+			>
+				<ExcursionCard
+					{...excursion}
+					isLoggedIn={isLoggedIn}
+					isJoined={isJoined}
+					onJoin={joinExcursion}
+				/>
+			</Col>
+		);
+	});
 
 	// --- Lógica de Renderizado Condicional ---
 	// Si hay un error, mostrar el componente de error.
@@ -173,5 +154,4 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	);
 }
 
-const ExcursionsList = memo(ExcursionsListComponent);
 export default ExcursionsList;
