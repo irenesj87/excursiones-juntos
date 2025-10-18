@@ -26,7 +26,7 @@ const excursionsInitialState = {
 };
 
 /**
- * @typedef {{type: 'FETCH_START'} | {type: 'FETCH_SUCCESS', payload: Excursion[]} | {type: 'FETCH_ERROR', payload: Error}} ExcursionsAction
+ * @typedef {{type: 'FETCH_INIT'} | {type: 'FETCH_SUCCESS', payload: Excursion[]} | {type: 'FETCH_ERROR', payload: Error}} ExcursionsAction
  */
 
 /**
@@ -37,18 +37,18 @@ const excursionsInitialState = {
  */
 const excursionsReducer = (state, action) => {
 	switch (action.type) {
-		case "FETCH_START":
+		case "FETCH_INIT":
 			return { ...state, isLoading: true, error: null };
 		case "FETCH_SUCCESS":
 			return { ...state, isLoading: false, data: action.payload };
 		case "FETCH_ERROR":
 			return { ...state, isLoading: false, error: action.payload, data: [] };
 		default: {
-			// Esta técnica de comprobación de exhaustividad asegura que todos los tipos de acción
-			// estén manejados en el switch. Si se añade un nuevo tipo a `ExcursionsAction`
-			// sin añadir su `case`, TypeScript dará un error en la siguiente línea.
-			const exhaustiveCheck = action;
-			throw new Error(`Acción no soportada: ${exhaustiveCheck}`);
+			// Esta técnica de comprobación de exhaustividad ayuda a las herramientas de tipado
+			// estático a asegurar que todos los casos están cubiertos.
+			// Para el error en tiempo de ejecución, incluimos el tipo de acción para facilitar la depuración.
+			const unhandledAction = /** @type {{type: string}} */ (action);
+			throw new Error(`Acción no soportada: ${unhandledAction.type}`);
 		}
 	}
 };
@@ -77,7 +77,7 @@ export const useExcursions = () => {
 	 */
 	const handleExcursionsFetchStart = () => {
 		startTiming();
-		excursionsDispatch({ type: "FETCH_START" });
+		excursionsDispatch({ type: "FETCH_INIT" });
 	};
 
 	/**

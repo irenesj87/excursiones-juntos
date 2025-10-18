@@ -38,9 +38,10 @@ function filtersReducer(state, action) {
 		default: {
 			// Esta técnica de comprobación de exhaustividad asegura que todos los tipos de acción
 			// estén manejados en el switch. Si se añade un nuevo tipo a `FiltersAction`
-			// sin añadir su `case`, TypeScript dará un error en la siguiente línea.
-			const exhaustiveCheck = action;
-			throw new Error(`Acción no soportada: ${exhaustiveCheck}`);
+			// sin añadir su `case`, las herramientas de tipado estático darán un error.
+			// Para el error en tiempo de ejecución, incluimos el tipo de acción para facilitar la depuración.
+			const unhandledAction = /** @type {{type: string}} */ (action);
+			throw new Error(`Acción no soportada: ${unhandledAction.type}`);
 		}
 	}
 }
@@ -58,19 +59,26 @@ export function useFilters(filterName) {
 	);
 
 	useEffect(() => {
-		let isMounted = true; // Flag para rastrear el estado de montaje
+		// AbortController es el enfoque moderno para cancelar peticiones y evitar
+		// actualizaciones de estado en componentes desmontados.
+		const controller = new AbortController();
+		const { signal } = controller;
 
 		const fetchData = async () => {
 			startTiming();
 			dispatch({ type: "FETCH_INIT" });
 
 			try {
-				const data = await fetchFilters(filterName);
-				if (isMounted) {
-					dispatchWithMinDisplayTime({ type: "FETCH_SUCCESS", payload: data });
-				}
+				const data = await fetchFilters(filterName, { signal });
+				dispatchWithMinDisplayTime({ type: "FETCH_SUCCESS", payload: data });
 			} catch (error) {
-				// Logueamos el error original para depuración.
+				// Si el error es por abortar la petición, no hacemos nada.
+				if (error.name === "AbortError") {
+					console.log("Petición de filtros abortada.");
+					return;
+				}
+
+				// Logueamos otros errores para depuración.
 				console.error(
 					`Error al cargar los filtros para "${filterName}":`,
 					error
@@ -82,28 +90,24 @@ export function useFilters(filterName) {
 						"Pista para el desarrollador: El servidor de la API no parece estar respondiendo. ¿Está en marcha?"
 					);
 				}
-				if (isMounted) {
-					/** @type {Error & {secondaryMessage?: string}} */
-					let finalError;
-					if (
-						error instanceof TypeError &&
-						error.message === "Failed to fetch"
-					) {
-						finalError = new Error("Error de conexión");
-						finalError.secondaryMessage =
-							"No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.";
-					} else {
-						// Para otros errores, usamos el mensaje que venga del servidor.
-						finalError = new Error(
-							error.message || "No se pudieron cargar los filtros."
-						);
-					}
 
-					dispatchWithMinDisplayTime({
-						type: "FETCH_FAILURE",
-						payload: finalError,
-					});
+				/** @type {Error & {secondaryMessage?: string}} */
+				let finalError;
+				if (error instanceof TypeError && error.message === "Failed to fetch") {
+					finalError = new Error("Error de conexión");
+					finalError.secondaryMessage =
+						"No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.";
+				} else {
+					// Para otros errores, usamos el mensaje que venga del servidor.
+					finalError = new Error(
+						error.message || "No se pudieron cargar los filtros."
+					);
 				}
+
+				dispatchWithMinDisplayTime({
+					type: "FETCH_FAILURE",
+					payload: finalError,
+				});
 			}
 		};
 
@@ -111,7 +115,7 @@ export function useFilters(filterName) {
 
 		// Función de limpieza que se ejecuta al desmontar
 		return () => {
-			isMounted = false;
+			controller.abort();
 		};
 	}, [filterName, dispatchWithMinDisplayTime, startTiming]);
 
