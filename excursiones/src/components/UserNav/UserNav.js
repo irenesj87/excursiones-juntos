@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import StyledNavLink from "../StyledNavLink";
@@ -31,12 +31,12 @@ function UserNav(props) {
 	/**
 	 * Maneja el proceso de cierre de sesión del usuario.
 	 */
-	const handleLogout = useCallback(() => {
+	const handleLogout = () => {
 		onCloseMenu?.();
 		logoutUser();
 		dispatch(logout());
 		navigate(ROUTES.HOME);
-	}, [dispatch, navigate, onCloseMenu]);
+	};
 
 	return (
 		<>

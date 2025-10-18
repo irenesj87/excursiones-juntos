@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import styles from "./ExcursionDetailItem.module.css";
 
@@ -13,29 +13,20 @@ import styles from "./ExcursionDetailItem.module.css";
  * debe ser sanitizado para prevenir ataques XSS.
  * @returns {React.ReactElement} - El elemento React que representa el detalle de la excursión.
  */
-function ExcursionDetailItemComponent({
-	IconComponent,
-	text,
-	label,
-	children,
-}) {
+function ExcursionDetailItem({ IconComponent, text, label, children }) {
 	/**
 	 * Renderiza el Tooltip para el detalle de la excursión.
-	 * Se memoiza con `useCallback` para evitar que se recree en cada renderizado.
 	 * @param {object} props - Propiedades inyectadas por OverlayTrigger.
-	 * @returns {React.ReactElement}
+	 * @returns {React.ReactElement} - El elemento Tooltip.
 	 */
-	const renderTooltip = useCallback(
-		(props) => (
-			<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
-		),
-		[label, text]
+	const renderTooltip = (props) => (
+		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
 
 	// Si no hay texto ni hijos para mostrar, no renderizamos nada.
 	// Esta comprobación se hace DESPUÉS de los hooks para cumplir las reglas de los hooks.
 	if (!text && !children) {
-		return null;
+		return null; // No renderizar nada si no hay contenido.
 	}
 
 	const itemContent = (
@@ -63,5 +54,4 @@ function ExcursionDetailItemComponent({
 	);
 }
 
-const ExcursionDetailItem = memo(ExcursionDetailItemComponent);
 export default ExcursionDetailItem;

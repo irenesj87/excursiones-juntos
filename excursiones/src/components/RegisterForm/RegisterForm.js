@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import ValidatedFormGroup from "../ValidatedFormGroup";
 import {
@@ -43,19 +43,15 @@ function RegisterForm() {
 		setValues((prev) => ({ ...prev, [field]: value }));
 	};
 
-	const authFormValues = useMemo(
-		() => ({
-			name: values.name,
-			surname: values.surname,
-			phone: values.phone,
-			mail: values.mail,
-			password: values.password,
-		}),
-		// Dependencias primitivas para asegurar que el objeto solo se recrea cuando un valor cambia.
-		[values.name, values.surname, values.phone, values.mail, values.password]
-	);
+	const authFormValues = {
+		name: values.name,
+		surname: values.surname,
+		phone: values.phone,
+		mail: values.mail,
+		password: values.password,
+	};
 
-	const isFormValid = useCallback(() => {
+	const isFormValid = () => {
 		return (
 			validateName(values.name) === true &&
 			validateSurname(values.surname) === true &&
@@ -64,7 +60,7 @@ function RegisterForm() {
 			validatePassword(values.password) === true &&
 			validateSamePassword(values.password, values.samePassword) === true
 		);
-	}, [values]);
+	};
 
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
 		// El hook espera los argumentos para la API en el mismo orden.
@@ -75,72 +71,67 @@ function RegisterForm() {
 	);
 
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
-	// Se usa useMemo para evitar que se recalcule en cada renderizado, optimizando el rendimiento.
-	// Solo se recalculará si `values.password` cambia, que es la única dependencia externa.
-	const formFieldsConfig = useMemo(
-		() => [
-			[
-				{
-					id: "formGridName",
-					name: "Nombre",
-					field: "name",
-					validationFunction: validateName,
-					autocomplete: "given-name",
-					errorMessage: "El nombre no puede estar vacío.",
-				},
-				{
-					id: "formGridSurname",
-					name: "Apellidos",
-					field: "surname",
-					validationFunction: validateSurname,
-					autocomplete: "family-name",
-					errorMessage: "Los apellidos no pueden estar vacíos.",
-				},
-			],
-			[
-				{
-					id: "formGridPhone",
-					name: "Teléfono",
-					field: "phone",
-					inputType: "tel",
-					validationFunction: validatePhone,
-					autocomplete: "tel",
-					errorMessage: "El formato del teléfono no es válido.",
-				},
-				{
-					id: "formGridEmail",
-					name: "Correo electrónico",
-					field: "mail",
-					inputType: "email",
-					validationFunction: validateMail,
-					autocomplete: "email",
-					errorMessage: "El formato del correo electrónico no es válido.",
-				},
-			],
-			[
-				{
-					id: "password",
-					name: "Contraseña",
-					field: "password",
-					inputType: "password",
-					validationFunction: validatePassword,
-					autocomplete: "new-password",
-					ariaDescribedBy: "password-requirements",
-				},
-				{
-					id: "confirm-password",
-					name: "Repite la contraseña",
-					field: "samePassword",
-					inputType: "password",
-					// La validación de este campo depende del valor de la contraseña, por eso se define aquí.
-					validationFunction: (value) =>
-						validateSamePassword(values.password, value),
-					autocomplete: "new-password",
-				},
-			],
+	const formFieldsConfig = [
+		[
+			{
+				id: "formGridName",
+				name: "Nombre",
+				field: "name",
+				validationFunction: validateName,
+				autocomplete: "given-name",
+				errorMessage: "El nombre no puede estar vacío.",
+			},
+			{
+				id: "formGridSurname",
+				name: "Apellidos",
+				field: "surname",
+				validationFunction: validateSurname,
+				autocomplete: "family-name",
+				errorMessage: "Los apellidos no pueden estar vacíos.",
+			},
 		],
-		[values.password]
-	);
+		[
+			{
+				id: "formGridPhone",
+				name: "Teléfono",
+				field: "phone",
+				inputType: "tel",
+				validationFunction: validatePhone,
+				autocomplete: "tel",
+				errorMessage: "El formato del teléfono no es válido.",
+			},
+			{
+				id: "formGridEmail",
+				name: "Correo electrónico",
+				field: "mail",
+				inputType: "email",
+				validationFunction: validateMail,
+				autocomplete: "email",
+				errorMessage: "El formato del correo electrónico no es válido.",
+			},
+		],
+		[
+			{
+				id: "password",
+				name: "Contraseña",
+				field: "password",
+				inputType: "password",
+				validationFunction: validatePassword,
+				autocomplete: "new-password",
+				ariaDescribedBy: "password-requirements",
+			},
+			{
+				id: "confirm-password",
+				name: "Repite la contraseña",
+				field: "samePassword",
+				inputType: "password",
+				// La validación de este campo depende del valor de la contraseña, por eso se define aquí.
+				validationFunction: (value) =>
+					validateSamePassword(values.password, value),
+				autocomplete: "new-password",
+			},
+		],
+	];
 
 	const isButtonDisabled = !isFormValid();
 

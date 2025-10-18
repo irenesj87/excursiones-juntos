@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import FiltersListCheckbox from "../FiltersListCheckbox/FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
@@ -9,16 +9,17 @@ import styles from "./FiltersList.module.css";
 
 /** @typedef {import("../../types").RootState} RootState */
 
-/** @typedef {object} FiltersListProps
+/** 
+ * @typedef {object} FiltersListProps
  * @property {string} filterName - El nombre de la categoría de filtro (ej. "area").
  */
 
 /**
  * Componente que muestra una lista de filtros para una categoría específica (ej. área, dificultad, tiempo).
  * @param {FiltersListProps} props - Las propiedades del componente.
- * @return {React.ReactElement} El componente de la lista de filtros.
+ * @returns {React.ReactElement} - El componente de la lista de filtros.
  */
-function FiltersListComponent({ filterName }) {
+function FiltersList({ filterName }) {
 	// Usamos el hook personalizado para obtener los datos y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
 	// Usamos el hook personalizado para obtener los colores del esqueleto según el tema.
@@ -64,7 +65,5 @@ function FiltersListComponent({ filterName }) {
 		</ul>
 	);
 }
-
-const FiltersList = memo(FiltersListComponent);
 
 export default FiltersList;
