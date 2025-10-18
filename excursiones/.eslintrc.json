@@ -5,7 +5,7 @@
 		"jest": true,
 		"node": true
 	},
-	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsdoc/recommended"],
+	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsdoc/recommended", "plugin:react-hooks/recommended"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true
