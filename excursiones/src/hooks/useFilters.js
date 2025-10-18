@@ -2,9 +2,11 @@ import { useEffect, useReducer } from "react";
 import { useMinDisplayTime } from "./useMinDisplayTime";
 import { fetchFilters } from "../services/filterService";
 
+/** @typedef {{id: string | number, name: string}} FilterItem */
+
 /**
  * @typedef {object} FiltersState
- * @property {any[]} data - Los datos de los filtros.
+ * @property {FilterItem[]} data - Los datos de los filtros.
  * @property {boolean} isLoading - Indica si los datos se están cargando.
  * @property {Error | null} error - Almacena un error si la carga falla.
  * Estado inicial para el reducer que gestiona la carga de filtros.
@@ -16,9 +18,13 @@ const initialState = {
 };
 
 /**
+ * @typedef {{type: 'FETCH_INIT'} | {type: 'FETCH_SUCCESS', payload: FilterItem[]} | {type: 'FETCH_FAILURE', payload: Error}} FiltersAction
+ */
+
+/**
  * Reducer para manejar el estado de la obtención de filtros.
  * @param {FiltersState} state - El estado actual.
- * @param {{type: string, payload?: any}} action - La acción a despachar, con un tipo y una carga útil opcional.
+ * @param {FiltersAction} action - La acción a despachar.
  * @returns {FiltersState} El nuevo estado.
  */
 function filtersReducer(state, action) {
@@ -29,8 +35,13 @@ function filtersReducer(state, action) {
 			return { ...state, isLoading: false, data: action.payload, error: null };
 		case "FETCH_FAILURE":
 			return { ...state, isLoading: false, error: action.payload, data: [] };
-		default:
-			throw new Error(`Acción no soportada: ${action.type}`);
+		default: {
+			// Esta técnica de comprobación de exhaustividad asegura que todos los tipos de acción
+			// estén manejados en el switch. Si se añade un nuevo tipo a `FiltersAction`
+			// sin añadir su `case`, TypeScript dará un error en la siguiente línea.
+			const exhaustiveCheck = action;
+			throw new Error(`Acción no soportada: ${exhaustiveCheck}`);
+		}
 	}
 }
 
@@ -74,7 +85,10 @@ export function useFilters(filterName) {
 				if (isMounted) {
 					/** @type {Error & {secondaryMessage?: string}} */
 					let finalError;
-					if (error instanceof TypeError && error.message === "Failed to fetch") {
+					if (
+						error instanceof TypeError &&
+						error.message === "Failed to fetch"
+					) {
 						finalError = new Error("Error de conexión");
 						finalError.secondaryMessage =
 							"No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.";
