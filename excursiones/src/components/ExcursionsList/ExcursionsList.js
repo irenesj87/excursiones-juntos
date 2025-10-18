@@ -54,23 +54,27 @@ function ExcursionsListComponent({ excursionData = [], isLoading, error }) {
 	// Efecto para gestionar qué excursiones se muestran. Se ejecuta cada vez que isLoading o excursionData cambian
 	useEffect(() => {
 		// No actualizamos nada mientras los datos se están cargando.
-		// Esto mantiene los resultados antiguos visibles para una mejor UX.
-		if (isLoading) {
-			return;
+		// Esto mantiene los resultados antiguos visibles para una mejor UX,
+		// por lo que solo actualizamos cuando la carga ha terminado.
+		if (!isLoading) {
+			setDisplayedExcursions(excursionData);
 		}
-		// Cuando la carga finaliza, actualizamos las excursiones mostradas.
-		setDisplayedExcursions(excursionData);
+	}, [isLoading, excursionData]);
 
+	// Efecto separado para la accesibilidad. Se ejecuta solo cuando los datos de las excursiones cambian.
+	useEffect(() => {
 		// Anunciar el resultado de la búsqueda a los lectores de pantalla, pero solo después de la carga inicial para evitar
 		// ruido innecesario.
 		if (isInitialLoad.current) {
 			isInitialLoad.current = false; // Marcar la carga inicial como completada.
-		} else if (excursionData.length > 0) {
+			return;
+		}
+		if (excursionData.length > 0) {
 			const plural = excursionData.length === 1 ? "excursión" : "excursiones";
 			const message = `Búsqueda completada. Se han encontrado ${excursionData.length} ${plural}.`;
 			setAnnouncement(message);
 		}
-	}, [isLoading, excursionData]);
+	}, [excursionData]);
 
 	/**
 	 * Función asíncrona para unirse a una excursión.

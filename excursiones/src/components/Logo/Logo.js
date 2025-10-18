@@ -1,9 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { COMPANY_NAME, ROUTES } from "../../constants";
 import styles from "./Logo.module.css";
 
 /**
  * Componente que renderiza el logo de la aplicación con el texto "Excursiones Juntos".
+ * @returns {React.ReactElement}  - Componente Logo.
  */
 function Logo() {
 	return (

@@ -229,5 +229,4 @@ function ExcursionCardComponent({
 }
 
 const ExcursionCard = memo(ExcursionCardComponent);
-
 export default ExcursionCard;
