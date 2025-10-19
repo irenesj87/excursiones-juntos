@@ -2,7 +2,7 @@
 	/* top: Altura de la barra de navegación en breakpoints pequeños.
 	 * La clase 'sticky-top' de Bootstrap establece 'top: 0', pero necesitamos
 	 * que esta barra se pegue justo debajo de la barra de navegación. */
-	top: 139px; /* Altura estándar de la navbar en móvil */
+	top: var(--navbar-height);
 	background-color: color-mix(
 		in srgb,
 		var(--mobile-filters-bar-bg) 95%,
@@ -29,7 +29,7 @@
 }
 
 .filtersToggleButton {
-	color: var(--offcanvas-text-color);
+	color: var(--filters-toggle-btn-color);
 	border-color: var(--filters-toggle-btn-border);
 	font-weight: 500;
 	transition: none;
