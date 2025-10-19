@@ -39,7 +39,7 @@ const ExcursionsPage = ({ excursionsState }) => {
 	const activeFilterCount = useSelector(
 		/**
 		 * @param {RootState} state - El estado global de la aplicación Redux.
-		 * @returns {number} El número total de filtros activos.
+		 * @returns {number} - El número total de filtros activos.
 		 */
 		(state) =>
 			state.filterReducer.area.length +
@@ -87,7 +87,7 @@ const ExcursionsPage = ({ excursionsState }) => {
 			>
 				{/* Botón para mostrar filtros (visible hasta 'md') */}
 				<div
-					className={`d-grid d-md-none sticky-top py-2 px-3 ${styles.mobileFiltersBar}`}
+					className={`d-grid d-md-none sticky-top ${styles.mobileFiltersBar}`}
 				>
 					<Button
 						variant="outline-secondary"
