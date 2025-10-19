@@ -53,6 +53,7 @@
 html.light {
 	/* --- 2a. Variables Semánticas --- */
 	--color-primary: var(--color-green-700);
+	--primary-color-rgb: 101, 140, 122; /* RGB de --color-green-700 (hsl(150, 26%, 27%)) */
 	--color-primary-hover: var(--color-green-800);
 	--color-accent: var(--color-green-500);
 	--color-background-body: var(--color-gray-neutral-100);
@@ -117,8 +118,8 @@ html.light {
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
 
-	--filters-toggle-btn-color: var(--color-text-muted);
-	--filters-toggle-btn-border: var(--separator-color);
+	--filters-toggle-btn-color: var(--navbar-color);
+	--filters-toggle-btn-border: var(--navbar-toggler-border-color);
 	--filters-toggle-btn-bg-hover: var(--color-gray-neutral-300);
 	--filters-toggle-btn-color-hover: var(--color-primary);
 	--filters-toggle-btn-border-hover: var(--color-accent);
@@ -126,7 +127,7 @@ html.light {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--mobile-filters-bar-bg: var(--body-bg);
+	--mobile-filters-bar-bg: var(--navbar-bg);
 	--mobile-filters-bar-border: var(--separator-color);
 	--filter-badge-bg: var(--color-primary);
 	--filter-badge-text: var(--login-btn-text);
@@ -187,6 +188,7 @@ html.light body {
 html.dark {
 	/* --- 2a. Variables Semánticas --- */
 	--color-primary: var(--color-green-100);
+	--primary-color-rgb: 166, 201, 184; /* RGB de --color-green-100 (hsl(150, 35%, 65%)) */
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: var(--color-green-900);
@@ -262,7 +264,7 @@ html.dark {
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
 
-	--filters-toggle-btn-color: var(--color-text-base);
+	--filters-toggle-btn-color: var(--navbar-color);
 	--filters-toggle-btn-border: var(--separator-color);
 	--filters-toggle-btn-bg-hover: hsl(150, 10%, 25%);
 	--filters-toggle-btn-color-hover: var(--color-accent);
@@ -271,7 +273,7 @@ html.dark {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--mobile-filters-bar-bg: var(--body-bg);
+	--mobile-filters-bar-bg: var(--navbar-bg);
 	--mobile-filters-bar-border: var(--separator-color);
 	--filter-badge-bg: var(--color-primary);
 	--filter-badge-text: var(--login-btn-text);
