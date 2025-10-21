@@ -57,7 +57,6 @@
 	transition: none;
 }
 
-/* Estilos para el contador de filtros cuando el botón está en estado hover o active */
 .filtersToggleButton:hover .filterBadge,
 .filtersToggleButton.active .filterBadge {
 	background-color: var(--filters-toggle-btn-color-active);

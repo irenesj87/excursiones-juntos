@@ -26,8 +26,7 @@
 	background-color: var(--footer-icon-bg);
 	font-size: 1.5rem;
 	color: var(--footer-icon-color);
-	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
-		box-shadow 0.2s ease-in-out;
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 /* Aplica el mismo feedback visual para hover y foco de teclado */

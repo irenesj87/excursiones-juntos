@@ -175,6 +175,11 @@ html.light {
 	--color-bg-danger-subtle: hsl(0, 100%, 97%);
 	--color-border-danger: hsl(0, 90%, 85%); /* Rojo suave */
 	--color-text-danger: hsl(0, 70%, 40%); /* Rojo oscuro para texto/iconos */
+
+	/* Componente de error de filtro */
+	--filter-error-bg: var(--color-bg-danger-subtle);
+	--filter-error-border: var(--color-border-danger);
+	--filter-error-text: var(--color-text-danger);
 }
 
 html.light body {
@@ -319,6 +324,11 @@ html.dark {
 	--color-bg-danger-subtle: hsl(0, 30%, 25%); /* Rojo oscuro desaturado */
 	--color-border-danger: hsl(0, 40%, 35%); /* Borde rojo oscuro */
 	--color-text-danger: hsl(0, 80%, 75%); /* Rojo claro para texto/iconos */
+
+	/* Componente de error de filtro */
+	--filter-error-bg: var(--color-bg-danger-subtle);
+	--filter-error-border: var(--color-border-danger);
+	--filter-error-text: var(--color-text-danger);
 }
 
 html.dark body {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FiltersList from "../FiltersList/FilterList";
+import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
 import { FiMapPin, FiBarChart, FiClock, FiTrash2 } from "react-icons/fi";
 import styles from "./Filters.module.css";
