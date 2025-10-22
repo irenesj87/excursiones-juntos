@@ -22,6 +22,7 @@ import styles from "./FiltersList.module.css";
 function FiltersList({ filterName }) {
 	// Usamos el hook personalizado para obtener los datos y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
+
 	// Usamos el hook personalizado para obtener los colores del esqueleto según el tema.
 	const skeletonThemeProps = useSkeletonTheme();
 
@@ -37,8 +38,7 @@ function FiltersList({ filterName }) {
 					{/* Mostramos 4 esqueletos para simular mejor el contenido real y evitar saltos de layout */}
 					{Array.from({ length: 4 }).map((_, index) => (
 						<li
-							// eslint-disable-next-line react/no-array-index-key
-							key={`skeleton-pill-${index}`}
+							key={`skeleton-${filterName}-${index}`} // Usamos filterName para garantizar una key única
 						>
 							<FilterPillSkeleton />
 						</li>
@@ -57,9 +57,9 @@ function FiltersList({ filterName }) {
 	// Muestra la lista de filtros una vez que la carga ha terminado y no hay errores.
 	return (
 		<ul className={styles.filtersGrid}>
-			{arrayFilters.map((filter) => (
-				<li key={filter.name}>
-					<FiltersListCheckbox filterName={filterName} filter={filter.name} />
+			{arrayFilters.map((filterOption) => (
+				<li key={`${filterName}-${filterOption}`}>
+					<FiltersListCheckbox filterName={filterName} filter={filterOption} />
 				</li>
 			))}
 		</ul>

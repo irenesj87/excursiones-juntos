@@ -2,11 +2,9 @@ import { useEffect, useReducer } from "react";
 import { useMinDisplayTime } from "./useMinDisplayTime";
 import { fetchFilters } from "../services/filterService";
 
-/** @typedef {{id: string | number, name: string}} FilterItem */
-
 /**
  * @typedef {object} FiltersState
- * @property {FilterItem[]} data - Los datos de los filtros.
+ * @property {string[]} data - Los datos de los filtros.
  * @property {boolean} isLoading - Indica si los datos se están cargando.
  * @property {Error | null} error - Almacena un error si la carga falla.
  * Estado inicial para el reducer que gestiona la carga de filtros.
@@ -18,7 +16,7 @@ const initialState = {
 };
 
 /**
- * @typedef {{type: 'FETCH_INIT'} | {type: 'FETCH_SUCCESS', payload: FilterItem[]} | {type: 'FETCH_FAILURE', payload: Error}} FiltersAction
+ * @typedef {{type: 'FETCH_INIT'} | {type: 'FETCH_SUCCESS', payload: string[]} | {type: 'FETCH_FAILURE', payload: Error}} FiltersAction
  */
 
 /**

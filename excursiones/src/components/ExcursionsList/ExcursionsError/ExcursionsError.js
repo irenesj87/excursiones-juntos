@@ -1,4 +1,4 @@
-import { FiAlertCircle } from "react-icons/fi";
+import { FiAlertTriangle } from "react-icons/fi";
 import styles from "./ExcursionsError.module.css";
 
 /** @typedef {import('react')} React */
@@ -13,8 +13,8 @@ export const DEFAULT_ERROR_MESSAGE =
 const ExcursionsError = () => (
 	<div className={styles.errorContainer}>
 		<div role="alert" className={styles.messageNotFound}>
-			<FiAlertCircle
-				className={`${styles.messageIcon} text-danger`}
+			<FiAlertTriangle
+				className={`${styles.messageIcon}`}
 				aria-hidden="true"
 			/>
 			<p>{DEFAULT_ERROR_MESSAGE}</p>

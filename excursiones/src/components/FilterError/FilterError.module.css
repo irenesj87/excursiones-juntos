@@ -10,7 +10,7 @@
 }
 
 .errorIcon {
-	color: var(--filter-error-text);
+	color: var(--color-text-danger);
 	font-size: 1.1rem;
 	flex-shrink: 0; /* Evita que el icono se encoja */
 }

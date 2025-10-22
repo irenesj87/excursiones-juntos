@@ -15,6 +15,7 @@
 	align-items: center;
 	gap: 0.5rem; /* Reducimos el espacio para una composición más compacta */
 	background-color: var(--color-bg-danger-subtle);
+	color: var(--color-text-danger);
 	border: 1px solid var(--color-border-danger);
 	border-radius: 0.5rem;
 	padding: 1rem 1.5rem;
@@ -25,7 +26,6 @@
 	font-size: 3rem; /* Hacemos el icono más grande para que destaque */
 	color: var(--color-text-danger);
 	margin-bottom: 0.5rem;
-	animation: pulse-error 0.8s ease-in-out;
 }
 
 @keyframes pulse-error {

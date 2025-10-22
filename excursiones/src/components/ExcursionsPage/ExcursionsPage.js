@@ -119,8 +119,13 @@ const ExcursionsPage = ({ excursionsState }) => {
 					id="mobile-filters-offcanvas"
 					aria-labelledby="mobile-filters-title"
 				>
-					<Offcanvas.Header closeButton>
-						<Offcanvas.Title id="mobile-filters-title">Filtros</Offcanvas.Title>
+					<Offcanvas.Header closeButton className="pb-0">
+						<Offcanvas.Title
+							id="mobile-filters-title"
+							className={styles.offcanvasTitle}
+						>
+							Filtros
+						</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body className="d-flex flex-column">
 						<Filters showTitle={false} />
