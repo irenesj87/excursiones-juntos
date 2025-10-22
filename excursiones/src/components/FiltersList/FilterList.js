@@ -57,8 +57,8 @@ function FiltersList({ filterName }) {
 	// Muestra la lista de filtros una vez que la carga ha terminado y no hay errores.
 	return (
 		<ul className={styles.filtersGrid}>
-			{arrayFilters.map((filterOption, index) => (
-				<li key={`${filterName}-${filterOption}-${index}`}>
+			{arrayFilters.map((filterOption) => (
+				<li key={`${filterName}-${filterOption}`}>
 					<FiltersListCheckbox filterName={filterName} filter={filterOption} />
 				</li>
 			))}
