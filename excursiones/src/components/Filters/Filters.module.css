@@ -10,14 +10,15 @@
 	padding: 1.5rem;
 }
 
-/* Título principal para la vista de escritorio */
-.desktopTitle {
-	font-size: 1.25rem;
+/* Título principal */
+.title {
+	font-size: 1.4rem;
 	font-weight: 600;
-	margin: 0 0 2rem;
+	margin: 0 0 1.5rem;
 	padding-bottom: 0.75rem;
 	border-bottom: 1px solid var(--separator-color);
 	color: var(--filter-title-color);
+	text-transform: uppercase;
 }
 
 .filterSection:not(:last-child) {
@@ -25,21 +26,20 @@
 }
 
 .filterTitle {
-	font-size: 1rem;
-	font-weight: 600;
-	text-transform: uppercase;
+	font-size: 1.1rem;
+	font-weight: 500; /* Reducido para no competir con el título principal */
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	color: var(--filter-title-color, inherit);
+	color: var(--color-text-muted);
 }
 
 .filterIcon {
 	font-size: 1.2rem;
 }
 
-/* Footer que contiene el botón de limpiar, se mantiene en la parte inferior */
+/* Footer que contiene el botón de limpiar */
 .filtersFooter {
 	padding: 1rem 1.5rem;
 	border-top: 1px solid var(--separator-color);
