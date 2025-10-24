@@ -20,7 +20,7 @@ import styles from "./FiltersList.module.css";
  * @returns {React.ReactElement} - El componente de la lista de filtros.
  */
 function FiltersList({ filterName }) {
-	// Usamos el hook personalizado para obtener los datos y el estado de carga/error.
+	// Usamos el hook personalizado para obtener los filtros y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
 
 	// Usamos el hook personalizado para obtener los colores del esqueleto según el tema.
@@ -38,7 +38,7 @@ function FiltersList({ filterName }) {
 					{/* Mostramos 4 esqueletos para simular mejor el contenido real y evitar saltos de layout */}
 					{Array.from({ length: 4 }).map((_, index) => (
 						<li
-							key={`skeleton-${filterName}-${index}`} // Usamos filterName para garantizar una key única
+							key={`skeleton-${filterName}-${index}`}
 						>
 							<FilterPillSkeleton />
 						</li>

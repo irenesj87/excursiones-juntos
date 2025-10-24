@@ -13,7 +13,7 @@ import styles from "./FiltersListCheckbox.module.css";
  */
 
 /**
- * Componente que renderiza una única opción de filtro como una "píldora" interactiva.
+ * Componente que renderiza una única opción de filtro como una píldora interactiva.
  * @param {FiltersListCheckboxProps} props - Propiedades del componente.
  * @returns {React.ReactElement} - El componente de filtro individual.
  */
@@ -38,7 +38,6 @@ function FiltersListCheckbox({ filterName, filter }) {
 	 * @returns {void}
 	 */
 	const handleToggle = () => {
-		// Despachamos una única acción para añadir o quitar el filtro
 		dispatch(toggleFilter({ filterType: filterName, value: filter }));
 	};
 
@@ -48,7 +47,6 @@ function FiltersListCheckbox({ filterName, filter }) {
 	const id = useId();
 
 	return (
-		// Usamos un fragmento para agrupar el input y la etiqueta sin añadir un div extra al DOM.
 		<>
 			<input
 				type="checkbox"
