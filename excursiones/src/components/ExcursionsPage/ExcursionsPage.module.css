@@ -3,14 +3,27 @@
 	 * La clase 'sticky-top' de Bootstrap establece 'top: 0', pero necesitamos
 	 * que esta barra se pegue justo debajo de la barra de navegación. */
 	top: var(--navbar-height);
-	background-color: var(--mobile-filters-bar-bg);
+	background-color: color-mix(
+		in srgb,
+		var(--mobile-filters-bar-bg) 95%,
+		transparent
+	);
+	/* Efecto de desenfoque para el fondo (funciona en navegadores compatibles) */
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 	z-index: 1020; /* Justo por debajo del z-index de la barra de navegación (1030) */
-	border-bottom: 1px solid var(--mobile-filters-bar-border);
+	/* Eliminamos el borde inferior para unificar con el estilo de la navbar */
+	border-bottom: none;
+
 	/* Usamos márgenes negativos para que la barra se extienda a lo ancho del viewport,
-	 * anulando el padding del contenedor padre. Luego, restauramos el padding internamente
-	 * para que el contenido (el botón) permanezca alineado. */
+	 * anulando el padding del contenedor padre. */
 	margin-right: calc(-0.5 * var(--bs-gutter-x));
 	margin-left: calc(-0.5 * var(--bs-gutter-x));
+	/* Restauramos el padding para que el botón no ocupe todo el ancho de la barra
+	   y se vea como un elemento contenido dentro de ella. */
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
 	padding-left: calc(var(--bs-gutter-x) * 0.5);
 	padding-right: calc(var(--bs-gutter-x) * 0.5);
 }
@@ -18,7 +31,6 @@
 .filtersToggleButton {
 	color: var(--filters-toggle-btn-color);
 	border-color: var(--filters-toggle-btn-border);
-	background-color: transparent;
 	font-weight: 500;
 	transition: none;
 }
@@ -45,9 +57,16 @@
 	transition: none;
 }
 
-/* Estilos para el contador de filtros cuando el botón está en estado hover o active */
 .filtersToggleButton:hover .filterBadge,
 .filtersToggleButton.active .filterBadge {
 	background-color: var(--filters-toggle-btn-color-active);
 	color: var(--filters-toggle-btn-bg-active);
+}
+
+/* Estilo para el título del Offcanvas */
+.offcanvasTitle {
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 1.4rem;
+	padding-bottom: 0.75rem;
 }

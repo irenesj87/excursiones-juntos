@@ -1,6 +1,6 @@
-import { memo } from "react";
+import React from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
-import FiltersListCheckbox from "../FiltersListCheckbox/FiltersListCheckbox";
+import FiltersListCheckbox from "../FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
 import FilterError from "../FilterError";
 import { useFilters } from "../../hooks/useFilters";
@@ -9,18 +9,20 @@ import styles from "./FiltersList.module.css";
 
 /** @typedef {import("../../types").RootState} RootState */
 
-/** @typedef {object} FiltersListProps
+/**
+ * @typedef {object} FiltersListProps
  * @property {string} filterName - El nombre de la categoría de filtro (ej. "area").
  */
 
 /**
  * Componente que muestra una lista de filtros para una categoría específica (ej. área, dificultad, tiempo).
  * @param {FiltersListProps} props - Las propiedades del componente.
- * @return {React.ReactElement} El componente de la lista de filtros.
+ * @returns {React.ReactElement} - El componente de la lista de filtros.
  */
-function FiltersListComponent({ filterName }) {
-	// Usamos el hook personalizado para obtener los datos y el estado de carga/error.
+function FiltersList({ filterName }) {
+	// Usamos el hook personalizado para obtener los filtros y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
+
 	// Usamos el hook personalizado para obtener los colores del esqueleto según el tema.
 	const skeletonThemeProps = useSkeletonTheme();
 
@@ -34,10 +36,9 @@ function FiltersListComponent({ filterName }) {
 				</output>
 				<ul className={styles.filtersGrid} aria-hidden="true">
 					{/* Mostramos 4 esqueletos para simular mejor el contenido real y evitar saltos de layout */}
-                    {Array.from({ length: 4 }).map((_, index) => (
+					{Array.from({ length: 4 }).map((_, index) => (
 						<li
-							// eslint-disable-next-line react/no-array-index-key
-							key={`skeleton-pill-${index}`}
+							key={`skeleton-${filterName}-${index}`}
 						>
 							<FilterPillSkeleton />
 						</li>
@@ -50,21 +51,19 @@ function FiltersListComponent({ filterName }) {
 	 * Muestra un mensaje de error si la carga de filtros falla.
 	 */
 	if (error) {
-		return <FilterError error={error} />;
+		return <FilterError />;
 	}
 
 	// Muestra la lista de filtros una vez que la carga ha terminado y no hay errores.
 	return (
 		<ul className={styles.filtersGrid}>
-			{arrayFilters.map((filterValue) => (
-				<li key={filterValue}>
-					<FiltersListCheckbox filterName={filterName} filter={filterValue} />
+			{arrayFilters.map((filterOption) => (
+				<li key={`${filterName}-${filterOption}`}>
+					<FiltersListCheckbox filterName={filterName} filter={filterOption} />
 				</li>
 			))}
 		</ul>
 	);
 }
-
-const FiltersList = memo(FiltersListComponent);
 
 export default FiltersList;

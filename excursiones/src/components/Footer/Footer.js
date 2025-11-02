@@ -1,12 +1,13 @@
 import React from "react";
 import { MdMail } from "react-icons/md";
 import { CONTACT_EMAIL, COMPANY_NAME, START_YEAR } from "../../constants";
+import { validateMail } from "../../validation/validations";
 import styles from "./Footer.module.css";
 
 /**
  * Genera el texto de copyright dinámicamente.
  * Muestra un solo año si el año de inicio y el actual son el mismo.
- * @returns {string} El texto de copyright.
+ * @returns {string} - El texto de copyright.
  */
 const getCopyrightText = () => {
 	const CURRENT_YEAR = new Date().getFullYear();
@@ -22,19 +23,22 @@ const getCopyrightText = () => {
  * @returns {React.ReactElement} El componente del pie de página.
  */
 function FooterComponent() {
+	const showMailLink = validateMail(CONTACT_EMAIL);
+
 	return (
 		<footer className={styles.footer}>
-			<a
-				href={`mailto:${CONTACT_EMAIL}`}
-				className={styles.mailIconLink}
-				aria-label="Enviar correo electrónico"
-			>
-				<MdMail />
-			</a>
+			{showMailLink && (
+				<a
+					href={`mailto:${CONTACT_EMAIL}`}
+					className={styles.mailIconLink}
+					aria-label="Enviar correo electrónico"
+				>
+					<MdMail />
+				</a>
+			)}
 
 			<small className={styles.footerText}>{getCopyrightText()}</small>
 		</footer>
 	);
 }
-
 export default FooterComponent;

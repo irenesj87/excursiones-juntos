@@ -4,19 +4,23 @@ import { Navigate, useLocation } from "react-router-dom";
 
 /** @typedef {import("../../types").RootState} RootState */
 
-/** @typedef {object} ProtectedRouteProps
+/**
+ * @typedef {object} ProtectedRouteProps
  * @property {React.ReactNode} children - El componente a renderizar si el usuario está autenticado.
  * @property {boolean} isAuthCheckComplete - Indica si la comprobación de autenticación inicial ha finalizado.
  */
 
 /**
  * Componente que protege rutas, redirigiendo a la página de login si el usuario no está autenticado.
- * @param {ProtectedRouteProps} props
- * @returns {React.ReactNode}
+ * @param {ProtectedRouteProps} props - Las propiedades del componente.
+ * @returns {React.ReactNode} - El componente protegido o una redirección a la página de login.
  */
 const ProtectedRoute = ({ children, isAuthCheckComplete }) => {
 	const { login: isLoggedIn } = useSelector(
-		/** @param {RootState} state */
+		/**
+		 * @param {RootState} state - El estado global de la aplicación.
+		 * @returns {import("../../types").LoginState} - El estado de login.
+		 */
 		(state) => state.loginReducer
 	);
 	// Se obtiene la ubicación actual para redirigir al usuario después de iniciar sesión.

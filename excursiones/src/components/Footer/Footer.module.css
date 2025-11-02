@@ -10,11 +10,6 @@
 	border-top: 1px solid var(--footer-border-top);
 }
 
-.footerText {
-	margin: 0;
-	opacity: 0.8; /* Hacemos el texto un poco más sutil */
-}
-
 .mailIconLink {
 	display: inline-flex;
 	align-items: center;
@@ -26,11 +21,9 @@
 	background-color: var(--footer-icon-bg);
 	font-size: 1.5rem;
 	color: var(--footer-icon-color);
-	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
-		box-shadow 0.2s ease-in-out;
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* Aplica el mismo feedback visual para hover y foco de teclado */
 .mailIconLink:hover,
 .mailIconLink:focus-visible {
 	background-color: var(--footer-icon-bg-hover);
@@ -38,7 +31,12 @@
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra para dar profundidad */
 }
 
-/* Diseño para breakpoints más grandes */
+.footerText {
+	margin: 0;
+	opacity: 0.8; /* Hacemos el texto un poco más sutil */
+}
+
+/* Diseño para breakpoints grandes */
 @media (min-width: 768px) {
 	.footer {
 		flex-direction: row; /* Cambiamos a layout horizontal */
@@ -48,5 +46,11 @@
 	.mailIconLink {
 		margin-bottom: 0; /* Quitamos el margen inferior en layout horizontal */
 		order: 2; /* Movemos el icono a la derecha */
+	}
+}
+
+@media (max-width: 767px) {
+	.footer {
+		border-top: none;
 	}
 }

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useId, useState, useEffect } from "react";
+import React, { useId, useState, useEffect } from "react";
 import { Card, Alert } from "react-bootstrap";
 import ExcursionDetailItem from "../ExcursionDetailItem";
 import StyledButton from "../StyledButton";
@@ -50,7 +50,7 @@ const getDifficultyClasses = (difficultyLevel) => {
  * @param {JoinButtonProps} props - Las propiedades del componente.
  * @returns {React.ReactElement} - El elemento React que representa el botón o estado.
  */
-function JoinButtonComponent({ isJoined, isJoining, onJoin }) {
+function JoinButton({ isJoined, isJoining, onJoin }) {
 	if (isJoined) {
 		return (
 			<div className="d-grid d-md-flex justify-content-center justify-content-md-end">
@@ -74,8 +74,6 @@ function JoinButtonComponent({ isJoined, isJoining, onJoin }) {
 	);
 }
 
-const JoinButton = memo(JoinButtonComponent);
-
 /**
  * @typedef {object} ExcursionCardProps
  * @property {string | number} id - El ID de la excursión.
@@ -94,7 +92,7 @@ const JoinButton = memo(JoinButtonComponent);
  * @param {ExcursionCardProps} props - Las propiedades del componente.
  * @returns {React.ReactElement} El elemento React que representa la tarjeta de excursión.
  */
-function ExcursionCardComponent({
+function ExcursionCard({
 	id,
 	name,
 	area,
@@ -118,10 +116,9 @@ function ExcursionCardComponent({
 	// Genera un ID seguro para el título, que se usará para la accesibilidad, previniendo inyección de atributos.
 	const titleId = useId();
 
-	// Callback memoizado para manejar el evento de unirse a la excursión.
-	const handleOnJoin = useCallback(() => {
+	const handleOnJoin = () => {
 		handleJoin(id);
-	}, [handleJoin, id]);
+	};
 
 	// Efecto para anunciar cambios de estado a los lectores de pantalla.
 	useEffect(() => {
@@ -227,7 +224,5 @@ function ExcursionCardComponent({
 		</Card>
 	);
 }
-
-const ExcursionCard = memo(ExcursionCardComponent);
 
 export default ExcursionCard;

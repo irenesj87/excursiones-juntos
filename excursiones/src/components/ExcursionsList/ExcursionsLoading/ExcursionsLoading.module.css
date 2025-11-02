@@ -7,10 +7,10 @@
 }
 
 .title {
-	margin-top: 0; /* Reseteamos el margen superior, lo controla el contenedor */
+	margin-top: 0;
 	margin-bottom: 2rem;
 	padding-bottom: 0;
-	color: var(--heading-color);
+	color: var(--color-text-base);
 	font-size: 1.6rem;
 	font-weight: bold;
 	text-align: left;

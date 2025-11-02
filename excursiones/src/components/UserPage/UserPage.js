@@ -1,3 +1,4 @@
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import UserInfoForm from "../UserInfoForm";
 import "bootstrap/dist/css/bootstrap.css";
@@ -5,8 +6,10 @@ import styles from "./UserPage.module.css";
 
 /** @typedef {import('types.js').RootState} RootState */
 
-/** Componente que representa la página de perfil del usuario.
+/** 
+ * Componente que representa la página de perfil del usuario.
  *  La lógica de protección de esta ruta se maneja en el componente `ProtectedRoute`.
+ * @returns {React.ReactElement} - El componente de la página de usuario.
  */
 function UserPage() {
 	return (

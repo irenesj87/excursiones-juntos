@@ -27,7 +27,6 @@
 	cursor: pointer; /* Añadimos cursor pointer al ser una etiqueta */
 }
 
-/* Efecto al pasar el ratón por encima */
 .filterPill:hover {
 	background-color: var(--filter-pill-bg-hover);
 	border-color: var(--filter-pill-border-hover);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Col, Button, Offcanvas, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { FiFilter } from "react-icons/fi";
@@ -22,15 +22,15 @@ const ExcursionsPage = ({ excursionsState }) => {
 	 */
 	const [showFilters, setShowFilters] = useState(false);
 	/**
-	 * Cierra el menú de filtros. Memoizada con `useCallback`.
+	 * Cierra el menú de filtros.
 	 * @type {() => void}
 	 */
-	const handleCloseFilters = useCallback(() => setShowFilters(false), []);
+	const handleCloseFilters = () => setShowFilters(false);
 	/**
-	 * Muestra el menú de filtros. Memoizada con `useCallback`.
+	 * Muestra el menú de filtros.
 	 * @type {() => void}
 	 */
-	const handleShowFilters = useCallback(() => setShowFilters(true), []);
+	const handleShowFilters = () => setShowFilters(true);
 
 	/**
 	 * Calcula el número total de filtros activos (área, dificultad, tiempo) desde el estado de Redux.
@@ -39,7 +39,7 @@ const ExcursionsPage = ({ excursionsState }) => {
 	const activeFilterCount = useSelector(
 		/**
 		 * @param {RootState} state - El estado global de la aplicación Redux.
-		 * @returns {number} El número total de filtros activos.
+		 * @returns {number} - El número total de filtros activos.
 		 */
 		(state) =>
 			state.filterReducer.area.length +
@@ -87,7 +87,7 @@ const ExcursionsPage = ({ excursionsState }) => {
 			>
 				{/* Botón para mostrar filtros (visible hasta 'md') */}
 				<div
-					className={`d-grid d-md-none sticky-top py-2 px-3 ${styles.mobileFiltersBar}`}
+					className={`d-grid d-md-none sticky-top ${styles.mobileFiltersBar}`}
 				>
 					<Button
 						variant="outline-secondary"
@@ -119,8 +119,13 @@ const ExcursionsPage = ({ excursionsState }) => {
 					id="mobile-filters-offcanvas"
 					aria-labelledby="mobile-filters-title"
 				>
-					<Offcanvas.Header closeButton>
-						<Offcanvas.Title id="mobile-filters-title">Filtros</Offcanvas.Title>
+					<Offcanvas.Header closeButton className="pb-0">
+						<Offcanvas.Title
+							id="mobile-filters-title"
+							className={styles.offcanvasTitle}
+						>
+							Filtros
+						</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body className="d-flex flex-column">
 						<Filters showTitle={false} />

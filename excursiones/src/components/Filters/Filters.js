@@ -1,7 +1,7 @@
-import { memo, useCallback } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FiltersList from "../FiltersList/FilterList";
+import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
 import { FiMapPin, FiBarChart, FiClock, FiTrash2 } from "react-icons/fi";
 import styles from "./Filters.module.css";
@@ -27,25 +27,27 @@ const filterSections = [
 	},
 ];
 
-/** @typedef {object} FiltersProps
+/**
+ * @typedef {object} FiltersProps
  * @property {boolean} [showTitle=true] - Controla si se muestra el título o no.
  */
 
-/** * Componente principal de los filtros que renderiza el tipo de los filtros de búsqueda (zona, dificultad, tiempo estimado).
- * Utiliza Redux para manejar el estado.
+/**
+ * Componente principal de los filtros que renderiza el tipo de los filtros de búsqueda (zona, dificultad, tiempo estimado).
  * @param {FiltersProps} props - Propiedades del componente.
- * @returns {React.ReactElement} El componente de filtros.
+ * @returns {React.ReactElement} - El componente de filtros.
  */
-function FiltersComponent({ showTitle = true }) {
+function Filters({ showTitle = true }) {
 	const dispatch = useDispatch();
 	/**
 	 * Comprueba si hay algún filtro activo para habilitar/deshabilitar el botón de limpiar filtros.
-	 * Este selector está optimizado para que el componente solo se vuelva a renderizar cuando el valor booleano resultante cambie,
-	 * en lugar de en cada cambio de filtro individual.
 	 * @type {boolean}
 	 */
 	const hasActiveFilters = useSelector(
-		/** @param {RootState} state */
+		/**
+		 * @param {RootState} state - El estado global de Redux.
+		 * @returns {boolean} - Verdadero si hay algún filtro activo, falso en caso contrario.
+		 */
 		(state) =>
 			state.filterReducer.area.length > 0 ||
 			state.filterReducer.difficulty.length > 0 ||
@@ -53,27 +55,29 @@ function FiltersComponent({ showTitle = true }) {
 	);
 
 	/**
-	 * Maneja el evento de click para limpiar todos los filtros. Despacha la acción `clearAllFilters` al store de Redux.
+	 * Maneja el evento de click para limpiar todos los filtros.
 	 * @returns {void}
 	 */
-	const handleClearFilters = useCallback(() => {
+	const handleClearFilters = () => {
 		if (hasActiveFilters) {
 			dispatch(clearAllFilters());
 		}
-	}, [dispatch, hasActiveFilters]);
+	};
 
 	return (
-		// El contenedor principal usa flexbox para posicionar el footer abajo.
-		// La clase h-100 es crucial para que ocupe toda la altura de su padre (la Col o el Offcanvas.Body)
+		// Contenedor principal de los filtros
 		<div className={`${styles.filtersContainer} h-100 d-flex flex-column`}>
 			{/* Contenedor para el contenido que puede hacer scroll */}
 			<div className={styles.scrollableContent}>
-				{showTitle && <h2 className={styles.desktopTitle}>Filtros</h2>}
+				{showTitle && <h2 className={styles.title}>Filtros</h2>}
 				{filterSections.map(({ name, title, Icon }) => (
-					<section key={name} className={styles.filterSection}>
-						<h3 className={styles.filterTitle}>
-							<Icon className={styles.filterIcon} aria-hidden="true" />
-							<span>{title}</span>
+					<section
+						key={name}
+						className={styles.filterSection}
+						aria-labelledby={`filter-title-${name}`}
+					>
+						<h3 id={`filter-title-${name}`} className={styles.filterTitle}>
+							<Icon className={styles.filterIcon} aria-hidden="true" /> {title}
 						</h3>
 						<FiltersList filterName={name} />
 					</section>
@@ -86,7 +90,7 @@ function FiltersComponent({ showTitle = true }) {
 					onClick={handleClearFilters}
 					className="w-100 d-flex align-items-center justify-content-center"
 					aria-label="Limpiar todos los filtros"
-					aria-disabled={!hasActiveFilters}
+					disabled={!hasActiveFilters}
 				>
 					<FiTrash2 aria-hidden="true" className="me-2" />
 					<span>Limpiar Filtros</span>
@@ -95,7 +99,5 @@ function FiltersComponent({ showTitle = true }) {
 		</div>
 	);
 }
-
-const Filters = memo(FiltersComponent);
 
 export default Filters;

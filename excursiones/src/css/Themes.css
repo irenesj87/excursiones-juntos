@@ -43,11 +43,6 @@
 	--color-success-dark: hsl(145, 50%, 60%);
 	--color-warning-dark: hsl(43, 80%, 65%);
 	--color-danger-dark: hsl(355, 75%, 70%);
-
-	/* Icono de hamburguesa para el tema claro (color blanco #ffffff) */
-	--navbar-toggler-icon-bg-light: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	/* Icono de hamburguesa para el tema oscuro (color blanco #ffffff) */
-	--navbar-toggler-icon-bg-dark: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 /* ======================================== */
@@ -58,6 +53,7 @@
 html.light {
 	/* --- 2a. Variables Semánticas --- */
 	--color-primary: var(--color-green-700);
+	--primary-color-rgb: 101, 140, 122; /* RGB de --color-green-700 (hsl(150, 26%, 27%)) */
 	--color-primary-hover: var(--color-green-800);
 	--color-accent: var(--color-green-500);
 	--color-background-body: var(--color-gray-neutral-100);
@@ -78,7 +74,7 @@ html.light {
 	--navbar-brand-color: var(--color-white);
 	--navbar-toggler-icon-color: var(--color-white);
 	--navbar-toggler-border-color: rgba(255, 255, 255, 0.25);
-	--bs-navbar-toggler-icon-bg: var(--navbar-toggler-icon-bg-light);
+	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
 
 	/* --- Bordes y Separadores --- */
@@ -122,8 +118,8 @@ html.light {
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
 
-	--filters-toggle-btn-color: var(--color-text-muted);
-	--filters-toggle-btn-border: var(--separator-color);
+	--filters-toggle-btn-color: var(--navbar-color);
+	--filters-toggle-btn-border: var(--navbar-toggler-border-color);
 	--filters-toggle-btn-bg-hover: var(--color-gray-neutral-300);
 	--filters-toggle-btn-color-hover: var(--color-primary);
 	--filters-toggle-btn-border-hover: var(--color-accent);
@@ -131,7 +127,7 @@ html.light {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--mobile-filters-bar-bg: var(--body-bg);
+	--mobile-filters-bar-bg: var(--navbar-bg);
 	--mobile-filters-bar-border: var(--separator-color);
 	--filter-badge-bg: var(--color-primary);
 	--filter-badge-text: var(--login-btn-text);
@@ -179,6 +175,11 @@ html.light {
 	--color-bg-danger-subtle: hsl(0, 100%, 97%);
 	--color-border-danger: hsl(0, 90%, 85%); /* Rojo suave */
 	--color-text-danger: hsl(0, 70%, 40%); /* Rojo oscuro para texto/iconos */
+
+	/* Componente de error de filtro */
+	--filter-error-bg: var(--color-bg-danger-subtle);
+	--filter-error-border: var(--color-border-danger);
+	--filter-error-text: var(--color-text-danger);
 }
 
 html.light body {
@@ -192,6 +193,7 @@ html.light body {
 html.dark {
 	/* --- 2a. Variables Semánticas --- */
 	--color-primary: var(--color-green-100);
+	--primary-color-rgb: 166, 201, 184; /* RGB de --color-green-100 (hsl(150, 35%, 65%)) */
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: var(--color-green-900);
@@ -210,20 +212,27 @@ html.dark {
 	--navbar-brand-color: var(--color-white);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
-	--bs-navbar-toggler-icon-bg: var(--navbar-toggler-icon-bg-dark);
+	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(139, 192, 165, 0.5); /* Primitiva RGB de --color-green-100 */
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-border-subtle);
 
 	/* --- Botones y Enlaces --- */
-	--login-btn-text: var(
-		--navbar-color
-	); /* Cambiado para que sea legible en la navbar */
-	--login-btn-bg: var(--color-primary);
-	--login-btn-border: var(--color-primary);
-	--login-btn-bg-hover: var(--color-primary-hover);
-	--login-btn-border-hover: var(--color-primary-hover);
+	--login-btn-text: var(--color-text-on-primary);
+	--login-btn-bg: transparent; /* Fondo transparente para estilo outline */
+	--login-btn-border: var(
+		--separator-color
+	); /* Borde sutil como otros elementos */
+	--login-btn-bg-hover: rgba(
+		255,
+		255,
+		255,
+		0.1
+	); /* Mismo hover que 'Registrarse' */
+	--login-btn-border-hover: var(
+		--separator-color
+	); /* El borde no cambia en hover */
 
 	--register-link-color: var(
 		--navbar-color
@@ -260,7 +269,7 @@ html.dark {
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
 
-	--filters-toggle-btn-color: var(--color-text-base);
+	--filters-toggle-btn-color: var(--navbar-color);
 	--filters-toggle-btn-border: var(--separator-color);
 	--filters-toggle-btn-bg-hover: hsl(150, 10%, 25%);
 	--filters-toggle-btn-color-hover: var(--color-accent);
@@ -269,7 +278,7 @@ html.dark {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--mobile-filters-bar-bg: var(--body-bg);
+	--mobile-filters-bar-bg: var(--navbar-bg);
 	--mobile-filters-bar-border: var(--separator-color);
 	--filter-badge-bg: var(--color-primary);
 	--filter-badge-text: var(--login-btn-text);
@@ -315,6 +324,11 @@ html.dark {
 	--color-bg-danger-subtle: hsl(0, 30%, 25%); /* Rojo oscuro desaturado */
 	--color-border-danger: hsl(0, 40%, 35%); /* Borde rojo oscuro */
 	--color-text-danger: hsl(0, 80%, 75%); /* Rojo claro para texto/iconos */
+
+	/* Componente de error de filtro */
+	--filter-error-bg: var(--color-bg-danger-subtle);
+	--filter-error-border: var(--color-border-danger);
+	--filter-error-text: var(--color-text-danger);
 }
 
 html.dark body {
@@ -359,8 +373,8 @@ html.dark .btn-close {
 
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
-	background-color: var(--color-background-body);
-	color: var(--color-text-base);
+	background-color: var(--excursion-card-bg); /* Unifica el fondo con el body */
+	color: var(--color-text-base); /* Mantiene el color del texto del tema */
 	border-bottom: 1px solid var(--separator-color);
 }
 
@@ -370,6 +384,7 @@ html.dark .btn-close {
 
 /* Estilos específicos para los enlaces dentro del Offcanvas de navegación (identificado por su ID) */
 #offcanvasNavbar .offcanvas-body .nav-link {
+	/* En modo oscuro, el texto de los botones de acción debe ser claro */
 	color: var(--color-text-base);
 }
 

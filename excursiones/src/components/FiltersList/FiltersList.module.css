@@ -3,9 +3,9 @@
 	padding: 0;
 	margin: 0;
 	display: grid;
-	gap: 0.5rem; /* 8px */
+	gap: 0.5rem;
 
-	/* Forzamos 2 columnas. En breakpoints pequeños (xs), el contenedor de filtros ocupa todo el ancho, por lo que 2 columnas se ve 
-	bien. En breakpoints más grandes (md+), esto asegura el layout 2xN que se necesita para evitar el salto vertical. */
+	/* Forzamos 2 columnas. En breakpoints pequeños (xs), el contenedor de filtros ocupa todo el ancho, por lo que 2 columnas se
+	ve bien. En breakpoints más grandes (md+), esto asegura el layout 2xN que se necesita para evitar el salto vertical. */
 	grid-template-columns: repeat(2, 1fr);
 }

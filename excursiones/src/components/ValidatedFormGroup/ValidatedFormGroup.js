@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ValidatedFormGroup.module.css";
@@ -8,7 +8,7 @@ import styles from "./ValidatedFormGroup.module.css";
  * @param {object} props - Las propiedades del componente.
  * @param {string} props.id - ID único para el campo de formulario y la etiqueta.
  * @param {string} props.name - Texto para la etiqueta del campo.
- * @param {string} [props.inputType="text"] - Tipo de input (ej. "text", "email", "password").
+ * @param {string} [props.inputType] - Tipo de input (ej. "text", "email", "password"). El valor por defecto es "text".
  * @param {(value: string) => void} props.inputToChange - Función para actualizar el estado del valor del input en el componente padre.
  * @param {(value: string) => boolean | string} props.validationFunction - Función que valida el valor del input. Retorna `true` si es válido, o un `string` con el mensaje de error.
  * @param {string} props.value - El valor actual del campo de formulario.
@@ -16,6 +16,7 @@ import styles from "./ValidatedFormGroup.module.css";
  * @param {string} [props.errorMessage] - Mensaje de error específico. Si no se proporciona, se usa uno genérico.
  * @param {string} props.autocomplete - Valor para el atributo autocomplete del input.
  * @param {string} [props.ariaDescribedBy] - IDs adicionales para aria-describedby, separados por espacios.
+ * @returns {React.ReactElement} - El componente de grupo de formulario validado.
  */
 function ValidatedFormGroup(props) {
 	const {

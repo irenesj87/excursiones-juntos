@@ -1,34 +1,32 @@
 # 🏔️ Proyecto "Excursiones Juntos"
 
-Una aplicación web completa construida con React y Node.js/Express que permite a los usuarios descubrir, buscar y apuntarse a excursiones. El proyecto está dividido en un frontend moderno y una API RESTful segura.
+Una aplicación web construida con React.js y Node.js que permite a los usuarios descubrir, buscar y apuntarse a excursiones. El proyecto está dividido en un frontend (excursiones) y una API RESTful (testserver).
 
 ## ✨ Características Principales
 
-### Frontend (React)
+### Frontend (React.js)
 
 - **Búsqueda y Filtrado Dinámico:** Busca excursiones por texto y filtra por zona, dificultad y duración.
 - **Autenticación de Usuarios:** Sistema completo de registro, inicio de sesión y cierre de sesión con JWT.
 - **Gestión de Perfil:** Los usuarios pueden ver y actualizar su información personal.
 - **Interacción con Excursiones:** Los usuarios autenticados pueden apuntarse a las excursiones.
 
-### Backend (Node.js/Express)
+### Backend (Node.js)
 
 - **API RESTful:** Endpoints bien definidos para gestionar usuarios, excursiones y autenticación.
 - **Seguridad:**
   - Autenticación basada en **JSON Web Tokens (JWT)**.
   - Contraseñas hasheadas con `bcrypt`.
-  - **Rate Limiting** para prevenir ataques de fuerza bruta y abuso de la API.
   - Configuración segura de **CORS** basada en una lista blanca (whitelist).
-  - Validación de entradas en todos los endpoints.
   - Variables de entorno seguras con `dotenv`.
 
 ## 🛠️ Tecnologías Utilizadas
 
 | Área         | Tecnología                                                                                     |
 | :----------- | :--------------------------------------------------------------------------------------------- |
-| **Frontend** | React, React Router, Redux Toolkit, React Bootstrap, CSS Modules, Jest, React Testing Library. |
-| **Backend**  | Node.js, Express, JWT, Bcrypt, Express-Rate-Limit, CORS.                                       |
-| **DevOps**   | SonarQube (para análisis de código estático).                                                  |
+| **Frontend** | React, React Router, Redux Toolkit, React Bootstrap. |
+| **Backend**  | Node.js, Express, JWT, Bcrypt.                                       |
+| **DevOps**   | SonarQube.                                                                                     |
 
 ## 📁 Estructura del Proyecto
 
@@ -75,6 +73,13 @@ JWT_SECRET=tu_clave_secreta_muy_larga_y_aleatoria_aqui
 # Orígenes permitidos para las peticiones CORS (el puerto de tu app de React)
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
+### 3. Configura las variables de entorno
+
+Copia el archivo de ejemplo `.env.example` a un nuevo archivo llamado `.env`.
+```bash
+cp .env.example .env
+```  
+Luego, abre el archivo `.env` y modifica la variable `JWT_SECRET` con un valor seguro y único.
 
 ### 4. Inicia el servidor (se ejecutará en http://localhost:3001)
 ```bash
@@ -101,7 +106,3 @@ npm install
 npm start
 ```
 
-## 🧪 Ejecutar Tests
-
-- **Para el Frontend:** `cd excursiones && npm test`
-- **Para el Backend:** Los tests para el backend aún no están implementados.

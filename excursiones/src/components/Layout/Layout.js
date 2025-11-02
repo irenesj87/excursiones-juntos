@@ -1,9 +1,9 @@
-import React, { memo } from "react";
+import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 import ExcursionsPage from "../ExcursionsPage";
-import OriginalFooter from "../Footer/Footer"; // Se renombra la importación original para que no haya conflictos
+import Footer from "../Footer"; // Se renombra la importación original para que no haya conflictos
 import ProtectedRoute from "../ProtectedRoute";
 import RegisterPageSkeleton from "../RegisterPage/RegisterPageSkeleton";
 import LoginPageSkeleton from "../LoginPage/LoginPageSkeleton";
@@ -23,9 +23,6 @@ import styles from "./Layout.module.css";
 const RegisterPage = lazyWithMinTime(() => import("../RegisterPage"));
 const LoginPage = lazyWithMinTime(() => import("../LoginPage"));
 const UserPage = lazyWithMinTime(() => import("../UserPage"));
-
-// Componente Footer memoizado para evitar re-renderizados innecesarios.
-const Footer = memo(OriginalFooter);
 
 /**
  * Componente principal de la aplicación. Gestiona el estado de las excursiones, la autenticación del usuario y la
@@ -58,7 +55,6 @@ const Layout = () => {
 				onFetchSuccess={handleExcursionsFetchSuccess}
 				onExcursionsFetchStart={handleExcursionsFetchStart}
 				onExcursionsFetchEnd={handleExcursionsFetchEnd}
-				isAuthCheckComplete={isAuthCheckComplete}
 				isOnExcursionsPage={isOnExcursionsPage}
 			/>
 			{/* Contenedor principal que alberga el contenido de la página */}
