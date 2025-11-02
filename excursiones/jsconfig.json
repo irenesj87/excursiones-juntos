@@ -1,9 +1,0 @@
-{
-	"compilerOptions": {
-		"baseUrl": "src",
-		"jsx": "react-jsx",
-		"checkJs": true,
-		"lib": ["dom", "dom.iterable", "es2022"]
-	},
-	"include": ["src"]
-}

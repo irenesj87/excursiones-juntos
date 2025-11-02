@@ -1,22 +1,22 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, FC } from "react";
 import ErrorMessageAlert from "../ErrorMessageAlert";
 
 /**
- * @typedef {object} FormErrorAlertProps
- * @property {string | null} error - El mensaje de error a mostrar.
- * @property {() => void} onClearError - Función para limpiar el error.
+ * Usamos una 'interface' para definir la forma de las props.
+ * Es el equivalente directo y más potente de tu @typedef de JSDoc.
  */
+interface FormErrorAlertProps {
+	error: string | null;
+	onClearError: () => void;
+}
 
-/**
- * Componente reutilizable para mostrar una alerta de error en un formulario.
- * Gestiona el foco en la alerta para mejorar la accesibilidad.
- * @param {FormErrorAlertProps} props
- */
-const FormErrorAlert = ({ error, onClearError }) => {
-	const errorAlertRef = useRef(null);
+const FormErrorAlert: FC<FormErrorAlertProps> = ({ error, onClearError }) => {
+	// Tipamos el ref para que TypeScript sepa que es una referencia a un elemento div.
+	const errorAlertRef = useRef<HTMLDivElement>(null);
 
 	// Efecto para mover el foco a la alerta de error cuando aparece.
 	useEffect(() => {
+		// TypeScript ahora sabe que .current puede tener un método .focus()
 		if (error && errorAlertRef.current) {
 			errorAlertRef.current.focus();
 		}
