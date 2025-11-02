@@ -69,15 +69,7 @@ npm install
 
 ### 3. Crea y configura el archivo de variables de entorno `.env`
 
-```env
-# Clave secreta para firmar los JSON Web Tokens (JWT)
-JWT_SECRET=tu_clave_secreta_muy_larga_y_aleatoria_aqui
-
-# Orígenes permitidos para las peticiones CORS (el puerto de tu app de React)
-CORS_ALLOWED_ORIGINS=http://localhost:3000
-```
-
-Copia el archivo de ejemplo `.env.example` a un nuevo archivo llamado `.env`.
+Copia el archivo `.env.example` a un nuevo archivo llamado `.env` dentro del mismo directorio.
 
 ```bash
 cp .env.example .env
