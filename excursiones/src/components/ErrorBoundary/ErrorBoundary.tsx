@@ -1,23 +1,33 @@
-import React from "react";
+import React, { ErrorInfo, ReactNode } from "react";
 
-/*
- * @file Componente que captura errores de JavaScript en cualquier parte de su árbol de componentes hijo, registra esos errores
- * y muestra una UI de respaldo en lugar del árbol de componentes que se ha roto.
- * @param {object} props - Las propiedades del componente.
- * @param {React.ReactNode} props.children - Los componentes hijos que el ErrorBoundary protegerá.
- * @param {React.ReactNode} props.fallback - La UI que se mostrará cuando ocurra un error.
+/**
+ * Props para el componente ErrorBoundary.
  */
-class ErrorBoundary extends React.Component {
-	constructor(props) {
+interface ErrorBoundaryProps {
+	/** Los componentes hijos que el ErrorBoundary protegerá. */
+	children: ReactNode;
+	/** La UI que se mostrará cuando ocurra un error. */
+	fallback: ReactNode;
+}
+
+/**
+ * Estado para el componente ErrorBoundary.
+ */
+interface ErrorBoundaryState {
+	/** Indica si se ha capturado un error. */
+	hasError: boolean;
+}
+
+class ErrorBoundary extends React.Component<
+	ErrorBoundaryProps,
+	ErrorBoundaryState
+> {
+	constructor(props: ErrorBoundaryProps) {
 		super(props);
-		/**
-		 * @type {object}
-		 * @property {boolean} hasError - Indica si se ha capturado un error.
-		 */
 		this.state = { hasError: false };
 	}
 
-	static getDerivedStateFromError(_error) {
+	static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
 		// Actualiza el estado para que el siguiente renderizado muestre la UI de respaldo.
 		return { hasError: true };
 	}
@@ -28,7 +38,7 @@ class ErrorBoundary extends React.Component {
 	 * @param {object} errorInfo - Un objeto con una key `componentStack` que contiene la información sobre qué componente
 	 * lanzó el error.
 	 */
-	componentDidCatch(error, errorInfo) {
+	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
 		// La mejor práctica es ser explícito con el entorno de producción.
 		if (process.env.NODE_ENV === "production") {
 			// EN PRODUCCIÓN: No exponer detalles en la consola del cliente.
@@ -38,7 +48,7 @@ class ErrorBoundary extends React.Component {
 			// En cualquier otro entorno (development, test, etc.), es útil ver el error completo.
 			// Para evitar la exposición accidental de datos sensibles en el error, solo mostramos
 			// información que es segura para la depuración.
-            console.error("Error capturado por ErrorBoundary:", {
+			console.error("Error capturado por ErrorBoundary:", {
 				stack: error.stack,
 				componentStack: errorInfo.componentStack,
 			});
