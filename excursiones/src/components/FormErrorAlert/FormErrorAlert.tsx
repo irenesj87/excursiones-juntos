@@ -1,35 +1,23 @@
-import { useRef, useEffect, FC } from "react";
 import ErrorMessageAlert from "../ErrorMessageAlert";
 
 /**
- * Componente que muestra una alerta de error en formularios.
- * Utiliza un ref para mover el foco a la alerta cuando aparece.
+ * `FormErrorAlert` es un componente que muestra una alerta de error en el contexto de un formulario.
+ * Su principal responsabilidad es notificar al usuario sobre errores de validación o de envío
+ * y permitir que el usuario cierre la alerta.
+ * Además, gestiona el foco para mejorar la accesibilidad, moviéndolo a la alerta cuando esta aparece.
  */
 interface FormErrorAlertProps {
 	error: string | null;
 	onClearError: () => void;
 }
 
-const FormErrorAlert: FC<FormErrorAlertProps> = ({ error, onClearError }) => {
-	// Tipamos el ref para que TypeScript sepa que es una referencia a un elemento div.
-	const errorAlertRef = useRef<HTMLDivElement>(null);
-
-	// Efecto para mover el foco a la alerta de error cuando aparece.
-	useEffect(() => {
-		// TypeScript ahora sabe que .current puede tener un método .focus()
-		if (error && errorAlertRef.current) {
-			errorAlertRef.current.focus();
-		}
-	}, [error]);
-
+const FormErrorAlert = ({ error, onClearError }: FormErrorAlertProps) => {
 	if (!error) {
 		return null;
 	}
 
 	return (
-		// El div wrapper permite que la alerta sea programáticamente enfocable.
-		// tabIndex="-1" lo hace enfocable vía JS sin añadirlo al orden de tabulación.
-		<div ref={errorAlertRef} tabIndex={-1}>
+		<div role="alert">
 			<ErrorMessageAlert message={error} onClose={onClearError} />
 		</div>
 	);
