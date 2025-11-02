@@ -1,13 +1,15 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Routes, Route, useLocation } from "react-router-dom";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import NavigationBar from "../NavigationBar";
 import ExcursionsPage from "../ExcursionsPage";
-import Footer from "../Footer"; // Se renombra la importación original para que no haya conflictos
+import Footer from "../Footer";
 import ProtectedRoute from "../ProtectedRoute";
 import RegisterPageSkeleton from "../RegisterPage/RegisterPageSkeleton";
 import LoginPageSkeleton from "../LoginPage/LoginPageSkeleton";
 import UserPageSkeleton from "../UserPage/UserPageSkeleton";
+import ErrorMessageAlert from "../ErrorMessageAlert/ErrorMessageAlert";
 import { useAuth } from "../../hooks/useAuth";
 import { useExcursions } from "../../hooks/useExcursions";
 import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
@@ -39,9 +41,9 @@ const Layout = () => {
 	// Se usa el hook useExcursions para obtener el estado completo de las excursiones, que contiene los datos, el estado
 	// de carga y los errores.
 	const {
-		excursionsState,
 		handleExcursionsFetchStart,
 		handleExcursionsFetchSuccess,
+		excursionsState,
 		handleExcursionsFetchEnd,
 	} = useExcursions();
 
@@ -60,60 +62,74 @@ const Layout = () => {
 			{/* Contenedor principal que alberga el contenido de la página */}
 			<main className={styles.mainContentWrapper}>
 				<Container fluid className="d-flex flex-column flex-grow-1">
-					<Row className="justify-content-start flex-grow-1 align-items-stretch">
-						<Routes>
-							{/* Define la ruta por defecto */}
-							<Route
-								path="/"
-								element={<ExcursionsPage excursionsState={excursionsState} />}
-							/>
-							{/* Define las rutas para los componentes RegisterPage, LoginPage y UserPage */}
-							<Route
-								path="registerPage"
-								element={
-									<LazyRouteWrapper
-										PageComponent={RegisterPage}
-										SkeletonComponent={RegisterPageSkeleton}
+					<ErrorBoundary
+						fallback={
+							<Row className="justify-content-center align-items-center flex-grow-1">
+								<Col xs="auto">
+									<ErrorMessageAlert
+										message="Ha ocurrido un error inesperado. Por favor, recarga la página o inténtalo de nuevo más tarde."
+										onClose={() => (globalThis.location.href = "/")}
 									/>
-								}
-							/>
-							<Route
-								path="loginPage"
-								element={
-									<LazyRouteWrapper
-										PageComponent={LoginPage}
-										SkeletonComponent={LoginPageSkeleton}
-									/>
-								}
-							/>
-							<Route
-								path="userPage"
-								element={
-									// ProtectedRoute asegura que el usuario esté autenticado antes de acceder a UserPage, es decir,
-									// restringe el acceso. Esto lo hace revisando el estado de autenticación del usuario (que se
-									// gestiona con Redux en loginSlice).
-									// Este componente tiene tres propósitos:
-									// 1. Evita mostrar una página "rota": Impide que un usuario no autenticado vea una página de
-									//    perfil vacía o con errores, ya que un usuario no autenticado (alguien que no ha iniciado
-									//    sesión) podría escribir /userPage en el navegador y llegar a la página. Sin embargo, como
-									//    no hay datos de usuario en el estado de Redux (state.loginReducer.user sería null), la
-									//    página de perfil se mostraría vacía o con errores, pero nunca mostraría los datos de otro
-									//    usuario. Su función aquí es mejorar la experiencia de usuario y mantener la lógica de
-									//    acceso.
-									// 2. Gestiona el flujo de autenticación: Si un usuario no logueado intenta acceder a /userPage,
-									//    lo redirige de forma limpia a la página de inicio de sesión (/loginPage).
-									// 3. Redirección inteligente: Guarda la página que el usuario intentaba visitar para que, una
-									//    vez que inicie sesión, pueda ser redirigido de vuelta a su perfil automáticamente.
-									<ProtectedRoute isAuthCheckComplete={isAuthCheckComplete}>
+								</Col>
+							</Row>
+						}
+						resetKey={location.pathname}
+					>
+						<Row className="justify-content-start flex-grow-1 align-items-stretch">
+							<Routes>
+								{/* Define la ruta por defecto */}
+								<Route
+									path="/"
+									element={<ExcursionsPage excursionsState={excursionsState} />}
+								/>
+								{/* Define las rutas para los componentes RegisterPage, LoginPage y UserPage */}
+								<Route
+									path="registerPage"
+									element={
 										<LazyRouteWrapper
-											PageComponent={UserPage}
-											SkeletonComponent={UserPageSkeleton}
+											PageComponent={RegisterPage}
+											SkeletonComponent={RegisterPageSkeleton}
 										/>
-									</ProtectedRoute>
-								}
-							/>
-						</Routes>
-					</Row>
+									}
+								/>
+								<Route
+									path="loginPage"
+									element={
+										<LazyRouteWrapper
+											PageComponent={LoginPage}
+											SkeletonComponent={LoginPageSkeleton}
+										/>
+									}
+								/>
+								<Route
+									path="userPage"
+									element={
+										// ProtectedRoute asegura que el usuario esté autenticado antes de acceder a UserPage, es decir,
+										// restringe el acceso. Esto lo hace revisando el estado de autenticación del usuario (que se
+										// gestiona con Redux en loginSlice).
+										// Este componente tiene tres propósitos:
+										// 1. Evita mostrar una página "rota": Impide que un usuario no autenticado vea una página de
+										//    perfil vacía o con errores, ya que un usuario no autenticado (alguien que no ha iniciado
+										//    sesión) podría escribir /userPage en el navegador y llegar a la página. Sin embargo, como
+										//    no hay datos de usuario en el estado de Redux (state.loginReducer.user sería null), la
+										//    página de perfil se mostraría vacía o con errores, pero nunca mostraría los datos de otro
+										//    usuario. Su función aquí es mejorar la experiencia de usuario y mantener la lógica de
+										//    acceso.
+										// 2. Gestiona el flujo de autenticación: Si un usuario no logueado intenta acceder a /userPage,
+										//    lo redirige de forma limpia a la página de inicio de sesión (/loginPage).
+										// 3. Redirección inteligente: Guarda la página que el usuario intentaba visitar para que, una
+										//    vez que inicie sesión, pueda ser redirigido de vuelta a su perfil automáticamente.
+										<ProtectedRoute isAuthCheckComplete={isAuthCheckComplete}>
+											<LazyRouteWrapper
+												PageComponent={UserPage}
+												SkeletonComponent={UserPageSkeleton}
+											/>
+										</ProtectedRoute>
+									}
+								/>
+							</Routes>
+						</Row>
+					</ErrorBoundary>
 				</Container>
 			</main>
 			<Footer />
