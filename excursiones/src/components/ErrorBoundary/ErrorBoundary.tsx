@@ -1,11 +1,16 @@
 import React, { ErrorInfo, ReactNode } from "react";
 
 /**
- * Props para el componente ErrorBoundary.
+ * `ErrorBoundary` es un componente de React que captura errores de JavaScript en cualquier parte de su árbol de componentes
+ * hijo, los registra y muestra una UI de respaldo en lugar del árbol de componentes que falló.
+ * Esto previene que toda la aplicación se rompa y mejora la experiencia del usuario.
+ * También permite resetear el estado de error mediante una clave (`resetKey`), útil para la navegación.
  */
 interface ErrorBoundaryProps {
 	/** Los componentes hijos que el ErrorBoundary protegerá. */
 	children: ReactNode;
+	/** Una clave que, al cambiar, reseteará el estado del ErrorBoundary. Útil para navegación. */
+	resetKey?: string | number;
 	/** La UI que se mostrará cuando ocurra un error. */
 	fallback: ReactNode;
 }
@@ -34,9 +39,6 @@ class ErrorBoundary extends React.Component<
 
 	/**
 	 * Captura los errores en los componentes hijo y loguea el error.
-	 * @param {Error} error - El error que se ha lanzado.
-	 * @param {object} errorInfo - Un objeto con una key `componentStack` que contiene la información sobre qué componente
-	 * lanzó el error.
 	 */
 	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
 		// La mejor práctica es ser explícito con el entorno de producción.
@@ -48,10 +50,21 @@ class ErrorBoundary extends React.Component<
 			// En cualquier otro entorno (development, test, etc.), es útil ver el error completo.
 			// Para evitar la exposición accidental de datos sensibles en el error, solo mostramos
 			// información que es segura para la depuración.
-			console.error("Error capturado por ErrorBoundary:", {
-				stack: error.stack,
+			// NO registramos `error.stack` directamente, ya que puede contener datos sensibles
+			// que causaron el error. En su lugar, registramos el mensaje y el `componentStack`.
+			console.error("ErrorBoundary capturó un error:", {
+				message: error.message,
 				componentStack: errorInfo.componentStack,
 			});
+		}
+	}
+
+	componentDidUpdate(prevProps: ErrorBoundaryProps) {
+		// Si la clave de reseteo ha cambiado y el componente tiene un error,
+		// reseteamos el estado para que intente renderizar los hijos de nuevo.
+		// Esto es útil, por ejemplo, al cambiar de ruta en la aplicación.
+		if (this.state.hasError && prevProps.resetKey !== this.props.resetKey) {
+			this.setState({ hasError: false });
 		}
 	}
 
