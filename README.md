@@ -22,11 +22,11 @@ Aplicación web construida con React.js y Node.js que permite a los usuarios des
 
 ## 🛠️ Tecnologías Utilizadas
 
-| Área         | Tecnología                                                                                     |
-| :----------- | :--------------------------------------------------------------------------------------------- |
-| **Frontend** | React, React Router, Redux Toolkit, React Bootstrap. |
-| **Backend**  | Node.js, Express, JWT, Bcrypt.                                       |
-| **DevOps**   | SonarQube.                                                                                     |
+| Área         | Tecnología                                                                |
+| :----------- | :------------------------------------------------------------------------ |
+| **Frontend** | React (con React Compiler), React Router, Redux Toolkit, React Bootstrap. |
+| **Backend**  | Node.js, Express, JWT, Bcrypt.                                            |
+| **DevOps**   | SonarQube.                                                                |
 
 ## 📁 Estructura del Proyecto
 
@@ -56,14 +56,17 @@ cd excursiones-juntos
 Primero, necesitamos poner en marcha el servidor de la API.
 
 ### 1. Navega al directorio del servidor
+
 ```bash
 cd testserver
 ```
 
 ### 2. Instala las dependencias
+
 ```bash
 npm install
 ```
+
 ### 3. Crea y configura el archivo de variables de entorno `.env`
 
 ```env
@@ -73,15 +76,17 @@ JWT_SECRET=tu_clave_secreta_muy_larga_y_aleatoria_aqui
 # Orígenes permitidos para las peticiones CORS (el puerto de tu app de React)
 CORS_ALLOWED_ORIGINS=http://localhost:3000
 ```
-### 3. Configura las variables de entorno
 
 Copia el archivo de ejemplo `.env.example` a un nuevo archivo llamado `.env`.
+
 ```bash
 cp .env.example .env
-```  
+```
+
 Luego, abre el archivo `.env` y modifica la variable `JWT_SECRET` con un valor seguro y único.
 
 ### 4. Inicia el servidor (se ejecutará en http://localhost:3001)
+
 ```bash
 npm start
 ```
@@ -95,14 +100,15 @@ Ahora, en una **nueva terminal**, vamos a iniciar la aplicación de React.
 ```bash
 cd excursiones
 ```
+
 ### 2. Instala las dependencias
 
 ```bash
 npm install
 ```
+
 ### 3. Inicia la aplicación de React (se abrirá en http://localhost:3000)
 
 ```bash
 npm start
 ```
-
