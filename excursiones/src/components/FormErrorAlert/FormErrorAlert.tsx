@@ -2,8 +2,8 @@ import { useRef, useEffect, FC } from "react";
 import ErrorMessageAlert from "../ErrorMessageAlert";
 
 /**
- * Usamos una 'interface' para definir la forma de las props.
- * Es el equivalente directo y más potente de tu @typedef de JSDoc.
+ * Componente que muestra una alerta de error en formularios.
+ * Utiliza un ref para mover el foco a la alerta cuando aparece.
  */
 interface FormErrorAlertProps {
 	error: string | null;
