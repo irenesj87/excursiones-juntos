@@ -1,7 +1,8 @@
 import { Alert } from "react-bootstrap";
 
 /**
- * Propiedades para el componente ErrorMessageAlert.
+ * `ErrorMessageAlert` es un componente funcional que muestra un mensaje de error
+ * en un formato de alerta de Bootstrap, permitiendo al usuario cerrarla.
  */
 interface ErrorMessageAlertProps {
 	/** El mensaje de error a mostrar. */

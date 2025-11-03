@@ -11,24 +11,29 @@ import styles from "./ExcursionCard.module.css";
 
 /**
  * Hook para obtener el valor anterior de una prop o estado.
- * @param {T} value El valor actual.
- * @returns {T | undefined} El valor de la renderización anterior.
+ * @param value El valor actual.
+ * @returns El valor de la renderización anterior.
  * @template T
  */
-const usePrevious = (value) => {
-	const ref = React.useRef(undefined);
+const usePrevious = <T,>(value: T): T | undefined => {
+	const ref = React.useRef<T | undefined>(undefined);
 	React.useEffect(() => {
 		ref.current = value;
 	});
 	return ref.current;
 };
+
+/** Define los posibles valores para la dificultad de una excursión. */
+type DifficultyLevel = "Baja" | "Media" | "Alta";
+
 /**
  * Determina las clases CSS para el badge de dificultad.
- * @param {string} difficultyLevel - El nivel de dificultad ("Baja", "Media", "Alta").
- * @returns {string} - Una cadena de clases CSS.
+ * @param difficultyLevel El nivel de dificultad ("Baja", "Media", "Alta").
+ * @returns Una cadena de clases CSS.
  */
-const getDifficultyClasses = (difficultyLevel) => {
-	const lowerCaseDifficulty = difficultyLevel.toLowerCase();
+const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
+	const lowerCaseDifficulty =
+		difficultyLevel.toLowerCase() as Lowercase<DifficultyLevel>;
 	const classMap = {
 		baja: styles.difficultyLow,
 		media: styles.difficultyMedium,
@@ -38,19 +43,20 @@ const getDifficultyClasses = (difficultyLevel) => {
 	return cn(styles.difficultyBadge, classMap[lowerCaseDifficulty]);
 };
 
-/**
- * @typedef {object} JoinButtonProps
- * @property {boolean} isJoined - Indica si el usuario se ha apuntado a la excursión.
- * @property {boolean} isJoining - Muestra si la acción de unirse está en progreso.
- * @property {() => void} onJoin - Callback que se ejecuta cuando se cliquea el botón para apuntarse.
- */
+interface JoinButtonProps {
+	/** Indica si el usuario se ha apuntado a la excursión. */
+	readonly isJoined: boolean;
+	/** Muestra si la acción de unirse está en progreso. */
+	readonly isJoining: boolean;
+	/** Callback que se ejecuta cuando se cliquea el botón para apuntarse. */
+	readonly onJoin: () => void;
+}
 
 /**
  * Renderiza el botón para unirse a una excursión. Muestra un botón "Apuntarse", un estado de carga o un estado "Apuntado/a".
- * @param {JoinButtonProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El elemento React que representa el botón o estado.
+ * @returns El componente JoinButton.
  */
-function JoinButton({ isJoined, isJoining, onJoin }) {
+function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	if (isJoined) {
 		return (
 			<div className="d-grid d-md-flex justify-content-center justify-content-md-end">
@@ -74,23 +80,28 @@ function JoinButton({ isJoined, isJoining, onJoin }) {
 	);
 }
 
-/**
- * @typedef {object} ExcursionCardProps
- * @property {string | number} id - El ID de la excursión.
- * @property {string} name - El nombre de la excursión.
- * @property {string} area - La zona donde se realiza la excursión.
- * @property {string} difficulty - La dificultad de la excursión (ej. "Baja", "Media", "Alta").
- * @property {string} time - El tiempo estimado de la excursión.
- * @property {boolean} isLoggedIn - Indica si el usuario ha iniciado sesión.
- * @property {boolean} isJoined - Indica si el usuario ya está apuntado a la excursión.
- * @property {(id: string | number) => Promise<void>} [onJoin] - Función asíncrona que se ejecuta cuando el usuario se
- * apunta a la excursión. Recibe el ID de la excursión.
- */
+interface ExcursionCardProps {
+	/** Identificador único de la excursión. */
+	readonly id: string | number;
+	/** Título o nombre descriptivo de la excursión. */
+	readonly name: string;
+	/** Ubicación geográfica o área donde se lleva a cabo la excursión. */
+	readonly area: string;
+	/** Nivel de dificultad de la excursión. */
+	readonly difficulty: DifficultyLevel;
+	/** Duración aproximada de la excursión. */
+	readonly time: string;
+	/** Booleano que indica si el usuario actual está autenticado. */
+	readonly isLoggedIn: boolean;
+	/** Booleano que indica si el usuario ya se ha unido a esta excursión. */
+	readonly isJoined: boolean;
+	/** Callback opcional que se invoca cuando el usuario intenta unirse a la excursión. */
+	readonly onJoin?: (id: string | number) => Promise<void>;
+}
 
 /**
  * Componente para la tarjeta de excursión.
- * @param {ExcursionCardProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} El elemento React que representa la tarjeta de excursión.
+ * @returns El componente ExcursionCard.
  */
 function ExcursionCard({
 	id,
@@ -101,21 +112,25 @@ function ExcursionCard({
 	isLoggedIn,
 	isJoined,
 	onJoin,
-}) {
+}: ExcursionCardProps) {
 	// La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar el componente y
-	// haceerlo puramente presentacional.
-	const { isJoining, joinError, handleJoin, clearError } =
-		useJoinExcursion(onJoin);
+	// hacerlo puramente presentacional. 
+	// Si onJoin no se proporciona, pasamos una función asíncrona vacía para satisfacer el tipado del hook y evitar errores 
+	// de TypeScript.
+	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
+		onJoin ?? (async () => {})
+	);
 
-	// Estado para gestionar los anuncios para lectores de pantalla.
+	// Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla.
 	const [announcement, setAnnouncement] = useState("");
 
-	// Hook para obtener el valor anterior de `isJoined` y evitar anuncios repetidos.
+	// Almacena el valor anterior de `isJoined` para evitar anuncios repetidos.
 	const prevIsJoined = usePrevious(isJoined);
 
-	// Genera un ID seguro para el título, que se usará para la accesibilidad, previniendo inyección de atributos.
+	// Genera un ID único y seguro para el título, que se usará para la accesibilidad.
 	const titleId = useId();
 
+	// Manejador para el evento de unirse a la excursión.
 	const handleOnJoin = () => {
 		handleJoin(id);
 	};
@@ -128,10 +143,10 @@ function ExcursionCard({
 	}, [isJoining, name]);
 
 	// Efecto para anunciar el resultado (éxito o error) de la acción.
-	// Usamos una referencia para saber si es la primera vez que el componente se monta
+	// Usamos una referencia para saber si es la primera vez que el componente se monta.
 	const isInitialMount = React.useRef(true);
 	useEffect(() => {
-		// Si es la primera vez que se monta, Detiene la ejecución del efecto inmediatamente.
+		// Si es la primera vez que se monta, detiene la ejecución del efecto inmediatamente.
 		// Esto evita anuncios innecesarios al cargar el componente.
 		if (isInitialMount.current) {
 			isInitialMount.current = false;
@@ -140,18 +155,13 @@ function ExcursionCard({
 		if (joinError) {
 			setAnnouncement(`Error al apuntarse: ${getSafeErrorMessage(joinError)}.`);
 		} else if (isJoined && !prevIsJoined) {
-			// Solo anunciar el éxito cuando el estado cambia de no apuntado a apuntado.
+			// Solo anuncia el éxito cuando el estado cambia de no apuntado a apuntado.
 			setAnnouncement(`Te has apuntado correctamente a la excursión ${name}.`);
 		}
 	}, [joinError, isJoined, prevIsJoined, name]);
 
 	return (
 		<Card
-			// Usamos un fieldset para agrupar la información relacionada de la excursión.
-			// Esto mejora la accesibilidad al proporcionar un contexto claro para los lectores de pantalla.
-			// El atributo aria-labelledby asocia el fieldset con su título, proporcionando una descripción clara.
-			// Esto es especialmente útil para usuarios de lectores de pantalla, ya que les permite entender
-			// rápidamente el propósito del grupo de información.
 			as="fieldset"
 			// La tarjeta es programáticamente enfocable con el teclado para mejorar la accesibilidad,
 			// para que todos los usuarios puedan navegar por el contenido.
@@ -161,7 +171,7 @@ function ExcursionCard({
 				[styles.isJoinedCard]: isJoined,
 			})}
 		>
-			{/* Contenedor invisible para los anuncios del lector de pantalla. */}
+			{/* Contenedor para anuncios de accesibilidad, oculto visualmente. */}
 			<div aria-live="polite" aria-atomic="true" className="visually-hidden">
 				{announcement}
 			</div>
@@ -170,7 +180,7 @@ function ExcursionCard({
 				<div>
 					{/* Título de la excursión */}
 					<Card.Title
-						/* 'legend' proporciona un título para su <fieldset> padre */
+						/* `legend` proporciona un título semántico para su <fieldset> padre. */
 						as="legend"
 						id={titleId}
 						className={`${styles.excursionTitle} mb-3`}
@@ -199,9 +209,11 @@ function ExcursionCard({
 				{/* Área de acción: botón para unirse a la excursión */}
 				{isLoggedIn && (
 					<div className={`${styles.cardActionArea} mt-auto pt-3`}>
-						{joinError && (
-							/* Componente Alert de Bootstrap para mostrar errores al unirse a la excursión. */
-							/* El mensaje de error se sanitiza para prevenir inyección de HTML. */
+						{joinError && ( // Si hay un error al unirse, muestra una alerta.
+							/* 
+								Componente Alert para mostrar errores. El mensaje se sanitiza con `getSafeErrorMessage` 
+								para prevenir inyección de HTML.
+							*/
 							<Alert
 								variant="danger"
 								onClose={clearError}
@@ -209,7 +221,6 @@ function ExcursionCard({
 								className="mb-2 small"
 								role="alert"
 							>
-								{/* Verificación de seguridad: Asegura que solo se rendericen strings. */}
 								{getSafeErrorMessage(joinError)}
 							</Alert>
 						)}
