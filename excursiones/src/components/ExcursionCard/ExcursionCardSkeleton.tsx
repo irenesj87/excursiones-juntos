@@ -62,9 +62,9 @@ interface ExcursionCardSkeletonProps {
 /**
  * Componente que muestra un esqueleto de carga para una ExcursionCard.
  */
-const ExcursionCardSkeleton = ({
+function ExcursionCardSkeleton({
 	isLoggedIn = false,
-}: ExcursionCardSkeletonProps) => {
+}: ExcursionCardSkeletonProps) {
 	const { baseColor, highlightColor } = useSkeletonTheme();
 
 	return (
