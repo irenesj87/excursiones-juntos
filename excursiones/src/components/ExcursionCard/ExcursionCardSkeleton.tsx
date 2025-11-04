@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
@@ -29,18 +28,20 @@ const SKELETON_SIZES = {
 	BUTTON_MIN_WIDTH: 117, // Ancho mínimo del esqueleto del botón
 };
 
-/**
- * @typedef {object} DetailItemSkeletonProps
- * @property {boolean} [withIcon=false] - Si se debe mostrar el esqueleto de un icono.
- * @property {number | string} width - El ancho del esqueleto de texto.
- */
+interface DetailItemSkeletonProps {
+	/** Si se debe mostrar el esqueleto de un icono. */
+	withIcon?: boolean;
+	/** El ancho del esqueleto de texto. */
+	width: number | string;
+}
 
 /**
  * Componente auxiliar para renderizar el esqueleto de un ítem de detalle.
- * @param {DetailItemSkeletonProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El elemento React que representa el esqueleto del ítem de detalle.
  */
-const DetailItemSkeleton = ({ withIcon = false, width }) => (
+const DetailItemSkeleton = ({
+	withIcon = false,
+	width,
+}: DetailItemSkeletonProps) => (
 	<div className={detailItemStyles.detailItem}>
 		{withIcon && (
 			<Skeleton
@@ -53,17 +54,17 @@ const DetailItemSkeleton = ({ withIcon = false, width }) => (
 	</div>
 );
 
-/**
- * @typedef {object} ExcursionCardSkeletonProps
- * @property {boolean} [isLoggedIn=false] - Indica si el usuario ha iniciado sesión para mostrar el placeholder del botón.
- */
+interface ExcursionCardSkeletonProps {
+	/** Indica si el usuario ha iniciado sesión para mostrar el placeholder del botón. */
+	isLoggedIn?: boolean;
+}
 
 /**
  * Componente que muestra un esqueleto de carga para una ExcursionCard.
- * @param {ExcursionCardSkeletonProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El elemento React que representa el esqueleto de la tarjeta de excursión.
  */
-function ExcursionCardSkeleton({ isLoggedIn = false }) {
+const ExcursionCardSkeleton = ({
+	isLoggedIn = false,
+}: ExcursionCardSkeletonProps) => {
 	const { baseColor, highlightColor } = useSkeletonTheme();
 
 	return (
@@ -115,6 +116,6 @@ function ExcursionCardSkeleton({ isLoggedIn = false }) {
 			</Card>
 		</SkeletonTheme>
 	);
-}
+};
 
 export default ExcursionCardSkeleton;
