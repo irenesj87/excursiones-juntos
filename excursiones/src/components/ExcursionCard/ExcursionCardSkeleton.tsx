@@ -56,7 +56,7 @@ const DetailItemSkeleton = ({
 
 interface ExcursionCardSkeletonProps {
 	/** Indica si el usuario ha iniciado sesión para mostrar el placeholder del botón. */
-	isLoggedIn?: boolean;
+	readonly isLoggedIn?: boolean;
 }
 
 /**

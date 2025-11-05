@@ -114,8 +114,8 @@ function ExcursionCard({
 	onJoin,
 }: ExcursionCardProps) {
 	// La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar el componente y
-	// hacerlo puramente presentacional. 
-	// Si onJoin no se proporciona, pasamos una función asíncrona vacía para satisfacer el tipado del hook y evitar errores 
+	// hacerlo puramente presentacional.
+	// Si onJoin no se proporciona, pasamos una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
 	// de TypeScript.
 	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
 		onJoin ?? (async () => {})
@@ -163,9 +163,8 @@ function ExcursionCard({
 	return (
 		<Card
 			as="fieldset"
-			// La tarjeta es programáticamente enfocable con el teclado para mejorar la accesibilidad,
-			// para que todos los usuarios puedan navegar por el contenido.
 			tabIndex={0}
+			role="article"
 			aria-labelledby={titleId}
 			className={cn(styles.excursionItemCard, "h-100 w-100", {
 				[styles.isJoinedCard]: isJoined,
@@ -175,7 +174,7 @@ function ExcursionCard({
 			<div aria-live="polite" aria-atomic="true" className="visually-hidden">
 				{announcement}
 			</div>
-
+			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>
 					{/* Título de la excursión */}
@@ -209,7 +208,7 @@ function ExcursionCard({
 				{/* Área de acción: botón para unirse a la excursión */}
 				{isLoggedIn && (
 					<div className={`${styles.cardActionArea} mt-auto pt-3`}>
-						{joinError && ( // Si hay un error al unirse, muestra una alerta.
+						{joinError && (
 							/* 
 								Componente Alert para mostrar errores. El mensaje se sanitiza con `getSafeErrorMessage` 
 								para prevenir inyección de HTML.
