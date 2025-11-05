@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
 
 /**
- * Hook para obtener el valor anterior de la variable isJoined.
+ * Hook para obtener el valor anterior de una prop o estado.
  * @param value El valor actual.
  * @returns El valor de la renderización anterior.
  * @template T
