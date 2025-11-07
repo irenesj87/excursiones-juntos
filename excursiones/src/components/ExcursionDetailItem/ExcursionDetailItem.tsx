@@ -20,8 +20,6 @@ interface ExcursionDetailItemProps {
  * Componente para mostrar un detalle específico de una excursión (ej. dificultad, tiempo).
  * ¡ADVERTENCIA DE SEGURIDAD! Si el contenido de `children` proviene de una fuente externa (API, usuario),
  * debe ser sanitizado para prevenir ataques XSS.
- * @param {ExcursionDetailItemProps} props - Las propiedades del componente.
- * @returns {React.ReactElement | null} - El elemento React que representa el detalle de la excursión, o null si no hay contenido.
  */
 function ExcursionDetailItem({
 	IconComponent,
@@ -31,8 +29,6 @@ function ExcursionDetailItem({
 }: ExcursionDetailItemProps): React.ReactElement | null {
 	/**
 	 * Renderiza el Tooltip para el detalle de la excursión.
-	 * @param {TooltipProps} props - Propiedades inyectadas por OverlayTrigger.
-	 * @returns {React.ReactElement} - El elemento Tooltip.
 	 */
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
