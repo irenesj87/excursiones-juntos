@@ -1,3 +1,4 @@
+import React from "react";
 import { OverlayTrigger, Tooltip, TooltipProps } from "react-bootstrap";
 import styles from "./ExcursionDetailItem.module.css";
 
