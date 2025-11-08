@@ -1,3 +1,4 @@
+import React from "react";
 import { Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
@@ -6,7 +7,7 @@ import detailItemStyles from "../ExcursionDetailItem/ExcursionDetailItem.module.
 import "react-loading-skeleton/dist/skeleton.css";
 
 /**
- * @constant {object} TEST_IDS - Identificadores para los elementos del componente para facilitar las pruebas.
+ * Identificadores para los elementos del componente para facilitar las pruebas.
  */
 export const TEST_IDS = {
 	SKELETON_CARD: "excursion-card-skeleton",
@@ -14,8 +15,7 @@ export const TEST_IDS = {
 };
 
 /**
- * @constant {object} SKELETON_SIZES - Define las dimensiones y anchos para los elementos del esqueleto para facilitar
- * su mantenimiento.
+ * Define las dimensiones y anchos para los elementos del esqueleto para facilitar su mantenimiento.
  */
 const SKELETON_SIZES = {
 	TITLE_HEIGHT: 21, // Altura del esqueleto del título
