@@ -75,9 +75,9 @@ function ExcursionsList({
 		try {
 			// Llamada al servicio para unirse a la excursión.
 			const updatedUser = await joinExcursionService(
-				user?.mail as string,
+user!.mail,
 				String(excursionId), // Aseguramos que el ID sea un string para el servicio
-				token as string
+				token!
 			);
 			// Actualiza el estado global del usuario con la nueva información.
 			loginDispatch(updateUser({ user: updatedUser as User }));
