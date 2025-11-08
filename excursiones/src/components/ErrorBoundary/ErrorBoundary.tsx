@@ -34,8 +34,6 @@ class ErrorBoundary extends React.Component<
 
 	/**
 	 * Actualiza el estado cuando se captura un error, para mostrar la UI de respaldo.
-	 * @param _error - El error que fue lanzado.
-	 * @returns Un objeto de estado que indica que se ha producido un error.
 	 */
 	static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
 		// Actualiza el estado para que el siguiente renderizado muestre la UI de respaldo.
@@ -44,8 +42,6 @@ class ErrorBoundary extends React.Component<
 
 	/**
 	 * Captura los errores en los componentes hijo y loguea el error.
-	 * @param error - El error que fue lanzado.
-	 * @param errorInfo - Información adicional sobre el error, incluyendo el stack trace del componente.
 	 */
 	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
 		// La mejor práctica es ser explícito con el entorno de producción.
@@ -68,7 +64,6 @@ class ErrorBoundary extends React.Component<
 
 	/**
 	 * Detecta cambios en las props para resetear el estado de error si es necesario.
-	 * @param prevProps - Las props anteriores del componente.
 	 */
 	componentDidUpdate(prevProps: ErrorBoundaryProps) {
 		// Si la clave de reseteo ha cambiado y el componente tiene un error,

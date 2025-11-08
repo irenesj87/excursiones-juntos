@@ -5,22 +5,20 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../../hooks/useSkeletonTheme";
 import ExcursionCardSkeleton from "../../ExcursionCard/ExcursionCardSkeleton";
 import styles from "./ExcursionsLoading.module.css";
-
-/** @typedef {import('../../../types').RootState} RootState */
+import { RootState } from "../../../store/store";
 
 /**
- * Componente para mostrar el esqueleto mientras las excursiones se cargan.
- * @returns {React.ReactElement} - Componente de carga de excursiones.
+ * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
  */
 const ExcursionsLoading = () => {
 	const isLoggedIn = useSelector(
-		/**
-		 * @param {RootState} state - El estado global de Redux.
-		 * @returns {boolean} - El estado del login.
-		 */
-		(state) => state.loginReducer.login
+		(state: RootState) => state.loginReducer.login
 	);
+
+	// Obtener las propiedades del tema para los esqueletos
 	const skeletonThemeProps = useSkeletonTheme();
+
+	// Renderizar la lista de esqueletos de tarjetas de excursión
 	return (
 		<SkeletonTheme {...skeletonThemeProps}>
 			<div className={styles.excursionsContainer}>

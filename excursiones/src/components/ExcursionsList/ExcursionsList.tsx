@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
 import { updateUser } from "../../slices/loginSlice";
 import ExcursionCard from "../ExcursionCard";
 import { joinExcursion as joinExcursionService } from "../../services/excursionService";
@@ -9,36 +10,46 @@ import ExcursionsError from "./ExcursionsError";
 import NoExcursionsFound from "./NoExcursionsFound";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionsList.module.css";
+import { Excursion, User } from "../../types";
 
-/** @typedef {import('types.js').RootState} RootState */
-/** @typedef {import('types.js').Excursion} Excursion */
+interface ExcursionsListProps {
+	readonly excursionData?: Excursion[];
+	readonly isLoading: boolean;
+	readonly error: Error | null;
+}
 
+/**
+ * Guarda de tipo para validar que un objeto es de tipo User.
+ * Comprueba la existencia y el tipo de las propiedades esenciales.
+ */
+function isUser(obj: unknown): obj is User {
+	return (
+		typeof obj === "object" &&
+		obj !== null &&
+		"mail" in obj &&
+		"excursions" in obj
+	);
+}
 /**
  * Componente que orquesta la visualización de la lista de excursiones.
  * Gestiona los estados de carga, error y "no encontrado", renderizando el componente hijo apropiado.
- * @param {object} props - Las propiedades del componente.
- * @param {Excursion[]} [props.excursionData] - Array de excursiones a mostrar. El valor por defecto es un array vacío.
- * @param {boolean} props.isLoading - Indica si los datos de las excursiones se están cargando.
- * @param {Error | null} props.error - Objeto de error si ha ocurrido un problema al cargar las excursiones. Se evalúa su veracidad.
- * @returns {React.ReactElement} El componente de la lista de excursiones.
  */
-function ExcursionsList({ excursionData = [], isLoading, error }) {
+function ExcursionsList({
+	excursionData = [],
+	isLoading,
+	error,
+}: ExcursionsListProps) {
 	// Se obtiene el estado del loginReducer, el objeto usuario y el token
 	const {
 		login: isLoggedIn,
 		user,
 		token,
-	} = useSelector(
-		/**
-		 * @param {RootState} state - El estado global de Redux.
-		 * @returns {{login: boolean, user: import('types.js').User | null, token: string | null}} - El estado del loginReducer.
-		 */
-		(state) => state.loginReducer
-	);
-	const loginDispatch = useDispatch();
+	} = useSelector((state: RootState) => state.loginReducer);
+	const loginDispatch = useDispatch<AppDispatch>();
 	// Estado para las excursiones que se muestran. Esto nos permite mantener los resultados antiguos visibles mientras se
 	// cargan los nuevos datos para evitar que parpadeen o se queden en blanco.
-	const [displayedExcursions, setDisplayedExcursions] = useState(excursionData);
+	const [displayedExcursions, setDisplayedExcursions] =
+		useState<Excursion[]>(excursionData);
 	// Estado para anunciar cambios a los lectores de pantalla.
 	const [announcement, setAnnouncement] = useState("");
 	// Referencia para saber si es la primera carga del componente. Permite evitar anunciar resultados en la primera carga.
@@ -71,19 +82,24 @@ function ExcursionsList({ excursionData = [], isLoading, error }) {
 
 	/**
 	 * Función asíncrona para unirse a una excursión.
-	 * @param {string | number} excursionId - El ID de la excursión a la que el usuario desea unirse.
 	 */
-	const joinExcursion = async (excursionId) => {
+	const joinExcursion = async (excursionId: string | number) => {
 		try {
 			// Llamada al servicio para unirse a la excursión.
 			const updatedUser = await joinExcursionService(
-				user?.mail,
-				excursionId,
+				user!.mail,
+				String(excursionId), // Aseguramos que el ID sea un string para el servicio
 				token
 			);
-			// Actualiza el estado global del usuario con la nueva información.
-			loginDispatch(updateUser({ user: updatedUser }));
-		} catch (caughtError) {
+
+			// Validamos que la respuesta de la API se ajuste a la interfaz User.
+			if (isUser(updatedUser)) {
+				// Si la validación es exitosa, actualizamos el estado global del usuario.
+				loginDispatch(updateUser({ user: updatedUser }));
+			} else {
+				throw new Error("La respuesta de la API no tiene el formato esperado.");
+			}
+		} catch (caughtError: unknown) {
 			// En desarrollo, muestra el error completo para facilitar la depuración.
 			if (process.env.NODE_ENV === "development") {
 				console.error("Error detallado (dev):", caughtError);
@@ -91,7 +107,7 @@ function ExcursionsList({ excursionData = [], isLoading, error }) {
 				// En producción o test, registramos un mensaje controlado para no exponer detalles.
 				console.error(
 					"Error técnico al unirse a la excursión:",
-					caughtError.message || "Error desconocido"
+					(caughtError as Error).message || "Error desconocido"
 				);
 			}
 			// Relanzamos un nuevo error con un mensaje más amigable para el usuario.
@@ -106,7 +122,9 @@ function ExcursionsList({ excursionData = [], isLoading, error }) {
 	 * Componentes de las tarjetas de excursión. El compilador de React se encargará de memoizar este cálculo si es necesario.
 	 */
 	const excursionComponents = displayedExcursions.map((excursion) => {
-		const isJoined = isLoggedIn && user?.excursions?.includes(excursion.id);
+		const isJoined = !!(
+			isLoggedIn && user?.excursions?.includes(String(excursion.id))
+		);
 		return (
 			<Col
 				as="li"

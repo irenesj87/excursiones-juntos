@@ -1,7 +1,5 @@
-/**
- * Este archivo centraliza las definiciones de tipos y interfaces para el proyecto.
- * Reemplaza el antiguo `types.js` con la potencia del tipado estático de TypeScript.
- */
+/** Define los posibles valores para la dificultad de una excursión. */
+export type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 export interface User {
 	name: string;
@@ -31,6 +29,6 @@ export interface Excursion {
 	id: number | string;
 	name: string;
 	area: string;
-	difficulty: string;
+	difficulty: DifficultyLevel;
 	time: string;
 }

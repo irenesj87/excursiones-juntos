@@ -11,9 +11,6 @@ import styles from "./ExcursionCard.module.css";
 
 /**
  * Hook para obtener el valor anterior de una prop o estado.
- * @param value El valor actual.
- * @returns El valor de la renderización anterior.
- * @template T
  */
 const usePrevious = <T,>(value: T): T | undefined => {
 	const ref = React.useRef<T | undefined>(undefined);
@@ -28,8 +25,6 @@ type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 /**
  * Determina las clases CSS para el badge de dificultad.
- * @param difficultyLevel El nivel de dificultad ("Baja", "Media", "Alta").
- * @returns Una cadena de clases CSS.
  */
 const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
 	const lowerCaseDifficulty =
@@ -54,7 +49,6 @@ interface JoinButtonProps {
 
 /**
  * Renderiza el botón para unirse a una excursión. Muestra un botón "Apuntarse", un estado de carga o un estado "Apuntado/a".
- * @returns El componente JoinButton.
  */
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	if (isJoined) {
@@ -101,7 +95,6 @@ interface ExcursionCardProps {
 
 /**
  * Componente para la tarjeta de excursión.
- * @returns El componente ExcursionCard.
  */
 function ExcursionCard({
 	id,
