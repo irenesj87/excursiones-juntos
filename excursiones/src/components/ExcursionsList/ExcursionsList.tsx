@@ -19,6 +19,18 @@ interface ExcursionsListProps {
 }
 
 /**
+ * Guarda de tipo para validar que un objeto es de tipo User.
+ * Comprueba la existencia y el tipo de las propiedades esenciales.
+ */
+function isUser(obj: unknown): obj is User {
+	return (
+		typeof obj === "object" &&
+		obj !== null &&
+		"mail" in obj &&
+		"excursions" in obj
+	);
+}
+/**
  * Componente que orquesta la visualización de la lista de excursiones.
  * Gestiona los estados de carga, error y "no encontrado", renderizando el componente hijo apropiado.
  */
@@ -75,12 +87,18 @@ function ExcursionsList({
 		try {
 			// Llamada al servicio para unirse a la excursión.
 			const updatedUser = await joinExcursionService(
-user!.mail,
+				user!.mail,
 				String(excursionId), // Aseguramos que el ID sea un string para el servicio
-				token!
+				token
 			);
-			// Actualiza el estado global del usuario con la nueva información.
-			loginDispatch(updateUser({ user: updatedUser as User }));
+
+			// Validamos que la respuesta de la API se ajuste a la interfaz User.
+			if (isUser(updatedUser)) {
+				// Si la validación es exitosa, actualizamos el estado global del usuario.
+				loginDispatch(updateUser({ user: updatedUser }));
+			} else {
+				throw new Error("La respuesta de la API no tiene el formato esperado.");
+			}
 		} catch (caughtError: unknown) {
 			// En desarrollo, muestra el error completo para facilitar la depuración.
 			if (process.env.NODE_ENV === "development") {
