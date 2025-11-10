@@ -7,12 +7,16 @@ import Filters from "../Filters";
 import ExcursionsList from "../ExcursionsList";
 import styles from "./ExcursionsPage.module.css";
 
+// Definición del tipo para el estado de las excursiones.
+type ExcursionsState = {
+	data: import("../../types").Excursion[];
+	isLoading: boolean;
+	error: (Error & { secondaryMessage?: string }) | null;
+};
+
+// Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
-	excursionsState: {
-		data: import("../../types").Excursion[];
-		isLoading: boolean;
-		error: (Error & { secondaryMessage?: string }) | null;
-	};
+	excursionsState: ExcursionsState;
 }
 
 /**
