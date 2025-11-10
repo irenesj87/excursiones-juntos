@@ -4,15 +4,20 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { FiFilter } from "react-icons/fi";
 import Filters from "../Filters";
+import { AppError, Excursion } from "../../types";
 import ExcursionsList from "../ExcursionsList";
 import styles from "./ExcursionsPage.module.css";
 
+// Definición del tipo para el estado de las excursiones.
+type ExcursionsState = {
+	data: Excursion[];
+	isLoading: boolean;
+	error: AppError | null;
+};
+
+// Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
-	excursionsState: {
-		data: import("../../types").Excursion[];
-		isLoading: boolean;
-		error: (Error & { secondaryMessage?: string }) | null;
-	};
+	excursionsState: ExcursionsState;
 }
 
 /**
