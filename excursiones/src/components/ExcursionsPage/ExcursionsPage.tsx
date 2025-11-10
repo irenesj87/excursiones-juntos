@@ -1,57 +1,42 @@
 import React, { useState } from "react";
 import { Col, Button, Offcanvas, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import { FiFilter } from "react-icons/fi";
 import Filters from "../Filters";
 import ExcursionsList from "../ExcursionsList";
 import styles from "./ExcursionsPage.module.css";
 
-/** @typedef {import('../../types').RootState} RootState */
+interface ExcursionsPageProps {
+	excursionsState: {
+		data: import("../../types").Excursion[];
+		isLoading: boolean;
+		error: (Error & { secondaryMessage?: string }) | null;
+	};
+}
 
 /**
  * Componente para la página de excursiones que muestra los filtros y la lista de excursiones.
- * @typedef {import('../../types').Excursion} Excursion
- * @typedef {{data: Excursion[], isLoading: boolean, error: (Error & { secondaryMessage?: string }) | null}} ExcursionsState
- * @param {{excursionsState: ExcursionsState}} props - Las propiedades del componente, que incluyen el estado de las excursiones.
- * @returns {React.ReactElement} - El componente de la página de excursiones.
  */
-const ExcursionsPage = ({ excursionsState }) => {
-	/**
-	 * Estado para controlar la visibilidad del menú de filtros en breakpoints pequeños.
-	 * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
-	 */
+const ExcursionsPage = ({ excursionsState }: ExcursionsPageProps) => {
+	// Estado para controlar la visibilidad del menú de filtros en breakpoints pequeños.
 	const [showFilters, setShowFilters] = useState(false);
-	/**
-	 * Cierra el menú de filtros.
-	 * @type {() => void}
-	 */
+	// Cierra el menú de filtros.
 	const handleCloseFilters = () => setShowFilters(false);
-	/**
-	 * Muestra el menú de filtros.
-	 * @type {() => void}
-	 */
+	// Muestra el menú de filtros.
 	const handleShowFilters = () => setShowFilters(true);
 
-	/**
-	 * Calcula el número total de filtros activos (área, dificultad, tiempo) desde el estado de Redux.
-	 * @type {number}
-	 */
-	const activeFilterCount = useSelector(
-		/**
-		 * @param {RootState} state - El estado global de la aplicación Redux.
-		 * @returns {number} - El número total de filtros activos.
-		 */
-		(state) =>
-			state.filterReducer.area.length +
-			state.filterReducer.difficulty.length +
-			state.filterReducer.time.length
-	);
+	// Calcula el número total de filtros activos (área, dificultad, tiempo) desde el estado de Redux.
+	const activeFilterCount = useSelector((state: RootState) => {
+		const { area, difficulty, time } = state.filterReducer;
+		return area.length + difficulty.length + time.length;
+	});
 
 	// Texto para el contador de filtros.
 	const filterCountText =
 		activeFilterCount === 1 ? "seleccionado" : "seleccionados";
 
-	/** @type {string} Texto dinámico para el `aria-label` del botón de filtros, mejorando la accesibilidad. */
+	// Texto dinámico para el `aria-label` del botón de filtros, mejorando la accesibilidad.
 	const ariaFilterLabel = `Mostrar filtros. ${activeFilterCount} ${
 		activeFilterCount === 1 ? "filtro aplicado" : "filtros aplicados"
 	}.`;
@@ -102,7 +87,7 @@ const ExcursionsPage = ({ excursionsState }) => {
 						<span aria-hidden="true">
 							Mostrar Filtros
 							{activeFilterCount > 0 && (
-								<Badge pill bg={null} className={`${styles.filterBadge} ms-2`}>
+								<Badge pill className={`${styles.filterBadge} ms-2`}>
 									{activeFilterCount} {filterCountText}
 								</Badge>
 							)}
