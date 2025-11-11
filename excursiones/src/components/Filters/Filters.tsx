@@ -1,12 +1,26 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { IconType } from "react-icons";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
 import { FiMapPin, FiBarChart, FiClock, FiTrash2 } from "react-icons/fi";
 import styles from "./Filters.module.css";
+import { RootState } from "../../store/store";
 
-/** @typedef {import('../../types').RootState} RootState */
+// Definimos las props que puede recibir el componente Filters.
+interface FiltersProps {
+	showTitle?: boolean;
+}
+
+// Definimos el tipo para las secciones de filtros.
+type FilterName = "area" | "difficulty" | "time";
+
+type FilterSection = {
+	name: FilterName;
+	title: string;
+	Icon: IconType;
+};
 
 // Definimos las secciones de filtros con sus nombres, títulos e iconos.
 const filterSections = [
@@ -25,30 +39,18 @@ const filterSections = [
 		title: "Tiempo estimado",
 		Icon: FiClock,
 	},
-];
-
-/**
- * @typedef {object} FiltersProps
- * @property {boolean} [showTitle=true] - Controla si se muestra el título o no.
- */
+] satisfies FilterSection[];
 
 /**
  * Componente principal de los filtros que renderiza el tipo de los filtros de búsqueda (zona, dificultad, tiempo estimado).
- * @param {FiltersProps} props - Propiedades del componente.
- * @returns {React.ReactElement} - El componente de filtros.
  */
-function Filters({ showTitle = true }) {
+const Filters = ({ showTitle = true }: FiltersProps) => {
 	const dispatch = useDispatch();
 	/**
 	 * Comprueba si hay algún filtro activo para habilitar/deshabilitar el botón de limpiar filtros.
-	 * @type {boolean}
 	 */
 	const hasActiveFilters = useSelector(
-		/**
-		 * @param {RootState} state - El estado global de Redux.
-		 * @returns {boolean} - Verdadero si hay algún filtro activo, falso en caso contrario.
-		 */
-		(state) =>
+		(state: RootState) =>
 			state.filterReducer.area.length > 0 ||
 			state.filterReducer.difficulty.length > 0 ||
 			state.filterReducer.time.length > 0
@@ -56,7 +58,6 @@ function Filters({ showTitle = true }) {
 
 	/**
 	 * Maneja el evento de click para limpiar todos los filtros.
-	 * @returns {void}
 	 */
 	const handleClearFilters = () => {
 		if (hasActiveFilters) {
@@ -64,8 +65,8 @@ function Filters({ showTitle = true }) {
 		}
 	};
 
+	// Renderizamos el componente de filtros con su contenido y el botón de limpiar filtros en el footer.
 	return (
-		// Contenedor principal de los filtros
 		<div className={`${styles.filtersContainer} h-100 d-flex flex-column`}>
 			{/* Contenedor para el contenido que puede hacer scroll */}
 			<div className={styles.scrollableContent}>
@@ -98,6 +99,6 @@ function Filters({ showTitle = true }) {
 			</footer>
 		</div>
 	);
-}
+};
 
 export default Filters;
