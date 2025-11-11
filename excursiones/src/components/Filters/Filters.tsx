@@ -14,8 +14,10 @@ interface FiltersProps {
 }
 
 // Definimos el tipo para las secciones de filtros.
+type FilterName = "area" | "difficulty" | "time";
+
 type FilterSection = {
-	name: keyof RootState["filterReducer"];
+	name: FilterName;
 	title: string;
 	Icon: IconType;
 };
