@@ -1,5 +1,4 @@
 import React from "react";
-import { FiSearch } from "react-icons/fi";
 import styles from "./NoExcursionsFound.module.css";
 
 /**
@@ -8,7 +7,6 @@ import styles from "./NoExcursionsFound.module.css";
 const NoExcursionsFound = () => (
 	<div className={styles.excursionsContainer}>
 		<output aria-live="polite" className={styles.messageNotFound}>
-			<FiSearch className={styles.messageIcon} aria-hidden="true" />
 			<p className={styles.primaryMessage}>
 				No se encontraron excursiones con esas características.
 			</p>

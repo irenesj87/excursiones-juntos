@@ -2,7 +2,6 @@ import React, { useId, useState, useEffect } from "react";
 import { Card, Alert } from "react-bootstrap";
 import ExcursionDetailItem from "../ExcursionDetailItem";
 import StyledButton from "../StyledButton";
-import { FiMapPin, FiClock, FiCheckCircle } from "react-icons/fi";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import cn from "classnames";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
@@ -55,7 +54,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 		return (
 			<div className="d-grid d-md-flex justify-content-center justify-content-md-end">
 				<output className={styles.joinedStatus}>
-					<FiCheckCircle /> <span>Apuntado/a</span>
+					<span>Apuntado/a</span>
 				</output>
 			</div>
 		);
@@ -90,7 +89,7 @@ interface ExcursionCardProps {
 	/** Booleano que indica si el usuario ya se ha unido a esta excursión. */
 	readonly isJoined: boolean;
 	/** Callback opcional que se invoca cuando el usuario intenta unirse a la excursión. */
-	readonly onJoin?: (id: string | number) => Promise<void>;
+	readonly onJoin?: (_id: string | number) => Promise<void>;
 }
 
 /**
@@ -111,7 +110,7 @@ function ExcursionCard({
 	// Si onJoin no se proporciona, pasamos una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
 	// de TypeScript.
 	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
-		onJoin ?? (async () => {})
+		onJoin ?? (() => Promise.resolve())
 	);
 
 	// Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla.
@@ -181,21 +180,13 @@ function ExcursionCard({
 					</Card.Title>
 					{/* Detalles de la excursión */}
 					<div className={styles.excursionDetails}>
-						<ExcursionDetailItem
-							IconComponent={FiMapPin}
-							text={area}
-							label="Zona"
-						/>
+						<ExcursionDetailItem text={area} label="Zona" />
 						<ExcursionDetailItem text={difficulty} label="Dificultad">
 							<span className={getDifficultyClasses(difficulty)}>
 								{difficulty}
 							</span>
 						</ExcursionDetailItem>
-						<ExcursionDetailItem
-							IconComponent={FiClock}
-							text={time}
-							label="Tiempo estimado"
-						/>
+						<ExcursionDetailItem text={time} label="Tiempo estimado" />
 					</div>
 				</div>
 				{/* Área de acción: botón para unirse a la excursión */}

@@ -116,6 +116,6 @@ function ExcursionCardSkeleton({
 			</Card>
 		</SkeletonTheme>
 	);
-};
+}
 
 export default ExcursionCardSkeleton;

@@ -12,9 +12,8 @@ const USER_NAV_SKELETON_SIZES = {
 
 /**
  * Componente que muestra un esqueleto de carga para los botones de navegación de un usuario logueado.
- * @returns {React.ReactElement} - El componente de esqueleto de navegación de usuario.
  */
-function UserNavSkeleton() {
+const UserNavSkeleton = () => {
 	// Obtiene los colores del esqueleto de forma centralizada a través del hook.
 	const { baseColor, highlightColor } = useSkeletonTheme();
 

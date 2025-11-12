@@ -6,8 +6,6 @@ import styles from "./ExcursionDetailItem.module.css";
  * Props para el componente ExcursionDetailItem.
  */
 interface ExcursionDetailItemProps {
-	/** El componente de icono a renderizar. */
-	readonly IconComponent?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 	/** El valor del detalle a mostrar (ej. "Media", "4 horas"). */
 	readonly text?: string;
 	/** Etiqueta descriptiva para accesibilidad y tooltips (ej. "Dificultad"). */
@@ -22,7 +20,6 @@ interface ExcursionDetailItemProps {
  * debe ser sanitizado para prevenir ataques XSS.
  */
 function ExcursionDetailItem({
-	IconComponent,
 	text,
 	label,
 	children,
@@ -43,13 +40,6 @@ function ExcursionDetailItem({
 	// Contenido del ítem, incluyendo icono, etiqueta oculta y texto o hijos personalizados.
 	const itemContent = (
 		<>
-			{IconComponent && (
-				<IconComponent
-					className={styles.detailIcon}
-					aria-hidden="true"
-					data-testid="detail-item-icon"
-				/>
-			)}
 			{label && <span className="visually-hidden">{`${label}: `}</span>}
 			{children || <span>{text}</span>}
 		</>

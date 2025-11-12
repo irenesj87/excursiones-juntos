@@ -1,10 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { IconType } from "react-icons";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
-import { FiMapPin, FiBarChart, FiClock, FiTrash2 } from "react-icons/fi";
 import styles from "./Filters.module.css";
 import { RootState } from "../../store/store";
 
@@ -19,7 +17,6 @@ type FilterName = "area" | "difficulty" | "time";
 type FilterSection = {
 	name: FilterName;
 	title: string;
-	Icon: IconType;
 };
 
 // Definimos las secciones de filtros con sus nombres, títulos e iconos.
@@ -27,17 +24,14 @@ const filterSections = [
 	{
 		name: "area",
 		title: "Zona",
-		Icon: FiMapPin,
 	},
 	{
 		name: "difficulty",
 		title: "Dificultad",
-		Icon: FiBarChart,
 	},
 	{
 		name: "time",
 		title: "Tiempo estimado",
-		Icon: FiClock,
 	},
 ] satisfies FilterSection[];
 
@@ -71,14 +65,14 @@ const Filters = ({ showTitle = true }: FiltersProps) => {
 			{/* Contenedor para el contenido que puede hacer scroll */}
 			<div className={styles.scrollableContent}>
 				{showTitle && <h2 className={styles.title}>Filtros</h2>}
-				{filterSections.map(({ name, title, Icon }) => (
+				{filterSections.map(({ name, title }) => (
 					<section
 						key={name}
 						className={styles.filterSection}
 						aria-labelledby={`filter-title-${name}`}
 					>
 						<h3 id={`filter-title-${name}`} className={styles.filterTitle}>
-							<Icon className={styles.filterIcon} aria-hidden="true" /> {title}
+							{title}
 						</h3>
 						<FiltersList filterName={name} />
 					</section>
@@ -93,7 +87,6 @@ const Filters = ({ showTitle = true }: FiltersProps) => {
 					aria-label="Limpiar todos los filtros"
 					disabled={!hasActiveFilters}
 				>
-					<FiTrash2 aria-hidden="true" className="me-2" />
 					<span>Limpiar Filtros</span>
 				</Button>
 			</footer>

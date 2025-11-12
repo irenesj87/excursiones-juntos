@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Col, Button, Offcanvas, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { FiFilter } from "react-icons/fi";
 import Filters from "../Filters";
 import { AppError, Excursion } from "../../types";
 import ExcursionsList from "../ExcursionsList";
@@ -86,9 +85,6 @@ const ExcursionsPage = ({ excursionsState }: ExcursionsPageProps) => {
 						aria-controls="mobile-filters-offcanvas"
 						aria-label={ariaFilterLabel}
 					>
-						{/* Ocultamos el contenido visual a los lectores de pantalla para evitar redundancia,
-						ya que el aria-label ya proporciona toda la información necesaria. */}
-						<FiFilter className="me-2" aria-hidden="true" />
 						<span aria-hidden="true">
 							Mostrar Filtros
 							{activeFilterCount > 0 && (

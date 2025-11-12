@@ -1,5 +1,4 @@
 import React from "react";
-import { MdMail } from "react-icons/md";
 import { CONTACT_EMAIL, COMPANY_NAME, START_YEAR } from "../../constants";
 import { validateMail } from "../../validation/validations";
 import styles from "./Footer.module.css";
@@ -24,10 +23,10 @@ const Footer = () => {
 			{showMailLink && (
 				<a
 					href={`mailto:${CONTACT_EMAIL}`}
-					className={styles.mailIconLink}
+					className={styles.contactLink}
 					aria-label="Enviar correo electrónico"
 				>
-					<MdMail />
+					Contacto
 				</a>
 			)}
 

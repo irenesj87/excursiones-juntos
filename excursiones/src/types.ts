@@ -3,6 +3,7 @@ export type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 /** Define la estructura de un usuario en la aplicación. */
 export interface User {
+	id: string | number;
 	name: string;
 	surname: string;
 	mail: string;
@@ -40,3 +41,21 @@ export interface Excursion {
 export interface AppError extends Error {
 	secondaryMessage?: string;
 }
+
+/**
+ * Define la respuesta de la API de autenticación.
+ */
+export interface AuthResponse {
+	user: User;
+	token: string;
+}
+
+/**
+ * Define las credenciales para el inicio de sesión.
+ */
+export type LoginCredentials = Pick<User, "mail"> & { password?: string };
+
+/**
+ * Define los datos necesarios para registrar un nuevo usuario.
+ */
+export type UserRegistration = Omit<User, "id"> & { password?: string };

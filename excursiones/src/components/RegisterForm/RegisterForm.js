@@ -9,10 +9,10 @@ import {
 	validatePassword,
 	validateSamePassword,
 } from "../../validation/validations.js";
-import { registerUser } from "../../services/authService.js";
+import { registerUser } from "../../services/authService";
 import FormErrorAlert from "../FormErrorAlert";
 import StyledButton from "../StyledButton";
-import { useAuthFormHandler } from "../../hooks/useAuthFormHandler.js";
+import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./RegisterForm.module.css";
 
