@@ -12,9 +12,8 @@ export const GUEST_NAV_SKELETON_SIZES = {
 
 /**
  * Componente que muestra un esqueleto de carga para los botones de navegación de un usuario invitado.
- * @returns {React.ReactElement} - El esqueleto de navegación para usuarios invitados.
  */
-function GuestNavSkeleton() {
+const GuestNavSkeleton = (): JSX.Element => {
 	// Obtiene los colores del esqueleto de forma centralizada a través del hook.
 	const { baseColor, highlightColor } = useSkeletonTheme();
 
