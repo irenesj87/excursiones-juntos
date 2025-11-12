@@ -10,7 +10,7 @@ interface GuestNavProps {
  * Muestra los enlaces de navegación para un usuario invitado (no logueado). Permite cerrar un menú contenedor (como un Offcanvas)
  * si se proporciona la función `onCloseMenu`.
  */
-const GuestNav = ({ onCloseMenu = () => {} }: GuestNavProps) => (
+const GuestNav = ({ onCloseMenu = () => {} }: GuestNavProps): JSX.Element => (
 	<>
 		<StyledNavLink
 			to={ROUTES.REGISTER}
