@@ -3,6 +3,7 @@ export type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 /** Define la estructura de un usuario en la aplicación. */
 export interface User {
+	id: string | number;
 	name: string;
 	surname: string;
 	mail: string;
@@ -39,4 +40,51 @@ export interface Excursion {
 /** Define la estructura de un error en la aplicación. */
 export interface AppError extends Error {
 	secondaryMessage?: string;
+}
+
+/**
+ * Define la respuesta de la API de autenticación.
+ */
+export interface AuthResponse {
+	user: User;
+	token: string;
+}
+
+/**
+ * Define las credenciales para el inicio de sesión.
+ */
+export type LoginCredentials = Pick<User, "mail"> & { password?: string };
+
+/**
+ * Define los datos necesarios para registrar un nuevo usuario.
+ */
+export type UserRegistration = Omit<User, "id"> & { password?: string };
+
+/**
+ * Define la estructura de los valores del formulario de registro, incluyendo la confirmación de contraseña.
+ */
+export interface RegisterFormValues {
+	name: string;
+	surname: string;
+	phone: string;
+	mail: string;
+	password: string;
+	samePassword: string;
+}
+
+/**
+ * Define la configuración para un campo de formulario que se renderiza dinámicamente.
+ */
+export interface FormFieldConfig<T> {
+	id: string;
+	name: string;
+	field: keyof T;
+	validationFunction: (
+		_value: string,
+		_secondValue?: string
+	) => boolean | string;
+	autocomplete: string;
+	errorMessage?: string;
+	inputType?: string;
+	ariaDescribedBy?: string;
 }

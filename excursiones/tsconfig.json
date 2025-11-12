@@ -8,6 +8,7 @@
 		"module": "esnext", // Usa el sistema de módulos moderno que los bundlers entienden
 		"moduleResolution": "node",
 		"allowJs": true, // Permite una migración gradual, importando archivos .js
+		"jsxImportSource": "react",
 
 		// --- Opciones de Calidad de Código (Recomendadas) ---
 		"strict": true, // Habilita todas las comprobaciones estrictas. ¡La mejor opción!

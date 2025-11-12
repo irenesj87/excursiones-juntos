@@ -1,11 +1,10 @@
 import React from "react";
-import { FiAlertTriangle } from "react-icons/fi";
 import styles from "./ExcursionsError.module.css";
 
 /**
  * Mensaje de error por defecto que se muestra cuando falla la carga de excursiones.
  */
-export const DEFAULT_ERROR_MESSAGE: string =
+export const DEFAULT_ERROR_MESSAGE =
 	"Lo sentimos, ha ocurrido un error al cargar las excursiones.";
 
 /**
@@ -14,7 +13,6 @@ export const DEFAULT_ERROR_MESSAGE: string =
 const ExcursionsError = () => (
 	<div className={styles.errorContainer}>
 		<div role="alert" className={styles.messageNotFound}>
-			<FiAlertTriangle className={styles.messageIcon} aria-hidden="true" />
 			<p>{DEFAULT_ERROR_MESSAGE}</p>
 		</div>
 	</div>

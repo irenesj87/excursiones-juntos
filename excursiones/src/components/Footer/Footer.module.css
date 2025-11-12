@@ -10,25 +10,14 @@
 	border-top: 1px solid var(--footer-border-top);
 }
 
-.mailIconLink {
+.contactLink {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 45px; /* Tamaño del círculo */
-	height: 45px;
-	border-radius: 50%;
 	margin-bottom: 0.75rem;
-	background-color: var(--footer-icon-bg);
-	font-size: 1.5rem;
-	color: var(--footer-icon-color);
-	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.mailIconLink:hover,
-.mailIconLink:focus-visible {
-	background-color: var(--footer-icon-bg-hover);
-	transform: scale(1.1) translateY(-2px); /* Lo elevamos un poco */
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra para dar profundidad */
+	font-size: 1.1rem;
+	text-decoration: none;
+	color: var(--footer-text-color);
 }
 
 .footerText {

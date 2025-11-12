@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { verifyToken } from "../services/authService";
+import { AuthResponse } from "../types";
 import { login, logout } from "../slices/loginSlice";
 import { useMinDisplayTime } from "./useMinDisplayTime";
 
@@ -15,8 +16,6 @@ import { useMinDisplayTime } from "./useMinDisplayTime";
  * 3. Durante un instante, la barra de navegación mostraría los botones "Regístrate" e "Inicia sesión".
  * 4. Un segundo después, algún código leería el token de sessionStorage, validaría la sesión y actualizaría el estado.
  * 5. La barra de navegación "parpadearía" y cambiaría para mostrar "Tu perfil" y "Cierra sesión".
- * @typedef {object} AuthState
- * @property {boolean} isAuthCheckComplete - Un flag que indica si la comprobación de autenticación inicial ha finalizado.
  *   Este estado es crucial para la lógica de renderizado condicional en la aplicación.
  *   - `false`: La comprobación del token de sesión está en curso. La UI debería mostrar un estado de carga
  *     (como un esqueleto o spinner) para evitar mostrar contenido incorrecto o una pantalla en blanco.
@@ -26,21 +25,26 @@ import { useMinDisplayTime } from "./useMinDisplayTime";
 
 /**
  * Estado inicial para el reducer de autenticación.
- * @type {AuthState}
  */
-const authInitialState = {
+const authInitialState: AuthState = {
 	isAuthCheckComplete: false,
 };
 
+interface AuthState {
+	isAuthCheckComplete: boolean;
+}
+
+type AuthAction =
+	| { type: "AUTH_START_CHECK" }
+	| { type: "AUTH_CHECK_COMPLETE" };
+
 /**
  * Reducer para manejar el estado de la autenticación del usuario.
- * @param {AuthState} state - El estado actual.
- * @param {{type: string}} action - La acción a despachar.
- * @returns {AuthState} El nuevo estado.
  */
-const authReducer = (state, action) => {
+const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 	switch (action.type) {
 		// Cuando se recibe esta acción, se indica que la verificación de autenticación ha comenzado.
+
 		case "AUTH_START_CHECK":
 			return { ...state, isAuthCheckComplete: false };
 		// Cuando se recibe esta acción, se indica que la verificación de autenticación ha finalizado (con éxito o no).
@@ -54,7 +58,6 @@ const authReducer = (state, action) => {
 /**
  * Hook personalizado para manejar la autenticación del usuario.
  * Verifica el token de sessionStorage en la carga inicial de la aplicación y actualiza el estado de Redux.
- * @returns {{isAuthCheckComplete: boolean}} Un objeto que indica si el proceso de verificación de autenticación ha finalizado.
  */
 export const useAuth = () => {
 	// useDispatch de Redux para despachar acciones de login y logout.
@@ -84,7 +87,7 @@ export const useAuth = () => {
 			try {
 				// Intenta verificar el token haciendo la petición al backend.
 				// Si la llamada tiene éxito, significa que el token es válido y el usuario está autenticado.
-				const authData = await verifyToken(sessionToken);
+				const authData: AuthResponse | null = await verifyToken(sessionToken);
 				if (isMounted) {
 					// Si el token es válido, authData contendrá el usuario y el token.
 					if (authData) {
@@ -100,9 +103,8 @@ export const useAuth = () => {
 				console.error(
 					"Error en la verificación del estado de autenticación:",
 					// Usamos error.message para un log más limpio, ya que el servicio ya formatea el error.
-					error.message
+					(error as Error).message
 				);
-				// Si el token no es válido o ha expirado, se despacha la acción de logout.
 				// Esto actualizará el estado de Redux para reflejar que el usuario no está autenticado.
 				// También se elimina el token del sessionStorage para limpiar la sesión.
 				// Si el componente ya no está montado, no hacemos nada.

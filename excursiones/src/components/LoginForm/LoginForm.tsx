@@ -6,16 +6,15 @@ import {
 } from "../../validation/validations.js";
 import { ROUTES, FORM_TEXT } from "../../constants.js";
 import ValidatedFormGroup from "../ValidatedFormGroup";
-import FormErrorAlert from "../FormErrorAlert/index.js";
+import FormErrorAlert from "../FormErrorAlert";
 import StyledButton from "../StyledButton/index.js";
-import { loginUser } from "../../services/authService.js";
-import { useAuthFormHandler } from "../../hooks/useAuthFormHandler.js";
+import { loginUser } from "../../services/authService";
+import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./LoginForm.module.css";
 
 /**
  * Componente que representa el formulario de inicio de sesión.
- * @returns {React.ReactElement} El formulario de inicio de sesión.
  */
 export function LoginForm() {
 	const [mail, setMail] = useState("");
@@ -25,19 +24,14 @@ export function LoginForm() {
 
 	/**
 	 * Comprueba si el formulario es válido.
-	 * @returns {boolean} - `true` si el formulario es válido, `false` en caso contrario.
 	 */
-	const isFormValid = () => validateMail(mail) && isNotEmpty(password);
+	const isFormValid = validateMail(mail) && isNotEmpty(password);
 
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
-		// El hook espera los argumentos para la API en el mismo orden.
-		formValues,
 		isFormValid,
-		loginUser,
+		() => loginUser(formValues),
 		ROUTES.USER
 	);
-
-	const isButtonDisabled = !isFormValid();
 
 	return (
 		<>
@@ -77,9 +71,9 @@ export function LoginForm() {
 				<div className="d-grid d-sm-flex justify-content-sm-end">
 					<StyledButton
 						type="submit"
-						variant={isButtonDisabled ? "secondary" : "primary"}
+						variant={formState.isButtonDisabled ? "secondary" : "primary"}
 						isLoading={formState.isLoading}
-						disabled={isButtonDisabled}
+						disabled={formState.isButtonDisabled}
 					>
 						Enviar
 					</StyledButton>

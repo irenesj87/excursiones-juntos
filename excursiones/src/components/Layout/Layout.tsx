@@ -16,7 +16,6 @@ import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
 import LazyRouteWrapper from "../../utils/LazyRouteWrapper";
 import styles from "./Layout.module.css";
 
-/** @typedef {import('../../types').RootState} RootState */
 
 /**
  * Lazy loading de los componentes RegisterPage, LoginPage y UserPage.
@@ -29,7 +28,6 @@ const UserPage = lazyWithMinTime(() => import("../UserPage"));
 /**
  * Componente principal de la aplicación. Gestiona el estado de las excursiones, la autenticación del usuario y la
  * estructura general de la página.
- * @returns {React.ReactElement} El layout
  */
 const Layout = () => {
 	const location = useLocation();
