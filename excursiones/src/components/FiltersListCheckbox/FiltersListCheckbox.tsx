@@ -4,29 +4,20 @@ import { toggleFilter } from "../../slices/filterSlice";
 import cn from "classnames";
 import styles from "./FiltersListCheckbox.module.css";
 
-/** @typedef {import("../../types").RootState} RootState */
+interface FiltersListCheckboxProps {
+	filterName: string;
+	filter: string;
+}
 
-/**
- * @typedef {object} FiltersListCheckboxProps - Props del componente FiltersListCheckbox.
- * @property {string} filterName - El nombre de la categoría de filtro (ej. "area").
- * @property {string} filter - El valor específico del filtro (ej. "Picos de Europa").
- */
-
-/**
- * Componente que renderiza una única opción de filtro como una píldora interactiva.
- * @param {FiltersListCheckboxProps} props - Propiedades del componente.
- * @returns {React.ReactElement} - El componente de filtro individual.
- */
-function FiltersListCheckbox({ filterName, filter }) {
+const FiltersListCheckbox = ({
+	filterName,
+	filter,
+}: FiltersListCheckboxProps) => {
 	const dispatch = useDispatch();
 
 	// Obtenemos los filtros seleccionados para esta categoría (ej. 'area') desde Redux
 	const selectedFilters = useSelector(
-		/**
-		 * @param {RootState} state - El estado global de Redux.
-		 * @returns {string[]} - Array de filtros seleccionados para la categoría dada.
-		 */
-		(state) => state.filterReducer[filterName]
+		(state: any) => state.filterReducer[filterName] as string[]
 	);
 
 	// El filtro está seleccionado si su valor está incluido en el array del estado de Redux
@@ -34,8 +25,6 @@ function FiltersListCheckbox({ filterName, filter }) {
 
 	/**
 	 * Maneja el evento de cambio del checkbox.
-	 * Despacha la acción `toggleFilter` para añadir o quitar el filtro del estado de Redux.
-	 * @returns {void}
 	 */
 	const handleToggle = () => {
 		dispatch(toggleFilter({ filterType: filterName, value: filter }));
@@ -46,6 +35,7 @@ function FiltersListCheckbox({ filterName, filter }) {
 	 */
 	const id = useId();
 
+	// Renderizamos el checkbox oculto y la etiqueta estilizada como un "pill".
 	return (
 		<>
 			<input
@@ -65,6 +55,6 @@ function FiltersListCheckbox({ filterName, filter }) {
 			</label>
 		</>
 	);
-}
+};
 
 export default FiltersListCheckbox;
