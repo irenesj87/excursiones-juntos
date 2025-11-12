@@ -16,7 +16,6 @@ const getCopyrightText = () => {
 	return `© ${COMPANY_NAME} ${yearDisplay}. Todos los derechos reservados.`;
 };
 
-// Componente Footer que muestra el correo de contacto y el texto de copyright
 const Footer = () => {
 	const showMailLink = validateMail(CONTACT_EMAIL);
 

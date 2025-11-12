@@ -2,18 +2,15 @@ import React from "react";
 import StyledNavLink from "../StyledNavLink";
 import { ROUTES } from "../../constants";
 
-/**
- * @typedef {object} GuestNavProps
- * @property {() => void} [onCloseMenu] - Función para cerrar el menú contenedor en breakpoints pequeños.
- */
+interface GuestNavProps {
+	readonly onCloseMenu?: () => void; // Función para cerrar el menú contenedor en breakpoints pequeños.
+}
 
 /**
  * Muestra los enlaces de navegación para un usuario invitado (no logueado). Permite cerrar un menú contenedor (como un Offcanvas)
  * si se proporciona la función `onCloseMenu`.
- * @param {GuestNavProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El componente de navegación para invitados.
  */
-const GuestNav = ({ onCloseMenu = () => {} }) => (
+const GuestNav = ({ onCloseMenu = () => {} }: GuestNavProps) => (
 	<>
 		<StyledNavLink
 			to={ROUTES.REGISTER}
