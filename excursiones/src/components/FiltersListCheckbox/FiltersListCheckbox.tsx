@@ -17,8 +17,7 @@ const FiltersListCheckbox = ({
 
 	// Obtenemos los filtros seleccionados para esta categoría (ej. 'area') desde Redux
 	const selectedFilters = useSelector(
-		(state: any) => state.filterReducer[filterName] as string[]
-	);
+(state: { filterReducer: FilterState }) => state.filterReducer[filterName]
 
 	// El filtro está seleccionado si su valor está incluido en el array del estado de Redux
 	const isChecked = selectedFilters.includes(filter);
