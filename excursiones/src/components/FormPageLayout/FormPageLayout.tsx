@@ -9,24 +9,24 @@ interface FormPageLayoutProps {
 	readonly subtitle?: string; // Un subtítulo opcional para dar más contexto.
 	readonly children: React.ReactNode; // El contenido del formulario a renderizar.
 	readonly colWidth?: ColProps["xl"]; // Ancho de la columna para el formulario.
-	readonly switcherPrompt?: string; // Texto que precede al enlace de cambio de página (ej. "¿No tienes cuenta?").
-	readonly switcherLinkText?: string; // Texto del enlace de cambio de página (ej. "Regístrate").
-	readonly switcherLinkTo?: string; // La ruta a la que debe navegar el enlace (ej. "/register").
+	readonly switcher?: {
+		readonly prompt: string; // Texto que precede al enlace (ej. "¿No tienes cuenta?").
+		readonly linkText: string; // Texto del enlace (ej. "Regístrate").
+		readonly linkTo: string; // La ruta a la que debe navegar el enlace (ej. "/register").
+	};
 }
 
 /**
  * Componente que proporciona un diseño de página reutilizable para formularios.
  * Centra el contenido del formulario en una tarjeta, adaptándose a diferentes breakpoints.
  */
-function FormPageLayout({
+const FormPageLayout = ({
 	title,
 	subtitle,
 	children,
 	colWidth = "5",
-	switcherPrompt,
-	switcherLinkText,
-	switcherLinkTo,
-}: FormPageLayoutProps) {
+	switcher,
+}: FormPageLayoutProps) => {
 	// Genera un ID único y estable para el título, garantizando la accesibilidad.
 	const titleId = useId();
 
@@ -46,11 +46,11 @@ function FormPageLayout({
 							{subtitle && <p className={styles.cardSubtitle}>{subtitle}</p>}
 							{children}
 						</Card.Body>
-						{switcherPrompt && switcherLinkText && switcherLinkTo && (
+						{switcher && (
 							<Card.Footer className={`${styles.switcher} d-lg-none p-3`}>
-								{switcherPrompt}{" "}
-								<Link to={switcherLinkTo} className={styles.switcherLink}>
-									{switcherLinkText}
+								{switcher.prompt}{" "}
+								<Link to={switcher.linkTo} className={styles.switcherLink}>
+									{switcher.linkText}
 								</Link>
 							</Card.Footer>
 						)}
@@ -59,6 +59,6 @@ function FormPageLayout({
 			</Row>
 		</Container>
 	);
-}
+};
 
 export default FormPageLayout;
