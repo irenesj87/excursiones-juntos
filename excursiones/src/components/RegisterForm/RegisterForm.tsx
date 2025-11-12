@@ -8,16 +8,20 @@ import {
 	validateMail,
 	validatePassword,
 	validateSamePassword,
-} from "../../validation/validations.js";
+} from "../../validation/validations";
 import { registerUser } from "../../services/authService";
 import FormErrorAlert from "../FormErrorAlert";
 import StyledButton from "../StyledButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./RegisterForm.module.css";
+import { RegisterFormValues, FormFieldConfig } from "../../types";
 
-// Estado inicial para el reducer del formulario.
-const initialState = {
+/**
+ * Estado inicial para el formulario de registro.
+ * @type {RegisterFormValues}
+ */
+const initialState: RegisterFormValues = {
 	name: "",
 	surname: "",
 	phone: "",
@@ -31,24 +35,18 @@ const initialState = {
  * @returns {React.ReactElement} El componente del formulario de registro.
  */
 function RegisterForm() {
-	const [values, setValues] = useState(initialState);
+	const [values, setValues] = useState<RegisterFormValues>(initialState);
 
 	/**
-	 * Función que se pasa a cada campo del formulario. Cuando cambia, llama a formDispatch con la acción UPDATE_FIELD para
-	 * actualizar el estado.
-	 * @param {string} field - El campo que ha cambiado.
+	 * Función que se pasa a cada campo del formulario para actualizar el estado.
+	 * @param {keyof RegisterFormValues} field - El campo que ha cambiado.
 	 * @param {string} value - El nuevo valor del campo.
 	 */
-	const handleInputChange = (field, value) => {
+	const handleInputChange = (
+		field: keyof RegisterFormValues,
+		value: string
+	) => {
 		setValues((prev) => ({ ...prev, [field]: value }));
-	};
-
-	const authFormValues = {
-		name: values.name,
-		surname: values.surname,
-		phone: values.phone,
-		mail: values.mail,
-		password: values.password,
 	};
 
 	const isFormValid = () => {
@@ -62,16 +60,28 @@ function RegisterForm() {
 		);
 	};
 
+	// Creamos la función de envío que el hook usará, encapsulando los valores del formulario.
+	const apiSubmitFunction = () => {
+		// Construimos el objeto justo antes de enviarlo para asegurar que tenemos los últimos valores.
+		const authFormValues = {
+			name: values.name,
+			surname: values.surname,
+			phone: values.phone,
+			mail: values.mail,
+			password: values.password,
+			excursions: [], // Un nuevo usuario siempre empieza con un array de excursiones vacío.
+		};
+		return registerUser(authFormValues);
+	};
+
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
-		// El hook espera los argumentos para la API en el mismo orden.
-		authFormValues,
-		isFormValid,
-		registerUser,
+		isFormValid(),
+		apiSubmitFunction,
 		"/"
 	);
 
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
-	const formFieldsConfig = [
+	const formFieldsConfig: FormFieldConfig<RegisterFormValues>[][] = [
 		[
 			{
 				id: "formGridName",
@@ -146,7 +156,7 @@ function RegisterForm() {
 				id="registerForm"
 				className={`${styles.formLabel} fw-bold`}
 				aria-busy={formState.isLoading}
-				onSubmit={handleSubmit}
+				onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
 			>
 				{formFieldsConfig.map((row, rowIndex) => (
 					// eslint-disable-next-line react/no-array-index-key

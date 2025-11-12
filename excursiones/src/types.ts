@@ -59,3 +59,32 @@ export type LoginCredentials = Pick<User, "mail"> & { password?: string };
  * Define los datos necesarios para registrar un nuevo usuario.
  */
 export type UserRegistration = Omit<User, "id"> & { password?: string };
+
+/**
+ * Define la estructura de los valores del formulario de registro, incluyendo la confirmación de contraseña.
+ */
+export interface RegisterFormValues {
+	name: string;
+	surname: string;
+	phone: string;
+	mail: string;
+	password: string;
+	samePassword: string;
+}
+
+/**
+ * Define la configuración para un campo de formulario que se renderiza dinámicamente.
+ */
+export interface FormFieldConfig<T> {
+	id: string;
+	name: string;
+	field: keyof T;
+	validationFunction: (
+		_value: string,
+		_secondValue?: string
+	) => boolean | string;
+	autocomplete: string;
+	errorMessage?: string;
+	inputType?: string;
+	ariaDescribedBy?: string;
+}
