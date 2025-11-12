@@ -86,13 +86,13 @@ export function useFilters(filterName: string): FiltersState {
 						);
 					}
 
-					let finalError: Error & { secondaryMessage?: string };
+					let finalError: Error;
 					if (
 						error instanceof TypeError &&
 						error.message === "Failed to fetch"
 					) {
 						finalError = new Error("Error de conexión");
-						finalError.secondaryMessage =
+						(finalError as AppError).secondaryMessage =
 							"No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.";
 					} else {
 						finalError = new Error(
