@@ -4,7 +4,7 @@ import { fetchFilters } from "../services/filterService";
 import { AppError } from "../types";
 
 // Estado inicial para el reducer.
-const initialState = {
+const initialState: FiltersState = {
 	data: [],
 	isLoading: true,
 	error: null,
