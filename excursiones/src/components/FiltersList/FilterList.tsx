@@ -7,19 +7,16 @@ import { useFilters } from "../../hooks/useFilters";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
 
-/** @typedef {import("../../types").RootState} RootState */
-
-/**
- * @typedef {object} FiltersListProps
- * @property {string} filterName - El nombre de la categoría de filtro (ej. "area").
- */
+// Props del componente FiltersList.
+interface FiltersListProps {
+	readonly filterName: string; // El nombre de la categoría de filtro (ej. "area").
+}
 
 /**
  * Componente que muestra una lista de filtros para una categoría específica (ej. área, dificultad, tiempo).
- * @param {FiltersListProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El componente de la lista de filtros.
  */
-function FiltersList({ filterName }) {
+function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
+	// El tipo para 'data' se infiere como `string[]` basándonos en su uso posterior.
 	// Usamos el hook personalizado para obtener los filtros y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
 
@@ -37,9 +34,7 @@ function FiltersList({ filterName }) {
 				<ul className={styles.filtersGrid} aria-hidden="true">
 					{/* Mostramos 4 esqueletos para simular mejor el contenido real y evitar saltos de layout */}
 					{Array.from({ length: 4 }).map((_, index) => (
-						<li
-							key={`skeleton-${filterName}-${index}`}
-						>
+						<li key={`skeleton-${filterName}-${index}`}>
 							<FilterPillSkeleton />
 						</li>
 					))}
