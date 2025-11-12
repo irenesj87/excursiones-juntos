@@ -5,9 +5,7 @@ import { validateMail } from "../../validation/validations";
 import styles from "./Footer.module.css";
 
 /**
- * Genera el texto de copyright dinámicamente.
- * Muestra un solo año si el año de inicio y el actual son el mismo.
- * @returns {string} - El texto de copyright.
+ * Genera el texto de copyright dinámicamente según el año actual.
  */
 const getCopyrightText = () => {
 	const CURRENT_YEAR = new Date().getFullYear();
@@ -18,11 +16,8 @@ const getCopyrightText = () => {
 	return `© ${COMPANY_NAME} ${yearDisplay}. Todos los derechos reservados.`;
 };
 
-/**
- * Componente del pie de página que muestra información de contacto y derechos de autor.
- * @returns {React.ReactElement} El componente del pie de página.
- */
-function FooterComponent() {
+// Componente Footer que muestra el correo de contacto y el texto de copyright
+const Footer = () => {
 	const showMailLink = validateMail(CONTACT_EMAIL);
 
 	return (
@@ -41,4 +36,5 @@ function FooterComponent() {
 		</footer>
 	);
 }
-export default FooterComponent;
+
+export default Footer;
