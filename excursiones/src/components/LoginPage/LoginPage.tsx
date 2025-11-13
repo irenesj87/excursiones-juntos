@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
  * Componente que representa la página de inicio de sesión.
  * Utiliza el layout de formulario genérico y renderiza el formulario de login.
  */
-const LoginPage = () => {
+const LoginPage = (): React.ReactElement => {
 	return (
 		<FormPageLayout
 			title={LOGIN_PAGE_TEXT.TITLE}
