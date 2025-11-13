@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { RootState } from "../../types";
+import { RootState } from "../../store/store";
 import "react-loading-skeleton/dist/skeleton.css";
 import loginFormStyles from "../LoginForm/LoginForm.module.css";
 

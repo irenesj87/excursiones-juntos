@@ -88,10 +88,3 @@ export interface FormFieldConfig<T> {
 	inputType?: string;
 	ariaDescribedBy?: string;
 }
-
-/** Define la estructura del estado raíz de la aplicación. */
-export interface RootState {
-	loginReducer: LoginState;
-	themeReducer: ThemeState;
-	filterReducer: FilterState;
-}
