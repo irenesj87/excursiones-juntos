@@ -17,7 +17,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({
 	children,
 	isAuthCheckComplete,
-}: ProtectedRouteProps): React.ReactElement | null => {
+}: ProtectedRouteProps): React.ReactElement => {
 	const { login: isLoggedIn } = useSelector(
 		(state: RootState) => state.loginReducer
 	);
