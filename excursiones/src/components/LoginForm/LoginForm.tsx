@@ -4,7 +4,7 @@ import {
 	validateMail,
 	validateName as isNotEmpty,
 } from "../../validation/validations.js";
-import { ROUTES, FORM_TEXT } from "../../constants.js";
+import { ROUTES, FORM_TEXT } from "../../constants";
 import ValidatedFormGroup from "../ValidatedFormGroup";
 import FormErrorAlert from "../FormErrorAlert";
 import StyledButton from "../StyledButton/index.js";
