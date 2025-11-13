@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
-import { RootState } from "../../types";
+import { RootState } from "../../store/store";
 
 /** Define las propiedades esperadas por el componente ProtectedRoute. */
 interface ProtectedRouteProps {
