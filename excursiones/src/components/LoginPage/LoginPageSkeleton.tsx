@@ -3,20 +3,17 @@ import { useSelector } from "react-redux";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { RootState } from "../../store/store";
 import "react-loading-skeleton/dist/skeleton.css";
 import loginFormStyles from "../LoginForm/LoginForm.module.css";
-
-/** @typedef {import('../../types').RootState} RootState */
 
 /**
  * Componente que muestra un esqueleto de carga para la página de inicio de sesión.
  * Simula la estructura del formulario de login mientras los componentes reales se cargan.
  */
-function LoginPageSkeleton() {
-	const mode = useSelector(
-		/** @param {RootState} state */
-		(state) => state.themeReducer.mode
-	);
+const LoginPageSkeleton = (): React.ReactElement => {
+	const mode = useSelector((state: RootState) => state.themeReducer.mode);
+
 	// Define los colores del esqueleto según el tema para una experiencia visual consistente.
 	const baseColor = mode === "dark" ? "#202020" : "#e0e0e0";
 	const highlightColor = mode === "dark" ? "#444" : "#f5f5f5";
@@ -35,9 +32,11 @@ function LoginPageSkeleton() {
 			title={LOGIN_PAGE_TEXT.TITLE}
 			colWidth="3"
 			subtitle={LOGIN_PAGE_TEXT.SUBTITLE}
-			switcherPrompt={LOGIN_PAGE_TEXT.SWITCHER_PROMPT}
-			switcherLinkText={LOGIN_PAGE_TEXT.SWITCHER_LINK_TEXT}
-			switcherLinkTo={ROUTES.REGISTER}
+			switcher={{
+				prompt: LOGIN_PAGE_TEXT.SWITCHER_PROMPT,
+				linkText: LOGIN_PAGE_TEXT.SWITCHER_LINK_TEXT,
+				linkTo: ROUTES.REGISTER,
+			}}
 		>
 			<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
 				<div
@@ -68,6 +67,6 @@ function LoginPageSkeleton() {
 			</SkeletonTheme>
 		</FormPageLayout>
 	);
-}
+};
 
 export default LoginPageSkeleton;

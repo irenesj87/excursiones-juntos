@@ -7,21 +7,22 @@ import "bootstrap/dist/css/bootstrap.css";
 /**
  * Componente que representa la página de inicio de sesión.
  * Utiliza el layout de formulario genérico y renderiza el formulario de login.
- * @returns {React.ReactElement} - El componente de la página de inicio de sesión.
  */
-function LoginPage() {
+const LoginPage = (): React.ReactElement => {
 	return (
 		<FormPageLayout
 			title={LOGIN_PAGE_TEXT.TITLE}
 			subtitle={LOGIN_PAGE_TEXT.SUBTITLE}
 			colWidth="3"
-			switcherPrompt={LOGIN_PAGE_TEXT.SWITCHER_PROMPT}
-			switcherLinkText={LOGIN_PAGE_TEXT.SWITCHER_LINK_TEXT}
-			switcherLinkTo={ROUTES.REGISTER}
+			switcher={{
+				prompt: LOGIN_PAGE_TEXT.SWITCHER_PROMPT,
+				linkText: LOGIN_PAGE_TEXT.SWITCHER_LINK_TEXT,
+				linkTo: ROUTES.REGISTER,
+			}}
 		>
 			<LoginForm />
 		</FormPageLayout>
 	);
-}
+};
 
 export default LoginPage;

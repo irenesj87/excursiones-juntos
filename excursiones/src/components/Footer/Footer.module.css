@@ -1,6 +1,6 @@
 .footer {
 	display: flex;
-	flex-direction: column; /* Por defecto para breakpoints pequeños */
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding: 1.5rem 2rem;
@@ -10,36 +10,7 @@
 	border-top: 1px solid var(--footer-border-top);
 }
 
-.contactLink {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 0.75rem;
-	font-size: 1.1rem;
-	text-decoration: none;
-	color: var(--footer-text-color);
-}
-
 .footerText {
 	margin: 0;
-	opacity: 0.8; /* Hacemos el texto un poco más sutil */
-}
-
-/* Diseño para breakpoints grandes */
-@media (min-width: 768px) {
-	.footer {
-		flex-direction: row; /* Cambiamos a layout horizontal */
-		justify-content: space-between; /* Distribuimos los elementos */
-	}
-
-	.mailIconLink {
-		margin-bottom: 0; /* Quitamos el margen inferior en layout horizontal */
-		order: 2; /* Movemos el icono a la derecha */
-	}
-}
-
-@media (max-width: 767px) {
-	.footer {
-		border-top: none;
-	}
+	opacity: 0.8;
 }

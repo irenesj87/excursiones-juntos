@@ -1,27 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import { RootState } from "../../store/store";
 
-/** @typedef {import("../../types").RootState} RootState */
-
-/**
- * @typedef {object} ProtectedRouteProps
- * @property {React.ReactNode} children - El componente a renderizar si el usuario está autenticado.
- * @property {boolean} isAuthCheckComplete - Indica si la comprobación de autenticación inicial ha finalizado.
- */
+/** Define las propiedades esperadas por el componente ProtectedRoute. */
+interface ProtectedRouteProps {
+	/** El componente a renderizar si el usuario está autenticado. */
+	children: React.ReactNode;
+	/** Indica si la comprobación de autenticación inicial ha finalizado. */
+	isAuthCheckComplete: boolean;
+}
 
 /**
  * Componente que protege rutas, redirigiendo a la página de login si el usuario no está autenticado.
- * @param {ProtectedRouteProps} props - Las propiedades del componente.
- * @returns {React.ReactNode} - El componente protegido o una redirección a la página de login.
  */
-const ProtectedRoute = ({ children, isAuthCheckComplete }) => {
+const ProtectedRoute = ({
+	children,
+	isAuthCheckComplete,
+}: ProtectedRouteProps): React.ReactElement => {
 	const { login: isLoggedIn } = useSelector(
-		/**
-		 * @param {RootState} state - El estado global de la aplicación.
-		 * @returns {import("../../types").LoginState} - El estado de login.
-		 */
-		(state) => state.loginReducer
+		(state: RootState) => state.loginReducer
 	);
 	// Se obtiene la ubicación actual para redirigir al usuario después de iniciar sesión.
 	const location = useLocation();
@@ -37,7 +35,7 @@ const ProtectedRoute = ({ children, isAuthCheckComplete }) => {
 	// contenido hijo.
 	// Mientras la comprobación está en curso, el componente hijo (`LazyRouteWrapper`) mostrará un esqueleto de carga, evitando una
 	// pantalla en blanco.
-	return children;
+	return <>{children}</>;
 };
 
 export default ProtectedRoute;
