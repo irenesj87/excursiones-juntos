@@ -5,14 +5,13 @@ import styles from "./Logo.module.css";
 
 /**
  * Componente que renderiza el logo de la aplicación con el texto "Excursiones Juntos".
- * @returns {React.ReactElement}  - Componente Logo.
  */
-function Logo() {
+const Logo = (): React.ReactElement => {
 	return (
 		<Link to={ROUTES.HOME} className={styles.logoContainer}>
 			<span className={styles.logoText}>{COMPANY_NAME}</span>
 		</Link>
 	);
-}
+};
 
 export default Logo;
