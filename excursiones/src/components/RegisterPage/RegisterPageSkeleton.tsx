@@ -7,6 +7,16 @@ import "react-loading-skeleton/dist/skeleton.css";
 import registerFormStyles from "../RegisterForm/RegisterForm.module.css";
 
 /**
+ * Configuración para las filas del esqueleto del formulario. Cada sub-array representa una fila
+ * y cada objeto dentro de él representa una columna con el ancho de la etiqueta del esqueleto.
+ */
+const skeletonFieldRows = [
+	[{ labelWidth: "30%" }, { labelWidth: "40%" }], // Nombre, Apellidos
+	[{ labelWidth: "35%" }, { labelWidth: "50%" }], // Teléfono, Correo
+	[{ labelWidth: "40%" }, { labelWidth: "60%" }], // Contraseña, Repetir contraseña
+];
+
+/**
  * Esqueleto de carga cuya función es mostrar una versión simplificada del formulario de registro mientras el componente real
  * (RegisterForm.js) se está cargando.
  */
@@ -43,30 +53,18 @@ const RegisterPageSkeleton = () => {
 					aria-hidden="true"
 					className={`${registerFormStyles.formLabel} fw-bold`}
 				>
-					<Row>
-						<Col xs={12} md={6}>
-							{renderInputPlaceholder("30%")} {/* Nombre */}
-						</Col>
-						<Col xs={12} md={6}>
-							{renderInputPlaceholder("40%")} {/* Apellidos */}
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12} md={6}>
-							{renderInputPlaceholder("35%")} {/* Teléfono */}
-						</Col>
-						<Col xs={12} md={6}>
-							{renderInputPlaceholder("50%")} {/* Correo electrónico */}
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12} md={6}>
-							{renderInputPlaceholder("40%")} {/* Contraseña */}
-						</Col>
-						<Col xs={12} md={6}>
-							{renderInputPlaceholder("60%")} {/* Repite la contraseña */}
-						</Col>
-					</Row>
+					{skeletonFieldRows.map((row, rowIndex) => (
+						// Usamos el índice como clave porque la lista es estática y no cambiará.
+						// eslint-disable-next-line react/no-array-index-key
+						<Row key={`skeleton-row-${rowIndex}`}>
+							{row.map((col, colIndex) => (
+								// eslint-disable-next-line react/no-array-index-key
+								<Col xs={12} md={6} key={`skeleton-col-${colIndex}`}>
+									{renderInputPlaceholder(col.labelWidth)}
+								</Col>
+							))}
+						</Row>
+					))}
 
 					{/* Esqueleto para el mensaje informativo de la contraseña. */}
 					<div className={`${registerFormStyles.infoMessage} mb-3`}>
