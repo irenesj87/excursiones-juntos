@@ -32,11 +32,11 @@ const getInitialAuthState = () => {
 
 interface NavigationBarProps {
 	/** Función para actualizar el estado de la lista de excursiones. */
-	onFetchSuccess: (_excursions: Excursion[]) => void;
+onFetchSuccess: (excursions: Excursion[]) => void;
 	/** Callback que se ejecuta al iniciar la búsqueda de excursiones. */
 	onExcursionsFetchStart: () => void;
 	/** Callback que se ejecuta al finalizar la búsqueda de excursiones. */
-	onExcursionsFetchEnd: (_error: Error | null) => void;
+	onExcursionsFetchEnd: (error: Error | null) => void;
 	/** Indica si la página actual es la de excursiones. */
 	isOnExcursionsPage: boolean;
 }
