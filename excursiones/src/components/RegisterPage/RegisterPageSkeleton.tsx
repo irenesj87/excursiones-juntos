@@ -1,32 +1,26 @@
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
+import { RootState } from "../../store/store";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import registerFormStyles from "../RegisterForm/RegisterForm.module.css";
-
-/** @typedef {import("../../types").RootState} RootState */
 
 /**
  * Esqueleto de carga cuya función es mostrar una versión simplificada del formulario de registro mientras el componente real
  * (RegisterForm.js) se está cargando.
  */
-function RegisterPageSkeleton() {
-	const mode = useSelector(
-		/** @param {RootState} state */
-		(state) => state.themeReducer.mode
-	);
+const RegisterPageSkeleton = () => {
+	const mode = useSelector((state: RootState) => state.themeReducer.mode);
 
 	// Define los colores del esqueleto según el tema para una experiencia visual consistente.
 	const baseColor = mode === "dark" ? "#202020" : "#e0e0e0";
 	const highlightColor = mode === "dark" ? "#444" : "#f5f5f5";
 
 	/**
-	 * Renderiza un marcador de posición para los campos de entrada del formulario.
-	 * @param {string} labelWidth - Ancho del marcador de posición del texto de la etiqueta.
-	 * @returns {React.ReactElement} Marcador de posición para el campo de entrada.
+	 * Renderiza un marcador de posición para un campo de entrada del formulario.
 	 */
-	const renderInputPlaceholder = (labelWidth) => (
+	const renderInputPlaceholder = (labelWidth: string) => (
 		<div className="mb-3">
 			<Skeleton width={labelWidth} containerClassName="d-block mb-2" />
 			<Skeleton height={38} />
@@ -38,9 +32,11 @@ function RegisterPageSkeleton() {
 		<FormPageLayout
 			title="Bienvenido/a"
 			subtitle="Crea tu cuenta para empezar a explorar."
-			switcherPrompt="¿Ya tienes una cuenta?"
-			switcherLinkText="Inicia sesión"
-			switcherLinkTo="/loginPage"
+			switcher={{
+				prompt: "¿Ya tienes una cuenta?",
+				linkText: "Inicia sesión",
+				linkTo: "/loginPage",
+			}}
 		>
 			<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
 				<div
@@ -106,6 +102,6 @@ function RegisterPageSkeleton() {
 			</SkeletonTheme>
 		</FormPageLayout>
 	);
-}
+};
 
 export default RegisterPageSkeleton;

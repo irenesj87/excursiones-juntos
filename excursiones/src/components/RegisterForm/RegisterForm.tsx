@@ -13,13 +13,11 @@ import { registerUser } from "../../services/authService";
 import FormErrorAlert from "../FormErrorAlert";
 import StyledButton from "../StyledButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
-import "bootstrap/dist/css/bootstrap.css";
 import styles from "./RegisterForm.module.css";
 import { RegisterFormValues, FormFieldConfig } from "../../types";
 
 /**
  * Estado inicial para el formulario de registro.
- * @type {RegisterFormValues}
  */
 const initialState: RegisterFormValues = {
 	name: "",
@@ -31,16 +29,13 @@ const initialState: RegisterFormValues = {
 };
 
 /**
- * Componente que contiene la lógica del formulario de registro.
- * @returns {React.ReactElement} El componente del formulario de registro.
+ * Componente de formulario de registro de usuario.
  */
-function RegisterForm() {
+const RegisterForm = () => {
 	const [values, setValues] = useState<RegisterFormValues>(initialState);
 
 	/**
-	 * Función que se pasa a cada campo del formulario para actualizar el estado.
-	 * @param {keyof RegisterFormValues} field - El campo que ha cambiado.
-	 * @param {string} value - El nuevo valor del campo.
+	 * Maneja el cambio de los campos del formulario.
 	 */
 	const handleInputChange = (
 		field: keyof RegisterFormValues,
@@ -49,6 +44,9 @@ function RegisterForm() {
 		setValues((prev) => ({ ...prev, [field]: value }));
 	};
 
+	/**
+	 * Verifica si el formulario es válido.
+	 */
 	const isFormValid = () => {
 		return (
 			validateName(values.name) === true &&
@@ -205,6 +203,6 @@ function RegisterForm() {
 			</Form>
 		</>
 	);
-}
+};
 
 export default RegisterForm;

@@ -8,6 +8,7 @@ import React, {
 import { Container, Navbar, Offcanvas } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useAuthContext } from "../../context/AuthContext";
+import { RootState } from "../../store/store";
 import Logo from "../Logo";
 import SearchBar from "../SearchBar";
 import ErrorBoundary from "../ErrorBoundary";
@@ -16,21 +17,12 @@ import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
 import ThemeToggleButton from "../ThemeToggleButton";
 import styles from "./NavigationBar.module.css";
 import "../../css/Themes.css";
-
-/** @typedef {import('types.js').RootState} RootState */
-
-/**
- * @typedef {import('types.js').Excursion} Excursion
- */
+import { Excursion } from "../../types";
 
 // Estos componentes se cargan de forma perezosa (lazy).
 const UserNav = lazy(() => import("../UserNav"));
 const GuestNav = lazy(() => import("../GuestNav"));
 
-/**
- * Obtiene de manera segura el estado de autenticación inicial de sessionStorage.
- * @returns {boolean} - True si es probable que haya un token, false en otros casos.
- */
 const getInitialAuthState = () => {
 	if (globalThis.window === undefined) {
 		return false;
@@ -38,28 +30,29 @@ const getInitialAuthState = () => {
 	return !!sessionStorage.getItem("token");
 };
 
-/**
- * @typedef {object} NavigationBarProps
- * @property {(excursions: Excursion[]) => void} onFetchSuccess - Función para actualizar el estado de la lista de excursiones.
- * @property {() => void} onExcursionsFetchStart - Callback que se ejecuta al iniciar la búsqueda de excursiones.
- * @property {(error: Error | null) => void} onExcursionsFetchEnd - Callback que se ejecuta al finalizar la búsqueda de excursiones.
- * @property {boolean} isOnExcursionsPage - Indica si la página actual es la de excursiones.
- */
+interface NavigationBarProps {
+	/** Función para actualizar el estado de la lista de excursiones. */
+	onFetchSuccess: (_excursions: Excursion[]) => void;
+	/** Callback que se ejecuta al iniciar la búsqueda de excursiones. */
+	onExcursionsFetchStart: () => void;
+	/** Callback que se ejecuta al finalizar la búsqueda de excursiones. */
+	onExcursionsFetchEnd: (_error: Error | null) => void;
+	/** Indica si la página actual es la de excursiones. */
+	isOnExcursionsPage: boolean;
+}
 
 /**
  * Componente para la barra de navegación.
- * @param {NavigationBarProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El componente de la barra de navegación.
  */
-function NavigationBar({
+const NavigationBar = ({
 	onFetchSuccess,
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
 	isOnExcursionsPage,
-}) {
+}: NavigationBarProps) => {
 	// Estado global de Redux para saber si el usuario está autenticado.
 	const { login: isLoggedIn } = useSelector(
-		(state) => /** @type {RootState} */ (state).loginReducer
+		(state: RootState) => state.loginReducer
 	);
 	// Estado del contexto de autenticación para saber si la comprobación inicial de autenticación ha finalizado.
 	// Dependiendo de ellos se muestra el esuqeleto para el invitado o para el usuario
@@ -68,17 +61,11 @@ function NavigationBar({
 	// Estado que indica si probablemente el usuario está autenticado basándonos en sessionStorage.
 	const [likelyLoggedIn] = useState(getInitialAuthState);
 
-	/**
-	 * Estado que guarda el texto que el usuario escribe en la barra de búsqueda.
-	 * @type {[string, React.Dispatch<React.SetStateAction<string>>]}
-	 */
+	/** Estado que guarda el texto que el usuario escribe en la barra de búsqueda. */
 	const [searchTerm, setSearchTerm] = useState("");
-	/**
-	 * Estado para controlar la visibilidad del componente Offcanvas (menú lateral).
-	 * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
-	 */
+	/** Estado para controlar la visibilidad del componente Offcanvas (menú lateral). */
 	const [showMenu, setShowMenu] = useState(false);
-	const navRef = useRef(null);
+	const navRef = useRef<HTMLElement>(null);
 
 	// Usamos useLayoutEffect para medir la altura de la barra de navegación después de que el DOM se haya actualizado,
 	// pero antes de que el navegador pinte la pantalla. Esto evita parpadeos.
@@ -113,22 +100,12 @@ function NavigationBar({
 		return () => observer.disconnect();
 	}, []);
 
-	/**
-	 * Cierra el menú lateral (Offcanvas).
-	 * @type {() => void}
-	 */
+	/** Cierra el menú lateral (Offcanvas). */
 	const handleCloseMenu = () => setShowMenu(false);
 
-	/**
-	 * Abre el menú lateral (Offcanvas).
-	 * @type {() => void}
-	 */
+	/** Abre el menú lateral (Offcanvas). */
 	const handleShowMenu = () => setShowMenu(true);
 
-	/**
-	 * Renderiza los botones de usuario o invitado.
-	 * @returns {React.ReactElement} - El contenido de navegación.
-	 */
 	const renderNavContent = () => {
 		// Mientras no se sabe si el usuario está autenticado, se muestra un esqueleto de carga.
 		// Depende de likelyLoggedIn. Si es true, se muestra el esqueleto de usuario, si es false, el de invitado.
@@ -186,7 +163,7 @@ function NavigationBar({
 				<div className="d-none d-md-flex justify-content-center flex-grow-1 px-md-3 px-lg-5 order-md-2 order-lg-2 me-md-3">
 					<div style={{ maxWidth: "900px", width: "100%" }}>
 						<SearchBar
-							onFetchSuccess={onFetchSuccess}
+							onFetchSuccess={onFetchSuccess} //Se pasa la función onFetchSuccess al componente SearchBar
 							id="searchBar-md-lg"
 							onFetchStart={onExcursionsFetchStart}
 							onFetchEnd={onExcursionsFetchEnd}
@@ -249,6 +226,6 @@ function NavigationBar({
 			</Container>
 		</Navbar>
 	);
-}
+};
 
 export default NavigationBar;
