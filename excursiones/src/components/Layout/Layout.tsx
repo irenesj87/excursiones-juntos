@@ -16,7 +16,6 @@ import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
 import LazyRouteWrapper from "../../utils/LazyRouteWrapper";
 import styles from "./Layout.module.css";
 
-
 /**
  * Lazy loading de los componentes RegisterPage, LoginPage y UserPage.
  * Se utiliza `lazyWithMinTime` para optimizar la carga de estos componentes.
@@ -40,7 +39,7 @@ const Layout = () => {
 	// de carga y los errores.
 	const {
 		handleExcursionsFetchStart,
-		handleExcursionsFetchSuccess,
+handleExcursionsFetchSuccess,
 		excursionsState,
 		handleExcursionsFetchEnd,
 	} = useExcursions();
