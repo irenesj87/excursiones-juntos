@@ -8,14 +8,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 
 interface SearchBarProps {
-	readonly onFetchSuccess: (_excursions: readonly Excursion[]) => void;
+	readonly onFetchSuccess: (excursions: readonly Excursion[]) => void;
 	readonly onExcursionsFetchStart: () => void;
 	readonly onExcursionsFetchEnd: (
-		_error: (Error & { secondaryMessage?: string }) | null
+		error: (Error & { secondaryMessage?: string }) | null
 	) => void;
 	readonly id: string;
 	readonly searchValue: string;
-	readonly onSearchChange: (_value: string) => void;
+	readonly onSearchChange: (value: string) => void;
 }
 
 /**
