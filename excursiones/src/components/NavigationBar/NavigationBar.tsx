@@ -32,7 +32,7 @@ const getInitialAuthState = () => {
 
 interface NavigationBarProps {
 	/** Función para actualizar el estado de la lista de excursiones. */
-onFetchSuccess: (excursions: Excursion[]) => void;
+	onFetchSuccess: (excursions: readonly Excursion[]) => void;
 	/** Callback que se ejecuta al iniciar la búsqueda de excursiones. */
 	onExcursionsFetchStart: () => void;
 	/** Callback que se ejecuta al finalizar la búsqueda de excursiones. */
@@ -165,8 +165,8 @@ const NavigationBar = ({
 						<SearchBar
 							onFetchSuccess={onFetchSuccess} //Se pasa la función onFetchSuccess al componente SearchBar
 							id="searchBar-md-lg"
-							onFetchStart={onExcursionsFetchStart}
-							onFetchEnd={onExcursionsFetchEnd}
+							onExcursionsFetchStart={onExcursionsFetchStart}
+							onExcursionsFetchEnd={onExcursionsFetchEnd}
 							searchValue={searchTerm}
 							onSearchChange={setSearchTerm}
 						/>
@@ -196,8 +196,8 @@ const NavigationBar = ({
 					<SearchBar
 						onFetchSuccess={onFetchSuccess}
 						id="searchBar-sm"
-						onFetchStart={onExcursionsFetchStart}
-						onFetchEnd={onExcursionsFetchEnd}
+						onExcursionsFetchStart={onExcursionsFetchStart}
+						onExcursionsFetchEnd={onExcursionsFetchEnd}
 						searchValue={searchTerm}
 						onSearchChange={setSearchTerm}
 					/>

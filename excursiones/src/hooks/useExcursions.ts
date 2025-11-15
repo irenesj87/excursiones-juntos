@@ -4,14 +4,14 @@ import type { Excursion } from "../types";
 
 // Definimos los tipos de estado y acción con TypeScript
 export interface ExcursionsState {
-	data: Excursion[];
+	readonly data: readonly Excursion[];
 	isLoading: boolean;
 	error: Error | null;
 }
 
 type ExcursionsAction =
 	| { type: "FETCH_INIT" }
-	| { type: "FETCH_SUCCESS"; payload: Excursion[] }
+	| { type: "FETCH_SUCCESS"; payload: readonly Excursion[] }
 	| { type: "FETCH_ERROR"; payload: Error };
 
 const excursionsInitialState: ExcursionsState = {
@@ -68,7 +68,7 @@ export const useExcursions = () => {
 	/**
 	 * Maneja el éxito de la carga de excursiones.
 	 */
-	const handleExcursionsFetchSuccess = (excursions: Excursion[]) => {
+	const handleExcursionsFetchSuccess = (excursions: readonly Excursion[]) => {
 		dispatchWithMinDisplayTime({
 			type: "FETCH_SUCCESS",
 			payload: excursions,

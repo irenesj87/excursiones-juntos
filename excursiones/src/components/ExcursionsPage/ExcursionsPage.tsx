@@ -9,14 +9,14 @@ import styles from "./ExcursionsPage.module.css";
 
 // Definición del tipo para el estado de las excursiones.
 type ExcursionsState = {
-	data: Excursion[];
+	readonly data: readonly Excursion[];
 	isLoading: boolean;
 	error: AppError | null;
 };
 
 // Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
-	excursionsState: ExcursionsState;
+	readonly excursionsState: ExcursionsState;
 }
 
 /**

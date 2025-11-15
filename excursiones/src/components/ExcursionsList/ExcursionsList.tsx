@@ -13,7 +13,7 @@ import styles from "./ExcursionsList.module.css";
 import { Excursion, User } from "../../types";
 
 interface ExcursionsListProps {
-	readonly excursionData?: Excursion[];
+	readonly excursionData?: readonly Excursion[];
 	readonly isLoading: boolean;
 	readonly error: Error | null;
 }
@@ -49,7 +49,7 @@ function ExcursionsList({
 	// Estado para las excursiones que se muestran. Esto nos permite mantener los resultados antiguos visibles mientras se
 	// cargan los nuevos datos para evitar que parpadeen o se queden en blanco.
 	const [displayedExcursions, setDisplayedExcursions] =
-		useState<Excursion[]>(excursionData);
+		useState<readonly Excursion[]>(excursionData);
 	// Estado para anunciar cambios a los lectores de pantalla.
 	const [announcement, setAnnouncement] = useState("");
 	// Referencia para saber si es la primera carga del componente. Permite evitar anunciar resultados en la primera carga.
@@ -86,8 +86,14 @@ function ExcursionsList({
 	const joinExcursion = async (excursionId: string | number) => {
 		try {
 			// Llamada al servicio para unirse a la excursión.
+			if (!user?.mail) {
+				throw new Error(
+					"No se pudo obtener el email del usuario para unirse a la excursión."
+				);
+			}
+
 			const updatedUser = await joinExcursionService(
-				user!.mail,
+				user.mail,
 				String(excursionId), // Aseguramos que el ID sea un string para el servicio
 				token
 			);
