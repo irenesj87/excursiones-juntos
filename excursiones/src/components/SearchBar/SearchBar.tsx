@@ -1,58 +1,46 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { FiSearch, FiX } from "react-icons/fi";
 import cn from "classnames";
 import { searchExcursions } from "../../services/excursionService";
+import { Excursion } from "../../types";
+import { RootState } from "../../store/store";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 
-/** @typedef {import('types.js').RootState} RootState */
-
-/**
- * @typedef {import('types.js').Excursion} Excursion
- */
-
-/**
- * @typedef {object} SearchBarProps
- * @property {(excursions: Excursion[]) => void} onFetchSuccess - Función para actualizar el estado de la lista de excursiones en el componente padre.
- * @property {() => void} onFetchStart - Callback que se ejecuta al iniciar la búsqueda de excursiones.
- * @property {(error: (Error & { secondaryMessage?: string }) | null) => void} onFetchEnd - Callback que se ejecuta al finalizar la búsqueda de excursiones
- * @property {string} id - ID único para el input de búsqueda, útil para accesibilidad y múltiples instancias.
- * @property {string} searchValue - El término de búsqueda actual.
- * @property {(value: string) => void} onSearchChange - Callback para actualizar el término de búsqueda.
- */
+interface SearchBarProps {
+	readonly onFetchSuccess: (_excursions: readonly Excursion[]) => void;
+	readonly onExcursionsFetchStart: () => void;
+	readonly onExcursionsFetchEnd: (
+		_error: (Error & { secondaryMessage?: string }) | null
+	) => void;
+	readonly id: string;
+	readonly searchValue: string;
+	readonly onSearchChange: (_value: string) => void;
+}
 
 /**
  * Componente que maneja la barra de búsqueda y la aplicación de filtros para las excursiones.
- * @param {SearchBarProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El componente de la barra de búsqueda.
  */
 function SearchBar({
 	onFetchSuccess,
-	onFetchStart,
-	onFetchEnd,
+	onExcursionsFetchStart,
+	onExcursionsFetchEnd,
 	id,
 	searchValue,
 	onSearchChange,
-}) {
-	// Estado para el texto de búsqueda "debounced" (retrasado) que se usará en la API.
+}: SearchBarProps) {
 	const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
-	// Ref para el input de búsqueda para poder enfocarlo programáticamente.
-	const searchInputRef = useRef(null);
-	// Selector de Redux que obtiene los filtros de área, dificultad y tiempo del estado `filterReducer`.
+	const searchInputRef = useRef<HTMLInputElement>(null);
+
 	const { area, difficulty, time } = useSelector(
-		/**
-		 * @param {RootState} state - El estado raíz de Redux.
-		 * @returns {import('types.js').FilterState} - El estado de los filtros.
-		 */ (state) => state.filterReducer,
+		(state: RootState) => state.filterReducer,
 		shallowEqual
 	);
+
 	/**
 	 * Maneja el evento `onChange` del input de búsqueda, actualizando el estado `search`.
-	 * @param {React.ChangeEvent<HTMLInputElement>} event - El evento de cambio del input.
 	 */
-	// Función que maneja el cambio en el input de búsqueda, actualizando el estado `search`.
-	const handleSearchChange = (event) => {
+	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onSearchChange(event.target.value);
 	};
 
@@ -61,7 +49,6 @@ function SearchBar({
 	 */
 	const handleClearSearch = () => {
 		onSearchChange("");
-		// Damos el foco al input para mejorar la experiencia de usuario.
 		searchInputRef.current?.focus();
 	};
 
@@ -70,7 +57,7 @@ function SearchBar({
 	useEffect(() => {
 		const timerId = setTimeout(() => {
 			setDebouncedSearch(searchValue);
-		}, 500); // Un debounce de 500ms es una buena práctica.
+		}, 500);
 
 		return () => clearTimeout(timerId);
 	}, [searchValue]);
@@ -79,8 +66,7 @@ function SearchBar({
 	 * Realiza la petición de búsqueda de excursiones. El compilador de React se encargará de memoizar esta función.
 	 */
 	const fetchData = async () => {
-		// Llama a la función onFetchStart si se proporcionó, para indicar que la carga de excursiones ha comenzado.
-		onFetchStart?.();
+		onExcursionsFetchStart();
 		try {
 			const data = await searchExcursions(
 				debouncedSearch,
@@ -88,35 +74,25 @@ function SearchBar({
 				difficulty,
 				time
 			);
-			// Actualiza el estado de las excursiones en el componente padre.
 			onFetchSuccess(data);
-			// Llama a onFetchEnd con null para indicar que la carga terminó sin errores.
-			onFetchEnd?.(null);
+			onExcursionsFetchEnd(null);
 		} catch (error) {
-			// Si ocurre un error durante la petición, lo muestra en la consola.
-			// Logueamos el error original para depuración.
 			console.error("Error técnico al buscar excursiones:", error);
-			// Opcionalmente, vacía la lista de excursiones en caso de error.
 			onFetchSuccess([]);
 
-			// Si es un error de conexión, podemos añadir un log más específico para el desarrollador.
 			if (error instanceof TypeError && error.message === "Failed to fetch") {
 				console.error(
 					"Pista para el desarrollador: El servidor de la API no parece estar respondiendo. ¿Está en marcha? Revisa también la configuración de CORS."
 				);
 			}
 
-			/** @type {Error & {secondaryMessage?: string}} */
-			let userFriendlyError;
+			let userFriendlyError: Error & { secondaryMessage?: string };
 
-			// Si es un error de conexión (la API no responde), creamos un mensaje específico y seguro.
 			if (error instanceof TypeError && error.message === "Failed to fetch") {
 				userFriendlyError = new Error("Error de conexión");
 				userFriendlyError.secondaryMessage =
 					"No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet e inténtalo de nuevo.";
 			} else {
-				// Para CUALQUIER OTRO error de la API, mostramos un mensaje genérico y seguro.
-				// NUNCA mostramos `error.message` de la API directamente al usuario.
 				userFriendlyError = new Error(
 					"No se han podido cargar las excursiones."
 				);
@@ -124,8 +100,7 @@ function SearchBar({
 					"Por favor, inténtalo de nuevo más tarde.";
 			}
 
-			// Pasamos el error amigable a la UI para que se muestre
-			onFetchEnd?.(userFriendlyError);
+			onExcursionsFetchEnd(userFriendlyError);
 		}
 	};
 
@@ -139,19 +114,17 @@ function SearchBar({
 		<form
 			role="search"
 			className={styles.searchContainer}
-			// Prevenimos el envío del formulario por defecto, ya que la búsqueda es dinámica.
 			onSubmit={(e) => e.preventDefault()}
 		>
 			<label htmlFor={id} className="visually-hidden">
-				Buscar excursiones por texto
+				Buscar excursiones por nombre
 			</label>
-			<FiSearch className={styles.searchIcon} aria-hidden="true" />
 			<input
 				ref={searchInputRef}
 				id={id}
 				className={cn("form-control", styles.searchInput)}
 				type="search"
-				placeholder="Busca excursiones..."
+				placeholder="Busca excursiones por nombre..."
 				value={searchValue}
 				onChange={handleSearchChange}
 			/>
@@ -161,9 +134,7 @@ function SearchBar({
 					className={styles.clearButton}
 					onClick={handleClearSearch}
 					aria-label="Limpiar búsqueda"
-				>
-					<FiX />
-				</button>
+				></button>
 			)}
 		</form>
 	);

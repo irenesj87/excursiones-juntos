@@ -39,7 +39,7 @@ const Layout = () => {
 	// de carga y los errores.
 	const {
 		handleExcursionsFetchStart,
-handleExcursionsFetchSuccess,
+		handleExcursionsFetchSuccess,
 		excursionsState,
 		handleExcursionsFetchEnd,
 	} = useExcursions();
