@@ -21,14 +21,14 @@ interface SearchBarProps {
 /**
  * Componente que maneja la barra de búsqueda y la aplicación de filtros para las excursiones.
  */
-function SearchBar({
+const SearchBar = ({
 	onFetchSuccess,
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
 	id,
 	searchValue,
 	onSearchChange,
-}: SearchBarProps) {
+}: SearchBarProps) => {
 	const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
 	const searchInputRef = useRef<HTMLInputElement>(null);
 
