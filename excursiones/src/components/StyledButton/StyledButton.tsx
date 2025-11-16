@@ -3,21 +3,28 @@ import { Button, Spinner } from "react-bootstrap";
 import styles from "./StyledButton.module.css";
 
 /**
- * @typedef {object} CustomButtonProps
- * @property {string | number} children - El contenido textual del botón. Por seguridad, solo se aceptan strings o números.
- * @property {() => void} [onClick] - Función a ejecutar al hacer clic.
- * @property {'button' | 'submit' | 'reset'} [type='button'] - El tipo de botón.
- * @property {'primary' | 'secondary'} [variant='primary'] - La variante de estilo del botón.
- * @property {string} [className] - Clases CSS adicionales para personalizar.
- * @property {boolean} [disabled=false] - Si el botón está deshabilitado.
- * @property {boolean} [isLoading=false] - Si el botón está en estado de carga.
+ * Props para el componente StyledButton.
  */
+interface StyledButtonProps {
+	/** El contenido textual del botón. Por seguridad, solo se aceptan strings o números. */
+	children: string | number;
+	/** Función a ejecutar al hacer clic. */
+	onClick?: () => void;
+	/** El tipo de botón. */
+	type?: "button" | "submit" | "reset";
+	/** La variante de estilo del botón. */
+	variant?: "primary" | "secondary";
+	/** Clases CSS adicionales para personalizar. */
+	className?: string;
+	/** Si el botón está deshabilitado. */
+	disabled?: boolean;
+	/** Si el botón está en estado de carga. */
+	isLoading?: boolean;
+}
 
 /**
  * Un componente de botón personalizado y reutilizable que extiende la funcionalidad
  * del botón de React Bootstrap.
- * @param {CustomButtonProps} props - Las props del componente.
- * @returns {React.ReactElement} - El componente de botón.
  */
 const StyledButton = ({
 	children,
@@ -27,8 +34,7 @@ const StyledButton = ({
 	className = "",
 	disabled = false,
 	isLoading = false,
-	...rest
-}) => {
+}: StyledButtonProps) => {
 	// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
 	const buttonClass = `${styles.styledButton} ${styles[variant]} ${className}`;
 
@@ -39,7 +45,6 @@ const StyledButton = ({
 			onClick={onClick}
 			disabled={disabled || isLoading}
 			aria-busy={isLoading}
-			{...rest}
 		>
 			{isLoading ? (
 				<>
