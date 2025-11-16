@@ -1,15 +1,17 @@
-import React, { createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 
 /**
- * @typedef {object} AuthContextType
- * @property {boolean} isAuthCheckComplete - Indica si la comprobación de autenticación inicial ha finalizado.
+ * Define la forma del contexto de autenticación.
  */
+interface AuthContextType {
+	/** Indica si la comprobación de autenticación inicial ha finalizado. */
+	isAuthCheckComplete: boolean;
+}
 
 /**
  * Contexto para proporcionar el estado de la comprobación de autenticación a los componentes anidados.
- * @type {React.Context<AuthContextType | undefined>}
  */
-export const AuthContext = createContext(
+export const AuthContext = createContext<AuthContextType | undefined>(
 	// El valor inicial es `undefined` para permitir la comprobación en `useAuthContext`
 	// y asegurar que el hook se use dentro de un `AuthProvider`.
 	undefined
@@ -17,9 +19,8 @@ export const AuthContext = createContext(
 
 /**
  * Hook personalizado para acceder fácilmente al AuthContext.
- * @returns {AuthContextType} El contexto de autenticación.
  */
-export const useAuthContext = () => {
+export const useAuthContext = (): AuthContextType => {
 	const context = useContext(AuthContext);
 
 	// Esta comprobación asegura que el hook solo se use dentro de un AuthProvider.
