@@ -7,7 +7,7 @@ import {
 import { ROUTES, FORM_TEXT } from "../../constants";
 import ValidatedFormGroup from "../ValidatedFormGroup";
 import FormErrorAlert from "../FormErrorAlert";
-import StyledButton from "../StyledButton/index.js";
+import StyledButton from "../StyledButton";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import "bootstrap/dist/css/bootstrap.css";
