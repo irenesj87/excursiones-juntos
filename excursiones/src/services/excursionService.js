@@ -64,10 +64,6 @@ export const joinExcursion = async (userMail, excursionId, token) => {
 
 	if (!response.ok) {
 		const errorData = await response.json().catch(() => ({}));
-		// --- INICIO DE MEJORA ---
-		// Mostramos el error real de la API en la consola del navegador para depurar.
-		console.error("Error de la API al unirse a la excursión:", errorData);
-		// --- FIN DE MEJORA ---
 		throw new Error(errorData.message || "No se pudo completar la operación.");
 	}
 
