@@ -228,7 +228,7 @@ router.get(
 
 		// Se filtran las excursiones para obtener solo aquellas a las que el usuario está apuntado
 		const userExcursions = excursions.filter((excursion) =>
-			user.excursions.includes(excursion.id)
+			user.excursions.includes(String(excursion.id))
 		);
 
 		// Se retornan las excursiones del usuario en formato JSON
@@ -259,7 +259,6 @@ router.post(
 					.json({ message: "El ID de la excursión es requerido." });
 			}
 
-			// Verificamos que la excursión a la que se apunta realmente existe.
 			const excursionExists = excursions.some((ex) => ex.id === excursionId);
 			if (!excursionExists) {
 				return res
