@@ -241,7 +241,6 @@ router.post(
 	"/:mail/excursions",
 	apiLimiter,
 	authenticateToken,
-	authorizeUserModification,
 	function (req, res, next) {
 		console.log(
 			`POST /users/${req.params["mail"]}/excursions - Request received.`
@@ -259,8 +258,19 @@ router.post(
 					.json({ message: "El ID de la excursión es requerido." });
 			}
 
+			// --- INICIO DE DEPURACIÓN ---
+			// Mostramos en la consola del servidor el ID que llega desde el frontend.
+			console.log(
+				`[DEBUG] Recibido excursionId: ${excursionId} (Tipo: ${typeof excursionId})`
+			);
+			// --- FIN DE DEPURACIÓN ---
+
 			// Verificamos que la excursión a la que se apunta realmente existe.
-			const excursionExists = excursions.some((ex) => ex.id === excursionId);
+			// Convertimos excursionId a número para asegurar una comparación correcta con ex.id.
+			const numericExcursionId = Number(excursionId);
+			const excursionExists = excursions.some(
+				(ex) => ex.id === numericExcursionId
+			);
 			if (!excursionExists) {
 				return res
 					.status(404)

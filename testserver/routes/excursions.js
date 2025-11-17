@@ -43,37 +43,40 @@ router.get("/", function (req, res) {
 	 */
 	// Se extrae el parámetro de búsqueda 'q' y el resto de filtros en un objeto 'filters'
 	const { q: search, ...filters } = req.query;
-
-	// Copy variable of the excursions array, we use this to not change the info in the excursions array
-	let excursionsCopy = [...excursions];
+	let filteredExcursions = [...excursions];
 
 	// Si el usuario ha buscado algo en la barra de búsqueda
 	if (search) {
 		const searchLower = search.toString().toLowerCase();
-		excursionsCopy = excursionsCopy.filter((excursion) =>
+		filteredExcursions = filteredExcursions.filter((excursion) =>
 			excursion.name.toLowerCase().includes(searchLower)
 		);
 	}
 
 	// Lista de propiedades por las que se puede filtrar
 	const filterableProperties = ["area", "difficulty", "time"];
+	// Se aplican los filtros de forma encadenada usando reduce para un código más funcional y conciso.
+	filteredExcursions = filterableProperties.reduce(
+		(currentExcursions, property) => {
+			if (filters[property]) {
+				return applyListFilter(currentExcursions, filters[property], property);
+			}
+			return currentExcursions;
+		},
+		filteredExcursions
+	);
+	res.status(200).json(filteredExcursions);
+});
 
-	// Se aplican todos los filtros que el usuario haya enviado en la URL de forma dinámica recorriendo la lista
-	// Esta línea inicia un bucle que va a recorrer los elementos del array filterableProperties. En cada pasada la variable property
-	// tomará un valor
-	filterableProperties.forEach((property) => {
-		// Se comprueba si el filtro existe
-		if (filters[property]) {
-			// Si existe, se aplica el filtro
-			excursionsCopy = applyListFilter(
-				excursionsCopy,
-				filters[property],
-				property
-			);
-		}
-	});
-
-	res.status(200).json(excursionsCopy);
+/** GET para obtener una excursión por su ID */
+router.get("/:id", function (req, res) {
+	const { id } = req.params;
+	const excursion = excursions.find((e) => e.id === id);
+	if (excursion) {
+		res.status(200).json(excursion);
+	} else {
+		res.status(404).json({ message: "Excursión no encontrada." });
+	}
 });
 
 module.exports = router;
