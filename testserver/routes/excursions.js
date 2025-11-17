@@ -71,7 +71,7 @@ router.get("/", function (req, res) {
 /** GET para obtener una excursión por su ID */
 router.get("/:id", function (req, res) {
 	const { id } = req.params;
-	const excursion = excursions.find((e) => e.id === id);
+	const excursion = excursions.find((e) => e.id === Number(id));
 	if (excursion) {
 		res.status(200).json(excursion);
 	} else {
