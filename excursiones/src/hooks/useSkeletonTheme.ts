@@ -1,9 +1,13 @@
 import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 
-/** @typedef {import('../types').RootState} RootState */
+interface SkeletonThemeProps {
+	baseColor: string;
+	highlightColor: string;
+}
 
 // Define los colores del esqueleto en un objeto centralizado para facilitar el mantenimiento.
-const SKELETON_COLORS = {
+const SKELETON_COLORS: Record<"light" | "dark", SkeletonThemeProps> = {
 	light: {
 		baseColor: "#e0e0e0",
 		highlightColor: "#f5f5f5",
@@ -17,13 +21,13 @@ const SKELETON_COLORS = {
 /**
  * Hook personalizado para obtener las props de tema para `react-loading-skeleton`.
  * Encapsula la lógica para seleccionar los colores del esqueleto según el modo de tema actual.
- * @returns {{baseColor: string, highlightColor: string}} Un objeto con los colores para el SkeletonTheme.
  */
-export const useSkeletonTheme = () => {
+export const useSkeletonTheme = (): SkeletonThemeProps => {
 	const mode = useSelector(
-		/** @param {RootState} state */
-		(state) => state.themeReducer.mode
+		(state: RootState) =>
+			state.themeReducer.mode as keyof typeof SKELETON_COLORS
 	);
 
-	return SKELETON_COLORS[mode] || SKELETON_COLORS.light;
+	// El modo puede ser 'light' o 'dark', ambos definidos en SKELETON_COLORS.
+	return SKELETON_COLORS[mode];
 };
