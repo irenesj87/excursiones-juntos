@@ -56,9 +56,9 @@ const ThemeToggleButton = ({
 
 	const icon =
 		mode === "light" ? (
-			"🌙"
+			<span aria-hidden="true">🌙</span>
 		) : (
-			"☀️"
+			<span aria-hidden="true">☀️</span>
 		);
 
 	return (
