@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect, useRef } from "react";
 import { Card, Col, Form, Row, Button, Spinner, Alert } from "react-bootstrap";
-import { FiMail, FiUser, FiUsers, FiPhone } from "react-icons/fi";
 import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserInfo } from "../../services/userService";
@@ -127,7 +126,6 @@ function UserInfoForm() {
 			id: "formPlaintextName",
 			label: "Nombre",
 			field: "name",
-			icon: FiUser,
 			ref: nameInputRef,
 			validation: validateName,
 			errorMessage: "El nombre no puede estar vacío.",
@@ -136,7 +134,6 @@ function UserInfoForm() {
 			id: "formPlaintextSurname",
 			label: "Apellidos",
 			field: "surname",
-			icon: FiUsers,
 			validation: validateSurname,
 			errorMessage: "Los apellidos no pueden estar vacíos.",
 		},
@@ -144,7 +141,6 @@ function UserInfoForm() {
 			id: "formPlaintextPhone",
 			label: "Teléfono",
 			field: "phone",
-			icon: FiPhone,
 			validation: validatePhone,
 			errorMessage: "El formato del teléfono no es válido.",
 		},
@@ -289,7 +285,7 @@ function UserInfoForm() {
 					controlId="formPlaintextEmail"
 				>
 					<Form.Label column sm="3" className="text-sm-end fw-bold">
-						<FiMail /> Correo:
+						Correo:
 					</Form.Label>
 					<Col sm="9">
 						<Form.Control plaintext readOnly defaultValue={user?.mail ?? ""} />

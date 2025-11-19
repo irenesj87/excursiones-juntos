@@ -1,32 +1,33 @@
 import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, TypedUseSelectorHook } from "react-redux";
 import { toggleMode } from "../../slices/themeSlice";
-import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "./ThemeToggleButton.module.css";
-
-/** @typedef {import('../../types').RootState} RootState */
+import { RootState, AppDispatch } from "../../store/store"; // Asegúrate de que la ruta sea correcta
 
 /**
- * @typedef {object} ThemeToggleButtonProps
- * @property {string} [className] - Clases CSS adicionales para el botón.
- * @property {boolean} [showText=false] - Si es true, muestra el texto junto al icono.
+ * Props para el componente ThemeToggleButton.
  */
+interface ThemeToggleButtonProps {
+	className?: string; // Clases CSS adicionales para el botón.
+	showText?: boolean; // Si es true, muestra el texto junto al icono.
+}
 
 /**
  * Botón que permite al usuario cambiar entre el tema claro y oscuro.
- * @param {ThemeToggleButtonProps} props - Las propiedades del componente.
- * @returns {React.ReactElement} - El componente del botón de cambio de tema.
  */
-const ThemeToggleButton = ({ className = "", showText = false }) => {
-	const mode = useSelector(
-		/** 
-		 * @param {RootState} state - El estado global de Redux. 
-		 * @returns {string} El modo de tema actual ('light' o 'dark'). 
-		 */
-		(state) => state.themeReducer.mode
-	);
-	const dispatch = useDispatch();
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+const useAppDispatch = () => useDispatch<AppDispatch>();
+
+/**
+ * Componente ThemeToggleButton.
+ */
+const ThemeToggleButton = ({
+	className = "",
+	showText = false,
+}: ThemeToggleButtonProps) => {
+	const mode = useAppSelector((state: RootState) => state.themeReducer.mode);
+	const dispatch = useAppDispatch();
 
 	/**
 	 * Efecto que se ejecuta cuando el `mode` (tema) cambia.
@@ -48,7 +49,6 @@ const ThemeToggleButton = ({ className = "", showText = false }) => {
 
 	/**
 	 * Alterna el modo de tema (claro/oscuro) despachando la acción de Redux.
-	 * @returns {void}
 	 */
 	const toggleTheme = () => {
 		dispatch(toggleMode());
@@ -56,9 +56,9 @@ const ThemeToggleButton = ({ className = "", showText = false }) => {
 
 	const icon =
 		mode === "light" ? (
-			<FaMoon className={styles.themeIcon} />
+			"🌙"
 		) : (
-			<FaSun className={styles.themeIcon} />
+			"☀️"
 		);
 
 	return (
