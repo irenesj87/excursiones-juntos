@@ -118,7 +118,6 @@ function UserInfoForm() {
 					...state,
 					isEditing: false,
 					isLoading: false,
-					originalValues: state.values,
 					successMessage: "¡Datos guardados con éxito!",
 				};
 			case "SAVE_FAILURE":
