@@ -4,9 +4,8 @@ import userInfoStyles from "./UserInfoForm.module.css";
 
 /**
  * Renderiza un esqueleto para la tarjeta de información del usuario de la página de usuario.
- * @returns {React.ReactElement}
  */
-function UserInfoSkeleton() {
+const UserInfoSkeleton = () => {
 	return (
 		<Card className={`${userInfoStyles.profileCard} w-100 flex-grow-1`}>
 			<Card.Header as="h3" className={userInfoStyles.cardHeader}>

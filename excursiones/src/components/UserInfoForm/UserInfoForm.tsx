@@ -57,7 +57,7 @@ type FormAction =
 /**
  * Componente que se encarga del menú de edición y muestra de los datos del usuario logueado en ese momento
  */
-function UserInfoForm() {
+const UserInfoForm = () => {
 	// Variable que necesitamos para poder usar los dispatchers de Redux.
 	const loginDispatch = useAppDispatch();
 	// Este useSelector nos da los datos del usuario actual.
