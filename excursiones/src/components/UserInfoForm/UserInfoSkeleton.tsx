@@ -24,7 +24,7 @@ function UserInfoSkeleton() {
 						</Col>
 					</Row>
 					{/* Simula 2 filas de etiqueta + input con margen estándar */}
-					{[...Array(2)].map((_, i) => (
+					{Array.from({ length: 2 }).map((_, i) => (
 						<Row
 							// eslint-disable-next-line react/no-array-index-key
 							key={`user-info-placeholder-row-${i}`}
