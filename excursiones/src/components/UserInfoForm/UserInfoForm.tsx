@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useRef } from "react";
 import { Card, Col, Form, Row, Button, Spinner, Alert } from "react-bootstrap";
 import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
-import { useSelector, useDispatch } from "react-redux";
+import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
 import { updateUserInfo } from "../../services/userService";
 import { updateUser } from "../../slices/loginSlice";
 import {
@@ -9,28 +9,64 @@ import {
 	validateSurname,
 	validatePhone,
 } from "../../validation/validations";
+import type { RootState, AppDispatch } from "../../store/store"; // Asumiendo que tienes estos tipos en tu store
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./UserInfoForm.module.css";
 
-/** @typedef {import('types.js').RootState} RootState */
+// Hooks tipados de Redux para mayor seguridad de tipos
+const useAppDispatch = () => useDispatch<AppDispatch>();
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+/**
+ * Tipos y estados para el reducer del formulario
+ */
+interface FormValues {
+	name: string;
+	surname: string;
+	phone: string;
+}
+
+/**
+ * Estado del formulario de información del usuario.
+ */
+interface FormState {
+	values: FormValues;
+	originalValues: FormValues;
+	isEditing: boolean;
+	isLoading: boolean;
+	error: string | null;
+	successMessage: string | null;
+}
+
+/**
+ * Acciones para el reducer del formulario.
+ */
+type FormAction =
+	| { type: "START_EDIT" }
+	| { type: "CANCEL_EDIT" } // Corregida la mezcla de espacios y tabulaciones
+	| {
+			type: "UPDATE_FIELD";
+			payload: { field: keyof FormValues; value: string };
+	}
+	| { type: "SAVE_START" }
+	| { type: "SAVE_SUCCESS" }
+	| { type: "SAVE_FAILURE"; payload: string }
+	| { type: "CLEAR_MESSAGES" }
+	| { type: "RESET_FORM"; payload: FormValues };
 
 /**
  * Componente que se encarga del menú de edición y muestra de los datos del usuario logueado en ese momento
- * @returns {React.ReactElement} - El componente de formulario de información del usuario.
  */
 function UserInfoForm() {
 	// Variable que necesitamos para poder usar los dispatchers de Redux.
-	const loginDispatch = useDispatch();
+	const loginDispatch = useAppDispatch();
 	// Este useSelector nos da los datos del usuario actual.
-	const { user, token } = useSelector(
-		/**
-		 * @param {RootState} state - Estado de Redux
-		 * @returns {object} El slice del reducer de login.
-		 */
-		(state) => state.loginReducer
+	const { user, token } = useAppSelector(
+		(state: RootState) => state.loginReducer
 	);
+
 	// Estado inicial para el reducer del formulario
-	const initialState = {
+	const initialState: FormState = {
 		values: {
 			name: user?.name ?? "",
 			surname: user?.surname ?? "",
@@ -49,11 +85,8 @@ function UserInfoForm() {
 
 	/**
 	 * Reducer para gestionar el estado del formulario de información del usuario.
-	 * @param {object} state - El estado actual del formulario.
-	 * @param {object} action - La acción a despachar.
-	 * @returns {object} - El nuevo estado del formulario.
 	 */
-	const formReducer = (state, action) => {
+	const formReducer = (state: FormState, action: FormAction): FormState => {
 		switch (action.type) {
 			case "START_EDIT":
 				return {
@@ -92,6 +125,13 @@ function UserInfoForm() {
 				return { ...state, isLoading: false, error: action.payload };
 			case "CLEAR_MESSAGES":
 				return { ...state, error: null, successMessage: null };
+			case "RESET_FORM":
+				return {
+					...state,
+					values: action.payload,
+					originalValues: action.payload,
+					isEditing: false, // Resetea también el modo edición
+				};
 			default:
 				return state;
 		}
@@ -107,8 +147,8 @@ function UserInfoForm() {
 		successMessage,
 	} = formState;
 
-	const nameInputRef = useRef(null);
-	const alertRef = useRef(null);
+	const nameInputRef = useRef<HTMLInputElement>(null);
+	const alertRef = useRef<HTMLFieldSetElement | null>(null);
 
 	// Comprueba si el formulario es válido.
 	const isFormValid =
@@ -120,29 +160,38 @@ function UserInfoForm() {
 	const isFormChanged =
 		JSON.stringify(values) !== JSON.stringify(originalValues);
 
+	interface FormField {
+		id: string;
+		label: string;
+		field: keyof FormValues;
+		ref?: React.RefObject<HTMLInputElement>;
+		validation: (value: string) => boolean;
+		errorMessage: string;
+	}
+
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
-	const formFields = [
+	const formFields: FormField[] = [
 		{
 			id: "formPlaintextName",
 			label: "Nombre",
 			field: "name",
 			ref: nameInputRef,
 			validation: validateName,
-			errorMessage: "El nombre no puede estar vacío.",
+			errorMessage: "El nombre no puede estar vacío y debe ser válido.",
 		},
 		{
 			id: "formPlaintextSurname",
 			label: "Apellidos",
 			field: "surname",
 			validation: validateSurname,
-			errorMessage: "Los apellidos no pueden estar vacíos.",
+			errorMessage: "Los apellidos no pueden estar vacíos y deben ser válidos.",
 		},
 		{
 			id: "formPlaintextPhone",
 			label: "Teléfono",
 			field: "phone",
 			validation: validatePhone,
-			errorMessage: "El formato del teléfono no es válido.",
+			errorMessage: "El formato del teléfono no es válido (9 dígitos).",
 		},
 	];
 
@@ -169,34 +218,61 @@ function UserInfoForm() {
 			return;
 		}
 
+		// Comprobación de seguridad para asegurar que user.mail y token no son nulos/undefined
+		if (!user || !token) {
+			console.error(
+				"No se puede actualizar: falta el email del usuario o el token."
+			);
+			return;
+		}
+
 		formDispatch({ type: "SAVE_START" });
 		try {
-			const updatedUserData = await updateUserInfo(user?.mail, values, token);
+			const updatedUserData = await updateUserInfo(user.mail, values, token);
 			// Actualiza el estado de Redux con los nuevos datos del usuario.
 			loginDispatch(
 				updateUser({
-					user: updatedUserData,
+					// Se fusiona el usuario existente con los datos actualizados para asegurar un objeto User completo.
+					user: { ...user, ...updatedUserData },
 				})
 			);
 			formDispatch({ type: "SAVE_SUCCESS" });
-		} catch (error) {
-			console.error("Error técnico al actualizar el perfil:", error);
+		} catch (err: unknown) {
+			// Log the error for debugging and include a user-friendly message in the UI.
+			console.error("Failed to update user info:", err);
+			const errorMessage =
+				err instanceof Error ? err.message : String(err ?? "Unknown error");
 			formDispatch({
 				type: "SAVE_FAILURE",
 				payload:
-					"No se pudo actualizar tu información. Por favor, comprueba tu conexión o inténtalo de nuevo más tarde.",
+					"No se pudo actualizar tu información. Por favor, comprueba tu conexión o inténtalo de nuevo más tarde." +
+					` (${errorMessage})`,
 			});
 		}
 	};
 
 	/**
 	 * Maneja el cambio de valor en un campo del formulario.
-	 * @param {string} field - El nombre del campo que se está actualizando.
-	 * @param {string} value - El nuevo valor del campo.
 	 */
-	const handleInputChange = (field, value) => {
+	const handleInputChange = (field: keyof FormValues, value: string) => {
 		formDispatch({ type: "UPDATE_FIELD", payload: { field, value } });
 	};
+
+	// Efecto para sincronizar el estado del formulario si el usuario de Redux cambia.
+	// Esto es crucial si los datos del usuario se cargan de forma asíncrona después del montaje inicial.
+	useEffect(() => {
+		const newValues = {
+			name: user?.name ?? "",
+			surname: user?.surname ?? "",
+			phone: user?.phone ?? "",
+		};
+		// Solo actualiza si los valores son diferentes para evitar bucles de renderizado.
+		if (JSON.stringify(newValues) !== JSON.stringify(originalValues)) {
+			formDispatch({ type: "RESET_FORM", payload: newValues });
+		}
+		// La dependencia de `originalValues` es importante para evitar re-sincronizaciones innecesarias
+		// si el usuario edita y cancela, volviendo a los valores originales que ya coinciden con `user`.
+	}, [user, originalValues]);
 
 	// Efecto para enfocar el primer input al entrar en modo edición.
 	useEffect(() => {
@@ -307,7 +383,7 @@ function UserInfoForm() {
 							className="text-sm-end fw-bold"
 							htmlFor={field.id}
 						>
-							<field.icon /> {field.label}:
+							{field.label}:
 						</Form.Label>
 						<Col sm="9">
 							<UserPageInputEdit
