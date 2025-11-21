@@ -239,14 +239,14 @@ function UserInfoForm() {
 			formDispatch({ type: "SAVE_SUCCESS" });
 		} catch (err: unknown) {
 			// Log the error for debugging and include a user-friendly message in the UI.
-			console.error("Failed to update user info:", err);
-			const errorMessage =
-				err instanceof Error ? err.message : String(err ?? "Unknown error");
+			console.error("Fallo al actualizar la información del usuario:", err);
+			// Extrae un mensaje de error seguro para mostrar en la UI.
+			const detail = err instanceof Error ? err.message : "Error desconocido";
 			formDispatch({
 				type: "SAVE_FAILURE",
 				payload:
 					"No se pudo actualizar tu información. Por favor, comprueba tu conexión o inténtalo de nuevo más tarde." +
-					` (${errorMessage})`,
+					` (Detalle: ${detail})`,
 			});
 		}
 	};
