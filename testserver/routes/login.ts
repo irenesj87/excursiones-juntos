@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import users from "../data/usersData.js";
 import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";

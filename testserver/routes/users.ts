@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import users, { User } from "../data/usersData.js";
 import { v4 as uuidv4 } from "uuid";
 import rateLimit from "express-rate-limit";

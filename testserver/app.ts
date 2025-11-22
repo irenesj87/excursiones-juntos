@@ -90,14 +90,26 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // error handler
-app.use((err: createError.HttpError, req: Request, res: Response, next: NextFunction) => {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(
+	(
+		err: createError.HttpError,
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) => {
+		// Determinamos el código de estado del error. Si no tiene uno, es un error interno (500).
+		const statusCode = err.status || 500;
 
-	// En lugar de renderizar una vista, devolvemos un JSON.
-	// Esto es más seguro y estándar para una API.
-	res.status(statusCode).json(errorResponse);
-});
+		// Creamos el objeto de respuesta del error.
+		const errorResponse = {
+			message: err.message,
+			// En desarrollo, añadimos el stack del error para facilitar la depuración.
+			...(req.app.get("env") === "development" ? { stack: err.stack } : {}),
+		};
+
+		// Enviamos la respuesta en formato JSON con el código de estado correcto.
+		res.status(statusCode).json(errorResponse);
+	}
+);
 
 export default app;

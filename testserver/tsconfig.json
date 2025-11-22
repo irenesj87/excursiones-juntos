@@ -2,8 +2,8 @@
 	"compilerOptions": {
 		/* Opciones del compilador */
 		"target": "ES2022", // Compila a una versión moderna de JavaScript
-		"module": "NodeNext", // Usa el sistema de módulos moderno de Node.js
-		"moduleResolution": "NodeNext", // Cómo resuelve los módulos
+		"module": "ESNext", // Usa el sistema de módulos ES estándar.
+		"moduleResolution": "Bundler", // La mejor opción para bundlers y loaders como ts-node.
 		"esModuleInterop": true, // Permite la interoperabilidad entre CommonJS y ES Modules
 		"strict": true, // Habilita todas las comprobaciones estrictas de tipos
 		"skipLibCheck": true, // Omite la comprobación de tipos en los archivos de declaración (.d.ts)
