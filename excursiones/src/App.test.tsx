@@ -2,12 +2,10 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import App from "./App";
-import loginSliceReducer from "./slices/loginSlice";
-import filterSliceReducer from "./slices/filterSlice";
-import themeSliceReducer from "./slices/themeSlice";
 import { searchExcursions } from "./services/excursionService";
+import { rootReducer, RootState } from "./store/store";
 
 // Mock de ResizeObserver para el entorno de JSDOM.
 // JSDOM no incluye esta API del navegador, por lo que la simulamos con una clase vacía.
@@ -26,15 +24,6 @@ globalThis.ResizeObserver = class ResizeObserver {
 // Mock del servicio de búsqueda para evitar llamadas de red reales.
 jest.mock("./services/excursionService");
 
-// Definimos el tipo del estado raíz de Redux para usarlo en el preloadedState.
-const rootReducer = combineReducers({
-	loginReducer: loginSliceReducer,
-	filterReducer: filterSliceReducer,
-	themeReducer: themeSliceReducer,
-});
-
-type RootState = ReturnType<typeof rootReducer>;
-
 /**
  * Función de ayuda para renderizar componentes que dependen de Redux y React Router.
  * Crea un store de Redux de prueba y envuelve el componente en Provider y MemoryRouter.
@@ -46,7 +35,7 @@ const renderWithProviders = (
 		route = "/",
 		...renderOptions
 	}: { preloadedState?: Partial<RootState>; route?: string } = {}
-) => {
+): import("@testing-library/react").RenderResult => {
 	const store = configureStore({
 		reducer: rootReducer,
 		preloadedState,
