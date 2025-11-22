@@ -23,11 +23,7 @@ export const loginSlice = createSlice({
 			state.user = user;
 			state.token = token;
 		},
-		logout: (state) => {
-			state.login = false;
-			state.user = null;
-			state.token = null;
-		},
+		logout: () => initialState,
 		updateUser: (state, action: PayloadAction<{ user: User }>) => {
 			const { user } = action.payload;
 			state.user = user;

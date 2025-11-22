@@ -38,11 +38,7 @@ export const filterSlice = createSlice({
 			}
 		},
 
-		clearAllFilters: (state) => {
-			state.area = [];
-			state.difficulty = [];
-			state.time = [];
-		},
+		clearAllFilters: () => initialState,
 	},
 });
 
