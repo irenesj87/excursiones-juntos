@@ -1,5 +1,17 @@
+/**
+ * Define el tipo para una excursión, asegurando que todos los objetos
+ * del mock cumplan con la misma estructura que espera la aplicación.
+ */
+export interface Excursion {
+	id: string;
+	name: string;
+	area: string;
+	difficulty: "Baja" | "Media" | "Alta";
+	time: string;
+}
+
 /* Array de excursiones */
-const excursions = [
+const excursions: Excursion[] = [
 	{
 		id: "0",
 		name: "Cangas de Onís",
@@ -37,4 +49,4 @@ const excursions = [
 	},
 ];
 
-module.exports = excursions;
+export default excursions;
