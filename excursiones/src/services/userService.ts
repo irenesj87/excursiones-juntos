@@ -16,8 +16,9 @@ export const updateUserInfo = async (
 	token: string
 ): Promise<User> => {
 	const url = `${API_BASE_URL}/users/${mail}`;
-	const options: RequestInit = {
+    const options: RequestInit = {
 		method: "PUT",
+		mode: "cors",
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
