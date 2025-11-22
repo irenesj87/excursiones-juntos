@@ -6,6 +6,6 @@ import { GENERIC_ERROR_MESSAGE } from "../constants";
  * @param {unknown} error - El error capturado, cuyo tipo no se conoce.
  * @returns {string} - Un mensaje de error seguro.
  */
-export const getSafeErrorMessage = (error) => {
+export const getSafeErrorMessage = (error: unknown): string => {
 	return typeof error === "string" ? error : GENERIC_ERROR_MESSAGE;
 };

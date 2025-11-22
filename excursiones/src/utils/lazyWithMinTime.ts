@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import React, { lazy } from "react";
 
 /**
  * Carga perezosa para componentes de ruta. Su propósito es asegurar que cuando un componente se carga de forma perezosa,
@@ -12,7 +12,10 @@ import { lazy } from "react";
 // `minTime`: El tiempo mínimo en milisegundos que el componente de carga (esqueleto) debe ser visible.
 // Retorna un componente React.lazy que asegura que el componente se muestre después de `minTime`,
 // evitando parpadeos rápidos si la carga es muy rápida.
-export const lazyWithMinTime = (factory, minTime = 500) => {
+export const lazyWithMinTime = <P extends object>(
+	factory: () => Promise<{ default: React.ComponentType<P> }>,
+	minTime = 500
+): React.LazyExoticComponent<React.ComponentType<P>> => {
 	return lazy(() =>
 		Promise.all([
 			factory(),
