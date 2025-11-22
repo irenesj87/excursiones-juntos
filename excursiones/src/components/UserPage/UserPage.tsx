@@ -8,7 +8,7 @@ import styles from "./UserPage.module.css";
  * Componente que representa la página de perfil del usuario.
  * La lógica de protección de esta ruta se maneja en el componente `ProtectedRoute`.
  */
-const UserPage = () => {
+const UserPage = (): JSX.Element => {
 	return (
 		// Se añade `h-100` a la Row y `d-flex flex-column` a la Col para asegurar que el layout
 		// ocupe toda la altura disponible y que el contenido se organice verticalmente.
