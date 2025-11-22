@@ -8,7 +8,7 @@ import { Col } from "react-bootstrap";
 interface LazyRouteWrapperProps<P extends object> {
 	readonly PageComponent: React.ComponentType<P>; // Componente de página que se cargará de forma perezosa.
 	readonly SkeletonComponent: React.ComponentType; // Componente esqueleto que se mostrará mientras se carga la página.
-	readonly pageProps?: P; // Hacemos pageProps opcional para los componentes que no reciben props.
+	readonly pageProps: P; // Props que se pasarán al PageComponent. Para componentes sin props, pasar un objeto vacío {}.
 }
 
 /**
@@ -19,11 +19,11 @@ const LazyRouteWrapper = <P extends object>({
 	PageComponent,
 	SkeletonComponent,
 	pageProps,
-}: LazyRouteWrapperProps<P>): React.ReactNode => {
+}: LazyRouteWrapperProps<P>): JSX.Element => {
 	return (
 		<Col xs={12}>
 			<Suspense fallback={<SkeletonComponent />}>
-				<PageComponent {...(pageProps as P)} />
+				<PageComponent {...pageProps} />
 			</Suspense>
 		</Col>
 	);
