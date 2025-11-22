@@ -88,9 +88,7 @@ const ValidatedFormGroup = (props: ValidatedFormGroupProps): JSX.Element => {
 					aria-live="polite"
 				>
 					{/* Si la validación retorna un string, lo muestra. Si no, usa el `errorMessage` de las props. */}
-					{typeof validationError === "string"
-						? validationError
-						: errorMessage || "Formato incorrecto."}
+					{validationError || errorMessage || "Formato incorrecto."}
 				</Form.Control.Feedback>
 			)}
 		</Form.Group>

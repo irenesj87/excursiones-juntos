@@ -98,9 +98,8 @@ const UserPageInputEditComponent = (
 					// This is crucial for dynamic, real-time validation feedback.
 					aria-live="polite"
 				>
-					{typeof validationError === "string"
-						? validationError
-						: errorMessage ||
+					{validationError ||
+						errorMessage ||
 						"Recuerda, no puedes dejar un campo vacío o en un formato incorrecto."}
 				</Form.Control.Feedback>
 			)}
