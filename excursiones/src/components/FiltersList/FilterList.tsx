@@ -6,10 +6,11 @@ import FilterError from "../FilterError";
 import { useFilters } from "../../hooks/useFilters";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
+import type { FilterState } from "../../slices/filterSlice";
 
 // Props del componente FiltersList.
 interface FiltersListProps {
-	readonly filterName: string; // El nombre de la categoría de filtro (ej. "area").
+	readonly filterName: keyof FilterState; // El nombre de la categoría de filtro (ej. "area").
 }
 
 /**
