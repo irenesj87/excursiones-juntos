@@ -6,7 +6,7 @@ export interface Excursion {
 	id: string;
 	name: string;
 	area: string;
-	difficulty: string;
+	difficulty: "Baja" | "Media" | "Alta";
 	time: string;
 }
 
