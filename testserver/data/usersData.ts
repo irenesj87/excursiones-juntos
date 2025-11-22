@@ -4,8 +4,13 @@
  * tengan el formato esperado.
  */
 export interface User {
+	id: string;
+	name: string;
+	surname: string;
 	mail: string;
-	passwordHash: string;
+	phone: string;
+	password: string; // Contiene el hash de la contraseña, no la contraseña en texto plano.
+	excursions: string[];
 }
 
 /* Array de usuarios */
