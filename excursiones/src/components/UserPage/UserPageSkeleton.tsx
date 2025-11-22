@@ -11,7 +11,7 @@ import { RootState } from "../../store/store";
  * Componente que muestra un esqueleto de carga para la página de perfil de usuario.
  * Simula la estructura de la `UserPage` mientras los componentes reales se cargan.
  */
-const UserPageSkeleton = () => {
+const UserPageSkeleton = ():React.ReactElement => {
 	const mode = useSelector((state: RootState) => state.themeReducer.mode);
 
 	// Define los colores del esqueleto según el tema para una experiencia visual consistente.
