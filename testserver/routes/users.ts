@@ -9,20 +9,14 @@ import { authenticateToken } from "../authMiddleware.js";
 
 const router = express.Router();
 
-// Extendemos la interfaz Request de Express para incluir las propiedades
-// que son añadidas por el middleware `authenticateToken`.
-interface AuthenticatedRequest extends Request {
-	tokenEmail?: string;
-}
-
 // Middleware que dice si un usuario puede modificar info o no
 const authorizeUserModification = (
-	req: AuthenticatedRequest,
+	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
-	// Obtenemos el correo asociado al token
-	const emailFromToken = req.tokenEmail; // Lo da el middleware authenticateToken
+	// Obtenemos el correo asociado al token, añadido por el middleware authenticateToken
+	const emailFromToken = req.userMail;
 	// Obtenemos el correo del usuario a modificar desde la URL
 	const targetMail = req.params["mail"];
 

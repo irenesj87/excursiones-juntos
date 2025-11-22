@@ -5,13 +5,6 @@ import { authenticateToken } from "../authMiddleware.js";
 
 const router = express.Router();
 
-// Extendemos la interfaz Request de Express para incluir las propiedades
-// que son añadidas por el middleware `authenticateToken`.
-interface AuthenticatedRequest extends Request {
-	tokenEmail?: string;
-	token?: string;
-}
-
 // Rate limiter para proteger el endpoint de verificación de token contra ataques de fuerza bruta o DoS.
 const verifyLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutos
@@ -36,10 +29,10 @@ router.get(
 	"/verify",
 	verifyLimiter,
 	authenticateToken,
-	(req: AuthenticatedRequest, res: Response) => {
+	(req: Request, res: Response) => {
 		// Si el middleware 'authenticateToken' pasa, el token es válido.
-		// El correo del usuario ya está en req.tokenEmail.
-		const userMail = req.tokenEmail;
+		// El correo del usuario ya está en req.userMail.
+		const userMail = req.userMail;
 		if (!userMail) {
 			return res
 				.status(400)
@@ -56,7 +49,7 @@ router.get(
 		}
 
 		const { password, ...userResponse } = user;
-		res.status(200).json({ user: userResponse, token: req.token });
+		res.status(200).json({ user: userResponse });
 	}
 );
 

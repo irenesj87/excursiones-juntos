@@ -5,12 +5,6 @@ import tokenBlocklist from "../data/tokenBlocklist.js";
 
 const router = express.Router();
 
-// Extendemos la interfaz Request de Express para incluir la propiedad `token`
-// que es añadida por el middleware `authenticateToken`.
-interface AuthenticatedRequest extends Request {
-	token?: string;
-}
-
 // Rate limiter para proteger el endpoint de logout contra el abuso.
 const logoutLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutos
@@ -30,8 +24,10 @@ router.delete(
 	"/",
 	logoutLimiter,
 	authenticateToken,
-	(req: AuthenticatedRequest, res: Response) => {
-		const token = req.token; // Obtenido del middleware authenticateToken
+	(req: Request, res: Response) => {
+		// El token a invalidar es el que viene en la cabecera de autorización.
+		const authHeader = req.headers.authorization;
+		const token = authHeader?.split(" ")[1];
 
 		if (token) {
 			// Añadir el token a la lista de bloqueo para invalidarlo
@@ -40,7 +36,9 @@ router.delete(
 				.status(200)
 				.json({ message: "La sesión se ha cerrado correctamente." });
 		}
-		return res.status(400).json({ error: "No se proporcionó un token." });
+		return res
+			.status(400)
+			.json({ error: "No se pudo encontrar el token para invalidar." });
 	}
 );
 

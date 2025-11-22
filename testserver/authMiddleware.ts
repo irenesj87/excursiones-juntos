@@ -1,51 +1,49 @@
 import { Request, Response, NextFunction } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import createError from "http-errors";
 import tokenBlocklist from "./data/tokenBlocklist.js";
+import type { CustomJwtPayload } from "../types/jwt.js";
 
-// Extendemos la interfaz Request de Express para incluir las propiedades
-// que se añadirán al objeto de petición tras una autenticación exitosa.
-export interface AuthenticatedRequest extends Request {
-	tokenEmail?: string;
-	token?: string;
-}
-
-export function authenticateToken(
-	req: AuthenticatedRequest,
+/**
+ * Middleware para verificar un token JWT presente en la cabecera de autorización.
+ */
+export const authenticateToken = (
+	req: Request,
 	res: Response,
 	next: NextFunction
-) {
-	const authHeader = req.headers["authorization"];
-	const token = authHeader?.split(" ")[1]; // Formato: Bearer TOKEN
-
-	if (token == null) {
-		return res.sendStatus(401); // Unauthorized: No hay token
+) => {
+	// 1. Extraer el token de la cabecera 'Authorization'.
+	const authHeader = req.headers.authorization;
+	if (!authHeader?.startsWith("Bearer ")) {
+		return next(
+			createError(401, "Token no proporcionado o con formato incorrecto")
+		);
 	}
+	const token = authHeader.split(" ")[1];
 
+	// 2. Verificar si el token está en la lista negra (blocklist).
 	if (tokenBlocklist.includes(token)) {
-		return res
-			.status(403)
-			.json({ error: "Forbidden: Token has been invalidated." });
+		return next(createError(403, "Token invalidado (cerró sesión)"));
 	}
+	try {
+		// 3. Verificar y decodificar el token usando la clave secreta.
+		const payload = jwt.verify(token, process.env.JWT_SECRET!);
 
-	const secretKey = process.env.JWT_SECRET;
-	if (!secretKey) {
-		console.error("FATAL ERROR: JWT_SECRET no está definida.");
-		return res.status(500).json({ error: "Server configuration error." });
-	}
-
-	jwt.verify(token, secretKey, (err, payload) => {
-		if (err) {
-			if (err.name === "TokenExpiredError") {
-				return res
-					.status(401)
-					.json({ error: "Unauthorized: Token has expired." });
-			}
-			return res.status(403).json({ error: "Forbidden: Invalid token." });
+		// 4. Type Guard de seguridad
+		// Verificamos que el payload es un objeto y contiene la propiedad 'mail'.
+		if (typeof payload === "object" && "mail" in payload) {
+			// 5. Añadir el email del usuario al objeto Request para usarlo en rutas posteriores.
+			req.userMail = (payload as CustomJwtPayload).mail;
+			return next(); // El token es válido, continuamos.
 		}
-
-		// Si el token es válido, adjuntamos los datos a la request.
-		req.tokenEmail = (payload as JwtPayload).mail;
-		req.token = token;
-		next(); // Pasamos al siguiente middleware o ruta.
-	});
-}
+		throw new Error("El formato del payload del token es inválido");
+	} catch (error) {
+		// 6. Capturar errores de verificación (expirado, firma inválida, etc.).
+		// Logueamos el error real en el servidor para depuración.
+		if (process.env.NODE_ENV === "development") {
+			console.error("Error de verificación de token:", error);
+		}
+		// Enviamos una respuesta genérica al cliente por seguridad.
+		return next(createError(401, "Token inválido o expirado"));
+	}
+};
