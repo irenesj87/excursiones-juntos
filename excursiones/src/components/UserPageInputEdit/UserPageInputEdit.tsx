@@ -1,25 +1,32 @@
-import { forwardRef, useState, useEffect } from "react";
+import { forwardRef, useState, useEffect, ChangeEvent } from "react";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./UserPageInputEdit.module.css";
 
 /**
- * @typedef {object} UserPageInputEditProps
- * @property {string} id - ID único para el campo de formulario.
- * @property {string} value - El valor actual del campo.
- * @property {(newValue: string) => void} onInputChange - Función para manejar el cambio de valor.
- * @property {boolean} isEditing - Indica si el campo está en modo de edición.
- * @property {(value: string) => boolean | string} validationFunction - Función para validar el valor del campo. Retorna `true` si es válido, o un `string` con el mensaje de error.
- * @property {boolean} message - Indica si se debe mostrar un mensaje de error.
- * @property {string} [errorMessage] - Mensaje de error específico. Si no se proporciona, se usa uno genérico.
+ * Propiedades para el componente UserPageInputEdit.
  */
+interface UserPageInputEditProps {
+	/** ID único para el campo de formulario. */
+	readonly id: string;
+	/** El valor actual del campo. */
+	readonly value: string;
+	/** Función para manejar el cambio de valor. */
+	readonly onInputChange: (newValue: string) => void;
+	/** Indica si el campo está en modo de edición. */
+	readonly isEditing: boolean;
+	/** Función para validar el valor del campo. Retorna `true` si es válido, o un `string` con el mensaje de error. */
+	readonly validationFunction: (value: string) => boolean | string;
+	/** Indica si se debe mostrar un mensaje de error. */
+	readonly message: boolean;
+	/** Mensaje de error específico. Si no se proporciona, se usa uno genérico. */
+	readonly errorMessage?: string;
+}
 
-/**
- * Componente interno que contiene la lógica de renderizado para el input de edición.
- * @param {UserPageInputEditProps} props - Las propiedades del componente.
- * @param {React.Ref<HTMLInputElement>} ref - La ref que se reenvía al input.
- */
-function UserPageInputEditComponent(props, ref) {
+const UserPageInputEditComponent = (
+	props: UserPageInputEditProps,
+	ref: React.Ref<HTMLInputElement>
+): JSX.Element => {
 	const {
 		id,
 		value,
@@ -30,7 +37,7 @@ function UserPageInputEditComponent(props, ref) {
 		errorMessage,
 	} = props;
 	// Estado para almacenar el mensaje de error de validación. `null` si es válido.
-	const [validationError, setValidationError] = useState(null);
+	const [validationError, setValidationError] = useState<string | null>(null);
 	/**
 	 * ID único para el mensaje de error, para asociarlo con el input.
 	 */
@@ -48,13 +55,18 @@ function UserPageInputEditComponent(props, ref) {
 		}
 	}, [isEditing]);
 
-	const handleChange = (event) => {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { value: newValue } = event.target;
 		onInputChange(newValue);
 		if (validationFunction) {
 			const validationResult = validationFunction(newValue);
-			// Si el resultado no es `true`, es un mensaje de error (string) o `false`.
-			setValidationError(validationResult === true ? null : validationResult);
+			// Si el resultado es `true`, la validación es correcta (sin error -> null).
+			// Si es un `string`, es el mensaje de error.
+			// Si es `false`, la validación falla, pero no hay mensaje específico,
+			// así que usamos un string vacío para indicar el error y mostrar el mensaje genérico.
+			setValidationError(
+				validationResult === true ? null : validationResult || ""
+			);
 		}
 	};
 
@@ -66,7 +78,7 @@ function UserPageInputEditComponent(props, ref) {
 		 */
 		<>
 			<Form.Control
-				ref={ref} // Pass the ref to the underlying Form.Control
+				ref={ref}
 				className={styles.userInput}
 				id={id}
 				type="text"
@@ -86,17 +98,18 @@ function UserPageInputEditComponent(props, ref) {
 					// This is crucial for dynamic, real-time validation feedback.
 					aria-live="polite"
 				>
-					{typeof validationError === "string"
-						? validationError
-						: errorMessage ||
+					{validationError ||
+						errorMessage ||
 						"Recuerda, no puedes dejar un campo vacío o en un formato incorrecto."}
 				</Form.Control.Feedback>
 			)}
 		</>
 	);
-}
+};
 
-const UserPageInputEdit = forwardRef(UserPageInputEditComponent);
+const UserPageInputEdit = forwardRef<HTMLInputElement, UserPageInputEditProps>(
+	UserPageInputEditComponent
+);
 
 UserPageInputEdit.displayName = "UserPageInputEdit";
 
