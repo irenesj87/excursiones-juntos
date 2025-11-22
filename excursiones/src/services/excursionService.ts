@@ -23,15 +23,12 @@ export const searchExcursions = async ({
 }: SearchExcursionsParams): Promise<Excursion[]> => {
 	const params = new URLSearchParams();
 	if (debouncedSearch) params.append("q", debouncedSearch);
-	for (const value of area) {
-		params.append("area", value);
-	}
-	for (const value of difficulty) {
-		params.append("difficulty", value);
-	}
-	for (const value of time) {
-		params.append("time", value);
-	}
+    const filterMap = { area, difficulty, time };
+    for (const [key, values] of Object.entries(filterMap)) {
+        for (const value of values) {
+            params.append(key, value);
+        }
+    }
 
 	const url = `${API_BASE_URL}/excursions?${params.toString()}`;
 	// Usamos GET por defecto, no es necesario pasar 'options' si no hay headers o body.
