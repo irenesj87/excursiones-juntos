@@ -62,51 +62,54 @@ const SearchBar = ({
 		return () => clearTimeout(timerId);
 	}, [searchValue]);
 
-	/**
-	 * Realiza la petición de búsqueda de excursiones. El compilador de React se encargará de memoizar esta función.
-	 */
-	const fetchData = async () => {
-		onExcursionsFetchStart();
-		try {
-			const data = await searchExcursions(
-				debouncedSearch,
-				area,
-				difficulty,
-				time
-			);
-			onFetchSuccess(data);
-			onExcursionsFetchEnd(null);
-		} catch (error) {
-			console.error("Error técnico al buscar excursiones:", error);
-			onFetchSuccess([]);
+	// Usamos refs para almacenar las props de función y evitar que el useEffect se vuelva a ejecutar innecesariamente.
+	const onFetchSuccessRef = useRef(onFetchSuccess);
+	const onExcursionsFetchStartRef = useRef(onExcursionsFetchStart);
+	const onExcursionsFetchEndRef = useRef(onExcursionsFetchEnd);
 
-			if (error instanceof TypeError && error.message === "Failed to fetch") {
-				console.error(
-					"Pista para el desarrollador: El servidor de la API no parece estar respondiendo. ¿Está en marcha? Revisa también la configuración de CORS."
-				);
-			}
-
-			let userFriendlyError: Error & { secondaryMessage?: string };
-
-			if (error instanceof TypeError && error.message === "Failed to fetch") {
-				userFriendlyError = new Error("Error de conexión");
-				userFriendlyError.secondaryMessage =
-					"No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet e inténtalo de nuevo.";
-			} else {
-				userFriendlyError = new Error(
-					"No se han podido cargar las excursiones."
-				);
-				userFriendlyError.secondaryMessage =
-					"Por favor, inténtalo de nuevo más tarde.";
-			}
-
-			onExcursionsFetchEnd(userFriendlyError);
-		}
-	};
+	// Mantenemos las refs actualizadas si las props cambian.
+	useEffect(() => {
+		onFetchSuccessRef.current = onFetchSuccess;
+		onExcursionsFetchStartRef.current = onExcursionsFetchStart;
+		onExcursionsFetchEndRef.current = onExcursionsFetchEnd;
+	}, [onFetchSuccess, onExcursionsFetchStart, onExcursionsFetchEnd]);
 
 	// Este efecto se ejecuta cada vez que el término de búsqueda "debounced" o los filtros cambian.
 	// De esta forma, los filtros se aplican instantáneamente, mientras que la búsqueda por texto espera.
 	useEffect(() => {
+		const fetchData = async () => {
+			onExcursionsFetchStartRef.current();
+			try {
+				const data = await searchExcursions({
+					debouncedSearch,
+					area,
+					difficulty,
+					time,
+				});
+				onFetchSuccessRef.current(data);
+				onExcursionsFetchEndRef.current(null);
+			} catch (error) {
+				console.error("Error técnico al buscar excursiones:", error);
+				onFetchSuccessRef.current([]);
+
+				let userFriendlyError: Error & { secondaryMessage?: string };
+
+				if (error instanceof TypeError && error.message === "Failed to fetch") {
+					userFriendlyError = new Error("Error de conexión");
+					userFriendlyError.secondaryMessage =
+						"No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet e inténtalo de nuevo.";
+				} else {
+					userFriendlyError = new Error(
+						"No se han podido cargar las excursiones."
+					);
+					userFriendlyError.secondaryMessage =
+						"Por favor, inténtalo de nuevo más tarde.";
+				}
+
+				onExcursionsFetchEndRef.current(userFriendlyError);
+			}
+		};
+
 		fetchData();
 	}, [debouncedSearch, area, difficulty, time]);
 
@@ -138,6 +141,6 @@ const SearchBar = ({
 			)}
 		</form>
 	);
-}
+};
 
 export default SearchBar;

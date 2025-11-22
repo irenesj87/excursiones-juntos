@@ -7,11 +7,11 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 /**
  * Realiza una petición fetch y maneja las respuestas de error comunes.
- * @param url - La URL a la que se hará la petición.
- * @param options - Las opciones de la petición fetch.
- * @returns La respuesta de la API en formato JSON.
  */
-async function fetchApi<T>(url: string, options: RequestInit): Promise<T> {
+export async function fetchApi<T>(
+	url: string,
+	options: RequestInit
+): Promise<T> {
 	const response = await fetch(url, options);
 
 	if (!response.ok) {
@@ -32,8 +32,6 @@ async function fetchApi<T>(url: string, options: RequestInit): Promise<T> {
 
 /**
  * Inicia sesión de un usuario.
- * @param credentials - Las credenciales de inicio de sesión (email y contraseña).
- * @returns Una promesa que resuelve con los datos de autenticación.
  */
 export const loginUser = async (
 	credentials: LoginCredentials
@@ -51,8 +49,6 @@ export const loginUser = async (
 
 /**
  * Registra un nuevo usuario.
- * @param userData - Los datos del usuario para el registro.
- * @returns Una promesa que resuelve con los datos del usuario registrado.
  */
 export const registerUser = async (
 	userData: UserRegistration
@@ -70,8 +66,6 @@ export const registerUser = async (
 
 /**
  * Verifica el estado de autenticación de un usuario validando un token de sesión.
- * @param token - El token de sesión a validar.
- * @returns Un objeto con los datos del usuario y el token si es válido, o null si no hay token.
  */
 export const verifyToken = async (
 	token: string | null
