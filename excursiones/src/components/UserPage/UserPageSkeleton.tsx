@@ -1,21 +1,18 @@
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { SkeletonTheme } from "react-loading-skeleton";
 import UserInfoSkeleton from "../UserInfoForm/UserInfoSkeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import styles from "./UserPage.module.css";
-
-/** @typedef {import("../../types").RootState} RootState */
+import { RootState } from "../../store/store";
 
 /**
  * Componente que muestra un esqueleto de carga para la página de perfil de usuario.
  * Simula la estructura de la `UserPage` mientras los componentes reales se cargan.
  */
-function UserPageSkeleton() {
-	const mode = useSelector(
-		/** @param {RootState} state */
-		(state) => state.themeReducer.mode
-	);
+const UserPageSkeleton = () => {
+	const mode = useSelector((state: RootState) => state.themeReducer.mode);
 
 	// Define los colores del esqueleto según el tema para una experiencia visual consistente.
 	const baseColor = mode === "dark" ? "#202020" : "#e0e0e0";
@@ -35,6 +32,6 @@ function UserPageSkeleton() {
 			</Row>
 		</SkeletonTheme>
 	);
-}
+};
 
 export default UserPageSkeleton;
