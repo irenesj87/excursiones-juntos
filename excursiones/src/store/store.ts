@@ -1,15 +1,17 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import filterSlice from "../slices/filterSlice";
 import loginSlice from "../slices/loginSlice";
 import themeSlice from "../slices/themeSlice";
 
-// Esta es la store de la página. Este arhivo configura dicha store con los reducers de los slices
+// Exportamos el reducer raíz combinado para poder reutilizarlo en las pruebas.
+export const rootReducer = combineReducers({
+	loginReducer: loginSlice,
+	filterReducer: filterSlice,
+	themeReducer: themeSlice,
+});
+
 const store = configureStore({
-	reducer: {
-		loginReducer: loginSlice,
-		filterReducer: filterSlice,
-		themeReducer: themeSlice,
-	},
+	reducer: rootReducer,
 });
 
 // Infiere los tipos `RootState` y `AppDispatch` del propio store
