@@ -90,16 +90,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-	// Comprobamos si el error tiene un código de estado, si no, es un error interno del servidor.
-	const statusCode = (err as any).status || 500;
-
-	// En desarrollo, queremos ver el error completo. En producción, no.
-	const errorResponse = {
-		message: err.message,
-		// Solo incluimos el stack trace en desarrollo
-		...(req.app.get("env") === "development" ? { error: err } : {}),
-	};
+app.use((err: createError.HttpError, req: Request, res: Response, next: NextFunction) => {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get("env") === "development" ? err : {};
 
 	// En lugar de renderizar una vista, devolvemos un JSON.
 	// Esto es más seguro y estándar para una API.
