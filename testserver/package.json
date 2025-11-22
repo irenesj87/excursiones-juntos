@@ -2,25 +2,38 @@
 	"name": "testserver",
 	"version": "0.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"start": "node ./bin/www"
+		"start": "node --loader ts-node/esm ./bin/www.ts"
 	},
 	"engines": {
 		"node": "22.9.0",
 		"npm": "11.6.0"
 	},
 	"dependencies": {
-		"bcrypt": "^6.0.0",
-		"cookie-parser": "~1.4.4",
+		"@types/bcryptjs": "^2.4.6",
+		"bcryptjs": "^3.0.3",
+		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.5",
-		"debug": "~2.6.9",
+		"debug": "^4.4.3",
 		"dotenv": "^17.2.2",
 		"express": "^4.21.2",
 		"express-rate-limit": "^8.1.0",
-		"http-errors": "~1.6.3",
-		"jade": "^0.31.2",
+		"http-errors": "^2.0.1",
 		"jsonwebtoken": "^9.0.2",
 		"morgan": "^1.10.1",
+		"pug": "^3.0.3",
 		"uuid": "^8.3.2"
+	},
+	"devDependencies": {
+		"@types/cookie-parser": "^1.4.10",
+		"@types/cors": "^2.8.19",
+		"@types/debug": "^4.1.12",
+		"@types/express": "^5.0.5",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/morgan": "^1.9.10",
+		"@types/uuid": "^10.0.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.0.0"
 	}
 }

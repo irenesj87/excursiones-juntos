@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		/* Opciones del compilador */
+		"target": "ES2022", // Compila a una versión moderna de JavaScript
+		"module": "ESNext", // Usa el sistema de módulos ES estándar.
+		"moduleResolution": "Bundler", // La mejor opción para bundlers y loaders como ts-node.
+		"esModuleInterop": true, // Permite la interoperabilidad entre CommonJS y ES Modules
+		"strict": true, // Habilita todas las comprobaciones estrictas de tipos
+		"skipLibCheck": true, // Omite la comprobación de tipos en los archivos de declaración (.d.ts)
+		"forceConsistentCasingInFileNames": true, // Asegura que las mayúsculas/minúsculas de los nombres de archivo sean consistentes
+		"outDir": "./dist" // Directorio de salida (aunque ts-node compila en memoria)
+	},
+	"include": [
+		"**/*.ts", // Incluye todos los archivos .ts del proyecto
+		"**/*.d.ts" // ¡Importante! Incluye los archivos de declaración de tipos globales.
+	],
+	"exclude": [
+		"node_modules" // Excluye la carpeta node_modules
+	]
+}

@@ -1,9 +1,10 @@
-const express = require("express");
+import express, { Request, Response } from "express";
+import bcrypt from "bcryptjs";
+import users from "../data/usersData.js";
+import rateLimit from "express-rate-limit";
+import jwt from "jsonwebtoken";
+
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const users = require("../data/usersData");
-const rateLimit = require("express-rate-limit");
-const jwt = require("jsonwebtoken");
 
 // Rate limiter para proteger el endpoint de login contra ataques de fuerza bruta.
 const loginLimiter = rateLimit({
@@ -16,7 +17,7 @@ const loginLimiter = rateLimit({
 });
 
 /** LOGIN */
-router.post("/", loginLimiter, async function (req, res) {
+router.post("/", loginLimiter, async (req: Request, res: Response) => {
 	// Obtenemos el correo y la contraseña del usuario que se quiere loguear
 	const { mail, password } = req.body;
 
@@ -43,17 +44,22 @@ router.post("/", loginLimiter, async function (req, res) {
 		// 2. Firmar el token con una clave secreta y establecer una expiración (ej: 1 hora)
 		// ¡IMPORTANTE! La clave secreta debe ser más compleja y guardarse de forma segura (ej: en variables de entorno).
 		const secretKey = process.env.JWT_SECRET;
+		if (!secretKey) {
+			console.error("JWT_SECRET no está definida en las variables de entorno.");
+			return res
+				.status(500)
+				.json({ error: "Error de configuración del servidor." });
+		}
 		const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
 
-		// Se hace una copia del usuario y se excluye la contraseña por seguridad
-		const userCopy = { ...foundUser };
-		delete userCopy["password"];
+		// Se crea una copia del objeto de usuario para la respuesta, excluyendo la contraseña hasheada.
+		const { password: _, ...userResponse } = foundUser;
 
 		/* Después enviamos el token y el usuario al cliente. Se manda el token para que el usuario pueda autenticar futuras 
 		peticiones y se manda el usuario, sin datos sensibles, para que el cliente tenga disponible su información en caso de
 		que haya que mostrarla. */
-		return res.status(200).json({ token: token, user: userCopy });
+		return res.status(200).json({ token: token, user: userResponse });
 	}
 });
 
-module.exports = router;
+export default router;

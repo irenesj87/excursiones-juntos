@@ -1,23 +1,33 @@
-const express = require("express");
+import express, { Request, Response } from "express";
+import excursions, { Excursion } from "../data/excursionsData.js";
+
 const router = express.Router();
-const excursions = require("../data/excursionsData");
 
 /**
  * Función auxiliar para aplicar filtros. Ahora maneja tanto un string como un array de valores.
- * @param {Array} data - El array de excursiones a filtrar.
- * @param {string | string[]} filterValue - El valor del parámetro de la query (ej: "Centro" o ["Centro", "Este"]).
- * @param {string} property - La propiedad del objeto excursión a comparar (ej: "area").
- * @returns {Array} - El array de excursiones filtrado.
+ * @param data - El array de excursiones a filtrar.
+ * @param filterValue - El valor del parámetro de la query (ej: "Centro" o ["Centro", "Este"]).
+ * @param property - La propiedad del objeto excursión a comparar (ej: "area").
+ * @returns - El array de excursiones filtrado.
  */
-const applyListFilter = (data, filterValue, property) => {
+const applyListFilter = (
+	data: Excursion[],
+	filterValue: unknown,
+	property: keyof Pick<Excursion, "area" | "difficulty" | "time">
+): Excursion[] => {
+	// Si el valor del filtro no es una cadena o un array, no se puede procesar.
+	if (typeof filterValue !== "string" && !Array.isArray(filterValue)) {
+		return data;
+	}
+
 	const sourceItems = Array.isArray(filterValue)
 		? filterValue
-		: filterValue.toString().split(",");
+		: filterValue.split(",");
 
 	// Limpia los valores: quita espacios, convierte a minúsculas y descarta los vacíos.
 	const filterItems = sourceItems
 		.map((item) => item.toString().trim().toLowerCase())
-		.filter((item) => item); // .filter(item => item) elimina strings vacíos
+		.filter(Boolean); // .filter(Boolean) elimina strings vacíos
 
 	// Si no hay items de filtro válidos después de limpiar, no se aplica ningún filtro.
 	// Este bloque ahora es alcanzable si el usuario envía filtros vacíos (ej: ?area=,).
@@ -32,7 +42,7 @@ const applyListFilter = (data, filterValue, property) => {
 };
 
 /** GET */
-router.get("/", function (req, res) {
+router.get("/", (req: Request, res: Response) => {
 	/* req.query: En Express.js, req representa la petición HTTP. Es una propiedad de este objeto que tiene cualquier
      parámetro enviado en la URL. Por ejemplo, si alguien accede a /excursions?q=hiking&difficulty=easy, entonces
      req.query será { q:'hiking', difficulty:'easy' }. Se utiliza la letra 'q' porque viene de query, normalmente los desarrolladores 
@@ -42,19 +52,24 @@ router.get("/", function (req, res) {
 	 * string con el que trabajar
 	 */
 	// Se extrae el parámetro de búsqueda 'q' y el resto de filtros en un objeto 'filters'
-	const { q: search, ...filters } = req.query;
+	const { q, ...filters } = req.query;
+	const search = q as string | undefined;
 	let filteredExcursions = [...excursions];
 
 	// Si el usuario ha buscado algo en la barra de búsqueda
 	if (search) {
-		const searchLower = search.toString().toLowerCase();
+		const searchLower = search.toLowerCase();
 		filteredExcursions = filteredExcursions.filter((excursion) =>
 			excursion.name.toLowerCase().includes(searchLower)
 		);
 	}
 
 	// Lista de propiedades por las que se puede filtrar
-	const filterableProperties = ["area", "difficulty", "time"];
+	const filterableProperties: ("area" | "difficulty" | "time")[] = [
+		"area",
+		"difficulty",
+		"time",
+	];
 	// Se aplican los filtros de forma encadenada usando reduce para un código más funcional y conciso.
 	filteredExcursions = filterableProperties.reduce(
 		(currentExcursions, property) => {
@@ -69,9 +84,9 @@ router.get("/", function (req, res) {
 });
 
 /** GET para obtener una excursión por su ID */
-router.get("/:id", function (req, res) {
+router.get("/:id", (req: Request, res: Response) => {
 	const { id } = req.params;
-	const excursion = excursions.find((e) => e.id === Number(id));
+	const excursion = excursions.find((e) => e.id === id);
 	if (excursion) {
 		res.status(200).json(excursion);
 	} else {
@@ -79,4 +94,4 @@ router.get("/:id", function (req, res) {
 	}
 });
 
-module.exports = router;
+export default router;

@@ -1,17 +1,22 @@
-const express = require("express");
+import express, { Request, Response, NextFunction } from "express";
+import bcrypt from "bcryptjs";
+import users, { User } from "../data/usersData.js";
+import { v4 as uuidv4 } from "uuid";
+import rateLimit from "express-rate-limit";
+import jwt from "jsonwebtoken";
+import excursions from "../data/excursionsData.js";
+import { authenticateToken } from "../authMiddleware.js";
+
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const users = require("../data/usersData");
-const { v4: uuidv4 } = require("uuid");
-const rateLimit = require("express-rate-limit");
-const jwt = require("jsonwebtoken");
-const excursions = require("../data/excursionsData");
-const { authenticateToken } = require("../authMiddleware");
 
 // Middleware que dice si un usuario puede modificar info o no
-const authorizeUserModification = (req, res, next) => {
-	// Obtenemos el correo asociado al token
-	const emailFromToken = req.tokenEmail; // Lo da el middleware authenticateToken
+const authorizeUserModification = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	// Obtenemos el correo asociado al token, añadido por el middleware authenticateToken
+	const emailFromToken = req.userMail;
 	// Obtenemos el correo del usuario a modificar desde la URL
 	const targetMail = req.params["mail"];
 
@@ -37,7 +42,7 @@ const authorizeUserModification = (req, res, next) => {
 };
 
 /** GET para obtener el correo del usuario */
-router.get("/", function (req, res, next) {
+router.get("/", (req: Request, res: Response) => {
 	// Se excluye la contraseña de la respuesta por seguridad.
 	const response = users.map(({ password, ...user }) => user);
 	res.status(200).json(response);
@@ -64,7 +69,7 @@ const apiLimiter = rateLimit({
 });
 
 /** POST para crear un nuevo usuario */
-router.post("/", createUserLimiter, async function (req, res) {
+router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 	// 1. Validación de los datos de entrada
 	const { name, surname, mail, password: plainPassword, phone } = req.body;
 
@@ -111,7 +116,7 @@ router.post("/", createUserLimiter, async function (req, res) {
 		// Se hashea la contraseña antes de guardarla para no almacenarla en texto plano.
 		const hashedPassword = await bcrypt.hash(plainPassword, 10);
 		// Se crea el nuevo objeto de usuario explícitamente para evitar vulnerabilidades de asignación masiva.
-		const user = {
+		const user: User = {
 			id: uuidv4(), // Se genera un ID único y seguro
 			name: name.trim(),
 			surname: surname.trim(),
@@ -125,6 +130,12 @@ router.post("/", createUserLimiter, async function (req, res) {
 		// Generamos un token JWT para el nuevo usuario
 		const payload = { mail: user.mail };
 		const secretKey = process.env.JWT_SECRET;
+		if (!secretKey) {
+			console.error("JWT_SECRET no está definida en las variables de entorno.");
+			return res
+				.status(500)
+				.json({ error: "Error de configuración del servidor." });
+		}
 		const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
 
 		// Se crea una copia del objeto de usuario para la respuesta, excluyendo la contraseña hasheada.
@@ -145,7 +156,7 @@ router.put(
 	apiLimiter,
 	authenticateToken,
 	authorizeUserModification,
-	function (req, res, next) {
+	(req: Request, res: Response) => {
 		console.log(`PUT /users/${req.params["mail"]} - Request received.`); // Log start
 		try {
 			// Obtenemos el correo del usuario a modificar
@@ -208,7 +219,7 @@ router.get(
 	apiLimiter,
 	authenticateToken,
 	authorizeUserModification,
-	function (req, res, next) {
+	(req: Request, res: Response) => {
 		// El correo del usuario ya ha sido validado por los middlewares
 		const userMail = req.params.mail;
 		// Se busca al usuario por su correo electrónico
@@ -242,7 +253,7 @@ router.post(
 	apiLimiter,
 	authenticateToken,
 	authorizeUserModification,
-	function (req, res, next) {
+	(req: Request, res: Response) => {
 		console.log(
 			`POST /users/${req.params["mail"]}/excursions - Request received.`
 		);
@@ -294,4 +305,4 @@ router.post(
 	}
 );
 
-module.exports = router;
+export default router;
