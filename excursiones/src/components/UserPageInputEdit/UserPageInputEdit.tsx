@@ -8,19 +8,19 @@ import styles from "./UserPageInputEdit.module.css";
  */
 interface UserPageInputEditProps {
 	/** ID único para el campo de formulario. */
-	id: string;
+	readonly id: string;
 	/** El valor actual del campo. */
-	value: string;
+	readonly value: string;
 	/** Función para manejar el cambio de valor. */
-	onInputChange: (newValue: string) => void;
+	readonly onInputChange: (newValue: string) => void;
 	/** Indica si el campo está en modo de edición. */
-	isEditing: boolean;
+	readonly isEditing: boolean;
 	/** Función para validar el valor del campo. Retorna `true` si es válido, o un `string` con el mensaje de error. */
-	validationFunction: (value: string) => boolean | string;
+	readonly validationFunction: (value: string) => boolean | string;
 	/** Indica si se debe mostrar un mensaje de error. */
-	message: boolean;
+	readonly message: boolean;
 	/** Mensaje de error específico. Si no se proporciona, se usa uno genérico. */
-	errorMessage?: string;
+	readonly errorMessage?: string;
 }
 
 const UserPageInputEditComponent = (
