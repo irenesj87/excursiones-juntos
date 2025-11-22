@@ -23,10 +23,10 @@ interface UserPageInputEditProps {
 	errorMessage?: string;
 }
 
-function UserPageInputEditComponent(
+const UserPageInputEditComponent = (
 	props: UserPageInputEditProps,
 	ref: React.Ref<HTMLInputElement>
-): JSX.Element {
+): JSX.Element => {
 	const {
 		id,
 		value,
@@ -100,12 +100,13 @@ function UserPageInputEditComponent(
 				>
 					{typeof validationError === "string"
 						? validationError
-						: errorMessage || "Recuerda, no puedes dejar un campo vacío o en un formato incorrecto."}
+						: errorMessage ||
+						"Recuerda, no puedes dejar un campo vacío o en un formato incorrecto."}
 				</Form.Control.Feedback>
 			)}
 		</>
 	);
-}
+};
 
 const UserPageInputEdit = forwardRef<HTMLInputElement, UserPageInputEditProps>(
 	UserPageInputEditComponent
