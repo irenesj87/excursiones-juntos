@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import cookieParser from "cookie-parser";
-import logger from "morgan";
+import morgan from "morgan";
 import cors, { CorsOptions } from "cors";
 
 import indexRouter from "./routes/index.js";
@@ -39,9 +39,9 @@ app.disable("x-powered-by");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set("view engine", "pug");
 
-app.use(logger("dev"));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -56,7 +56,7 @@ const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS
 
 const corsOptions: CorsOptions = {
 	origin: (origin, callback: (err: Error | null, allow?: boolean) => void) => {
-		// Permitir peticiones sin origen (como apps móviles o Postman)
+		// Permitir peticiones sin origen (como Postman)
 		// o si el origen está en la lista blanca.
 		if (!origin) {
 			return callback(null, true);
@@ -64,7 +64,12 @@ const corsOptions: CorsOptions = {
 		if (allowedOrigins.includes(origin)) {
 			callback(null, true);
 		} else {
-			callback(new Error("Petición no permitida por la política de CORS"));
+			// Usamos createError para generar un error HTTP estándar con código 403 (Forbidden).
+			const error = createError(
+				403,
+				"Petición no permitida por la política de CORS"
+			);
+			callback(error);
 		}
 	},
 };
@@ -85,14 +90,20 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+	// Comprobamos si el error tiene un código de estado, si no, es un error interno del servidor.
+	const statusCode = (err as any).status || 500;
 
-	// render the error page
-	res.status(err.status || 500);
-	res.render("error");
+	// En desarrollo, queremos ver el error completo. En producción, no.
+	const errorResponse = {
+		message: err.message,
+		// Solo incluimos el stack trace en desarrollo
+		...(req.app.get("env") === "development" ? { error: err } : {}),
+	};
+
+	// En lugar de renderizar una vista, devolvemos un JSON.
+	// Esto es más seguro y estándar para una API.
+	res.status(statusCode).json(errorResponse);
 });
 
 export default app;

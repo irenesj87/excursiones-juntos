@@ -1,24 +1,19 @@
 {
-    "compilerOptions": {
-        /* Opciones del compilador */
-        "target": "ES2022", // Compila a una versión moderna de JavaScript
-        "module": "NodeNext", // Usa el sistema de módulos moderno de Node.js
-        "moduleResolution": "NodeNext", // Cómo resuelve los módulos
-        "esModuleInterop": true, // Permite la interoperabilidad entre CommonJS y ES Modules
-        "strict": true, // Habilita todas las comprobaciones estrictas de tipos
-        "skipLibCheck": true, // Omite la comprobación de tipos en los archivos de declaración (.d.ts)
-        "forceConsistentCasingInFileNames": true, // Asegura que las mayúsculas/minúsculas de los nombres de archivo sean consistentes
-        "outDir": "./dist" // Directorio de salida (aunque ts-node compila en memoria)
-    },
-    "ts-node": {
-        // Opciones específicas para ts-node
-        "esm": true, // ¡Importante! Habilita el soporte para Módulos ES
-        "experimentalSpecifierResolution": "node"
-    },
-    "include": [
-        "**/*.ts" // Incluye todos los archivos .ts del proyecto
-    ],
-    "exclude": [
-        "node_modules" // Excluye la carpeta node_modules
-    ]
+	"compilerOptions": {
+		/* Opciones del compilador */
+		"target": "ES2022", // Compila a una versión moderna de JavaScript
+		"module": "NodeNext", // Usa el sistema de módulos moderno de Node.js
+		"moduleResolution": "NodeNext", // Cómo resuelve los módulos
+		"esModuleInterop": true, // Permite la interoperabilidad entre CommonJS y ES Modules
+		"strict": true, // Habilita todas las comprobaciones estrictas de tipos
+		"skipLibCheck": true, // Omite la comprobación de tipos en los archivos de declaración (.d.ts)
+		"forceConsistentCasingInFileNames": true, // Asegura que las mayúsculas/minúsculas de los nombres de archivo sean consistentes
+		"outDir": "./dist" // Directorio de salida (aunque ts-node compila en memoria)
+	},
+	"include": [
+		"**/*.ts" // Incluye todos los archivos .ts del proyecto
+	],
+	"exclude": [
+		"node_modules" // Excluye la carpeta node_modules
+	]
 }
