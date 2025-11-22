@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import {
 	validateMail,
 	validateName as isNotEmpty,
-} from "../../validation/validations.js";
+} from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
 import ValidatedFormGroup from "../ValidatedFormGroup";
 import FormErrorAlert from "../FormErrorAlert";
