@@ -6,14 +6,15 @@ import NavigationBar from "../NavigationBar";
 import ExcursionsPage from "../ExcursionsPage";
 import Footer from "../Footer";
 import ProtectedRoute from "../ProtectedRoute";
+import LazyRouteWrapper from "../LazyRouteWrapper";
 import RegisterPageSkeleton from "../RegisterPage/RegisterPageSkeleton";
 import LoginPageSkeleton from "../LoginPage/LoginPageSkeleton";
 import UserPageSkeleton from "../UserPage/UserPageSkeleton";
-import ErrorMessageAlert from "../ErrorMessageAlert/ErrorMessageAlert";
+import ErrorMessageAlert from "../ErrorMessageAlert";
 import { useAuth } from "../../hooks/useAuth";
 import { useExcursions } from "../../hooks/useExcursions";
 import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
-import LazyRouteWrapper from "../../utils/LazyRouteWrapper";
+
 import styles from "./Layout.module.css";
 
 /**
@@ -86,6 +87,7 @@ const Layout = () => {
 										<LazyRouteWrapper
 											PageComponent={RegisterPage}
 											SkeletonComponent={RegisterPageSkeleton}
+											pageProps={{}}
 										/>
 									}
 								/>
@@ -95,6 +97,7 @@ const Layout = () => {
 										<LazyRouteWrapper
 											PageComponent={LoginPage}
 											SkeletonComponent={LoginPageSkeleton}
+											pageProps={{}}
 										/>
 									}
 								/>
@@ -120,6 +123,7 @@ const Layout = () => {
 											<LazyRouteWrapper
 												PageComponent={UserPage}
 												SkeletonComponent={UserPageSkeleton}
+												pageProps={{}}
 											/>
 										</ProtectedRoute>
 									}
