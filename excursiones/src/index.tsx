@@ -10,7 +10,19 @@ import Store from "./store/store";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+// Buscamos el elemento raíz en el DOM.
+const rootElement = document.getElementById("root");
+
+// Nos aseguramos de que el elemento raíz exista antes de intentar renderizar la aplicación.
+// Esto previene errores en tiempo de ejecución si el div#root no se encuentra en el HTML.
+if (!rootElement) {
+	throw new Error(
+		"No se pudo encontrar el elemento raíz para montar la aplicación."
+	);
+}
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
 	<React.StrictMode>
 		<Provider store={Store}>
 			<BrowserRouter>
