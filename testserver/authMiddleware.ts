@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import createError from "http-errors";
 import tokenBlocklist from "./data/tokenBlocklist.js";
-import type { CustomJwtPayload } from "../types/jwt.js";
+import type { CustomJwtPayload } from "./types/jwt";
 
 /**
  * Middleware para verificar un token JWT presente en la cabecera de autorización.

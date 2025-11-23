@@ -64,12 +64,8 @@ const corsOptions: CorsOptions = {
 		if (allowedOrigins.includes(origin)) {
 			callback(null, true);
 		} else {
-			// Usamos createError para generar un error HTTP estándar con código 403 (Forbidden).
-			const error = createError(
-				403,
-				"Petición no permitida por la política de CORS"
-			);
-			callback(error);
+			// Para rechazar un origen, pasamos false. La librería 'cors' se encargará del error.
+			callback(null, false);
 		}
 	},
 };
@@ -86,30 +82,25 @@ app.use("/logout", logoutRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-	next(createError(404));
+	next(createError(404, "La ruta solicitada no ha sido encontrada."));
 });
 
 // error handler
-app.use(
-	(
-		err: createError.HttpError,
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) => {
-		// Determinamos el código de estado del error. Si no tiene uno, es un error interno (500).
-		const statusCode = err.status || 500;
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+	// Determinamos el código de estado del error. Si no tiene uno, es un error interno (500).
+	// Hacemos una aserción de tipo para poder acceder a 'status' de forma segura.
+	const statusCode =
+		"status" in err && typeof err.status === "number" ? err.status : 500;
 
-		// Creamos el objeto de respuesta del error.
-		const errorResponse = {
-			message: err.message,
-			// En desarrollo, añadimos el stack del error para facilitar la depuración.
-			...(req.app.get("env") === "development" ? { stack: err.stack } : {}),
-		};
+	// Creamos el objeto de respuesta del error.
+	const errorResponse = {
+		message: err.message,
+		// En desarrollo, añadimos el stack del error para facilitar la depuración.
+		...(req.app.get("env") === "development" ? { stack: err.stack } : {}),
+	};
 
-		// Enviamos la respuesta en formato JSON con el código de estado correcto.
-		res.status(statusCode).json(errorResponse);
-	}
-);
+	// Enviamos la respuesta en formato JSON con el código de estado correcto.
+	res.status(statusCode).json(errorResponse);
+});
 
 export default app;
