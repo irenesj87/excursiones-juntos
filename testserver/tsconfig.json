@@ -24,7 +24,7 @@
 		"node_modules" // Excluye la carpeta node_modules
 	],
 	"ts-node": {
-		"logError": true, // Habilita el soporte para ES Modules en ts-node
+		"logError": true, // Registra los errores de TypeScript en stderr.
 		"pretty": true
 	}
 }
