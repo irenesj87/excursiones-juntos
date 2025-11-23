@@ -7,14 +7,24 @@
 		"esModuleInterop": true, // Permite la interoperabilidad entre CommonJS y ES Modules
 		"strict": true, // Habilita todas las comprobaciones estrictas de tipos
 		"skipLibCheck": true, // Omite la comprobación de tipos en los archivos de declaración (.d.ts)
-		"forceConsistentCasingInFileNames": true, // Asegura que las mayúsculas/minúsculas de los nombres de archivo sean consistentes
-		"outDir": "./dist" // Directorio de salida (aunque ts-node compila en memoria)
+		"forceConsistentCasingInFileNames": true, // Asegura que las mayúsculas/minúsculas de los nombres de archivo sean consistentes,
+		"outDir": "./dist", // Directorio de salida (aunque ts-node compila en memoria)
+		/* Opciones de Resolución de Tipos */
+		"typeRoots": ["./node_modules/@types", "./types"] // Añade nuestro directorio de tipos personalizados.
 	},
+	"files": [
+		// Fuerza la inclusión de nuestra declaración de tipos global para Express.
+		"./types/express.d.ts"
+	],
 	"include": [
 		"**/*.ts", // Incluye todos los archivos .ts del proyecto
 		"**/*.d.ts" // ¡Importante! Incluye los archivos de declaración de tipos globales.
 	],
 	"exclude": [
 		"node_modules" // Excluye la carpeta node_modules
-	]
+	],
+	"ts-node": {
+		"logError": true, // Habilita el soporte para ES Modules en ts-node
+		"pretty": true
+	}
 }
