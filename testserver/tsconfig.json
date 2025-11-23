@@ -25,6 +25,7 @@
 	],
 	"ts-node": {
 		"logError": true, // Registra los errores de TypeScript en stderr.
-		"pretty": true
+		"pretty": true,
+		"esm": true
 	}
 }
