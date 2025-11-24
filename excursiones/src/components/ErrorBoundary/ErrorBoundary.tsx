@@ -1,10 +1,10 @@
 import React, { ErrorInfo, ReactNode } from "react";
 
 /**
- * `ErrorBoundary` es un componente de React que captura errores de JavaScript en cualquier parte de su árbol de componentes
+ * @component ErrorBoundary
+ * @description Es un componente de React que captura errores de JavaScript en cualquier parte de su árbol de componentes
  * hijo, los registra y muestra una UI de respaldo en lugar del árbol de componentes que falló.
  * Esto previene que toda la aplicación se rompa y mejora la experiencia del usuario.
- * También permite resetear el estado de error mediante una clave (`resetKey`), útil para la navegación.
  */
 interface ErrorBoundaryProps {
 	/** Los componentes hijos que el ErrorBoundary protegerá. */
@@ -23,6 +23,9 @@ interface ErrorBoundaryState {
 	hasError: boolean;
 }
 
+/**
+ * Componente de clase que implementa el patrón de Error Boundary en React.
+ */
 class ErrorBoundary extends React.Component<
 	ErrorBoundaryProps,
 	ErrorBoundaryState
@@ -36,7 +39,6 @@ class ErrorBoundary extends React.Component<
 	 * Actualiza el estado cuando se captura un error, para mostrar la UI de respaldo.
 	 */
 	static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
-		// Actualiza el estado para que el siguiente renderizado muestre la UI de respaldo.
 		return { hasError: true };
 	}
 
@@ -44,17 +46,20 @@ class ErrorBoundary extends React.Component<
 	 * Captura los errores en los componentes hijo y loguea el error.
 	 */
 	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-		// La mejor práctica es ser explícito con el entorno de producción.
+		/**
+		 * En producción no se exponen detalles en la consola del cliente.
+		 * Enviar el error a un servicio de logging externo (ej: Sentry, LogRocket, etc.).
+		 */
 		if (process.env.NODE_ENV === "production") {
-			// EN PRODUCCIÓN: No exponer detalles en la consola del cliente.
-			// Enviar el error a un servicio de logging externo (ej: Sentry, LogRocket, etc.).
 			console.error("Se ha producido un error en la aplicación."); // Mensaje genérico
 		} else {
-			// En cualquier otro entorno (development, test, etc.), es útil ver el error completo.
-			// Para evitar la exposición accidental de datos sensibles en el error, solo mostramos
-			// información que es segura para la depuración.
-			// NO registramos `error.stack` directamente, ya que puede contener datos sensibles
-			// que causaron el error. En su lugar, registramos el mensaje y el `componentStack`.
+			/**
+			 * En cualquier otro entorno (development, test, etc.), es útil ver el error completo.
+			 * Para evitar la exposición accidental de datos sensibles en el error, solo se muestra la
+			 * información que es segura para la depuración.
+			 * NO se registra `error.stack`, ya que puede contener datos sensibles
+			 * que causaron el error. En su lugar, se registra el mensaje y el `componentStack`.
+			 */
 			console.error("ErrorBoundary capturó un error:", {
 				message: error.message,
 				componentStack: errorInfo.componentStack,
@@ -66,9 +71,11 @@ class ErrorBoundary extends React.Component<
 	 * Detecta cambios en las props para resetear el estado de error si es necesario.
 	 */
 	componentDidUpdate(prevProps: ErrorBoundaryProps) {
-		// Si la clave de reseteo ha cambiado y el componente tiene un error,
-		// reseteamos el estado para que intente renderizar los hijos de nuevo.
-		// Esto es útil, por ejemplo, al cambiar de ruta en la aplicación.
+		/**
+		 * Si la clave de reseteo ha cambiado y el componente tiene un error,
+		 * se resetea el estado para que intente renderizar los hijos de nuevo.
+		 * Esto es útil al cambiar de ruta en la aplicación.
+		 */
 		if (this.state.hasError && prevProps.resetKey !== this.props.resetKey) {
 			this.setState({ hasError: false });
 		}
@@ -76,8 +83,14 @@ class ErrorBoundary extends React.Component<
 
 	render() {
 		return this.state.hasError
-			? this.props.fallback // Si hay un error, muestra la UI de respaldo.
-			: this.props.children; // Si no, renderiza los componentes hijos.
+			/**
+			 * Si se ha capturado un error, renderiza la UI de respaldo proporcionada.
+			 */
+			? this.props.fallback
+			/**
+			 * Si no hay error, renderiza los componentes hijos normalmente.
+			 */
+			: this.props.children;
 	}
 }
 
