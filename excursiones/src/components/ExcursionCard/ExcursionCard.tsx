@@ -26,7 +26,7 @@ type DifficultyLevel = "Baja" | "Media" | "Alta";
  * Genera las clases CSS para la etiqueta de dificultad.
  */
 const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
-	/**
+	/*
 	 * Convierte el nivel de dificultad a minúsculas y lo usa para buscar la clase CSS correspondiente en classMap.
 	 */
 	const lowerCaseDifficulty =
