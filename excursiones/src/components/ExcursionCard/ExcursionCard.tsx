@@ -37,7 +37,7 @@ const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
 		alta: styles.difficultyHigh,
 	};
 
-	/**
+	/*
 	 * Combina una clase base (difficultyBadge) con la clase específica del nivel de dificultad.
 	 */
 	return cn(styles.difficultyBadge, classMap[lowerCaseDifficulty]);
@@ -124,9 +124,9 @@ function ExcursionCard({
 
 	// Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla.
 	const [announcement, setAnnouncement] = useState("");
-	/** Almacena el valor anterior de `isJoined` para evitar anuncios repetidos. */
+	// Almacena el valor anterior de `isJoined` para evitar anuncios repetidos.
 	const prevIsJoined = usePrevious(isJoined);
-	/** Genera un ID único y seguro para el título, que se usará para la accesibilidad. */
+	// Genera un ID único y seguro para el título, que se usará para la accesibilidad.
 	const titleId = useId();
 
 	/** Manejador para el evento de unirse a la excursión. */
@@ -147,7 +147,7 @@ function ExcursionCard({
 	 */
 	const isInitialMount = React.useRef(true);
 	useEffect(() => {
-		/**
+		/*
 		 * Si es la primera vez que se monta, detiene la ejecución del efecto inmediatamente.
 		 * Esto evita anuncios innecesarios al cargar el componente.
 		 */
@@ -158,7 +158,7 @@ function ExcursionCard({
 		if (joinError) {
 			setAnnouncement(`Error al apuntarse: ${getSafeErrorMessage(joinError)}.`);
 		} else if (isJoined && !prevIsJoined) {
-			/** Solo anuncia el éxito cuando el estado cambia de no apuntado a apuntado. */
+			// Solo anuncia el éxito cuando el estado cambia de no apuntado a apuntado.
 			setAnnouncement(`Te has apuntado correctamente a la excursión ${name}.`);
 		}
 	}, [joinError, isJoined, prevIsJoined, name]);
@@ -182,7 +182,6 @@ function ExcursionCard({
 				<div>
 					{/* Título de la excursión */}
 					<Card.Title
-						/* `legend` proporciona un título semántico para su <fieldset> padre. */
 						as="legend"
 						id={titleId}
 						className={`${styles.excursionTitle} mb-3`}
