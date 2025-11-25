@@ -112,7 +112,7 @@ function ExcursionCard({
 	isJoined,
 	onJoin,
 }: ExcursionCardProps) {
-	/**
+	/*
 	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar el componente y
 	 * hacerlo puramente presentacional.
 	 * Si onJoin no se proporciona, se pasa una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
