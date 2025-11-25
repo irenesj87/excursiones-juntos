@@ -122,7 +122,7 @@ function ExcursionCard({
 		onJoin ?? (() => Promise.resolve())
 	);
 
-	/** Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla. */
+	// Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla.
 	const [announcement, setAnnouncement] = useState("");
 	/** Almacena el valor anterior de `isJoined` para evitar anuncios repetidos. */
 	const prevIsJoined = usePrevious(isJoined);
