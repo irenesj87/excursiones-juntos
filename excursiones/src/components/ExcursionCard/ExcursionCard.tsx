@@ -23,9 +23,12 @@ const usePrevious = <T,>(value: T): T | undefined => {
 type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 /**
- * Determina las clases CSS para el badge de dificultad.
+ * Genera las clases CSS para la etiqueta de dificultad.
  */
 const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
+	/**
+	 * Convierte el nivel de dificultad a minúsculas y lo usa para buscar la clase CSS correspondiente en classMap.
+	 */
 	const lowerCaseDifficulty =
 		difficultyLevel.toLowerCase() as Lowercase<DifficultyLevel>;
 	const classMap = {
@@ -34,6 +37,9 @@ const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
 		alta: styles.difficultyHigh,
 	};
 
+	/**
+	 * Combina una clase base (difficultyBadge) con la clase específica del nivel de dificultad.
+	 */
 	return cn(styles.difficultyBadge, classMap[lowerCaseDifficulty]);
 };
 
@@ -76,9 +82,9 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 interface ExcursionCardProps {
 	/** Identificador único de la excursión. */
 	readonly id: string | number;
-	/** Título o nombre descriptivo de la excursión. */
+	/** Título de la excursión. */
 	readonly name: string;
-	/** Ubicación geográfica o área donde se lleva a cabo la excursión. */
+	/** Ubicación geográfica donde se lleva a cabo la excursión. */
 	readonly area: string;
 	/** Nivel de dificultad de la excursión. */
 	readonly difficulty: DifficultyLevel;
@@ -93,7 +99,8 @@ interface ExcursionCardProps {
 }
 
 /**
- * Componente para la tarjeta de excursión.
+ * Componente que se encarga de renderizar un tarjeta que muestra la información de una excursión y permite a los usuarios
+ * apuntarse a ella.
  */
 function ExcursionCard({
 	id,
@@ -105,41 +112,45 @@ function ExcursionCard({
 	isJoined,
 	onJoin,
 }: ExcursionCardProps) {
-	// La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar el componente y
-	// hacerlo puramente presentacional.
-	// Si onJoin no se proporciona, pasamos una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
-	// de TypeScript.
+	/**
+	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar el componente y
+	 * hacerlo puramente presentacional.
+	 * Si onJoin no se proporciona, se pasa una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
+	 * de TypeScript.
+	 */
 	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
 		onJoin ?? (() => Promise.resolve())
 	);
 
-	// Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla.
+	/** Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla. */
 	const [announcement, setAnnouncement] = useState("");
-
-	// Almacena el valor anterior de `isJoined` para evitar anuncios repetidos.
+	/** Almacena el valor anterior de `isJoined` para evitar anuncios repetidos. */
 	const prevIsJoined = usePrevious(isJoined);
-
-	// Genera un ID único y seguro para el título, que se usará para la accesibilidad.
+	/** Genera un ID único y seguro para el título, que se usará para la accesibilidad. */
 	const titleId = useId();
 
-	// Manejador para el evento de unirse a la excursión.
+	/** Manejador para el evento de unirse a la excursión. */
 	const handleOnJoin = () => {
 		handleJoin(id);
 	};
 
-	// Efecto para anunciar cambios de estado a los lectores de pantalla.
+	/** Efecto para anunciar cambios de estado a los lectores de pantalla. */
 	useEffect(() => {
 		if (isJoining) {
 			setAnnouncement(`Apuntando a la excursión ${name}.`);
 		}
 	}, [isJoining, name]);
 
-	// Efecto para anunciar el resultado (éxito o error) de la acción.
-	// Usamos una referencia para saber si es la primera vez que el componente se monta.
+	/**
+	 * Efecto para anunciar el resultado (éxito o error) de la acción.
+	 * Usamos una referencia para saber si es la primera vez que el componente se monta.
+	 */
 	const isInitialMount = React.useRef(true);
 	useEffect(() => {
-		// Si es la primera vez que se monta, detiene la ejecución del efecto inmediatamente.
-		// Esto evita anuncios innecesarios al cargar el componente.
+		/**
+		 * Si es la primera vez que se monta, detiene la ejecución del efecto inmediatamente.
+		 * Esto evita anuncios innecesarios al cargar el componente.
+		 */
 		if (isInitialMount.current) {
 			isInitialMount.current = false;
 			return;
@@ -147,7 +158,7 @@ function ExcursionCard({
 		if (joinError) {
 			setAnnouncement(`Error al apuntarse: ${getSafeErrorMessage(joinError)}.`);
 		} else if (isJoined && !prevIsJoined) {
-			// Solo anuncia el éxito cuando el estado cambia de no apuntado a apuntado.
+			/** Solo anuncia el éxito cuando el estado cambia de no apuntado a apuntado. */
 			setAnnouncement(`Te has apuntado correctamente a la excursión ${name}.`);
 		}
 	}, [joinError, isJoined, prevIsJoined, name]);
