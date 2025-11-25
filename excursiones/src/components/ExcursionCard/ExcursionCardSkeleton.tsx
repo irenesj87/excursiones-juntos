@@ -20,7 +20,6 @@ export const TEST_IDS = {
 const SKELETON_SIZES = {
 	TITLE_HEIGHT: 21, // Altura del esqueleto del título
 	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
-	ICON_SIZE: 20, // Tamaño del esqueleto del icono
 	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
 	DIFFICULTY_TEXT_WIDTH: 76, // Ancho del esqueleto del texto de dificultad
 	TIME_TEXT_WIDTH: 58, // Ancho del esqueleto del texto de tiempo
@@ -29,8 +28,6 @@ const SKELETON_SIZES = {
 };
 
 interface DetailItemSkeletonProps {
-	/** Si se debe mostrar el esqueleto de un icono. */
-	withIcon?: boolean;
 	/** El ancho del esqueleto de texto. */
 	width: number | string;
 }
@@ -38,18 +35,8 @@ interface DetailItemSkeletonProps {
 /**
  * Componente auxiliar para renderizar el esqueleto de un ítem de detalle.
  */
-const DetailItemSkeleton = ({
-	withIcon = false,
-	width,
-}: DetailItemSkeletonProps) => (
+const DetailItemSkeleton = ({ width }: DetailItemSkeletonProps) => (
 	<div className={detailItemStyles.detailItem}>
-		{withIcon && (
-			<Skeleton
-				circle
-				width={SKELETON_SIZES.ICON_SIZE}
-				height={SKELETON_SIZES.ICON_SIZE}
-			/>
-		)}
 		<Skeleton width={width} />
 	</div>
 );
@@ -84,17 +71,11 @@ function ExcursionCardSkeleton({
 						/>
 						{/* Detalles (Zona, Dificultad, Tiempo) */}
 						<div className={cardStyles.excursionDetails}>
-							<DetailItemSkeleton
-								withIcon
-								width={SKELETON_SIZES.AREA_TEXT_WIDTH}
-							/>
+							<DetailItemSkeleton width={SKELETON_SIZES.AREA_TEXT_WIDTH} />
 							<DetailItemSkeleton
 								width={SKELETON_SIZES.DIFFICULTY_TEXT_WIDTH}
 							/>
-							<DetailItemSkeleton
-								withIcon
-								width={SKELETON_SIZES.TIME_TEXT_WIDTH}
-							/>
+							<DetailItemSkeleton width={SKELETON_SIZES.TIME_TEXT_WIDTH} />
 						</div>
 					</div>
 					{/* Botón de "Apuntarse" */}
