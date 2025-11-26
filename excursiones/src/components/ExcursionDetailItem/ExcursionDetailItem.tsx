@@ -1,8 +1,8 @@
 import React from "react";
 import { OverlayTrigger, Tooltip, TooltipProps } from "react-bootstrap";
-import type { DifficultyLevel } from "../ExcursionCard/ExcursionCard";
 import cn from "classnames";
 import styles from "./ExcursionDetailItem.module.css";
+import type { DifficultyLevel } from "../../types";
 
 /**
  * Props para el componente ExcursionDetailItem.

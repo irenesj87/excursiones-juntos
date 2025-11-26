@@ -1,6 +1,7 @@
 import React, { useId, useState, useEffect } from "react";
 import { Card, Alert } from "react-bootstrap";
 import ExcursionDetailItem from "../ExcursionDetailItem";
+import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import cn from "classnames";
@@ -18,9 +19,6 @@ const usePrevious = <T,>(value: T): T | undefined => {
 	});
 	return ref.current;
 };
-
-/** Define los posibles valores para la dificultad de una excursión. */
-export type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 interface JoinButtonProps {
 	/** Indica si el usuario se ha apuntado a la excursión. */
