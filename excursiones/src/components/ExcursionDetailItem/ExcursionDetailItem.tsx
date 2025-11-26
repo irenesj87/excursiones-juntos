@@ -14,6 +14,10 @@ interface ExcursionDetailItemProps {
 	readonly label?: string;
 }
 
+/**
+ * Define los nombres de las variantes de estilo para la dificultad.
+ * Se utiliza internamente para mapear a clases CSS.
+ */
 type DifficultyVariant =
 	| "difficulty-low"
 	| "difficulty-medium"
@@ -27,26 +31,31 @@ const variantClassMap: Record<DifficultyVariant, string> = {
 };
 
 /**
+ * Convierte un nivel de dificultad (ej. "Baja") en su variante de estilo correspondiente (ej. "difficulty-low").
+ * @param difficultyLevel El nivel de dificultad textual ("Baja", "Media", "Alta").
+ * @returns La variante de estilo como string.
+ */
+const getDifficultyVariant = (
+	difficultyLevel: DifficultyLevel
+): DifficultyVariant => {
+	const lowerCaseDifficulty =
+		difficultyLevel.toLowerCase() as Lowercase<DifficultyLevel>;
+	const variantMap: Record<Lowercase<DifficultyLevel>, DifficultyVariant> = {
+		baja: "difficulty-low",
+		media: "difficulty-medium",
+		alta: "difficulty-high",
+	};
+	return variantMap[lowerCaseDifficulty];
+};
+
+/**
  * Componente para mostrar un detalle específico de una excursión (ej. dificultad, tiempo).
  */
 const ExcursionDetailItem = ({
 	text,
 	label,
 }: ExcursionDetailItemProps): JSX.Element | null => {
-	const getDifficultyVariant = (
-		difficultyLevel: DifficultyLevel
-	): DifficultyVariant => {
-		const lowerCaseDifficulty =
-			difficultyLevel.toLowerCase() as Lowercase<DifficultyLevel>;
-		const variantMap: Record<Lowercase<DifficultyLevel>, DifficultyVariant> = {
-			baja: "difficulty-low",
-			media: "difficulty-medium",
-			alta: "difficulty-high",
-		};
-		return variantMap[lowerCaseDifficulty];
-	};
-	// Determina la variante de estilo a aplicar.
-	// Si la etiqueta es "Dificultad", calcula la variante basada en el texto.
+	// Determina la variante de estilo a aplicar. Si la etiqueta es "Dificultad", calcula la variante basada en el texto.
 	const variant =
 		label === "Dificultad" && text
 			? getDifficultyVariant(text as DifficultyLevel)
