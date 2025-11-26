@@ -36,9 +36,9 @@ interface DetailItemSkeletonProps {
  * Componente auxiliar para renderizar el esqueleto de un ítem de detalle.
  */
 const DetailItemSkeleton = ({ width }: DetailItemSkeletonProps) => (
-	<div className={detailItemStyles.detailItem}>
+	<button type="button" className={detailItemStyles.detailItem} disabled>
 		<Skeleton width={width} />
-	</div>
+	</button>
 );
 
 interface ExcursionCardSkeletonProps {
