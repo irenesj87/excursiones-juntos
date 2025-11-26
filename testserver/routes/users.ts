@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";
 import excursions from "../data/excursionsData.js";
+import sanitizeHtml from "sanitize-html";
 import { authenticateToken } from "../authMiddleware.js";
 
 const router = express.Router();
@@ -68,6 +69,12 @@ const apiLimiter = rateLimit({
 		"Demasiadas peticiones desde esta IP, por favor intente de nuevo después de 15 minutos.",
 });
 
+// Configuración de sanitización: eliminar todas las etiquetas HTML.
+const sanitizeConfig = {
+	allowedTags: [],
+	allowedAttributes: {},
+};
+
 /** POST para crear un nuevo usuario */
 router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 	// 1. Validación de los datos de entrada
@@ -118,10 +125,10 @@ router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 		// Se crea el nuevo objeto de usuario explícitamente para evitar vulnerabilidades de asignación masiva.
 		const user: User = {
 			id: uuidv4(), // Se genera un ID único y seguro
-			name: name.trim(),
-			surname: surname.trim(),
+			name: sanitizeHtml(name.trim(), sanitizeConfig),
+			surname: sanitizeHtml(surname.trim(), sanitizeConfig),
 			mail: mail.toLowerCase(),
-			phone: phone ? phone.trim() : "", // El teléfono es opcional
+			phone: phone ? sanitizeHtml(phone.trim(), sanitizeConfig) : "", // El teléfono es opcional
 			password: hashedPassword,
 			excursions: [],
 		};
@@ -183,7 +190,7 @@ router.put(
 						.status(400)
 						.json({ error: "El nombre proporcionado no es válido." });
 				}
-				currentUser.name = name.trim();
+				currentUser.name = sanitizeHtml(name.trim(), sanitizeConfig);
 			}
 
 			if (surname !== undefined) {
@@ -192,16 +199,16 @@ router.put(
 						.status(400)
 						.json({ error: "El apellido proporcionado no es válido." });
 				}
-				currentUser.surname = surname.trim();
+				currentUser.surname = sanitizeHtml(surname.trim(), sanitizeConfig);
 			}
 
 			if (phone !== undefined) {
-				if (typeof phone !== "string" || phone.trim() === "") {
+				if (typeof phone !== "string") {
 					return res
 						.status(400)
 						.json({ error: "El teléfono proporcionado no es válido." });
 				}
-				currentUser.phone = phone.trim();
+				currentUser.phone = sanitizeHtml(phone.trim(), sanitizeConfig);
 			}
 
 			const { password, ...userResponse } = currentUser;

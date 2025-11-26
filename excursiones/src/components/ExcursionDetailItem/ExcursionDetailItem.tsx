@@ -1,5 +1,7 @@
 import React from "react";
 import { OverlayTrigger, Tooltip, TooltipProps } from "react-bootstrap";
+import type { DifficultyLevel } from "../ExcursionCard/ExcursionCard";
+import cn from "classnames";
 import styles from "./ExcursionDetailItem.module.css";
 
 /**
@@ -10,38 +12,71 @@ interface ExcursionDetailItemProps {
 	readonly text?: string;
 	/** Etiqueta descriptiva para accesibilidad y tooltips (ej. "Dificultad"). */
 	readonly label?: string;
-	/** Nodos hijos para renderizar contenido personalizado en lugar del texto. */
-	readonly children?: React.ReactNode;
 }
+
+type DifficultyVariant =
+	| "difficulty-low"
+	| "difficulty-medium"
+	| "difficulty-high";
+
+// Mapa para asociar las variantes de dificultad con sus clases CSS correspondientes.
+const variantClassMap: Record<DifficultyVariant, string> = {
+	"difficulty-low": styles.difficultyLow,
+	"difficulty-medium": styles.difficultyMedium,
+	"difficulty-high": styles.difficultyHigh,
+};
 
 /**
  * Componente para mostrar un detalle específico de una excursión (ej. dificultad, tiempo).
- * ¡ADVERTENCIA DE SEGURIDAD! Si el contenido de `children` proviene de una fuente externa (API, usuario),
- * debe ser sanitizado para prevenir ataques XSS.
  */
-function ExcursionDetailItem({
+const ExcursionDetailItem = ({
 	text,
 	label,
-	children,
-}: ExcursionDetailItemProps): React.ReactElement | null {
-	/**
-	 * Renderiza el Tooltip para el detalle de la excursión.
-	 */
+}: ExcursionDetailItemProps): JSX.Element | null => {
+	const getDifficultyVariant = (
+		difficultyLevel: DifficultyLevel
+	): DifficultyVariant => {
+		const lowerCaseDifficulty =
+			difficultyLevel.toLowerCase() as Lowercase<DifficultyLevel>;
+		const variantMap: Record<Lowercase<DifficultyLevel>, DifficultyVariant> = {
+			baja: "difficulty-low",
+			media: "difficulty-medium",
+			alta: "difficulty-high",
+		};
+		return variantMap[lowerCaseDifficulty];
+	};
+	// Determina la variante de estilo a aplicar.
+	// Si la etiqueta es "Dificultad", calcula la variante basada en el texto.
+	const variant =
+		label === "Dificultad" && text
+			? getDifficultyVariant(text as DifficultyLevel)
+			: undefined;
+
+	// Renderiza el Tooltip para el detalle de la excursión.
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
 
-	// Si no hay texto ni hijos para mostrar, no renderizamos nada.
-	// Esta comprobación se hace DESPUÉS de los hooks para cumplir las reglas de los hooks.
-	if (!text && !children) {
+	/*
+	 * Si no hay texto para mostrar, no renderizamos nada.
+	 * Esta comprobación se hace DESPUÉS de los hooks para cumplir las reglas de los hooks.
+	 */
+	if (!text) {
 		return null;
 	}
 
-	// Contenido del ítem, incluyendo icono, etiqueta oculta y texto o hijos personalizados.
+	// Contenido del ítem, incluyendo etiqueta oculta y texto.
 	const itemContent = (
 		<>
 			{label && <span className="visually-hidden">{`${label}: `}</span>}
-			{children || <span>{text}</span>}
+			<span
+				className={cn(
+					styles.difficultyBadge,
+					variant && variantClassMap[variant]
+				)}
+			>
+				{text}
+			</span>
 		</>
 	);
 
@@ -54,6 +89,6 @@ function ExcursionDetailItem({
 			</button>
 		</OverlayTrigger>
 	);
-}
+};
 
 export default ExcursionDetailItem;

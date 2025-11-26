@@ -30,3 +30,25 @@
 	color: var(--excursion-card-icon-color);
 	font-size: 1.2rem;
 }
+
+/* Clase base para la insignia de dificultad. */
+.difficultyBadge {
+	/* Podemos añadir estilos base aquí si es necesario en el futuro */
+	font-weight: 500; /* Hacemos el texto un poco más visible */
+}
+
+/*
+ * Estilos para las variantes de dificultad.
+ * Estos colores se aplican al texto del detalle.
+ */
+.difficultyLow {
+	color: var(--difficulty-low-color, #28a745); /* Verde */
+}
+
+.difficultyMedium {
+	color: var(--difficulty-medium-color, #ffc107); /* Amarillo */
+}
+
+.difficultyHigh {
+	color: var(--difficulty-high-color, #dc3545); /* Rojo */
+}

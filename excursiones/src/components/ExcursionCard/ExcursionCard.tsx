@@ -20,28 +20,7 @@ const usePrevious = <T,>(value: T): T | undefined => {
 };
 
 /** Define los posibles valores para la dificultad de una excursión. */
-type DifficultyLevel = "Baja" | "Media" | "Alta";
-
-/**
- * Genera las clases CSS para la etiqueta de dificultad.
- */
-const getDifficultyClasses = (difficultyLevel: DifficultyLevel): string => {
-	/*
-	 * Convierte el nivel de dificultad a minúsculas y lo usa para buscar la clase CSS correspondiente en classMap.
-	 */
-	const lowerCaseDifficulty =
-		difficultyLevel.toLowerCase() as Lowercase<DifficultyLevel>;
-	const classMap = {
-		baja: styles.difficultyLow,
-		media: styles.difficultyMedium,
-		alta: styles.difficultyHigh,
-	};
-
-	/*
-	 * Combina una clase base (difficultyBadge) con la clase específica del nivel de dificultad.
-	 */
-	return cn(styles.difficultyBadge, classMap[lowerCaseDifficulty]);
-};
+export type DifficultyLevel = "Baja" | "Media" | "Alta";
 
 interface JoinButtonProps {
 	/** Indica si el usuario se ha apuntado a la excursión. */
@@ -191,11 +170,7 @@ function ExcursionCard({
 					{/* Detalles de la excursión */}
 					<div className={styles.excursionDetails}>
 						<ExcursionDetailItem text={area} label="Zona" />
-						<ExcursionDetailItem text={difficulty} label="Dificultad">
-							<span className={getDifficultyClasses(difficulty)}>
-								{difficulty}
-							</span>
-						</ExcursionDetailItem>
+						<ExcursionDetailItem text={difficulty} label="Dificultad" />
 						<ExcursionDetailItem text={time} label="Tiempo estimado" />
 					</div>
 				</div>
