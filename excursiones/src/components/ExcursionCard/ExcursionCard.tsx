@@ -10,13 +10,28 @@ import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
 
 /**
- * Hook para obtener el valor anterior de una prop o estado.
+ * Hook para recordar y retornar el valor que tenía una variable (ya sea un estado o prop) en el renderizado anterior del
+ * componente.
  */
 const usePrevious = <T,>(value: T): T | undefined => {
+	/*
+	 * Se utiliza useRef para crear un contenedor ya que la principal característica de useRef es que su contenido
+	 * ref.current persiste entre renderizados sin provocar que el componente se vuelva a renderizar si cambia.
+	 * Se inicializa con el valor undefined.
+	 */
 	const ref = React.useRef<T | undefined>(undefined);
+	/*
+	 * useEffect ejecuta el código que tiene dentro después de que el componente se haya renderizado.
+	 * Entonces, después de cada renderizado, este efecto se activa y actualiza el valor de ref.current al valor value que se
+	 * le pasó al hook en ese renderizado.
+	 */
 	React.useEffect(() => {
 		ref.current = value;
 	});
+	/*
+	 * Esta línea se ejecuta durante el renderizado. Como el useEffect todavía no se ha ejecutado en este punto, ref.current
+	 * aún contiene el valor del renderizado anterior.
+	 */
 	return ref.current;
 };
 

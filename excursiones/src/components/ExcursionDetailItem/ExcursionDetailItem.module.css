@@ -11,11 +11,9 @@
 	border: none;
 	padding: 0;
 	margin: 0;
-	font: inherit; /* Hereda todas las propiedades de fuente (familia, peso, etc.) */
+	font: inherit;
 	cursor: pointer;
 	text-align: inherit; /* Asegura la alineación correcta */
-
-	/* Tipografía específica del componente */
 	font-size: 1.08rem;
 }
 
@@ -33,7 +31,6 @@
 
 /* Clase base para la insignia de dificultad. */
 .difficultyBadge {
-	/* Podemos añadir estilos base aquí si es necesario en el futuro */
 	font-weight: 500; /* Hacemos el texto un poco más visible */
 }
 
@@ -42,13 +39,13 @@
  * Estos colores se aplican al texto del detalle.
  */
 .difficultyLow {
-	color: var(--difficulty-low-color, #28a745); /* Verde */
+	color: var(--difficulty-low-color, #28a745);
 }
 
 .difficultyMedium {
-	color: var(--difficulty-medium-color, #ffc107); /* Amarillo */
+	color: var(--difficulty-medium-color, #ffc107);
 }
 
 .difficultyHigh {
-	color: var(--difficulty-high-color, #dc3545); /* Rojo */
+	color: var(--difficulty-high-color, #dc3545);
 }

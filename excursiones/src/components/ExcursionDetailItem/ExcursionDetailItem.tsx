@@ -49,7 +49,7 @@ const getDifficultyVariant = (
 };
 
 /**
- * Componente para mostrar un detalle específico de una excursión (ej. dificultad, tiempo).
+ * Componente para mostrar un detalle específico de una excursión como su nivel de dificultad o duración.
  */
 const ExcursionDetailItem = ({
 	text,
@@ -68,7 +68,7 @@ const ExcursionDetailItem = ({
 
 	/*
 	 * Si no hay texto para mostrar, no renderizamos nada.
-	 * Esta comprobación se hace DESPUÉS de los hooks para cumplir las reglas de los hooks.
+	 * Esta comprobación se hace después de los hooks para cumplir las reglas de los hooks.
 	 */
 	if (!text) {
 		return null;
