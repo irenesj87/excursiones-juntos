@@ -29,6 +29,7 @@
 }
 
 .filtersToggleButton {
+	background-color: var(--filters-toggle-btn-bg);
 	color: var(--filters-toggle-btn-color);
 	border-color: var(--filters-toggle-btn-border);
 	font-weight: 500;

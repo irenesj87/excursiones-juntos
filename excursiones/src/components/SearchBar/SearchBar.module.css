@@ -4,10 +4,9 @@
 }
 
 .searchInput {
-	/* Aumentamos el padding para dar más espacio y mejorar la legibilidad */
 	padding: 0.6rem 1rem 0.6rem 2.75rem; /* Padding izquierdo para el icono */
-	border-radius: 25px; /* Bordes redondeados para un look más suave */
-	border: 1px solid var(--separator-color);
+	border-radius: 25px; 
+	border: 2px solid var(--separator-color);
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
 	width: 100%;
@@ -36,7 +35,7 @@
 	transform: translateY(-50%);
 	color: var(--color-text-muted);
 	pointer-events: none; /* Evita que el icono intercepte clics */
-	font-size: 1.1rem;
+	font-size: 1.3rem;
 }
 
 .clearButton {

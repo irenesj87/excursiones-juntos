@@ -73,16 +73,15 @@ html.light {
 	--navbar-color: var(--color-white-off);
 	--navbar-brand-color: var(--color-gray-green-900);
 	--navbar-brand-icon: var(--color-green-500);
-	--navbar-toggler-icon-color: var(--color-white);
-	--navbar-toggler-border-color: rgba(255, 255, 255, 0.25);
-	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+	--navbar-toggler-icon-color: var(--color-gray-green-900);
+	--navbar-toggler-border-color: var(--color-gray-neutral-500);
+	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(30, 41, 35, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(101, 140, 122, 0.5);
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-border-subtle);
 
 	/* --- Botones y Enlaces --- */
-	
 	--theme-toggle-btn-color: var(--navbar-color);
 	--theme-toggle-btn-icon: var(--color-gray-green-900);
 	--theme-toggle-btn-border-color: var(--separator-color);
@@ -90,7 +89,7 @@ html.light {
 
 	--register-link-color: var(
 		--color-gray-green-900
-	); /* Cambiado para que sea legible en la navbar */
+	);
 	--register-link-bg-hover: var(--color-gray-neutral-300);
 	--nav-link-active-bg: var(--color-gray-neutral-400);
 	--nav-link-active-border: var(--color-gray-neutral-600);
@@ -98,7 +97,6 @@ html.light {
 	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-green-500);
 	--login-btn-border: var(--color-primary);
-	/* En la navbar, el botón de login será outline. Estos :hover son para fuera de la navbar */
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-border-hover: var(--color-primary-hover);
 
@@ -121,9 +119,9 @@ html.light {
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
-
-	--filters-toggle-btn-color: var(--navbar-color);
-	--filters-toggle-btn-border: var(--navbar-toggler-border-color);
+	--filters-toggle-btn-color: var(--color-white);
+	--filters-toggle-btn-bg: var(--color-green-500);
+	--filters-toggle-btn-border: var(--color-green-500);
 	--filters-toggle-btn-bg-hover: var(--color-gray-neutral-300);
 	--filters-toggle-btn-color-hover: var(--color-primary);
 	--filters-toggle-btn-border-hover: var(--color-accent);
@@ -147,7 +145,7 @@ html.light {
 	--filter-pill-text-checked: var(--color-text-base);
 	--filter-pill-border-checked: var(--color-gray-neutral-500);
 	--filter-pill-shadow-checked: none;
-
+	
 	--filter-clear-btn-color-hover: hsl(347, 77%, 50%);
 
 	/* --- Footer --- */
@@ -224,24 +222,28 @@ html.dark {
 	--separator-color: var(--color-border-subtle);
 
 	/* --- Botones y Enlaces --- */
+	--theme-toggle-btn-color: var(--navbar-color);
+	--theme-toggle-btn-border-color: var(--separator-color);
+	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
+
 	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-white-off); 
 	--login-btn-border: var(
 		--separator-color
-	); /* Borde sutil como otros elementos */
+	);
 	--login-btn-bg-hover: rgba(
 		255,
 		255,
 		255,
 		0.1
-	); /* Mismo hover que 'Registrarse' */
+	);
 	--login-btn-border-hover: var(
 		--separator-color
-	); /* El borde no cambia en hover */
+	);
 
 	--register-link-color: var(
 		--navbar-color
-	); /* Mantenemos el color claro para la navbar */
+	);
 	--register-link-bg-hover: rgba(255, 255, 255, 0.1);
 	--nav-link-active-bg: hsl(150, 10%, 25%);
 	--nav-link-active-border: hsl(150, 10%, 35%);
@@ -258,10 +260,6 @@ html.dark {
 	--logout-bg-color-hover: hsl(210, 15%, 30%);
 	--logout-text-color: var(--color-text-base);
 
-	--theme-toggle-btn-color: var(--navbar-color);
-	--theme-toggle-btn-border-color: var(--separator-color);
-	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
-
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
 	--excursion-card-bg: var(--color-background-surface);
 	--excursion-card-shadow: none;
@@ -273,8 +271,8 @@ html.dark {
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
-
 	--filters-toggle-btn-color: var(--navbar-color);
+	--filters-toggle-btn-bg: transparent;
 	--filters-toggle-btn-border: var(--separator-color);
 	--filters-toggle-btn-bg-hover: hsl(150, 10%, 25%);
 	--filters-toggle-btn-color-hover: var(--color-accent);

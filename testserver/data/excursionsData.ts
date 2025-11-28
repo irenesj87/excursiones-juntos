@@ -40,13 +40,6 @@ const excursions: Excursion[] = [
 		difficulty: "Media",
 		time: "2 horas",
 	},
-	{
-		id: "4",
-		name: "Ruta del Oso",
-		area: "Este",
-		difficulty: "Media",
-		time: "4 horas",
-	},
 ];
 
 export default excursions;
