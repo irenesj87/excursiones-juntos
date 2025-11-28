@@ -19,6 +19,16 @@
 	}
 }
 
+/* Estilos para la imagen de la tarjeta */
+.cardImage {
+	height: 300px; /* Altura fija para todas las imágenes */
+	object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+	border-bottom: 1px solid var(--excursion-card-border-color, #dee2e6);
+	/* Redondea solo las esquinas superiores para que coincida con la tarjeta */
+	border-top-left-radius: var(--border-radius-lg);
+	border-top-right-radius: var(--border-radius-lg);
+}
+
 /* Título de la tarjeta */
 .excursionTitle {
 	font-size: 1.4rem;

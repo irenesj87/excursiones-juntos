@@ -143,6 +143,7 @@ function ExcursionsList({
 			>
 				<ExcursionCard
 					{...excursion}
+					image={`/images/${excursion.id}.jpg`}
 					isLoggedIn={isLoggedIn}
 					isJoined={isJoined}
 					onJoin={joinExcursion}
