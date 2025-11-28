@@ -76,6 +76,8 @@ interface ExcursionCardProps {
 	readonly id: string | number;
 	/** Título de la excursión. */
 	readonly name: string;
+	/** Imagen de la excursión. */
+	readonly image: string;
 	/** Ubicación geográfica donde se lleva a cabo la excursión. */
 	readonly area: string;
 	/** Nivel de dificultad de la excursión. */
@@ -97,6 +99,7 @@ interface ExcursionCardProps {
 function ExcursionCard({
 	id,
 	name,
+	image,
 	area,
 	difficulty,
 	time,
@@ -165,6 +168,12 @@ function ExcursionCard({
 				[styles.isJoinedCard]: isJoined,
 			})}
 		>
+			<Card.Img
+				variant="top"
+				src={image}
+				alt={`Paisaje de ${area}`}
+				className={styles.cardImage}
+			/>
 			{/* Contenedor para anuncios de accesibilidad, oculto visualmente. */}
 			<div aria-live="polite" aria-atomic="true" className="visually-hidden">
 				{announcement}

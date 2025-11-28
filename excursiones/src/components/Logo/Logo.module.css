@@ -9,7 +9,7 @@
 	font-family: inherit;
 	font-size: 1.7rem;
 	font-weight: 700;
-	color: var(--navbar-brand-color);
+	color: #000;
 	transition: none;
 	letter-spacing: -0.5px;
 }

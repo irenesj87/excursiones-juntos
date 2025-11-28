@@ -1,7 +1,7 @@
 .customNavbar {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
-	background-color: color-mix(in srgb, var(--navbar-bg) 95%, transparent);
+	background-color: #fff;
 	/* Efecto de desenfoque para el fondo (funciona en navegadores compatibles) */
 	-webkit-backdrop-filter: blur(8px);
 	backdrop-filter: blur(8px);
