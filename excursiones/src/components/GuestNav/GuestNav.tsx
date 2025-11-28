@@ -21,7 +21,7 @@ const GuestNav = ({
 			to={ROUTES.REGISTER}
 			onClick={onCloseMenu}
 			variant="link"
-			className="me-lg-2"
+			className={`me-lg-2 ${styles.registerLink}`}
 		>
 			Regístrate
 		</StyledNavLink>
