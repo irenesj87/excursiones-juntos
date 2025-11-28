@@ -272,6 +272,7 @@ html.dark {
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
 	--filters-toggle-btn-color: var(--navbar-color);
+	--filters-toggle-btn-bg: transparent;
 	--filters-toggle-btn-border: var(--separator-color);
 	--filters-toggle-btn-bg-hover: hsl(150, 10%, 25%);
 	--filters-toggle-btn-color-hover: var(--color-accent);
