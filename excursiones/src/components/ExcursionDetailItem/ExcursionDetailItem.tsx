@@ -12,6 +12,8 @@ interface ExcursionDetailItemProps {
 	readonly text?: string;
 	/** Etiqueta descriptiva para accesibilidad y tooltips (ej. "Dificultad"). */
 	readonly label?: string;
+	/** El icono a mostrar junto al detalle. */
+	readonly icon?: React.ReactNode;
 }
 
 /**
@@ -54,6 +56,7 @@ const getDifficultyVariant = (
 const ExcursionDetailItem = ({
 	text,
 	label,
+	icon,
 }: ExcursionDetailItemProps): JSX.Element | null => {
 	// Determina la variante de estilo a aplicar. Si la etiqueta es "Dificultad", calcula la variante basada en el texto.
 	const variant =
@@ -77,6 +80,7 @@ const ExcursionDetailItem = ({
 	// Contenido del ítem, incluyendo etiqueta oculta y texto.
 	const itemContent = (
 		<>
+			{icon}
 			{label && <span className="visually-hidden">{`${label}: `}</span>}
 			<span
 				className={cn(
