@@ -101,6 +101,7 @@ html.light {
 	--logout-text-color: var(--color-text-on-primary);
 
 	--theme-toggle-btn-color: var(--navbar-color);
+	--theme-toggle-btn-icon: var(--color-gray-green-900);
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: var(--color-gray-green-100);
 

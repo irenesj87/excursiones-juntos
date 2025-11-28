@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch, TypedUseSelectorHook } from "react-redux";
 import { toggleMode } from "../../slices/themeSlice";
+import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "./ThemeToggleButton.module.css";
 import { RootState, AppDispatch } from "../../store/store"; // Asegúrate de que la ruta sea correcta
 
@@ -12,6 +13,16 @@ interface ThemeToggleButtonProps {
 	className?: string; // Clases CSS adicionales para el botón.
 	showText?: boolean; // Si es true, muestra el texto junto al icono.
 }
+
+// Asignamos el icono a una constante con el tipo React.ElementType
+// para asegurar a TypeScript que es un componente JSX válido.
+const IconoLuna = FaMoon as React.ComponentType<{
+	className: string;
+}>;
+
+const IconoSol = FaSun as React.ComponentType<{
+	className: string;
+}>;
 
 /**
  * Botón que permite al usuario cambiar entre el tema claro y oscuro.
@@ -56,9 +67,9 @@ const ThemeToggleButton = ({
 
 	const icon =
 		mode === "light" ? (
-			<span aria-hidden="true">🌙</span>
+			<IconoLuna className={styles.themeIcon} />
 		) : (
-			<span aria-hidden="true">☀️</span>
+			<IconoSol className={styles.themeIcon} />
 		);
 
 	return (

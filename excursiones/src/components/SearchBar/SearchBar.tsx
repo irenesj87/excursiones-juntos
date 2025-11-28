@@ -4,6 +4,7 @@ import cn from "classnames";
 import { searchExcursions } from "../../services/excursionService";
 import { Excursion } from "../../types";
 import { RootState } from "../../store/store";
+import { GoSearch } from "react-icons/go";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 
@@ -17,6 +18,11 @@ interface SearchBarProps {
 	readonly searchValue: string;
 	readonly onSearchChange: (value: string) => void;
 }
+
+const IconoLupa = GoSearch as React.ComponentType<{
+	className: string
+}>;
+
 
 /**
  * Componente que maneja la barra de búsqueda y la aplicación de filtros para las excursiones.
@@ -119,6 +125,7 @@ const SearchBar = ({
 			className={styles.searchContainer}
 			onSubmit={(e) => e.preventDefault()}
 		>
+			<IconoLupa className={styles.searchIcon} />
 			<label htmlFor={id} className="visually-hidden">
 				Buscar excursiones por nombre
 			</label>

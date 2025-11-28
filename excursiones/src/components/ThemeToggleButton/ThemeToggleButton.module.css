@@ -11,7 +11,8 @@
 }
 
 .themeIcon {
-	font-size: 1.2rem; /* Tamaño base del icono */
+	font-size: 1.4rem; /* Tamaño base del icono */
+	color: var(--theme-toggle-btn-icon);
 }
 
 .themeToggleBtn:hover,
