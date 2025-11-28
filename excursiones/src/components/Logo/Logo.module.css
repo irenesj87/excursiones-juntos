@@ -5,6 +5,12 @@
 	text-decoration: none;
 }
 
+.logoIcon{
+
+	font-size: 2.5rem;
+	color: var(--navbar-brand-icon);
+}
+
 .logoText {
 	font-family: inherit;
 	font-size: 1.7rem;

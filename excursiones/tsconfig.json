@@ -20,7 +20,8 @@
 		// --- Opciones para Bundlers Modernos (Vite, Create React App, etc.) ---
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"noEmit": true // TypeScript solo revisa el código, el bundler lo compila.
+		"noEmit": true, // TypeScript solo revisa el código, el bundler lo compila.
+		"allowUmdGlobalAccess": true
 	},
 	// ¡MUY IMPORTANTE! Le dice a TypeScript que solo se preocupe de los archivos en 'src'
 	"include": ["src"]
