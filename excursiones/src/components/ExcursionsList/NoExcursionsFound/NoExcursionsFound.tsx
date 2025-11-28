@@ -1,5 +1,10 @@
 import React from "react";
+import {GoSearch } from "react-icons/go";
 import styles from "./NoExcursionsFound.module.css";
+
+const IconoLupa = GoSearch as React.ComponentType<{
+	className: string
+}>;
 
 /**
  * Muestra un mensaje cuando no se encuentran excursiones que coincidan con los criterios de búsqueda.
@@ -7,6 +12,7 @@ import styles from "./NoExcursionsFound.module.css";
 const NoExcursionsFound = () => (
 	<div className={styles.excursionsContainer}>
 		<output aria-live="polite" className={styles.messageNotFound}>
+			<IconoLupa className={ styles.messageIcon} />
 			<p className={styles.primaryMessage}>
 				No se encontraron excursiones con esas características.
 			</p>

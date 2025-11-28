@@ -82,28 +82,30 @@ html.light {
 	--separator-color: var(--color-border-subtle);
 
 	/* --- Botones y Enlaces --- */
-	--login-btn-text: var(--color-text-on-primary);
-	--login-btn-bg: var(--color-primary);
-	--login-btn-border: var(--color-primary);
-	/* En la navbar, el botón de login será outline. Estos :hover son para fuera de la navbar */
-	--login-btn-bg-hover: var(--color-primary-hover);
-	--login-btn-border-hover: var(--color-primary-hover);
+	
+	--theme-toggle-btn-color: var(--navbar-color);
+	--theme-toggle-btn-icon: var(--color-gray-green-900);
+	--theme-toggle-btn-border-color: var(--separator-color);
+	--theme-toggle-btn-bg-hover: var(--color-gray-green-100);
 
 	--register-link-color: var(
-		--navbar-color
+		--color-gray-green-900
 	); /* Cambiado para que sea legible en la navbar */
 	--register-link-bg-hover: var(--color-gray-neutral-300);
 	--nav-link-active-bg: var(--color-gray-neutral-400);
 	--nav-link-active-border: var(--color-gray-neutral-600);
 
+	--login-btn-text: var(--color-text-on-primary);
+	--login-btn-bg: var(--color-green-500);
+	--login-btn-border: var(--color-primary);
+	/* En la navbar, el botón de login será outline. Estos :hover son para fuera de la navbar */
+	--login-btn-bg-hover: var(--color-primary-hover);
+	--login-btn-border-hover: var(--color-primary-hover);
+
 	--logout-bg-color: var(--primary-color);
 	--logout-bg-color-hover: var(--primary-color);
 	--logout-text-color: var(--color-text-on-primary);
 
-	--theme-toggle-btn-color: var(--navbar-color);
-	--theme-toggle-btn-icon: var(--color-gray-green-900);
-	--theme-toggle-btn-border-color: var(--separator-color);
-	--theme-toggle-btn-bg-hover: var(--color-gray-green-100);
 
 	/* --- Menú de navegación Offcanvas --- */
 	--offcanvas-text-color: var(--color-gray-neutral-100);
@@ -211,7 +213,8 @@ html.dark {
 	/* --- Navbar --- */
 	--navbar-bg: var(--color-gray-green-950);
 	--navbar-color: var(--color-text-base);
-	--navbar-brand-color: var(--color-white);
+	--navbar-brand-color: var(--color-white-off);
+	--navbar-brand-icon: var(--color-white-off);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
 	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -222,7 +225,7 @@ html.dark {
 
 	/* --- Botones y Enlaces --- */
 	--login-btn-text: var(--color-text-on-primary);
-	--login-btn-bg: transparent; /* Fondo transparente para estilo outline */
+	--login-btn-bg: var(--color-white-off); 
 	--login-btn-border: var(
 		--separator-color
 	); /* Borde sutil como otros elementos */

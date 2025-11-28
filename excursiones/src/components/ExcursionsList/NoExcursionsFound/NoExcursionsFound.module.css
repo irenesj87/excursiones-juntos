@@ -34,6 +34,7 @@
 
 .messageIcon {
 	font-size: 3rem;
+	font-weight: 200;
 	color: var(--color-text-muted);
 	margin-bottom: 0.5rem;
 }

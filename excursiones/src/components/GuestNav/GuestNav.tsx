@@ -1,6 +1,7 @@
 import React from "react";
 import StyledNavLink from "../StyledNavLink";
 import { ROUTES } from "../../constants";
+import styles from "./GuestNav.module.css"
 
 interface GuestNavProps {
 	readonly onCloseMenu?: () => void; // Función para cerrar el menú contenedor en breakpoints pequeños.
@@ -24,7 +25,7 @@ const GuestNav = ({
 		>
 			Regístrate
 		</StyledNavLink>
-		<StyledNavLink to={ROUTES.LOGIN} onClick={onCloseMenu} variant="button">
+		<StyledNavLink to={ROUTES.LOGIN} onClick={onCloseMenu} variant="button" className={styles.loginLink}>
 			Inicia sesión
 		</StyledNavLink>
 	</>
