@@ -37,14 +37,11 @@ const usePrevious = <T,>(value: T): T | undefined => {
 	return ref.current;
 };
 
-// Asignamos el icono a una constante con el tipo React.ElementType
-// para asegurar a TypeScript que es un componente JSX válido.
+// Asignamos el icono a una constante con el tipo React.ElementType para asegurar a TypeScript que es un componente JSX válido.
 const IconoMapa = FiMapPin as React.ComponentType<{
 	className: string;
 }>;
 
-// Asignamos el icono a una constante con el tipo React.ElementType
-// para asegurar a TypeScript que es un componente JSX válido.
 const IconoReloj = FaRegClock as React.ComponentType<{
 	className: string;
 }>;

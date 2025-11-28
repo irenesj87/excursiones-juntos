@@ -165,12 +165,12 @@ html.light {
 	--bs-danger: var(--color-danger-light);
 
 	/* --- Variables para badges de dificultad --- */
-	--difficulty-low-bg: hsl(140, 70%, 86%); /* Verde más vivo */
-	--difficulty-low-text: hsl(140, 60%, 20%);
-	--difficulty-medium-bg: hsl(40, 95%, 86%); /* Amarillo más vivo */
-	--difficulty-medium-text: hsl(40, 85%, 18%);
-	--difficulty-high-bg: hsl(0, 95%, 88%); /* Rojo más vivo */
-	--difficulty-high-text: hsl(0, 70%, 33%);
+	--difficulty-low-bg: var(--color-green-500);
+	--difficulty-low-text: var(--color-white-off);
+	--difficulty-medium-bg: hsl(41, 87%, 64%); /* Amarillo más vivo */
+	--difficulty-medium-text: var(--color-white-off);
+	--difficulty-high-bg: hsl(0, 88%, 67%); /* Rojo más vivo */
+	--difficulty-high-text: var(--color-white-off);
 
 	/* --- Accesibilidad --- */
 	--focus-outline-color: var(--color-primary);
@@ -315,8 +315,8 @@ html.dark {
 	--bs-danger: var(--color-danger-dark);
 
 	/* --- Variables para badges de dificultad --- */
-	--difficulty-low-bg: hsl(145, 65%, 30%); /* Verde oscuro más vivo */
-	--difficulty-low-text: hsl(145, 35%, 92%);
+	--difficulty-low-bg: var(--color-green-500);
+	--difficulty-low-text: var(--color-white-off);
 	--difficulty-medium-bg: hsl(35, 95%, 32%); /* Naranja oscuro más vivo */
 	--difficulty-medium-text: hsl(35, 60%, 90%);
 	--difficulty-high-bg: hsl(347, 85%, 38%); /* Rojo oscuro más vivo */
