@@ -4,6 +4,7 @@ import { RootState } from "../../store/store";
 import { toggleFilter } from "../../slices/filterSlice";
 import cn from "classnames";
 import styles from "./FiltersListCheckbox.module.css";
+import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 
 import type { FilterState } from "../../slices/filterSlice";
 
@@ -11,6 +12,46 @@ interface FiltersListCheckboxProps {
 	filterName: keyof FilterState; // Por ejemplo: 'area', 'difficulty', 'time'
 	filter: string; // El valor específico del filtro, por ejemplo: 'Montaña', 'Baja'
 }
+
+interface LabelProps {
+	htmlFor: string;
+	filter: string;
+	isChecked: boolean;
+}
+
+// Componente interno para la etiqueta que usa el hook de dificultad.
+const DifficultyLabel = ({ htmlFor, filter, isChecked }: LabelProps) => {
+	// El hook ahora centraliza la lógica de nombres de clase.
+	// Le pasamos los estilos y nos devuelve las clases computadas.
+	const { baseDifficultyClass, checkedDifficultyClass } = useDifficultyStyles(
+		filter as "Baja" | "Media" | "Alta",
+		styles
+	);
+
+	return (
+		<label
+			htmlFor={htmlFor}
+			className={cn(styles.filterPill, {
+				[baseDifficultyClass]: !isChecked,
+				[checkedDifficultyClass]: isChecked,
+			})}
+		>
+			{filter}
+		</label>
+	);
+};
+
+// Componente interno para la etiqueta genérica.
+const GenericLabel = ({ htmlFor, filter, isChecked }: LabelProps) => (
+	<label
+		htmlFor={htmlFor}
+		className={cn(styles.filterPill, {
+			[styles.checked]: isChecked,
+		})}
+	>
+		{filter}
+	</label>
+);
 
 const FiltersListCheckbox = ({
 	filterName,
@@ -50,12 +91,11 @@ const FiltersListCheckbox = ({
 				onChange={handleToggle}
 				className={styles.visuallyHidden}
 			/>
-			<label
-				htmlFor={id}
-				className={cn(styles.filterPill, { [styles.checked]: isChecked })}
-			>
-				{filter}
-			</label>
+			{filterName === "difficulty" ? (
+				<DifficultyLabel htmlFor={id} filter={filter} isChecked={isChecked} />
+			) : (
+				<GenericLabel htmlFor={id} filter={filter} isChecked={isChecked} />
+			)}
 		</>
 	);
 };
