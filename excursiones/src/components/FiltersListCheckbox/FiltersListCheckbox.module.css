@@ -16,7 +16,7 @@
 	margin: 0;
 	display: block;
 	width: 100%;
-	padding: 0.4rem 0.4rem; 
+	padding: 0.4rem 0.4rem;
 	font-weight: 500;
 	color: var(--filter-pill-text);
 	background-color: var(--filter-pill-bg);
@@ -32,20 +32,40 @@
 	border-color: var(--filter-pill-border-hover);
 }
 
-/* Estilo para la píldora cuando está seleccionada (aria-checked="true") */
-.checked {
-	background-color: var(--filter-pill-bg-checked);
-	color: var(--filter-pill-text-checked);
-	border-color: var(--filter-pill-border-checked);
-	box-shadow: var(--filter-pill-shadow-checked);
+/* --- Estilos para Dificultad BAJA --- */
+.baja {
+	border: var(--difficulty-low-bg);
+	color: var(--color-white);
+	background-color: var(--difficulty-low-bg);
+}
+.bajaChecked {
+	border-color: #4caf50;
+	background-color: #4caf50;
+	color: var(--color-white);
 }
 
-/* Al pasar el ratón por encima de una píldora seleccionada, nos aseguramos
-   de que los estilos de 'hover' no interfieran con los de 'checked',
-   manteniendo así la legibilidad y la apariencia de "seleccionado". */
-.checked:hover {
-	background-color: var(--filter-pill-bg-checked);
-	border-color: var(--filter-pill-border-checked);
+/* --- Estilos para Dificultad MEDIA --- */
+.media {
+	border: var(--difficulty-medium-bg);
+	color: var(--color-white);
+	background-color: var(--difficulty-medium-bg);
+}
+.mediaChecked {
+	border-color: #ff9800;
+	background-color: #ff9800;
+	color: var(--color-white);
+}
+
+/* --- Estilos para Dificultad ALTA --- */
+.alta {
+	border: var(--difficulty-high-bg);
+	color: var(--color-white);
+	background-color: var(--difficulty-high-bg);
+}
+.altaChecked {
+	border-color: #f44336;
+	background-color: #f44336;
+	color: var(--color-white);
 }
 
 /* Estilo para el foco del input (accesibilidad con teclado) */

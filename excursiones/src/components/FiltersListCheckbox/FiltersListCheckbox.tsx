@@ -12,6 +12,43 @@ interface FiltersListCheckboxProps {
 	filter: string; // El valor específico del filtro, por ejemplo: 'Montaña', 'Baja'
 }
 
+interface LabelProps {
+	htmlFor: string;
+	filter: string;
+	isChecked: boolean;
+}
+
+// Componente interno para la etiqueta que usa el hook de dificultad.
+const DifficultyLabel = ({ htmlFor, filter, isChecked }: LabelProps) => {
+	// Obtenemos el nombre de la clase en minúsculas para usarlo como selector.
+	// Por ejemplo: "Baja" -> "baja".
+	const difficultyClassName = filter.toLowerCase();
+
+	return (
+		<label
+			htmlFor={htmlFor}
+			className={cn(styles.filterPill, {
+				[styles[difficultyClassName]]: !isChecked, // Ej: styles.baja, styles.media
+				[styles[`${difficultyClassName}Checked`]]: isChecked, // Ej: styles.bajaChecked
+			})}
+		>
+			{filter}
+		</label>
+	);
+};
+
+// Componente interno para la etiqueta genérica.
+const GenericLabel = ({ htmlFor, filter, isChecked }: LabelProps) => (
+	<label
+		htmlFor={htmlFor}
+		className={cn(styles.filterPill, {
+			[styles.checked]: isChecked,
+		})}
+	>
+		{filter}
+	</label>
+);
+
 const FiltersListCheckbox = ({
 	filterName,
 	filter,
@@ -50,12 +87,15 @@ const FiltersListCheckbox = ({
 				onChange={handleToggle}
 				className={styles.visuallyHidden}
 			/>
-			<label
-				htmlFor={id}
-				className={cn(styles.filterPill, { [styles.checked]: isChecked })}
-			>
-				{filter}
-			</label>
+			{filterName === "difficulty" ? (
+				<DifficultyLabel
+					htmlFor={id}
+					filter={filter}
+					isChecked={isChecked} // 'filterName' eliminado
+				/>
+			) : (
+				<GenericLabel htmlFor={id} filter={filter} isChecked={isChecked} /> // 'filterName' eliminado
+			)}
 		</>
 	);
 };
