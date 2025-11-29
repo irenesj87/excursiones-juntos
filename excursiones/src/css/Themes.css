@@ -165,6 +165,7 @@ html.light {
 	/* --- Variables para badges de dificultad --- */
 	--difficulty-low-bg: var(--color-green-500);
 	--difficulty-low-text: var(--color-white-off);
+	--difficulty-low-bg-checked: var(--color-green-700);
 	--difficulty-medium-bg: hsl(41, 87%, 64%); /* Amarillo más vivo */
 	--difficulty-medium-text: var(--color-white-off);
 	--difficulty-high-bg: hsl(0, 88%, 67%); /* Rojo más vivo */

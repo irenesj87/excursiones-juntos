@@ -19,8 +19,11 @@ interface ExcursionDetailItemProps {
 
 // Componente interno que renderiza el contenido y aplica los estilos de dificultad.
 const DifficultyItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
-	// El hook solo se llama aquí, donde sabemos que `text` es una DifficultyLevel.
-	const { difficultyClass } = useDifficultyStyles(text as DifficultyLevel);
+	// El hook ahora recibe el módulo de estilos y devuelve la clase computada.
+	const { difficultyClass } = useDifficultyStyles(
+		text as DifficultyLevel,
+		styles
+	);
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);

@@ -1,11 +1,13 @@
-import styles from "../components/ExcursionDetailItem/ExcursionDetailItem.module.css";
-import checkboxStyles from "../components/FiltersListCheckbox/FiltersListCheckbox.module.css";
 import type { DifficultyLevel } from "../types";
 
 /**
- * Define los nombres de las variantes de estilo para la dificultad.
- * Se utiliza internamente para mapear a clases CSS.
+ * Define la estructura esperada para los módulos de estilo CSS que se pasan al hook.
+ * Esto permite que el hook sea flexible y funcione con diferentes archivos CSS.
  */
+interface StyleModules {
+	[key: string]: string;
+}
+
 type DifficultyVariant = "low" | "medium" | "high";
 
 /**
@@ -27,19 +29,26 @@ const getDifficultyVariant = (
 };
 
 /**
- * Un hook personalizado que devuelve las clases CSS para un nivel de dificultad determinado.
+ * Un hook personalizado que genera los nombres de clase CSS para un nivel de dificultad.
+ * Centraliza la lógica de construcción de clases, pero permanece desacoplado al recibir
+ * los módulos de estilo como argumento.
+ *
  * @param difficultyLevel - El nivel de dificultad ("Baja", "Media", "Alta").
- * @returns Un objeto con `difficultyClass` para el estado normal y `checkedDifficultyClass` para el estado seleccionado.
+ * @param styles - Un objeto que contiene los módulos de estilo necesarios.
+ * @returns Un objeto con los nombres de clase computados (`difficultyClass` y `checkedDifficultyClass`).
  */
-export const useDifficultyStyles = (difficultyLevel: DifficultyLevel) => {
+export const useDifficultyStyles = (
+	difficultyLevel: DifficultyLevel,
+	styles: StyleModules
+) => {
 	const variant = getDifficultyVariant(difficultyLevel);
+	const capitalizedVariant = variant.charAt(0).toUpperCase() + variant.slice(1);
 
-	const difficultyClass =
-		styles[`difficulty${variant.charAt(0).toUpperCase() + variant.slice(1)}`];
-	const checkedDifficultyClass =
-		checkboxStyles[
-			`checked${variant.charAt(0).toUpperCase() + variant.slice(1)}`
-		];
-
-	return { difficultyClass, checkedDifficultyClass };
+	// Genera los nombres de clase usando las convenciones de cada componente.
+	// El componente que no necesite una clase, simplemente la ignorará.
+	return {
+		difficultyClass: styles[`difficulty${capitalizedVariant}`], // Para ExcursionDetailItem (ej: difficultyLow)
+		checkedDifficultyClass: styles[`${variant}Checked`], // Para FiltersListCheckbox (ej: lowChecked)
+		baseDifficultyClass: styles[variant], // Para FiltersListCheckbox (ej: low)
+	};
 };

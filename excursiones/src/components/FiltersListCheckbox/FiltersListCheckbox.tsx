@@ -4,6 +4,7 @@ import { RootState } from "../../store/store";
 import { toggleFilter } from "../../slices/filterSlice";
 import cn from "classnames";
 import styles from "./FiltersListCheckbox.module.css";
+import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 
 import type { FilterState } from "../../slices/filterSlice";
 
@@ -20,16 +21,19 @@ interface LabelProps {
 
 // Componente interno para la etiqueta que usa el hook de dificultad.
 const DifficultyLabel = ({ htmlFor, filter, isChecked }: LabelProps) => {
-	// Obtenemos el nombre de la clase en minúsculas para usarlo como selector.
-	// Por ejemplo: "Baja" -> "baja".
-	const difficultyClassName = filter.toLowerCase();
+	// El hook ahora centraliza la lógica de nombres de clase.
+	// Le pasamos los estilos y nos devuelve las clases computadas.
+	const { baseDifficultyClass, checkedDifficultyClass } = useDifficultyStyles(
+		filter as "Baja" | "Media" | "Alta",
+		styles
+	);
 
 	return (
 		<label
 			htmlFor={htmlFor}
 			className={cn(styles.filterPill, {
-				[styles[difficultyClassName]]: !isChecked, // Ej: styles.baja, styles.media
-				[styles[`${difficultyClassName}Checked`]]: isChecked, // Ej: styles.bajaChecked
+				[baseDifficultyClass]: !isChecked,
+				[checkedDifficultyClass]: isChecked,
 			})}
 		>
 			{filter}
@@ -88,13 +92,9 @@ const FiltersListCheckbox = ({
 				className={styles.visuallyHidden}
 			/>
 			{filterName === "difficulty" ? (
-				<DifficultyLabel
-					htmlFor={id}
-					filter={filter}
-					isChecked={isChecked} // 'filterName' eliminado
-				/>
+				<DifficultyLabel htmlFor={id} filter={filter} isChecked={isChecked} />
 			) : (
-				<GenericLabel htmlFor={id} filter={filter} isChecked={isChecked} /> // 'filterName' eliminado
+				<GenericLabel htmlFor={id} filter={filter} isChecked={isChecked} />
 			)}
 		</>
 	);
