@@ -23,7 +23,6 @@
 .cardImage {
 	height: 300px; /* Altura fija para todas las imágenes */
 	object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
-	border-bottom: 1px solid var(--excursion-card-border-color, #dee2e6);
 	/* Redondea solo las esquinas superiores para que coincida con la tarjeta */
 	border-top-left-radius: var(--border-radius-lg);
 	border-top-right-radius: var(--border-radius-lg);
@@ -38,8 +37,8 @@
 	color: var(--excursion-card-title-color);
 }
 
-
-.icon{
+/* Iconos para los detalles de la excursión */
+.icon {
 	font-size: 1.1rem;
 }
 
