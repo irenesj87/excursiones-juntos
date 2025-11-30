@@ -125,7 +125,7 @@ function ExcursionCard({
 	onJoin,
 }: ExcursionCardProps) {
 	/*
-	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar este componente y
+	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para simplificar este componente y
 	 * hacerlo puramente presentacional.
 	 * Si onJoin no se proporciona, se pasa una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
 	 * de TypeScript.
