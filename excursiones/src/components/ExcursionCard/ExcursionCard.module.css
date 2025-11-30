@@ -37,7 +37,7 @@
 	color: var(--excursion-card-title-color);
 }
 
-/* Iconos de la tarjeta */
+/* Iconos para los detalles de la excursión */
 .icon {
 	font-size: 1.1rem;
 }
