@@ -19,14 +19,16 @@ interface ExcursionDetailItemProps {
 
 // Componente interno que renderiza el contenido y aplica los estilos de dificultad.
 const DifficultyItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
-	// El hook ahora recibe el módulo de estilos y devuelve la clase computada.
+	// El hook recibe el módulo de estilos y retorna la clase computada.
 	const { difficultyClass } = useDifficultyStyles(
 		text as DifficultyLevel,
 		styles
 	);
+	
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
+
 	return (
 		<OverlayTrigger placement="top" overlay={renderTooltip}>
 			<button type="button" className={styles.detailItem}>
@@ -42,9 +44,11 @@ const DifficultyItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
 
 // Componente interno para detalles genéricos (sin estilos de dificultad).
 const GenericItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
+	
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
+
 	return (
 		<OverlayTrigger placement="top" overlay={renderTooltip}>
 			<button type="button" className={styles.detailItem}>
@@ -68,7 +72,7 @@ const ExcursionDetailItem = (
 		return null;
 	}
 
-	// Decidimos qué componente renderizar. Esto no viola las reglas de los Hooks.
+	// Decidimos qué componente renderizar.
 	return props.label === "Dificultad" ? (
 		<DifficultyItem {...props} />
 	) : (
