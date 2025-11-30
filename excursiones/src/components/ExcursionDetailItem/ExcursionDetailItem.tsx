@@ -24,7 +24,6 @@ const DifficultyItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
 		text as DifficultyLevel,
 		styles
 	);
-	
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
@@ -44,11 +43,9 @@ const DifficultyItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
 
 // Componente interno para detalles genéricos (sin estilos de dificultad).
 const GenericItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
-	
 	const renderTooltip = (props: TooltipProps): React.ReactElement => (
 		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
-
 	return (
 		<OverlayTrigger placement="top" overlay={renderTooltip}>
 			<button type="button" className={styles.detailItem}>
