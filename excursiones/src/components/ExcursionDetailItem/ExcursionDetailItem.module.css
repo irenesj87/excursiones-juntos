@@ -40,8 +40,7 @@
 }
 
 /*
- * Estilos para las variantes de dificultad.
- * Estos colores se aplican al texto del detalle.
+ * Estilos para las variantes de dificultad. Estos colores se aplican al texto del detalle.
  */
 .difficultyLow {
 	background-color: var(--difficulty-low-bg);
