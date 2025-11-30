@@ -46,6 +46,9 @@ const IconoReloj = FaRegClock as React.ComponentType<{
 	className: string;
 }>;
 
+/**
+ * Props del botón para unirse a una excursión.
+ */
 interface JoinButtonProps {
 	/** Indica si el usuario se ha apuntado a la excursión. */
 	readonly isJoined: boolean;
@@ -82,6 +85,9 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	);
 }
 
+/**
+ * Props de la tarjeta de la excursión.
+ */
 interface ExcursionCardProps {
 	/** Identificador único de la excursión. */
 	readonly id: string | number;
@@ -119,7 +125,7 @@ function ExcursionCard({
 	onJoin,
 }: ExcursionCardProps) {
 	/*
-	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar el componente y
+	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para limpiar este componente y
 	 * hacerlo puramente presentacional.
 	 * Si onJoin no se proporciona, se pasa una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
 	 * de TypeScript.
