@@ -4,7 +4,8 @@
  */
 export const COMPANY_NAME = "Excursiones Juntos";
 export const START_YEAR = 2021;
-export const GENERIC_ERROR_MESSAGE = "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde";
+export const GENERIC_ERROR_MESSAGE =
+	"Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde";
 
 /**
  * Rutas de la aplicación.
@@ -34,4 +35,12 @@ export const LOGIN_PAGE_TEXT = {
 	SUBTITLE: "Nos alegra verte de nuevo.",
 	SWITCHER_PROMPT: "¿No tienes una cuenta?",
 	SWITCHER_LINK_TEXT: "Regístrate",
+} as const;
+
+/**
+ * Constantes relacionadas con la API.
+ */
+export const API = {
+	BASE_URL: "http://localhost:3001",
+	STATIC_IMAGES_URL: "http://localhost:3001/static/images",
 } as const;

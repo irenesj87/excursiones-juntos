@@ -45,7 +45,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
+// Sirve archivos estáticos desde la carpeta 'public'.
+// Se le asigna el prefijo de ruta virtual '/static'.
+app.use("/static", express.static(path.join(__dirname, "public")));
 
 // Configuración de CORS más segura
 // Se define una lista de orígenes permitidos (whitelist).

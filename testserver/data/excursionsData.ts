@@ -8,6 +8,7 @@ export interface Excursion {
 	area: string;
 	difficulty: "Baja" | "Media" | "Alta";
 	time: string;
+	image: string;
 }
 
 /* Array de excursiones */
@@ -18,6 +19,7 @@ const excursions: Excursion[] = [
 		area: "Centro-Este",
 		difficulty: "Baja",
 		time: "3 horas",
+		image: "1.jpg",
 	},
 	{
 		id: "1",
@@ -25,6 +27,7 @@ const excursions: Excursion[] = [
 		area: "Este",
 		difficulty: "Media",
 		time: "4 horas",
+		image: "2.jpg",
 	},
 	{
 		id: "2",
@@ -32,6 +35,7 @@ const excursions: Excursion[] = [
 		area: "Este",
 		difficulty: "Alta",
 		time: "5 horas",
+		image: "3.jpg",
 	},
 	{
 		id: "3",
@@ -39,6 +43,7 @@ const excursions: Excursion[] = [
 		area: "Centro",
 		difficulty: "Media",
 		time: "2 horas",
+		image: "4.jpg",
 	},
 ];
 

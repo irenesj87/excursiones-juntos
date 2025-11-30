@@ -1,5 +1,6 @@
 import React, { useId, useState, useEffect } from "react";
 import { Card, Alert } from "react-bootstrap";
+import { API } from "../../constants";
 import ExcursionDetailItem from "../ExcursionDetailItem";
 import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
@@ -141,6 +142,14 @@ function ExcursionCard({
 	// Genera un ID único y seguro para el título, que se usará para la accesibilidad.
 	const titleId = useId();
 
+	// Construye la URL completa de la imagen.
+	// Es una buena práctica definir la URL base en una variable de entorno
+	// (ej. process.env.REACT_APP_API_URL) para no tener que escribirla directamente.
+	// Se extrae solo el nombre del archivo de la prop 'image' para evitar rutas duplicadas.
+	const imageName = image.split("/").pop() || "";
+	const imageUrl = image.startsWith("http")
+		? image
+		: `${API.STATIC_IMAGES_URL}/${imageName}`;
 	/** Manejador para el evento de unirse a la excursión. */
 	const handleOnJoin = () => {
 		handleJoin(id);
@@ -187,7 +196,7 @@ function ExcursionCard({
 		>
 			<Card.Img
 				variant="top"
-				src={image}
+				src={imageUrl}
 				alt={`Paisaje de ${area}`}
 				className={styles.cardImage}
 			/>

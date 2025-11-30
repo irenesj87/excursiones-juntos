@@ -5,6 +5,7 @@ import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 import styles from "./ExcursionDetailItem.module.css";
 import type { DifficultyLevel } from "../../types";
 
+const DIFFICULTY = "Dificultad";
 /**
  * Props para el componente ExcursionDetailItem.
  */
@@ -17,47 +18,16 @@ interface ExcursionDetailItemProps {
 	readonly icon?: React.ReactNode;
 }
 
-// Componente interno que renderiza el contenido y aplica los estilos de dificultad.
-const DifficultyItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
-	// El hook recibe el módulo de estilos y retorna la clase computada.
-	const { difficultyClass } = useDifficultyStyles(
-		text as DifficultyLevel,
-		styles
-	);
-	
-	const renderTooltip = (props: TooltipProps): React.ReactElement => (
-		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
-	);
+/**
+ * Array con los niveles de dificultad válidos.
+ */
+const validDifficultyLevels: DifficultyLevel[] = ["Baja", "Media", "Alta"];
 
-	return (
-		<OverlayTrigger placement="top" overlay={renderTooltip}>
-			<button type="button" className={styles.detailItem}>
-				{icon}
-				{label && <span className="visually-hidden">{`${label}: `}</span>}
-				<span className={cn(styles.difficultyBadge, difficultyClass)}>
-					{text}
-				</span>
-			</button>
-		</OverlayTrigger>
-	);
-};
-
-// Componente interno para detalles genéricos (sin estilos de dificultad).
-const GenericItem = ({ text, label, icon }: ExcursionDetailItemProps) => {
-	
-	const renderTooltip = (props: TooltipProps): React.ReactElement => (
-		<Tooltip {...props}>{label ? `${label}: ${text}` : text}</Tooltip>
-	);
-
-	return (
-		<OverlayTrigger placement="top" overlay={renderTooltip}>
-			<button type="button" className={styles.detailItem}>
-				{icon}
-				{label && <span className="visually-hidden">{`${label}: `}</span>}
-				<span>{text}</span>
-			</button>
-		</OverlayTrigger>
-	);
+/**
+ * Type guard que comprueba si un string es un nivel de dificultad válido.
+ */
+const isDifficultyLevel = (value: string): value is DifficultyLevel => {
+	return (validDifficultyLevels as string[]).includes(value);
 };
 
 /**
@@ -68,15 +38,46 @@ const ExcursionDetailItem = (
 	props: ExcursionDetailItemProps
 ): JSX.Element | null => {
 	// Si no hay texto, no renderizamos nada.
-	if (!props.text) {
+	const { text, label, icon } = props;
+
+	// Determina si el item es de tipo "Dificultad" para aplicar estilos especiales.
+	// La comprobación de `text` es necesaria para el type guard.
+	const isDifficulty =
+		label === DIFFICULTY && !!text && isDifficultyLevel(text);
+
+	// Hook para obtener la clase de estilo solo si es un item de dificultad.
+	// Se llama siempre en el nivel superior del componente.
+	const { difficultyClass } = useDifficultyStyles(
+		isDifficulty ? text : null,
+		styles
+	);
+
+	// El "early return" se mueve aquí, después de que todos los hooks se hayan llamado.
+	if (!text) {
 		return null;
 	}
 
-	// Decidimos qué componente renderizar.
-	return props.label === "Dificultad" ? (
-		<DifficultyItem {...props} />
-	) : (
-		<GenericItem {...props} />
+	// Función única para renderizar el tooltip, evitando duplicación.
+	const renderTooltip = (tooltipProps: TooltipProps): React.ReactElement => (
+		<Tooltip {...tooltipProps}>{label ? `${label}: ${text}` : text}</Tooltip>
+	);
+
+	return (
+		<OverlayTrigger placement="top" overlay={renderTooltip}>
+			<button type="button" className={styles.detailItem}>
+				{icon}
+				{label && <span className="visually-hidden">{`${label}: `}</span>}
+				<span
+					className={
+						isDifficulty
+							? cn(styles.difficultyBadge, difficultyClass)
+							: undefined
+					}
+				>
+					{text}
+				</span>
+			</button>
+		</OverlayTrigger>
 	);
 };
 
