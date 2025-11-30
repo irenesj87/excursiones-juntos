@@ -38,9 +38,18 @@ const getDifficultyVariant = (
  * @returns Un objeto con los nombres de clase computados (`difficultyClass` y `checkedDifficultyClass`).
  */
 export const useDifficultyStyles = (
-	difficultyLevel: DifficultyLevel,
+	difficultyLevel: DifficultyLevel | null,
 	styles: StyleModules
 ) => {
+	// Si el nivel de dificultad es nulo, devolvemos clases vacías para evitar errores.
+	if (difficultyLevel === null) {
+		return {
+			difficultyClass: "",
+			checkedDifficultyClass: "",
+			baseDifficultyClass: "",
+		};
+	}
+
 	const variant = getDifficultyVariant(difficultyLevel);
 	const capitalizedVariant = variant.charAt(0).toUpperCase() + variant.slice(1);
 
