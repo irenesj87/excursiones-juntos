@@ -56,3 +56,9 @@
 	background-color: var(--difficulty-high-bg);
 	color: var(--difficulty-high-text);
 }
+
+.difficultyBadgeWithIcon {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem; /* Espacio entre el icono y el texto */
+}

@@ -172,7 +172,7 @@ const NavigationBar = ({
 					</div>
 				</div>
 				{/* --- Contenedor de la derecha: controles de usuario, tema y menú --- */}
-				<div className="d-flex align-items-center ms-auto ms-md-0 order-md-3 order-lg-3 me-2">
+				<div className="d-flex align-items-center ms-auto ms-md-0 order-md-3 order-lg-3">
 					{/* Botón de tema */}
 					<ThemeToggleButton />
 
