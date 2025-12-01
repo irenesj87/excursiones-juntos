@@ -6,6 +6,7 @@ import styles from "./ExcursionDetailItem.module.css";
 import type { DifficultyLevel } from "../../types";
 
 const DIFFICULTY = "Dificultad";
+
 /**
  * Props para el componente ExcursionDetailItem.
  */
@@ -65,17 +66,24 @@ const ExcursionDetailItem = (
 	return (
 		<OverlayTrigger placement="top" overlay={renderTooltip}>
 			<button type="button" className={styles.detailItem}>
-				{icon}
 				{label && <span className="visually-hidden">{`${label}: `}</span>}
-				<span
-					className={
-						isDifficulty
-							? cn(styles.difficultyBadge, difficultyClass)
-							: undefined
-					}
-				>
-					{text}
-				</span>
+				{isDifficulty ? (
+					<span
+						className={cn(
+							styles.difficultyBadge,
+							difficultyClass,
+							styles.difficultyBadgeWithIcon
+						)}
+					>
+						{icon}
+						{text}
+					</span>
+				) : (
+					<>
+						{icon}
+						<span>{text}</span>
+					</>
+				)}
 			</button>
 		</OverlayTrigger>
 	);

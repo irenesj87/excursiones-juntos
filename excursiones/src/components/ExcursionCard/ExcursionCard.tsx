@@ -8,6 +8,7 @@ import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import cn from "classnames";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import { FiMapPin } from "react-icons/fi";
+import { BsBarChartFill } from "react-icons/bs";
 import { FaRegClock } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
@@ -40,6 +41,10 @@ const usePrevious = <T,>(value: T): T | undefined => {
 
 // Asignamos el icono a una constante con el tipo React.ElementType para asegurar a TypeScript que es un componente JSX válido.
 const IconoMapa = FiMapPin as React.ComponentType<{
+	className: string;
+}>;
+
+const IconoDificultad = BsBarChartFill as React.ComponentType<{
 	className: string;
 }>;
 
@@ -222,7 +227,11 @@ function ExcursionCard({
 							label="Zona"
 							icon={<IconoMapa className={styles.icon} />}
 						/>
-						<ExcursionDetailItem text={difficulty} label="Dificultad" />
+						<ExcursionDetailItem
+							text={difficulty}
+							label="Dificultad"
+							icon={<IconoDificultad className={styles.icon} />}
+						/>
 						<ExcursionDetailItem
 							text={time}
 							label="Tiempo estimado"
