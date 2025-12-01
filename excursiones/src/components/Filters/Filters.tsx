@@ -3,29 +3,9 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
-import { FiMapPin, FiTrash2 } from "react-icons/fi";
-import { BsBarChartFill } from "react-icons/bs";
-import { FaRegClock } from "react-icons/fa";
+import { MapIcon, ChartIcon, ClockIcon, TrashIcon} from "../shared/Icons";	
 import styles from "./Filters.module.css";
 import { RootState } from "../../store/store";
-
-// Asignamos el icono a una constante con el tipo React.ElementType para asegurar a TypeScript que es un componente JSX válido.
-const MapIcon = FiMapPin as React.ComponentType<{
-	className: string;
-}>;
-
-// Asignamos el icono a una constante con el tipo React.ElementType para asegurar a TypeScript que es un componente JSX válido.
-const ChartIcon = BsBarChartFill as React.ComponentType<{
-	className: string;
-}>;
-
-const ClockIcon = FaRegClock as React.ComponentType<{
-	className: string;
-}>;
-
-const TrashIcon = FiTrash2 as React.ComponentType<{
-	className: string;
-}>;
 
 // Definimos las props que puede recibir el componente Filters.
 interface FiltersProps {
