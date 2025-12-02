@@ -27,7 +27,7 @@
 	transition: none;
 }
 
-.loginLink:hover {
+.loginLink:hover,
+.loginLink:focus {
 	background-color: var(--login-btn-bg-hover);
-	color: var(--login-btn-text);
 }
