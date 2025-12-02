@@ -12,7 +12,8 @@
 	user-select: none;
 }
 
-.registerLink:hover {
+.registerLink:hover,
+.registerLink:focus {
 	color: var(--register-link-color);
 	background-color: var(--register-link-bg-hover);
 	outline: none;
