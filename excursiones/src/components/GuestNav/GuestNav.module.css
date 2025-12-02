@@ -13,16 +13,21 @@
 }
 
 .registerLink:hover,
-.registerLink:focus,
-.registerLink:active {
+.registerLink:focus {
 	color: var(--register-link-color);
 	background-color: var(--register-link-bg-hover);
 	outline: none;
 	box-shadow: none;
 }
 
-.loginLink {
+.loginLink,
+.loginLink:visited {
 	background-color: var(--login-btn-bg);
 	color: var(--login-btn-text);
 	transition: none;
+}
+
+.loginLink:hover,
+.loginLink:focus {
+	background-color: var(--login-btn-bg-hover);
 }
