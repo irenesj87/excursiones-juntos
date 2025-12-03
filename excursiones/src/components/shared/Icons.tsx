@@ -2,6 +2,7 @@ import React from "react"; // Necesario para el tipo React.ComponentType
 import { FiMapPin, FiTrash2 } from "react-icons/fi";
 import { BsBarChartFill } from "react-icons/bs";
 import { FaRegClock } from "react-icons/fa";
+import { LuMoon, LuSun } from "react-icons/lu";
 
 /**
  * Archivo central para exportar los componentes de íconos de la aplicación.
@@ -19,5 +20,13 @@ export const ClockIcon = FaRegClock as React.ComponentType<{
 	className?: string;
 }>;
 export const TrashIcon = FiTrash2 as React.ComponentType<{
+	className?: string;
+}>;
+
+export const MoonIcon = LuMoon as React.ComponentType<{
+	className?: string;
+}>;
+
+export const SunIcon = LuSun as React.ComponentType<{
 	className?: string;
 }>;
