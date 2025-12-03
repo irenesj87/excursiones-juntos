@@ -26,8 +26,8 @@
 }
 
 .filterTitle {
-	font-size: 1.1rem;
-	font-weight: 500; /* Reducido para no competir con el título principal */
+	font-size: 1.2rem;
+	font-weight: 500;
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
@@ -36,7 +36,7 @@
 }
 
 .filterIcon {
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 }
 
 /* Footer que contiene el botón de limpiar */

@@ -3,7 +3,12 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
-import { MapIcon, ChartIcon, ClockIcon, TrashIcon} from "../shared/Icons";	
+import {
+	ChartIcon,
+	ClockIcon,
+	MapIcon,
+	TrashIcon,
+} from "../shared/Icons";
 import styles from "./Filters.module.css";
 import { RootState } from "../../store/store";
 
@@ -26,17 +31,17 @@ const filterSections = [
 	{
 		name: "area",
 		title: "Zona",
-		icon: <MapIcon className={styles.icon} />,
+		icon: <MapIcon className={styles.filterIcon} />,
 	},
 	{
 		name: "difficulty",
 		title: "Dificultad",
-		icon: <ChartIcon className={styles.icon} />,
+		icon: <ChartIcon className={styles.filterIcon} />,
 	},
 	{
 		name: "time",
 		title: "Tiempo estimado",
-		icon: <ClockIcon className={styles.icon} />,
+		icon: <ClockIcon className={styles.filterIcon} />,
 	},
 ] satisfies FilterSection[];
 
@@ -93,7 +98,7 @@ const Filters = ({ showTitle = true }: FiltersProps) => {
 					aria-label="Limpiar todos los filtros"
 					disabled={!hasActiveFilters}
 				>
-					<TrashIcon className={styles.icon} />
+					<TrashIcon className={styles.filterIcon} />
 					<span className="ms-2">Limpiar Filtros</span>
 				</Button>
 			</footer>
