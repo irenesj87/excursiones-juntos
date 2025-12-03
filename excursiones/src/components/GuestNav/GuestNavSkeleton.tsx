@@ -5,7 +5,7 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 // Define placeholder dimensions as constants to avoid magic numbers and improve maintainability.
 export const GUEST_NAV_SKELETON_SIZES = {
-	REGISTER_LINK_WIDTH: 97,
+	REGISTER_LINK_WIDTH: 98.3,
 	LOGIN_LINK_WIDTH: 129,
 	HEIGHT: 44,
 };
@@ -19,25 +19,26 @@ const GuestNavSkeleton = (): JSX.Element => {
 
 	return (
 		<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+			{/* Usamos un contenedor Flexbox para asegurar que los esqueletos se alineen horizontalmente,
+			    imitando el comportamiento de los enlaces de navegación finales. */}
 			<div
 				className="d-flex align-items-center"
-				aria-hidden="true"
 				data-testid="guest-nav-skeleton"
 			>
-				{/* Placeholder para el enlace "Regístrate" */}
 				<Skeleton
 					width={GUEST_NAV_SKELETON_SIZES.REGISTER_LINK_WIDTH}
 					height={GUEST_NAV_SKELETON_SIZES.HEIGHT}
-					className="me-3"
+					aria-hidden="true"
+					className="me-lg-2" // Aplica el margen directamente al esqueleto
 				/>
-				{/* Placeholder para el enlace "Inicia sesión" */}
 				<Skeleton
 					width={GUEST_NAV_SKELETON_SIZES.LOGIN_LINK_WIDTH}
 					height={GUEST_NAV_SKELETON_SIZES.HEIGHT}
+					aria-hidden="true"
 				/>
 			</div>
 		</SkeletonTheme>
 	);
-}
+};
 
 export default GuestNavSkeleton;
