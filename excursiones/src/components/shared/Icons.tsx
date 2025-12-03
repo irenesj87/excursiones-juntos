@@ -24,9 +24,9 @@ export const TrashIcon = FiTrash2 as React.ComponentType<{
 }>;
 
 export const MoonIcon = LuMoon as React.ComponentType<{
-	className: string;
+	className?: string;
 }>;
 
 export const SunIcon = LuSun as React.ComponentType<{
-	className: string;
+	className?: string;
 }>;
