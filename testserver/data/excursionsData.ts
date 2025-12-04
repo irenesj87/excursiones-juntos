@@ -37,14 +37,6 @@ const excursions: Excursion[] = [
 		time: "5 horas",
 		image: "3.jpg",
 	},
-	{
-		id: "3",
-		name: "Picos de Europa",
-		area: "Centro",
-		difficulty: "Media",
-		time: "2 horas",
-		image: "4.jpg",
-	},
 ];
 
 export default excursions;

@@ -7,7 +7,7 @@ import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import cn from "classnames";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import { MapIcon, ChartIcon, ClockIcon} from "../shared/Icons";	
+import { MapIcon, ChartIcon, ClockIcon } from "../shared/Icons";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
 
@@ -36,7 +36,6 @@ const usePrevious = <T,>(value: T): T | undefined => {
 	 */
 	return ref.current;
 };
-
 
 /**
  * Props del botón para unirse a una excursión.
@@ -177,20 +176,31 @@ function ExcursionCard({
 
 	return (
 		<Card
-			as="fieldset"
+			as="article"
 			tabIndex={0}
-			role="article"
 			aria-labelledby={titleId}
 			className={cn(styles.excursionItemCard, "h-100 w-100", {
 				[styles.isJoinedCard]: isJoined,
 			})}
 		>
-			<Card.Img
-				variant="top"
-				src={imageUrl}
-				alt={`Paisaje de ${area}`}
-				className={styles.cardImage}
-			/>
+			{/* 
+				Usamos el elemento <picture> para servir imágenes en formato WebP si el navegador lo soporta,
+				con un fallback a la imagen original (JPG/PNG) para navegadores antiguos.
+				Esto requiere que una versión .webp de la imagen exista en el servidor.
+			*/}
+			<picture>
+				<source
+					srcSet={imageUrl.replace(/\.[^/.]+$/, ".webp")}
+					type="image/webp"
+				/>
+				<Card.Img
+					as="img"
+					src={imageUrl}
+					alt={`Paisaje de ${area}`}
+					className={styles.cardImage}
+					decoding="async"
+				/>
+			</picture>
 			{/* Contenedor para anuncios de accesibilidad, oculto visualmente. */}
 			<div aria-live="polite" aria-atomic="true" className="visually-hidden">
 				{announcement}
@@ -199,11 +209,7 @@ function ExcursionCard({
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>
 					{/* Título de la excursión */}
-					<Card.Title
-						as="legend"
-						id={titleId}
-						className={`${styles.excursionTitle} mb-3`}
-					>
+					<Card.Title id={titleId} className={`${styles.excursionTitle} mb-3`}>
 						{name}
 					</Card.Title>
 					{/* Detalles de la excursión */}
