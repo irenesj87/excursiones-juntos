@@ -132,7 +132,7 @@ const NavigationBar = ({
 					{isLoggedIn ? (
 						<UserNav onCloseMenu={handleCloseMenu} />
 					) : (
-						<GuestNav onCloseMenu={handleCloseMenu} />
+						<GuestNav onCloseMenu={handleCloseMenu} variant="default" />
 					)}
 				</Suspense>
 			</ErrorBoundary>
@@ -216,10 +216,20 @@ const NavigationBar = ({
 						<Offcanvas.Title>Menú</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
-						{/* La clase d-flex y flex-column asegura que los elementos se apilen verticalmente */}
-						<div className="d-lg-none d-flex flex-column pt-2 align-items-start gap-3">
-							{renderNavContent()}
-						</div>
+						{/* 
+							Se replica la lógica de `renderNavContent` para el menú Offcanvas.
+							Esto asegura que los usuarios logueados vean `UserNav` y los invitados `GuestNav`.
+							Se usa Suspense para manejar la carga perezosa de los componentes.
+						*/}
+						<Suspense
+							fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
+						>
+							{isLoggedIn ? (
+								<UserNav onCloseMenu={handleCloseMenu} />
+							) : (
+								<GuestNav onCloseMenu={handleCloseMenu} variant="offcanvas" />
+							)}
+						</Suspense>
 					</Offcanvas.Body>
 				</Offcanvas>
 			</Container>

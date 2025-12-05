@@ -224,8 +224,8 @@ html.dark {
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
 
-	--login-btn-text: var(--color-text-on-primary);
-	--login-btn-bg: var(--color-white-off);
+	--login-btn-text: var(--color-white);
+	--login-btn-bg: var(--color-green-300);
 	--login-btn-border: var(--separator-color);
 	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
 	--login-btn-border-hover: var(--separator-color);

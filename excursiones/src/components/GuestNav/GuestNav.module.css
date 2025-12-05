@@ -35,3 +35,24 @@
 .loginLink:hover {
 	color: var(--login-btn-text);
 }
+
+/* Estilos para la variante 'offcanvas' */
+/* Asegura que el contenedor en offcanvas apile los botones verticalmente y los alinee. */
+.offcanvasContainer {
+	display: flex;
+	flex-direction: column; /* Apila los botones verticalmente */
+	gap: 0.5rem; /* Reduce el espacio entre los botones */
+}
+
+/* Elimina el borde del enlace de registro y su estado hover en el offcanvas. */
+.offcanvasContainer .registerLink,
+.offcanvasContainer .registerLink:hover {
+	border: none !important;
+}
+
+/* Asegura que el botón de login tenga el texto blanco y el fondo correcto. */
+.offcanvasContainer .loginLink,
+.offcanvasContainer .loginLink:hover {
+	color: var(--color-white) !important;
+	background-color: var(--login-btn-bg); /* Usa la variable del tema para el fondo */
+}
