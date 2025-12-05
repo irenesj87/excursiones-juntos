@@ -18,7 +18,6 @@ export const TEST_IDS = {
  * Define las dimensiones y anchos para los elementos del esqueleto para facilitar su mantenimiento.
  */
 const SKELETON_SIZES = {
-	IMAGE_HEIGHT: 300, // Altura del esqueleto de la imagen
 	TITLE_HEIGHT: 21, // Altura del esqueleto del título
 	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
 	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
@@ -62,10 +61,6 @@ function ExcursionCardSkeleton({
 				aria-hidden="true"
 				data-testid={TEST_IDS.SKELETON_CARD}
 			>
-				<Skeleton
-					height={SKELETON_SIZES.IMAGE_HEIGHT}
-					className={cardStyles.cardImage}
-				/>
 				<Card.Body className="d-flex flex-column flex-grow-1">
 					<div>
 						{/* Título */}

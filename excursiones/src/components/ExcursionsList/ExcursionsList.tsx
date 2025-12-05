@@ -42,8 +42,7 @@ function ExcursionsList({
 	// Se obtiene el estado del loginReducer, el objeto usuario y el token
 	const {
 		login: isLoggedIn,
-		user,
-		token,
+		user
 	} = useSelector((state: RootState) => state.loginReducer);
 	const loginDispatch = useDispatch<AppDispatch>();
 	// Estado para las excursiones que se muestran. Esto nos permite mantener los resultados antiguos visibles mientras se
@@ -83,45 +82,57 @@ function ExcursionsList({
 	/**
 	 * Función asíncrona para unirse a una excursión.
 	 */
-	const joinExcursion = async (excursionId: string | number) => {
-		try {
-			// Llamada al servicio para unirse a la excursión.
-			if (!user?.mail) {
-				throw new Error(
-					"No se pudo obtener el email del usuario para unirse a la excursión."
-				);
-			}
+	const handleJoinExcursion = async (excursionId: string | number) => {
+		// En lugar de depender de `user` y `token` de la clausura del componente,
+		// que puede ser rancia, creamos una acción "thunk" que Redux puede ejecutar.
+		// Este thunk tendrá acceso a la versión más reciente del estado a través de `getState`.
+		const joinExcursionThunk =
+			() => async (dispatch: AppDispatch, getState: () => RootState) => {
+				const { user, token } = getState().loginReducer;
 
-			const updatedUser = await joinExcursionService(
-				user.mail,
-				String(excursionId), // Aseguramos que el ID sea un string para el servicio
-				token
-			);
+				if (!user?.mail || !token) {
+					throw new Error("Usuario no autenticado o información faltante.");
+				}
 
-			// Validamos que la respuesta de la API se ajuste a la interfaz User.
-			if (isUser(updatedUser)) {
-				// Si la validación es exitosa, actualizamos el estado global del usuario.
-				loginDispatch(updateUser({ user: updatedUser }));
-			} else {
-				throw new Error("La respuesta de la API no tiene el formato esperado.");
-			}
-		} catch (caughtError: unknown) {
-			// En desarrollo, muestra el error completo para facilitar la depuración.
-			if (process.env.NODE_ENV === "development") {
-				console.error("Error detallado (dev):", caughtError);
-			} else {
-				// En producción o test, registramos un mensaje controlado para no exponer detalles.
-				console.error(
-					"Error técnico al unirse a la excursión:",
-					(caughtError as Error).message || "Error desconocido"
-				);
-			}
-			// Relanzamos un nuevo error con un mensaje más amigable para el usuario.
-			// Este error será capturado y mostrado por el componente ExcursionCard.
-			throw new Error(
-				"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde."
-			);
-		}
+				try {
+					// Llamada al servicio para unirse a la excursión.
+					const updatedUser = await joinExcursionService(
+						user.mail,
+						String(excursionId), // Aseguramos que el ID sea un string para el servicio
+						token
+					);
+
+					// Validamos que la respuesta de la API se ajuste a la interfaz User.
+					if (isUser(updatedUser)) {
+						// Si la validación es exitosa, actualizamos el estado global del usuario.
+						dispatch(updateUser({ user: updatedUser }));
+					} else {
+						throw new Error(
+							"La respuesta de la API no tiene el formato esperado."
+						);
+					}
+				} catch (caughtError: unknown) {
+					// En desarrollo, muestra el error completo para facilitar la depuración.
+					if (process.env.NODE_ENV === "development") {
+						console.error("Error detallado (dev):", caughtError);
+					} else {
+						// En producción o test, registramos un mensaje controlado para no exponer detalles.
+						console.error(
+							"Error técnico al unirse a la excursión:",
+							(caughtError as Error).message || "Error desconocido"
+						);
+					}
+					// Relanzamos un nuevo error con un mensaje más amigable para el usuario.
+					// Este error será capturado y mostrado por el componente ExcursionCard.
+					throw new Error(
+						"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde."
+					);
+				}
+			};
+
+		// Despachamos el thunk. Redux Toolkit lo ejecutará y manejará la lógica asíncrona.
+		// El `await` asegura que si el thunk lanza un error, lo capturemos aquí.
+		await loginDispatch(joinExcursionThunk());
 	};
 
 	/**
@@ -143,10 +154,9 @@ function ExcursionsList({
 			>
 				<ExcursionCard
 					{...excursion}
-					image={`/images/${excursion.id}.jpg`}
 					isLoggedIn={isLoggedIn}
 					isJoined={isJoined}
-					onJoin={joinExcursion}
+					onJoin={handleJoinExcursion}
 				/>
 			</Col>
 		);

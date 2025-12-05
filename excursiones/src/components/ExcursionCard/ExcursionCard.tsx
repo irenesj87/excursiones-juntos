@@ -1,6 +1,5 @@
 import React, { useId, useState, useEffect } from "react";
 import { Card, Alert } from "react-bootstrap";
-import { API } from "../../constants";
 import ExcursionDetailItem from "../ExcursionDetailItem";
 import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
@@ -84,8 +83,6 @@ interface ExcursionCardProps {
 	readonly id: string | number;
 	/** Título de la excursión. */
 	readonly name: string;
-	/** Imagen de la excursión. */
-	readonly image: string;
 	/** Ubicación geográfica donde se lleva a cabo la excursión. */
 	readonly area: string;
 	/** Nivel de dificultad de la excursión. */
@@ -107,7 +104,6 @@ interface ExcursionCardProps {
 function ExcursionCard({
 	id,
 	name,
-	image,
 	area,
 	difficulty,
 	time,
@@ -132,14 +128,6 @@ function ExcursionCard({
 	// Genera un ID único y seguro para el título, que se usará para la accesibilidad.
 	const titleId = useId();
 
-	// Construye la URL completa de la imagen.
-	// Es una buena práctica definir la URL base en una variable de entorno
-	// (ej. process.env.REACT_APP_API_URL) para no tener que escribirla directamente.
-	// Se extrae solo el nombre del archivo de la prop 'image' para evitar rutas duplicadas.
-	const imageName = image.split("/").pop() || "";
-	const imageUrl = image.startsWith("http")
-		? image
-		: `${API.STATIC_IMAGES_URL}/${imageName}`;
 	/** Manejador para el evento de unirse a la excursión. */
 	const handleOnJoin = () => {
 		handleJoin(id);
@@ -188,19 +176,6 @@ function ExcursionCard({
 				con un fallback a la imagen original (JPG/PNG) para navegadores antiguos.
 				Esto requiere que una versión .webp de la imagen exista en el servidor.
 			*/}
-			<picture>
-				<source
-					srcSet={imageUrl.replace(/\.[^/.]+$/, ".webp")}
-					type="image/webp"
-				/>
-				<Card.Img
-					as="img"
-					src={imageUrl}
-					alt={`Paisaje de ${area}`}
-					className={styles.cardImage}
-					decoding="async"
-				/>
-			</picture>
 			{/* Contenedor para anuncios de accesibilidad, oculto visualmente. */}
 			<div aria-live="polite" aria-atomic="true" className="visually-hidden">
 				{announcement}
