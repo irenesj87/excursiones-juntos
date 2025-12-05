@@ -132,7 +132,7 @@ const NavigationBar = ({
 					{isLoggedIn ? (
 						<UserNav onCloseMenu={handleCloseMenu} />
 					) : (
-						<GuestNav onCloseMenu={handleCloseMenu} />
+						<GuestNav onCloseMenu={handleCloseMenu} variant="default" />
 					)}
 				</Suspense>
 			</ErrorBoundary>
@@ -217,9 +217,7 @@ const NavigationBar = ({
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						{/* La clase d-flex y flex-column asegura que los elementos se apilen verticalmente */}
-						<div className="d-lg-none d-flex flex-column pt-2 align-items-start gap-3">
-							{renderNavContent()}
-						</div>
+						<GuestNav onCloseMenu={handleCloseMenu} variant="offcanvas" />
 					</Offcanvas.Body>
 				</Offcanvas>
 			</Container>
