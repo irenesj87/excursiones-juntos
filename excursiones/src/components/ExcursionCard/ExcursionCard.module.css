@@ -7,15 +7,9 @@
 	border: var(--excursion-card-border);
 	border-radius: var(--border-radius-lg);
 	box-shadow: var(--excursion-card-shadow);
-	/* Añade un outline para la accesibilidad del teclado */
-	outline-offset: 2px;
 
 	& .card-body {
-		background-color: transparent; /* Asegura que el fondo del cuerpo sea transparente */
-	}
-
-	&:focus-visible {
-		outline: 2px solid var(--focus-outline-color);
+		background-color: transparent;
 	}
 }
 
@@ -48,6 +42,7 @@
 	flex-direction: column;
 	justify-content: center;
 }
+
 /* Estilos para la tarjeta cuando el usuario ya está apuntado */
 .joinedStatus {
 	display: inline-flex;

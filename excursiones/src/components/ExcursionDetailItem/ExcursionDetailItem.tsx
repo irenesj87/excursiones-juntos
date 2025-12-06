@@ -66,7 +66,6 @@ const ExcursionDetailItem = (
 	return (
 		<OverlayTrigger placement="top" overlay={renderTooltip}>
 			<button type="button" className={styles.detailItem}>
-				{label && <span className="visually-hidden">{`${label}: `}</span>}
 				{isDifficulty ? (
 					<span
 						className={cn(

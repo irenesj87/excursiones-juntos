@@ -7,7 +7,7 @@ import styles from "./NoExcursionsFound.module.css";
  */
 const NoExcursionsFound = () => (
 	<div className={styles.excursionsContainer}>
-		<output aria-live="polite" className={styles.messageNotFound}>
+		<output className={styles.messageNotFound}>
 			<SearchIcon className={ styles.messageIcon} />
 			<p className={styles.primaryMessage}>
 				No se encontraron excursiones con esas características.

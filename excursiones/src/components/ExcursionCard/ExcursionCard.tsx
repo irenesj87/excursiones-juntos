@@ -1,40 +1,14 @@
-import React, { useId, useState, useEffect } from "react";
+import React from "react";
 import { Card, Alert } from "react-bootstrap";
 import ExcursionDetailItem from "../ExcursionDetailItem";
 import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
-import cn from "classnames";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import { MapIcon, ChartIcon, ClockIcon } from "../shared/Icons";
+import cn from "classnames";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
-
-/**
- * Hook para recordar y retornar el valor que tenía una variable (ya sea un estado o prop) en el renderizado anterior del
- * componente.
- */
-const usePrevious = <T,>(value: T): T | undefined => {
-	/*
-	 * Se utiliza useRef para crear un contenedor ya que la principal característica de useRef es que su contenido
-	 * ref.current persiste entre renderizados sin provocar que el componente se vuelva a renderizar si cambia.
-	 * Se inicializa con el valor undefined.
-	 */
-	const ref = React.useRef<T | undefined>(undefined);
-	/*
-	 * useEffect ejecuta el código que tiene dentro después de que el componente se haya renderizado.
-	 * Entonces, después de cada renderizado, este efecto se activa y actualiza el valor de ref.current al valor value que se
-	 * le pasó al hook en ese renderizado.
-	 */
-	React.useEffect(() => {
-		ref.current = value;
-	});
-	/*
-	 * Esta línea se ejecuta durante el renderizado. Como el useEffect todavía no se ha ejecutado en este punto, ref.current
-	 * aún contiene el valor del renderizado anterior.
-	 */
-	return ref.current;
-};
 
 /**
  * Props del botón para unirse a una excursión.
@@ -121,70 +95,23 @@ function ExcursionCard({
 		onJoin ?? (() => Promise.resolve())
 	);
 
-	// Estado para gestionar los mensajes que se anunciarán a los lectores de pantalla.
-	const [announcement, setAnnouncement] = useState("");
-	// Almacena el valor anterior de `isJoined` para evitar anuncios repetidos.
-	const prevIsJoined = usePrevious(isJoined);
-	// Genera un ID único y seguro para el título, que se usará para la accesibilidad.
-	const titleId = useId();
-
 	/** Manejador para el evento de unirse a la excursión. */
 	const handleOnJoin = () => {
 		handleJoin(id);
 	};
 
-	/** Efecto para anunciar cambios de estado a los lectores de pantalla. */
-	useEffect(() => {
-		if (isJoining) {
-			setAnnouncement(`Apuntando a la excursión ${name}.`);
-		}
-	}, [isJoining, name]);
-
-	/**
-	 * Efecto para anunciar el resultado (éxito o error) de la acción.
-	 * Usamos una referencia para saber si es la primera vez que el componente se monta.
-	 */
-	const isInitialMount = React.useRef(true);
-	useEffect(() => {
-		/*
-		 * Si es la primera vez que se monta, detiene la ejecución del efecto inmediatamente.
-		 * Esto evita anuncios innecesarios al cargar el componente.
-		 */
-		if (isInitialMount.current) {
-			isInitialMount.current = false;
-			return;
-		}
-		if (joinError) {
-			setAnnouncement(`Error al apuntarse: ${getSafeErrorMessage(joinError)}.`);
-		} else if (isJoined && !prevIsJoined) {
-			// Solo anuncia el éxito cuando el estado cambia de no apuntado a apuntado.
-			setAnnouncement(`Te has apuntado correctamente a la excursión ${name}.`);
-		}
-	}, [joinError, isJoined, prevIsJoined, name]);
-
 	return (
 		<Card
 			as="article"
-			tabIndex={0}
-			aria-labelledby={titleId}
 			className={cn(styles.excursionItemCard, "h-100 w-100", {
 				[styles.isJoinedCard]: isJoined,
 			})}
 		>
-			{/* 
-				Usamos el elemento <picture> para servir imágenes en formato WebP si el navegador lo soporta,
-				con un fallback a la imagen original (JPG/PNG) para navegadores antiguos.
-				Esto requiere que una versión .webp de la imagen exista en el servidor.
-			*/}
-			{/* Contenedor para anuncios de accesibilidad, oculto visualmente. */}
-			<div aria-live="polite" aria-atomic="true" className="visually-hidden">
-				{announcement}
-			</div>
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>
 					{/* Título de la excursión */}
-					<Card.Title id={titleId} className={`${styles.excursionTitle} mb-3`}>
+					<Card.Title className={`${styles.excursionTitle} mb-3`}>
 						{name}
 					</Card.Title>
 					{/* Detalles de la excursión */}

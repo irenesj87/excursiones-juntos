@@ -3,8 +3,8 @@ import { Alert } from "react-bootstrap";
 
 /** 
  * @component ErrorMessageAlert
- * @description Es un componente funcional que muestra un mensaje de error
- * en un formato de alerta de Bootstrap, permitiendo al usuario cerrarla.
+ * @description Es un componente funcional que muestra un mensaje de error en un formato de alerta de Bootstrap, 
+ * permitiendo al usuario cerrarla.
  */
 interface ErrorMessageAlertProps {
 	/** El mensaje de error a mostrar. */
