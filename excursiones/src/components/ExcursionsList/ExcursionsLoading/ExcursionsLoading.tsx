@@ -23,9 +23,6 @@ const ExcursionsLoading = () => {
 		<SkeletonTheme {...skeletonThemeProps}>
 			<div className={styles.excursionsContainer}>
 				<h2 className={styles.title}>Próximas excursiones</h2>
-				<output aria-live="polite" className="visually-hidden">
-					Cargando excursiones...
-				</output>
 				<Row as="ul" className="gx-4 gy-5 list-unstyled">
 					{Array.from({ length: 8 }).map((_, index) => (
 						<Col

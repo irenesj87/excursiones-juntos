@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -40,19 +40,14 @@ function ExcursionsList({
 	error,
 }: ExcursionsListProps) {
 	// Se obtiene el estado del loginReducer, el objeto usuario y el token
-	const {
-		login: isLoggedIn,
-		user
-	} = useSelector((state: RootState) => state.loginReducer);
+	const { login: isLoggedIn, user } = useSelector(
+		(state: RootState) => state.loginReducer
+	);
 	const loginDispatch = useDispatch<AppDispatch>();
 	// Estado para las excursiones que se muestran. Esto nos permite mantener los resultados antiguos visibles mientras se
 	// cargan los nuevos datos para evitar que parpadeen o se queden en blanco.
 	const [displayedExcursions, setDisplayedExcursions] =
 		useState<readonly Excursion[]>(excursionData);
-	// Estado para anunciar cambios a los lectores de pantalla.
-	const [announcement, setAnnouncement] = useState("");
-	// Referencia para saber si es la primera carga del componente. Permite evitar anunciar resultados en la primera carga.
-	const isInitialLoad = useRef(true);
 
 	// Efecto para gestionar qué excursiones se muestran. Se ejecuta cada vez que isLoading o excursionData cambian
 	useEffect(() => {
@@ -63,21 +58,6 @@ function ExcursionsList({
 			setDisplayedExcursions(excursionData);
 		}
 	}, [isLoading, excursionData]);
-
-	// Efecto separado para la accesibilidad. Se ejecuta solo cuando los datos de las excursiones cambian.
-	useEffect(() => {
-		// Anunciar el resultado de la búsqueda a los lectores de pantalla, pero solo después de la carga inicial para evitar
-		// ruido innecesario.
-		if (isInitialLoad.current) {
-			isInitialLoad.current = false; // Marcar la carga inicial como completada.
-			return;
-		}
-		if (excursionData.length > 0) {
-			const plural = excursionData.length === 1 ? "excursión" : "excursiones";
-			const message = `Búsqueda completada. Se han encontrado ${excursionData.length} ${plural}.`;
-			setAnnouncement(message);
-		}
-	}, [excursionData]);
 
 	/**
 	 * Función asíncrona para unirse a una excursión.
@@ -178,9 +158,6 @@ function ExcursionsList({
 	// Por defecto, mostrar las excursiones.
 	return (
 		<div className={styles.excursionsContainer}>
-			<output aria-live="polite" className="visually-hidden">
-				{announcement}
-			</output>
 			<h2 className={styles.title}>Próximas excursiones</h2>
 			<Row as="ul" className="gx-4 gy-5 list-unstyled">
 				{excursionComponents}

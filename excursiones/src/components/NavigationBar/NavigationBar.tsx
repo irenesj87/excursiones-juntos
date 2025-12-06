@@ -11,7 +11,6 @@ import { useAuthContext } from "../../context/AuthContext";
 import { RootState } from "../../store/store";
 import Logo from "../Logo";
 import SearchBar from "../SearchBar";
-import ErrorBoundary from "../ErrorBoundary";
 import UserNavSkeleton from "../UserNav/UserNavSkeleton";
 import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
 import ThemeToggleButton from "../ThemeToggleButton";
@@ -125,17 +124,15 @@ const NavigationBar = ({
 		// Si el usuario está autenticado, se muestra UserNav, si no, GuestNav.
 		// Ambos reciben la función handleCloseMenu para cerrar el menú al hacer alguna acción.
 		return (
-			<ErrorBoundary fallback={<GuestNavSkeleton />}>
-				<Suspense
-					fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
-				>
-					{isLoggedIn ? (
-						<UserNav onCloseMenu={handleCloseMenu} />
-					) : (
-						<GuestNav onCloseMenu={handleCloseMenu} variant="default" />
-					)}
-				</Suspense>
-			</ErrorBoundary>
+			<Suspense
+				fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
+			>
+				{isLoggedIn ? (
+					<UserNav onCloseMenu={handleCloseMenu} />
+				) : (
+					<GuestNav onCloseMenu={handleCloseMenu} variant="default" />
+				)}
+			</Suspense>
 		);
 	};
 
