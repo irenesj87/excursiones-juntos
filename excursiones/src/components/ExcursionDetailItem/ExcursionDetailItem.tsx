@@ -3,9 +3,7 @@ import { OverlayTrigger, Tooltip, TooltipProps } from "react-bootstrap";
 import cn from "classnames";
 import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 import styles from "./ExcursionDetailItem.module.css";
-import type { DifficultyLevel } from "../../types";
-
-const DIFFICULTY = "Dificultad";
+import { DIFFICULTY, VALID_DIFFICULTY_LEVELS } from "../../constants";
 
 /**
  * Props para el componente ExcursionDetailItem.
@@ -20,16 +18,12 @@ interface ExcursionDetailItemProps {
 }
 
 /**
- * Array con los niveles de dificultad válidos.
- */
-const validDifficultyLevels: DifficultyLevel[] = ["Baja", "Media", "Alta"];
-
-/**
  * Type guard que comprueba si un string es un nivel de dificultad válido.
  */
-const isDifficultyLevel = (value: string): value is DifficultyLevel => {
-	return (validDifficultyLevels as string[]).includes(value);
-};
+const isDifficultyLevel = (
+	value: string
+): value is (typeof VALID_DIFFICULTY_LEVELS)[number] =>
+	(VALID_DIFFICULTY_LEVELS as readonly string[]).includes(value);
 
 /**
  * Componente para mostrar un detalle específico de una excursión.

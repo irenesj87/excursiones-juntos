@@ -1,11 +1,20 @@
 /**
  * Constantes globales de la aplicación.
- * Centralizar estas constantes en un solo lugar mejora la mantenibilidad y asegura la consistencia en el proyecto.
  */
 export const COMPANY_NAME = "Excursiones Juntos";
 export const START_YEAR = 2021;
 export const GENERIC_ERROR_MESSAGE =
 	"Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde";
+export const DIFFICULTY = "Dificultad";
+
+/**
+ * Array con los niveles de dificultad válidos.
+ */
+export const VALID_DIFFICULTY_LEVELS = [
+	"Baja",
+	"Media",
+	"Alta",
+] as const;
 
 /**
  * Rutas de la aplicación.
