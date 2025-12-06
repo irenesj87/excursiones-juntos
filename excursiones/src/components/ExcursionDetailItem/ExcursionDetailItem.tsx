@@ -1,9 +1,10 @@
 import React from "react";
 import { OverlayTrigger, Tooltip, TooltipProps } from "react-bootstrap";
 import cn from "classnames";
+import { DIFFICULTY, VALID_DIFFICULTY_LEVELS } from "../../constants";
 import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 import styles from "./ExcursionDetailItem.module.css";
-import { DIFFICULTY, VALID_DIFFICULTY_LEVELS } from "../../constants";
+
 
 /**
  * Props para el componente ExcursionDetailItem.
@@ -11,18 +12,20 @@ import { DIFFICULTY, VALID_DIFFICULTY_LEVELS } from "../../constants";
 interface ExcursionDetailItemProps {
 	/** El valor del detalle a mostrar (ej. "Media", "4 horas"). */
 	readonly text?: string;
-	/** Etiqueta descriptiva para accesibilidad y tooltips (ej. "Dificultad"). */
+	/** Etiqueta descriptiva para tooltips (ej. "Dificultad"). */
 	readonly label?: string;
 	/** El icono a mostrar junto al detalle. */
 	readonly icon?: React.ReactNode;
 }
 
 /**
- * Type guard que comprueba si un string es un nivel de dificultad válido.
+ * Guarda de tipo que comprueba si un string es un nivel de dificultad válido.
  */
 const isDifficultyLevel = (
 	value: string
+	// Si esta función retorna true, value ya no es un string cualquiera, sino que es uno de los valores específicos del array
 ): value is (typeof VALID_DIFFICULTY_LEVELS)[number] =>
+	// Se necesita poner readonly string[] para evitar problemas de tipo
 	(VALID_DIFFICULTY_LEVELS as readonly string[]).includes(value);
 
 /**
@@ -32,27 +35,30 @@ const isDifficultyLevel = (
 const ExcursionDetailItem = (
 	props: ExcursionDetailItemProps
 ): JSX.Element | null => {
-	// Si no hay texto, no renderizamos nada.
 	const { text, label, icon } = props;
 
-	// Determina si el item es de tipo "Dificultad" para aplicar estilos especiales.
-	// La comprobación de `text` es necesaria para el type guard.
+	/*
+	 * Determina si el item es de tipo "Dificultad" para aplicar estilos especiales.
+	 * Para ello tiene que cumplir tres condiciones:
+	 * 1. La label tiene que decir "Dificultad".
+	 * 2. El texto debe existir.
+	 * 3. El texto debe de ser un nivel de dificultad válido, es decir, "Baja", "Media" o "Alta".
+	 */
 	const isDifficulty =
 		label === DIFFICULTY && !!text && isDifficultyLevel(text);
 
 	// Hook para obtener la clase de estilo solo si es un item de dificultad.
-	// Se llama siempre en el nivel superior del componente.
 	const { difficultyClass } = useDifficultyStyles(
 		isDifficulty ? text : null,
 		styles
 	);
 
-	// El "early return" se mueve aquí, después de que todos los hooks se hayan llamado.
 	if (!text) {
+		// Si no hay texto, no renderizamos nada.
 		return null;
 	}
 
-	// Función única para renderizar el tooltip, evitando duplicación.
+	// Función para renderizar el tooltip.
 	const renderTooltip = (tooltipProps: TooltipProps): React.ReactElement => (
 		<Tooltip {...tooltipProps}>{label ? `${label}: ${text}` : text}</Tooltip>
 	);
