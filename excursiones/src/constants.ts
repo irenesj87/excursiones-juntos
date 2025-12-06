@@ -1,5 +1,3 @@
-import type { DifficultyLevel } from "./types";
-
 /**
  * Constantes globales de la aplicación.
  */
