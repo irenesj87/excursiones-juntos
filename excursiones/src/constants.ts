@@ -12,11 +12,11 @@ export const DIFFICULTY = "Dificultad";
 /**
  * Array con los niveles de dificultad válidos.
  */
-export const VALID_DIFFICULTY_LEVELS: DifficultyLevel[] = [
+export const VALID_DIFFICULTY_LEVELS = [
 	"Baja",
 	"Media",
 	"Alta",
-];
+] as const;
 
 /**
  * Rutas de la aplicación.
