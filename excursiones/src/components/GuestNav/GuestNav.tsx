@@ -5,7 +5,7 @@ import { ROUTES } from "../../constants";
 import styles from "./GuestNav.module.css";
 
 interface GuestNavProps {
-	/** Define la apariencia y el layout de los enlaces de navegación. */
+	/** Función para cerrar el menú contenedor (p. ej. un Offcanvas). */
 	readonly onCloseMenu?: () => void;
 	readonly variant?: "default" | "offcanvas";
 	/**
