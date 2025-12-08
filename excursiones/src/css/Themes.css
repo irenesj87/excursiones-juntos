@@ -372,24 +372,6 @@ html.dark .btn-close {
 	background-color: var(--excursion-card-bg);
 }
 
-/* Estilos específicos para los enlaces dentro del Offcanvas de navegación (identificado por su ID) */
-#offcanvasNavbar .offcanvas-body .nav-link {
-	/* En modo oscuro, el texto de los botones de acción debe ser claro */
-	color: var(--color-text-base);
-}
-
-/* Estilos para el botón de 'Iniciar Sesión' dentro del Offcanvas */
-#offcanvasNavbar .offcanvas-body .nav-link.loginLink {
-	color: var(--login-btn-text);
-	background-color: var(--login-btn-bg);
-	border: 1px solid var(--login-btn-border);
-}
-
-#offcanvasNavbar .offcanvas-body .nav-link.loginLink:hover {
-	background-color: var(--login-btn-bg-hover);
-	border-color: var(--login-btn-border-hover);
-}
-
 /* Estilos específicos para los inputs de tipo 'plaintext' */
 .form-control-plaintext {
 	color: var(--color-text-base);

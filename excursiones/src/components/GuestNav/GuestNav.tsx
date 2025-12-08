@@ -5,8 +5,13 @@ import { ROUTES } from "../../constants";
 import styles from "./GuestNav.module.css";
 
 interface GuestNavProps {
-	readonly onCloseMenu?: () => void; // Función para cerrar el menú contenedor en breakpoints pequeños.
+	/** Función para cerrar el menú contenedor (p. ej. un Offcanvas). */
+	readonly onCloseMenu?: () => void;
 	readonly variant?: "default" | "offcanvas";
+	/**
+	 * Clases CSS adicionales para aplicar al contenedor principal de los enlaces.
+	 */
+	readonly className?: string;
 }
 
 /**
@@ -14,13 +19,14 @@ interface GuestNavProps {
  * si se proporciona la función `onCloseMenu`.
  */
 const GuestNav = ({
+	className,
 	onCloseMenu = () => {
 		/* no-op */
 	},
 	variant = "default",
 }: GuestNavProps): JSX.Element => (
 	<div
-		className={cn({
+		className={cn(className, {
 			// Aplica clases específicas cuando la variante es 'offcanvas' para controlar la disposición y el ancho.
 			[styles.offcanvasContainer]: variant === "offcanvas",
 			"w-100": variant === "offcanvas",
@@ -30,7 +36,7 @@ const GuestNav = ({
 			to={ROUTES.REGISTER}
 			onClick={onCloseMenu}
 			variant="link"
-className={cn(styles.registerLink, { "me-lg-2": variant === "default" })}
+			className={cn(styles.registerLink, { "me-lg-2": variant === "default" })}
 		>
 			Regístrate
 		</StyledNavLink>

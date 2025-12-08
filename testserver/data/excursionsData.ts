@@ -33,6 +33,20 @@ const excursions: Excursion[] = [
 		difficulty: "Alta",
 		time: "5 horas",
 	},
+	{
+		id: "3",
+		name: "Ruta del Oso",
+		area: "Norte",
+		difficulty: "Baja",
+		time: "2 horas",
+	},
+	{
+		id: "4",
+		name: "Parque Natural de Somiedo",
+		area: "Norte",
+		difficulty: "Media",
+		time: "3 horas",
+	}
 ];
 
 export default excursions;
