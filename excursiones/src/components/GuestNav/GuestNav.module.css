@@ -1,12 +1,13 @@
 .registerLink {
 	display: inline-block;
-	padding: 0.5rem 0.75rem;
+	padding: 0.6rem 1rem; /* Ajustado para igualar la altura del botón de login */
 	font-weight: 600;
 	line-height: 1.5;
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
 	color: var(--register-link-color);
+	border: 1px solid var(--separator-color);
 	transition: none;
 	cursor: pointer;
 	user-select: none;
@@ -40,19 +41,7 @@
 /* Asegura que el contenedor en offcanvas apile los botones verticalmente y los alinee. */
 .offcanvasContainer {
 	display: flex;
-	flex-direction: column; /* Apila los botones verticalmente */
-	gap: 0.5rem; /* Reduce el espacio entre los botones */
-}
-
-/* Elimina el borde del enlace de registro y su estado hover en el offcanvas. */
-.offcanvasContainer .registerLink,
-.offcanvasContainer .registerLink:hover {
-	border: none !important;
-}
-
-/* Asegura que el botón de login tenga el texto blanco y el fondo correcto. */
-.offcanvasContainer .loginLink,
-.offcanvasContainer .loginLink:hover {
-	color: var(--color-white) !important;
-	background-color: var(--login-btn-bg); /* Usa la variable del tema para el fondo */
+	flex-direction: column;
+	gap: 0.5rem; /* Espacio entre los enlaces */
+	padding-top: 1rem; /* Añade espacio superior para separar del borde del offcanvas */
 }
