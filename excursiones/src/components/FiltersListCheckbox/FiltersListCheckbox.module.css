@@ -55,15 +55,11 @@
 	opacity: 0.9;
 }
 
-.lowChecked {
-	border-color: var(--difficulty-low-bg-hover);
-	background-color: var(--difficulty-low-bg-hover);
-	color: var(--color-white);
-}
-
+.lowChecked, 
 .lowChecked:hover {
 	border-color: var(--difficulty-low-bg-hover);
 	background-color: var(--difficulty-low-bg-hover);
+	color: var(--color-white);
 }
 
 /* --- Estilos para Dificultad Media--- */
@@ -79,15 +75,11 @@
 	opacity: 0.9;
 }
 
-.mediumChecked {
-	border-color: var(--difficulty-medium-bg-hover);
-	background-color: var(--difficulty-medium-bg-hover);
-	color: var(--color-white);
-}
-
+.mediumChecked,
 .mediumChecked:hover {
 	border-color: var(--difficulty-medium-bg-hover);
 	background-color: var(--difficulty-medium-bg-hover);
+	color: var(--color-white);
 }
 
 /* --- Estilos para Dificultad Alta --- */
@@ -96,17 +88,14 @@
 	color: var(--color-white);
 	background-color: var(--difficulty-high-bg);
 }
+
 .high:hover {
 	background-color: var(--difficulty-high-bg-hover);
 	border-color: var(--difficulty-high-bg-hover);
 	opacity: 0.9;
 }
-.highChecked {
-	border-color: var(--difficulty-high-bg-hover);
-	background-color: var(--difficulty-high-bg-hover);
-	color: var(--color-white);
-}
 
+.highChecked,
 .highChecked:hover {
 	border-color: var(--difficulty-high-bg-hover);
 	background-color: var(--difficulty-high-bg-hover);

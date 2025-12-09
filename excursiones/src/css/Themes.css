@@ -165,7 +165,7 @@ html.light {
 	--difficulty-low-bg-hover: var(--color-green-700);
 	--difficulty-medium-bg: hsl(41, 87%, 64%);
 	--difficulty-medium-text: var(--color-white-off);
-	--difficulty-medium-bg-hover:hsl(41, 80%, 50%); 
+	--difficulty-medium-bg-hover:hsl(41, 80%, 50%);
 	--difficulty-high-bg: hsl(0, 88%, 67%);
 	--difficulty-high-text: var(--color-white-off);
 	--difficulty-high-bg-hover: hsl(0, 66%, 51%);
@@ -175,7 +175,7 @@ html.light {
 
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 100%, 97%);
-	--color-border-danger: hsl(0, 90%, 85%); /* Rojo suave */
+	--color-border-danger: hsl(0, 90%, 85%);
 	--color-text-danger: hsl(0, 70%, 40%); /* Rojo oscuro para texto/iconos */
 
 	/* Componente de error de filtro */
@@ -195,7 +195,7 @@ html.light body {
 html.dark {
 	/* --- 2a. Variables Semánticas --- */
 	--color-primary: var(--color-green-100);
-	--primary-color-rgb: 166, 201, 184; /* RGB de --color-green-100 (hsl(150, 35%, 65%)) */
+	--primary-color-rgb: 166, 201, 184;
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: var(--color-green-900);
@@ -285,7 +285,7 @@ html.dark {
 	--filter-pill-border-checked: var(--color-primary);
 	--filter-pill-shadow-checked: none;
 
-	--filter-clear-btn-color-hover: hsl(355, 83%, 71%); /* Rojo claro */
+	--filter-clear-btn-color-hover: hsl(355, 83%, 71%);
 
 	/* --- Footer --- */
 	--footer-bg: var(--color-background-body);
