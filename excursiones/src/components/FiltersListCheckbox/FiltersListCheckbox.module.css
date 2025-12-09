@@ -52,6 +52,7 @@
 	/* Aseguramos que el color del borde también cambie en el hover para evitar saltos visuales. */
 	border-color: var(--difficulty-low-bg-hover);
 	background-color: var(--difficulty-low-bg-hover);
+	opacity: 0.9;
 }
 
 .lowChecked {
