@@ -3,21 +3,22 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
-import {
-	ChartIcon,
-	ClockIcon,
-	MapIcon,
-	TrashIcon,
-} from "../shared/Icons";
+import { ChartIcon, ClockIcon, MapIcon, TrashIcon } from "../shared/Icons";
 import styles from "./Filters.module.css";
 import { RootState } from "../../store/store";
 
-// Definimos las props que puede recibir el componente Filters.
+/**
+ * Props para el componente `Filters`.
+ */
 interface FiltersProps {
+	/**
+	 * Si es `true`, muestra el título principal "Filtros".
+	 * @default true
+	 */
 	showTitle?: boolean;
 }
 
-// Definimos el tipo para las secciones de filtros.
+/** Tipo para los nombres de las categorías de filtro. */
 type FilterName = "area" | "difficulty" | "time";
 
 type FilterSection = {
@@ -26,7 +27,7 @@ type FilterSection = {
 	icon: React.ReactNode;
 };
 
-// Definimos las secciones de filtros con sus nombres, títulos e iconos.
+/** Define las secciones de filtros con sus nombres, títulos e iconos correspondientes. */
 const filterSections = [
 	{
 		name: "area",
@@ -46,7 +47,10 @@ const filterSections = [
 ] satisfies FilterSection[];
 
 /**
- * Componente principal de los filtros que renderiza el tipo de los filtros de búsqueda (zona, dificultad, tiempo estimado).
+ * Componente que renderiza el panel de filtros.
+ * Muestra diferentes secciones de filtrado (zona, dificultad, tiempo) y un botón para limpiar todas las selecciones.
+ * @param {FiltersProps} props - Las props del componente.
+ * @returns {React.ReactElement} El componente de filtros.
  */
 const Filters = ({ showTitle = true }: FiltersProps) => {
 	const dispatch = useDispatch();
