@@ -21,6 +21,15 @@
 	},
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
+		// TypeScript: Error si se usa 'any' explícitamente
+		"@typescript-eslint/no-explicit-any": "error",
+		// React: Preferir definición de funciones sobre React.FC
+		"react/function-component-definition": [
+			"error",
+			{
+				"namedComponents": "function-declaration"
+			}
+		],
 		"react/react-in-jsx-scope": "off",
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]

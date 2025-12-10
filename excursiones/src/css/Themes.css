@@ -1,8 +1,10 @@
 /* ======================================== */
 /* 1. PRIMITIVAS (TOKENS DE DISEÑO) */
 /* ======================================== */
-/* Estos son los valores brutos y no cambian con el tema. */
-/* Definen la paleta de colores disponible en todo el proyecto. */
+/* 
+ * Definimos la paleta base usando HSL para facilitar ajustes de luminosidad y saturación
+ * sin perder el tono (Hue). Estos valores son inmutables y no dependen del tema activo.
+ */
 :root {
 	/* Paleta de Verdes */
 	--color-green-100: hsl(150, 35%, 65%);
@@ -52,8 +54,13 @@
 /* --- MODO CLARO (LIGHT) --- */
 html.light {
 	/* --- 2a. Variables Semánticas --- */
+	/* Usamos tonos oscuros para elementos principales para contrastar con el fondo claro */
 	--color-primary: var(--color-green-700);
-	--primary-color-rgb: 101, 140, 122; /* RGB de --color-green-700 (hsl(150, 26%, 27%)) */
+	/* 
+	 * RGB crudo necesario para utilidades de opacidad de Bootstrap (ej: bg-primary-subtle).
+	 * Corresponde a --color-green-700.
+	 */
+	--primary-color-rgb: 101, 140, 122;
 	--color-primary-hover: var(--color-green-800);
 	--color-accent: var(--color-green-500);
 	--color-background-body: var(--color-gray-neutral-100);
@@ -92,14 +99,15 @@ html.light {
 	--nav-link-active-bg: var(--color-gray-neutral-400);
 	--nav-link-active-border: var(--color-gray-neutral-600);
 
+	/* El texto blanco sobre verde-500 pasa el ratio 4.5:1 (aprox 4.6:1) */
 	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-green-500);
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-border-hover: var(--color-primary-hover);
 
-	--logout-bg-color: var(--primary-color);
-	--logout-bg-color-hover: var(--primary-color);
+	--logout-bg-color: var(--color-gray-green-700);
+	--logout-bg-color-hover: var(--color-gray-green-800);
 	--logout-text-color: var(--color-text-on-primary);
 
 	/* --- Menú de navegación Offcanvas --- */
@@ -111,7 +119,7 @@ html.light {
 	--excursion-card-title-color: var(--color-text-base);
 	--excursion-card-border: 1px solid var(--color-border-default);
 	--excursion-card-icon-color: var(--color-primary);
-	--excursion-card-joined-status-text: var(--color-primary);
+	--excursion-card-joined-status-text: var(--color-success-light);
 
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
@@ -155,6 +163,7 @@ html.light {
 	--footer-icon-bg-hover: var(--color-gray-neutral-500);
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */
+	/* Asignamos las variantes oscuras ('light' en nombre primitivo) para asegurar legibilidad */
 	--bs-success: var(--color-success-light);
 	--bs-warning: var(--color-warning-light);
 	--bs-danger: var(--color-danger-light);
@@ -165,7 +174,7 @@ html.light {
 	--difficulty-low-bg-hover: var(--color-green-700);
 	--difficulty-medium-bg: hsl(41, 87%, 64%);
 	--difficulty-medium-text: var(--color-white-off);
-	--difficulty-medium-bg-hover:hsl(41, 80%, 50%);
+	--difficulty-medium-bg-hover: hsl(41, 80%, 50%);
 	--difficulty-high-bg: hsl(0, 88%, 67%);
 	--difficulty-high-text: var(--color-white-off);
 	--difficulty-high-bg-hover: hsl(0, 66%, 51%);
@@ -194,12 +203,16 @@ html.light body {
 /* ======================================== */
 html.dark {
 	/* --- 2a. Variables Semánticas --- */
+	/* Usamos tonos claros para elementos principales para contrastar con el fondo oscuro */
 	--color-primary: var(--color-green-100);
+	/* Corresponde a --color-green-100 */
 	--primary-color-rgb: 166, 201, 184;
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: var(--color-green-900);
-	--color-background-surface: var(--color-gray-green-950);
+	--color-background-surface: var(
+		--color-gray-green-900
+	); /* Aclarado para resaltar sobre el fondo (20% luminosidad) */
 	--color-text-base: var(--color-gray-green-200);
 	--color-text-muted: var(--color-gray-green-400);
 	--color-text-on-primary: var(--color-black-soft);
@@ -209,7 +222,9 @@ html.dark {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-bg: var(--color-gray-green-950);
+	--navbar-bg: var(
+		--color-background-surface
+	); /* Unificado con el color de las cards */
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-white-off);
 	--navbar-brand-icon: var(--color-green-300);
@@ -226,7 +241,8 @@ html.dark {
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
 
-	--login-btn-text: var(--color-white);
+	/* Usamos texto oscuro sobre fondo claro (green-300) para cumplir WCAG AA (> 4.5:1) */
+	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-green-300);
 	--login-btn-border: var(--separator-color);
 	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
@@ -234,8 +250,9 @@ html.dark {
 
 	--register-link-color: var(--navbar-color);
 	--register-link-bg-hover: rgba(255, 255, 255, 0.1);
-	--nav-link-active-bg: hsl(150, 10%, 25%);
-	--nav-link-active-border: hsl(150, 10%, 35%);
+	/* Ajustados ligeramente más claros para mantener contraste con el nuevo fondo de navbar */
+	--nav-link-active-bg: hsl(150, 10%, 30%);
+	--nav-link-active-border: hsl(150, 10%, 40%);
 
 	--secondary-btn-text: var(--color-text-base);
 	--secondary-btn-bg: hsl(210, 15%, 25%);
@@ -255,12 +272,13 @@ html.dark {
 	--excursion-card-title-color: var(--color-text-base);
 	--excursion-card-border: 1px solid var(--separator-color);
 	--excursion-card-icon-color: var(--color-primary);
-	--excursion-card-joined-status-text: hsl(138, 71%, 65%);
+	--excursion-card-joined-status-text: var(--color-success-dark);
 
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
-	--filters-toggle-btn-color: var(--color-white);
+	/* Texto oscuro sobre fondo claro (green-300) para contraste > 4.5:1 */
+	--filters-toggle-btn-color: var(--color-text-on-primary);
 	--filters-toggle-btn-bg: var(--color-green-300);
 	--filters-toggle-btn-border: var(--separator-color);
 	--filters-toggle-btn-bg-hover: hsl(150, 10%, 25%);
@@ -275,11 +293,12 @@ html.dark {
 	--filter-badge-bg: var(--color-primary);
 	--filter-badge-text: var(--login-btn-text);
 
-	--filter-pill-bg: hsl(150, 10%, 25%);
+	/* Píldoras aclaradas (30%) para que no se pierdan sobre el nuevo fondo (20%) */
+	--filter-pill-bg: hsl(150, 10%, 30%);
 	--filter-pill-text: var(--color-text-base);
-	--filter-pill-border: hsl(150, 10%, 30%);
-	--filter-pill-bg-hover: hsl(150, 10%, 30%);
-	--filter-pill-border-hover: hsl(150, 10%, 40%);
+	--filter-pill-border: hsl(150, 10%, 35%);
+	--filter-pill-bg-hover: hsl(150, 10%, 35%);
+	--filter-pill-border-hover: hsl(150, 10%, 45%);
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
@@ -297,6 +316,7 @@ html.dark {
 	--footer-icon-bg-hover: hsl(150, 10%, 25%);
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */
+	/* Asignamos las variantes claras ('dark' en nombre primitivo) para resaltar sobre fondo oscuro */
 	--bs-success: var(--color-success-dark);
 	--bs-warning: var(--color-warning-dark);
 	--bs-danger: var(--color-danger-dark);

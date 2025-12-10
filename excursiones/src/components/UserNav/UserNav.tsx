@@ -13,7 +13,7 @@ import styles from "./UserNav.module.css";
  * Define las propiedades que recibe el componente UserNav.
  */
 interface UserNavProps {
-	onCloseMenu?: () => void; // Función opcional para cerrar un menú (ej: en responsive).
+	readonly onCloseMenu?: () => void; // Función opcional para cerrar un menú (ej: en responsive).
 }
 
 /**
@@ -21,11 +21,11 @@ interface UserNavProps {
  * sesión.
  * Permite cerrar un menú contenedor (como un Offcanvas o un Dropdown) si se proporciona la función `onCloseMenu`.
  */
-const UserNav = ({
+function UserNav({
 	onCloseMenu = () => {
 		/* no-op */
 	},
-}: UserNavProps) => {
+}: UserNavProps) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ const UserNav = ({
 			<StyledNavLink
 				to={ROUTES.USER}
 				onClick={onCloseMenu}
-				className="me-lg-3"
+				className={`${styles.profileLink} me-lg-3`}
 				aria-label="Tu perfil"
 			>
 				<span className="ms-2">Tu perfil</span>
@@ -54,6 +54,6 @@ const UserNav = ({
 			</StyledButton>
 		</>
 	);
-};
+}
 
 export default UserNav;

@@ -5,7 +5,7 @@ import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import { MapIcon, ChartIcon, ClockIcon } from "../shared/Icons";
+import { MapIcon, ChartIcon, ClockIcon, CheckIcon } from "../shared/Icons";
 import cn from "classnames";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
@@ -30,6 +30,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 		return (
 			<div className="d-grid d-md-flex justify-content-center justify-content-md-end">
 				<output className={styles.joinedStatus}>
+					<span><CheckIcon className={styles.detailIcon} /></span>
 					<span>Apuntado/a</span>
 				</output>
 			</div>
@@ -119,17 +120,17 @@ function ExcursionCard({
 						<ExcursionDetailItem
 							text={area}
 							label="Zona"
-							icon={<MapIcon className={styles.icon} />}
+							icon={<MapIcon className={styles.detailIcon} />}
 						/>
 						<ExcursionDetailItem
 							text={difficulty}
 							label="Dificultad"
-							icon={<ChartIcon className={styles.icon} />}
+							icon={<ChartIcon className={styles.detailIcon} />}
 						/>
 						<ExcursionDetailItem
 							text={time}
 							label="Tiempo estimado"
-							icon={<ClockIcon className={styles.icon} />}
+							icon={<ClockIcon className={styles.detailIcon} />}
 						/>
 					</div>
 				</div>
