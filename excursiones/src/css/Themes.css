@@ -212,7 +212,7 @@ html.dark {
 	--navbar-bg: var(--color-gray-green-950);
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-white-off);
-	--navbar-brand-icon: var(--color-white-off);
+	--navbar-brand-icon: var(--color-green-300);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
 	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -260,8 +260,8 @@ html.dark {
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
-	--filters-toggle-btn-color: var(--navbar-color);
-	--filters-toggle-btn-bg: transparent;
+	--filters-toggle-btn-color: var(--color-white);
+	--filters-toggle-btn-bg: var(--color-green-300);
 	--filters-toggle-btn-border: var(--separator-color);
 	--filters-toggle-btn-bg-hover: hsl(150, 10%, 25%);
 	--filters-toggle-btn-color-hover: var(--color-accent);
