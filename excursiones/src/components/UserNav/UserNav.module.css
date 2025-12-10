@@ -1,18 +1,16 @@
 .profileLink {
 	display: inline-block;
-	padding: 0.375rem 0.75rem;
-	font-weight: 400;
+	padding: 0.6rem 1rem;
+	font-weight: 600;
 	line-height: 1.5;
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
-	cursor: pointer;
-	user-select: none;
-	border-radius: 0.375rem;
-	background-color: transparent;
-	border: 1px solid var(--register-link-border-color);
+	border: 1px solid var(--separator-color);
 	color: var(--register-link-color);
 	transition: none;
+	cursor: pointer;
+	user-select: none;
 }
 
 .profileLink:hover {
@@ -25,8 +23,8 @@
 	color: var(--logout-text-color);
 	background-color: var(--logout-bg-color);
 	border-color: var(--logout-bg-color);
-	border-radius: 0.375rem;
-	padding: 0.375rem 0.75rem;
+	padding: 0.6rem 1rem;
+	transition: none;
 }
 
 .logoutLink:hover,

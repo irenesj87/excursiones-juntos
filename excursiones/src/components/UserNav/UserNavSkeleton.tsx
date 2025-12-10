@@ -5,15 +5,15 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 // Define placeholder dimensions as constants to avoid magic numbers and improve maintainability.
 const USER_NAV_SKELETON_SIZES = {
-	PROFILE_LINK_WIDTH: 112.5,
-	LOGOUT_BUTTON_WIDTH: 138,
+	PROFILE_LINK_WIDTH: 99,
+	LOGOUT_BUTTON_WIDTH: 132,
 	HEIGHT: 44,
 };
 
 /**
  * Componente que muestra un esqueleto de carga para los botones de navegación de un usuario logueado.
  */
-const UserNavSkeleton = () => {
+function UserNavSkeleton() {
 	// Obtiene los colores del esqueleto de forma centralizada a través del hook.
 	const { baseColor, highlightColor } = useSkeletonTheme();
 
