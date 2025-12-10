@@ -23,7 +23,6 @@
 	color: var(--logout-text-color);
 	background-color: var(--logout-bg-color);
 	border-color: var(--logout-bg-color);
-	border-radius: 0.375rem;
 	padding: 0.6rem 1rem;
 	transition: none;
 }
