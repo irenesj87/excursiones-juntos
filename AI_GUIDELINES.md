@@ -7,6 +7,9 @@
 
 ## 2. Estructura y Componentes:
 
+- Descompón funciones y componentes extensos (más de 20-30 líneas) en unidades pequeñas con una única responsabilidad.
+- Evita copiar y pegar; extrae la lógica o UI duplicada a custom hooks, utilidades o componentes reutilizables.
+- Sustituye números y cadenas literales sueltas por constantes con nombres descriptivos (ej: MAX_RETRIES en lugar de 3).
 - No utilices React.FC.
 - Desestructura las props directamente en la firma del componente para mejorar la legibilidad y ver claramente las dependencias de dicho componente.
 - Si hay una lista de elementos, usa un key único y estable. 
@@ -30,6 +33,7 @@
 
 ## 6. Documentación:
 
+- Prioriza nombres claros de variables y funciones sobre los comentarios.
 - Añade comentarios TSDoc donde falten y sean necesarios. 
 - Mantén todos los comentarios en español. 
 - Evita comentar lo obvio. Los comentarios deben explicar el "porqué" de una decisión de código, no sólo el "qué" hace.

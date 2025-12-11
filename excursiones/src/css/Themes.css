@@ -95,7 +95,7 @@ html.light {
 	--theme-toggle-btn-bg-hover: var(--color-gray-green-100);
 
 	--register-link-color: var(--color-gray-green-900);
-	--register-link-bg-hover: var(--color-gray-neutral-300);
+	--register-link-bg-hover: var(--color-gray-green-100);
 	--nav-link-active-bg: var(--color-gray-neutral-400);
 	--nav-link-active-border: var(--color-gray-neutral-600);
 

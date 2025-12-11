@@ -3,27 +3,16 @@
 /* ======================================== */
 .styledNavLink {
 	/* --- Estilos base del enlace --- */
-	font-weight: 500; /* Un grosor de fuente semibold para que destaque ligeramente */
-	padding: 0.5rem 1rem;
-	border-radius: 0.375rem; /* Bordes redondeados para un look más suave */
-	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
-		border-color 0.2s ease-in-out; /* Transición suave para los cambios de estado */
-	text-decoration: none; /* Quitamos el subrayado por defecto */
-	border: 2px solid transparent; /* Borde transparente para evitar saltos de layout en :focus-visible */
-	display: inline-block; /* Asegura que el padding y otras propiedades de bloque se apliquen correctamente */
+	display: inline-block;
 	text-align: center;
-}
-
-/* --- Variante de Enlace de Texto (por defecto) --- */
-.textLink {
-	/* La clase .nav-link es de react-bootstrap. Al añadirla, aumentamos la especificidad
-	   de nuestra regla para que anule el color por defecto de bootstrap sin necesidad de !important. */
-	color: var(--navbar-color);
-}
-
-/* --- Estado Hover (cuando el ratón está encima) --- */
-.styledNavLink:hover {
-	background-color: var(--register-link-bg-hover);
+	vertical-align: middle;
+	line-height: 1.5;
+	font-weight: 600;
+	padding: 0.5rem 1rem;
+	border-radius: 0.375rem;
+	transition: none;
+	text-decoration: none;
+	border: 2px solid transparent; /* Borde transparente para evitar saltos de layout en :focus-visible */
 }
 
 /* --- Estado de Foco (accesibilidad con teclado) --- */
@@ -38,21 +27,4 @@
 .styledNavLink.active {
 	background-color: var(--nav-link-active-bg);
 	border-color: var(--nav-link-active-border);
-}
-
-/* --- Variante de Botón (para "Iniciar sesión") --- */
-.buttonLink {
-	/* Usamos colores fijos para que este botón siempre parezca "claro" */
-	background-color: var(--color-white);
-	color: var(
-		--color-gray-green-900
-	); /* Texto oscuro para contraste sobre fondo blanco */
-	font-weight: 600;
-}
-
-.buttonLink:hover {
-	background-color: var(
-		--color-gray-neutral-300
-	); /* Un gris claro para el hover */
-	color: var(--color-gray-green-900);
 }
