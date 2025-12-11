@@ -4,8 +4,6 @@ import styles from "./StyledNavLink.module.css";
 
 /**
  * Componente de enlace de navegación con estilos consistentes.
- * Envuelve directamente a NavLink de react-router-dom para mantener toda su funcionalidad,
- * como el uso de funciones para `className` y `style` para estados activos.
  */
 function StyledNavLink({
 	className,
