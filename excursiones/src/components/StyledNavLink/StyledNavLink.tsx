@@ -7,8 +7,10 @@ import styles from "./StyledNavLink.module.css";
  * Extiende las propiedades de NavLink de react-router-dom para una integración completa.
  */
 interface StyledNavLinkProps extends NavLinkProps {
-	/** Variante visual del enlace. */
-	variant?: "button" | "link";
+	/** Variante visual del enlace. Si se elige la variante button hay un color de fondo, si por el contrario se elige link
+	 * no hay color de fondo.
+	 */
+	readonly variant?: "button" | "link";
 }
 
 /**
@@ -16,11 +18,11 @@ interface StyledNavLinkProps extends NavLinkProps {
  * Envuelve directamente a NavLink de react-router-dom para mantener toda su funcionalidad,
  * como el uso de funciones para `className` y `style` para estados activos.
  */
-const StyledNavLink = ({
+function StyledNavLink({
 	className,
 	variant = "link",
 	...rest
-}: StyledNavLinkProps) => {
+}: StyledNavLinkProps): JSX.Element {
 	const variantClass =
 		variant === "button" ? styles.buttonLink : styles.textLink;
 
@@ -31,9 +33,7 @@ const StyledNavLink = ({
 					"nav-link", // Clase base de Bootstrap para consistencia
 					styles.styledNavLink,
 					variantClass,
-					typeof className === "function"
-						? className(navLinkState)
-						: className,
+					typeof className === "function" ? className(navLinkState) : className,
 				]
 					.filter(Boolean)
 					.join(" ")
@@ -41,6 +41,6 @@ const StyledNavLink = ({
 			{...rest}
 		/>
 	);
-};
+}
 
 export default StyledNavLink;

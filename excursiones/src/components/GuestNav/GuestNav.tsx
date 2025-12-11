@@ -18,37 +18,41 @@ interface GuestNavProps {
  * Muestra los enlaces de navegación para un usuario invitado (no logueado). Permite cerrar un menú contenedor (como un Offcanvas)
  * si se proporciona la función `onCloseMenu`.
  */
-const GuestNav = ({
+function GuestNav({
 	className,
 	onCloseMenu = () => {
 		/* no-op */
 	},
 	variant = "default",
-}: GuestNavProps): JSX.Element => (
-	<div
-		className={cn(className, {
-			// Aplica clases específicas cuando la variante es 'offcanvas' para controlar la disposición y el ancho.
-			[styles.offcanvasContainer]: variant === "offcanvas",
-			"w-100": variant === "offcanvas",
-		})}
-	>
-		<StyledNavLink
-			to={ROUTES.REGISTER}
-			onClick={onCloseMenu}
-			variant="link"
-			className={cn(styles.registerLink, { "me-lg-2": variant === "default" })}
+}: GuestNavProps): JSX.Element {
+	return (
+		<div
+			className={cn(className, {
+				// Aplica clases específicas cuando la variante es 'offcanvas' para controlar la disposición y el ancho.
+				[styles.offcanvasContainer]: variant === "offcanvas",
+				"w-100": variant === "offcanvas",
+			})}
 		>
-			Regístrate
-		</StyledNavLink>
-		<StyledNavLink
-			to={ROUTES.LOGIN}
-			onClick={onCloseMenu}
-			variant="button"
-			className={styles.loginLink}
-		>
-			Inicia sesión
-		</StyledNavLink>
-	</div>
-);
+			<StyledNavLink
+				to={ROUTES.REGISTER}
+				onClick={onCloseMenu}
+				variant="link"
+				className={cn(styles.registerLink, {
+					"me-lg-2": variant === "default",
+				})}
+			>
+				Regístrate
+			</StyledNavLink>
+			<StyledNavLink
+				to={ROUTES.LOGIN}
+				onClick={onCloseMenu}
+				variant="button"
+				className={styles.loginLink}
+			>
+				Inicia sesión
+			</StyledNavLink>
+		</div>
+	);
+}
 
 export default GuestNav;

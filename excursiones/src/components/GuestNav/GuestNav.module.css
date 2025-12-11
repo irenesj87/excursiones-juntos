@@ -1,24 +1,19 @@
 .registerLink {
-	display: inline-block;
-	padding: 0.6rem 1rem; /* Ajustado para igualar la altura del botón de login */
-	font-weight: 600;
-	line-height: 1.5;
-	text-align: center;
-	text-decoration: none;
-	vertical-align: middle;
 	color: var(--register-link-color);
-	border: 1px solid var(--separator-color);
-	transition: none;
-	cursor: pointer;
 	user-select: none;
 }
 
-.registerLink:hover,
-.registerLink:focus {
+.registerLink:hover {
+	color: var(--register-link-color);
+	background-color: var(--register-link-bg-hover);
+}
+
+/* Usamos :focus-visible para mostrar el anillo de foco solo al navegar con teclado */
+.registerLink:focus-visible {
 	color: var(--register-link-color);
 	background-color: var(--register-link-bg-hover);
 	outline: none;
-	box-shadow: none;
+	box-shadow: 0 0 0 0.2rem var(--focus-outline-color);
 }
 
 .loginLink,
