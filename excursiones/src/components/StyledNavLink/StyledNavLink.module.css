@@ -28,20 +28,3 @@
 	background-color: var(--nav-link-active-bg);
 	border-color: var(--nav-link-active-border);
 }
-
-/* --- Variante de Botón --- */
-.buttonLink {
-	/* Usamos colores fijos para que este botón siempre parezca "claro" */
-	background-color: var(--color-white);
-	color: var(
-		--color-gray-green-900
-	); /* Texto oscuro para contraste sobre fondo blanco */
-	font-weight: 600;
-}
-
-.buttonLink:hover {
-	background-color: var(
-		--color-gray-neutral-300
-	); /* Un gris claro para el hover */
-	color: var(--color-gray-green-900);
-}

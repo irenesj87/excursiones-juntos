@@ -4,13 +4,11 @@
 }
 
 .registerLink:hover {
-	color: var(--register-link-color);
 	background-color: var(--register-link-bg-hover);
 }
 
 /* Usamos :focus-visible para mostrar el anillo de foco solo al navegar con teclado */
 .registerLink:focus-visible {
-	color: var(--register-link-color);
 	background-color: var(--register-link-bg-hover);
 	outline: none;
 	box-shadow: 0 0 0 0.2rem var(--focus-outline-color);

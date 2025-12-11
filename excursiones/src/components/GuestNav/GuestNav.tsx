@@ -36,7 +36,6 @@ function GuestNav({
 			<StyledNavLink
 				to={ROUTES.REGISTER}
 				onClick={onCloseMenu}
-				variant="link"
 				className={cn(styles.registerLink, {
 					"me-lg-2": variant === "default",
 				})}
@@ -46,7 +45,6 @@ function GuestNav({
 			<StyledNavLink
 				to={ROUTES.LOGIN}
 				onClick={onCloseMenu}
-				variant="button"
 				className={styles.loginLink}
 			>
 				Inicia sesión
