@@ -38,8 +38,8 @@ function GuestNav({
 				onClick={onCloseMenu}
 				className={cn(styles.registerLink, {
 					"me-lg-2": variant === "default",
+					"border-0": variant === "offcanvas",
 				})}
-				style={variant === "offcanvas" ? { border: 0 } : undefined}
 			>
 				Regístrate
 			</StyledNavLink>
