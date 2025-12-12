@@ -15,6 +15,7 @@
 @media (max-width: 767.98px) {
 	.onExcursionsPage {
 		border-bottom: none;
+		box-shadow: none;
 	}
 }
 

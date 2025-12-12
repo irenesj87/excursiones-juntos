@@ -39,6 +39,7 @@ function GuestNav({
 				className={cn(styles.registerLink, {
 					"me-lg-2": variant === "default",
 				})}
+				style={variant === "offcanvas" ? { border: 0 } : undefined}
 			>
 				Regístrate
 			</StyledNavLink>
