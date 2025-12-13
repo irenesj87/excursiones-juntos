@@ -4,10 +4,14 @@ import cn from "classnames";
 import { searchExcursions } from "../../services/excursionService";
 import { Excursion } from "../../types";
 import { RootState } from "../../store/store";
-import { SearchIcon } from "../shared/Icons";
+import { SearchIcon, ClearIcon } from "../shared/Icons";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 
+// Constante para el tiempo de tetraso del debounce
+const DEBOUNCE_DELAY_MS = 500;
+
+// Define las propiedades que acepta el componente SearchBar.
 interface SearchBarProps {
 	readonly onFetchSuccess: (excursions: readonly Excursion[]) => void;
 	readonly onExcursionsFetchStart: () => void;
@@ -20,16 +24,37 @@ interface SearchBarProps {
 }
 
 /**
+ * Genera un error amigable para el usuario basado en el error técnico capturado.
+ */
+function createFriendlyError(
+	error: unknown
+): Error & { secondaryMessage?: string } {
+	let userFriendlyError: Error & { secondaryMessage?: string };
+
+	if (error instanceof TypeError && error.message === "Failed to fetch") {
+		userFriendlyError = new Error("Error de conexión");
+		userFriendlyError.secondaryMessage =
+			"No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet e inténtalo de nuevo.";
+	} else {
+		userFriendlyError = new Error("No se han podido cargar las excursiones.");
+		userFriendlyError.secondaryMessage =
+			"Por favor, inténtalo de nuevo más tarde.";
+	}
+
+	return userFriendlyError;
+}
+
+/**
  * Componente que maneja la barra de búsqueda y la aplicación de filtros para las excursiones.
  */
-const SearchBar = ({
+function SearchBar({
 	onFetchSuccess,
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
 	id,
 	searchValue,
 	onSearchChange,
-}: SearchBarProps) => {
+}: SearchBarProps) {
 	const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
 	const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -58,7 +83,7 @@ const SearchBar = ({
 	useEffect(() => {
 		const timerId = setTimeout(() => {
 			setDebouncedSearch(searchValue);
-		}, 500);
+		}, DEBOUNCE_DELAY_MS);
 
 		return () => clearTimeout(timerId);
 	}, [searchValue]);
@@ -93,21 +118,7 @@ const SearchBar = ({
 				console.error("Error técnico al buscar excursiones:", error);
 				onFetchSuccessRef.current([]);
 
-				let userFriendlyError: Error & { secondaryMessage?: string };
-
-				if (error instanceof TypeError && error.message === "Failed to fetch") {
-					userFriendlyError = new Error("Error de conexión");
-					userFriendlyError.secondaryMessage =
-						"No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet e inténtalo de nuevo.";
-				} else {
-					userFriendlyError = new Error(
-						"No se han podido cargar las excursiones."
-					);
-					userFriendlyError.secondaryMessage =
-						"Por favor, inténtalo de nuevo más tarde.";
-				}
-
-				onExcursionsFetchEndRef.current(userFriendlyError);
+				onExcursionsFetchEndRef.current(createFriendlyError(error));
 			}
 		};
 
@@ -120,7 +131,7 @@ const SearchBar = ({
 			className={styles.searchContainer}
 			onSubmit={(e) => e.preventDefault()}
 		>
-			<SearchIcon className={styles.searchIcon} />
+			<SearchIcon className={styles.searchIcon} aria-hidden="true" />
 			<label htmlFor={id} className="visually-hidden">
 				Buscar excursiones por nombre
 			</label>
@@ -139,10 +150,12 @@ const SearchBar = ({
 					className={styles.clearButton}
 					onClick={handleClearSearch}
 					aria-label="Limpiar búsqueda"
-				></button>
+				>
+					<ClearIcon className={styles.clearIcon} aria-hidden="true" />
+				</button>
 			)}
 		</form>
 	);
-};
+}
 
 export default SearchBar;

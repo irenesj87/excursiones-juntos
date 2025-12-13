@@ -1,25 +1,21 @@
 import React from "react";
 import { COMPANY_NAME, START_YEAR } from "../../constants";
+import { CopyrightIcon } from "../shared/Icons";
 import styles from "./Footer.module.css";
 
-/**
- * Genera el texto de copyright dinámicamente según el año actual.
- */
-const getCopyrightText = () => {
-	const CURRENT_YEAR = new Date().getFullYear();
+function Footer() {
+	const currentYear = new Date().getFullYear();
 	const yearDisplay =
-		START_YEAR === CURRENT_YEAR
-			? START_YEAR
-			: `${START_YEAR} - ${CURRENT_YEAR}`;
-	return `© ${COMPANY_NAME} ${yearDisplay}. Todos los derechos reservados.`;
-};
+		START_YEAR === currentYear ? START_YEAR : `${START_YEAR} - ${currentYear}`;
 
-const Footer = () => {
 	return (
 		<footer className={styles.footer}>
-			<small className={styles.footerText}>{getCopyrightText()}</small>
+			<small className={styles.footerText}>
+				<CopyrightIcon className={styles.copyrightIcon } /> {COMPANY_NAME} {yearDisplay}. Todos los derechos
+				reservados.
+			</small>
 		</footer>
 	);
-};
+}
 
 export default Footer;
