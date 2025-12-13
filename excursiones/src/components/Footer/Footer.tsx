@@ -11,7 +11,7 @@ function Footer() {
 	return (
 		<footer className={styles.footer}>
 			<small className={styles.footerText}>
-				<CopyrightIcon className={styles.copyrightIcon } /> {COMPANY_NAME} {yearDisplay}. Todos los derechos
+				<CopyrightIcon className={styles.copyrightIcon} /> {COMPANY_NAME} {yearDisplay}. Todos los derechos
 				reservados.
 			</small>
 		</footer>
