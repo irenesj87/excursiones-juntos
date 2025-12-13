@@ -23,10 +23,10 @@ interface UserPageInputEditProps {
 	readonly errorMessage?: string;
 }
 
-const UserPageInputEditComponent = (
+function UserPageInputEditComponent(
 	props: UserPageInputEditProps,
 	ref: React.Ref<HTMLInputElement>
-): JSX.Element => {
+): JSX.Element {
 	const {
 		id,
 		value,
@@ -105,7 +105,7 @@ const UserPageInputEditComponent = (
 			)}
 		</>
 	);
-};
+}
 
 const UserPageInputEdit = forwardRef<HTMLInputElement, UserPageInputEditProps>(
 	UserPageInputEditComponent

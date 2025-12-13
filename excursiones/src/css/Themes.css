@@ -32,6 +32,7 @@
 	--color-gray-neutral-400: hsl(210, 15%, 90%);
 	--color-gray-neutral-500: hsl(210, 15%, 88%);
 	--color-gray-neutral-600: hsl(210, 15%, 85%);
+	--color-gray-neutral-800: hsl(218, 5%, 70%);
 
 	/* Blancos y Negros */
 	--color-white: #ffffff;
@@ -80,6 +81,7 @@ html.light {
 	--navbar-color: var(--color-white-off);
 	--navbar-brand-color: var(--color-gray-green-900);
 	--navbar-brand-icon: var(--color-green-500);
+	--navbar-brand-focus-outline-color: var(--color-green-500);
 	--navbar-toggler-icon-color: var(--color-gray-green-900);
 	--navbar-toggler-border-color: var(--color-gray-neutral-500);
 	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -96,6 +98,8 @@ html.light {
 
 	--register-link-color: var(--color-gray-green-900);
 	--register-link-bg-hover: var(--color-gray-neutral-300);
+	--register-focus-outline-color: var(--color-gray-neutral-800);
+
 	--nav-link-active-bg: var(--color-gray-neutral-400);
 	--nav-link-active-border: var(--color-gray-neutral-600);
 
@@ -105,6 +109,7 @@ html.light {
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-border-hover: var(--color-primary-hover);
+	--login-focus-outline-color: var(--color-green-700);
 
 	--logout-bg-color: var(--color-gray-green-700);
 	--logout-bg-color-hover: var(--color-gray-green-800);
@@ -145,6 +150,7 @@ html.light {
 	--filter-pill-border: var(--color-gray-neutral-400);
 	--filter-pill-bg-hover: var(--color-gray-neutral-400);
 	--filter-pill-border-hover: var(--color-gray-neutral-600);
+	--filter-pill-outline-focus: var(--color-gray-neutral-600);
 	/* Píldoras de filtro (seleccionadas) */
 	--filter-pill-bg-checked: var(--color-gray-neutral-500);
 	--filter-pill-text-checked: var(--color-text-base);
@@ -178,6 +184,11 @@ html.light {
 	--difficulty-high-bg: hsl(0, 88%, 67%);
 	--difficulty-high-text: var(--color-white-off);
 	--difficulty-high-bg-hover: hsl(0, 66%, 51%);
+
+	/* --- Colores de foco para píldoras de dificultad --- */
+	--difficulty-low-focus-outline: var(--difficulty-low-bg-hover);
+	--difficulty-medium-focus-outline: var(--difficulty-medium-bg-hover);
+	--difficulty-high-focus-outline: var(--difficulty-high-bg-hover);
 
 	/* --- Accesibilidad --- */
 	--focus-outline-color: var(--color-primary);
@@ -228,6 +239,7 @@ html.dark {
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-white-off);
 	--navbar-brand-icon: var(--color-green-300);
+	--navbar-brand-focus-outline-color: var(--color-green-300);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
 	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -299,6 +311,7 @@ html.dark {
 	--filter-pill-border: hsl(150, 10%, 35%);
 	--filter-pill-bg-hover: hsl(150, 10%, 35%);
 	--filter-pill-border-hover: hsl(150, 10%, 45%);
+	--filter-pill-outline-focus: var(--focus-outline-color);
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
@@ -331,6 +344,11 @@ html.dark {
 	--difficulty-high-bg: hsl(347, 85%, 38%);
 	--difficulty-high-text: hsl(347, 55%, 92%);
 	--difficulty-high-bg-hover: hsl(347, 89%, 29%);
+
+	/* --- Colores de foco para píldoras de dificultad (modo oscuro) --- */
+	--difficulty-low-focus-outline: hsl(145, 30%, 75%);
+	--difficulty-medium-focus-outline: hsl(35, 95%, 60%);
+	--difficulty-high-focus-outline: hsl(347, 85%, 65%);
 
 	/* --- Accesibilidad --- */
 	--focus-outline-color: var(--color-primary);

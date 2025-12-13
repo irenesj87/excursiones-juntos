@@ -10,24 +10,28 @@
 /* Usamos :focus-visible para mostrar el anillo de foco solo al navegar con teclado */
 .registerLink:focus-visible {
 	background-color: var(--register-link-bg-hover);
-	outline: none;
-	box-shadow: 0 0 0 0.2rem var(--focus-outline-color);
+	outline: 2px solid var(--register-focus-outline-color);
+	outline-offset: 2px;
+	border: none;
 }
 
-.loginLink,
-.loginLink:visited {
+.loginLink {
 	background-color: var(--login-btn-bg);
 	color: var(--login-btn-text);
 	transition: none;
 }
 
-.loginLink:hover,
-.loginLink:focus {
+.loginLink:hover {
 	background-color: var(--login-btn-bg-hover);
+	color: var(--login-btn-text);
 }
 
-.loginLink:hover {
+.loginLink:focus-visible {
+	background-color: var(--login-btn-bg-hover);
+	border-color: var(--login-btn-bg-hover);
 	color: var(--login-btn-text);
+	outline: 2px solid var(--login-focus-outline-color);
+	outline-offset: 2px;
 }
 
 /* Estilos para la variante 'offcanvas' */
@@ -35,6 +39,6 @@
 .offcanvasContainer {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem; /* Espacio entre los enlaces */
+	gap: 0.3rem; /* Espacio entre los enlaces */
 	padding-top: 1rem; /* Añade espacio superior para separar del borde del offcanvas */
 }
