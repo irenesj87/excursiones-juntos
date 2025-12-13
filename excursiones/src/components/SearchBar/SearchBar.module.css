@@ -5,7 +5,7 @@
 
 .searchInput {
 	padding: 0.6rem 1rem 0.6rem 2.75rem; /* Padding izquierdo para el icono */
-	border-radius: 25px; 
+	border-radius: 25px;
 	border: 2px solid var(--separator-color);
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
@@ -20,11 +20,9 @@
 }
 
 /* Estilo de foco mejorado */
-.searchInput:focus {
-	border-color: var(--color-primary);
-	box-shadow: 0 0 0 3px
-		color-mix(in srgb, var(--color-primary) 25%, transparent);
-	outline: none;
+.searchInput:focus-visible {
+	border: 2px solid var(--color-primary);
+	outline-offset: 2px;
 	border-radius: 25px; /* Mantenemos los bordes redondeados en el foco */
 }
 
@@ -49,11 +47,9 @@
 	cursor: pointer;
 	padding: 0.5rem;
 	font-size: 1.2rem;
-	transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .clearButton:hover,
 .clearButton:focus-visible {
 	color: var(--color-text-base);
-	transform: translateY(-50%) scale(1.1);
 }
