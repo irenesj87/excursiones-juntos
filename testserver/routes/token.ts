@@ -48,8 +48,13 @@ router.get(
 				.json({ message: "Usuario asociado al token no encontrado." });
 		}
 
+		// Recuperamos el token de la cabecera para devolverlo al cliente.
+		// Esto asegura que el frontend siempre reciba el token explícitamente tras verificar.
+		const authHeader = req.headers.authorization;
+		const token = authHeader?.split(" ")[1];
+
 		const { password, ...userResponse } = user;
-		res.status(200).json({ user: userResponse });
+		res.status(200).json({ user: userResponse, token });
 	}
 );
 

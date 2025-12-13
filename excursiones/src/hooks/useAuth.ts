@@ -82,8 +82,34 @@ export const useAuth = () => {
 			authDispatch({ type: "AUTH_START_CHECK" });
 			// Inicia el temporizador para asegurar que la UI se muestre durante un tiempo mínimo.
 			startTiming();
-			// Intenta obtener el token que debería estar guardado en el navegador si el usuario inició sesió previamente.
-			const sessionToken = sessionStorage.getItem("token");
+
+			// Intentamos obtener el token directamente de sessionStorage.
+			// Esto es más seguro que depender del estado de Redux en el primer renderizado.
+			let sessionToken = sessionStorage.getItem("token");
+
+			// Si no encontramos la clave 'token', buscamos en el objeto 'authState' como respaldo.
+			// Esto cubre casos donde el usuario tiene una sesión antigua guardada antes de nuestra actualización.
+			if (!sessionToken) {
+				const authState = sessionStorage.getItem("authState");
+				if (authState) {
+					try {
+						sessionToken = JSON.parse(authState).token;
+					} catch (e) {
+						console.warn("Error al recuperar token de authState:", e);
+					}
+				}
+			}
+
+			// Si después de buscar en sessionStorage y en el respaldo authState no tenemos token,
+			// no tiene sentido llamar al backend. Asumimos que no hay sesión válida.
+			if (!sessionToken) {
+				if (isMounted) {
+					reduxDispatch(logout()); // Aseguramos que Redux esté limpio
+					dispatchWithMinDisplayTime({ type: "AUTH_CHECK_COMPLETE" });
+				}
+				return;
+			}
+
 			try {
 				// Intenta verificar el token haciendo la petición al backend.
 				// Si la llamada tiene éxito, significa que el token es válido y el usuario está autenticado.
