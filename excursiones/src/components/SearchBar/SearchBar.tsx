@@ -8,7 +8,7 @@ import { SearchIcon, ClearIcon } from "../shared/Icons";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 
-// Constante para el tiempo de tetraso del debounce
+// Constante para el tiempo de retraso del debounce
 const DEBOUNCE_DELAY_MS = 500;
 
 // Define las propiedades que acepta el componente SearchBar.
