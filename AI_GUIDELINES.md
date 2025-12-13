@@ -14,6 +14,7 @@
 - Desestructura las props directamente en la firma del componente para mejorar la legibilidad y ver claramente las dependencias de dicho componente.
 - Si hay una lista de elementos, usa un key único y estable. 
 - Utiliza HTML semántico siempre que sea posible (ej: <button> en lugar de <div onClick...>, <main>, <article>).
+- No uses !important.
 
 ## 3. Estado y Lógica:
 

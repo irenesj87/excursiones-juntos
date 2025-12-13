@@ -11,6 +11,10 @@ const saveStateToSessionStorage = (state: LoginState) => {
 	try {
 		const serializedState = JSON.stringify(state);
 		sessionStorage.setItem(SESSION_STORAGE_KEY, serializedState);
+		// Sincronizamos también el token individualmente para que useAuth lo encuentre
+		if (state.token) {
+			sessionStorage.setItem("token", state.token);
+		}
 	} catch (e) {
 		console.warn("No se pudo guardar el estado en sessionStorage", e);
 	}
@@ -70,6 +74,7 @@ export const loginSlice = createSlice({
 			// Reseteamos el estado a los valores iniciales por defecto.
 			Object.assign(state, defaultInitialState);
 			sessionStorage.removeItem(SESSION_STORAGE_KEY); // Limpiamos sessionStorage
+			sessionStorage.removeItem("token");
 		},
 		updateUser: (state, action: PayloadAction<{ user: User }>) => {
 			// Actualizamos solo las excursiones para no perder otros datos del usuario
@@ -85,8 +90,16 @@ export const loginSlice = createSlice({
 				saveStateToSessionStorage(state);
 			}
 		},
+		updateUserInfo: (state, action: PayloadAction<{ user: User }>) => {
+			// Actualizamos la información del usuario (nombre, teléfono, etc.)
+			// El token se mantiene intacto en el estado y se vuelve a guardar.
+			if (state.user) {
+				state.user = action.payload.user;
+				saveStateToSessionStorage(state);
+			}
+		},
 	},
 });
 
-export const { login, logout, updateUser } = loginSlice.actions;
+export const { login, logout, updateUser, updateUserInfo } = loginSlice.actions;
 export default loginSlice.reducer;

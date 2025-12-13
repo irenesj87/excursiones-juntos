@@ -1,7 +1,7 @@
 import { useReducer, useEffect, useRef } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { updateUserInfo } from "../services/userService";
-import { updateUser } from "../slices/loginSlice";
+import { updateUserInfo as updateUserService } from "../services/userService";
+import { updateUserInfo } from "../slices/loginSlice";
 import {
 	validateName,
 	validateSurname,
@@ -34,7 +34,7 @@ type FormAction =
 	| {
 		type: "UPDATE_FIELD";
 		payload: { field: keyof FormValues; value: string };
-      }
+    }
 	| { type: "SAVE_START" }
 	| { type: "SAVE_SUCCESS" }
 	| { type: "SAVE_FAILURE"; payload: string }
@@ -145,8 +145,8 @@ export const useUserInfoForm = () => {
 
 		formDispatch({ type: "SAVE_START" });
 		try {
-			const updatedUserData = await updateUserInfo(user.mail, values, token);
-			loginDispatch(updateUser({ user: { ...user, ...updatedUserData } }));
+			const updatedUserData = await updateUserService(user.mail, values, token);
+			loginDispatch(updateUserInfo({ user: { ...user, ...updatedUserData } }));
 			formDispatch({ type: "SAVE_SUCCESS" });
 		} catch (err: unknown) {
 			console.error("Fallo al actualizar la información del usuario:", err);
