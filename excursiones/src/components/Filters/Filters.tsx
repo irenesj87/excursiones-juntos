@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
-import { ChartIcon, ClockIcon, MapIcon, TrashIcon } from "../shared/Icons";
+import { ChartIcon, ClockIcon, MapIcon, FilterXIcon } from "../shared/Icons";
 import styles from "./Filters.module.css";
 import { RootState } from "../../store/store";
 
@@ -15,7 +15,7 @@ interface FiltersProps {
 	 * Si es `true`, muestra el título principal "Filtros".
 	 * @default true
 	 */
-	showTitle?: boolean;
+	readonly showTitle?: boolean;
 }
 
 /** Tipo para los nombres de las categorías de filtro. */
@@ -47,31 +47,33 @@ const filterSections = [
 ] satisfies FilterSection[];
 
 /**
- * Componente que renderiza el panel de filtros.
- * Muestra diferentes secciones de filtrado (zona, dificultad, tiempo) y un botón para limpiar todas las selecciones.
- * @param {FiltersProps} props - Las props del componente.
- * @returns {React.ReactElement} El componente de filtros.
+ * Hook personalizado para encapsular la lógica de estado y acciones de los filtros.
  */
-const Filters = ({ showTitle = true }: FiltersProps) => {
+function useFiltersLogic() {
 	const dispatch = useDispatch();
-	/**
-	 * Comprueba si hay algún filtro activo para habilitar/deshabilitar el botón de limpiar filtros.
-	 */
-	const hasActiveFilters = useSelector(
-		(state: RootState) =>
-			state.filterReducer.area.length > 0 ||
-			state.filterReducer.difficulty.length > 0 ||
-			state.filterReducer.time.length > 0
-	);
 
-	/**
-	 * Maneja el evento de click para limpiar todos los filtros.
-	 */
+	const hasActiveFilters = useSelector((state: RootState) => {
+		const { area, difficulty, time } = state.filterReducer;
+		return area.length > 0 || difficulty.length > 0 || time.length > 0;
+	});
+
 	const handleClearFilters = () => {
 		if (hasActiveFilters) {
 			dispatch(clearAllFilters());
 		}
 	};
+
+	return { hasActiveFilters, handleClearFilters };
+}
+
+/**
+ * Componente que renderiza el panel de filtros.
+ * Muestra diferentes secciones de filtrado (zona, dificultad, tiempo) y un botón para limpiar todas las selecciones.
+ * @param {FiltersProps} props - Las props del componente.
+ * @returns {React.ReactElement} El componente de filtros.
+ */
+function Filters({ showTitle = true }: FiltersProps) {
+	const { hasActiveFilters, handleClearFilters } = useFiltersLogic();
 
 	// Renderizamos el componente de filtros con su contenido y el botón de limpiar filtros en el footer.
 	return (
@@ -102,12 +104,12 @@ const Filters = ({ showTitle = true }: FiltersProps) => {
 					aria-label="Limpiar todos los filtros"
 					disabled={!hasActiveFilters}
 				>
-					<TrashIcon className={styles.filterIcon} />
+					<FilterXIcon className={styles.filterIcon} />
 					<span className="ms-2">Limpiar Filtros</span>
 				</Button>
 			</footer>
 		</div>
 	);
-};
+}
 
 export default Filters;

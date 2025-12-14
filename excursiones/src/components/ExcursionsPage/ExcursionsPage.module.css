@@ -34,6 +34,10 @@
 	border-color: var(--filters-toggle-btn-border);
 	font-weight: 500;
 	transition: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 }
 
 .filtersToggleButton:hover,
@@ -47,6 +51,10 @@
 /* Usa un `box-shadow` en lugar de `outline` para respetar el `border-radius` del botón. */
 .filtersToggleButton:focus {
 	box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.5);
+}
+
+.filterIcon {
+	font-size: 1.4rem;
 }
 
 /* Estilos para el contador de filtros */

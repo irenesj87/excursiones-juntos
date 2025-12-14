@@ -4,10 +4,10 @@ import {
 	LuMoon,
 	LuSun,
 	LuFilter,
+	LuFilterX,
 	LuMapPin,
 	LuChartNoAxesColumnIncreasing,
 	LuClock3,
-	LuTrash2,
 	LuCircleCheckBig,
 	LuCopyright,
 } from "react-icons/lu";
@@ -48,11 +48,11 @@ export const ClockIcon = LuClock3 as React.ComponentType<{
 	className?: string;
 }>;
 
-export const TrashIcon = LuTrash2 as React.ComponentType<{
+export const FilterIcon = LuFilter as React.ComponentType<{
 	className?: string;
 }>;
 
-export const FilterIcon = LuFilter as React.ComponentType<{
+export const FilterXIcon = LuFilterX as React.ComponentType<{
 	className?: string;
 }>;
 

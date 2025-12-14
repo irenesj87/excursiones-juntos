@@ -9,18 +9,18 @@ import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 import type { FilterState } from "../../slices/filterSlice";
 
 interface FiltersListCheckboxProps {
-	filterName: keyof FilterState; // Por ejemplo: 'area', 'difficulty', 'time'
-	filter: string; // El valor específico del filtro, por ejemplo: 'Montaña', 'Baja'
+	readonly filterName: keyof FilterState; // Por ejemplo: 'area', 'difficulty', 'time'
+	readonly filter: string; // El valor específico del filtro, por ejemplo: 'Montaña', 'Baja'
 }
 
 interface LabelProps {
-	htmlFor: string;
-	filter: string;
-	isChecked: boolean;
+	readonly htmlFor: string;
+	readonly filter: string;
+	readonly isChecked: boolean;
 }
 
 // Componente interno para la etiqueta que usa el hook de dificultad.
-const DifficultyLabel = ({ htmlFor, filter, isChecked }: LabelProps) => {
+function DifficultyLabel({ htmlFor, filter, isChecked }: LabelProps) {
 	// El hook ahora centraliza la lógica de nombres de clase.
 	// Le pasamos los estilos y nos devuelve las clases computadas.
 	const { baseDifficultyClass, checkedDifficultyClass } = useDifficultyStyles(
@@ -39,24 +39,23 @@ const DifficultyLabel = ({ htmlFor, filter, isChecked }: LabelProps) => {
 			{filter}
 		</label>
 	);
-};
+}
 
 // Componente interno para la etiqueta genérica.
-const GenericLabel = ({ htmlFor, filter, isChecked }: LabelProps) => (
-	<label
-		htmlFor={htmlFor}
-		className={cn(styles.filterPill, {
-			[styles.checked]: isChecked,
-		})}
-	>
-		{filter}
-	</label>
-);
+function GenericLabel({ htmlFor, filter, isChecked }: LabelProps) {
+	return (
+		<label
+			htmlFor={htmlFor}
+			className={cn(styles.filterPill, {
+				[styles.checked]: isChecked,
+			})}
+		>
+			{filter}
+		</label>
+	);
+}
 
-const FiltersListCheckbox = ({
-	filterName,
-	filter,
-}: FiltersListCheckboxProps) => {
+function FiltersListCheckbox({ filterName, filter }: FiltersListCheckboxProps) {
 	const dispatch = useDispatch();
 
 	// Obtenemos los filtros seleccionados para esta categoría (ej. 'area') desde Redux
@@ -98,6 +97,6 @@ const FiltersListCheckbox = ({
 			)}
 		</>
 	);
-};
+}
 
 export default FiltersListCheckbox;
