@@ -5,6 +5,7 @@ import { RootState } from "../../store/store";
 import Filters from "../Filters";
 import { AppError, Excursion } from "../../types";
 import ExcursionsList from "../ExcursionsList";
+import { FilterIcon } from "../shared/Icons";
 import styles from "./ExcursionsPage.module.css";
 
 // Definición del tipo para el estado de las excursiones.
@@ -20,30 +21,49 @@ interface ExcursionsPageProps {
 }
 
 /**
- * Componente para la página de excursiones que muestra los filtros y la lista de excursiones.
+ * Hook personalizado para manejar la lógica de la página de excursiones.
+ * Gestiona la visibilidad de los filtros en breakpoints pequeños y el conteo de filtros activos.
  */
-const ExcursionsPage = ({ excursionsState }: ExcursionsPageProps) => {
-	// Estado para controlar la visibilidad del menú de filtros en breakpoints pequeños.
+function useExcursionsPageLogic() {
 	const [showFilters, setShowFilters] = useState(false);
-	// Cierra el menú de filtros.
+
 	const handleCloseFilters = () => setShowFilters(false);
-	// Muestra el menú de filtros.
 	const handleShowFilters = () => setShowFilters(true);
 
-	// Calcula el número total de filtros activos (área, dificultad, tiempo) desde el estado de Redux.
 	const activeFilterCount = useSelector((state: RootState) => {
 		const { area, difficulty, time } = state.filterReducer;
 		return area.length + difficulty.length + time.length;
 	});
 
-	// Texto para el contador de filtros.
 	const filterCountText =
 		activeFilterCount === 1 ? "seleccionado" : "seleccionados";
 
-	// Texto dinámico para el `aria-label` del botón de filtros, mejorando la accesibilidad.
 	const ariaFilterLabel = `Mostrar filtros. ${activeFilterCount} ${
 		activeFilterCount === 1 ? "filtro aplicado" : "filtros aplicados"
 	}.`;
+
+	return {
+		showFilters,
+		handleCloseFilters,
+		handleShowFilters,
+		activeFilterCount,
+		filterCountText,
+		ariaFilterLabel,
+	};
+}
+
+/**
+ * Componente para la página de excursiones que muestra los filtros y la lista de excursiones.
+ */
+function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
+	const {
+		showFilters,
+		handleCloseFilters,
+		handleShowFilters,
+		activeFilterCount,
+		filterCountText,
+		ariaFilterLabel,
+	} = useExcursionsPageLogic();
 
 	// La lista de excursiones.
 	const excursionsList = (
@@ -86,6 +106,9 @@ const ExcursionsPage = ({ excursionsState }: ExcursionsPageProps) => {
 						aria-label={ariaFilterLabel}
 					>
 						<span aria-hidden="true">
+							<FilterIcon className={styles.filterIcon} />
+						</span>
+						<span>
 							Mostrar Filtros
 							{activeFilterCount > 0 && (
 								<Badge pill className={`${styles.filterBadge} ms-2`}>
@@ -120,6 +143,6 @@ const ExcursionsPage = ({ excursionsState }: ExcursionsPageProps) => {
 			</Col>
 		</>
 	);
-};
+}
 
 export default ExcursionsPage;
