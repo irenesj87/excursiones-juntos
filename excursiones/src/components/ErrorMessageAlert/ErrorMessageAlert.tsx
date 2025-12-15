@@ -8,21 +8,21 @@ import { Alert } from "react-bootstrap";
  */
 interface ErrorMessageAlertProps {
 	/** El mensaje de error a mostrar. */
-	message: string;
+	readonly message: string;
 	/** Función que se ejecuta cuando se cierra la alerta. */
-	onClose: () => void;
+	readonly onClose: () => void;
 }
 
 /**
  * Componente que muestra una alerta de error.
  */
-const ErrorMessageAlert = ({ message, onClose }: ErrorMessageAlertProps) => {
+function ErrorMessageAlert({ message, onClose }: ErrorMessageAlertProps) {
 	return (
 		<Alert variant="danger" onClose={onClose} dismissible>
 			<Alert.Heading as="h2">Error</Alert.Heading>
 			{message}
 		</Alert>
 	);
-};
+}
 
 export default ErrorMessageAlert;

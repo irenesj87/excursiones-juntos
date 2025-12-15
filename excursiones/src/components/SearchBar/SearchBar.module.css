@@ -6,7 +6,8 @@
 .searchInput {
 	padding: 0.6rem 1rem 0.6rem 2.75rem; /* Padding izquierdo para el icono */
 	border-radius: 25px;
-	border: 2px solid var(--separator-color);
+	/* Usamos text-muted para asegurar un contraste > 3:1 (WCAG AA) en los bordes */
+	border: 1px solid var(--color-text-muted);
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
 	width: 100%;

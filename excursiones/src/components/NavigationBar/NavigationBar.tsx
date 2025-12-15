@@ -31,24 +31,24 @@ const getInitialAuthState = () => {
 
 interface NavigationBarProps {
 	/** Función para actualizar el estado de la lista de excursiones. */
-	onFetchSuccess: (excursions: readonly Excursion[]) => void;
+	readonly onFetchSuccess: (excursions: readonly Excursion[]) => void;
 	/** Callback que se ejecuta al iniciar la búsqueda de excursiones. */
-	onExcursionsFetchStart: () => void;
+	readonly onExcursionsFetchStart: () => void;
 	/** Callback que se ejecuta al finalizar la búsqueda de excursiones. */
-	onExcursionsFetchEnd: (error: Error | null) => void;
+	readonly onExcursionsFetchEnd: (error: Error | null) => void;
 	/** Indica si la página actual es la de excursiones. */
-	isOnExcursionsPage: boolean;
+	readonly isOnExcursionsPage: boolean;
 }
 
 /**
  * Componente para la barra de navegación.
  */
-const NavigationBar = ({
+function NavigationBar({
 	onFetchSuccess,
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
 	isOnExcursionsPage,
-}: NavigationBarProps) => {
+}: NavigationBarProps){
 	// Estado global de Redux para saber si el usuario está autenticado.
 	const { login: isLoggedIn } = useSelector(
 		(state: RootState) => state.loginReducer
@@ -232,6 +232,6 @@ const NavigationBar = ({
 			</Container>
 		</Navbar>
 	);
-};
+}
 
 export default NavigationBar;
