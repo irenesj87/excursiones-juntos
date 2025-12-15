@@ -84,7 +84,7 @@ html.light {
 	--navbar-brand-focus-outline-color: var(--color-green-500);
 	--navbar-toggler-icon-color: var(--color-gray-green-900);
 	--navbar-toggler-border-color: var(--color-gray-neutral-500);
-	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(101, 140, 122, 0.5);
 
 	/* --- Bordes y Separadores --- */
@@ -157,7 +157,8 @@ html.light {
 	--filter-pill-border-checked: var(--color-gray-neutral-500);
 	--filter-pill-shadow-checked: none;
 
-	--filter-clear-btn-color-hover: hsl(347, 77%, 50%);
+	/* Oscurecido para cumplir contraste AA (4.5:1) sobre blanco */
+	--filter-clear-btn-color-hover: hsl(347, 80%, 40%);
 
 	/* --- Footer --- */
 	--footer-bg: var(--color-background-body);
@@ -178,12 +179,17 @@ html.light {
 	--difficulty-low-bg: var(--color-green-500);
 	--difficulty-low-text: var(--color-white-off);
 	--difficulty-low-bg-hover: var(--color-green-700);
-	--difficulty-medium-bg: hsl(41, 87%, 64%);
+	/* Tono naranja oscuro (teja) para mantener contraste AA con texto blanco */
+	--difficulty-medium-bg: hsl(30, 90%, 35%);
 	--difficulty-medium-text: var(--color-white-off);
-	--difficulty-medium-bg-hover: hsl(41, 80%, 50%);
-	--difficulty-high-bg: hsl(0, 88%, 67%);
+	--difficulty-medium-bg-hover: hsl(30, 90%, 25%);
+	--difficulty-high-bg: hsl(
+		0,
+		70%,
+		45%
+	); /* Oscurecido para contraste con blanco */
 	--difficulty-high-text: var(--color-white-off);
-	--difficulty-high-bg-hover: hsl(0, 66%, 51%);
+	--difficulty-high-bg-hover: hsl(0, 70%, 35%);
 
 	/* --- Colores de foco para píldoras de dificultad --- */
 	--difficulty-low-focus-outline: var(--difficulty-low-bg-hover);
@@ -242,7 +248,7 @@ html.dark {
 	--navbar-brand-focus-outline-color: var(--color-green-300);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
-	--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(139, 192, 165, 0.5); /* Primitiva RGB de --color-green-100 */
 
 	/* --- Bordes y Separadores --- */

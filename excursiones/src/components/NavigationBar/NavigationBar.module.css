@@ -37,6 +37,6 @@
 
 /* Sobrescribe el ícono del toggler de Bootstrap para usar siempre la variable CSS del tema.
    Esto evita tener que usar la prop 'variant' en el componente Navbar. */
-.customNavbar .navbar-toggler-icon {
-	background-image: var(--bs-navbar-toggler-icon-bg);
+.customNavbar :global(.navbar-toggler-icon) {
+	background-image: var(--custom-toggler-icon-bg);
 }

@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Col, Button, Offcanvas, Badge } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import Filters from "../Filters";
 import { AppError, Excursion } from "../../types";
 import ExcursionsList from "../ExcursionsList";
 import { FilterIcon } from "../shared/Icons";
 import styles from "./ExcursionsPage.module.css";
+import { useExcursionsPageLogic } from "../../hooks/useExcursionsPageLogic";
 
 // Definición del tipo para el estado de las excursiones.
 type ExcursionsState = {
@@ -18,38 +17,6 @@ type ExcursionsState = {
 // Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
 	readonly excursionsState: ExcursionsState;
-}
-
-/**
- * Hook personalizado para manejar la lógica de la página de excursiones.
- * Gestiona la visibilidad de los filtros en breakpoints pequeños y el conteo de filtros activos.
- */
-function useExcursionsPageLogic() {
-	const [showFilters, setShowFilters] = useState(false);
-
-	const handleCloseFilters = () => setShowFilters(false);
-	const handleShowFilters = () => setShowFilters(true);
-
-	const activeFilterCount = useSelector((state: RootState) => {
-		const { area, difficulty, time } = state.filterReducer;
-		return area.length + difficulty.length + time.length;
-	});
-
-	const filterCountText =
-		activeFilterCount === 1 ? "seleccionado" : "seleccionados";
-
-	const ariaFilterLabel = `Mostrar filtros. ${activeFilterCount} ${
-		activeFilterCount === 1 ? "filtro aplicado" : "filtros aplicados"
-	}.`;
-
-	return {
-		showFilters,
-		handleCloseFilters,
-		handleShowFilters,
-		activeFilterCount,
-		filterCountText,
-		ariaFilterLabel,
-	};
 }
 
 /**
