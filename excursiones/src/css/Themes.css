@@ -44,7 +44,7 @@
 		145,
 		55%,
 		35%
-	); /* Oscurecido para ratio > 4.5:1 sobre blanco */
+	);
 	--color-warning-light: hsl(40, 75%, 55%);
 	--color-danger-light: hsl(0, 60%, 40%);
 	--color-success-dark: hsl(145, 50%, 60%);
@@ -187,10 +187,9 @@ html.light {
 		30,
 		90%,
 		30%
-	); /* Oscurecido para contraste > 4.5:1 con texto blanco */
+	); 
 	--difficulty-medium-text: var(--color-white-off);
 	--difficulty-medium-bg-hover: hsl(30, 90%, 25%);
-	/* Oscurecido para contraste > 4.5:1 con texto blanco */
 	--difficulty-high-bg: hsl(0, 70%, 40%);
 	--difficulty-high-text: var(--color-white-off);
 	--difficulty-high-bg-hover: hsl(0, 70%, 35%);
@@ -233,7 +232,7 @@ html.dark {
 	--color-background-body: var(--color-green-900);
 	--color-background-surface: var(
 		--color-gray-green-900
-	); /* Aclarado para resaltar sobre el fondo (20% luminosidad) */
+	);
 	--color-text-base: var(--color-gray-green-200);
 	--color-text-muted: var(--color-gray-green-400);
 	--color-text-on-primary: var(--color-black-soft);
@@ -263,20 +262,18 @@ html.dark {
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
 
-	/* Usamos texto oscuro sobre fondo claro (green-300) para cumplir WCAG AA (> 4.5:1) */
 	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: hsl(
 		145,
 		35%,
 		65%
-	); /* Aclarado para ratio > 3:1 sobre el fondo de la navbar */
+	);
 	--login-btn-border: var(--separator-color);
 	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
 	--login-btn-border-hover: var(--separator-color);
 
 	--register-link-color: var(--navbar-color);
 	--register-link-bg-hover: rgba(255, 255, 255, 0.1);
-	/* Ajustados ligeramente más claros para mantener contraste con el nuevo fondo de navbar */
 	--nav-link-active-bg: hsl(150, 10%, 30%);
 	--nav-link-active-border: hsl(150, 10%, 40%);
 
@@ -319,7 +316,6 @@ html.dark {
 	--filter-badge-bg: var(--color-primary);
 	--filter-badge-text: var(--login-btn-text);
 
-	/* Píldoras aclaradas (30%) para que no se pierdan sobre el nuevo fondo (20%) */
 	--filter-pill-bg: hsl(150, 10%, 30%);
 	--filter-pill-text: var(--color-text-base);
 	--filter-pill-border: hsl(150, 10%, 35%);
@@ -361,18 +357,18 @@ html.dark {
 		35,
 		60%,
 		85%
-	); /* Aclarado para contraste > 4.5:1 */
+	);
 	--difficulty-medium-bg-hover: hsl(35, 94%, 27%);
 	--difficulty-high-bg: hsl(
 		347,
 		85%,
 		30%
-	); /* Oscurecido para contraste > 4.5:1 */
+	);
 	--difficulty-high-text: hsl(
 		347,
 		55%,
 		88%
-	); /* Aclarado para contraste > 4.5:1 */
+	);
 	--difficulty-high-bg-hover: hsl(347, 89%, 25%);
 
 	/* --- Colores de foco para píldoras de dificultad (modo oscuro) --- */
