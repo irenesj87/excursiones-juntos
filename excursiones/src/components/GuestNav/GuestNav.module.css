@@ -23,7 +23,7 @@
 
 .loginLink:hover {
 	background-color: var(--login-btn-bg-hover);
-	color: var(--login-btn-text);
+	color: var(--color-white);
 }
 
 .loginLink:focus-visible {

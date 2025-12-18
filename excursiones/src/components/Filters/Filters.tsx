@@ -69,8 +69,8 @@ function useFiltersLogic() {
 /**
  * Componente que renderiza el panel de filtros.
  * Muestra diferentes secciones de filtrado (zona, dificultad, tiempo) y un botón para limpiar todas las selecciones.
- * @param {FiltersProps} props - Las props del componente.
- * @returns {React.ReactElement} El componente de filtros.
+ * @param props - Las props del componente.
+ * @returns - El componente de filtros.
  */
 function Filters({ showTitle = true }: FiltersProps) {
 	const { hasActiveFilters, handleClearFilters } = useFiltersLogic();
