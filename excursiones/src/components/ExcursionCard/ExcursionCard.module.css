@@ -32,7 +32,6 @@
 .excursionDetails {
 	margin-bottom: 1.5rem;
 	display: flex;
-	flex-direction: row;
 	flex-wrap: wrap;
 	gap: 1rem;
 	color: var(--color-text-base);
