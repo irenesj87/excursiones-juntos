@@ -16,6 +16,8 @@ interface ErrorMessageAlertProps {
 	readonly onClose: () => void;
 	/** Título opcional de la alerta. Por defecto es "Error". */
 	readonly title?: string;
+	/** Clases CSS adicionales para el contenedor de la alerta. */
+	readonly className?: string;
 }
 
 /**
@@ -25,9 +27,10 @@ function ErrorMessageAlert({
 	message,
 	onClose,
 	title = DEFAULT_TITLE,
+	className,
 }: ErrorMessageAlertProps) {
 	return (
-		<Alert variant="danger" onClose={onClose} dismissible>
+		<Alert variant="danger" onClose={onClose} dismissible className={className}>
 			<div className="d-flex gap-3 align-items-start">
 				<AlertIcon
 					size={24}

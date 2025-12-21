@@ -29,17 +29,19 @@ const SKELETON_SIZES = {
 
 interface DetailItemSkeletonProps {
 	/** El ancho del esqueleto de texto. */
-	width: number | string;
+	readonly width: number | string;
 }
 
 /**
  * Componente auxiliar para renderizar el esqueleto de un ítem de detalle.
  */
-const DetailItemSkeleton = ({ width }: DetailItemSkeletonProps) => (
-	<button type="button" className={detailItemStyles.detailItem} disabled>
-		<Skeleton width={width} />
-	</button>
-);
+function DetailItemSkeleton({ width }: DetailItemSkeletonProps) {
+	return (
+		<button type="button" className={detailItemStyles.detailItem} disabled>
+			<Skeleton width={width} />
+		</button>
+	);
+}
 
 interface ExcursionCardSkeletonProps {
 	/** Indica si el usuario ha iniciado sesión para mostrar el placeholder del botón. */
@@ -80,16 +82,16 @@ function ExcursionCardSkeleton({
 					</div>
 					{/* Botón de "Apuntarse" */}
 					{isLoggedIn && (
-						<div
-							className="mt-auto pt-3"
-							data-testid={TEST_IDS.BUTTON_CONTAINER}
-						>
-							<div className="d-grid d-md-flex justify-content-md-end">
-								<Skeleton
-									height={SKELETON_SIZES.BUTTON_HEIGHT}
-									className="w-100"
-									style={{ minWidth: SKELETON_SIZES.BUTTON_MIN_WIDTH }}
-								/>
+						<div className="mt-auto" data-testid={TEST_IDS.BUTTON_CONTAINER}>
+							<hr className="border-secondary-subtle my-3 opacity-25" />
+							<div className={cardStyles.cardActionArea}>
+								<div className="d-grid d-md-flex justify-content-md-end">
+									<Skeleton
+										height={SKELETON_SIZES.BUTTON_HEIGHT}
+										className="w-100"
+										style={{ minWidth: SKELETON_SIZES.BUTTON_MIN_WIDTH }}
+									/>
+								</div>
 							</div>
 						</div>
 					)}
