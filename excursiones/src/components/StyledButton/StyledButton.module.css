@@ -5,12 +5,28 @@
 	transition: none;
 	border: none;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: relative;
 }
 
 /* Estilo de foco para accesibilidad con teclado */
 .styledButton:focus-visible {
 	outline: none;
 	box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+.spinnerOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hiddenContent {
+	visibility: hidden;
 }
 
 .primary {

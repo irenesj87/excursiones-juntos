@@ -46,20 +46,15 @@ function StyledButton({
 			disabled={disabled || isLoading}
 			aria-busy={isLoading}
 		>
-			{isLoading ? (
-				<>
-					<Spinner
-						as="span"
-						animation="border"
-						size="sm"
-						aria-hidden="true"
-						className="me-2"
-					/>
+			{isLoading && (
+				<span className={styles.spinnerOverlay}>
+					<Spinner as="span" animation="border" size="sm" aria-hidden="true" />
 					<span className="visually-hidden">Cargando...</span>
-				</>
-			) : (
-				children // El texto original solo se muestra si no está cargando
+				</span>
 			)}
+			<span className={isLoading ? styles.hiddenContent : undefined}>
+				{children}
+			</span>
 		</Button>
 	);
 }

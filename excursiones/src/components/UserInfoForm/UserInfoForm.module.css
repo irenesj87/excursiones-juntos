@@ -52,12 +52,6 @@
 	}
 }
 
-.editButton,
-.cancelButton,
-.saveButton {
-	transition: none;
-}
-
 /* Alinea los iconos con el texto en los botones del formulario */
 .editButton svg,
 .cancelButton svg,
