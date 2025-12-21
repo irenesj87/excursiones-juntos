@@ -1,13 +1,13 @@
 import React from "react";
-import { Card, Alert } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import ExcursionDetailItem from "../ExcursionDetailItem";
+import ErrorMessageAlert from "../ErrorMessageAlert/ErrorMessageAlert";
 import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import { MapIcon, ChartIcon, ClockIcon, CheckIcon } from "../shared/Icons";
 import cn from "classnames";
-import "bootstrap/dist/css/bootstrap.css";
 import styles from "./ExcursionCard.module.css";
 
 /**
@@ -28,9 +28,11 @@ interface JoinButtonProps {
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	if (isJoined) {
 		return (
-			<div className="d-grid d-md-flex justify-content-center justify-content-md-end">
+			<div className="d-grid d-md-flex justify-content-md-end">
 				<output className={styles.joinedStatus}>
-					<span><CheckIcon className={styles.detailIcon} /></span>
+					<span>
+						<CheckIcon className={styles.detailIcon} />
+					</span>
 					<span>Apuntado/a</span>
 				</output>
 			</div>
@@ -102,19 +104,12 @@ function ExcursionCard({
 	};
 
 	return (
-		<Card
-			as="article"
-			className={cn(styles.excursionItemCard, "h-100 w-100", {
-				[styles.isJoinedCard]: isJoined,
-			})}
-		>
+		<Card as="article" className={cn(styles.excursionItemCard, "h-100 w-100")}>
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>
 					{/* Título de la excursión */}
-					<Card.Title className={`${styles.excursionTitle} mb-3`}>
-						{name}
-					</Card.Title>
+					<Card.Title className={styles.excursionTitle}>{name}</Card.Title>
 					{/* Detalles de la excursión */}
 					<div className={styles.excursionDetails}>
 						<ExcursionDetailItem
@@ -136,27 +131,23 @@ function ExcursionCard({
 				</div>
 				{/* Área de acción: botón para unirse a la excursión */}
 				{isLoggedIn && (
-					<div className={`${styles.cardActionArea} mt-auto pt-3`}>
-						{joinError && (
-							/* 
-								Componente Alert para mostrar errores. El mensaje se sanitiza con `getSafeErrorMessage` 
-								para prevenir inyección de HTML.
-							*/
-							<Alert
-								variant="danger"
-								onClose={clearError}
-								dismissible
-								className="mb-2 small"
-								role="alert"
-							>
-								{getSafeErrorMessage(joinError)}
-							</Alert>
-						)}
-						<JoinButton
-							isJoined={isJoined}
-							isJoining={isJoining}
-							onJoin={handleOnJoin}
-						/>
+					<div className="mt-auto">
+						{/* Separador visual sutil antes de las acciones */}
+						<hr className="border-secondary-subtle my-3 opacity-25" />
+						<div className={styles.cardActionArea}>
+							{joinError && (
+								<ErrorMessageAlert
+									message={getSafeErrorMessage(joinError)}
+									onClose={clearError}
+									className="mb-2 small"
+								/>
+							)}
+							<JoinButton
+								isJoined={isJoined}
+								isJoining={isJoining}
+								onJoin={handleOnJoin}
+							/>
+						</div>
 					</div>
 				)}
 			</Card.Body>
