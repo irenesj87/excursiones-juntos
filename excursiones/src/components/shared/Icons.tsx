@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	LuTriangleAlert,
 	LuSearch,
 	LuMoon,
 	LuSun,
@@ -22,44 +23,74 @@ import { MdClear } from "react-icons/md";
  * que no permite el uso de los íconos directamente en JSX sin esta aserción.
  */
 // Icono de la lupa para la barra de búsqueda.
+export const AlertIcon = LuTriangleAlert as React.ComponentType<{
+	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
+}>;
+// Icono de la lupa para la barra de búsqueda.
 export const SearchIcon = LuSearch as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 // Icono de una "x" para limpiar la barra de búsqueda.
 export const ClearIcon = MdClear as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 // Icono de una luna para el botón de cambio de tema.
 export const MoonIcon = LuMoon as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 // Icono de un sol para el cambio de tema.
 export const SunIcon = LuSun as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 
-export const MapIcon = LuMapPin as React.ComponentType<{ className?: string }>;
+export const MapIcon = LuMapPin as React.ComponentType<{
+	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
+}>;
 
 export const ChartIcon = LuChartNoAxesColumnIncreasing as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 
 export const ClockIcon = LuClock3 as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 
 export const FilterIcon = LuFilter as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 
 export const FilterXIcon = LuFilterX as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 
 export const CheckIcon = LuCircleCheckBig as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
 
 export const CopyrightIcon = LuCopyright as React.ComponentType<{
 	className?: string;
+	size?: number | string;
+	"aria-hidden"?: boolean | string;
 }>;
