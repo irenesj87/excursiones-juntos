@@ -6,27 +6,27 @@ import styles from "./StyledButton.module.css";
  * Props para el componente StyledButton.
  */
 interface StyledButtonProps {
-	/** El contenido textual del botón. Por seguridad, solo se aceptan strings o números. */
-	children: string | number;
+	/** El contenido del botón. Puede ser texto, iconos o cualquier nodo renderizable. */
+	readonly children: React.ReactNode;
 	/** Función a ejecutar al hacer clic. */
-	onClick?: () => void;
+	readonly onClick?: () => void;
 	/** El tipo de botón. */
-	type?: "button" | "submit" | "reset";
+	readonly type?: "button" | "submit" | "reset";
 	/** La variante de estilo del botón. */
-	variant?: "primary" | "secondary";
+	readonly variant?: "primary" | "secondary" | "success" | "danger";
 	/** Clases CSS adicionales para personalizar. */
-	className?: string;
+	readonly className?: string;
 	/** Si el botón está deshabilitado. */
-	disabled?: boolean;
+	readonly disabled?: boolean;
 	/** Si el botón está en estado de carga. */
-	isLoading?: boolean;
+	readonly isLoading?: boolean;
 }
 
 /**
  * Un componente de botón personalizado y reutilizable que extiende la funcionalidad
  * del botón de React Bootstrap.
  */
-const StyledButton = ({
+function StyledButton({
 	children,
 	onClick,
 	type = "button",
@@ -34,7 +34,7 @@ const StyledButton = ({
 	className = "",
 	disabled = false,
 	isLoading = false,
-}: StyledButtonProps) => {
+}: StyledButtonProps) {
 	// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
 	const buttonClass = `${styles.styledButton} ${styles[variant]} ${className}`;
 
@@ -46,22 +46,17 @@ const StyledButton = ({
 			disabled={disabled || isLoading}
 			aria-busy={isLoading}
 		>
-			{isLoading ? (
-				<>
-					<Spinner
-						as="span"
-						animation="border"
-						size="sm"
-						aria-hidden="true"
-						className="me-2"
-					/>
+			{isLoading && (
+				<span className={styles.spinnerOverlay}>
+					<Spinner as="span" animation="border" size="sm" aria-hidden="true" />
 					<span className="visually-hidden">Cargando...</span>
-				</>
-			) : (
-				children // El texto original solo se muestra si no está cargando
+				</span>
 			)}
+			<span className={isLoading ? styles.hiddenContent : undefined}>
+				{children}
+			</span>
 		</Button>
 	);
-};
+}
 
 export default StyledButton;

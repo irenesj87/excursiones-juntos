@@ -10,26 +10,46 @@
 	); /* Aplicamos la misma sombra que las tarjetas de excursión */
 }
 
-.cardHeader {
-	background-color: var(--primary-color);
-	color: white;
-	font-size: 1.1rem; /* Ajustamos el tamaño para que no sea tan grande */
-	text-transform: uppercase;
-	font-weight: bold;
-	padding: 1rem 1.25rem;
-	border-bottom: 1px solid var(--separator-color);
-}
-
 .cardBody {
 	background-color: transparent; /* Aseguramos que el cuerpo de la tarjeta no sobreescriba el fondo */
 	padding: 1.5rem;
 	font-size: 1.1rem;
 }
 
-.editButton,
-.cancelButton,
-.saveButton {
-	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+.formTitle {
+	color: var(--color-text-base);
+	font-size: 1.7rem;
+	font-weight: 700;
+	margin-bottom: 0.25rem;
+}
+
+.formDescription {
+	color: var(--color-text-muted);
+	margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+	color: var(--color-text-muted);
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.labelIcon {
+	color: var(--color-primary);
+	font-size: 1.1em;
+}
+
+/* En breakpoints pequeños, el texto fluye naturalmente.
+   En breakpoints sm+ (donde el label está a la derecha), fijamos un ancho
+   para que los iconos queden alineados verticalmente. */
+@media (min-width: 576px) {
+	.labelText {
+		min-width: 5.5rem;
+		text-align: right;
+	}
 }
 
 /* Alinea los iconos con el texto en los botones del formulario */
@@ -39,11 +59,4 @@
 	margin-right: 0.5rem;
 	vertical-align: -0.125em;
 	font-size: 1.1em;
-}
-
-/* Alinea los iconos con el texto en las etiquetas del formulario */
-.cardBody .form-label svg {
-	margin-right: 0.5rem;
-	vertical-align: -0.125em;
-	color: var(--accent-color); /* Usamos el color de acento para los iconos */
 }

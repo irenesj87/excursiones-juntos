@@ -27,8 +27,7 @@
 
 ## 4. Accesibilidad y Color:
 
-- Cumple estrictamente con el estándar WCAG 2.1 Nivel AA.
-- Asegura un ratio de contraste de al menos 4.5:1 para texto normal y 3:1 para texto grande (18.66px+ negrita o 24px+) o componentes gráficos de interfaz (iconos, bordes de inputs).
+- Cumple estrictamente con el estándar WCAG Nivel AAA.
 - No confíes únicamente en el color para transmitir información (usa también iconos o texto).
 - Verifica la accesibilidad en todas las variantes del tema (modo claro y oscuro).
 - Gestiona el Foco (Focus Management). Asegúrate de que la navegación por teclado sea lógica y visible (outline). Nunca elimines el outline sin proporcionar una alternativa visual clara.

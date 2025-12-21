@@ -11,6 +11,12 @@ import {
 	LuClock3,
 	LuCircleCheckBig,
 	LuCopyright,
+	LuUser,
+	LuUsers,
+	LuPhone,
+	LuMail,
+	LuPencil,
+	LuX,
 } from "react-icons/lu";
 import { MdClear } from "react-icons/md";
 
@@ -49,3 +55,15 @@ export const FilterXIcon = LuFilterX as React.ComponentType<IconProps>;
 export const CheckIcon = LuCircleCheckBig as React.ComponentType<IconProps>;
 // Icono del copyright para el footer
 export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
+// Icono de usuario para campos de nombre
+export const UserIcon = LuUser as React.ComponentType<IconProps>;
+// Icono de usuario para campos de apellidos
+export const UsersIcon = LuUsers as React.ComponentType<IconProps>;
+// Icono de teléfono
+export const PhoneIcon = LuPhone as React.ComponentType<IconProps>;
+// Icono de correo electrónico
+export const MailIcon = LuMail as React.ComponentType<IconProps>;
+// Icono de lápiz para editar
+export const EditIcon = LuPencil as React.ComponentType<IconProps>;
+// Icono de X para cancelar
+export const CancelIcon = LuX as React.ComponentType<IconProps>;
