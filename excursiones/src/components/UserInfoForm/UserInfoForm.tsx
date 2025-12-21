@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Form, Row, Button, Spinner, Alert } from "react-bootstrap";
+import { Card, Col, Form, Row, Alert } from "react-bootstrap";
 import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
 import {
 	validateName,
@@ -7,8 +7,30 @@ import {
 	validatePhone,
 } from "../../validation/validations";
 import { useUserInfoForm, FormValues } from "../../hooks/useUserInfoForm";
-import "bootstrap/dist/css/bootstrap.css";
+import StyledButton from "../StyledButton/StyledButton";
+import {
+	UserIcon,
+	UsersIcon,
+	PhoneIcon,
+	MailIcon,
+	EditIcon,
+	CancelIcon,
+	CheckIcon,
+} from "../shared/Icons";
 import styles from "./UserInfoForm.module.css";
+
+/**
+ * Definición de los campos del formulario.
+ */
+interface FormField {
+	id: string;
+	label: string;
+	field: keyof FormValues;
+	ref?: React.RefObject<HTMLInputElement>;
+	validation: (value: string) => boolean;
+	errorMessage: string;
+	icon: React.ComponentType<{ className?: string }>;
+}
 
 /**
  * Componente que se encarga del menú de edición y muestra de los datos del usuario logueado en ese momento
@@ -30,15 +52,6 @@ function UserInfoForm(): React.ReactElement {
 
 	const { values, isEditing, isLoading, error, successMessage } = formState;
 
-	interface FormField {
-		id: string;
-		label: string;
-		field: keyof FormValues;
-		ref?: React.RefObject<HTMLInputElement>;
-		validation: (value: string) => boolean;
-		errorMessage: string;
-	}
-
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
 	const formFields: FormField[] = [
 		{
@@ -48,6 +61,7 @@ function UserInfoForm(): React.ReactElement {
 			ref: nameInputRef,
 			validation: validateName,
 			errorMessage: "El nombre no puede estar vacío y debe ser válido.",
+			icon: UserIcon,
 		},
 		{
 			id: "formPlaintextSurname",
@@ -55,6 +69,7 @@ function UserInfoForm(): React.ReactElement {
 			field: "surname",
 			validation: validateSurname,
 			errorMessage: "Los apellidos no pueden estar vacíos y deben ser válidos.",
+			icon: UsersIcon,
 		},
 		{
 			id: "formPlaintextPhone",
@@ -62,6 +77,7 @@ function UserInfoForm(): React.ReactElement {
 			field: "phone",
 			validation: validatePhone,
 			errorMessage: "El formato del teléfono no es válido (9 dígitos).",
+			icon: PhoneIcon,
 		},
 	];
 
@@ -82,6 +98,13 @@ function UserInfoForm(): React.ReactElement {
 	return (
 		<Card className={`${styles.profileCard} w-100 flex-grow-1`}>
 			<Card.Body className={`${styles.cardBody} d-flex flex-column`}>
+				<div className="mb-2">
+					<h2 className={styles.formTitle}>Mi Perfil</h2>
+					<p className={styles.formDescription}>
+						Gestiona tu información personal y de contacto.
+					</p>
+				</div>
+
 				{/*
 				 * Contenedor para alertas de éxito y error.
 				 * - `role="group"` agrupa las alertas semánticamente.
@@ -116,63 +139,91 @@ function UserInfoForm(): React.ReactElement {
 					)}
 				</fieldset>
 
-				{/* Campo de correo electrónico (sólo lectura) */}
-				<Form.Group
-					as={Row}
-					className="mb-3 gx-2"
-					controlId="formPlaintextEmail"
-				>
-					<Form.Label column sm="3" className="text-sm-end fw-bold">
-						Correo:
-					</Form.Label>
-					<Col sm="9">
-						<Form.Control plaintext readOnly defaultValue={user?.mail ?? ""} />
-					</Col>
-				</Form.Group>
-
-				{/* Renderizado dinámico de los campos del formulario */}
-				{formFields.map((field, index) => (
+				{/* Sección: Datos de Cuenta */}
+				<div className="mb-4">
+					<h3 className={styles.sectionTitle}>Cuenta</h3>
 					<Form.Group
 						as={Row}
-						key={field.id}
-						className={`${
-							index === formFields.length - 1 ? "mb-4" : "mb-3"
-						} gx-2 align-items-center`}
+						className="mb-0 gx-2 align-items-center"
+						controlId="formPlaintextEmail"
 					>
-						<Form.Label
-							column
-							sm="3"
-							className="text-sm-end fw-bold"
-							htmlFor={field.id}
-						>
-							{field.label}:
+						<Form.Label column sm="3" className="text-sm-end fw-bold">
+							<span className="d-flex align-items-center justify-content-sm-end gap-2">
+								<MailIcon className={styles.labelIcon} aria-hidden="true" />
+								<span className={styles.labelText}>Correo:</span>
+							</span>
 						</Form.Label>
 						<Col sm="9">
-							<UserPageInputEdit
-								ref={field.ref}
-								id={field.id}
-								isEditing={isEditing}
-								onInputChange={(value) => handleInputChange(field.field, value)}
-								value={values[field.field]}
-								validationFunction={field.validation}
-								message={true}
-								errorMessage={field.errorMessage}
+							<Form.Control
+								plaintext
+								readOnly
+								defaultValue={user?.mail ?? ""}
 							/>
 						</Col>
 					</Form.Group>
-				))}
+				</div>
+
+				<hr className="border-secondary-subtle my-4 opacity-25" />
+
+				{/* Sección: Información Personal */}
+				<div>
+					<h3 className={styles.sectionTitle}>Información Personal</h3>
+
+					{/* Renderizado dinámico de los campos del formulario */}
+					{formFields.map((field, index) => (
+						<Form.Group
+							as={Row}
+							key={field.id}
+							className={`${
+								index === formFields.length - 1 ? "mb-4" : "mb-3"
+							} gx-2 align-items-center`}
+						>
+							<Form.Label
+								column
+								sm="3"
+								className="text-sm-end fw-bold"
+								htmlFor={field.id}
+							>
+								<span className="d-flex align-items-center justify-content-sm-end gap-2">
+									<field.icon className={styles.labelIcon} aria-hidden="true" />
+									<span className={styles.labelText}>{field.label}:</span>
+								</span>
+							</Form.Label>
+							<Col sm="9">
+								<UserPageInputEdit
+									ref={field.ref}
+									id={field.id}
+									isEditing={isEditing}
+									onInputChange={(value) =>
+										handleInputChange(field.field, value)
+									}
+									value={values[field.field]}
+									validationFunction={field.validation}
+									message={true}
+									errorMessage={field.errorMessage}
+								/>
+							</Col>
+						</Form.Group>
+					))}
+				</div>
 
 				{/* Botón "Editar" visible cuando no se está editando */}
 				{!isEditing && (
 					<div className="mt-auto pt-3">
 						<Row className="justify-content-center justify-content-sm-end gx-0">
 							<Col xs={12} sm="auto">
-								<Button
+								<StyledButton
 									onClick={startEdit}
 									className={`${styles.editButton} w-100`}
+									variant="primary"
 								>
-									Editar
-								</Button>
+									{/* Pasamos el icono y texto como children */}
+									{/* StyledButton maneja el layout interno, pero podemos añadir un span para el gap */}
+									<span className="d-flex align-items-center justify-content-center gap-2">
+										<EditIcon aria-hidden="true" />
+										Editar
+									</span>
+								</StyledButton>
 							</Col>
 						</Row>
 					</div>
@@ -182,36 +233,32 @@ function UserInfoForm(): React.ReactElement {
 						<Row className="justify-content-center justify-content-sm-end gx-2">
 							{/* En xs, los botones ocupan el ancho completo y se apilan. En sm+, se muestran en línea. */}
 							<Col xs={12} sm="auto" className="mb-2 mb-sm-0">
-								<Button
+								<StyledButton
 									variant="danger"
 									onClick={cancelEdit}
 									className={`${styles.cancelButton} w-100`}
 								>
-									Cancelar
-								</Button>
+									<span className="d-flex align-items-center justify-content-center gap-2">
+										<CancelIcon aria-hidden="true" />
+										Cancelar
+									</span>
+								</StyledButton>
 							</Col>
 							<Col xs={12} sm="auto">
-								<Button
+								<StyledButton
 									variant={
 										!isFormValid || !isFormChanged ? "secondary" : "success"
 									}
 									onClick={saveEdit}
 									className={`${styles.saveButton} w-100`}
-									aria-disabled={!isFormValid || !isFormChanged || isLoading}
+									disabled={!isFormValid || !isFormChanged}
+									isLoading={isLoading}
 								>
-									{isLoading ? (
-										<output>
-											<Spinner
-												as="span"
-												animation="border"
-												size="sm"
-												aria-hidden="true"
-											/>
-										</output>
-									) : (
-										<>Guardar</>
-									)}
-								</Button>
+									<span className="d-flex align-items-center justify-content-center gap-2">
+										<CheckIcon aria-hidden="true" />
+										Guardar
+									</span>
+								</StyledButton>
 							</Col>
 						</Row>
 					</div>
