@@ -5,7 +5,6 @@ import { DIFFICULTY, VALID_DIFFICULTY_LEVELS } from "../../constants";
 import { useDifficultyStyles } from "../../hooks/useDifficultyStyles";
 import styles from "./ExcursionDetailItem.module.css";
 
-
 /**
  * Props para el componente ExcursionDetailItem.
  */
@@ -16,6 +15,8 @@ interface ExcursionDetailItemProps {
 	readonly label?: string;
 	/** El icono a mostrar junto al detalle. */
 	readonly icon?: React.ReactNode;
+	/** Variante de visualización. Permite forzar el estilo de dificultad explícitamente. */
+	readonly variant?: "default" | "difficulty";
 }
 
 /**
@@ -32,24 +33,27 @@ const isDifficultyLevel = (
  * Componente para mostrar un detalle específico de una excursión.
  * Renderiza un componente diferente según si el detalle es la dificultad o no.
  */
-const ExcursionDetailItem = (
-	props: ExcursionDetailItemProps
-): JSX.Element | null => {
-	const { text, label, icon } = props;
-
+function ExcursionDetailItem({
+	text,
+	label,
+	icon,
+	variant = "default",
+}: ExcursionDetailItemProps): JSX.Element | null {
 	/*
 	 * Determina si el item es de tipo "Dificultad" para aplicar estilos especiales.
-	 * Para ello tiene que cumplir tres condiciones:
-	 * 1. La label tiene que decir "Dificultad".
-	 * 2. El texto debe existir.
-	 * 3. El texto debe de ser un nivel de dificultad válido, es decir, "Baja", "Media" o "Alta".
+	 * Prioriza la prop 'variant' si es 'difficulty'.
+	 * De lo contrario, usa la lógica de inferencia basada en la etiqueta (legacy).
 	 */
 	const isDifficulty =
-		label === DIFFICULTY && !!text && isDifficultyLevel(text);
+		variant === "difficulty" ||
+		(variant === "default" &&
+			label === DIFFICULTY &&
+			!!text &&
+			isDifficultyLevel(text));
 
 	// Hook para obtener la clase de estilo solo si es un item de dificultad.
 	const { difficultyClass } = useDifficultyStyles(
-		isDifficulty ? text : null,
+		isDifficulty && text && isDifficultyLevel(text) ? text : null,
 		styles
 	);
 
@@ -86,6 +90,6 @@ const ExcursionDetailItem = (
 			</button>
 		</OverlayTrigger>
 	);
-};
+}
 
 export default ExcursionDetailItem;

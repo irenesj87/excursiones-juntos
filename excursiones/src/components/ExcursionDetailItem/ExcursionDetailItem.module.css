@@ -3,7 +3,7 @@
 	/* Layout */
 	display: flex;
 	align-items: center;
-	gap: 0.4rem;
+	gap: 0.5rem;
 
 	/* Reseteo de estilos de botón para que parezca texto normal */
 	background: none;
@@ -14,7 +14,7 @@
 	font: inherit;
 	cursor: pointer;
 	text-align: inherit; /* Asegura la alineación correcta */
-	font-size: 1.08rem;
+	font-size: 1.125rem;
 }
 
 /* Indicador de foco para cuando el elemento es interactivo (solo con teclado) */

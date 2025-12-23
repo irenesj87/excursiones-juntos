@@ -1,0 +1,43 @@
+/* Clase contenedora para la alerta. Nos permite encapsular los overrides de Bootstrap. */
+.alert {
+	border: none;
+}
+
+/*
+ * Sobreescribimos el botón de cierre de Bootstrap (.btn-close).
+ * Usamos :global() porque .btn-close es una clase interna de Bootstrap.
+ */
+.alert :global(.btn-close) {
+	/* Accesibilidad (WCAG AAA): Eliminamos la transparencia por defecto (0.5) */
+	opacity: 1;
+	/* Aseguramos que el botón esté alineado verticalmente si el contenido crece */
+	top: 50%;
+	transform: translateY(-50%);
+	right: 1rem;
+}
+
+/* Contenedor interno para alinear icono y texto */
+.alertContent {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem; /* Equivalente a gap-3 */
+}
+
+/* Icono: Evita que se encoja y ajusta su alineación vertical */
+.icon {
+	flex-shrink: 0;
+	margin-top: 0.25rem; /* Equivalente a mt-1 */
+}
+
+/* Título: Estilo semántico en lugar de clases utilitarias */
+.title {
+	font-size: 1.25rem; /* Equivalente a h5 */
+	font-weight: 500;
+	line-height: 1.2;
+	margin-bottom: 0.5rem;
+}
+
+/* Mensaje */
+.message {
+	margin-bottom: 0;
+}
