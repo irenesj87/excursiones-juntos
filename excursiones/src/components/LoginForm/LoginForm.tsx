@@ -6,7 +6,7 @@ import {
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
 import ValidatedFormGroup from "../ValidatedFormGroup";
-import FormErrorAlert from "../FormErrorAlert";
+import ErrorMessageAlert from "../ErrorMessageAlert";
 import StyledButton from "../StyledButton";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
@@ -35,10 +35,12 @@ export function LoginForm() {
 
 	return (
 		<>
-			<FormErrorAlert
-				error={formState.error}
-				onClearError={() => formDispatch({ type: "CLEAR_ERROR" })}
-			/>
+			{formState.error && (
+				<ErrorMessageAlert
+					message={formState.error}
+					onClose={() => formDispatch({ type: "CLEAR_ERROR" })}
+				/>
+			)}
 			<Form
 				id="loginForm"
 				noValidate

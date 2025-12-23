@@ -10,7 +10,7 @@ import {
 	validateSamePassword,
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
-import FormErrorAlert from "../FormErrorAlert";
+import ErrorMessageAlert from "../ErrorMessageAlert";
 import StyledButton from "../StyledButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
@@ -31,7 +31,7 @@ const initialState: RegisterFormValues = {
 /**
  * Componente de formulario de registro de usuario.
  */
-const RegisterForm = () => {
+function RegisterForm() {
 	const [values, setValues] = useState<RegisterFormValues>(initialState);
 
 	/**
@@ -145,10 +145,12 @@ const RegisterForm = () => {
 
 	return (
 		<>
-			<FormErrorAlert
-				error={formState.error}
-				onClearError={() => formDispatch({ type: "CLEAR_ERROR" })}
-			/>
+			{formState.error && (
+				<ErrorMessageAlert
+					message={formState.error}
+					onClose={() => formDispatch({ type: "CLEAR_ERROR" })}
+				/>
+			)}
 			{/* Formulario de registro */}
 			<Form
 				id="registerForm"
@@ -203,6 +205,6 @@ const RegisterForm = () => {
 			</Form>
 		</>
 	);
-};
+}
 
 export default RegisterForm;
