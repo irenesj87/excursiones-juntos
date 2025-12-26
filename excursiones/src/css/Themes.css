@@ -66,6 +66,7 @@
 
 /* --- MODO CLARO (LIGHT) --- */
 html.light {
+	color-scheme: light;
 	/* --- 2a. Variables Semánticas --- */
 	/* Usamos tonos oscuros para elementos principales para contrastar con el fondo claro */
 	--color-primary: var(--color-green-700);
@@ -234,6 +235,7 @@ html.light body {
 /* --- MODO OSCURO (DARK) --- */
 /* ======================================== */
 html.dark {
+	color-scheme: dark;
 	/* --- 2a. Variables Semánticas --- */
 	/* Usamos tonos claros para elementos principales para contrastar con el fondo oscuro */
 	--color-primary: hsl(

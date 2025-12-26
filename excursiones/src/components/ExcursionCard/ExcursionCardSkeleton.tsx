@@ -37,9 +37,9 @@ interface DetailItemSkeletonProps {
  */
 function DetailItemSkeleton({ width }: DetailItemSkeletonProps) {
 	return (
-		<button type="button" className={detailItemStyles.detailItem} disabled>
+		<div className={detailItemStyles.detailItem} aria-hidden="true">
 			<Skeleton width={width} />
-		</button>
+		</div>
 	);
 }
 

@@ -26,28 +26,24 @@ interface JoinButtonProps {
  * Renderiza el botón para unirse a una excursión. Muestra un botón "Apuntarse", un estado de carga o un estado "Apuntado/a".
  */
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
-	if (isJoined) {
-		return (
-			<div className="d-grid d-md-flex justify-content-md-end">
+	return (
+		<div className="d-grid d-md-flex justify-content-md-end">
+			{isJoined ? (
 				<output className={styles.joinedStatus}>
 					<span>
 						<CheckIcon className={styles.detailIcon} />
 					</span>
 					<span>Apuntado/a</span>
 				</output>
-			</div>
-		);
-	}
-
-	return (
-		<div className="d-grid d-md-flex justify-content-md-end">
-			<StyledButton
-				onClick={onJoin}
-				className={styles.joinButton}
-				isLoading={isJoining}
-			>
-				{isJoining ? "Apuntando..." : "Apuntarse"}
-			</StyledButton>
+			) : (
+				<StyledButton
+					onClick={onJoin}
+					className={styles.joinButton}
+					isLoading={isJoining}
+				>
+					Apuntarse
+				</StyledButton>
+			)}
 		</div>
 	);
 }
@@ -75,7 +71,7 @@ interface ExcursionCardProps {
 }
 
 /**
- * Componente que se encarga de renderizar un tarjeta que muestra la información de una excursión y permite a los usuarios
+ * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los usuarios
  * apuntarse a ella.
  */
 function ExcursionCard({
@@ -109,7 +105,9 @@ function ExcursionCard({
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>
 					{/* Título de la excursión */}
-					<Card.Title className={styles.excursionTitle}>{name}</Card.Title>
+					<Card.Title as="h3" className={styles.excursionTitle}>
+						{name}
+					</Card.Title>
 					{/* Detalles de la excursión */}
 					<div className={styles.excursionDetails}>
 						<ExcursionDetailItem
