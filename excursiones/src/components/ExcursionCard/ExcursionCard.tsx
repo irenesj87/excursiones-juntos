@@ -32,8 +32,8 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 				<span className={styles.joinedStatus} role="status">
 					<span>
 						<CheckIcon className={styles.detailIcon} />
+						Apuntado/a
 					</span>
-					<span>Apuntado/a</span>
 				</span>
 			) : (
 				<StyledButton
