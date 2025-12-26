@@ -29,12 +29,12 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	return (
 		<div className="d-grid d-md-flex justify-content-md-end">
 			{isJoined ? (
-				<output className={styles.joinedStatus}>
+				<span className={styles.joinedStatus} role="status">
 					<span>
 						<CheckIcon className={styles.detailIcon} />
 					</span>
 					<span>Apuntado/a</span>
-				</output>
+				</span>
 			) : (
 				<StyledButton
 					onClick={onJoin}
