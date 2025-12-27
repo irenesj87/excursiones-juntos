@@ -43,7 +43,7 @@
 - Utiliza Design Tokens o variables para espaciado, tipografía y colores.
 - Evita 'números mágicos' (ej: padding: 17px).
 - Usa una escala espacial consistente (ej: múltiplos de 4px o 8px) para mantener el ritmo vertical y el balance del espacio en blanco.
-- Estética "Naturaleza Minimalista: "Prioriza una paleta de colores orgánicos (verdes bosque, tierras, beiges, blancos cálidos) y evita los colores neón o puramente digitales. Combina la limpieza del minimalismo (mucho espacio en blanco) con la calidez de lo rústico (tipografías con serifa en títulos, bordes redondeados y sombras suaves).
+- Estética "Minimalismo Orgánico": Prioriza una paleta de colores orgánicos (verdes bosque, tierras, beiges, blancos cálidos) y evita los colores neón o puramente digitales. Combina la limpieza del minimalismo (mucho espacio en blanco) con la calidez de lo rústico (tipografías con serifa en títulos, bordes redondeados y sombras suaves).
 - Define los estilos base pensando en dispositivos móviles y utiliza media queries (`min-width`) para adaptar el diseño a pantallas más grandes.
 - La UI debe ser resiliente. Diseña y programa pensando en que el contenido puede desbordarse (textos largos) o faltar.
 - Jerarquía visual: Guía la vista del usuario hacia los elementos más importantes. Usa el tamaño, el color, el contraste y el espaciado para destacar las acciones principales.
