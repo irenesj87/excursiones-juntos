@@ -48,7 +48,7 @@ function NavigationBar({
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
 	isOnExcursionsPage,
-}: NavigationBarProps){
+}: NavigationBarProps) {
 	// Estado global de Redux para saber si el usuario está autenticado.
 	const { login: isLoggedIn } = useSelector(
 		(state: RootState) => state.loginReducer
@@ -157,7 +157,7 @@ function NavigationBar({
 				</div>
 				{/* --- Barra de búsqueda --- */}
 				<div className="d-none d-md-flex justify-content-center flex-grow-1 px-md-3 px-lg-5 order-md-2 order-lg-2 me-md-3">
-					<div style={{ maxWidth: "900px", width: "100%" }}>
+					<div className={styles.searchContainer}>
 						<SearchBar
 							onFetchSuccess={onFetchSuccess} //Se pasa la función onFetchSuccess al componente SearchBar
 							id="searchBar-md-lg"

@@ -17,7 +17,7 @@
 - Sustituye números y cadenas literales sueltas por constantes con nombres descriptivos (ej: MAX_RETRIES en lugar de 3).
 - No utilices React.FC.
 - Desestructura las props directamente en la firma del componente para mejorar la legibilidad y ver claramente las dependencias de dicho componente.
-- Si hay una lista de elementos, usa un key único y estable. 
+- Si hay una lista de elementos, usa un key único y estable.
 - Utiliza HTML semántico siempre que sea posible (ej: <button> en lugar de <div onClick...>, <main>, <article>).
 
 ## 3. Estado y Lógica:
@@ -40,16 +40,18 @@
 ## 6. Diseño y Estética
 
 - No uses !important.
-- Utiliza Design Tokens o variables para espaciado, tipografía y colores. 
-- Evita 'números mágicos' (ej: padding: 17px). 
+- Utiliza Design Tokens o variables para espaciado, tipografía y colores.
+- Evita 'números mágicos' (ej: padding: 17px).
 - Usa una escala espacial consistente (ej: múltiplos de 4px o 8px) para mantener el ritmo vertical y el balance del espacio en blanco.
+- Estética "Naturaleza Minimalista: "Prioriza una paleta de colores orgánicos (verdes bosque, tierras, beiges, blancos cálidos) y evita los colores neón o puramente digitales. Combina la limpieza del minimalismo (mucho espacio en blanco) con la calidez de lo rústico (tipografías con serifa en títulos, bordes redondeados y sombras suaves).
+- Define los estilos base pensando en dispositivos móviles y utiliza media queries (`min-width`) para adaptar el diseño a pantallas más grandes.
 - La UI debe ser resiliente. Diseña y programa pensando en que el contenido puede desbordarse (textos largos) o faltar.
 - Jerarquía visual: Guía la vista del usuario hacia los elementos más importantes. Usa el tamaño, el color, el contraste y el espaciado para destacar las acciones principales.
 - Consistencia visual: Usa la misma paleta de colores, tipografías y estilos de iconos en toda la aplicación.
 - Estados de los elementos: Un botón debe cambiar de apariencia cuando se pasa el cursor por encima, cuando se hace clic y mientras la acción se está procesando (estado de carga).
 - Estados de la aplicación:
 - Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
-- Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una  llamada a la acción ("No tienes tareas. ¡Crea la primera!").
+- Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
 - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución o una forma de reintentar.
 - Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
 - No tengas miedo de usar el espacio en blanco (whitespace) para ayudar a reducir la carga cognitiva, agrupar elementos relacionados y mejorar la legibilidad.
@@ -57,6 +59,14 @@
 ## 7. Documentación:
 
 - Prioriza nombres claros de variables y funciones sobre los comentarios.
-- Añade comentarios TSDoc donde falten y sean necesarios. 
-- Mantén todos los comentarios en español. 
+- Añade comentarios TSDoc donde falten y sean necesarios.
+- Mantén todos los comentarios en español.
 - Evita comentar lo obvio. Los comentarios deben explicar el "porqué" de una decisión de código, no sólo el "qué" hace.
+
+## 8. Calidad:
+
+- Happy Path y Casos Borde: Cubre los flujos principales y los errores comunes, no busques el 100% de cobertura arbitraria si no aporta valor.
+
+## 9. Seguridad y Validación de Datos:
+
+- Evita inyectar HTML directamente (`dangerouslySetInnerHTML`). Si es estrictamente necesario, sanitiza el contenido antes de renderizarlo.

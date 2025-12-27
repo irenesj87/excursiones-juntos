@@ -1,13 +1,13 @@
 .customNavbar {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
-	background-color: color-mix(in srgb, var(--navbar-bg) 95%, transparent);
-	/* Efecto de desenfoque para el fondo (funciona en navegadores compatibles) */
-	-webkit-backdrop-filter: blur(8px);
-	backdrop-filter: blur(8px);
-	border-bottom: none;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-	z-index: 1030; /* Asegura que la barra de navegación esté por encima de otros elementos sticky */
+	background-color: color-mix(in srgb, var(--navbar-bg) 90%, transparent);
+	/* Efecto "cristal esmerilado" más suave y natural */
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	border-bottom: 1px solid var(--separator-color);
+	transition: none;
+	z-index: 1030;
 }
 
 /* En breakpoints pequeños (<768px) y sólo en la página de excursiones, se elimina el borde para evitar duplicidad con 
@@ -20,19 +20,30 @@
 }
 
 .offcanvasMenu {
+	background-color: var(--navbar-bg);
 	max-width: 300px;
 }
 
-/* Elimina el borde del botón de hamburguesa y su sombra al enfocarlo */
-.navbarToggler,
-.navbarToggler:focus {
-	border: none;
-	box-shadow: none;
+.searchContainer {
+	max-width: 900px;
+	width: 100%;
 }
 
-/* Ajuste para el foco del toggler */
-.navbar-toggler:focus {
-	box-shadow: var(--navbar-toggler-focus-shadow);
+/* Botón de menú (Hamburguesa) */
+.navbarToggler {
+	border: none;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+}
+
+.navbarToggler:hover {
+	background-color: var(--theme-toggle-btn-bg-hover);
+}
+
+.navbarToggler:focus-visible {
+	box-shadow: 0 0 0 2px var(--navbar-brand-focus-outline-color);
+	outline: none;
 }
 
 /* Sobrescribe el ícono del toggler de Bootstrap para usar siempre la variable CSS del tema.

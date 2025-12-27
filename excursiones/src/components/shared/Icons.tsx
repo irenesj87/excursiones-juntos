@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	LuMountainSnow,
 	LuTriangleAlert,
 	LuSearch,
 	LuMoon,
@@ -30,6 +31,8 @@ type IconProps = {
 /**
  * Archivo central para exportar los componentes de íconos de la aplicación.
  */
+// Icono del logo
+export const LogoIcon = LuMountainSnow as React.ComponentType<IconProps>;
 // Icono de alerta.
 export const AlertIcon = LuTriangleAlert as React.ComponentType<IconProps>;
 // Icono de la lupa para la barra de búsqueda.
