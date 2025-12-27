@@ -1,28 +1,43 @@
 .logoContainer {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 0.5rem;
 	text-decoration: none;
+	transition: opacity 0.2s ease-in-out;
+	color: inherit;
 }
 
-.logoIcon{
+.logoContainer:hover {
+	opacity: 0.85;
+}
 
-	font-size: 2.5rem;
+.logoIcon {
+	font-size: 2rem; /* Tamaño base para breakpoints pequeños */
 	color: var(--navbar-brand-icon);
+	flex-shrink: 0;
 }
 
 .logoText {
-	font-family: inherit;
-	font-size: 1.6rem;
+	font-family: "Merriweather", "Georgia", serif;
+	font-size: 1.25rem; /* Tamaño base para breakpoints pequeños */
 	font-weight: 700;
 	color: var(--navbar-brand-color);
-	transition: none;
-	letter-spacing: -0.5px;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+}
+
+/* Escala para breakpoints más grandes */
+@media (min-width: 768px) {
+	.logoIcon {
+		font-size: 2.5rem;
+	}
+	.logoText {
+		font-size: 1.5rem;
+	}
 }
 
 .logoContainer:focus-visible {
 	outline: 2px solid var(--navbar-brand-focus-outline-color);
-	outline-offset: 2px;
+	outline-offset: 4px;
+	border-radius: 4px;
 }
-
-
