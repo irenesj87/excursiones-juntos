@@ -12,7 +12,7 @@
 }
 
 .logoIcon {
-	font-size: 2rem; /* Tamaño base para brakpoints pequeños */
+	font-size: 2rem; /* Tamaño base para breakpoints pequeños */
 	color: var(--navbar-brand-icon);
 	flex-shrink: 0;
 }
