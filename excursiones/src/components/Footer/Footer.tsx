@@ -15,7 +15,7 @@ function Footer(): JSX.Element {
 			<small className={styles.footerText}>
 				<CopyrightIcon
 					className={styles.copyrightIcon}
-					aria-label="Copyright"
+					aria-hidden="true"
 				/>
 				<span>
 					<span className={styles.companyName}>{COMPANY_NAME}</span>{" "}
