@@ -1,20 +1,12 @@
-/* Estilos para el botón de detalle, combinando layout y reseteo de estilos. */
 .detailItem {
-	/* Layout */
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+}
 
-	/* Reseteo de estilos de botón para que parezca texto normal */
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	margin: 0;
-	font: inherit;
-	cursor: pointer;
-	text-align: inherit; /* Asegura la alineación correcta */
-	font-size: 1.125rem;
+.detailLabel {
+	font-weight: 600;
+	color: var(--color-primary);
 }
 
 /* Indicador de foco para cuando el elemento es interactivo (solo con teclado) */
@@ -22,43 +14,4 @@
 	outline: 2px solid var(--primary-color);
 	outline-offset: 2px;
 	border-radius: var(--border-radius-sm, 0.25rem);
-}
-
-.detailIcon {
-	color: var(--excursion-card-icon-color);
-	font-size: 1.2rem;
-}
-
-/* Clase base para la insignia de dificultad. */
-.difficultyBadge {
-	display: inline-block;
-	padding: 0.25em 0.6em;
-	border-radius: 1em;
-	font-weight: 600;
-	line-height: 1;
-	text-align: center;
-}
-
-/*
- * Estilos para las variantes de dificultad. Estos colores se aplican al texto del detalle.
- */
-.difficultyLow {
-	background-color: var(--difficulty-low-bg);
-	color: var(--difficulty-low-text);
-}
-
-.difficultyMedium {
-	background-color: var(--difficulty-medium-bg);
-	color: var(--difficulty-medium-text);
-}
-
-.difficultyHigh {
-	background-color: var(--difficulty-high-bg);
-	color: var(--difficulty-high-text);
-}
-
-.difficultyBadgeWithIcon {
-	display: flex;
-	align-items: center;
-	gap: 0.25rem; /* Espacio entre el icono y el texto */
 }

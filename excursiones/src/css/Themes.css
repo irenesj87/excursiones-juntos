@@ -23,7 +23,6 @@
 	--color-earth-700: hsl(30, 50%, 35%);
 
 	/* Paleta de Piedra (Grises Cálidos/Stone - HSL 40) */
-	/* Reemplaza a los grises fríos para dar calidez y sensación de "papel" */
 	--color-stone-50:  hsl(40, 20%, 97%); /* Blanco hueso / Crema */
 	--color-stone-100: hsl(40, 15%, 92%);
 	--color-stone-200: hsl(40, 10%, 85%);
@@ -93,7 +92,7 @@ html.light {
 	/* --- Navbar --- */
 	--navbar-bg: var(--color-white);
 	--navbar-color: var(--color-stone-700);
-	--navbar-brand-color: var(--color-green-700);
+	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(--color-green-500);
 	--navbar-brand-focus-outline-color: var(--color-green-500);
 	--navbar-toggler-icon-color: var(--color-stone-800);
@@ -102,7 +101,7 @@ html.light {
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(101, 140, 122, 0.5);
 
 	/* --- Bordes y Separadores --- */
-	--separator-color: var(--color-border-subtle);
+	--separator-color: var(--color-border-default);
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--color-stone-700);
@@ -272,7 +271,7 @@ html.dark {
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(139, 192, 165, 0.5); /* Primitiva RGB de --color-green-100 */
 
 	/* --- Bordes y Separadores --- */
-	--separator-color: var(--color-border-subtle);
+	--separator-color: var(--color-border-default);
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--navbar-color);
