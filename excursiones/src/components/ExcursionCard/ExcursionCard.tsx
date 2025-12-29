@@ -6,7 +6,7 @@ import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "../../hooks/useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import { MapIcon, ChartIcon, ClockIcon, CheckIcon } from "../shared/Icons";
+import { CheckIcon } from "../shared/Icons";
 import cn from "classnames";
 import styles from "./ExcursionCard.module.css";
 
@@ -14,7 +14,7 @@ import styles from "./ExcursionCard.module.css";
  * Props del botón para unirse a una excursión.
  */
 interface JoinButtonProps {
-	/** Indica si el usuario se ha apuntado a la excursión. */
+	/** Indica si el usuario ya se ha apuntado a la excursión. */
 	readonly isJoined: boolean;
 	/** Muestra si la acción de unirse está en progreso. */
 	readonly isJoining: boolean;
@@ -30,10 +30,8 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 		<div className="d-grid d-md-flex justify-content-md-end">
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
-					<span>
-						<CheckIcon className={styles.detailIcon} />
-						Apuntado/a
-					</span>
+					<CheckIcon className={styles.detailIcon} />
+					Apuntado/a
 				</span>
 			) : (
 				<StyledButton
@@ -110,28 +108,16 @@ function ExcursionCard({
 					</Card.Title>
 					{/* Detalles de la excursión */}
 					<div className={styles.excursionDetails}>
-						<ExcursionDetailItem
-							text={area}
-							label="Zona"
-							icon={<MapIcon className={styles.detailIcon} />}
-						/>
-						<ExcursionDetailItem
-							text={difficulty}
-							label="Dificultad"
-							icon={<ChartIcon className={styles.detailIcon} />}
-						/>
-						<ExcursionDetailItem
-							text={time}
-							label="Tiempo estimado"
-							icon={<ClockIcon className={styles.detailIcon} />}
-						/>
+						<ExcursionDetailItem text={area} label="Zona" />
+						<ExcursionDetailItem text={difficulty} label="Dificultad" />
+						<ExcursionDetailItem text={time} label="Tiempo estimado" />
 					</div>
 				</div>
 				{/* Área de acción: botón para unirse a la excursión */}
 				{isLoggedIn && (
 					<div className="mt-auto">
 						{/* Separador visual sutil antes de las acciones */}
-						<hr className="border-secondary-subtle my-3 opacity-25" />
+						<hr className={styles.separator} />
 						<div className={styles.cardActionArea}>
 							{joinError && (
 								<ErrorMessageAlert
