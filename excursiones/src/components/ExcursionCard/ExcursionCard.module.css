@@ -22,7 +22,6 @@
 	color: var(--excursion-card-title-color);
 }
 
-/* Iconos para los detalles de la excursión */
 .detailIcon {
 	font-size: 1.3rem;
 	margin-inline-end: 0.5rem;

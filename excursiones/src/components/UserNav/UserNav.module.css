@@ -6,7 +6,6 @@
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
-	border: 1px solid var(--separator-color);
 	color: var(--register-link-color);
 	transition: none;
 	cursor: pointer;

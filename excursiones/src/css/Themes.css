@@ -23,7 +23,7 @@
 	--color-earth-700: hsl(30, 50%, 35%);
 
 	/* Paleta de Piedra (Grises Cálidos/Stone - HSL 40) */
-	--color-stone-50:  hsl(40, 20%, 97%); /* Blanco hueso / Crema */
+	--color-stone-50: hsl(40, 20%, 97%); /* Blanco hueso / Crema */
 	--color-stone-100: hsl(40, 15%, 92%);
 	--color-stone-200: hsl(40, 10%, 85%);
 	--color-stone-300: hsl(40, 10%, 75%);
@@ -101,7 +101,11 @@ html.light {
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(101, 140, 122, 0.5);
 
 	/* --- Bordes y Separadores --- */
-	--separator-color: var(--color-border-default);
+	--separator-color: hsl(
+		40,
+		5%,
+		55%
+	); /* Aumentado contraste para cumplir 3:1 (WCAG AA UI) */
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--color-stone-700);
@@ -248,7 +252,11 @@ html.dark {
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: hsl(135, 30%, 12%); /* Verde bosque muy oscuro */
-	--color-background-surface: hsl(135, 25%, 18%); /* Superficie ligeramente más clara */
+	--color-background-surface: hsl(
+		135,
+		25%,
+		18%
+	); /* Superficie ligeramente más clara */
 	--color-text-base: var(--color-stone-100); /* Blanco hueso para texto */
 	--color-text-muted: var(--color-stone-400);
 	--color-text-on-primary: var(--color-black-soft);
@@ -271,7 +279,11 @@ html.dark {
 	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(139, 192, 165, 0.5); /* Primitiva RGB de --color-green-100 */
 
 	/* --- Bordes y Separadores --- */
-	--separator-color: var(--color-border-default);
+	--separator-color: hsl(
+		135,
+		15%,
+		50%
+	); /* Aclarado significativamente para cumplir 3:1 sobre fondo oscuro */
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--navbar-color);
