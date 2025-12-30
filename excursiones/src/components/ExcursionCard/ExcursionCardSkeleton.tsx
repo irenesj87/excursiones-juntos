@@ -18,13 +18,13 @@ export const TEST_IDS = {
  * Define las dimensiones y anchos para los elementos del esqueleto para facilitar su mantenimiento.
  */
 const SKELETON_SIZES = {
-	TITLE_HEIGHT: 21, // Altura del esqueleto del título
+	TITLE_HEIGHT: 28, // Ajustado a 28px (aprox 1.75rem h3 line-height) para evitar CLS
 	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
 	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
 	DIFFICULTY_TEXT_WIDTH: 76, // Ancho del esqueleto del texto de dificultad
-	TIME_TEXT_WIDTH: 58, // Ancho del esqueleto del texto de tiempo
-	BUTTON_HEIGHT: 43, // Altura del esqueleto del botón
-	BUTTON_MIN_WIDTH: 117, // Ancho mínimo del esqueleto del botón
+	TIME_TEXT_WIDTH: 60, // Ajustado a múltiplo de 4 (antes 58)
+	BUTTON_HEIGHT: 42, // Ajustado a 42px para coincidir con el botón real (padding 0.5rem + border + line-height)
+	BUTTON_MIN_WIDTH: 120, // Ajustado a múltiplo de 4 (antes 117)
 };
 
 interface DetailItemSkeletonProps {
@@ -83,7 +83,8 @@ function ExcursionCardSkeleton({
 					{/* Botón de "Apuntarse" */}
 					{isLoggedIn && (
 						<div className="mt-auto" data-testid={TEST_IDS.BUTTON_CONTAINER}>
-							<hr className="border-secondary-subtle my-3 opacity-25" />
+							{/* Usamos la misma clase que el componente real para evitar saltos visuales en márgenes o color */}
+							<hr className={cardStyles.separator} />
 							<div className={cardStyles.cardActionArea}>
 								<div className="d-grid d-md-flex justify-content-md-end">
 									<Skeleton

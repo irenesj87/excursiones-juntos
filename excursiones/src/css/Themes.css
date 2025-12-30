@@ -50,7 +50,11 @@
 	/* Colores de Éxito, Advertencia y Peligro */
 	--color-success-light: hsl(145, 55%, 35%);
 	--color-warning-light: hsl(40, 75%, 55%);
-	--color-danger-light: hsl(0, 60%, 40%);
+	--color-danger-light: hsl(
+		0,
+		60%,
+		28%
+	); /* Oscurecido para cumplir ratio 7:1 (AAA) con texto blanco */
 	--color-success-dark: hsl(
 		145,
 		45%,

@@ -16,7 +16,7 @@
 	margin: 0;
 	display: block;
 	width: 100%;
-	padding: 0.4rem 0.4rem;
+	padding: 0.5rem 0.75rem; /* Aumentado para mejor touch target y escala consistente (8px / 12px) */
 	font-weight: 500;
 	color: var(--filter-pill-text);
 	background-color: var(--filter-pill-bg);
@@ -39,84 +39,13 @@
 .checked:hover {
 	background-color: var(--filter-pill-bg-checked);
 	border-color: var(--filter-pill-border-checked);
-}
-
-/* --- Estilos para Dificultad Baja --- */
-.low {
-	border: 1px solid var(--difficulty-low-bg);
-	color: var(--color-white);
-	background-color: var(--difficulty-low-bg);
-}
-
-.low:hover {
-	/* Aseguramos que el color del borde también cambie en el hover para evitar saltos visuales. */
-	border-color: var(--difficulty-low-bg-hover);
-	background-color: var(--difficulty-low-bg-hover);
-	opacity: 0.9;
-}
-
-.lowChecked, 
-.lowChecked:hover {
-	border-color: var(--difficulty-low-bg-hover);
-	background-color: var(--difficulty-low-bg-hover);
-	color: var(--color-white);
-}
-
-/* --- Estilos para Dificultad Media--- */
-.medium {
-	border: 1px solid var(--difficulty-medium-bg);
-	color: var(--color-white);
-	background-color: var(--difficulty-medium-bg);
-}
-
-.medium:hover {
-	background-color: var(--difficulty-medium-bg-hover);
-	border-color: var(--difficulty-medium-bg-hover);
-	opacity: 0.9;
-}
-
-.mediumChecked,
-.mediumChecked:hover {
-	border-color: var(--difficulty-medium-bg-hover);
-	background-color: var(--difficulty-medium-bg-hover);
-	color: var(--color-white);
-}
-
-/* --- Estilos para Dificultad Alta --- */
-.high {
-	border: 1px solid var(--difficulty-high-bg);
-	color: var(--color-white);
-	background-color: var(--difficulty-high-bg);
-}
-
-.high:hover {
-	background-color: var(--difficulty-high-bg-hover);
-	border-color: var(--difficulty-high-bg-hover);
-	opacity: 0.9;
-}
-
-.highChecked,
-.highChecked:hover {
-	border-color: var(--difficulty-high-bg-hover);
-	background-color: var(--difficulty-high-bg-hover);
-	color: var(--color-white);
+	color: var(
+		--filter-pill-text-checked
+	); /* Asegura contraste correcto (ej: texto oscuro sobre fondo claro en Dark Mode) */
 }
 
 /* Estilo para el foco del input (accesibilidad con teclado) */
 .visuallyHidden:focus-visible + .filterPill {
 	outline: 2px solid var(--filter-pill-outline-focus);
 	outline-offset: 2px;
-}
-
-/* Para las píldoras de dificultad, el color de foco se ajusta para cada tema para cumplir con WCAG. */
-.visuallyHidden:focus-visible + .low {
-	outline-color: var(--difficulty-low-focus-outline);
-}
-
-.visuallyHidden:focus-visible + .medium {
-	outline-color: var(--difficulty-medium-focus-outline);
-}
-
-.visuallyHidden:focus-visible + .high {
-	outline-color: var(--difficulty-high-focus-outline);
 }

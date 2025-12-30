@@ -12,8 +12,8 @@ function FilterPillSkeleton(): React.ReactElement {
 	// elementos adyacentes,logrando una alineación visualmente perfecta y manteniendo el espaciado correcto entre filas.
 	return (
 		<Skeleton
-			height={38}
-			borderRadius={20}
+			height={42}
+			borderRadius={50}
 			style={{ verticalAlign: "middle" }}
 		/>
 	);
