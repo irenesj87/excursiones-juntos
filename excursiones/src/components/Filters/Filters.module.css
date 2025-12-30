@@ -12,7 +12,7 @@
 
 /* Título principal */
 .title {
-	font-size: 1.4rem;
+	font-size: 1.5rem; /* Ajustado a escala estándar (24px) */
 	font-weight: 600;
 	margin: 0 0 1.5rem;
 	padding-bottom: 0.75rem;
@@ -26,7 +26,7 @@
 }
 
 .filterTitle {
-	font-size: 1.2rem;
+	font-size: 1.25rem; /* Ajustado a escala estándar (20px) */
 	font-weight: 500;
 	margin-bottom: 1rem;
 	display: flex;
@@ -36,7 +36,7 @@
 }
 
 .filterIcon {
-	font-size: 1.4rem;
+	font-size: 1.5rem; /* Consistente con el título principal */
 }
 
 /* Footer que contiene el botón de limpiar */
