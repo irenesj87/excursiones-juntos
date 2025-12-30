@@ -2,7 +2,7 @@
 	border-radius: 8px;
 	font-weight: 600;
 	padding: 0.6rem 1.2rem;
-	transition: none;
+	transition: transform 0.1s ease-out;
 	border: none;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	position: relative;
