@@ -100,7 +100,7 @@ function Filters({ showTitle = true }: FiltersProps) {
 				<StyledButton
 					variant={hasActiveFilters ? "danger" : "secondary"}
 					onClick={handleClearFilters}
-					className={`w-100 d-flex align-items-center justify-content-center ${styles.clearButton}`}
+					className="w-100 d-flex align-items-center justify-content-center"
 					disabled={!hasActiveFilters}
 				>
 					<FilterXIcon className={styles.filterIcon} />
