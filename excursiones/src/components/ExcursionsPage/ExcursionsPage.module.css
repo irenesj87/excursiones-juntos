@@ -13,8 +13,6 @@
 	backdrop-filter: blur(8px);
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 	z-index: 1020; /* Justo por debajo del z-index de la barra de navegación (1030) */
-	/* Eliminamos el borde inferior para unificar con el estilo de la navbar */
-	border-bottom: none;
 
 	/* Usamos márgenes negativos para que la barra se extienda a lo ancho del viewport,
 	 * anulando el padding del contenedor padre. */

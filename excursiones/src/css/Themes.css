@@ -180,6 +180,7 @@ html.light {
 
 	/* Oscurecido para cumplir contraste AA (4.5:1) sobre blanco */
 	--filter-clear-btn-color-hover: hsl(347, 80%, 40%);
+	--filter-clear-btn-text-hover: var(--color-white);
 
 	/* --- Footer --- */
 	--footer-bg: var(--color-background-body);
@@ -356,6 +357,7 @@ html.dark {
 	--filter-pill-shadow-checked: none;
 
 	--filter-clear-btn-color-hover: hsl(355, 83%, 71%);
+	--filter-clear-btn-text-hover: var(--color-black-soft);
 
 	/* --- Footer --- */
 	--footer-bg: var(--color-background-body);
