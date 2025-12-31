@@ -40,6 +40,7 @@ function StyledButton({
 
 	return (
 		<Button
+			variant={variant}
 			type={type}
 			className={buttonClass}
 			onClick={onClick}

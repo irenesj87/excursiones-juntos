@@ -178,9 +178,6 @@ html.light {
 	--filter-pill-border-checked: var(--color-stone-500);
 	--filter-pill-shadow-checked: none;
 
-	/* Oscurecido para cumplir contraste AA (4.5:1) sobre blanco */
-	--filter-clear-btn-color-hover: hsl(347, 80%, 40%);
-
 	/* --- Footer --- */
 	--footer-bg: var(--color-background-body);
 	--footer-text-color: var(--color-text-muted);
@@ -354,8 +351,6 @@ html.dark {
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
 	--filter-pill-shadow-checked: none;
-
-	--filter-clear-btn-color-hover: hsl(355, 83%, 71%);
 
 	/* --- Footer --- */
 	--footer-bg: var(--color-background-body);

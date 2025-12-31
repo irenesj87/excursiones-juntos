@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersList from "../FiltersList";
 import { clearAllFilters } from "../../slices/filterSlice";
 import { ChartIcon, ClockIcon, MapIcon, FilterXIcon } from "../shared/Icons";
 import styles from "./Filters.module.css";
 import { RootState } from "../../store/store";
+import StyledButton from "../StyledButton/StyledButton";
 
 /**
  * Props para el componente `Filters`.
@@ -97,16 +97,15 @@ function Filters({ showTitle = true }: FiltersProps) {
 			</div>
 			{/* El footer se mantiene en la parte inferior */}
 			<footer className={styles.filtersFooter}>
-				<Button
+				<StyledButton
 					variant={hasActiveFilters ? "danger" : "secondary"}
 					onClick={handleClearFilters}
 					className="w-100 d-flex align-items-center justify-content-center"
-					aria-label="Limpiar todos los filtros"
 					disabled={!hasActiveFilters}
 				>
 					<FilterXIcon className={styles.filterIcon} />
 					<span className="ms-2">Limpiar Filtros</span>
-				</Button>
+				</StyledButton>
 			</footer>
 		</div>
 	);
