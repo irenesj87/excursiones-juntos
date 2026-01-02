@@ -46,6 +46,11 @@ function ExcursionsList({
 		} catch (caughtError: unknown) {
 			if (process.env.NODE_ENV === "development") {
 				console.error("Error detallado (dev):", caughtError);
+			} else {
+				console.error(
+					"Error técnico al unirse a la excursión:",
+					(caughtError as Error).message || "Error desconocido"
+				);
 			}
 			// El componente hijo espera un error para mostrar feedback visual.
 			throw new Error(
