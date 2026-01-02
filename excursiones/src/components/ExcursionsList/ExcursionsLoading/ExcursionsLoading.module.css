@@ -2,8 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	margin-top: 2rem;
-	margin-bottom: 2rem;
+	margin-block: 2rem;
 }
 
 .title {
@@ -11,16 +10,14 @@
 	margin-bottom: 2rem;
 	padding-bottom: 0;
 	color: var(--color-text-base);
-	font-size: 1.6rem;
+	font-size: 1.5rem;
 	font-weight: bold;
-	text-align: left;
-	text-transform: uppercase;
+	text-align: center;
 }
 
 /* --- Media Queries --- */
-@media (max-width: 991.98px) {
-	/* Para breakpoints 'md' hacia abajo  */
+@media (min-width: 992px) {
 	.title {
-		text-align: center;
+		text-align: left;
 	}
 }

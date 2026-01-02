@@ -10,7 +10,7 @@ import { RootState } from "../../../store/store";
 /**
  * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
  */
-const ExcursionsLoading = () => {
+function ExcursionsLoading(){
 	const isLoggedIn = useSelector(
 		(state: RootState) => state.loginReducer.login
 	);
@@ -42,6 +42,6 @@ const ExcursionsLoading = () => {
 			</div>
 		</SkeletonTheme>
 	);
-};
+}
 
 export default ExcursionsLoading;

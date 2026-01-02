@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getSafeErrorMessage } from "../utils/errorUtils";
+import { getSafeErrorMessage } from "../../utils/errorUtils";
 
 /**
  * Define el tipo de la función que se ejecuta al unirse a una excursión.
