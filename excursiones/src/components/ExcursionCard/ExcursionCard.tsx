@@ -4,7 +4,7 @@ import ExcursionDetailItem from "../ExcursionDetailItem";
 import ErrorMessageAlert from "../ErrorMessageAlert/ErrorMessageAlert";
 import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
-import { useJoinExcursion } from "../../hooks/useJoinExcursion";
+import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import { CheckIcon } from "../shared/Icons";
 import cn from "classnames";
