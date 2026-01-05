@@ -14,6 +14,8 @@ interface ExcursionsListProps {
 	readonly excursionData?: readonly Excursion[];
 	readonly isLoading: boolean;
 	readonly error: Error | null;
+	/** Función opcional para reintentar la carga de datos en caso de error. */
+	readonly onRetry?: () => void;
 }
 
 /**
@@ -24,6 +26,7 @@ function ExcursionsList({
 	excursionData = [],
 	isLoading,
 	error,
+	onRetry,
 }: ExcursionsListProps) {
 	const { login: isLoggedIn, user } = useSelector(
 		(state: RootState) => state.loginReducer
@@ -85,7 +88,12 @@ function ExcursionsList({
 	});
 
 	if (error) {
-		return <ExcursionsError />;
+		return (
+			<ExcursionsError
+				// No pasamos 'message' para usar el texto amigable por defecto ("Lo sentimos...") en lugar del error técnico.
+				onRetry={onRetry}
+			/>
+		);
 	}
 
 	if (isLoading && displayedExcursions.length === 0) {
