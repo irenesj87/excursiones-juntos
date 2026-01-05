@@ -91,8 +91,7 @@ function ExcursionsList({
 		return (
 			<ExcursionsError
 				// No pasamos 'message' para usar el texto amigable por defecto ("Lo sentimos...") en lugar del error técnico.
-				// Si no se proporciona una función de reintento específica, recargamos la página como fallback.
-				onRetry={onRetry ?? (() => globalThis.location.reload())}
+				onRetry={onRetry}
 			/>
 		);
 	}
