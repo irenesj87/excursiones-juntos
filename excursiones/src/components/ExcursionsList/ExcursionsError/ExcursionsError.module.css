@@ -26,6 +26,11 @@
 	font-size: 3rem; /* Hacemos el icono más grande para que destaque */
 	color: var(--color-text-danger);
 	margin-bottom: 0.5rem;
+	animation: pulse-error 2s infinite ease-in-out;
+}
+
+.retryButton {
+	margin-top: 1rem;
 }
 
 @keyframes pulse-error {
