@@ -28,6 +28,7 @@
 
 - Cumple estrictamente con el estándar WCAG Nivel AAA.
 - No confíes únicamente en el color para transmitir información (usa también iconos o texto).
+- Para los iconos utiliza la librería "Lucide" de react-icons. react-icons ya están instalados en este proyecto.
 - Verifica la accesibilidad en todas las variantes del tema (modo claro y oscuro).
 - Gestiona el Foco (Focus Management). Asegúrate de que la navegación por teclado sea lógica y visible (outline). Nunca elimines el outline sin proporcionar una alternativa visual clara.
 
@@ -50,11 +51,11 @@
 - Consistencia visual: Usa la misma paleta de colores, tipografías y estilos de iconos en toda la aplicación.
 - Estados de los elementos: Un botón debe cambiar de apariencia cuando se pasa el cursor por encima, cuando se hace clic y mientras la acción se está procesando (estado de carga).
 - Estados de la aplicación:
-- Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
-- Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
-- Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución o una forma de reintentar.
-- Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
-- No tengas miedo de usar el espacio en blanco (whitespace) para ayudar a reducir la carga cognitiva, agrupar elementos relacionados y mejorar la legibilidad.
+    - Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
+    - Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
+    - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución o una forma de reintentar.
+    - Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
+- No tengas miedo a usar el espacio en blanco (whitespace) para ayudar a reducir la carga cognitiva, agrupar elementos relacionados y mejorar la legibilidad.
 
 ## 7. Documentación:
 
