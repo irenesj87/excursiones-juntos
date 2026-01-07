@@ -49,6 +49,7 @@
 	font-weight: 700;
 	line-height: 1.4;
 	margin-bottom: 1rem;
+	font-family: var(--font-serif, serif);
 	color: var(--excursion-card-title-color);
 }
 

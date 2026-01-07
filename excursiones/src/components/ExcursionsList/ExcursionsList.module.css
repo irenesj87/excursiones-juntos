@@ -13,6 +13,7 @@
 	font-size: 1.5rem; /* Ajustado a múltiplo de 8px (24px) */
 	font-weight: bold;
 	text-align: center;
+	font-family: var(--font-serif, serif);
 }
 
 /* --- Media Queries --- */
