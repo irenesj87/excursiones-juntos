@@ -146,6 +146,7 @@ html.light {
 	--excursion-card-border: 1px solid var(--color-border-default);
 	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-light);
+	--image-placeholder-bg: #ebe8e1; /* Beige arena suave */
 
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
@@ -321,6 +322,11 @@ html.dark {
 	--excursion-card-border: 1px solid var(--separator-color);
 	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-dark);
+	--image-placeholder-bg: hsl(
+		135,
+		10%,
+		25%
+	); /* Gris verdoso oscuro para placeholder */
 
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);

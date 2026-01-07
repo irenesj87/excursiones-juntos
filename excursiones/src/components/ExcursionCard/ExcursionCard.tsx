@@ -9,6 +9,7 @@ import { getSafeErrorMessage } from "../../utils/errorUtils";
 import { CheckIcon } from "../shared/Icons";
 import cn from "classnames";
 import styles from "./ExcursionCard.module.css";
+import { API } from "../../constants";
 
 /**
  * Props del botón para unirse a una excursión.
@@ -47,6 +48,17 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 }
 
 /**
+ * Helper para resolver la URL de la imagen.
+ * Centraliza la lógica de construcción de rutas y evita ternarios anidados.
+ */
+function resolveImageUrl(id: string | number, src?: string): string {
+	if (!src) {
+		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}.jpg`;
+	}
+	return src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
+}
+
+/**
  * Props de la tarjeta de la excursión.
  */
 interface ExcursionCardProps {
@@ -66,6 +78,10 @@ interface ExcursionCardProps {
 	readonly isJoined: boolean;
 	/** Callback opcional que se invoca cuando el usuario intenta unirse a la excursión. */
 	readonly onJoin?: (_id: string | number) => Promise<void>;
+	/** URL de la imagen principal de la excursión. */
+	readonly imgSrc?: string;
+	/** Texto alternativo para la imagen. */
+	readonly imgAlt?: string;
 }
 
 /**
@@ -81,6 +97,8 @@ function ExcursionCard({
 	isLoggedIn,
 	isJoined,
 	onJoin,
+	imgSrc,
+	imgAlt,
 }: ExcursionCardProps) {
 	/*
 	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para simplificar este componente y
@@ -97,8 +115,37 @@ function ExcursionCard({
 		handleJoin(id);
 	};
 
+	// Estado para manejar la carga suave de la imagen y evitar parpadeos
+	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
+	const [hasImageError, setHasImageError] = React.useState(false);
+
+	// Determinamos la fuente de la imagen.
+	// Si viene imgSrc:
+	// 1. Si es absoluta (empieza por http), la usamos tal cual.
+	// 2. Si es relativa, le anteponemos la base de la API.
+	// Si no viene imgSrc, construimos la URL de fallback usando el ID.
+	const finalImgSrc = resolveImageUrl(id, imgSrc);
+
 	return (
-		<Card as="article" className={cn(styles.excursionItemCard, "h-100 w-100")}>
+		<Card
+			as="article"
+			className={cn(styles.excursionItemCard, "h-100 w-100 overflow-hidden")}
+		>
+			{/* Sección de imagen con prevención de CLS y transición suave */}
+			{finalImgSrc && !hasImageError && (
+				<div className={styles.imageContainer}>
+					<Card.Img
+						variant="top"
+						src={finalImgSrc}
+						alt={imgAlt ?? name}
+						loading="lazy"
+						className={styles.cardImage}
+						onLoad={() => setIsImageLoaded(true)}
+						onError={() => setHasImageError(true)}
+						style={{ opacity: isImageLoaded ? 1 : 0 }}
+					/>
+				</div>
+			)}
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>

@@ -59,10 +59,15 @@ function ExcursionCardSkeleton({
 	return (
 		<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
 			<Card
-				className={`${cardStyles.excursionItemCard} h-100 w-100`}
+				className={`${cardStyles.excursionItemCard} h-100 w-100 overflow-hidden`}
 				aria-hidden="true"
 				data-testid={TEST_IDS.SKELETON_CARD}
 			>
+				{/* Skeleton de la Imagen: Altura fija para evitar CLS y coincidir con el diseño final */}
+				<div className={cardStyles.imageSkeletonContainer}>
+					<Skeleton height="100%" containerClassName="h-100 w-100 d-block" />
+				</div>
+
 				<Card.Body className="d-flex flex-column flex-grow-1">
 					<div>
 						{/* Título */}
