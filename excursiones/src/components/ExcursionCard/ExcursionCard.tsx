@@ -48,6 +48,17 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 }
 
 /**
+ * Helper para resolver la URL de la imagen.
+ * Centraliza la lógica de construcción de rutas y evita ternarios anidados.
+ */
+function resolveImageUrl(id: string | number, src?: string): string {
+	if (!src) {
+		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}.jpg`;
+	}
+	return src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
+}
+
+/**
  * Props de la tarjeta de la excursión.
  */
 interface ExcursionCardProps {
@@ -108,11 +119,12 @@ function ExcursionCard({
 	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 	const [hasImageError, setHasImageError] = React.useState(false);
 
-	// Determinamos la fuente de la imagen: si no viene por props, usamos el testserver como fallback
-	// basándonos en el ID de la excursión.
-	const finalImgSrc =
-		imgSrc ??
-		`${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}.jpg`;
+	// Determinamos la fuente de la imagen.
+	// Si viene imgSrc:
+	// 1. Si es absoluta (empieza por http), la usamos tal cual.
+	// 2. Si es relativa, le anteponemos la base de la API.
+	// Si no viene imgSrc, construimos la URL de fallback usando el ID.
+	const finalImgSrc = resolveImageUrl(id, imgSrc);
 
 	return (
 		<Card
@@ -121,28 +133,16 @@ function ExcursionCard({
 		>
 			{/* Sección de imagen con prevención de CLS y transición suave */}
 			{finalImgSrc && !hasImageError && (
-				<div
-					style={{
-						height: "300px", // Altura fija para uniformidad visual en la grilla
-						width: "100%",
-						backgroundColor: "#EBE8E1", // Color 'surface' orgánico para el placeholder
-						position: "relative",
-					}}
-				>
+				<div className={styles.imageContainer}>
 					<Card.Img
 						variant="top"
 						src={finalImgSrc}
 						alt={imgAlt ?? name}
 						loading="lazy"
+						className={styles.cardImage}
 						onLoad={() => setIsImageLoaded(true)}
 						onError={() => setHasImageError(true)}
-						style={{
-							width: "100%",
-							height: "100%",
-							objectFit: "cover",
-							opacity: isImageLoaded ? 1 : 0,
-							transition: "opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-						}}
+						style={{ opacity: isImageLoaded ? 1 : 0 }}
 					/>
 				</div>
 			)}

@@ -20,7 +20,7 @@ const excursions: Excursion[] = [
 		area: "Centro-Este",
 		difficulty: "Baja",
 		time: "3 horas",
-		imgSrc: "http://localhost:3001/images/0.jpg",
+		imgSrc: "/images/0.jpg",
 		imgAlt: "Puente Romano de Cangas de Onís sobre el río Sella",
 	},
 	{
@@ -29,7 +29,7 @@ const excursions: Excursion[] = [
 		area: "Este",
 		difficulty: "Media",
 		time: "4 horas",
-		imgSrc: "http://localhost:3001/images/1.jpg",
+		imgSrc: "/images/1.jpg",
 		imgAlt: "Paisaje montañoso de los Picos de Europa con niebla",
 	},
 	{
@@ -38,7 +38,7 @@ const excursions: Excursion[] = [
 		area: "Este",
 		difficulty: "Alta",
 		time: "5 horas",
-		imgSrc: "http://localhost:3001/images/2.jpg",
+		imgSrc: "/images/2.jpg",
 		imgAlt: "Cumbres escarpadas de los Picos de Europa",
 	},
 ];

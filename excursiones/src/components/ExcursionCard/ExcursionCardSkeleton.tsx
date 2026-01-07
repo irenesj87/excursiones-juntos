@@ -25,7 +25,6 @@ const SKELETON_SIZES = {
 	TIME_TEXT_WIDTH: 60, // Ajustado a múltiplo de 4 (antes 58)
 	BUTTON_HEIGHT: 42, // Ajustado a 42px para coincidir con el botón real (padding 0.5rem + border + line-height)
 	BUTTON_MIN_WIDTH: 120, // Ajustado a múltiplo de 4 (antes 117)
-	IMAGE_HEIGHT: 300, // Altura fija de la imagen para coincidir con ExcursionCard
 };
 
 interface DetailItemSkeletonProps {
@@ -65,7 +64,7 @@ function ExcursionCardSkeleton({
 				data-testid={TEST_IDS.SKELETON_CARD}
 			>
 				{/* Skeleton de la Imagen: Altura fija para evitar CLS y coincidir con el diseño final */}
-				<div style={{ height: SKELETON_SIZES.IMAGE_HEIGHT, lineHeight: 0 }}>
+				<div className={cardStyles.imageSkeletonContainer}>
 					<Skeleton height="100%" containerClassName="h-100 w-100 d-block" />
 				</div>
 
