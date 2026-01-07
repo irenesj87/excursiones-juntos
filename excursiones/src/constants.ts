@@ -10,11 +10,7 @@ export const DIFFICULTY = "Dificultad";
 /**
  * Array con los niveles de dificultad válidos.
  */
-export const VALID_DIFFICULTY_LEVELS = [
-	"Baja",
-	"Media",
-	"Alta",
-] as const;
+export const VALID_DIFFICULTY_LEVELS = ["Baja", "Media", "Alta"] as const;
 
 /**
  * Rutas de la aplicación.
@@ -51,5 +47,5 @@ export const LOGIN_PAGE_TEXT = {
  */
 export const API = {
 	BASE_URL: "http://localhost:3001",
-	STATIC_IMAGES_URL: "http://localhost:3001/static/images",
+	STATIC_IMAGES_URL: "http://localhost:3001/images",
 } as const;

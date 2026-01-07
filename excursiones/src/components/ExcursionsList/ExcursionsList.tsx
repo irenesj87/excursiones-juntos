@@ -78,7 +78,13 @@ function ExcursionsList({
 				className="d-flex"
 			>
 				<ExcursionCard
-					{...excursion}
+					id={excursion.id}
+					name={excursion.name}
+					area={excursion.area}
+					difficulty={excursion.difficulty}
+					time={excursion.time}
+					imgSrc={excursion.imgSrc}
+					imgAlt={excursion.imgAlt}
 					isLoggedIn={isLoggedIn}
 					isJoined={isJoined}
 					onJoin={handleJoinExcursion}

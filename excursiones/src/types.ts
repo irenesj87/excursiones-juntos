@@ -35,7 +35,8 @@ export interface Excursion {
 	area: string;
 	difficulty: DifficultyLevel;
 	time: string;
-	image: string;
+	imgSrc?: string;
+	imgAlt?: string;
 }
 
 /** Define la estructura de un error en la aplicación. */

@@ -48,7 +48,7 @@ app.use(cookieParser());
 
 // Sirve archivos estáticos desde la carpeta 'public'.
 // Se le asigna el prefijo de ruta virtual '/static'.
-app.use("/static", express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // Configuración de CORS más segura
 // Se define una lista de orígenes permitidos (whitelist).

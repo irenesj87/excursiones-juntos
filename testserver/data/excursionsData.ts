@@ -8,6 +8,8 @@ export interface Excursion {
 	area: string;
 	difficulty: "Baja" | "Media" | "Alta";
 	time: string;
+	imgSrc?: string;
+	imgAlt?: string;
 }
 
 /* Array de excursiones */
@@ -18,6 +20,8 @@ const excursions: Excursion[] = [
 		area: "Centro-Este",
 		difficulty: "Baja",
 		time: "3 horas",
+		imgSrc: "http://localhost:3001/images/0.jpg",
+		imgAlt: "Puente Romano de Cangas de Onís sobre el río Sella",
 	},
 	{
 		id: "1",
@@ -25,6 +29,8 @@ const excursions: Excursion[] = [
 		area: "Este",
 		difficulty: "Media",
 		time: "4 horas",
+		imgSrc: "http://localhost:3001/images/1.jpg",
+		imgAlt: "Paisaje montañoso de los Picos de Europa con niebla",
 	},
 	{
 		id: "2",
@@ -32,21 +38,9 @@ const excursions: Excursion[] = [
 		area: "Este",
 		difficulty: "Alta",
 		time: "5 horas",
+		imgSrc: "http://localhost:3001/images/2.jpg",
+		imgAlt: "Cumbres escarpadas de los Picos de Europa",
 	},
-	{
-		id: "3",
-		name: "Ruta del Oso",
-		area: "Norte",
-		difficulty: "Baja",
-		time: "2 horas",
-	},
-	{
-		id: "4",
-		name: "Parque Natural de Somiedo",
-		area: "Norte",
-		difficulty: "Media",
-		time: "3 horas",
-	}
 ];
 
 export default excursions;
