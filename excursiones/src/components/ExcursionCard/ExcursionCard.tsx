@@ -55,7 +55,7 @@ function resolveImageBaseUrl(id: string | number, src?: string): string {
 		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}`;
 	}
 	const fullPath = src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
-	return fullPath.replace(/\.(jpg|jpeg|png)$/i, "");
+	return fullPath.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 }
 
 /**
