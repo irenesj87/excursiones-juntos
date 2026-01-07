@@ -8,23 +8,26 @@ import styles from "./ExcursionsLoading.module.css";
 import { RootState } from "../../../store/store";
 
 /**
+ * Número de skeletons de tarjetas de excursión.
+ */
+const SKELETON_COUNT = 8;
+
+/**
  * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
  */
-function ExcursionsLoading(){
+function ExcursionsLoading() {
 	const isLoggedIn = useSelector(
 		(state: RootState) => state.loginReducer.login
 	);
 
-	// Obtener las propiedades del tema para los esqueletos
 	const skeletonThemeProps = useSkeletonTheme();
 
-	// Renderizar la lista de esqueletos de tarjetas de excursión
 	return (
 		<SkeletonTheme {...skeletonThemeProps}>
 			<div className={styles.excursionsContainer}>
 				<h2 className={styles.title}>Próximas excursiones</h2>
 				<Row as="ul" className="gx-4 gy-5 list-unstyled">
-					{Array.from({ length: 8 }).map((_, index) => (
+					{Array.from({ length: SKELETON_COUNT }).map((_, index) => (
 						<Col
 							as="li"
 							xs={12}

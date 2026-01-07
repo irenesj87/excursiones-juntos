@@ -48,14 +48,14 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 }
 
 /**
- * Helper para resolver la URL de la imagen.
- * Centraliza la lógica de construcción de rutas y evita ternarios anidados.
+ * Helper para resolver la URL base de la imagen, sin la extensión del archivo.
  */
-function resolveImageUrl(id: string | number, src?: string): string {
+function resolveImageBaseUrl(id: string | number, src?: string): string {
 	if (!src) {
-		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}.jpg`;
+		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}`;
 	}
-	return src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
+	const fullPath = src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
+	return fullPath.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 }
 
 /**
@@ -118,32 +118,34 @@ function ExcursionCard({
 	// Estado para manejar la carga suave de la imagen y evitar parpadeos
 	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 	const [hasImageError, setHasImageError] = React.useState(false);
-
-	// Determinamos la fuente de la imagen.
-	// Si viene imgSrc:
-	// 1. Si es absoluta (empieza por http), la usamos tal cual.
-	// 2. Si es relativa, le anteponemos la base de la API.
-	// Si no viene imgSrc, construimos la URL de fallback usando el ID.
-	const finalImgSrc = resolveImageUrl(id, imgSrc);
+	const imageBaseUrl = resolveImageBaseUrl(id, imgSrc);
 
 	return (
 		<Card
 			as="article"
 			className={cn(styles.excursionItemCard, "h-100 w-100 overflow-hidden")}
 		>
-			{/* Sección de imagen con prevención de CLS y transición suave */}
-			{finalImgSrc && !hasImageError && (
+			{/* Sección de imagen */}
+			{imageBaseUrl && !hasImageError && (
 				<div className={styles.imageContainer}>
-					<Card.Img
-						variant="top"
-						src={finalImgSrc}
-						alt={imgAlt ?? name}
-						loading="lazy"
-						className={styles.cardImage}
-						onLoad={() => setIsImageLoaded(true)}
-						onError={() => setHasImageError(true)}
-						style={{ opacity: isImageLoaded ? 1 : 0 }}
-					/>
+					<picture>
+						<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
+						<Card.Img
+							as="img"
+							variant="top"
+							src={`${imageBaseUrl}.jpg`}
+							alt={imgAlt ?? name}
+							loading="lazy"
+							decoding="async"
+							width={640}
+							height={360}
+							className={cn(styles.cardImage, {
+								[styles.imageLoaded]: isImageLoaded,
+							})}
+							onLoad={() => setIsImageLoaded(true)}
+							onError={() => setHasImageError(true)}
+						/>
+					</picture>
 				</div>
 			)}
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}

@@ -19,7 +19,6 @@ import {
 	LuPencil,
 	LuX,
 } from "react-icons/lu";
-import { MdClear } from "react-icons/md";
 
 // Tipo base para las props de los iconos
 type IconProps = {
@@ -38,7 +37,7 @@ export const AlertIcon = LuTriangleAlert as React.ComponentType<IconProps>;
 // Icono de la lupa para la barra de búsqueda.
 export const SearchIcon = LuSearch as React.ComponentType<IconProps>;
 // Icono de una "x" para limpiar la barra de búsqueda.
-export const ClearIcon = MdClear as React.ComponentType<IconProps>;
+export const ClearIcon = LuX as React.ComponentType<IconProps>;
 // Icono de una luna para el botón de cambio de tema.
 export const MoonIcon = LuMoon as React.ComponentType<IconProps>;
 // Icono de un sol para el cambio de tema.
