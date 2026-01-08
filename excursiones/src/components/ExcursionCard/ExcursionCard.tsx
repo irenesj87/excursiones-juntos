@@ -62,13 +62,11 @@ function ImageFallback() {
 /**
  * Helper para resolver la URL base de la imagen, sin la extensión del archivo.
  */
-function resolveImageBaseUrl(id: string | number, src?: string): string {
-	// Si no hay imagen
-	if (!src) {
-		// Busca una imagen estática basada en el id de la excursión.
-		// encodeURIComponent evita que caracteres extraños rompan la URL.
-		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}`;
-	}
+function resolveImageBaseUrl(src?: string): string {
+	// Si no hay src explícito, devolvemos cadena vacía para que el componente
+	// renderice directamente el fallback sin intentar cargar nada.
+	if (!src) return "";
+
 	// Si src empieza por http significa que es una ruta externa completa, así que la deja igual.
 	// Y si es una relativa, le añade la url de base.
 	const fullPath = src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
@@ -136,7 +134,7 @@ function ExcursionCard({
 	// Estado para manejar la carga suave de la imagen y evitar parpadeos
 	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 	const [hasImageError, setHasImageError] = React.useState(false);
-	const imageBaseUrl = resolveImageBaseUrl(id, imgSrc);
+	const imageBaseUrl = resolveImageBaseUrl(imgSrc);
 
 	return (
 		<Card
