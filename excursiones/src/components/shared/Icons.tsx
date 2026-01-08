@@ -5,6 +5,7 @@ import {
 	LuSearch,
 	LuMoon,
 	LuSun,
+	LuImageOff,
 	LuFilter,
 	LuFilterX,
 	LuMapPin,
@@ -37,11 +38,13 @@ export const AlertIcon = LuTriangleAlert as React.ComponentType<IconProps>;
 // Icono de la lupa para la barra de búsqueda.
 export const SearchIcon = LuSearch as React.ComponentType<IconProps>;
 // Icono de una "x" para limpiar la barra de búsqueda.
-export const ClearIcon = LuX as React.ComponentType<IconProps>;
+export const XIcon = LuX as React.ComponentType<IconProps>;
 // Icono de una luna para el botón de cambio de tema.
 export const MoonIcon = LuMoon as React.ComponentType<IconProps>;
 // Icono de un sol para el cambio de tema.
 export const SunIcon = LuSun as React.ComponentType<IconProps>;
+// Icono para mostrar que la excursión no tiene imagen
+export const NoImageIcon = LuImageOff as React.ComponentType<IconProps>;
 // Icono de un pin para la zona.
 export const MapIcon = LuMapPin as React.ComponentType<IconProps>;
 // Icono para la dificultad de las excursiones.
@@ -67,5 +70,3 @@ export const PhoneIcon = LuPhone as React.ComponentType<IconProps>;
 export const MailIcon = LuMail as React.ComponentType<IconProps>;
 // Icono de lápiz para editar
 export const EditIcon = LuPencil as React.ComponentType<IconProps>;
-// Icono de X para cancelar
-export const CancelIcon = LuX as React.ComponentType<IconProps>;

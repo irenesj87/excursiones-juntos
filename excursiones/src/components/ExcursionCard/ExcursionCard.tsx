@@ -6,7 +6,7 @@ import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import { CheckIcon } from "../shared/Icons";
+import { NoImageIcon, CheckIcon } from "../shared/Icons";
 import cn from "classnames";
 import styles from "./ExcursionCard.module.css";
 import { API } from "../../constants";
@@ -48,13 +48,31 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 }
 
 /**
+ * Componente visual de respaldo para cuando la imagen no se puede cargar.
+ */
+function ImageFallback() {
+	return (
+		<div className={styles.imageFallback}>
+			<NoImageIcon size={48} aria-hidden="true" />
+			<span className="visually-hidden">Imagen no disponible</span>
+		</div>
+	);
+}
+
+/**
  * Helper para resolver la URL base de la imagen, sin la extensión del archivo.
  */
 function resolveImageBaseUrl(id: string | number, src?: string): string {
+	// Si no hay imagen
 	if (!src) {
+		// Busca una imagen estática basada en el id de la excursión.
+		// encodeURIComponent evita que caracteres extraños rompan la URL.
 		return `${API.STATIC_IMAGES_URL}/${encodeURIComponent(id.toString())}`;
 	}
+	// Si src empieza por http significa que es una ruta externa completa, así que la deja igual.
+	// Y si es una relativa, le añade la url de base.
 	const fullPath = src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
+	// Elimina la extensión original del archivo para que después se le pueda añadir .webp o .jpg manuañmente.
 	return fullPath.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 }
 
@@ -126,8 +144,8 @@ function ExcursionCard({
 			className={cn(styles.excursionItemCard, "h-100 w-100 overflow-hidden")}
 		>
 			{/* Sección de imagen */}
-			{imageBaseUrl && !hasImageError && (
-				<div className={styles.imageContainer}>
+			<div className={styles.imageContainer}>
+				{imageBaseUrl && !hasImageError ? (
 					<picture>
 						<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
 						<Card.Img
@@ -146,8 +164,10 @@ function ExcursionCard({
 							onError={() => setHasImageError(true)}
 						/>
 					</picture>
-				</div>
-			)}
+				) : (
+					<ImageFallback />
+				)}
+			</div>
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
 			<Card.Body className="d-flex flex-column flex-grow-1">
 				<div>

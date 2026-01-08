@@ -41,6 +41,13 @@ const excursions: Excursion[] = [
 		imgSrc: "/images/2.jpg",
 		imgAlt: "Cumbres escarpadas de los Picos de Europa",
 	},
+	{
+		id: "3",
+		name: "Parque Natural de Somiedo",
+		area: "Oeste",
+		difficulty: "Baja",
+		time: "2 horas",
+	}
 ];
 
 export default excursions;
