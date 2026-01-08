@@ -14,7 +14,7 @@ import {
 	PhoneIcon,
 	MailIcon,
 	EditIcon,
-	CancelIcon,
+	XIcon,
 	CheckIcon,
 } from "../shared/Icons";
 import styles from "./UserInfoForm.module.css";
@@ -239,7 +239,7 @@ function UserInfoForm(): React.ReactElement {
 									className={`${styles.cancelButton} w-100`}
 								>
 									<span className="d-flex align-items-center justify-content-center gap-2">
-										<CancelIcon aria-hidden="true" />
+										<XIcon aria-hidden="true" />
 										Cancelar
 									</span>
 								</StyledButton>

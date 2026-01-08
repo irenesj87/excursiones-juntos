@@ -4,7 +4,7 @@ import cn from "classnames";
 import { searchExcursions } from "../../services/excursionService";
 import { Excursion } from "../../types";
 import { RootState } from "../../store/store";
-import { SearchIcon, ClearIcon } from "../shared/Icons";
+import { SearchIcon, XIcon } from "../shared/Icons";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 
@@ -151,7 +151,7 @@ function SearchBar({
 					onClick={handleClearSearch}
 					aria-label="Limpiar búsqueda"
 				>
-					<ClearIcon className={styles.clearIcon} aria-hidden="true" />
+					<XIcon className={styles.clearIcon} aria-hidden="true" />
 				</button>
 			)}
 		</form>

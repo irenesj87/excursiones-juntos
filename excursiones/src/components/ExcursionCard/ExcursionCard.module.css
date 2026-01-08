@@ -28,6 +28,17 @@
 	line-height: 0;
 }
 
+/* Estilo para el componente de fallback cuando la imagen falla */
+.imageFallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background-color: var(--image-placeholder-bg);
+	color: var(--color-text-muted);
+}
+
 .cardImage {
 	width: 100%;
 	height: 100%;
