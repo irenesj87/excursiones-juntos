@@ -41,7 +41,7 @@ export const useJoinExcursion = (
 			await onJoin(id);
 			// El éxito es manejado por el componente padre, que actualizará `isJoined`.
 		} catch (error: unknown) {
-			// El error técnico ya se loguea en el componente padre (Excursions.js).
+			// El error técnico ya se loguea en el componente consumidor (p. ej., ExcursionsList.tsx).
 			// Aquí solo nos encargamos de capturar el mensaje para la UI.
 			setJoinError(getSafeErrorMessage(error));
 		} finally {
