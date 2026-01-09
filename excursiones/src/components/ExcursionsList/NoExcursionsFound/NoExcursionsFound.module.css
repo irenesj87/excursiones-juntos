@@ -4,16 +4,16 @@
 	flex-grow: 1;
 	margin-top: 2rem;
 	margin-bottom: 2rem;
-	align-items: center; /* Centra horizontalmente */
-	justify-content: center; /* Centra verticalmente */
-	min-height: 400px;
+	align-items: center;
+	justify-content: center;
+	min-height: 40vh;
 }
 
 .messageNotFound {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.5rem; /* Reducimos el espacio para una composición más compacta */
+	gap: 1rem;
 	max-width: 500px;
 }
 
@@ -34,7 +34,6 @@
 
 .messageIcon {
 	font-size: 3rem;
-	font-weight: 200;
 	color: var(--color-text-muted);
 	margin-bottom: 0.5rem;
 }
