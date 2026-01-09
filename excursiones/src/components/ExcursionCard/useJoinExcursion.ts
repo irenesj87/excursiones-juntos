@@ -4,7 +4,7 @@ import { getSafeErrorMessage } from "../../utils/errorUtils";
 /**
  * Define el tipo de la función que se ejecuta al unirse a una excursión.
  */
-type OnJoinFunction = (_id: string | number) => Promise<void>;
+type OnJoinFunction = (id: string | number) => Promise<void>;
 
 /**
  * Define la forma del objeto que retorna el hook.
@@ -12,7 +12,7 @@ type OnJoinFunction = (_id: string | number) => Promise<void>;
 interface UseJoinExcursionReturn {
 	isJoining: boolean;
 	joinError: string | null;
-	handleJoin: (_id: string | number) => Promise<void>;
+	handleJoin: (id: string | number) => Promise<void>;
 	clearError: () => void;
 }
 
