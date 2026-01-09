@@ -11,11 +11,7 @@ const SUBTITLE_MESSAGE =
  */
 function NoExcursionsFound() {
 	return (
-		<div
-			className={styles.excursionsContainer}
-			role="status"
-			aria-live="polite"
-		>
+		<div className={styles.excursionsContainer} role="status">
 			<div className={styles.messageNotFound}>
 				<SearchIcon className={styles.messageIcon} aria-hidden="true" />
 				<p className={styles.primaryMessage}>{TITLE_MESSAGE}</p>
