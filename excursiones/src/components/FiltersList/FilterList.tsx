@@ -3,7 +3,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import FiltersListCheckbox from "../FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
 import FilterError from "../FilterError";
-import { useFilters } from "../../hooks/useFilters";
+import { useFilters } from "./useFilters";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
 import type { FilterState } from "../../slices/filterSlice";

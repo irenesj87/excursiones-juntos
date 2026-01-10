@@ -5,7 +5,7 @@ import { AppError, Excursion } from "../../types";
 import ExcursionsList from "../ExcursionsList";
 import { FilterIcon } from "../shared/Icons";
 import styles from "./ExcursionsPage.module.css";
-import { useExcursionsPageLogic } from "../../hooks/useExcursionsPageLogic";
+import { useExcursionsPageLogic } from "./useExcursionsPageLogic";
 
 // Definición del tipo para el estado de las excursiones.
 type ExcursionsState = {

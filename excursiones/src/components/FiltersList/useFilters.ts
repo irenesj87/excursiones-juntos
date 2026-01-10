@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
-import { useMinDisplayTime } from "./useMinDisplayTime";
-import { fetchFilters } from "../services/filterService";
-import { AppError } from "../types";
+import { useMinDisplayTime } from "../../hooks/useMinDisplayTime";
+import { fetchFilters } from "../../services/filterService";
+import { AppError } from "../../types";
 
 // Estado inicial para el reducer.
 const initialState: FiltersState = {
