@@ -63,7 +63,9 @@ export const useJoinExcursion = (
 	};
 
 	// Función que elimina el error de manera manual. Es útil si se quiere poner una x en la alerta para cerrarla.
-const clearError = () => state.status === "error" && setState({ status: "idle" });
+	const clearError = () => {
+		if (state.status === "error") setState({ status: "idle" });
+	};
 
 	// Derivamos los valores para mantener la compatibilidad con la interfaz original
 	return {
