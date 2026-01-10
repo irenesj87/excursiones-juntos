@@ -6,7 +6,7 @@ import {
 	validateSurname,
 	validatePhone,
 } from "../../validation/validations";
-import { useUserInfoForm, FormValues } from "../../hooks/useUserInfoForm";
+import { useUserInfoForm, FormValues } from "./useUserInfoForm";
 import StyledButton from "../StyledButton/StyledButton";
 import {
 	UserIcon,

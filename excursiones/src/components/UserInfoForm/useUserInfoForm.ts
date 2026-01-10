@@ -1,13 +1,13 @@
 import { useReducer, useEffect, useRef } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { updateUserInfo as updateUserService } from "../services/userService";
-import { updateUserInfo } from "../slices/loginSlice";
+import { updateUserInfo as updateUserService } from "../../services/userService";
+import { updateUserInfo } from "../../slices/loginSlice";
 import {
 	validateName,
 	validateSurname,
 	validatePhone,
-} from "../validation/validations";
-import type { RootState, AppDispatch } from "../store/store";
+} from "../../validation/validations";
+import type { RootState, AppDispatch } from "../../store/store";
 
 // Hooks tipados de Redux
 const useAppDispatch = () => useDispatch<AppDispatch>();
