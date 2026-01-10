@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 
 /**
@@ -32,6 +32,15 @@ export const useJoinExcursion = (
 ): UseJoinExcursionReturn => {
 	// Unificamos el estado en una sola variable
 	const [state, setState] = useState<JoinState>({ status: "idle" });
+	const isMounted = useRef(true);
+
+	useEffect(() => {
+		return () => {
+			// Esta función se ejecuta automáticamente justo antes de que React
+			// elimine el componente del DOM (desmontaje).
+			isMounted.current = false;
+		};
+	}, []);
 
 	// Función que llama el componente ExcursionCard cuando el usuario hace click en el botón para apuntarse a la excursión
 	const handleJoin = async (id: string | number) => {
@@ -43,9 +52,13 @@ export const useJoinExcursion = (
 		try {
 			await onJoin(id);
 			// Si tiene éxito, volvemos al estado inicial (idle)
-			setState({ status: "idle" });
+			if (isMounted.current) {
+				setState({ status: "idle" });
+			}
 		} catch (error: unknown) {
-			setState({ status: "error", error: getSafeErrorMessage(error) });
+			if (isMounted.current) {
+				setState({ status: "error", error: getSafeErrorMessage(error) });
+			}
 		}
 	};
 
