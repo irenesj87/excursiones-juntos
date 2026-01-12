@@ -26,7 +26,7 @@ function isUser(obj: unknown): obj is User {
 	if (typeof obj !== "object" || obj === null) {
 		return false;
 	}
-	// El objeto se convierte temporalmente a Record<string, unknown> para poder leer sus propeidades sin que el
+	// El objeto se convierte temporalmente a Record<string, unknown> para poder leer sus propiedades sin que el
 	// compilador de problemas.
 	const candidate = obj as Record<string, unknown>;
 
