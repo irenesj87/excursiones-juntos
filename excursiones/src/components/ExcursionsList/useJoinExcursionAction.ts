@@ -38,7 +38,7 @@ function isUser(obj: unknown): obj is User {
 		typeof candidate.mail === "string" &&
 		typeof candidate.phone === "string" &&
 		Array.isArray(candidate.excursions) &&
-		candidate.excursions.every(
+		(candidate.excursions as unknown[]).every(
 			(id) => typeof id === "string" || typeof id === "number"
 		)
 	);
