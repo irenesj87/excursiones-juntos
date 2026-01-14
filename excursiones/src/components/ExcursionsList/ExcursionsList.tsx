@@ -22,20 +22,13 @@ function ExcursionsListView({
 	joinedExcursionIds,
 	onJoin,
 }: Readonly<ExcursionsListViewProps>) {
-	// Si hay un error.
 	if (error) {
 		return <ExcursionsError />;
 	}
 
-	// Si está cargando y no tenemos datos previos para mostrar, mostramos el esqueleto.
-	if (isLoading && excursions.length === 0) {
-		return <ExcursionsLoading />;
-	}
-
-	// Si no está cargando y la lista está vacía, mostramos el mensaje de vacío.
-	if (!isLoading && excursions.length === 0) {
-		return <NoExcursionsFound />;
-	}
+	// Si no hay excursiones que mostrar
+	if (excursions.length === 0)
+		return isLoading ? <ExcursionsLoading /> : <NoExcursionsFound />;
 
 	const excursionComponents = excursions.map((excursion) => {
 		const isJoined = isLoggedIn && joinedExcursionIds.has(String(excursion.id));
