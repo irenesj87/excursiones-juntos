@@ -34,14 +34,14 @@ export function useExcursionsListLogic({
 	isLoading,
 	error,
 }: ExcursionsListProps): ExcursionsListViewProps {
-    // se accede a Redux para saber si el usuario está logueado o no.
+	// se accede a Redux para saber si el usuario está logueado o no.
 	const { login: isLoggedIn, user } = useSelector(
 		(state: RootState) => state.loginReducer
-    );
-    // Se obtiene la función joinExcursion de otro hook.
+	);
+	// Se obtiene la función joinExcursion de otro hook.
 	const { joinExcursion } = useJoinExcursionAction();
 
-    // Mantenemos los resultados antiguos visibles mientras cargan los nuevos para evitar parpadeos (UX).
+	// Mantenemos los resultados antiguos visibles mientras cargan los nuevos para evitar parpadeos (UX).
     // Si simplemente se pasara excursionData, cuando el usuario refresca la vista, la pantalla podría parpadear,
     // borrando lo que ya estaba viendo.
     // Con el estado local displayedExcursions, se congela la lista antigua en pantalla mientras isLoading sea true.
@@ -55,7 +55,7 @@ export function useExcursionsListLogic({
 		}
 	}, [isLoading, excursionData]);
 
-    // Transformación a Set para búsquedas O(1) en el renderizado.
+	// Transformación a Set para búsquedas O(1) en el renderizado.
     // Toma la lista de excursiones del usuario(si existe), convierte todos los IDs a texto para evitar errores de
     // comparación y luego los guarda en un Set para ir más rápido.
 	const joinedExcursionIds = new Set((user?.excursions || []).map(String));
