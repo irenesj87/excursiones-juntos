@@ -1,72 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import ExcursionCard from "../ExcursionCard";
 import ExcursionsLoading from "./ExcursionsLoading";
 import ExcursionsError from "./ExcursionsError";
 import NoExcursionsFound from "./NoExcursionsFound";
 import styles from "./ExcursionsList.module.css";
-import { Excursion } from "../../types";
-import { useJoinExcursionAction } from "./useJoinExcursionAction";
-
-interface ExcursionsListProps {
-	readonly excursionData?: readonly Excursion[];
-	readonly isLoading: boolean;
-	readonly error: Error | null;
-	/** Función opcional para reintentar la carga de datos en caso de error. */
-	readonly onRetry?: () => void;
-}
+import {
+	useExcursionsListLogic,
+	ExcursionsListProps,
+	ExcursionsListViewProps,
+} from "./useExcursionsListLogic";
 
 /**
- * Componente que orquesta la visualización de la lista de excursiones.
- * Gestiona los estados de carga, error y "no encontrado", renderizando el componente hijo apropiado.
+ * Este componente se encarga de mostrar las excursiones.
  */
-function ExcursionsList({
-	excursionData = [],
+function ExcursionsListView({
+	excursions,
 	isLoading,
 	error,
-	onRetry,
-}: ExcursionsListProps) {
-	const { login: isLoggedIn, user } = useSelector(
-		(state: RootState) => state.loginReducer
-	);
-	const { joinExcursion } = useJoinExcursionAction();
+	isLoggedIn,
+	joinedExcursionIds,
+	onJoin,
+}: Readonly<ExcursionsListViewProps>) {
+	if (error) {
+		return <ExcursionsError />;
+	}
 
-	// Mantenemos los resultados antiguos visibles mientras cargan los nuevos para evitar parpadeos (UX).
-	const [displayedExcursions, setDisplayedExcursions] =
-		useState<readonly Excursion[]>(excursionData);
+	// Si no hay excursiones que mostrar
+	if (excursions.length === 0)
+		return isLoading ? <ExcursionsLoading /> : <NoExcursionsFound />;
 
-	useEffect(() => {
-		if (!isLoading) {
-			setDisplayedExcursions(excursionData);
-		}
-	}, [isLoading, excursionData]);
+	const excursionComponents = excursions.map((excursion) => {
+		const isJoined = isLoggedIn && joinedExcursionIds.has(String(excursion.id));
 
-	const handleJoinExcursion = async (excursionId: string | number) => {
-		try {
-			await joinExcursion(excursionId);
-		} catch (caughtError: unknown) {
-			if (process.env.NODE_ENV === "development") {
-				console.error("Error detallado (dev):", caughtError);
-			} else {
-				console.error(
-					"Error técnico al unirse a la excursión:",
-					(caughtError as Error).message || "Error desconocido"
-				);
-			}
-			// El componente hijo espera un error para mostrar feedback visual.
-			throw new Error(
-				"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde."
-			);
-		}
-	};
-
-	// El compilador de React se encargará de memoizar este cálculo si es necesario.
-	const excursionComponents = displayedExcursions.map((excursion) => {
-		const isJoined = !!(
-			isLoggedIn && user?.excursions?.includes(String(excursion.id))
-		);
 		return (
 			<Col
 				as="li"
@@ -87,27 +53,12 @@ function ExcursionsList({
 					imgAlt={excursion.imgAlt}
 					isLoggedIn={isLoggedIn}
 					isJoined={isJoined}
-					onJoin={handleJoinExcursion}
+					onJoin={onJoin}
 				/>
 			</Col>
 		);
 	});
 
-	if (error) {
-		return (
-			<ExcursionsError
-				// No pasamos 'message' para usar el texto amigable por defecto ("Lo sentimos...") en lugar del error técnico.
-				onRetry={onRetry}
-			/>
-		);
-	}
-
-	if (isLoading && displayedExcursions.length === 0) {
-		return <ExcursionsLoading />;
-	}
-	if (!isLoading && excursionData.length === 0) {
-		return <NoExcursionsFound />;
-	}
 	return (
 		<div className={styles.excursionsContainer}>
 			<h2 className={styles.title}>Próximas excursiones</h2>
@@ -116,6 +67,16 @@ function ExcursionsList({
 			</Row>
 		</div>
 	);
+}
+
+/**
+ * Componente Principal (Container).
+ * Conecta la lógica (Hook) con la Vista (Componente).
+ */
+function ExcursionsList(props: Readonly<ExcursionsListProps>) {
+	const viewProps = useExcursionsListLogic(props);
+
+	return <ExcursionsListView {...viewProps} />;
 }
 
 export default ExcursionsList;
