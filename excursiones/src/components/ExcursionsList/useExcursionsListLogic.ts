@@ -67,10 +67,7 @@ export function useExcursionsListLogic({
 			if (process.env.NODE_ENV === "development") {
 				console.error("Error detallado (dev):", caughtError);
 			} else {
-				let errorMessage = "Error desconocido";
-				if (caughtError instanceof Error) {
-					errorMessage = caughtError.message;
-				}
+				const errorMessage = caughtError instanceof Error ? caughtError.message : "Error desconocido";
 				console.error("Error técnico al unirse a la excursión:", errorMessage);
 			}
 			// Relanzamos un error genérico para que la UI pueda mostrar un mensaje amigable
