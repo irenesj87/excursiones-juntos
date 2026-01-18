@@ -1,4 +1,4 @@
-import { Col, Offcanvas, Badge } from "react-bootstrap";
+import { Col, Offcanvas } from "react-bootstrap";
 import Filters from "../Filters";
 import StyledButton from "../StyledButton/StyledButton";
 import type { ExcursionsState } from "../../hooks/useExcursions";
@@ -13,6 +13,7 @@ import { useExcursionsPageLogic } from "./useExcursionsPageLogic";
 
 // Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
+	// Estado de la petición de las excursiones
 	readonly excursionsState: ExcursionsState;
 }
 
@@ -24,8 +25,6 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 		showFilters,
 		handleCloseFilters,
 		handleShowFilters,
-		activeFilterCount,
-		filterCountText,
 		ariaFilterLabel,
 	} = useExcursionsPageLogic();
 
@@ -60,20 +59,17 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 						aria-controls="mobile-filters-offcanvas"
 						aria-label={ariaFilterLabel}
 					>
-						<span aria-hidden="true" className="me-2">
-							<FilterIcon className={styles.filterIcon} />
-						</span>
-						<span>
-							Mostrar Filtros
-							{activeFilterCount > 0 && (
-								<Badge pill className={`${styles.filterBadge} ms-2`}>
-									{activeFilterCount} {filterCountText}
-								</Badge>
-							)}
-						</span>
+						<FilterIcon
+							className={`${styles.filterIcon} me-2`}
+							aria-hidden="true"
+						/>
+						Mostrar Filtros
 					</StyledButton>
 				</div>
-
+				{ /**
+				 * Renderiza el componente pasándole toda la información necesaria del estado actual de la 
+				 * petición de datos.
+				 */}
 				<ExcursionsList
 					excursionData={excursionsState.data}
 					isLoading={excursionsState.status === "loading"}
