@@ -1,18 +1,15 @@
-import React from "react";
-import { Col, Button, Offcanvas, Badge } from "react-bootstrap";
+import { Col, Offcanvas, Badge } from "react-bootstrap";
 import Filters from "../Filters";
-import { AppError, Excursion } from "../../types";
+import StyledButton from "../StyledButton/StyledButton";
+import type { ExcursionsState } from "../../hooks/useExcursions";
 import ExcursionsList from "../ExcursionsList";
 import { FilterIcon } from "../shared/Icons";
 import styles from "./ExcursionsPage.module.css";
 import { useExcursionsPageLogic } from "./useExcursionsPageLogic";
 
-// Definición del tipo para el estado de las excursiones.
-type ExcursionsState = {
-	readonly data: readonly Excursion[];
-	isLoading: boolean;
-	error: AppError | null;
-};
+/**
+ * Este componente es el contenedor principal del diseño (layout) para la página de listado de escursiones.
+ */
 
 // Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
@@ -31,15 +28,6 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 		filterCountText,
 		ariaFilterLabel,
 	} = useExcursionsPageLogic();
-
-	// La lista de excursiones.
-	const excursionsList = (
-		<ExcursionsList
-			excursionData={excursionsState.data}
-			isLoading={excursionsState.isLoading}
-			error={excursionsState.error}
-		/>
-	);
 
 	return (
 		<>
@@ -65,14 +53,14 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 				<div
 					className={`d-grid d-md-none sticky-top ${styles.mobileFiltersBar}`}
 				>
-					<Button
-						variant="outline-secondary"
+					<StyledButton
+						variant="secondary"
 						onClick={handleShowFilters}
 						className={`w-100 ${styles.filtersToggleButton}`}
 						aria-controls="mobile-filters-offcanvas"
 						aria-label={ariaFilterLabel}
 					>
-						<span aria-hidden="true">
+						<span aria-hidden="true" className="me-2">
 							<FilterIcon className={styles.filterIcon} />
 						</span>
 						<span>
@@ -83,9 +71,17 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 								</Badge>
 							)}
 						</span>
-					</Button>
+					</StyledButton>
 				</div>
-				{excursionsList}
+
+				<ExcursionsList
+					excursionData={excursionsState.data}
+					isLoading={excursionsState.status === "loading"}
+					error={
+						excursionsState.status === "error" ? excursionsState.error : null
+					}
+				/>
+
 				{/* Menú Offcanvas para los filtros en breakpoints hasta 'md'. */}
 				<Offcanvas
 					show={showFilters}

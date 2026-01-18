@@ -20,6 +20,10 @@ interface StyledButtonProps {
 	readonly disabled?: boolean;
 	/** Si el botón está en estado de carga. */
 	readonly isLoading?: boolean;
+	/** ID del elemento que controla este botón (A11y). */
+	readonly "aria-controls"?: string;
+	/** Etiqueta accesible para el botón (A11y). */
+	readonly "aria-label"?: string;
 }
 
 /**
@@ -34,6 +38,8 @@ function StyledButton({
 	className = "",
 	disabled = false,
 	isLoading = false,
+	"aria-controls": ariaControls,
+	"aria-label": ariaLabel,
 }: StyledButtonProps) {
 	// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
 	const buttonClass = `${styles.styledButton} ${styles[variant]} ${className}`;
@@ -46,6 +52,8 @@ function StyledButton({
 			onClick={onClick}
 			disabled={disabled || isLoading}
 			aria-busy={isLoading}
+			aria-controls={ariaControls}
+			aria-label={ariaLabel}
 		>
 			{isLoading && (
 				<span className={styles.spinnerOverlay}>

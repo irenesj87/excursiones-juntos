@@ -1,10 +1,8 @@
 .customNavbar {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
-	background-color: color-mix(in srgb, var(--navbar-bg) 90%, transparent);
-	/* Efecto "cristal esmerilado" más suave y natural */
-	-webkit-backdrop-filter: blur(12px);
-	backdrop-filter: blur(12px);
+	background-color: var(--navbar-bg);
+	background-image: var(--rustic-paper-texture);
 	border-bottom: 1px solid var(--separator-color);
 	transition: none;
 	z-index: 1030;

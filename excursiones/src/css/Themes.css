@@ -62,6 +62,9 @@
 	); /* Pastel claro para AAA sobre oscuro */
 	--color-warning-dark: hsl(43, 85%, 75%);
 	--color-danger-dark: hsl(355, 85%, 82%);
+
+	/* Textura de papel/grano sutil (SVG Data URI) para superficies rústicas */
+	--rustic-paper-texture: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%20viewBox='0%200%20200%20200'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.5'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'%20opacity='0.15'/%3E%3C/svg%3E");
 }
 
 /* ======================================== */
@@ -180,7 +183,7 @@ html.light {
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
-	--footer-bg: var(--color-background-body);
+	--footer-bg: var(--color-background-surface);
 	--footer-text-color: var(--color-text-muted);
 	--footer-border-color: var(--color-stone-300);
 	--footer-border-top: var(--footer-border-color);
@@ -359,9 +362,9 @@ html.dark {
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
-	--footer-bg: var(--color-background-body);
+	--footer-bg: var(--color-background-surface);
 	--footer-text-color: var(--color-text-muted);
-	--footer-border-color: hsl(135, 10%, 18%);
+	--footer-border-color: var(--separator-color);
 	--footer-border-top: var(--footer-border-color);
 	--footer-icon-bg: var(--color-background-surface);
 	--footer-icon-color: var(--color-text-muted);
