@@ -160,7 +160,7 @@ html.light {
 	--filters-toggle-btn-bg-hover: var(--color-stone-200);
 	--filters-toggle-btn-color-hover: var(--color-primary);
 	--filters-toggle-btn-border-hover: var(--color-accent);
-	--filters-toggle-btn-bg-active: var(--color-earth-500);
+	--filters-toggle-btn-bg-active: var(--color-green-700);
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 

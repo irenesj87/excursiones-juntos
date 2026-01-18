@@ -1,11 +1,11 @@
-import { Col, Offcanvas, Badge } from "react-bootstrap";
+import { useState } from "react";
+import { Col, Offcanvas } from "react-bootstrap";
 import Filters from "../Filters";
 import StyledButton from "../StyledButton/StyledButton";
 import type { ExcursionsState } from "../../hooks/useExcursions";
 import ExcursionsList from "../ExcursionsList";
 import { FilterIcon } from "../shared/Icons";
 import styles from "./ExcursionsPage.module.css";
-import { useExcursionsPageLogic } from "./useExcursionsPageLogic";
 
 /**
  * Este componente es el contenedor principal del diseño (layout) para la página de listado de escursiones.
@@ -13,6 +13,7 @@ import { useExcursionsPageLogic } from "./useExcursionsPageLogic";
 
 // Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
+	// Estado de la petición de las excursiones
 	readonly excursionsState: ExcursionsState;
 }
 
@@ -20,14 +21,9 @@ interface ExcursionsPageProps {
  * Componente para la página de excursiones que muestra los filtros y la lista de excursiones.
  */
 function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
-	const {
-		showFilters,
-		handleCloseFilters,
-		handleShowFilters,
-		activeFilterCount,
-		filterCountText,
-		ariaFilterLabel,
-	} = useExcursionsPageLogic();
+	const [showFilters, setShowFilters] = useState(false);
+	const handleCloseFilters = () => setShowFilters(false);
+	const handleShowFilters = () => setShowFilters(true);
 
 	return (
 		<>
@@ -58,22 +54,19 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 						onClick={handleShowFilters}
 						className={`w-100 ${styles.filtersToggleButton}`}
 						aria-controls="mobile-filters-offcanvas"
-						aria-label={ariaFilterLabel}
+						aria-label="Mostrar filtros"
 					>
-						<span aria-hidden="true" className="me-2">
-							<FilterIcon className={styles.filterIcon} />
-						</span>
-						<span>
-							Mostrar Filtros
-							{activeFilterCount > 0 && (
-								<Badge pill className={`${styles.filterBadge} ms-2`}>
-									{activeFilterCount} {filterCountText}
-								</Badge>
-							)}
-						</span>
+						<FilterIcon
+							className={`${styles.filterIcon} me-2`}
+							aria-hidden="true"
+						/>
+						Mostrar Filtros
 					</StyledButton>
 				</div>
-
+				{/**
+				 * Renderiza el componente pasándole toda la información necesaria del estado actual de la
+				 * petición de datos.
+				 */}
 				<ExcursionsList
 					excursionData={excursionsState.data}
 					isLoading={excursionsState.status === "loading"}
