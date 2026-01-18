@@ -6,8 +6,10 @@
 	padding: 3rem 2rem;
 	text-align: center;
 	background-color: var(--footer-bg);
+	background-image: var(--rustic-paper-texture);
 	color: var(--footer-text-color);
 	border-top: 1px solid var(--footer-border-top);
+	transition: none;
 }
 
 .footerText {

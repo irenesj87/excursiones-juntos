@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
@@ -27,7 +26,7 @@ const UserPage = lazyWithMinTime(() => import("../UserPage"));
  * Componente principal de la aplicación. Gestiona el estado de las excursiones, la autenticación del usuario y la
  * estructura general de la página.
  */
-const Layout = () => {
+function Layout(){
 	const location = useLocation();
 	const isOnExcursionsPage = location.pathname === "/";
 
@@ -120,6 +119,6 @@ const Layout = () => {
 			<Footer />
 		</div>
 	);
-};
+}
 
 export default Layout;
