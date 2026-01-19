@@ -61,7 +61,7 @@ function ExcursionsListView({
 
 	return (
 		<div className={styles.excursionsContainer}>
-			<h2 className={styles.title}>Próximas excursiones</h2>
+			<h2 className={styles.title}>Próximas Excursiones</h2>
 			<Row as="ul" className="gx-4 gy-5 list-unstyled">
 				{excursionComponents}
 			</Row>

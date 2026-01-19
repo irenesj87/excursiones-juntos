@@ -19,6 +19,7 @@
 	border-bottom: 1px solid var(--separator-color);
 	color: var(--filter-title-color);
 	text-transform: uppercase;
+	font-family: serif;
 }
 
 .filterSection:not(:last-child) {

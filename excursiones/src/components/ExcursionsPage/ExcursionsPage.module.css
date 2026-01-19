@@ -49,27 +49,12 @@
 	font-size: 1.4rem;
 }
 
-/* Estilos para el contador de filtros */
-.filterBadge {
-	background-color: var(--filter-badge-bg);
-	color: var(--filter-badge-text);
-	font-size: 0.75em;
-	padding: 0.3em 0.6em;
-	transition:
-		background-color 0.2s ease-in-out,
-		color 0.2s ease-in-out;
-}
-
-.filtersToggleButton:hover .filterBadge,
-.filtersToggleButton.active .filterBadge {
-	background-color: var(--filters-toggle-btn-color-active);
-	color: var(--filters-toggle-btn-bg-active);
-}
-
 /* Estilo para el título del Offcanvas */
 .offcanvasTitle {
-	text-transform: uppercase;
+	font-family: serif;
 	font-weight: 600;
-	font-size: 1.4rem;
-	padding-bottom: 0.75rem;
+	font-size: 1.5rem;
+	color: var(--filter-title-color);
+	text-transform: uppercase;
+	margin-bottom: 0; /* Alineación perfecta con el botón de cierre */
 }
