@@ -10,7 +10,7 @@ function FilterError() {
 	return (
 		<div className={styles.errorContainer} role="alert">
 			<AlertIcon className={styles.errorIcon} aria-hidden="true" />
-			<p className={styles.errorMessage}>{message}</p>
+			<p className={styles.errorMessage}><span className="visually-hidden">Error: </span>{message}</p>
 		</div>
 	);
 }
