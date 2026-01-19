@@ -80,7 +80,7 @@ function Filters({ showTitle = true }: FiltersProps) {
 		<div className={`${styles.filtersContainer} h-100 d-flex flex-column`}>
 			{/* Contenedor para el contenido que puede hacer scroll */}
 			<div className={styles.scrollableContent}>
-				{showTitle && <h2 className="visually-hidden">Filtros</h2>}
+				{showTitle && <h2 className={styles.title}>Filtros</h2>}
 				{filterSections.map(({ name, title, icon }) => (
 					<section
 						key={name}

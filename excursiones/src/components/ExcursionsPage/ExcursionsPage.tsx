@@ -8,17 +8,18 @@ import { FilterIcon } from "../shared/Icons";
 import styles from "./ExcursionsPage.module.css";
 
 /**
- * Este componente es el contenedor principal del diseño (layout) para la página de listado de escursiones.
+ * Este componente es el contenedor principal del diseño (layout) para la página de listado de escursiones y los
+ * filtros, manejando la responsividad entre diferentes breakpoints.
  */
 
 // Props del componente ExcursionsPage.
 interface ExcursionsPageProps {
-	// Estado de la petición de las excursiones
+	// Estado de la petición de las excursiones. Contiene los datos, el estado de carga y posibles errores.
 	readonly excursionsState: ExcursionsState;
 }
 
 /**
- * Componente para la página de excursiones que muestra los filtros y la lista de excursiones.
+ * Componente principal.
  */
 function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 	const [showFilters, setShowFilters] = useState(false);
