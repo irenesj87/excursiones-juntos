@@ -1,11 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import FiltersList from "../FiltersList";
-import { clearAllFilters } from "../../slices/filterSlice";
 import { ChartIcon, ClockIcon, MapIcon, FilterXIcon } from "../shared/Icons";
 import styles from "./Filters.module.css";
-import { RootState } from "../../store/store";
 import StyledButton from "../StyledButton/StyledButton";
+import { useFiltersLogic } from "./useFiltersLogic";
 
 /**
  * Props para el componente `Filters`.
@@ -41,30 +39,10 @@ const filterSections = [
 	},
 	{
 		name: "time",
-		title: "Tiempo estimado",
+		title: "Tiempo Estimado",
 		icon: <ClockIcon className={styles.filterIcon} />,
 	},
 ] satisfies FilterSection[];
-
-/**
- * Hook personalizado para encapsular la lógica de estado y acciones de los filtros.
- */
-function useFiltersLogic() {
-	const dispatch = useDispatch();
-
-	const hasActiveFilters = useSelector((state: RootState) => {
-		const { area, difficulty, time } = state.filterReducer;
-		return area.length > 0 || difficulty.length > 0 || time.length > 0;
-	});
-
-	const handleClearFilters = () => {
-		if (hasActiveFilters) {
-			dispatch(clearAllFilters());
-		}
-	};
-
-	return { hasActiveFilters, handleClearFilters };
-}
 
 /**
  * Componente que renderiza el panel de filtros.
@@ -75,9 +53,8 @@ function useFiltersLogic() {
 function Filters({ showTitle = true }: FiltersProps) {
 	const { hasActiveFilters, handleClearFilters } = useFiltersLogic();
 
-	// Renderizamos el componente de filtros con su contenido y el botón de limpiar filtros en el footer.
 	return (
-		<div className={`${styles.filtersContainer} h-100 d-flex flex-column`}>
+		<div className={styles.filtersContainer}>
 			{/* Contenedor para el contenido que puede hacer scroll */}
 			<div className={styles.scrollableContent}>
 				{showTitle && <h2 className={styles.title}>Filtros</h2>}
@@ -100,11 +77,11 @@ function Filters({ showTitle = true }: FiltersProps) {
 				<StyledButton
 					variant={hasActiveFilters ? "danger" : "secondary"}
 					onClick={handleClearFilters}
-					className="w-100 d-flex align-items-center justify-content-center"
+					className={styles.clearButton}
 					disabled={!hasActiveFilters}
 				>
 					<FilterXIcon className={styles.filterIcon} />
-					<span className="ms-2">Limpiar Filtros</span>
+					<span>Limpiar Filtros</span>
 				</StyledButton>
 			</footer>
 		</div>
