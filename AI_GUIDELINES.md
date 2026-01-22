@@ -6,7 +6,8 @@
 
 - Si hay alguna librería o componente pesado que no sea imprescindible para cargar la página en un inicio utiliza lazy loading, si se puede.
 - Recuerda que React Compiler está instalado, así que no sugieras memoización.
-- Utiliza estructuras de datos que tengan una complejidad de O(1) cuando sea posible.
+- Asegura la estabilidad referencial. Evita pasar objetos, arrays o funciones creadas en línea como props, ya que generan nuevas referencias en cada render y pueden provocar re-renderizados innecesarios en los componentes hijos.
+- Prioriza la eficiencia algorítmica (Big O). Utiliza estructuras de datos optimizadas (O(1) como Maps/Sets) y evita bucles anidados o cálculos costosos innecesarios.
 - Optimiza la carga de medios. Utiliza formatos modernos (WebP/AVIF) y especifica siempre width y height para evitar el Cumulative Layout Shift (CLS).
 
 ## 2. Estructura y Componentes:
@@ -48,10 +49,10 @@
 - Consistencia visual: Usa la misma paleta de colores, tipografías y estilos de iconos en toda la aplicación.
 - Estados de los elementos: Un botón debe cambiar de apariencia cuando se pasa el cursor por encima, cuando se hace clic y mientras la acción se está procesando (estado de carga).
 - Estados de la aplicación:
-    - Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
-    - Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
-    - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución o una forma de reintentar.
-    - Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
+  - Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
+  - Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
+  - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución o una forma de reintentar.
+  - Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
 - No tengas miedo a usar el espacio en blanco (whitespace) para ayudar a reducir la carga cognitiva, agrupar elementos relacionados y mejorar la legibilidad.
 
 ## 6. Documentación:
