@@ -30,14 +30,14 @@
 }
 
 .filterTitle {
-	font-size: 1.25rem; 
+	font-size: 1.25rem;
 	font-weight: 500;
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	color: var(--filter-title-color); 
-	font-family: serif; 
+	color: var(--filter-title-color);
+	font-family: serif;
 }
 
 .filterIcon {
@@ -60,7 +60,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.5rem;
 }
 
 @media (max-width: 767.98px) {
