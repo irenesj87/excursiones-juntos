@@ -61,7 +61,7 @@ color: var(--color-white); /* Color de texto principal: blanco */
 
 .title {
 	/* Usamos una tipografía con serifa para un toque más orgánico y rústico en el título principal */
-	font-family: "Georgia", "Times New Roman", serif;
+font-family: var(--font-family-serif);
 	font-size: 3.5rem; /* 56px */
 	font-weight: 700;
 	line-height: 1.1;
