@@ -47,13 +47,11 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 				className="d-flex flex-column position-relative"
 			>
 				{/* Botón para mostrar filtros (visible hasta 'md') */}
-				<div
-					className={`d-grid d-md-none sticky-top ${styles.mobileFiltersBar}`}
-				>
+				<div className={`d-md-none ${styles.mobileFiltersBar}`}>
 					<StyledButton
 						variant="secondary" /* El CSS module sobrescribe los colores, pero esto mantiene props válidas */
 						onClick={handleShowFilters}
-						className={`w-100 ${styles.filtersToggleButton}`}
+						className={styles.filtersToggleButton}
 						aria-controls="mobile-filters-offcanvas"
 						aria-label="Mostrar filtros"
 					>

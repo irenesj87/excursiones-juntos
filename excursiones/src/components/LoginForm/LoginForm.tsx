@@ -30,7 +30,7 @@ export function LoginForm() {
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
 		isFormValid,
 		() => loginUser(formValues),
-		ROUTES.USER
+		ROUTES.USER,
 	);
 
 	return (
@@ -48,28 +48,30 @@ export function LoginForm() {
 				onSubmit={handleSubmit}
 				className={`${styles.formLabel} fw-bold`}
 			>
-				<ValidatedFormGroup
-					id="formLoginEmail"
-					name={FORM_TEXT.EMAIL_LABEL}
-					inputType="email"
-					inputToChange={setMail}
-					validationFunction={validateMail}
-					value={mail}
-					message={true}
-					autocomplete="email"
-					errorMessage={FORM_TEXT.INVALID_EMAIL_FORMAT}
-				/>
-				<ValidatedFormGroup
-					id="formLoginPassword"
-					inputType="password"
-					name={FORM_TEXT.PASSWORD_LABEL}
-					inputToChange={setPassword}
-					validationFunction={isNotEmpty}
-					value={password}
-					message={true}
-					autocomplete="current-password"
-					errorMessage={FORM_TEXT.PASSWORD_CANNOT_BE_EMPTY}
-				/>
+				<div className={styles.fieldsContainer}>
+					<ValidatedFormGroup
+						id="formLoginEmail"
+						name={FORM_TEXT.EMAIL_LABEL}
+						inputType="email"
+						inputToChange={setMail}
+						validationFunction={validateMail}
+						value={mail}
+						message={true}
+						autocomplete="email"
+						errorMessage={FORM_TEXT.INVALID_EMAIL_FORMAT}
+					/>
+					<ValidatedFormGroup
+						id="formLoginPassword"
+						inputType="password"
+						name={FORM_TEXT.PASSWORD_LABEL}
+						inputToChange={setPassword}
+						validationFunction={isNotEmpty}
+						value={password}
+						message={true}
+						autocomplete="current-password"
+						errorMessage={FORM_TEXT.PASSWORD_CANNOT_BE_EMPTY}
+					/>
+				</div>
 				<div className="d-grid d-sm-flex justify-content-sm-end">
 					<StyledButton
 						type="submit"

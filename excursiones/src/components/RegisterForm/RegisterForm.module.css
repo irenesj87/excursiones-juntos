@@ -1,8 +1,17 @@
 .formLabel {
 	font-size: 1.1rem;
+	font-family: var(--font-family-sans);
+}
+
+.fieldsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem; /* 24px */
+	margin-bottom: 1.5rem;
 }
 
 .infoMessage {
 	font-weight: normal;
 	font-style: italic;
+	color: var(--color-text-muted);
 }

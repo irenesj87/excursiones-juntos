@@ -1,7 +1,6 @@
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
-import { RootState } from "../../store/store";
+import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import registerFormStyles from "../RegisterForm/RegisterForm.module.css";
@@ -20,20 +19,17 @@ const skeletonFieldRows = [
  * Esqueleto de carga cuya función es mostrar una versión simplificada del formulario de registro mientras el componente real
  * (RegisterForm.js) se está cargando.
  */
-const RegisterPageSkeleton = () => {
-	const mode = useSelector((state: RootState) => state.themeReducer.mode);
-
-	// Define los colores del esqueleto según el tema para una experiencia visual consistente.
-	const baseColor = mode === "dark" ? "#202020" : "#e0e0e0";
-	const highlightColor = mode === "dark" ? "#444" : "#f5f5f5";
+function RegisterPageSkeleton() {
+	const { baseColor, highlightColor } = useSkeletonTheme();
 
 	/**
 	 * Renderiza un marcador de posición para un campo de entrada del formulario.
 	 */
 	const renderInputPlaceholder = (labelWidth: string) => (
-		<div className="mb-3">
+		// El contenedor necesita un gap o un margin-bottom para espaciar los campos
+		<div>
 			<Skeleton width={labelWidth} containerClassName="d-block mb-2" />
-			<Skeleton height={38} />
+			<Skeleton height={50} borderRadius="var(--border-radius-md)" />
 		</div>
 	);
 
@@ -49,22 +45,21 @@ const RegisterPageSkeleton = () => {
 			}}
 		>
 			<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-				<div
-					aria-hidden="true"
-					className={`${registerFormStyles.formLabel} fw-bold`}
-				>
-					{skeletonFieldRows.map((row, rowIndex) => (
-						// Usamos el índice como clave porque la lista es estática y no cambiará.
-						// eslint-disable-next-line react/no-array-index-key
-						<Row key={`skeleton-row-${rowIndex}`}>
-							{row.map((col, colIndex) => (
-								// eslint-disable-next-line react/no-array-index-key
-								<Col xs={12} md={6} key={`skeleton-col-${colIndex}`}>
-									{renderInputPlaceholder(col.labelWidth)}
-								</Col>
-							))}
-						</Row>
-					))}
+				<div aria-hidden="true" className={registerFormStyles.formLabel}>
+					<div className={`${registerFormStyles.fieldsContainer} mb-5`}>
+						{skeletonFieldRows.map((row, rowIndex) => (
+							// Usamos el índice como clave porque la lista es estática y no cambiará.
+							// eslint-disable-next-line react/no-array-index-key
+							<Row key={`skeleton-row-${rowIndex}`}>
+								{row.map((col, colIndex) => (
+									// eslint-disable-next-line react/no-array-index-key
+									<Col xs={12} md={6} key={`skeleton-col-${colIndex}`}>
+										{renderInputPlaceholder(col.labelWidth)}
+									</Col>
+								))}
+							</Row>
+						))}
+					</div>
 
 					{/* Esqueleto para el mensaje informativo de la contraseña. */}
 					<div className={`${registerFormStyles.infoMessage} mb-3`}>
@@ -92,6 +87,7 @@ const RegisterPageSkeleton = () => {
 							<Skeleton
 								height={44}
 								className="w-100"
+								borderRadius="var(--border-radius-pill)"
 								style={{ minWidth: 85 }}
 							/>
 						</Col>
@@ -100,6 +96,6 @@ const RegisterPageSkeleton = () => {
 			</SkeletonTheme>
 		</FormPageLayout>
 	);
-};
+}
 
 export default RegisterPageSkeleton;

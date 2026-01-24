@@ -1,9 +1,8 @@
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
+import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { RootState } from "../../store/store";
 import "react-loading-skeleton/dist/skeleton.css";
 import loginFormStyles from "../LoginForm/LoginForm.module.css";
 
@@ -11,18 +10,14 @@ import loginFormStyles from "../LoginForm/LoginForm.module.css";
  * Componente que muestra un esqueleto de carga para la página de inicio de sesión.
  * Simula la estructura del formulario de login mientras los componentes reales se cargan.
  */
-const LoginPageSkeleton = (): React.ReactElement => {
-	const mode = useSelector((state: RootState) => state.themeReducer.mode);
-
-	// Define los colores del esqueleto según el tema para una experiencia visual consistente.
-	const baseColor = mode === "dark" ? "#202020" : "#e0e0e0";
-	const highlightColor = mode === "dark" ? "#444" : "#f5f5f5";
+function LoginPageSkeleton(): React.ReactElement{
+	const { baseColor, highlightColor } = useSkeletonTheme();
 
 	/** Renderiza un placeholder para un campo de formulario (etiqueta(label) + input). */
 	const renderInputPlaceholder = () => (
-		<div className="mb-3">
+		<div>
 			<Skeleton width="40%" containerClassName="d-block mb-2" />
-			<Skeleton height={38} />
+			<Skeleton height={50} borderRadius="var(--border-radius-md)" />
 		</div>
 	);
 
@@ -39,12 +34,11 @@ const LoginPageSkeleton = (): React.ReactElement => {
 			}}
 		>
 			<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-				<div
-					aria-hidden="true"
-					className={`${loginFormStyles.formLabel} fw-bold`}
-				>
-					{renderInputPlaceholder()}
-					{renderInputPlaceholder()}
+				<div aria-hidden="true" className={loginFormStyles.formLabel}>
+					<div className={loginFormStyles.fieldsContainer}>
+						{renderInputPlaceholder()}
+						{renderInputPlaceholder()}
+					</div>
 					{/* Esqueleto para el botón de envío */}
 
 					<Row className="justify-content-sm-end">
@@ -59,6 +53,7 @@ const LoginPageSkeleton = (): React.ReactElement => {
 							<Skeleton
 								height={44}
 								className="w-100"
+								borderRadius="var(--border-radius-pill)"
 								style={{ minWidth: 85 }}
 							/>
 						</Col>
@@ -67,6 +62,6 @@ const LoginPageSkeleton = (): React.ReactElement => {
 			</SkeletonTheme>
 		</FormPageLayout>
 	);
-};
+}
 
 export default LoginPageSkeleton;

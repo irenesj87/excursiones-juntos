@@ -2,15 +2,17 @@ import React from "react";
 import LoginForm from "../LoginForm";
 import FormPageLayout from "../FormPageLayout/FormPageLayout";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
+import styles from "./LoginPage.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 /**
  * Componente que representa la página de inicio de sesión.
  * Utiliza el layout de formulario genérico y renderiza el formulario de login.
  */
-const LoginPage = (): React.ReactElement => {
+function LoginPage(): React.ReactElement {
 	return (
 		<FormPageLayout
+			containerClassName={styles.pageContainer}
 			title={LOGIN_PAGE_TEXT.TITLE}
 			subtitle={LOGIN_PAGE_TEXT.SUBTITLE}
 			colWidth="3"
@@ -23,6 +25,6 @@ const LoginPage = (): React.ReactElement => {
 			<LoginForm />
 		</FormPageLayout>
 	);
-};
+}
 
 export default LoginPage;

@@ -141,6 +141,8 @@ html.light {
 	--nav-link-active-bg: var(--color-stone-200);
 	--nav-link-active-border: var(--color-stone-400);
 
+	--switcher-link-color: var(--color-primary);
+
 	/* El texto blanco sobre verde-500 pasa el ratio 4.5:1 (aprox 4.6:1) */
 	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-green-500);
@@ -247,6 +249,16 @@ html.light {
 	--filter-error-bg: var(--color-bg-danger-subtle);
 	--filter-error-border: var(--color-border-danger);
 	--filter-error-text: var(--color-text-danger);
+
+	/* --- SearchBar (Glassmorphism Light) --- */
+	--search-bar-bg: rgba(255, 255, 255, 0.92);
+	--search-bar-border: rgba(255, 255, 255, 0.6);
+	--search-bar-placeholder-text: var(
+		--color-stone-700
+	); /* Oscurecido para contraste AAA */
+	--search-bar-bg-focus: var(--color-white);
+	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 html.light body {
@@ -427,6 +439,22 @@ html.dark {
 	--filter-error-bg: var(--color-bg-danger-subtle);
 	--filter-error-border: var(--color-border-danger);
 	--filter-error-text: var(--color-text-danger);
+
+	/* --- SearchBar (Glassmorphism Dark) --- */
+	/* Opacidad aumentada a 0.95 para garantizar contraste AAA del placeholder */
+	--search-bar-bg: rgba(20, 25, 20, 0.95);
+	--search-bar-border: rgba(255, 255, 255, 0.1);
+	--search-bar-placeholder-text: var(
+		--color-stone-300
+	); /* Aclarado para mejor legibilidad */
+	--search-bar-bg-focus: rgba(
+		10,
+		15,
+		10,
+		0.95
+	); /* Casi negro sólido al enfocar */
+	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.7);
 }
 
 html.dark body {
@@ -447,18 +475,28 @@ html.dark .btn-close {
 .form-control {
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
-	border: 1px solid var(--separator-color);
+	border: 1px solid var(--color-border-default);
+	padding: 0.75rem 1rem; /* 12px 16px */
+	height: auto; /* Dejar que el padding defina la altura */
+	border-radius: var(--border-radius-md);
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
 }
 
 .form-control::placeholder {
 	color: var(--color-text-muted);
 }
 
-/* Sobrescribe el estilo de foco de Bootstrap para que sea consistente con el :focus-visible global */
+/* Sobrescribe el estilo de foco de Bootstrap para que sea consistente con el :focus-visible global.
+ * Usamos box-shadow para el anillo de foco para que respete el border-radius.
+ */
 .form-control:focus {
 	color: var(--color-text-base);
 	background-color: var(--excursion-card-bg);
 	border-color: var(--color-primary);
+	box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+	outline: none;
 }
 
 /* Estilos para inputs deshabilitados o de solo lectura, para que se adapten al tema */

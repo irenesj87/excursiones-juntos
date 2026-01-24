@@ -1,17 +1,25 @@
 .styledButton {
-	border-radius: 8px;
+	border-radius: var(--border-radius-pill);
 	font-weight: 600;
 	padding: 0.6rem 1.2rem;
 	border: none;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	position: relative;
-	transition: none;
+	transition:
+		transform 0.2s ease-out,
+		background-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.styledButton:hover:not(:disabled) {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-soft);
 }
 
 /* Estilo de foco para accesibilidad con teclado */
 .styledButton:focus-visible {
-	outline: none;
-	box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+	outline: 2px solid var(--focus-outline-color);
+	outline-offset: 2px;
+	box-shadow: none; /* Evita duplicar sombras */
 }
 
 .spinnerOverlay {
@@ -39,10 +47,6 @@
 	color: var(--color-text-on-primary); /* Asegura contraste en hover */
 }
 
-.primary:active {
-	transform: scale(0.98);
-}
-
 .secondary {
 	background-color: var(--bs-secondary);
 	color: var(--color-text-base); /* Usa el color de texto base del tema */
@@ -52,9 +56,6 @@
 	filter: brightness(
 		0.9
 	); /* Oscurece ligeramente manteniendo el tono del tema */
-}
-.secondary:active {
-	transform: scale(0.98);
 }
 
 .secondary:disabled {
@@ -71,10 +72,6 @@
 	filter: brightness(0.9);
 }
 
-.success:active {
-	transform: scale(0.98);
-}
-
 .danger {
 	background-color: var(--bs-danger);
 	color: var(--color-text-on-primary);
@@ -82,8 +79,4 @@
 
 .danger:hover {
 	filter: brightness(0.9);
-}
-
-.danger:active {
-	transform: scale(0.98);
 }

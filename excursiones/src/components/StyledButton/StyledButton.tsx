@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./StyledButton.module.css";
 
@@ -30,42 +30,55 @@ interface StyledButtonProps {
  * Un componente de botón personalizado y reutilizable que extiende la funcionalidad
  * del botón de React Bootstrap.
  */
-function StyledButton({
-	children,
-	onClick,
-	type = "button",
-	variant = "primary",
-	className = "",
-	disabled = false,
-	isLoading = false,
-	"aria-controls": ariaControls,
-	"aria-label": ariaLabel,
-}: StyledButtonProps) {
-	// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
-	const buttonClass = `${styles.styledButton} ${styles[variant]} ${className}`;
+const StyledButton = forwardRef<HTMLButtonElement, StyledButtonProps>(
+	(
+		{
+			children,
+			onClick,
+			type = "button",
+			variant = "primary",
+			className = "",
+			disabled = false,
+			isLoading = false,
+			"aria-controls": ariaControls,
+			"aria-label": ariaLabel,
+		},
+		ref,
+	) => {
+		// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
+		const buttonClass = `${styles.styledButton} ${styles[variant]} ${className}`;
 
-	return (
-		<Button
-			variant={variant}
-			type={type}
-			className={buttonClass}
-			onClick={onClick}
-			disabled={disabled || isLoading}
-			aria-busy={isLoading}
-			aria-controls={ariaControls}
-			aria-label={ariaLabel}
-		>
-			{isLoading && (
-				<span className={styles.spinnerOverlay}>
-					<Spinner as="span" animation="border" size="sm" aria-hidden="true" />
-					<span className="visually-hidden">Cargando...</span>
+		return (
+			<Button
+				ref={ref}
+				variant={variant}
+				type={type}
+				className={buttonClass}
+				onClick={onClick}
+				disabled={disabled || isLoading}
+				aria-busy={isLoading}
+				aria-controls={ariaControls}
+				aria-label={ariaLabel}
+			>
+				{isLoading && (
+					<span className={styles.spinnerOverlay}>
+						<Spinner
+							as="span"
+							animation="border"
+							size="sm"
+							aria-hidden="true"
+						/>
+						<span className="visually-hidden">Cargando...</span>
+					</span>
+				)}
+				<span className={isLoading ? styles.hiddenContent : undefined}>
+					{children}
 				</span>
-			)}
-			<span className={isLoading ? styles.hiddenContent : undefined}>
-				{children}
-			</span>
-		</Button>
-	);
-}
+			</Button>
+		);
+	},
+);
+
+StyledButton.displayName = "StyledButton";
 
 export default StyledButton;
