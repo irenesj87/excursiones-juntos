@@ -12,8 +12,6 @@
 	border-radius: var(--border-radius-pill); /* Forma orgánica de píldora */
 	transition:
 		transform 0.2s ease-out,
-		background-color 0.2s ease,
-		color 0.2s ease,
 		box-shadow 0.2s ease;
 	text-decoration: none;
 	border: 2px solid transparent; /* Borde transparente para evitar saltos de layout en :focus-visible */

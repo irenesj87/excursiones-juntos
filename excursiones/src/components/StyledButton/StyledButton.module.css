@@ -6,7 +6,6 @@
 	position: relative;
 	transition:
 		transform 0.2s ease-out,
-		background-color 0.2s ease,
 		box-shadow 0.2s ease;
 }
 

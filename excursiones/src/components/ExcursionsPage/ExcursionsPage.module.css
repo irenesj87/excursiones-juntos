@@ -4,7 +4,7 @@
 	bottom: 2rem;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 1040; /* Por encima de casi todo */
+	z-index: 1030; /* Nivel 'fixed' estándar (igual que Navbar), debajo de modales y backdrops */
 	width: auto;
 	padding: 0;
 	margin: 0;
@@ -23,7 +23,6 @@
 	box-shadow: var(--shadow-soft); /* Sombra para que flote sobre el contenido */
 	transition:
 		transform 0.2s ease-out,
-		background-color 0.2s ease,
 		box-shadow 0.2s ease;
 }
 
