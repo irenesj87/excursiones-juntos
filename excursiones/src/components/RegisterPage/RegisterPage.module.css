@@ -1,0 +1,4 @@
+/* Aplica la tipografía Serif al título dentro del FormPageLayout */
+.pageContainer :global(h2) {
+	font-family: var(--font-family-serif);
+}

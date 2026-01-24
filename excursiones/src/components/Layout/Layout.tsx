@@ -14,7 +14,6 @@ import UserPageSkeleton from "../UserPage/UserPageSkeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { useExcursions } from "../../hooks/useExcursions";
 import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
-
 import styles from "./Layout.module.css";
 
 /**
@@ -55,8 +54,8 @@ function Layout() {
 			 */}
 			<NavigationBar isOnExcursionsPage={isOnExcursionsPage} />
 
-			<Hero>
-				{isOnExcursionsPage && (
+			{isOnExcursionsPage && (
+				<Hero>
 					<SearchBar
 						id="hero-search-bar"
 						onFetchSuccess={handleExcursionsFetchSuccess}
@@ -65,8 +64,8 @@ function Layout() {
 						searchValue={searchValue}
 						onSearchChange={setSearchValue}
 					/>
-				)}
-			</Hero>
+				</Hero>
+			)}
 			<div className={styles.layout}>
 				{/* Contenedor principal que alberga el contenido de la página */}
 				<main className={styles.mainContentWrapper}>

@@ -1,23 +1,13 @@
 .mobileFiltersBar {
-	/* top: Altura de la barra de navegación en breakpoints pequeños.
-	 * La clase 'sticky-top' de Bootstrap establece 'top: 0', pero necesitamos
-	 * que esta barra se pegue justo debajo de la barra de navegación. */
-	top: var(--navbar-height);
-	background-color: var(--mobile-filters-bar-bg);
-	border-bottom: none; /* Eliminamos borde duro para un look más limpio */
-	box-shadow: var(--shadow-soft); /* Sombra suave para profundidad */
-	z-index: 1020; /* Justo por debajo del z-index de la barra de navegación (1030) */
-
-	/* Usamos márgenes negativos para que la barra se extienda a lo ancho del viewport,
-	 * anulando el padding del contenedor padre. */
-	margin-right: calc(-0.5 * var(--bs-gutter-x));
-	margin-left: calc(-0.5 * var(--bs-gutter-x));
-	/* Restauramos el padding para que el botón no ocupe todo el ancho de la barra
-	   y se vea como un elemento contenido dentro de ella. */
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-	padding-left: calc(var(--bs-gutter-x) * 0.5);
-	padding-right: calc(var(--bs-gutter-x) * 0.5);
+	/* Convertimos la barra en un contenedor flotante fijo abajo */
+	position: fixed;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1030; /* Nivel 'fixed' estándar (igual que Navbar), debajo de modales y backdrops */
+	width: auto;
+	padding: 0;
+	margin: 0;
 }
 
 .filtersToggleButton {
@@ -30,9 +20,9 @@
 	justify-content: center;
 	gap: 0.5rem;
 	border-radius: var(--border-radius-pill); /* Forma orgánica de píldora */
+	box-shadow: var(--shadow-soft); /* Sombra para que flote sobre el contenido */
 	transition:
 		transform 0.2s ease-out,
-		background-color 0.2s ease,
 		box-shadow 0.2s ease;
 }
 
@@ -42,7 +32,7 @@
 	background-color: var(--filters-toggle-btn-bg-active);
 	border-color: var(--filters-toggle-btn-border-active);
 	transform: translateY(-1px); /* Micro-interacción sutil */
-	box-shadow: none;
+	box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al elevarse */
 }
 
 /* Usa un `box-shadow` en lugar de `outline` para respetar el `border-radius` del botón. */

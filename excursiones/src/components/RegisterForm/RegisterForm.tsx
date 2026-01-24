@@ -39,7 +39,7 @@ function RegisterForm() {
 	 */
 	const handleInputChange = (
 		field: keyof RegisterFormValues,
-		value: string
+		value: string,
 	) => {
 		setValues((prev) => ({ ...prev, [field]: value }));
 	};
@@ -75,7 +75,7 @@ function RegisterForm() {
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
 		isFormValid(),
 		apiSubmitFunction,
-		"/"
+		"/",
 	);
 
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
@@ -158,23 +158,25 @@ function RegisterForm() {
 				aria-busy={formState.isLoading}
 				onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
 			>
-				{formFieldsConfig.map((row, rowIndex) => (
-					// eslint-disable-next-line react/no-array-index-key
-					<Row key={`form-row-${rowIndex}`}>
-						{row.map((field) => (
-							<Col xs={12} md={6} key={field.id}>
-								<ValidatedFormGroup
-									{...field}
-									value={values[field.field]}
-									inputToChange={(value) =>
-										handleInputChange(field.field, value)
-									}
-									message={true}
-								/>
-							</Col>
-						))}
-					</Row>
-				))}
+				<div className={styles.fieldsContainer}>
+					{formFieldsConfig.map((row, rowIndex) => (
+						// eslint-disable-next-line react/no-array-index-key
+						<Row key={`form-row-${rowIndex}`}>
+							{row.map((field) => (
+								<Col xs={12} md={6} key={field.id}>
+									<ValidatedFormGroup
+										{...field}
+										value={values[field.field]}
+										inputToChange={(value) =>
+											handleInputChange(field.field, value)
+										}
+										message={true}
+									/>
+								</Col>
+							))}
+						</Row>
+					))}
+				</div>
 				{/* Mensaje informativo sobre los requisitos de la contraseña. */}
 				<div
 					id="password-requirements"

@@ -9,6 +9,7 @@ interface FormPageLayoutProps {
 	readonly subtitle?: string; // Un subtítulo opcional para dar más contexto.
 	readonly children: React.ReactNode; // El contenido del formulario a renderizar.
 	readonly colWidth?: ColProps["xl"]; // Ancho de la columna para el formulario.
+	readonly containerClassName?: string; // Clase CSS opcional para el contenedor principal.
 	readonly switcher?: {
 		readonly prompt: string; // Texto que precede al enlace (ej. "¿No tienes cuenta?").
 		readonly linkText: string; // Texto del enlace (ej. "Regístrate").
@@ -20,18 +21,23 @@ interface FormPageLayoutProps {
  * Componente que proporciona un diseño de página reutilizable para formularios.
  * Centra el contenido del formulario en una tarjeta, adaptándose a diferentes breakpoints.
  */
-const FormPageLayout = ({
+function FormPageLayout({
 	title,
 	subtitle,
 	children,
 	colWidth = "5",
+	containerClassName,
 	switcher,
-}: FormPageLayoutProps) => {
+}: FormPageLayoutProps){
 	// Genera un ID único y estable para el título, garantizando la accesibilidad.
 	const titleId = useId();
 
 	return (
-		<Container as="main" fluid className={`${styles.container} h-100`}>
+		<Container
+			as="main"
+			fluid
+			className={`${styles.container} h-100 ${containerClassName ?? ""}`}
+		>
 			<Row className="justify-content-center align-items-center h-100">
 				<Col xs={12} md={9} lg={8} xl={colWidth}>
 					<Card
@@ -59,6 +65,6 @@ const FormPageLayout = ({
 			</Row>
 		</Container>
 	);
-};
+}
 
 export default FormPageLayout;

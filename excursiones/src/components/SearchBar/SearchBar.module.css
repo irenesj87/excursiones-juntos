@@ -1,17 +1,42 @@
 .searchContainer {
 	position: relative;
 	width: 100%;
+	max-width: 600px; /* Limitamos el ancho para que se vea bien en el Hero */
+	margin: 0 auto; /* Centrado horizontal */
+	display: flex;
+	align-items: center;
+
+	/* --- Estilo Glassmorphism --- */
+	/* Usamos variables del tema para soportar modo oscuro */
+	background-color: var(--search-bar-bg);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid var(--search-bar-border);
+	border-radius: var(--border-radius-pill);
+	box-shadow: var(--search-bar-shadow);
+}
+
+/* Estado de foco: Elevación y fondo sólido para máxima concentración */
+.searchContainer:focus-within {
+	transform: translateY(-2px);
+	box-shadow: var(--search-bar-shadow-focus);
+	background-color: var(--search-bar-bg-focus);
+	border-color: var(--color-primary);
 }
 
 .searchInput {
-	padding: 0.6rem 1rem 0.6rem 2.75rem; /* Padding izquierdo para el icono */
-	border-radius: 25px;
-	/* Usamos text-muted para asegurar un contraste > 3:1 (WCAG AA) en los bordes */
-	border: 1px solid var(--color-text-muted);
-	background-color: var(--excursion-card-bg);
+	flex-grow: 1;
+	background-color: transparent;
+	border: none;
 	color: var(--color-text-base);
+	padding: 0.8rem 3rem; /* Padding a ambos lados para dejar espacio a los iconos */
+	font-size: 1.1rem;
+	font-weight: 500;
+	border-radius: var(--border-radius-pill);
+	outline: none;
+	box-shadow: none; /* Asegura que no haya sombras nativas cuadradas */
 	width: 100%;
-	height: 48px; /* Altura fija para consistencia */
+	height: auto;
 }
 
 /* Eliminamos el estilo por defecto del navegador para el icono de 'limpiar' en inputs de tipo search */
@@ -20,37 +45,48 @@
 	appearance: none;
 }
 
-/* Estilo de foco mejorado */
-.searchInput:focus-visible {
-	border: 2px solid var(--color-primary);
-	outline-offset: 2px;
-	border-radius: 25px; /* Mantenemos los bordes redondeados en el foco */
+/* Aseguramos que el input no tenga estilos de foco propios, ya que los maneja el contenedor */
+.searchInput:focus {
+	background-color: transparent;
+	box-shadow: none;
+	outline: none; /* Doble seguridad para evitar el borde cuadrado */
+	color: var(--color-text-base);
+}
+
+.searchInput::placeholder {
+	color: var(--search-bar-placeholder-text);
 }
 
 .searchIcon {
 	position: absolute;
-	left: 1rem;
-	top: 50%;
-	transform: translateY(-50%);
+	left: 1.2rem;
 	color: var(--color-text-muted);
 	pointer-events: none; /* Evita que el icono intercepte clics */
 	font-size: 1.3rem;
+	z-index: 1;
 }
 
 .clearButton {
 	position: absolute;
 	right: 0.75rem;
-	top: 50%;
-	transform: translateY(-50%);
 	background: none;
 	border: none;
 	color: var(--color-text-muted);
 	cursor: pointer;
 	padding: 0.5rem;
-	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
 }
 
-.clearButton:hover,
-.clearButton:focus-visible {
+.clearButton:hover {
+	background-color: rgba(0, 0, 0, 0.05);
 	color: var(--color-text-base);
+}
+
+.clearButton:focus-visible {
+	outline: none;
+	/* Usamos box-shadow en lugar de outline para asegurar que sea redondo */
+	box-shadow: 0 0 0 2px var(--focus-outline-color);
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import cn from "classnames";
 import { searchExcursions } from "../../services/excursionService";
 import { Excursion } from "../../types";
 import { RootState } from "../../store/store";
@@ -16,7 +15,7 @@ interface SearchBarProps {
 	readonly onFetchSuccess: (excursions: readonly Excursion[]) => void;
 	readonly onExcursionsFetchStart: () => void;
 	readonly onExcursionsFetchEnd: (
-		error: (Error & { secondaryMessage?: string }) | null
+		error: (Error & { secondaryMessage?: string }) | null,
 	) => void;
 	readonly id: string;
 	readonly searchValue: string;
@@ -27,7 +26,7 @@ interface SearchBarProps {
  * Genera un error amigable para el usuario basado en el error técnico capturado.
  */
 function createFriendlyError(
-	error: unknown
+	error: unknown,
 ): Error & { secondaryMessage?: string } {
 	let userFriendlyError: Error & { secondaryMessage?: string };
 
@@ -60,7 +59,7 @@ function SearchBar({
 
 	const { area, difficulty, time } = useSelector(
 		(state: RootState) => state.filterReducer,
-		shallowEqual
+		shallowEqual,
 	);
 
 	/**
@@ -138,9 +137,9 @@ function SearchBar({
 			<input
 				ref={searchInputRef}
 				id={id}
-				className={cn("form-control", styles.searchInput)}
+				className={styles.searchInput}
 				type="search"
-				placeholder="Busca excursiones por nombre..."
+				placeholder="¿A dónde quieres ir?"
 				value={searchValue}
 				onChange={handleSearchChange}
 			/>

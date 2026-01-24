@@ -25,7 +25,9 @@
 	user-select: none; /* Evita que el texto se pueda seleccionar */
 	text-align: center;
 	cursor: pointer; /* Añadimos cursor pointer al ser una etiqueta */
-	transition: all 0.2s ease-out; /* Transición suave para micro-interacciones */
+	transition:
+		transform 0.2s ease-out,
+		box-shadow 0.2s ease-out;
 }
 
 .filterPill:hover {

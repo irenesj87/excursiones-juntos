@@ -125,7 +125,7 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	return (
 		<Navbar
 			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
-			expand="lg" // El menú se expande en breakpoints grandes.
+			expand="md" // El menú se expande en breakpoints medianos (iPad Mini+).
 			className={`${styles.customNavbar} ${
 				// Se comprueba si estamos en la página de excursiones para saber si tenemos que eliminar el borde inferior.
 				isOnExcursionsPage ? styles.onExcursionsPage : ""
@@ -145,8 +145,8 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 					{/* Botón de tema */}
 					<ThemeToggleButton />
 
-					{/* Contenido de navegación para breakpoints grandes (lg y superior) */}
-					<div className="d-none d-lg-flex align-items-center">
+					{/* Contenido de navegación para breakpoints medianos (md y superior) */}
+					<div className="d-none d-md-flex align-items-center">
 						{renderNavContent()}
 					</div>
 
@@ -155,7 +155,7 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 						aria-controls="offcanvasNavbar"
 						label="Abrir menú de navegación"
 						onClick={handleShowMenu}
-						className={`d-lg-none ${styles.navbarToggler}`}
+						className={`d-md-none ${styles.navbarToggler}`}
 					/>
 				</div>
 				{/* --- Componente Offcanvas --- */}
