@@ -4,9 +4,8 @@
 	 * que esta barra se pegue justo debajo de la barra de navegación. */
 	top: var(--navbar-height);
 	background-color: var(--mobile-filters-bar-bg);
-	background-image: var(--rustic-paper-texture);
-	border-bottom: 1px solid var(--mobile-filters-bar-border);
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	border-bottom: none; /* Eliminamos borde duro para un look más limpio */
+	box-shadow: var(--shadow-soft); /* Sombra suave para profundidad */
 	z-index: 1020; /* Justo por debajo del z-index de la barra de navegación (1030) */
 
 	/* Usamos márgenes negativos para que la barra se extienda a lo ancho del viewport,
@@ -25,11 +24,16 @@
 	background-color: var(--filters-toggle-btn-bg);
 	color: var(--filters-toggle-btn-color);
 	border-color: var(--filters-toggle-btn-border);
-	font-weight: 500;
+	font-weight: 600;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
+	border-radius: var(--border-radius-pill); /* Forma orgánica de píldora */
+	transition:
+		transform 0.2s ease-out,
+		background-color 0.2s ease,
+		box-shadow 0.2s ease;
 }
 
 .filtersToggleButton:hover,
@@ -37,6 +41,7 @@
 	color: var(--filters-toggle-btn-color-active);
 	background-color: var(--filters-toggle-btn-bg-active);
 	border-color: var(--filters-toggle-btn-border-active);
+	transform: translateY(-1px); /* Micro-interacción sutil */
 	box-shadow: none;
 }
 
@@ -51,7 +56,7 @@
 
 /* Estilo para el título del Offcanvas */
 .offcanvasTitle {
-	font-family: serif;
+	font-family: var(--font-family-serif);
 	font-weight: 600;
 	font-size: 1.5rem;
 	color: var(--filter-title-color);

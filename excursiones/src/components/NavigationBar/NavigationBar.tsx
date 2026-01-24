@@ -10,13 +10,11 @@ import { useSelector } from "react-redux";
 import { useAuthContext } from "../../context/AuthContext";
 import { RootState } from "../../store/store";
 import Logo from "../Logo";
-import SearchBar from "../SearchBar";
 import UserNavSkeleton from "../UserNav/UserNavSkeleton";
 import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
 import ThemeToggleButton from "../ThemeToggleButton";
 import styles from "./NavigationBar.module.css";
 import "../../css/Themes.css";
-import { Excursion } from "../../types";
 
 // Estos componentes se cargan de forma perezosa (lazy).
 const UserNav = lazy(() => import("../UserNav"));
@@ -30,12 +28,6 @@ const getInitialAuthState = () => {
 };
 
 interface NavigationBarProps {
-	/** Función para actualizar el estado de la lista de excursiones. */
-	readonly onFetchSuccess: (excursions: readonly Excursion[]) => void;
-	/** Callback que se ejecuta al iniciar la búsqueda de excursiones. */
-	readonly onExcursionsFetchStart: () => void;
-	/** Callback que se ejecuta al finalizar la búsqueda de excursiones. */
-	readonly onExcursionsFetchEnd: (error: Error | null) => void;
 	/** Indica si la página actual es la de excursiones. */
 	readonly isOnExcursionsPage: boolean;
 }
@@ -43,15 +35,10 @@ interface NavigationBarProps {
 /**
  * Componente para la barra de navegación.
  */
-function NavigationBar({
-	onFetchSuccess,
-	onExcursionsFetchStart,
-	onExcursionsFetchEnd,
-	isOnExcursionsPage,
-}: NavigationBarProps) {
+function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	// Estado global de Redux para saber si el usuario está autenticado.
 	const { login: isLoggedIn } = useSelector(
-		(state: RootState) => state.loginReducer
+		(state: RootState) => state.loginReducer,
 	);
 	// Estado del contexto de autenticación para saber si la comprobación inicial de autenticación ha finalizado.
 	// Dependiendo de ellos se muestra el esuqeleto para el invitado o para el usuario
@@ -60,8 +47,6 @@ function NavigationBar({
 	// Estado que indica si probablemente el usuario está autenticado basándonos en sessionStorage.
 	const [likelyLoggedIn] = useState(getInitialAuthState);
 
-	/** Estado que guarda el texto que el usuario escribe en la barra de búsqueda. */
-	const [searchTerm, setSearchTerm] = useState("");
 	/** Estado para controlar la visibilidad del componente Offcanvas (menú lateral). */
 	const [showMenu, setShowMenu] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
@@ -81,7 +66,7 @@ function NavigationBar({
 			const height = navElement.offsetHeight;
 			document.documentElement.style.setProperty(
 				"--navbar-height",
-				`${height}px`
+				`${height}px`,
 			);
 		};
 
@@ -155,19 +140,6 @@ function NavigationBar({
 						<Logo />
 					</Navbar.Brand>
 				</div>
-				{/* --- Barra de búsqueda --- */}
-				<div className="d-none d-md-flex justify-content-center flex-grow-1 px-md-3 px-lg-5 order-md-2 order-lg-2 me-md-3">
-					<div className={styles.searchContainer}>
-						<SearchBar
-							onFetchSuccess={onFetchSuccess} //Se pasa la función onFetchSuccess al componente SearchBar
-							id="searchBar-md-lg"
-							onExcursionsFetchStart={onExcursionsFetchStart}
-							onExcursionsFetchEnd={onExcursionsFetchEnd}
-							searchValue={searchTerm}
-							onSearchChange={setSearchTerm}
-						/>
-					</div>
-				</div>
 				{/* --- Contenedor de la derecha: controles de usuario, tema y menú --- */}
 				<div className="d-flex align-items-center ms-auto ms-md-0 order-md-3 order-lg-3">
 					{/* Botón de tema */}
@@ -184,18 +156,6 @@ function NavigationBar({
 						label="Abrir menú de navegación"
 						onClick={handleShowMenu}
 						className={`d-lg-none ${styles.navbarToggler}`}
-					/>
-				</div>
-				{/* Barra de búsqueda en breakpoints pequeños. Ocupa toda la anchura */}
-				{/* order-last: Asegura que esté al final del contenedor */}
-				<div className="d-md-none w-100 mt-2 order-last">
-					<SearchBar
-						onFetchSuccess={onFetchSuccess}
-						id="searchBar-sm"
-						onExcursionsFetchStart={onExcursionsFetchStart}
-						onExcursionsFetchEnd={onExcursionsFetchEnd}
-						searchValue={searchTerm}
-						onSearchChange={setSearchTerm}
 					/>
 				</div>
 				{/* --- Componente Offcanvas --- */}

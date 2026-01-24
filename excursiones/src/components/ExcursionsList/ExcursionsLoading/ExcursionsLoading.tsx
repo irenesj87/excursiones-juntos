@@ -4,7 +4,6 @@ import { Row, Col } from "react-bootstrap";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../../hooks/useSkeletonTheme";
 import ExcursionCardSkeleton from "../../ExcursionCard/ExcursionCardSkeleton";
-import styles from "./ExcursionsLoading.module.css";
 import { RootState } from "../../../store/store";
 
 /**
@@ -17,32 +16,29 @@ const SKELETON_COUNT = 8;
  */
 function ExcursionsLoading() {
 	const isLoggedIn = useSelector(
-		(state: RootState) => state.loginReducer.login
+		(state: RootState) => state.loginReducer.login,
 	);
 
 	const skeletonThemeProps = useSkeletonTheme();
 
 	return (
 		<SkeletonTheme {...skeletonThemeProps}>
-			<div className={styles.excursionsContainer}>
-				<h2 className={styles.title}>Próximas excursiones</h2>
-				<Row as="ul" className="gx-4 gy-5 list-unstyled">
-					{Array.from({ length: SKELETON_COUNT }).map((_, index) => (
-						<Col
-							as="li"
-							xs={12}
-							md={6}
-							lg={4}
-							xl={3}
-							// eslint-disable-next-line react/no-array-index-key
-							key={`skeleton-card-${index}`}
-							className="d-flex"
-						>
-							<ExcursionCardSkeleton isLoggedIn={isLoggedIn} />
-						</Col>
-					))}
-				</Row>
-			</div>
+			<Row as="ul" className="gx-4 gy-5 list-unstyled">
+				{Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+					<Col
+						as="li"
+						xs={12}
+						md={6}
+						lg={4}
+						xl={3}
+						// eslint-disable-next-line react/no-array-index-key
+						key={`skeleton-card-${index}`}
+						className="d-flex"
+					>
+						<ExcursionCardSkeleton isLoggedIn={isLoggedIn} />
+					</Col>
+				))}
+			</Row>
 		</SkeletonTheme>
 	);
 }
