@@ -11,7 +11,7 @@
 	max-height: 550px;
 	padding: 0 24px;
 	text-align: center;
-	color: #ffffff; /* Color de texto principal: blanco cálido */
+color: var(--color-white); /* Color de texto principal: blanco */
 }
 
 .heroBackground {
