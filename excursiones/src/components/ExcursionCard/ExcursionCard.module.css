@@ -4,9 +4,10 @@
 	flex-direction: column;
 	height: 100%;
 	background-color: var(--excursion-card-bg);
-	border: var(--excursion-card-border);
+	/* Borde muy sutil y sombra suave para profundidad (Estética Moderno y Orgánico) */
+	border: 1px solid var(--color-border-subtle);
 	border-radius: var(--border-radius-lg);
-	box-shadow: var(--excursion-card-shadow);
+	box-shadow: var(--shadow-soft);
 
 	& .card-body {
 		background-color: transparent;
@@ -45,7 +46,9 @@
 	object-fit: cover;
 	opacity: 0;
 	transform: scale(1.05);
-	transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+	transition:
+		opacity 0.5s ease-out,
+		transform 0.5s ease-out;
 	will-change: opacity, transform;
 
 	&.imageLoaded {
@@ -60,7 +63,8 @@
 	font-weight: 700;
 	line-height: 1.4;
 	margin-bottom: 1rem;
-	font-family: var(--font-serif, serif);
+	font-family: var(--font-family-serif);
+	letter-spacing: -0.01em;
 	color: var(--excursion-card-title-color);
 }
 
@@ -77,13 +81,6 @@
 	flex-wrap: wrap;
 	gap: 1rem;
 	color: var(--color-text-base);
-}
-
-/* Separador visual antes de las acciones */
-.separator {
-	border: 0;
-	border-top: 1px solid var(--separator-color);
-	margin: 1rem 0;
 }
 
 .cardActionArea {

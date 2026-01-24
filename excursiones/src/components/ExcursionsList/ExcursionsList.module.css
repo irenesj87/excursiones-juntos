@@ -2,18 +2,18 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	margin-block: 2rem;
+	margin-block: 3rem; /* Más espacio vertical (48px) para reducir carga cognitiva */
 }
 
 .title {
 	margin-top: 0;
-	margin-bottom: 2rem;
+	margin-bottom: 3rem; /* Separación generosa entre título y tarjetas */
 	padding-bottom: 0;
 	color: var(--color-text-base);
-	font-size: 1.5rem; /* Ajustado a múltiplo de 8px (24px) */
+	font-size: 2rem; /* 32px - Más presencia para el título de sección */
 	font-weight: bold;
 	text-align: center;
-	font-family: var(--font-serif, serif);
+	font-family: var(--font-family-serif); /* Tipografía Serif elegante */
 }
 
 /* --- Media Queries --- */

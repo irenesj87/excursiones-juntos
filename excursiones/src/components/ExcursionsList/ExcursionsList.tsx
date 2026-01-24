@@ -22,56 +22,66 @@ function ExcursionsListView({
 	joinedExcursionIds,
 	onJoin,
 }: Readonly<ExcursionsListViewProps>) {
-	// 1. Prioridad: Carga inicial.
-	// Si está cargando y no hay datos, mostramos el esqueleto para evitar parpadeos.
-	if (isLoading && excursions.length === 0) {
-		return <ExcursionsLoading />;
-	}
-	// 2. Prioridad: Error.
-	if (error) {
-		return <ExcursionsError />;
-	}
-	// 3. Prioridad: Estado vacío.
-	if (excursions.length === 0) {
-		return <NoExcursionsFound />;
-	}
-
-	const excursionComponents = excursions.map((excursion) => {
-		const isJoined = isLoggedIn && joinedExcursionIds.has(String(excursion.id));
+	const renderContent = () => {
+		// 1. Prioridad: Carga inicial.
+		// Si está cargando y no hay datos, mostramos el esqueleto para evitar parpadeos.
+		if (isLoading && excursions.length === 0) {
+			return <ExcursionsLoading />;
+		}
+		// 2. Prioridad: Error.
+		if (error) {
+			return <ExcursionsError />;
+		}
+		// 3. Prioridad: Estado vacío.
+		if (excursions.length === 0) {
+			return <NoExcursionsFound />;
+		}
 
 		return (
-			<Col
-				as="li"
-				xs={12}
-				md={6}
-				lg={4}
-				key={excursion.id}
-				xl={3}
-				className="d-flex"
-			>
-				<ExcursionCard
-					id={excursion.id}
-					name={excursion.name}
-					area={excursion.area}
-					difficulty={excursion.difficulty}
-					time={excursion.time}
-					imgSrc={excursion.imgSrc}
-					imgAlt={excursion.imgAlt}
-					isLoggedIn={isLoggedIn}
-					isJoined={isJoined}
-					onJoin={onJoin}
-				/>
-			</Col>
+			<Row as="ul" className="gx-4 gy-5 list-unstyled">
+				{excursions.map((excursion) => {
+					const isJoined =
+						isLoggedIn && joinedExcursionIds.has(String(excursion.id));
+
+					return (
+						<Col
+							as="li"
+							xs={12}
+							md={6}
+							lg={4}
+							key={excursion.id}
+							xl={3}
+							className="d-flex"
+						>
+							<ExcursionCard
+								id={excursion.id}
+								name={excursion.name}
+								area={excursion.area}
+								difficulty={excursion.difficulty}
+								time={excursion.time}
+								imgSrc={excursion.imgSrc}
+								imgAlt={excursion.imgAlt}
+								isLoggedIn={isLoggedIn}
+								isJoined={isJoined}
+								onJoin={onJoin}
+							/>
+						</Col>
+					);
+				})}
+			</Row>
 		);
-	});
+	};
 
 	return (
-		<div className={styles.excursionsContainer}>
-			<h2 className={styles.title}>Próximas Excursiones</h2>
-			<Row as="ul" className="gx-4 gy-5 list-unstyled">
-				{excursionComponents}
-			</Row>
-		</div>
+		<section
+			className={styles.excursionsContainer}
+			aria-labelledby="excursions-list-title"
+		>
+			<h2 id="excursions-list-title" className={styles.title}>
+				Próximas Excursiones
+			</h2>
+			{renderContent()}
+		</section>
 	);
 }
 

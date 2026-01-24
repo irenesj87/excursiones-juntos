@@ -123,7 +123,7 @@ function ExcursionCard({
 	 * de TypeScript.
 	 */
 	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
-		onJoin ?? (() => Promise.resolve())
+		onJoin ?? (() => Promise.resolve()),
 	);
 
 	/** Manejador para el evento de unirse a la excursión. */
@@ -183,8 +183,6 @@ function ExcursionCard({
 				{/* Área de acción: botón para unirse a la excursión */}
 				{isLoggedIn && (
 					<div className="mt-auto">
-						{/* Separador visual sutil antes de las acciones */}
-						<hr className={styles.separator} />
 						<div className={styles.cardActionArea}>
 							{joinError && (
 								<ErrorMessageAlert

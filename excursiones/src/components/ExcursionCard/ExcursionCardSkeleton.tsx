@@ -57,7 +57,11 @@ function ExcursionCardSkeleton({
 	const { baseColor, highlightColor } = useSkeletonTheme();
 
 	return (
-		<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+		<SkeletonTheme
+			baseColor={baseColor}
+			highlightColor={highlightColor}
+			borderRadius={8}
+		>
 			<Card
 				className={`${cardStyles.excursionItemCard} h-100 w-100 overflow-hidden`}
 				aria-hidden="true"
@@ -88,14 +92,13 @@ function ExcursionCardSkeleton({
 					{/* Botón de "Apuntarse" */}
 					{isLoggedIn && (
 						<div className="mt-auto" data-testid={TEST_IDS.BUTTON_CONTAINER}>
-							{/* Usamos la misma clase que el componente real para evitar saltos visuales en márgenes o color */}
-							<hr className={cardStyles.separator} />
 							<div className={cardStyles.cardActionArea}>
 								<div className="d-grid d-md-flex justify-content-md-end">
 									<Skeleton
 										height={SKELETON_SIZES.BUTTON_HEIGHT}
 										className="w-100"
 										style={{ minWidth: SKELETON_SIZES.BUTTON_MIN_WIDTH }}
+										borderRadius={24}
 									/>
 								</div>
 							</div>

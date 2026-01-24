@@ -51,7 +51,7 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 					className={`d-grid d-md-none sticky-top ${styles.mobileFiltersBar}`}
 				>
 					<StyledButton
-						variant="secondary"
+						variant="secondary" /* El CSS module sobrescribe los colores, pero esto mantiene props válidas */
 						onClick={handleShowFilters}
 						className={`w-100 ${styles.filtersToggleButton}`}
 						aria-controls="mobile-filters-offcanvas"

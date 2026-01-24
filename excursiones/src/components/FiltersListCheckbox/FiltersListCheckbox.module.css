@@ -16,20 +16,23 @@
 	margin: 0;
 	display: block;
 	width: 100%;
-	padding: 0.5rem 0.75rem; /* Aumentado para mejor touch target y escala consistente (8px / 12px) */
+	padding: 0.5rem 1rem; /* Más padding horizontal para elegancia */
 	font-weight: 500;
 	color: var(--filter-pill-text);
 	background-color: var(--filter-pill-bg);
 	border: 1px solid var(--filter-pill-border);
-	border-radius: 50px;
+	border-radius: var(--border-radius-pill);
 	user-select: none; /* Evita que el texto se pueda seleccionar */
 	text-align: center;
 	cursor: pointer; /* Añadimos cursor pointer al ser una etiqueta */
+	transition: all 0.2s ease-out; /* Transición suave para micro-interacciones */
 }
 
 .filterPill:hover {
 	background-color: var(--filter-pill-bg-hover);
 	border-color: var(--filter-pill-border-hover);
+	transform: translateY(-2px); /* Elevación sutil al hacer hover */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave */
 }
 
 /* Al pasar el ratón por encima de una píldora seleccionada, nos aseguramos
@@ -42,6 +45,7 @@
 	color: var(
 		--filter-pill-text-checked
 	); /* Asegura contraste correcto (ej: texto oscuro sobre fondo claro en Dark Mode) */
+	box-shadow: var(--shadow-soft); /* Profundidad para el estado activo */
 }
 
 /* Estilo para el foco del input (accesibilidad con teclado) */
