@@ -3,6 +3,7 @@ import styles from "./Hero.module.css";
 import heroImage from "../../assets/images/hero-background.jpg";
 import heroImageAvif from "../../assets/images/hero-background.avif";
 import heroImageAvifMobile from "../../assets/images/hero-background-mobile.avif";
+import heroImageMobile from "../../assets/images/hero-background-mobile.jpg";
 
 interface HeroProps {
 	/**
@@ -31,6 +32,12 @@ export function Hero({ children }: HeroProps) {
 					srcSet={`${heroImageAvifMobile} 768w, ${heroImageAvif} 1920w`}
 					sizes="100vw"
 					type="image/avif"
+				/>
+				{/* Fallback: JPG Móvil para dispositivos sin soporte AVIF (Requiere crear la imagen) */}
+				<source
+					media="(max-width: 768px)"
+					srcSet={heroImageMobile}
+					type="image/jpeg"
 				/>
 				{/* Fallback: JPG original para navegadores que no soporten AVIF */}
 				<img
