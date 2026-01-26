@@ -26,9 +26,9 @@ const excursions: Excursion[] = [
 	{
 		id: "1",
 		name: "Parque Natural de Somiedo",
-		area: "Este",
+		area: "Centro",
 		difficulty: "Baja",
-		time: "2 horas",
+		time: "3 horas",
 	},
 	{
 		id: "2",

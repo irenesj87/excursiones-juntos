@@ -5,6 +5,9 @@
 
 .registerLink:hover {
 	background-color: var(--register-link-bg-hover);
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out;
 }
 
 /* Usamos :focus-visible para mostrar el anillo de foco solo al navegar con teclado */
@@ -18,12 +21,14 @@
 .loginLink {
 	background-color: var(--login-btn-bg);
 	color: var(--login-btn-text);
-	transition: none;
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out;
 }
 
 .loginLink:hover {
 	background-color: var(--login-btn-bg-hover);
-	color: var(--color-white);
+	color: var(--login-btn-text-hover);
 }
 
 .loginLink:focus-visible {
@@ -39,6 +44,6 @@
 .offcanvasContainer {
 	display: flex;
 	flex-direction: column;
-	gap: 0.3rem; /* Espacio entre los enlaces */
+	gap: 0.5rem; /* Espacio entre los enlaces (8px) */
 	padding-top: 1rem; /* Añade espacio superior para separar del borde del offcanvas */
 }

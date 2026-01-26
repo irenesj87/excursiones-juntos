@@ -14,21 +14,25 @@ interface GuestNavProps {
 	readonly className?: string;
 }
 
+const NO_OP = () => {
+	/* no-op */
+};
+
 /**
  * Muestra los enlaces de navegación para un usuario invitado (no logueado). Permite cerrar un menú contenedor (como un Offcanvas)
  * si se proporciona la función `onCloseMenu`.
  */
 function GuestNav({
 	className,
-	onCloseMenu = () => {
-		/* no-op */
-	},
+	onCloseMenu = NO_OP,
 	variant = "default",
 }: GuestNavProps): JSX.Element {
 	return (
 		<div
 			className={cn(className, {
-				// Aplica clases específicas cuando la variante es 'offcanvas' para controlar la disposición y el ancho.
+				// Para la variante por defecto, usamos flexbox para alinear los elementos horizontalmente,
+				// replicando el comportamiento del esqueleto y asegurando una transición sin saltos (CLS).
+				"d-flex align-items-center": variant === "default",
 				[styles.offcanvasContainer]: variant === "offcanvas",
 				"w-100": variant === "offcanvas",
 			})}
@@ -37,7 +41,7 @@ function GuestNav({
 				to={ROUTES.REGISTER}
 				onClick={onCloseMenu}
 				className={cn(styles.registerLink, {
-					"me-lg-2": variant === "default",
+					"me-2": variant === "default",
 					"border-0": variant === "offcanvas",
 				})}
 			>
