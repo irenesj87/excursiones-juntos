@@ -5,6 +5,9 @@
 
 .registerLink:hover {
 	background-color: var(--register-link-bg-hover);
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out;
 }
 
 /* Usamos :focus-visible para mostrar el anillo de foco solo al navegar con teclado */
