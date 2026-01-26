@@ -2,8 +2,6 @@ import { ReactNode } from "react";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/images/hero-background.jpg";
 import heroImageAvif from "../../assets/images/hero-background.avif";
-import heroImageAvifMobile from "../../assets/images/hero-background-mobile.avif";
-import heroImageMobile from "../../assets/images/hero-background-mobile.jpg";
 
 interface HeroProps {
 	/**
@@ -24,20 +22,14 @@ export function Hero({ children }: HeroProps) {
 	return (
 		<section
 			className={styles.hero}
-			aria-label="Cabecera principal con imagen de un paisaje montañoso"
+			aria-label="Cabecera principal con imagen de musgo"
 		>
 			<picture>
 				{/* Formato AVIF: Prioridad alta por ser más ligero */}
 				<source
-					srcSet={`${heroImageAvifMobile} 768w, ${heroImageAvif} 1920w`}
+					srcSet={`${heroImageAvif} 1920w`}
 					sizes="100vw"
 					type="image/avif"
-				/>
-				{/* Fallback: JPG Móvil para dispositivos sin soporte AVIF (Requiere crear la imagen) */}
-				<source
-					media="(max-width: 768px)"
-					srcSet={heroImageMobile}
-					type="image/jpeg"
 				/>
 				{/* Fallback: JPG original para navegadores que no soporten AVIF */}
 				<img

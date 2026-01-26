@@ -72,13 +72,25 @@
 		system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
 		sans-serif;
 
+	/* Escala de tipografía modular para consistencia */
+	--font-size-xs: 0.75rem; /* 12px */
+	--font-size-sm: 0.875rem; /* 14px */
+	--font-size-base: 1rem; /* 16px */
+	--font-size-lg: 1.25rem; /* 20px */
+	--font-size-xl: 1.5rem; /* 24px */
+	--font-size-xxl: 2rem; /* 32px */
+	--font-size-xxxl: 2.5rem; /* 40px */
+	--font-size-display: 3.5rem; /* 56px */
+
 	--border-radius-sm: 8px;
 	--border-radius-md: 16px;
 	--border-radius-lg: 24px;
 	--border-radius-pill: 50rem;
 
+	/* Sombra suave y difusa de varias capas para una profundidad natural. */
+	/* Funciona tanto en modo claro como oscuro. */
 	--shadow-soft:
-		0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+		0 16px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
 }
 
 /* ======================================== */
@@ -98,7 +110,9 @@ html.light {
 	--primary-color-rgb: 35, 92, 51; /* Aprox para hsl(135, 45%, 25%) */
 	--color-primary-hover: var(--color-green-800);
 	--color-accent: var(--color-earth-500); /* Acento terracota */
-	--color-background-body: var(--color-white); /* Fondo blanco limpio */
+	--color-background-body: var(
+		--color-white-off
+	); /* Fondo blanco cálido para un toque más orgánico */
 	--color-background-surface: var(
 		--color-white
 	); /* Para tarjetas, modales, etc. */
@@ -148,6 +162,9 @@ html.light {
 	--login-btn-bg: var(--color-green-500);
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
+	--login-btn-text-hover: var(
+		--color-white
+	); /* Asegura texto blanco en hover */
 	--login-btn-border-hover: var(--color-primary-hover);
 	--login-focus-outline-color: var(--color-green-700);
 
@@ -160,9 +177,9 @@ html.light {
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
 	--excursion-card-bg: var(--color-background-surface);
-	--excursion-card-shadow: none;
+	--excursion-card-shadow: var(--shadow-soft);
 	--excursion-card-title-color: var(--color-text-base);
-	--excursion-card-border: 1px solid var(--color-border-default);
+	--excursion-card-border: 1px solid transparent; /* El borde se elimina para usar la sombra para la profundidad */
 	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-light);
 	--image-placeholder-bg: #ebe8e1; /* Beige arena suave */
@@ -325,6 +342,9 @@ html.dark {
 	--login-btn-bg: hsl(135, 40%, 78%); /* Aclarado para contraste AAA */
 	--login-btn-border: var(--separator-color);
 	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
+	--login-btn-text-hover: var(
+		--color-text-base
+	); /* Mantiene texto claro en hover */
 	--login-btn-border-hover: var(--separator-color);
 
 	--register-link-color: var(--navbar-color);
@@ -346,9 +366,9 @@ html.dark {
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
 	--excursion-card-bg: var(--color-background-surface);
-	--excursion-card-shadow: none;
+	--excursion-card-shadow: var(--shadow-soft);
 	--excursion-card-title-color: var(--color-text-base);
-	--excursion-card-border: 1px solid var(--separator-color);
+	--excursion-card-border: 1px solid transparent; /* El borde se elimina para usar la sombra para la profundidad */
 	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-dark);
 	--image-placeholder-bg: hsl(
