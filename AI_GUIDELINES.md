@@ -6,7 +6,7 @@
 
 - Si hay alguna librería o componente pesado que no sea imprescindible para cargar la página en un inicio utiliza lazy loading, si se puede.
 - Recuerda que React Compiler está instalado, así que no sugieras memoización.
-- Asegura la estabilidad referencial. Evita pasar objetos, arrays o funciones creadas en línea como props, ya que generan nuevas referencias en cada render y pueden provocar re-renderizados innecesarios en los componentes hijos.
+- Asegura la estabilidad referencial. Evita pasar objetos, arrays o funciones creadas en línea como props.
 - Prioriza la eficiencia algorítmica (Big O). Utiliza estructuras de datos optimizadas (O(1) como Maps/Sets) y evita bucles anidados o cálculos costosos innecesarios.
 - Optimiza la carga de medios. Utiliza formatos modernos (WebP/AVIF) y especifica siempre width y height para evitar el Cumulative Layout Shift (CLS).
 
@@ -55,9 +55,9 @@
 - Estados de la aplicación:
   - Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
   - Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
-  - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución o una forma de reintentar.
+  - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución.
   - Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
-- No tengas miedo a usar el espacio en blanco (whitespace) para ayudar a reducir la carga cognitiva, agrupar elementos relacionados y mejorar la legibilidad.
+- No tengas miedo a usar el espacio en blanco (whitespace).
 
 ## 6. Documentación:
 

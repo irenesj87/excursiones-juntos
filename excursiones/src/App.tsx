@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import Layout from "./components/Layout/Layout";
 import { useAuth } from "./hooks/useAuth";
 import { AuthContext } from "./context/AuthContext";

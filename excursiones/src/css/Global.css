@@ -1,11 +1,93 @@
 /* ======================================== */
-/* 1. VARIABLES GLOBALES (NO DEPENDEN DEL TEMA) */
+/* 1. PRIMITIVAS (TOKENS DE DISEÑO) */
 /* ======================================== */
+/* 
+ * Definimos la paleta base usando HSL para facilitar ajustes de luminosidad y saturación
+ * sin perder el tono (Hue). Estos valores son inmutables y no dependen del tema activo.
+ */
 :root {
-	/* Radios de borde para consistencia */
-	--border-radius-sm: 0.25rem; /* 4px */
-	--border-radius-md: 0.5rem; /* 8px */
-	--border-radius-lg: 0.75rem; /* 12px */
+	/* Paleta de Verdes (Bosque y Naturaleza - HSL 135) */
+	/* Más orgánicos, menos saturados que el verde digital */
+	--color-green-100: hsl(135, 25%, 88%); /* Salvia muy claro */
+	--color-green-200: hsl(135, 25%, 75%);
+	--color-green-300: hsl(135, 30%, 60%);
+	--color-green-500: hsl(135, 40%, 40%); /* Verde hoja */
+	--color-green-700: hsl(135, 45%, 25%); /* Verde bosque profundo */
+	--color-green-800: hsl(135, 45%, 20%);
+	--color-green-900: hsl(135, 40%, 15%);
+
+	/* Paleta de Tierras (Acento Rústico) */
+	--color-earth-100: hsl(35, 30%, 90%);
+	--color-earth-300: hsl(35, 40%, 70%);
+	--color-earth-500: hsl(30, 45%, 50%); /* Terracota / Arcilla */
+	--color-earth-700: hsl(30, 50%, 35%);
+
+	/* Paleta de Piedra (Grises Cálidos/Stone - HSL 40) */
+	--color-stone-50: hsl(40, 20%, 97%); /* Blanco hueso / Crema */
+	--color-stone-100: hsl(40, 15%, 92%);
+	--color-stone-200: hsl(40, 10%, 85%);
+	--color-stone-300: hsl(40, 10%, 75%);
+	--color-stone-400: hsl(40, 5%, 65%);
+	--color-stone-500: hsl(40, 5%, 50%);
+	--color-stone-700: hsl(40, 10%, 30%);
+	--color-stone-800: hsl(40, 10%, 20%);
+	--color-stone-900: hsl(40, 10%, 15%);
+
+	/* Mapeo de compatibilidad para variables antiguas (si se usan directamente) */
+	--color-gray-neutral-100: var(--color-stone-50);
+	--color-gray-neutral-200: var(--color-stone-100);
+	--color-gray-neutral-300: var(--color-stone-200);
+	--color-gray-neutral-400: var(--color-stone-300);
+	--color-gray-neutral-500: var(--color-stone-400);
+	--color-gray-neutral-600: var(--color-stone-500);
+	--color-gray-neutral-800: var(--color-stone-700);
+
+	/* Blancos y Negros */
+	--color-white: #ffffff;
+	--color-white-off: var(--color-stone-50); /* Blanco cálido */
+	--color-black-soft: var(--color-stone-900); /* Negro suave cálido */
+
+	/* Colores de Éxito, Advertencia y Peligro */
+	--color-success-light: hsl(145, 55%, 35%);
+	--color-warning-light: hsl(40, 75%, 55%);
+	--color-danger-light: hsl(
+		0,
+		60%,
+		28%
+	); /* Oscurecido para cumplir ratio 7:1 (AAA) con texto blanco */
+	--color-success-dark: hsl(
+		145,
+		45%,
+		75%
+	); /* Pastel claro para AAA sobre oscuro */
+	--color-warning-dark: hsl(43, 85%, 75%);
+	--color-danger-dark: hsl(355, 85%, 82%);
+
+	/* --- Tipografía y Formas (Moderno y Orgánico) --- */
+	--font-family-serif: "Georgia", "Times New Roman", serif;
+	--font-family-sans:
+		system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+		sans-serif;
+
+	/* Escala de tipografía modular para consistencia */
+	--font-size-xs: 0.75rem; /* 12px */
+	--font-size-sm: 0.875rem; /* 14px */
+	--font-size-base: 1rem; /* 16px */
+	--font-size-lg: 1.25rem; /* 20px */
+	--font-size-xl: 1.5rem; /* 24px */
+	--font-size-xxl: 2rem; /* 32px */
+	--font-size-xxxl: 2.5rem; /* 40px */
+	--font-size-display: 3.5rem; /* 56px */
+
+	--border-radius-sm: 8px;
+	--border-radius-md: 16px;
+	--border-radius-lg: 24px;
+	--border-radius-pill: 50rem;
+
+	/* Sombra suave y difusa de varias capas para una profundidad natural. */
+	/* Funciona tanto en modo claro como oscuro. */
+	--shadow-soft:
+		0 16px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
 }
 
 /* ======================================== */
@@ -100,12 +182,4 @@ body {
 	display: block;
 	width: 95%;
 	margin: 0 auto 0.6rem;
-}
-
-/* Estilos para los badges de dificultad (se aplica con una clase global) */
-.difficulty-badge {
-	font-size: var(--font-size-sm);
-	padding: 0.3em 0.65em;
-	font-weight: 500;
-	letter-spacing: 0.5px;
 }
