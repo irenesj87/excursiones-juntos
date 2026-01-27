@@ -10,6 +10,10 @@
 	margin-bottom: 1.5rem;
 }
 
+.fieldsContainer :global(.form-control) {
+	border-radius: var(--border-radius-md);
+}
+
 .infoMessage {
 	font-weight: normal;
 	font-style: italic;
