@@ -350,14 +350,12 @@ html.dark .btn-close {
 }
 
 /* --- Botones (Global Override) --- */
-/*
- * Sobrescribe el `box-shadow` de foco por defecto para usar el color primario del tema
- * en TODOS los casos (teclado y ratón).
- * Esto elimina el anillo/sombra azul de Bootstrap que aparece al hacer clic (:focus).
- */
 .btn:focus,
+button:focus {
+	outline: 0;
+}
+
 .btn:focus-visible,
-button:focus,
 button:focus-visible {
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 	outline: 0;
