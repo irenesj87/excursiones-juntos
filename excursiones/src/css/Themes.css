@@ -36,21 +36,14 @@ html.light {
 	--navbar-brand-icon: var(--color-green-500);
 	--navbar-brand-focus-outline-color: var(--color-green-500);
 	--navbar-toggler-icon-color: var(--color-stone-800);
-	--navbar-toggler-border-color: var(--color-stone-300);
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(101, 140, 122, 0.5);
 
 	/* --- Bordes y Separadores --- */
-	--separator-color: hsl(
-		40,
-		5%,
-		55%
-	); /* Aumentado contraste para cumplir 3:1 (WCAG AA UI) */
+	--separator-color: var(--color-stone-500);
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--color-stone-700);
 	--theme-toggle-btn-icon: var(--color-stone-800);
-	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: var(--color-stone-100);
 
 	--register-link-color: var(--color-stone-800);
@@ -62,14 +55,11 @@ html.light {
 
 	--switcher-link-color: var(--color-primary);
 
-	/* El texto blanco sobre verde-500 pasa el ratio 4.5:1 (aprox 4.6:1) */
 	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-green-500);
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
-	--login-btn-text-hover: var(
-		--color-white
-	); /* Asegura texto blanco en hover */
+	--login-btn-text-hover: var(--color-white);
 	--login-btn-border-hover: var(--color-primary-hover);
 	--login-focus-outline-color: var(--color-green-700);
 
@@ -87,7 +77,7 @@ html.light {
 	--excursion-card-border: 1px solid transparent; /* El borde se elimina para usar la sombra para la profundidad */
 	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-light);
-	--image-placeholder-bg: #ebe8e1; /* Beige arena suave */
+	--image-placeholder-bg: var(--color-stone-100); /* Beige arena suave */
 
 	/* --- Filtros --- */
 	--filter-container-bg: var(--color-background-surface);
@@ -143,24 +133,9 @@ html.light {
 		--color-text-base
 	); /* Asegura que el texto dentro de botones herede bien si no se especifica */
 
-	/* --- Variables para badges de dificultad --- */
-	--difficulty-low-bg: var(--color-green-500);
-	--difficulty-low-text: var(--color-white-off);
-	--difficulty-low-bg-hover: var(--color-green-700);
-	--difficulty-medium-bg: hsl(30, 90%, 30%);
-	--difficulty-medium-text: var(--color-white-off);
-	--difficulty-medium-bg-hover: hsl(30, 90%, 25%);
-	--difficulty-high-bg: hsl(0, 70%, 40%);
-	--difficulty-high-text: var(--color-white-off);
-	--difficulty-high-bg-hover: hsl(0, 70%, 35%);
-
-	/* --- Colores de foco para píldoras de dificultad --- */
-	--difficulty-low-focus-outline: var(--difficulty-low-bg-hover);
-	--difficulty-medium-focus-outline: var(--difficulty-medium-bg-hover);
-	--difficulty-high-focus-outline: var(--difficulty-high-bg-hover);
-
 	/* --- Accesibilidad --- */
 	--focus-outline-color: var(--color-primary);
+	--focus-ring-color: rgba(var(--primary-color-rgb), 0.25);
 
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 100%, 97%);
@@ -195,13 +170,11 @@ html.dark {
 	color-scheme: dark;
 	/* --- 2a. Variables Semánticas --- */
 	/* Usamos tonos claros para elementos principales para contrastar con el fondo oscuro */
-	--color-primary: hsl(
-		135,
-		40%,
-		80%
+	--color-primary: var(
+		--color-green-100
 	); /* Muy claro para ratio 7:1 sobre fondo oscuro */
 	/* Corresponde a --color-green-100 */
-	--primary-color-rgb: 214, 235, 222;
+	--primary-color-rgb: 217, 242, 227;
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: hsl(135, 30%, 12%); /* Verde bosque muy oscuro */
@@ -229,7 +202,6 @@ html.dark {
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	--navbar-toggler-focus-shadow: 0 0 0 0.25rem rgba(139, 192, 165, 0.5); /* Primitiva RGB de --color-green-100 */
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: hsl(
@@ -244,7 +216,7 @@ html.dark {
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
 
 	--login-btn-text: var(--color-text-on-primary);
-	--login-btn-bg: hsl(135, 40%, 78%); /* Aclarado para contraste AAA */
+	--login-btn-bg: var(--color-primary); /* Aclarado para contraste AAA */
 	--login-btn-border: var(--separator-color);
 	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
 	--login-btn-text-hover: var(
@@ -332,28 +304,9 @@ html.dark {
 		--secondary-btn-bg
 	); /* Gris oscuro real para contraste AAA */
 
-	/* --- Variables para badges de dificultad --- */
-	--difficulty-low-bg: var(--color-green-500);
-	--difficulty-low-text: var(--color-white-off);
-	--difficulty-low-bg-hover: var(--color-green-700);
-	--difficulty-medium-bg: hsl(
-		35,
-		95%,
-		25%
-	); /* Oscurecido para contraste > 4.5:1 */
-	--difficulty-medium-text: hsl(35, 60%, 85%);
-	--difficulty-medium-bg-hover: hsl(35, 94%, 27%);
-	--difficulty-high-bg: hsl(347, 85%, 30%);
-	--difficulty-high-text: hsl(347, 55%, 88%);
-	--difficulty-high-bg-hover: hsl(347, 89%, 25%);
-
-	/* --- Colores de foco para píldoras de dificultad (modo oscuro) --- */
-	--difficulty-low-focus-outline: hsl(145, 30%, 75%);
-	--difficulty-medium-focus-outline: hsl(35, 95%, 60%);
-	--difficulty-high-focus-outline: hsl(347, 85%, 65%);
-
 	/* --- Accesibilidad --- */
 	--focus-outline-color: var(--color-primary);
+	--focus-ring-color: rgba(var(--primary-color-rgb), 0.5);
 
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 30%, 25%); /* Rojo oscuro desaturado */
@@ -396,6 +349,18 @@ html.dark .btn-close {
 	filter: invert(1) grayscale(100%) brightness(200%);
 }
 
+/* --- Botones (Global Override) --- */
+.btn:focus,
+button:focus {
+	outline: 0;
+}
+
+.btn:focus-visible,
+button:focus-visible {
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	outline: 0;
+}
+
 /* --- Formularios (Inputs, etc.) --- */
 .form-control {
 	background-color: var(--excursion-card-bg);
@@ -420,7 +385,7 @@ html.dark .btn-close {
 	color: var(--color-text-base);
 	background-color: var(--excursion-card-bg);
 	border-color: var(--color-primary);
-	box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 	outline: none;
 }
 
