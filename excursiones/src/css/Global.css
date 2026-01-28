@@ -7,7 +7,6 @@
  */
 :root {
 	/* Paleta de Verdes (Bosque y Naturaleza - HSL 135) */
-	/* Más orgánicos, menos saturados que el verde digital */
 	--color-green-100: hsl(135, 25%, 88%); /* Salvia muy claro */
 	--color-green-200: hsl(135, 25%, 75%);
 	--color-green-300: hsl(135, 30%, 60%);
@@ -32,15 +31,6 @@
 	--color-stone-700: hsl(40, 10%, 30%);
 	--color-stone-800: hsl(40, 10%, 20%);
 	--color-stone-900: hsl(40, 10%, 15%);
-
-	/* Mapeo de compatibilidad para variables antiguas (si se usan directamente) */
-	--color-gray-neutral-100: var(--color-stone-50);
-	--color-gray-neutral-200: var(--color-stone-100);
-	--color-gray-neutral-300: var(--color-stone-200);
-	--color-gray-neutral-400: var(--color-stone-300);
-	--color-gray-neutral-500: var(--color-stone-400);
-	--color-gray-neutral-600: var(--color-stone-500);
-	--color-gray-neutral-800: var(--color-stone-700);
 
 	/* Blancos y Negros */
 	--color-white: #ffffff;
@@ -116,8 +106,8 @@ h6,
 /* Estilos para botones deshabilitados de forma accesible. Se mantienen en el DOM y son enfocables, pero visualmente
 parecen inactivos. */
 .btn[aria-disabled="true"] {
-	opacity: 0.65; /* Reduce la opacidad para indicar visualmente que está inactivo */
-	cursor: not-allowed; /* Cambia el cursor para indicar que no es clickeable */
+	opacity: 0.65;
+	cursor: not-allowed;
 }
 
 /* --- Offcanvas (Menú y Filtros) --- */
