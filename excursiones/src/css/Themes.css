@@ -387,8 +387,12 @@ html.dark .btn-close {
 	color: var(--color-text-base);
 	background-color: var(--excursion-card-bg);
 	border-color: var(--color-primary);
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	box-shadow: none;
 	outline: none;
+}
+
+.form-control:focus-visible {
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 }
 
 /* Estilos para inputs deshabilitados o de solo lectura, para que se adapten al tema */
