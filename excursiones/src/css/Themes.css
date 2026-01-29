@@ -34,7 +34,6 @@ html.light {
 	--navbar-color: var(--color-stone-700);
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(--color-green-500);
-	--navbar-brand-focus-outline-color: var(--color-green-500);
 	--navbar-toggler-icon-color: var(--color-stone-800);
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
@@ -48,7 +47,6 @@ html.light {
 
 	--register-link-color: var(--color-stone-800);
 	--register-link-bg-hover: var(--color-stone-200);
-	--register-focus-outline-color: var(--color-stone-700);
 
 	--nav-link-active-bg: var(--color-stone-200);
 	--nav-link-active-border: var(--color-stone-400);
@@ -61,7 +59,6 @@ html.light {
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-text-hover: var(--color-white);
 	--login-btn-border-hover: var(--color-primary-hover);
-	--login-focus-outline-color: var(--color-green-700);
 
 	--logout-bg-color: var(--color-stone-700);
 	--logout-bg-color-hover: var(--color-stone-800);
@@ -103,7 +100,6 @@ html.light {
 	--filter-pill-border: var(--color-stone-300);
 	--filter-pill-bg-hover: var(--color-stone-300);
 	--filter-pill-border-hover: var(--color-stone-500);
-	--filter-pill-outline-focus: var(--color-stone-500);
 	/* Píldoras de filtro (seleccionadas) */
 	--filter-pill-bg-checked: var(--color-stone-500);
 	--filter-pill-text-checked: var(--color-text-base);
@@ -134,7 +130,6 @@ html.light {
 	); /* Asegura que el texto dentro de botones herede bien si no se especifica */
 
 	/* --- Accesibilidad --- */
-	--focus-outline-color: var(--color-primary);
 	--focus-ring-color: rgba(var(--primary-color-rgb), 0.25);
 
 	/* --- Estados (Error, Alerta) --- */
@@ -198,7 +193,6 @@ html.dark {
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-stone-50);
 	--navbar-brand-icon: var(--color-green-300);
-	--navbar-brand-focus-outline-color: var(--color-green-300);
 	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -278,7 +272,6 @@ html.dark {
 	--filter-pill-border: hsl(135, 10%, 35%);
 	--filter-pill-bg-hover: hsl(135, 10%, 35%);
 	--filter-pill-border-hover: hsl(135, 10%, 45%);
-	--filter-pill-outline-focus: var(--focus-outline-color);
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
@@ -305,7 +298,6 @@ html.dark {
 	); /* Gris oscuro real para contraste AAA */
 
 	/* --- Accesibilidad --- */
-	--focus-outline-color: var(--color-primary);
 	--focus-ring-color: rgba(var(--primary-color-rgb), 0.5);
 
 	/* --- Estados (Error, Alerta) --- */
@@ -349,16 +341,26 @@ html.dark .btn-close {
 	filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-/* --- Botones (Global Override) --- */
-.btn:focus,
-button:focus {
+/* --- Accesibilidad (Gestión de Foco Global) --- */
+
+/*
+ * Elimina el anillo de foco para usuarios de ratón, pero lo preserva para
+ * usuarios de teclado y tecnologías de asistencia. Esto evita el "ruido" visual
+ * en los clics sin perjudicar la accesibilidad.
+ */
+:focus:not(:focus-visible) {
 	outline: 0;
+	box-shadow: none;
 }
 
-.btn:focus-visible,
-button:focus-visible {
+/*
+ * Define un estilo de foco global y consistente para la navegación por teclado.
+ * Usamos box-shadow para que el indicador respete el border-radius de los elementos.
+ * Este estilo se aplica a CUALQUIER elemento enfocable (botones, enlaces, inputs, etc.).
+ */
+:focus-visible {
+	outline: 0; /* Se prefiere box-shadow, así que eliminamos el outline nativo. */
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
-	outline: 0;
 }
 
 /* --- Formularios (Inputs, etc.) --- */
