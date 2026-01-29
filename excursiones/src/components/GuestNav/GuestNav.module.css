@@ -10,12 +10,11 @@
 		color 0.2s ease-out;
 }
 
-/* Usamos :focus-visible para mostrar el anillo de foco solo al navegar con teclado */
+/* Restauramos el cambio de fondo en focus-visible para dar feedback visual, manteniendo el anillo global */
 .registerLink:focus-visible {
 	background-color: var(--register-link-bg-hover);
-	outline: 2px solid var(--register-focus-outline-color);
-	outline-offset: 2px;
-	border: none;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 }
 
 .loginLink {
@@ -31,12 +30,12 @@
 	color: var(--login-btn-text-hover);
 }
 
+/* Restauramos el estilo de focus-visible para coincidir con el hover */
 .loginLink:focus-visible {
 	background-color: var(--login-btn-bg-hover);
-	border-color: var(--login-btn-bg-hover);
-	color: var(--login-btn-text);
-	outline: 2px solid var(--login-focus-outline-color);
-	outline-offset: 2px;
+	color: var(--login-btn-text-hover);
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 }
 
 /* Estilos para la variante 'offcanvas' */

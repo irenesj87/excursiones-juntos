@@ -132,12 +132,6 @@ body {
 	transition: none;
 }
 
-/* --- Formularios (Inputs, etc.) --- */
-/* Se elimina el box-shadow por defecto de Bootstrap para que el outline de :focus-visible sea el único indicador */
-.form-control:focus {
-	box-shadow: none;
-}
-
 /* Reseteamos la opacidad que Bootstrap aplica por defecto a los campos deshabilitados */
 .form-control:disabled:not(.form-control-plaintext),
 .form-control[readonly]:not(.form-control-plaintext) {
