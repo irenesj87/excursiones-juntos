@@ -11,14 +11,11 @@
 :root {
 	/* Navbar y Estructura */
 	--navbar-bg: var(--color-background-surface);
-	--mobile-filters-bar-bg: var(--navbar-bg);
-	--mobile-filters-bar-border: var(--separator-color);
 
 	/* Tarjetas (ExcursionCard) */
 	--excursion-card-bg: var(--color-background-surface);
 	--excursion-card-shadow: var(--shadow-soft);
 	--excursion-card-title-color: var(--color-text-base);
-	--excursion-card-border: 1px solid transparent;
 	--excursion-card-icon-color: var(--color-primary);
 
 	/* Filtros y Botones Comunes */
@@ -276,7 +273,7 @@ html.dark {
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
-	--footer-bg: var(--color-background-surface);
+	--footer-bg: var(--navbar-bg);
 	--footer-text-color: var(--color-text-muted);
 	--footer-border-color: var(--separator-color);
 	--footer-border-top: var(--footer-border-color);
