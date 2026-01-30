@@ -27,7 +27,7 @@
 	/* Combinamos el anillo de foco global (luz) con la sombra de elevación (profundidad) */
 	/* Usamos la variable completa 'shadow' para permitir desenfoque (glow) en modo oscuro */
 	box-shadow:
-		var(--search-bar-focus-ring-shadow), var(--search-bar-shadow-focus) !important;
+		var(--search-bar-focus-ring-shadow), var(--search-bar-shadow-focus);
 	background-color: var(--search-bar-bg-focus);
 	border-color: var(--search-bar-border-focus);
 }
