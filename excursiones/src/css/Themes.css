@@ -2,6 +2,37 @@
 /* 2. VARIABLES SEMÁNTICAS Y DE COMPONENTES */
 /* ======================================== */
 
+/* --- VARIABLES COMPARTIDAS (Mapeos Estructurales) --- */
+/* 
+ * Estas variables definen la estructura del diseño. Al depender de variables semánticas 
+ * (como --color-primary o --color-background-surface) que ya cambian según el tema, 
+ * podemos definirlas una sola vez aquí.
+ */
+:root {
+	/* Navbar y Estructura */
+	--navbar-bg: var(--color-background-surface);
+	--mobile-filters-bar-bg: var(--navbar-bg);
+	--mobile-filters-bar-border: var(--separator-color);
+
+	/* Tarjetas (ExcursionCard) */
+	--excursion-card-bg: var(--color-background-surface);
+	--excursion-card-shadow: var(--shadow-soft);
+	--excursion-card-title-color: var(--color-text-base);
+	--excursion-card-border: 1px solid transparent;
+	--excursion-card-icon-color: var(--color-primary);
+
+	/* Filtros y Botones Comunes */
+	--filter-container-bg: var(--color-background-surface);
+	--filter-title-color: var(--color-text-base);
+	--filter-badge-bg: var(--color-primary);
+	--filter-badge-text: var(--color-text-on-primary);
+	--switcher-link-color: var(--color-primary);
+	--login-btn-text: var(--color-text-on-primary);
+
+	/* Bootstrap Overrides Generales */
+	--bs-primary: var(--color-primary);
+}
+
 /* --- MODO CLARO (LIGHT) --- */
 html.light {
 	color-scheme: light;
@@ -30,7 +61,6 @@ html.light {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-bg: var(--color-white);
 	--navbar-color: var(--color-stone-700);
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(--color-green-500);
@@ -51,9 +81,6 @@ html.light {
 	--nav-link-active-bg: var(--color-stone-200);
 	--nav-link-active-border: var(--color-stone-400);
 
-	--switcher-link-color: var(--color-primary);
-
-	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-green-500);
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
@@ -68,17 +95,10 @@ html.light {
 	--offcanvas-text-color: var(--color-stone-100);
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
-	--excursion-card-bg: var(--color-background-surface);
-	--excursion-card-shadow: var(--shadow-soft);
-	--excursion-card-title-color: var(--color-text-base);
-	--excursion-card-border: 1px solid transparent; /* El borde se elimina para usar la sombra para la profundidad */
-	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-light);
 	--image-placeholder-bg: var(--color-stone-100); /* Beige arena suave */
 
 	/* --- Filtros --- */
-	--filter-container-bg: var(--color-background-surface);
-	--filter-title-color: var(--color-text-base);
 	--filters-toggle-btn-color: var(--color-white);
 	--filters-toggle-btn-bg: var(--color-green-500);
 	--filters-toggle-btn-border: var(--color-green-500);
@@ -88,11 +108,6 @@ html.light {
 	--filters-toggle-btn-bg-active: var(--color-green-700);
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
-
-	--mobile-filters-bar-bg: var(--navbar-bg);
-	--mobile-filters-bar-border: var(--separator-color);
-	--filter-badge-bg: var(--color-primary);
-	--filter-badge-text: var(--login-btn-text);
 
 	/* Píldoras de filtro (no seleccionadas) */
 	--filter-pill-bg: var(--color-stone-200);
@@ -107,11 +122,13 @@ html.light {
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
-	--footer-bg: var(--color-background-surface);
+	--footer-bg: var(
+		--color-white
+	); /* Forzamos blanco puro para diferenciarlo del fondo cálido */
 	--footer-text-color: var(--color-text-muted);
 	--footer-border-color: var(--color-stone-300);
 	--footer-border-top: var(--footer-border-color);
-	--footer-icon-bg: var(--color-white);
+	--footer-icon-bg: var(--color-background-surface);
 	--footer-icon-color: var(--color-text-muted);
 	--footer-icon-bg-hover: var(--color-stone-200);
 
@@ -121,7 +138,6 @@ html.light {
 	--bs-warning: var(--color-warning-light);
 	--bs-danger: var(--color-danger-light);
 	/* Mapeamos Primary y Secondary para que StyledButton use el tema */
-	--bs-primary: var(--color-primary);
 	--bs-secondary: var(
 		--color-stone-200
 	); /* Gris claro para fondo, texto oscuro */
@@ -187,9 +203,6 @@ html.dark {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-bg: var(
-		--color-background-surface
-	); /* Unificado con el color de las cards */
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-stone-50);
 	--navbar-brand-icon: var(--color-green-300);
@@ -209,7 +222,6 @@ html.dark {
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
 
-	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-primary); /* Aclarado para contraste AAA */
 	--login-btn-border: var(--separator-color);
 	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
@@ -229,18 +241,11 @@ html.dark {
 	--secondary-btn-bg-hover: hsl(210, 15%, 30%);
 	--secondary-btn-border-hover: hsl(210, 15%, 30%);
 
-	--switcher-link-color: var(--color-primary);
-
 	--logout-bg-color: hsl(210, 15%, 25%);
 	--logout-bg-color-hover: hsl(210, 15%, 30%);
 	--logout-text-color: var(--color-text-base);
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
-	--excursion-card-bg: var(--color-background-surface);
-	--excursion-card-shadow: var(--shadow-soft);
-	--excursion-card-title-color: var(--color-text-base);
-	--excursion-card-border: 1px solid transparent; /* El borde se elimina para usar la sombra para la profundidad */
-	--excursion-card-icon-color: var(--color-primary);
 	--excursion-card-joined-status-text: var(--color-success-dark);
 	--image-placeholder-bg: hsl(
 		135,
@@ -249,8 +254,6 @@ html.dark {
 	); /* Gris verdoso oscuro para placeholder */
 
 	/* --- Filtros --- */
-	--filter-container-bg: var(--color-background-surface);
-	--filter-title-color: var(--color-text-base);
 	/* Texto oscuro sobre fondo claro (green-300) para contraste > 4.5:1 */
 	--filters-toggle-btn-color: var(--color-text-on-primary);
 	--filters-toggle-btn-bg: var(--color-green-300);
@@ -261,11 +264,6 @@ html.dark {
 	--filters-toggle-btn-bg-active: var(--color-primary);
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
-
-	--mobile-filters-bar-bg: var(--navbar-bg);
-	--mobile-filters-bar-border: var(--separator-color);
-	--filter-badge-bg: var(--color-primary);
-	--filter-badge-text: var(--login-btn-text);
 
 	--filter-pill-bg: hsl(135, 10%, 30%);
 	--filter-pill-text: var(--color-text-base);
@@ -282,7 +280,9 @@ html.dark {
 	--footer-text-color: var(--color-text-muted);
 	--footer-border-color: var(--separator-color);
 	--footer-border-top: var(--footer-border-color);
-	--footer-icon-bg: var(--color-background-surface);
+	--footer-icon-bg: var(
+		--color-background-surface
+	); /* Redundante pero explícito */
 	--footer-icon-color: var(--color-text-muted);
 	--footer-icon-bg-hover: hsl(135, 10%, 25%);
 
@@ -292,7 +292,6 @@ html.dark {
 	--bs-warning: var(--color-warning-dark);
 	--bs-danger: var(--color-danger-dark);
 	/* Mapeamos Primary y Secondary */
-	--bs-primary: var(--color-primary);
 	--bs-secondary: var(
 		--secondary-btn-bg
 	); /* Gris oscuro real para contraste AAA */
@@ -315,7 +314,7 @@ html.dark {
 	--search-bar-bg: rgba(20, 25, 20, 0.95);
 	--search-bar-border: rgba(255, 255, 255, 0.1);
 	--search-bar-placeholder-text: var(
-		--color-stone-300
+		--color-stone-200
 	); /* Aclarado para mejor legibilidad */
 	--search-bar-bg-focus: rgba(
 		10,
@@ -339,28 +338,6 @@ html.dark body {
 /* Invierte el color del botón de cierre en modo oscuro para que sea visible */
 html.dark .btn-close {
 	filter: invert(1) grayscale(100%) brightness(200%);
-}
-
-/* --- Accesibilidad (Gestión de Foco Global) --- */
-
-/*
- * Elimina el anillo de foco para usuarios de ratón, pero lo preserva para
- * usuarios de teclado y tecnologías de asistencia. Esto evita el "ruido" visual
- * en los clics sin perjudicar la accesibilidad.
- */
-:focus:not(:focus-visible) {
-	outline: 0;
-	box-shadow: none;
-}
-
-/*
- * Define un estilo de foco global y consistente para la navegación por teclado.
- * Usamos box-shadow para que el indicador respete el border-radius de los elementos.
- * Este estilo se aplica a CUALQUIER elemento enfocable (botones, enlaces, inputs, etc.).
- */
-:focus-visible {
-	outline: 0; /* Se prefiere box-shadow, así que eliminamos el outline nativo. */
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 }
 
 /* --- Formularios (Inputs, etc.) --- */
@@ -387,12 +364,8 @@ html.dark .btn-close {
 	color: var(--color-text-base);
 	background-color: var(--excursion-card-bg);
 	border-color: var(--color-primary);
-	box-shadow: none;
-	outline: none;
-}
-
-.form-control:focus-visible {
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	outline: none;
 }
 
 /* Estilos para inputs deshabilitados o de solo lectura, para que se adapten al tema */
