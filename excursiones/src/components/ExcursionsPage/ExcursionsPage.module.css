@@ -19,7 +19,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
-	border-radius: var(--border-radius-pill); /* Forma orgánica de píldora */
+	border-radius: var(--border-radius-pill);
 	box-shadow: var(--shadow-soft); /* Sombra para que flote sobre el contenido */
 	transition:
 		transform 0.2s ease-out,
@@ -31,13 +31,8 @@
 	color: var(--filters-toggle-btn-color-active);
 	background-color: var(--filters-toggle-btn-bg-active);
 	border-color: var(--filters-toggle-btn-border-active);
-	transform: translateY(-1px); /* Micro-interacción sutil */
-	box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al elevarse */
-}
-
-/* Usa un `box-shadow` en lugar de `outline` para respetar el `border-radius` del botón. */
-.filtersToggleButton:focus {
-	box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.5);
+	transform: translateY(-1px);
+	box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
 }
 
 .filterIcon {

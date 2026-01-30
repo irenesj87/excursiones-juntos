@@ -14,14 +14,22 @@
 	border: 1px solid var(--search-bar-border);
 	border-radius: var(--border-radius-pill);
 	box-shadow: var(--search-bar-shadow);
+	transition:
+		box-shadow 0.3s ease,
+		transform 0.2s ease;
 }
 
 /* Estado de foco: Elevación y fondo sólido para máxima concentración */
 .searchContainer:focus-within {
+	outline: none;
+	z-index: 10; /* Asegura que el anillo y la sombra no queden recortados por elementos vecinos */
 	transform: translateY(-2px);
-	box-shadow: var(--search-bar-shadow-focus);
+	/* Combinamos el anillo de foco global (luz) con la sombra de elevación (profundidad) */
+	/* Usamos la variable completa 'shadow' para permitir desenfoque (glow) en modo oscuro */
+	box-shadow:
+		var(--search-bar-focus-ring-shadow), var(--search-bar-shadow-focus) !important;
 	background-color: var(--search-bar-bg-focus);
-	border-color: var(--color-primary);
+	border-color: var(--search-bar-border-focus);
 }
 
 .searchInput {
@@ -29,7 +37,7 @@
 	background-color: transparent;
 	border: none;
 	color: var(--color-text-base);
-	padding: 0.8rem 3rem; /* Padding a ambos lados para dejar espacio a los iconos */
+	padding: 0.8rem 4rem 0.8rem 3rem; /* Aumentamos padding derecho para evitar solapamiento con botón táctil */
 	font-size: 1.1rem;
 	font-weight: 500;
 	border-radius: var(--border-radius-pill);
@@ -46,9 +54,10 @@
 }
 
 /* Aseguramos que el input no tenga estilos de foco propios, ya que los maneja el contenedor */
-.searchInput:focus {
+.searchInput:focus,
+.searchInput:focus-visible {
 	background-color: transparent;
-	box-shadow: none;
+	box-shadow: none !important; /* Importante para anular el estilo global :focus-visible de Themes.css */
 	outline: none; /* Doble seguridad para evitar el borde cuadrado */
 	color: var(--color-text-base);
 }
@@ -60,7 +69,7 @@
 .searchIcon {
 	position: absolute;
 	left: 1.2rem;
-	color: var(--color-text-muted);
+	color: var(--search-bar-icon-color);
 	pointer-events: none; /* Evita que el icono intercepte clics */
 	font-size: 1.3rem;
 	z-index: 1;
@@ -71,13 +80,15 @@
 	right: 0.75rem;
 	background: none;
 	border: none;
-	color: var(--color-text-muted);
+	color: var(--search-bar-icon-color);
 	cursor: pointer;
-	padding: 0.5rem;
+	padding: 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
+	width: 44px; /* Mínimo 44x44px para accesibilidad táctil (WCAG/Mobile) */
+	height: 44px;
 }
 
 .clearButton:hover {
@@ -87,6 +98,4 @@
 
 .clearButton:focus-visible {
 	outline: none;
-	/* Usamos box-shadow en lugar de outline para asegurar que sea redondo */
-	box-shadow: 0 0 0 2px var(--focus-outline-color);
 }

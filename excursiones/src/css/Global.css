@@ -15,6 +15,16 @@
 	--color-green-800: hsl(135, 45%, 20%);
 	--color-green-900: hsl(135, 40%, 15%);
 
+	/* Paleta de Verdes Profundos (Base para Modo Oscuro - Desaturados) */
+	--color-green-dark-900: hsl(135, 30%, 12%); /* Fondo Body */
+	--color-green-dark-800: hsl(135, 25%, 18%); /* Fondo Surface */
+	--color-green-dark-700: hsl(135, 20%, 20%); /* Borde Sutil */
+	--color-green-dark-600: hsl(135, 20%, 25%); /* Borde Default */
+	--color-green-dark-500: hsl(135, 15%, 35%); /* Fondos UI / Hover */
+	--color-green-dark-400: hsl(135, 15%, 50%); /* Separadores */
+	--color-green-dark-300: hsl(135, 15%, 65%); /* Textos secundarios / Iconos */
+	--color-green-dark-200: hsl(150, 15%, 88%); /* Iconos claros */
+
 	/* Paleta de Tierras (Acento Rústico) */
 	--color-earth-100: hsl(35, 30%, 90%);
 	--color-earth-300: hsl(35, 40%, 70%);

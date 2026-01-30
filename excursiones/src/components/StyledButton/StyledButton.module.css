@@ -14,13 +14,6 @@
 	box-shadow: var(--shadow-soft);
 }
 
-/* Estilo de foco para accesibilidad con teclado */
-.styledButton:focus-visible {
-	outline: 2px solid var(--focus-outline-color);
-	outline-offset: 2px;
-	box-shadow: none; /* Evita duplicar sombras */
-}
-
 .spinnerOverlay {
 	position: absolute;
 	top: 0;

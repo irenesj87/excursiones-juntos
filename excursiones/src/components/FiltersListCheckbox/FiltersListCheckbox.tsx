@@ -1,4 +1,4 @@
-import React, { useId } from "react";
+import { useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { toggleFilter } from "../../slices/filterSlice";
@@ -36,7 +36,7 @@ function FiltersListCheckbox({ filterName, filter }: FiltersListCheckboxProps) {
 
 	// Obtenemos los filtros seleccionados para esta categoría (ej. 'area') desde Redux
 	const selectedFilters = useSelector(
-		(state: RootState) => state.filterReducer[filterName]
+		(state: RootState) => state.filterReducer[filterName],
 	);
 
 	// El filtro está seleccionado si su valor está incluido en el array del estado de Redux

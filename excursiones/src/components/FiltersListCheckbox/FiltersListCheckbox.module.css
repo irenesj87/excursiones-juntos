@@ -34,7 +34,9 @@
 	background-color: var(--filter-pill-bg-hover);
 	border-color: var(--filter-pill-border-hover);
 	transform: translateY(-2px); /* Elevación sutil al hacer hover */
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave */
+	box-shadow: var(
+		--shadow-soft
+	); /* Usamos la sombra global para consistencia */
 }
 
 /* Al pasar el ratón por encima de una píldora seleccionada, nos aseguramos
@@ -50,8 +52,19 @@
 	box-shadow: var(--shadow-soft); /* Profundidad para el estado activo */
 }
 
-/* Estilo para el foco del input (accesibilidad con teclado) */
+/* 
+ * ACCESIBILIDAD (FOCUS BRIDGE):
+ * Como el input está oculto (.visuallyHidden), el estilo global :focus-visible no se ve.
+ * Usamos el selector de hermano adyacente (+) para aplicar el anillo de foco al label
+ * cuando el input tiene el foco por teclado.
+ */
 .visuallyHidden:focus-visible + .filterPill {
-	outline: 2px solid var(--filter-pill-outline-focus);
-	outline-offset: 2px;
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+}
+
+/* Si está seleccionado Y enfocado, combinamos el anillo de foco con la sombra de elevación */
+.visuallyHidden:focus-visible + .checked {
+	box-shadow:
+		0 0 0 0.25rem var(--focus-ring-color),
+		var(--shadow-soft);
 }
