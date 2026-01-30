@@ -22,26 +22,6 @@
 	transform: translateY(-1px);
 }
 
-/* --- Estado de Foco (accesibilidad con teclado) --- */
-/*
- * Elimina el anillo de foco para usuarios de ratón, pero lo preserva para
- * usuarios de teclado y tecnologías de asistencia. Esto evita el "ruido" visual
- * en los clics sin perjudicar la accesibilidad.
- */
-.styledNavLink:focus:not(:focus-visible) {
-	outline: 0;
-	box-shadow: none;
-}
-
-/*
- * Define un estilo de foco global y consistente para la navegación por teclado.
- * Usamos box-shadow para que el indicador respete el border-radius de los elementos.
- */
-.styledNavLink:focus-visible {
-	outline: 0; /* Se prefiere box-shadow, así que eliminamos el outline nativo. */
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
-}
-
 /* --- Estado Activo (cuando el enlace corresponde a la página actual) --- */
 .styledNavLink.active {
 	background-color: var(--nav-link-active-bg);

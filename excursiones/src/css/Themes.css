@@ -16,18 +16,23 @@
 	--excursion-card-bg: var(--color-background-surface);
 	--excursion-card-shadow: var(--shadow-soft);
 	--excursion-card-title-color: var(--color-text-base);
-	--excursion-card-icon-color: var(--color-primary);
 
 	/* Filtros y Botones Comunes */
 	--filter-container-bg: var(--color-background-surface);
 	--filter-title-color: var(--color-text-base);
-	--filter-badge-bg: var(--color-primary);
-	--filter-badge-text: var(--color-text-on-primary);
 	--switcher-link-color: var(--color-primary);
 	--login-btn-text: var(--color-text-on-primary);
 
+	/* Footer */
+	--footer-bg: var(--navbar-bg);
+
 	/* Bootstrap Overrides Generales */
 	--bs-primary: var(--color-primary);
+
+	/* Fallback de seguridad: Negro al 60% para garantizar contraste 4.5:1 */
+	--focus-ring-color: rgba(0, 0, 0, 0.6);
+	--search-bar-focus-ring-shadow: 0 0 0 0 transparent; /* Sin anillo por defecto */
+	--search-bar-border-focus: rgba(255, 255, 255, 0.8);
 }
 
 /* --- MODO CLARO (LIGHT) --- */
@@ -61,7 +66,6 @@ html.light {
 	--navbar-color: var(--color-stone-700);
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(--color-green-500);
-	--navbar-toggler-icon-color: var(--color-stone-800);
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
 	/* --- Bordes y Separadores --- */
@@ -119,15 +123,9 @@ html.light {
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
-	--footer-bg: var(
-		--color-white
-	); /* Forzamos blanco puro para diferenciarlo del fondo cálido */
 	--footer-text-color: var(--color-text-muted);
 	--footer-border-color: var(--color-stone-300);
 	--footer-border-top: var(--footer-border-color);
-	--footer-icon-bg: var(--color-background-surface);
-	--footer-icon-color: var(--color-text-muted);
-	--footer-icon-bg-hover: var(--color-stone-200);
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */
 	/* Asignamos las variantes oscuras ('light' en nombre primitivo) para asegurar legibilidad */
@@ -143,7 +141,11 @@ html.light {
 	); /* Asegura que el texto dentro de botones herede bien si no se especifica */
 
 	/* --- Accesibilidad --- */
-	--focus-ring-color: rgba(var(--primary-color-rgb), 0.25);
+	--focus-ring-color: color-mix(
+		in srgb,
+		var(--color-black-soft),
+		transparent 40%
+	);
 
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 100%, 97%);
@@ -156,14 +158,24 @@ html.light {
 	--filter-error-text: var(--color-text-danger);
 
 	/* --- SearchBar (Glassmorphism Light) --- */
-	--search-bar-bg: rgba(255, 255, 255, 0.92);
+	--search-bar-bg: rgba(255, 255, 255, 0.8);
 	--search-bar-border: rgba(255, 255, 255, 0.6);
 	--search-bar-placeholder-text: var(
-		--color-stone-700
+		--color-stone-800
 	); /* Oscurecido para contraste AAA */
+	--search-bar-icon-color: var(
+		--color-stone-700
+	); /* Icono oscuro para contraste seguro */
 	--search-bar-bg-focus: var(--color-white);
 	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.15);
+	/* 
+	 * LIMPIEZA VISUAL:
+	 * Eliminamos el anillo exterior. Confiamos en la elevación (sombra) y el fondo blanco sólido
+	 * para indicar el foco.
+	 */
+	--search-bar-focus-ring-shadow: 0 0 0 0 transparent;
+	--search-bar-border-focus: #ffffff;
 }
 
 html.light body {
@@ -185,17 +197,13 @@ html.dark {
 	--primary-color-rgb: 217, 242, 227;
 	--color-primary-hover: var(--color-green-200);
 	--color-accent: var(--color-green-300);
-	--color-background-body: hsl(135, 30%, 12%); /* Verde bosque muy oscuro */
-	--color-background-surface: hsl(
-		135,
-		25%,
-		18%
-	); /* Superficie ligeramente más clara */
+	--color-background-body: var(--color-green-dark-900);
+	--color-background-surface: var(--color-green-dark-800);
 	--color-text-base: var(--color-stone-100); /* Blanco hueso para texto */
 	--color-text-muted: var(--color-stone-400);
 	--color-text-on-primary: var(--color-black-soft);
-	--color-border-default: hsl(135, 20%, 25%);
-	--color-border-subtle: hsl(135, 20%, 20%);
+	--color-border-default: var(--color-green-dark-600);
+	--color-border-subtle: var(--color-green-dark-700);
 
 	/* --- 2b. Variables de Componente --- */
 
@@ -203,16 +211,12 @@ html.dark {
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-stone-50);
 	--navbar-brand-icon: var(--color-green-300);
-	--navbar-toggler-icon-color: var(--color-text-base);
 	--navbar-toggler-border-color: var(--separator-color);
+	/* Usamos el token --color-green-dark-200 para el stroke del SVG (que era hsl(150, 15%, 88%)) */
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
 	/* --- Bordes y Separadores --- */
-	--separator-color: hsl(
-		135,
-		15%,
-		50%
-	); /* Aclarado significativamente para cumplir 3:1 sobre fondo oscuro */
+	--separator-color: var(--color-green-dark-400);
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--navbar-color);
@@ -233,13 +237,13 @@ html.dark {
 	--nav-link-active-border: hsl(150, 10%, 40%);
 
 	--secondary-btn-text: var(--color-text-base);
-	--secondary-btn-bg: hsl(210, 15%, 25%);
-	--secondary-btn-border: hsl(210, 15%, 25%);
-	--secondary-btn-bg-hover: hsl(210, 15%, 30%);
-	--secondary-btn-border-hover: hsl(210, 15%, 30%);
+	--secondary-btn-bg: var(--color-green-dark-600);
+	--secondary-btn-border: var(--color-green-dark-600);
+	--secondary-btn-bg-hover: var(--color-green-dark-500);
+	--secondary-btn-border-hover: var(--color-green-dark-500);
 
-	--logout-bg-color: hsl(210, 15%, 25%);
-	--logout-bg-color-hover: hsl(210, 15%, 30%);
+	--logout-bg-color: var(--color-green-dark-600);
+	--logout-bg-color-hover: var(--color-green-dark-500);
 	--logout-text-color: var(--color-text-base);
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
@@ -255,33 +259,27 @@ html.dark {
 	--filters-toggle-btn-color: var(--color-text-on-primary);
 	--filters-toggle-btn-bg: var(--color-green-300);
 	--filters-toggle-btn-border: var(--separator-color);
-	--filters-toggle-btn-bg-hover: hsl(135, 10%, 25%);
+	--filters-toggle-btn-bg-hover: var(--color-green-dark-600);
 	--filters-toggle-btn-color-hover: var(--color-accent);
 	--filters-toggle-btn-border-hover: var(--color-primary);
 	--filters-toggle-btn-bg-active: var(--color-primary);
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--filter-pill-bg: hsl(135, 10%, 30%);
+	--filter-pill-bg: var(--color-green-dark-600); /* 25% lightness */
 	--filter-pill-text: var(--color-text-base);
-	--filter-pill-border: hsl(135, 10%, 35%);
-	--filter-pill-bg-hover: hsl(135, 10%, 35%);
-	--filter-pill-border-hover: hsl(135, 10%, 45%);
+	--filter-pill-border: var(--color-green-dark-500); /* 35% lightness */
+	--filter-pill-bg-hover: var(--color-green-dark-500);
+	--filter-pill-border-hover: var(--color-green-dark-400); /* 50% lightness */
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
-	--footer-bg: var(--navbar-bg);
 	--footer-text-color: var(--color-text-muted);
 	--footer-border-color: var(--separator-color);
 	--footer-border-top: var(--footer-border-color);
-	--footer-icon-bg: var(
-		--color-background-surface
-	); /* Redundante pero explícito */
-	--footer-icon-color: var(--color-text-muted);
-	--footer-icon-bg-hover: hsl(135, 10%, 25%);
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */
 	/* Asignamos las variantes claras ('dark' en nombre primitivo) para resaltar sobre fondo oscuro */
@@ -294,7 +292,11 @@ html.dark {
 	); /* Gris oscuro real para contraste AAA */
 
 	/* --- Accesibilidad --- */
-	--focus-ring-color: rgba(var(--primary-color-rgb), 0.5);
+	--focus-ring-color: color-mix(
+		in srgb,
+		var(--color-stone-100),
+		transparent 40%
+	);
 
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 30%, 25%); /* Rojo oscuro desaturado */
@@ -307,20 +309,26 @@ html.dark {
 	--filter-error-text: var(--color-text-danger);
 
 	/* --- SearchBar (Glassmorphism Dark) --- */
-	/* Opacidad aumentada a 0.95 para garantizar contraste AAA del placeholder */
-	--search-bar-bg: rgba(20, 25, 20, 0.95);
+	/* Opacidad al 60% para equilibrar efecto cristal y legibilidad del texto */
+	--search-bar-bg: rgba(0, 0, 0, 0.6);
 	--search-bar-border: rgba(255, 255, 255, 0.1);
 	--search-bar-placeholder-text: var(
 		--color-stone-200
 	); /* Aclarado para mejor legibilidad */
-	--search-bar-bg-focus: rgba(
-		10,
-		15,
-		10,
-		0.95
-	); /* Casi negro sólido al enfocar */
-	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.7);
+	--search-bar-icon-color: var(
+		--color-stone-200
+	); /* Icono claro para contraste seguro */
+	/* Fondo translúcido al enfocar para mantener el efecto cristal (antes era 0.95 sólido) */
+	--search-bar-bg-focus: rgba(10, 15, 10, 0.7);
+	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0);
+	/* CORRECCIÓN: Definimos una sombra real, no un color sólido */
+	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.5);
+	/* 
+	 * LIMPIEZA VISUAL:
+	 * Sin anillos extraños. Solo un borde sutilmente más claro y la sombra de profundidad.
+	 */
+	--search-bar-focus-ring-shadow: 0 0 0 0 transparent;
+	--search-bar-border-focus: rgba(255, 255, 255, 0.5);
 }
 
 html.dark body {
@@ -387,4 +395,16 @@ html.dark .btn-close {
 /* Estilos específicos para los inputs de tipo 'plaintext' */
 .form-control-plaintext {
 	color: var(--color-text-base);
+}
+
+/* 
+ * Estilo global para el foco visible (Accesibilidad / Teclado).
+ * Centralizamos aquí el box-shadow para no repetirlo en módulos CSS.
+ * Se aplica a cualquier elemento interactivo cuando recibe foco por teclado.
+ */
+:focus-visible {
+	outline: none;
+	/* !important necesario para sobrescribir los estilos por defecto de Bootstrap (.btn:focus, etc.) */
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color) !important;
+	transition: box-shadow 0.2s ease-in-out;
 }
