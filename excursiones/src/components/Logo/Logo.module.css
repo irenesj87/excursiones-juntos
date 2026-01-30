@@ -11,6 +11,10 @@
 	opacity: 0.85;
 }
 
+.logoContainer:focus-visible {
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+}
+
 .logoIcon {
 	font-size: 2rem; /* Tamaño base para breakpoints pequeños */
 	color: var(--navbar-brand-icon);
@@ -34,10 +38,4 @@
 	.logoText {
 		font-size: 1.5rem;
 	}
-}
-
-.logoContainer:focus-visible {
-	outline: 2px solid var(--navbar-brand-focus-outline-color);
-	outline-offset: 4px;
-	border-radius: 4px;
 }
