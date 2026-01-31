@@ -97,7 +97,7 @@ export const checkIsUserJoined = async (
 	token: string, // Necesitamos el token para consultar el usuario
 ): Promise<boolean> => {
 	// Consultamos el endpoint específico de excursiones del usuario que ya devuelve la lista filtrada
-	const url = `${API_BASE_URL}/users/${userMail}/excursions`;
+const url = `${API_BASE_URL}/users/${encodeURIComponent(userMail)}/excursions`;
 	try {
 		const excursions = await fetchApi<Excursion[]>(url, {
 			headers: { Authorization: `Bearer ${token}` },
