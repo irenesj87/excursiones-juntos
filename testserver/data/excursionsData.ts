@@ -19,7 +19,7 @@ const excursions: Excursion[] = [
 		id: "0",
 		name: "Cangas de Onís",
 		description:
-			"Una ruta histórica y tranquila que comienza en el icónico Puente Romano sobre el río Sella. Perfecta para disfrutar en familia, pasear por las calles empedradas y descubrir la primera capital del Reino de Asturias rodeada de naturaleza.",
+			"Una ruta histórica que comienza en el icónico Puente Romano sobre el río Sella. Perfecta para disfrutar en familia, paseando por las calles empedradas y descubriendo la primera capital del Reino de Asturias.",
 		area: "Centro-Este",
 		difficulty: "Baja",
 		time: "3 horas",
@@ -30,7 +30,7 @@ const excursions: Excursion[] = [
 		id: "1",
 		name: "Parque Natural de Somiedo",
 		description:
-			"Adéntrate en uno de los paisajes más vírgenes de Asturias, hogar del oso pardo. Esta ruta sencilla te llevará a través de valles verdes y te permitirá ver las tradicionales cabañas de teito, ofreciendo una experiencia inmersiva en la biosfera.",
+			"Adéntrate en uno de los paisajes más vírgenes de Asturias, hogar del oso pardo. Esta ruta te llevará a través de valles verdes y te permitirá ver las tradicionales cabañas de teito, ofreciendo una experiencia inmersiva en la biosfera.",
 		area: "Centro",
 		difficulty: "Baja",
 		time: "3 horas",

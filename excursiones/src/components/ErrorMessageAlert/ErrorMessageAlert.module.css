@@ -1,6 +1,10 @@
 /* Clase contenedora para la alerta. Nos permite encapsular los overrides de Bootstrap. */
 .alert {
-	border: none;
+	border: 1px solid var(--color-border-danger);
+	background-color: var(--color-bg-danger-subtle);
+	color: var(--color-text-danger);
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-soft);
 }
 
 /*
@@ -14,6 +18,18 @@
 	top: 50%;
 	transform: translateY(-50%);
 	right: 1rem;
+	/* Estética: Hacemos el foco circular para que coincida con el diseño orgánico */
+	border-radius: 50%;
+	/* Forzamos dimensiones cuadradas explícitas y centrado para evitar deformaciones */
+	width: 2rem;
+	height: 2rem;
+	padding: 0.5rem;
+	box-sizing: border-box;
+	background-position: center;
+
+	&:focus {
+		box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	}
 }
 
 /* Contenedor interno para alinear icono y texto */
@@ -27,11 +43,13 @@
 .icon {
 	flex-shrink: 0;
 	margin-top: 0.25rem; /* Equivalente a mt-1 */
+	color: var(--color-text-danger);
 }
 
 /* Título: Estilo semántico en lugar de clases utilitarias */
 .title {
-	font-size: 1.25rem; /* Equivalente a h5 */
+	font-family: var(--font-family-serif);
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 1.2;
 	margin-bottom: 0.5rem;
