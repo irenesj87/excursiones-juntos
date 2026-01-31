@@ -68,6 +68,17 @@
 	color: var(--excursion-card-title-color);
 }
 
+/* Descripción de la excursión */
+.excursionDescription {
+	font-size: 1.1rem;
+	font-family: var(--font-family-sans);
+	font-style: italic;
+	line-height: 1.5;
+	color: var(--color-text-muted);
+	margin-bottom: 1.5rem;
+	font-weight: 400;
+}
+
 /* Icono que sale cuando un usuario se ha apuntado a una excursión */
 .detailIcon {
 	font-size: 1.3rem;

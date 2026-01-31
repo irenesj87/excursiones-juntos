@@ -38,6 +38,7 @@ interface DetailItemSkeletonProps {
 function DetailItemSkeleton({ width }: DetailItemSkeletonProps) {
 	return (
 		<div className={detailItemStyles.detailItem} aria-hidden="true">
+			<Skeleton circle width={18} height={18} />
 			<Skeleton width={width} />
 		</div>
 	);
@@ -80,6 +81,11 @@ function ExcursionCardSkeleton({
 							width={SKELETON_SIZES.TITLE_WIDTH}
 							className="mb-3"
 						/>
+						{/* Descripción: Simula un párrafo breve de 4 líneas */}
+						<div className="mb-4">
+							<Skeleton count={3} style={{ marginBottom: 6 }} />
+							<Skeleton width="60%" />
+						</div>
 						{/* Detalles (Zona, Dificultad, Tiempo) */}
 						<div className={cardStyles.excursionDetails}>
 							<DetailItemSkeleton width={SKELETON_SIZES.AREA_TEXT_WIDTH} />

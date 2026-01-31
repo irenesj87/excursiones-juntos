@@ -9,6 +9,8 @@ interface ExcursionDetailItemProps {
 	readonly text?: string;
 	/** Etiqueta descriptiva (ej. "Dificultad"). */
 	readonly label?: string;
+	/** Icono opcional para mostrar en lugar de la etiqueta de texto. */
+	readonly icon?: React.ReactNode;
 }
 
 /**
@@ -17,6 +19,7 @@ interface ExcursionDetailItemProps {
 function ExcursionDetailItem({
 	text,
 	label,
+	icon,
 }: ExcursionDetailItemProps): JSX.Element | null {
 	if (!text) {
 		// Si no hay texto, no renderizamos nada.
@@ -26,9 +29,16 @@ function ExcursionDetailItem({
 	return (
 		<span
 			className={styles.detailItem}
+			title={label}
 			aria-label={label ? `${label}: ${text}` : text}
 		>
-			{label && <span className={styles.detailLabel}>{label}: </span>}
+			{icon ? (
+				<span className={styles.iconWrapper} aria-hidden="true">
+					{icon}
+				</span>
+			) : (
+				label && <span className={styles.detailLabel}>{label}: </span>
+			)}
 			{text}
 		</span>
 	);

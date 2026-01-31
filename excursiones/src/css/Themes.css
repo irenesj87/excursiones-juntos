@@ -158,7 +158,7 @@ html.light {
 	--filter-error-text: var(--color-text-danger);
 
 	/* --- SearchBar (Glassmorphism Light) --- */
-	--search-bar-bg: rgba(255, 255, 255, 0.8);
+	--search-bar-bg: rgba(255, 255, 255, 0.85);
 	--search-bar-border: rgba(255, 255, 255, 0.6);
 	--search-bar-placeholder-text: var(
 		--color-stone-800

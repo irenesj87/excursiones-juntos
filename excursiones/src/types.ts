@@ -32,6 +32,7 @@ export interface FilterState {
 export interface Excursion {
 	id: number | string;
 	name: string;
+	description: string;
 	area: string;
 	difficulty: DifficultyLevel;
 	time: string;

@@ -6,7 +6,7 @@ import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import { NoImageIcon, CheckIcon } from "../shared/Icons";
+import { NoImageIcon, CheckIcon, MapIcon, ChartIcon, ClockIcon } from "../shared/Icons";
 import cn from "classnames";
 import styles from "./ExcursionCard.module.css";
 import { API } from "../../constants";
@@ -82,6 +82,8 @@ interface ExcursionCardProps {
 	readonly id: string | number;
 	/** Título de la excursión. */
 	readonly name: string;
+	/** Descripción breve de la excursión. */
+	readonly description: string;
 	/** Ubicación geográfica donde se lleva a cabo la excursión. */
 	readonly area: string;
 	/** Nivel de dificultad de la excursión. */
@@ -107,6 +109,7 @@ interface ExcursionCardProps {
 function ExcursionCard({
 	id,
 	name,
+	description,
 	area,
 	difficulty,
 	time,
@@ -173,11 +176,27 @@ function ExcursionCard({
 					<Card.Title as="h3" className={styles.excursionTitle}>
 						{name}
 					</Card.Title>
+					{/* Descripción de la excursión */}
+					<Card.Subtitle className={styles.excursionDescription}>
+						{description}
+					</Card.Subtitle>
 					{/* Detalles de la excursión */}
 					<div className={styles.excursionDetails}>
-						<ExcursionDetailItem text={area} label="Zona" />
-						<ExcursionDetailItem text={difficulty} label="Dificultad" />
-						<ExcursionDetailItem text={time} label="Tiempo estimado" />
+						<ExcursionDetailItem
+							text={area}
+							label="Zona"
+							icon={<MapIcon size={18} />}
+						/>
+						<ExcursionDetailItem
+							text={difficulty}
+							label="Dificultad"
+							icon={<ChartIcon size={18} />}
+						/>
+						<ExcursionDetailItem
+							text={time}
+							label="Tiempo estimado"
+							icon={<ClockIcon size={18} />}
+						/>
 					</div>
 				</div>
 				{/* Área de acción: botón para unirse a la excursión */}
