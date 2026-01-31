@@ -1,12 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Hero } from "../Hero/Hero";
 import NavigationBar from "../NavigationBar";
 import SearchBar from "../SearchBar/SearchBar";
 import ExcursionsPage from "../ExcursionsPage";
-import Excursion from "../Excursion/Excursion";
 import Footer from "../Footer";
 import ProtectedRoute from "../ProtectedRoute";
 import LazyRouteWrapper from "../LazyRouteWrapper";
@@ -16,8 +14,6 @@ import UserPageSkeleton from "../UserPage/UserPageSkeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { useExcursions } from "../../hooks/useExcursions";
 import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
-import { joinExcursion } from "../../services/excursionService";
-import { RootState } from "../../store/store";
 import styles from "./Layout.module.css";
 
 /**
@@ -34,8 +30,7 @@ const UserPage = lazyWithMinTime(() => import("../UserPage"));
  */
 function Layout() {
 	const location = useLocation();
-	const isOnExcursionsPage =
-		location.pathname === "/" || location.pathname === "/excursions";
+	const isOnExcursionsPage = location.pathname === "/";
 
 	// Estado para controlar el valor del input de búsqueda en el Hero
 	const [searchValue, setSearchValue] = useState("");
@@ -51,21 +46,6 @@ function Layout() {
 		excursionsState,
 		handleExcursionsFetchEnd,
 	} = useExcursions();
-
-	// Obtenemos el usuario del estado de Redux para saber si está logueado
-	const user = useSelector((state: RootState) => state.loginReducer.user);
-	const token = useSelector((state: RootState) => state.loginReducer.token);
-	const isLoggedIn = Boolean(user);
-
-	// Función para manejar la acción de unirse a una excursión desde la página de detalle
-	const handleJoinExcursion = useCallback(
-		async (id: string | number) => {
-			if (!token || !user) return;
-
-			await joinExcursion(user.mail, id, token);
-		},
-		[token, user],
-	);
 
 	return (
 		<>
@@ -96,21 +76,6 @@ function Layout() {
 								<Route
 									path="/"
 									element={<ExcursionsPage excursionsState={excursionsState} />}
-								/>
-								{/* Ruta para el listado explícito (necesaria para el botón "Volver") */}
-								<Route
-									path="excursions"
-									element={<ExcursionsPage excursionsState={excursionsState} />}
-								/>
-								{/* Ruta de detalle de la excursión */}
-								<Route
-									path="excursions/:id"
-									element={
-										<Excursion
-											isLoggedIn={isLoggedIn}
-											onJoinAction={handleJoinExcursion}
-										/>
-									}
 								/>
 								{/* Define las rutas para los componentes RegisterPage, LoginPage y UserPage */}
 								<Route

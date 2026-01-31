@@ -139,10 +139,6 @@ html.light {
 	--bs-body-color: var(
 		--color-text-base
 	); /* Asegura que el texto dentro de botones herede bien si no se especifica */
-	--bs-heading-color: var(--color-text-base); /* Para h1, h2, h3... */
-	--bs-secondary-color: var(
-		--color-text-muted
-	); /* Para .text-muted y .text-body-secondary */
 
 	/* --- Accesibilidad --- */
 	--focus-ring-color: color-mix(
@@ -294,8 +290,6 @@ html.dark {
 	--bs-secondary: var(
 		--secondary-btn-bg
 	); /* Gris oscuro real para contraste AAA */
-	--bs-heading-color: var(--color-text-base);
-	--bs-secondary-color: var(--color-text-muted);
 
 	/* --- Accesibilidad --- */
 	--focus-ring-color: color-mix(
