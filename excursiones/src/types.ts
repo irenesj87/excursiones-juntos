@@ -32,6 +32,7 @@ export interface FilterState {
 export interface Excursion {
 	id: number | string;
 	name: string;
+	description?: string;
 	area: string;
 	difficulty: DifficultyLevel;
 	time: string;
@@ -83,7 +84,7 @@ export interface FormFieldConfig<T> {
 	field: keyof T;
 	validationFunction: (
 		_value: string,
-		_secondValue?: string
+		_secondValue?: string,
 	) => boolean | string;
 	autocomplete: string;
 	errorMessage?: string;

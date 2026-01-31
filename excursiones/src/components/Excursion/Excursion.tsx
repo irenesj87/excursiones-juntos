@@ -28,7 +28,6 @@ import { RootState } from "../../store/store";
 
 // Extendemos el tipo base para evitar duplicar definiciones (Guideline 4)
 interface ExcursionData extends ExcursionType {
-	description?: string; // Campo extra para la vista de detalle
 	isJoined: boolean; // Estado local añadido
 }
 
@@ -111,11 +110,7 @@ function Excursion({
 
 				setExcursion({
 					...excursionData,
-					// Proporcionamos un valor por defecto para 'description' para cumplir con el tipo obligatorio ExcursionData.
-					// Usamos una intersección de tipos para acceder a la propiedad de forma segura si existe en runtime.
-					description:
-						(excursionData as ExcursionType & { description?: string })
-							.description ?? "",
+					description: excursionData.description ?? "",
 					isJoined,
 				});
 			} catch (err) {

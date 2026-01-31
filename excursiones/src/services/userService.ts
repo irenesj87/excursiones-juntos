@@ -13,7 +13,8 @@ export const getUserById = async (
 	id: string | number,
 	token: string,
 ): Promise<User> => {
-	const url = `${API_BASE_URL}/users/${id}`;
+	const url = `${API_BASE_URL}/users/${encodeURIComponent(id)}`;
+
 	const options: RequestInit = {
 		method: "GET",
 		headers: {
