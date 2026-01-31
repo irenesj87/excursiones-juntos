@@ -81,7 +81,8 @@ export const joinExcursion = async (
 export const getExcursionById = async (
 	id: string | number,
 ): Promise<Excursion> => {
-	const url = `${API_BASE_URL}/excursions/${id}`;
+	const url = `${API_BASE_URL}/excursions/${encodeURIComponent(id)}`;
+
 	return fetchApi<Excursion>(url, {});
 };
 
