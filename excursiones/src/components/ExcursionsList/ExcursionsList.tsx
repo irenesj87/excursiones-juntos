@@ -18,9 +18,6 @@ function ExcursionsListView({
 	excursions,
 	isLoading,
 	error,
-	isLoggedIn,
-	joinedExcursionIds,
-	onJoin,
 }: Readonly<ExcursionsListViewProps>) {
 	const renderContent = () => {
 		// 1. Prioridad: Carga inicial.
@@ -40,9 +37,6 @@ function ExcursionsListView({
 		return (
 			<Row as="ul" className="gx-4 gy-5 list-unstyled">
 				{excursions.map((excursion) => {
-					const isJoined =
-						isLoggedIn && joinedExcursionIds.has(String(excursion.id));
-
 					return (
 						<Col
 							as="li"
@@ -61,9 +55,6 @@ function ExcursionsListView({
 								time={excursion.time}
 								imgSrc={excursion.imgSrc}
 								imgAlt={excursion.imgAlt}
-								isLoggedIn={isLoggedIn}
-								isJoined={isJoined}
-								onJoin={onJoin}
 							/>
 						</Col>
 					);
