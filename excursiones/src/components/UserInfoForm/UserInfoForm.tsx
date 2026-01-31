@@ -98,11 +98,21 @@ function UserInfoForm(): React.ReactElement {
 	return (
 		<Card className={`${styles.profileCard} w-100 flex-grow-1`}>
 			<Card.Body className={`${styles.cardBody} d-flex flex-column`}>
-				<div className="mb-2">
-					<h2 className={styles.formTitle}>Mi Perfil</h2>
-					<p className={styles.formDescription}>
-						Gestiona tu información personal y de contacto.
-					</p>
+				{/* Cabecera del perfil con foto y título */}
+				<div className="d-flex flex-column flex-sm-row align-items-center gap-3 gap-sm-4 mb-4">
+					<div className={styles.profileImageContainer}>
+						<UserIcon
+							size={48}
+							className={styles.profilePlaceholderIcon}
+							aria-hidden="true"
+						/>
+					</div>
+					<div className="text-center text-sm-start">
+						<h2 className={styles.formTitle}>Mi Perfil</h2>
+						<p className={styles.formDescription}>
+							Gestiona tu información personal y de contacto.
+						</p>
+					</div>
 				</div>
 
 				{/*

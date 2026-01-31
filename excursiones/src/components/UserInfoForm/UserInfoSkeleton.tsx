@@ -14,9 +14,12 @@ function UserInfoSkeleton(): React.ReactElement {
 		<Card className={`${userInfoStyles.profileCard} w-100 flex-grow-1`}>
 			<Card.Body className={`${userInfoStyles.cardBody} d-flex flex-column`}>
 				{/* Header Skeleton */}
-				<div className="mb-4">
-					<Skeleton width="40%" height={24} className="mb-2" />
-					<Skeleton width="60%" height={16} />
+				<div className="d-flex flex-column flex-sm-row align-items-center gap-3 gap-sm-4 mb-4">
+					<Skeleton circle width={96} height={96} className="flex-shrink-0" />
+					<div className="w-100 text-center text-sm-start">
+						<Skeleton width="40%" height={32} className="mb-2" />
+						<Skeleton width="60%" />
+					</div>
 				</div>
 
 				{/* Account Section Skeleton */}
