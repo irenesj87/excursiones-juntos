@@ -1,6 +1,5 @@
 import React from "react";
 import {
-	LuArrowLeft,
 	LuMountainSnow,
 	LuTriangleAlert,
 	LuSearch,
@@ -20,7 +19,6 @@ import {
 	LuMail,
 	LuPencil,
 	LuX,
-	LuLock,
 } from "react-icons/lu";
 
 // Tipo base para las props de los iconos
@@ -33,8 +31,6 @@ type IconProps = {
 /**
  * Archivo central para exportar los componentes de íconos de la aplicación.
  */
-// Icono de flecha hacia atrás
-export const ArrowLeftIcon = LuArrowLeft as React.ComponentType<IconProps>;
 // Icono del logo
 export const LogoIcon = LuMountainSnow as React.ComponentType<IconProps>;
 // Icono de alerta.
@@ -74,5 +70,3 @@ export const PhoneIcon = LuPhone as React.ComponentType<IconProps>;
 export const MailIcon = LuMail as React.ComponentType<IconProps>;
 // Icono de lápiz para editar
 export const EditIcon = LuPencil as React.ComponentType<IconProps>;
-// Icono de candado para indicar autenticación requerida
-export const LockIcon = LuLock as React.ComponentType<IconProps>;

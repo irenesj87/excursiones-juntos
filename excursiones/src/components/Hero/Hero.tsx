@@ -45,12 +45,8 @@ export function Hero({ children }: HeroProps) {
 			<div className={styles.heroOverlay} aria-hidden="true" />
 			<div className={styles.heroContent}>
 				<div className={styles.titleContainer}>
-					{/* Forzamos texto blanco con la clase de utilidad de Bootstrap 'text-white' 
-					    para asegurar contraste sobre la imagen en cualquier tema */}
-					<h1 className={`${styles.title} text-white`}>
-						Tu próxima aventura te espera
-					</h1>
-					<p className={`${styles.subtitle} text-white`}>
+					<h1 className={styles.title}>Tu próxima aventura te espera</h1>
+					<p className={styles.subtitle}>
 						Descubre y únete a excursiones con personas como tú.
 					</p>
 				</div>

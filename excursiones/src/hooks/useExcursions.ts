@@ -27,7 +27,7 @@ const excursionsInitialState: ExcursionsState = {
  */
 const excursionsReducer = (
 	state: ExcursionsState,
-	action: ExcursionsAction,
+	action: ExcursionsAction
 ): ExcursionsState => {
 	switch (action.type) {
 		case "FETCH_INIT":
@@ -40,7 +40,7 @@ const excursionsReducer = (
 			// TypeScript se asegurará de que todos los casos de acción estén cubiertos.
 			// Si se añade una nueva acción y no se maneja aquí, TypeScript dará un error.
 			throw new Error(
-				`Acción no soportada: ${(action as { type: string }).type}`,
+				`Acción no soportada: ${(action as { type: string }).type}`
 			);
 		}
 	}
@@ -52,11 +52,11 @@ const excursionsReducer = (
 export const useExcursions = () => {
 	const [excursionsState, excursionsDispatch] = useReducer(
 		excursionsReducer,
-		excursionsInitialState,
+		excursionsInitialState
 	);
 	const { startTiming, dispatchWithMinDisplayTime } = useMinDisplayTime(
 		excursionsDispatch,
-		500,
+		500
 	);
 
 	/**
