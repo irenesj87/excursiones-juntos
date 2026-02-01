@@ -60,7 +60,7 @@ function UserInfoForm(): React.ReactElement {
 			const timer = setTimeout(() => nameInputRef.current?.focus(), 50);
 			return () => clearTimeout(timer);
 		}
-	}, [isEditing]);
+	}, [isEditing, nameInputRef]);
 
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
 	const formFields: FormField[] = [

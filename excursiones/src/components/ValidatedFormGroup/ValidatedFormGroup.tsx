@@ -110,7 +110,12 @@ const ValidatedFormGroup = forwardRef<
 						{showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
 					</Button>
 					{/* Feedback debe ir dentro del InputGroup cuando se usa hasValidation */}
-					<Form.Control.Feedback type="invalid">
+					<Form.Control.Feedback
+						type="invalid"
+						id={errorId}
+						className={`${styles.errorMessage} text-danger fw-bold mt-1`}
+						aria-live="polite"
+					>
 						{validationError || errorMessage || "Formato incorrecto."}
 					</Form.Control.Feedback>
 				</InputGroup>

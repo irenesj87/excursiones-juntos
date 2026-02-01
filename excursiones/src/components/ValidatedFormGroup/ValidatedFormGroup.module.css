@@ -9,9 +9,12 @@
 	color: var(--color-text-muted);
 	/* Aseguramos que el botón herede el radio del tema (16px) para mantener la simetría con el input */
 	border-radius: var(--border-radius-md);
-	transition:
-		background-color 0.2s ease,
-		color 0.2s ease;
+	transition: none;
+	/* Accesibilidad: Aseguramos objetivo táctil mínimo de 44px de ancho */
+	min-width: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Aumentamos la especificidad con :global(.btn) para sobrescribir los estilos de Bootstrap */
