@@ -14,6 +14,11 @@
 	box-shadow: var(--shadow-soft);
 }
 
+.styledButton:active:not(:disabled) {
+	transform: translateY(0);
+	box-shadow: none;
+}
+
 .spinnerOverlay {
 	position: absolute;
 	top: 0;
@@ -39,6 +44,14 @@
 	color: var(--color-text-on-primary); /* Asegura contraste en hover */
 }
 
+/* Aumentamos la especificidad para sobrescribir los estilos :active de Bootstrap */
+.styledButton.primary:active,
+.styledButton.primary:focus-visible {
+	background-color: var(--color-primary-hover);
+	border-color: transparent;
+	box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.5);
+}
+
 .secondary {
 	background-color: var(--bs-secondary);
 	color: var(--color-text-base); /* Usa el color de texto base del tema */
@@ -48,6 +61,12 @@
 	filter: brightness(
 		0.9
 	); /* Oscurece ligeramente manteniendo el tono del tema */
+}
+
+.styledButton.secondary:active,
+.styledButton.secondary:focus-visible {
+	filter: brightness(0.85);
+	border-color: transparent;
 }
 
 .secondary:disabled {
@@ -64,6 +83,12 @@
 	filter: brightness(0.9);
 }
 
+.styledButton.success:active,
+.styledButton.success:focus-visible {
+	filter: brightness(0.85);
+	border-color: transparent;
+}
+
 .danger {
 	background-color: var(--bs-danger);
 	color: var(--color-text-on-primary);
@@ -71,4 +96,10 @@
 
 .danger:hover {
 	filter: brightness(0.9);
+}
+
+.styledButton.danger:active,
+.styledButton.danger:focus-visible {
+	filter: brightness(0.85);
+	border-color: transparent;
 }

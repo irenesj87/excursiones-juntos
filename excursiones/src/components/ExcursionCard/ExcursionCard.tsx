@@ -6,10 +6,24 @@ import type { DifficultyLevel } from "../../types";
 import StyledButton from "../StyledButton";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import { NoImageIcon, CheckIcon, MapIcon, ChartIcon, ClockIcon } from "../shared/Icons";
+import {
+	NoImageIcon,
+	CheckIcon,
+	MapIcon,
+	ChartIcon,
+	ClockIcon,
+	JoinIcon,
+} from "../shared/Icons";
 import cn from "classnames";
 import styles from "./ExcursionCard.module.css";
 import { API } from "../../constants";
+
+/**
+ * Constantes para las dimensiones de la imagen.
+ */
+const IMG_WIDTH = 640;
+const IMG_HEIGHT = 360;
+const NO_OP_JOIN = () => Promise.resolve();
 
 /**
  * Props del botón para unirse a una excursión.
@@ -28,7 +42,7 @@ interface JoinButtonProps {
  */
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	return (
-		<div className="d-grid d-md-flex justify-content-md-end">
+		<div className="d-grid d-xl-flex justify-content-xl-end">
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
 					<CheckIcon className={styles.detailIcon} />
@@ -40,7 +54,8 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
-					Apuntarse
+					<JoinIcon className={styles.detailIcon} />
+					Apúntate
 				</StyledButton>
 			)}
 		</div>
@@ -126,7 +141,7 @@ function ExcursionCard({
 	 * de TypeScript.
 	 */
 	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
-		onJoin ?? (() => Promise.resolve()),
+		onJoin ?? NO_OP_JOIN,
 	);
 
 	/** Manejador para el evento de unirse a la excursión. */
@@ -156,8 +171,8 @@ function ExcursionCard({
 							alt={imgAlt ?? name}
 							loading="lazy"
 							decoding="async"
-							width={640}
-							height={360}
+							width={IMG_WIDTH}
+							height={IMG_HEIGHT}
 							className={cn(styles.cardImage, {
 								[styles.imageLoaded]: isImageLoaded,
 							})}
@@ -207,7 +222,7 @@ function ExcursionCard({
 								<ErrorMessageAlert
 									message={getSafeErrorMessage(joinError)}
 									onClose={clearError}
-									className="mb-2 small"
+									className="mb-2"
 								/>
 							)}
 							<JoinButton

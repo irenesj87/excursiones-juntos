@@ -23,7 +23,7 @@ const SKELETON_SIZES = {
 	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
 	DIFFICULTY_TEXT_WIDTH: 76, // Ancho del esqueleto del texto de dificultad
 	TIME_TEXT_WIDTH: 60, // Ajustado a múltiplo de 4 (antes 58)
-	BUTTON_HEIGHT: 42, // Ajustado a 42px para coincidir con el botón real (padding 0.5rem + border + line-height)
+	BUTTON_HEIGHT: 44, // Ajustado a 44px para coincidir con el botón real (padding 0.5rem + border + line-height)
 	BUTTON_MIN_WIDTH: 120, // Ajustado a múltiplo de 4 (antes 117)
 };
 
@@ -99,7 +99,7 @@ function ExcursionCardSkeleton({
 					{isLoggedIn && (
 						<div className="mt-auto" data-testid={TEST_IDS.BUTTON_CONTAINER}>
 							<div className={cardStyles.cardActionArea}>
-								<div className="d-grid d-md-flex justify-content-md-end">
+								<div className="d-grid d-xl-flex justify-content-xl-end">
 									<Skeleton
 										height={SKELETON_SIZES.BUTTON_HEIGHT}
 										className="w-100"
