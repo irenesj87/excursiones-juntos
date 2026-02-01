@@ -1,6 +1,9 @@
-import React, { useState, ChangeEvent } from "react";
-import { Form } from "react-bootstrap";
+import React, { useState, ChangeEvent, forwardRef } from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
+import { EyeIcon, EyeOffIcon } from "../shared/Icons";
 import styles from "./ValidatedFormGroup.module.css";
 
 /**
@@ -29,7 +32,10 @@ interface ValidatedFormGroupProps {
 	readonly ariaDescribedBy?: string;
 }
 
-const ValidatedFormGroup = (props: ValidatedFormGroupProps): JSX.Element => {
+const ValidatedFormGroup = forwardRef<
+	HTMLInputElement,
+	ValidatedFormGroupProps
+>((props, ref) => {
 	const {
 		id,
 		name,
@@ -44,6 +50,8 @@ const ValidatedFormGroup = (props: ValidatedFormGroupProps): JSX.Element => {
 	} = props;
 	// Estado para almacenar el mensaje de error de validación. `null` si es válido.
 	const [validationError, setValidationError] = useState<string | null>(null);
+	// Estado para controlar la visibilidad de la contraseña
+	const [showPassword, setShowPassword] = useState(false);
 	// ID único para el mensaje de error, para asociarlo con el input.
 	const errorId = `${id}-error`;
 
@@ -57,7 +65,7 @@ const ValidatedFormGroup = (props: ValidatedFormGroupProps): JSX.Element => {
 		// Si es `false`, la validación falla, pero no hay mensaje específico,
 		// así que usamos un string vacío para indicar el error y mostrar el mensaje genérico.
 		setValidationError(
-			validationResult === true ? null : validationResult || ""
+			validationResult === true ? null : validationResult || "",
 		);
 	};
 
@@ -67,19 +75,65 @@ const ValidatedFormGroup = (props: ValidatedFormGroupProps): JSX.Element => {
 		.filter(Boolean)
 		.join(" ");
 
+	// Determinamos si es un campo de contraseña y qué tipo mostrar realmente
+	const isPasswordType = inputType === "password";
+	const currentType = isPasswordType && showPassword ? "text" : inputType;
+
+	const togglePasswordVisibility = () => {
+		setShowPassword((prev) => !prev);
+	};
+
 	return (
 		<Form.Group className="mb-3" controlId={id}>
 			<Form.Label>{name}</Form.Label>
-			<Form.Control
-				type={inputType}
-				onChange={nameChange}
-				name={name}
-				value={value}
-				autoComplete={autocomplete}
-				isInvalid={isInvalid}
-				aria-describedby={describedBy || undefined}
-			/>
-			{isInvalid && (
+			{isPasswordType ? (
+				<InputGroup hasValidation>
+					<Form.Control
+						ref={ref}
+						type={currentType}
+						onChange={nameChange}
+						name={name}
+						value={value}
+						autoComplete={autocomplete}
+						isInvalid={isInvalid}
+						aria-describedby={describedBy || undefined}
+					/>
+					<Button
+						variant="outline-secondary"
+						className={styles.passwordToggle}
+						onClick={togglePasswordVisibility}
+						type="button"
+						aria-label={
+							showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+						}
+					>
+						{showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+					</Button>
+					{/* Feedback debe ir dentro del InputGroup cuando se usa hasValidation */}
+					<Form.Control.Feedback
+						type="invalid"
+						id={errorId}
+						className={`${styles.errorMessage} text-danger fw-bold mt-1`}
+						aria-live="polite"
+					>
+						{validationError || errorMessage || "Formato incorrecto."}
+					</Form.Control.Feedback>
+				</InputGroup>
+			) : (
+				<Form.Control
+					ref={ref}
+					type={inputType}
+					onChange={nameChange}
+					name={name}
+					value={value}
+					autoComplete={autocomplete}
+					isInvalid={isInvalid}
+					aria-describedby={describedBy || undefined}
+				/>
+			)}
+
+			{/* Renderizamos el feedback aquí solo si NO es password, para evitar duplicados */}
+			{isInvalid && !isPasswordType && (
 				<Form.Control.Feedback
 					type="invalid"
 					id={errorId}
@@ -93,6 +147,8 @@ const ValidatedFormGroup = (props: ValidatedFormGroupProps): JSX.Element => {
 			)}
 		</Form.Group>
 	);
-};
+});
+
+ValidatedFormGroup.displayName = "ValidatedFormGroup";
 
 export default ValidatedFormGroup;

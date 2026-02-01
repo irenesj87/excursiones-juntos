@@ -55,7 +55,7 @@ html.light {
 		--color-white
 	); /* Para tarjetas, modales, etc. */
 	--color-text-base: var(--color-stone-900);
-	--color-text-muted: var(--color-stone-500);
+	--color-text-muted: var(--color-stone-700); /* Oscurecido para AAA */
 	--color-text-on-primary: var(--color-white);
 	--color-border-default: var(--color-stone-300);
 	--color-border-subtle: var(--color-stone-100);
@@ -82,7 +82,9 @@ html.light {
 	--nav-link-active-bg: var(--color-stone-200);
 	--nav-link-active-border: var(--color-stone-400);
 
-	--login-btn-bg: var(--color-green-500);
+	--login-btn-bg: var(
+		--color-primary
+	); /* Green-700 para contraste AAA con texto blanco */
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-text-hover: var(--color-white);
@@ -101,8 +103,10 @@ html.light {
 
 	/* --- Filtros --- */
 	--filters-toggle-btn-color: var(--color-white);
-	--filters-toggle-btn-bg: var(--color-green-500);
-	--filters-toggle-btn-border: var(--color-green-500);
+	--filters-toggle-btn-bg: var(
+		--color-primary
+	); /* Green-700 para contraste AAA */
+	--filters-toggle-btn-border: var(--color-primary);
 	--filters-toggle-btn-bg-hover: var(--color-stone-200);
 	--filters-toggle-btn-color-hover: var(--color-primary);
 	--filters-toggle-btn-border-hover: var(--color-accent);
@@ -117,9 +121,13 @@ html.light {
 	--filter-pill-bg-hover: var(--color-stone-300);
 	--filter-pill-border-hover: var(--color-stone-500);
 	/* Píldoras de filtro (seleccionadas) */
-	--filter-pill-bg-checked: var(--color-stone-500);
-	--filter-pill-text-checked: var(--color-text-base);
-	--filter-pill-border-checked: var(--color-stone-500);
+	--filter-pill-bg-checked: var(
+		--color-stone-700
+	); /* Oscurecido para contraste */
+	--filter-pill-text-checked: var(
+		--color-white
+	); /* Texto blanco para contraste AAA */
+	--filter-pill-border-checked: var(--color-stone-700);
 	--filter-pill-shadow-checked: none;
 
 	/* --- Footer --- */
@@ -157,25 +165,16 @@ html.light {
 	--filter-error-border: var(--color-border-danger);
 	--filter-error-text: var(--color-text-danger);
 
-	/* --- SearchBar (Glassmorphism Light) --- */
-	--search-bar-bg: rgba(255, 255, 255, 0.85);
-	--search-bar-border: rgba(255, 255, 255, 0.6);
-	--search-bar-placeholder-text: var(
-		--color-stone-800
-	); /* Oscurecido para contraste AAA */
-	--search-bar-icon-color: var(
-		--color-stone-700
-	); /* Icono oscuro para contraste seguro */
+	/* --- SearchBar --- */
+	--search-bar-bg: var(--color-white);
+	--search-bar-border: var(--color-stone-300);
+	--search-bar-placeholder-text: var(--color-stone-700);
+	--search-bar-icon-color: var(--color-stone-700);
 	--search-bar-bg-focus: var(--color-white);
 	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.15);
-	/* 
-	 * LIMPIEZA VISUAL:
-	 * Eliminamos el anillo exterior. Confiamos en la elevación (sombra) y el fondo blanco sólido
-	 * para indicar el foco.
-	 */
 	--search-bar-focus-ring-shadow: 0 0 0 0 transparent;
-	--search-bar-border-focus: #ffffff;
+	--search-bar-border-focus: var(--color-primary);
 }
 
 html.light body {
@@ -200,7 +199,9 @@ html.dark {
 	--color-background-body: var(--color-green-dark-900);
 	--color-background-surface: var(--color-green-dark-800);
 	--color-text-base: var(--color-stone-100); /* Blanco hueso para texto */
-	--color-text-muted: var(--color-stone-400);
+	--color-text-muted: var(
+		--color-stone-300
+	); /* Aclarado para AAA sobre fondo oscuro */
 	--color-text-on-primary: var(--color-black-soft);
 	--color-border-default: var(--color-green-dark-600);
 	--color-border-subtle: var(--color-green-dark-700);
@@ -308,27 +309,16 @@ html.dark {
 	--filter-error-border: var(--color-border-danger);
 	--filter-error-text: var(--color-text-danger);
 
-	/* --- SearchBar (Glassmorphism Dark) --- */
-	/* Opacidad al 60% para equilibrar efecto cristal y legibilidad del texto */
-	--search-bar-bg: rgba(0, 0, 0, 0.6);
-	--search-bar-border: rgba(255, 255, 255, 0.1);
-	--search-bar-placeholder-text: var(
-		--color-stone-200
-	); /* Aclarado para mejor legibilidad */
-	--search-bar-icon-color: var(
-		--color-stone-200
-	); /* Icono claro para contraste seguro */
-	/* Fondo translúcido al enfocar para mantener el efecto cristal (antes era 0.95 sólido) */
-	--search-bar-bg-focus: rgba(10, 15, 10, 0.7);
-	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0);
-	/* CORRECCIÓN: Definimos una sombra real, no un color sólido */
+	/* --- SearchBar --- */
+	--search-bar-bg: var(--color-green-dark-800);
+	--search-bar-border: var(--color-green-dark-600);
+	--search-bar-placeholder-text: var(--color-stone-300);
+	--search-bar-icon-color: var(--color-stone-300);
+	--search-bar-bg-focus: var(--color-green-dark-800);
+	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.5);
-	/* 
-	 * LIMPIEZA VISUAL:
-	 * Sin anillos extraños. Solo un borde sutilmente más claro y la sombra de profundidad.
-	 */
 	--search-bar-focus-ring-shadow: 0 0 0 0 transparent;
-	--search-bar-border-focus: rgba(255, 255, 255, 0.5);
+	--search-bar-border-focus: var(--color-primary);
 }
 
 html.dark body {
@@ -353,9 +343,6 @@ html.dark .btn-close {
 	padding: 0.75rem 1rem; /* 12px 16px */
 	height: auto; /* Dejar que el padding defina la altura */
 	border-radius: var(--border-radius-md);
-	transition:
-		border-color 0.2s ease,
-		box-shadow 0.2s ease;
 }
 
 .form-control::placeholder {

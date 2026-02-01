@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 /** Define los posibles valores para la dificultad de una excursión. */
 export type DifficultyLevel = "Baja" | "Media" | "Alta";
 
@@ -84,10 +86,11 @@ export interface FormFieldConfig<T> {
 	field: keyof T;
 	validationFunction: (
 		_value: string,
-		_secondValue?: string
+		_secondValue?: string,
 	) => boolean | string;
 	autocomplete: string;
 	errorMessage?: string;
 	inputType?: string;
 	ariaDescribedBy?: string;
+	ref?: RefObject<HTMLInputElement>;
 }

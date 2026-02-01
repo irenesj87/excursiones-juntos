@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import { RegisterIcon, LogInIcon} from "../shared/Icons";
 import StyledNavLink from "../StyledNavLink";
 import { ROUTES } from "../../constants";
 import styles from "./GuestNav.module.css";
@@ -45,6 +46,7 @@ function GuestNav({
 					"border-0": variant === "offcanvas",
 				})}
 			>
+				<RegisterIcon size={20} className="me-2" />
 				Regístrate
 			</StyledNavLink>
 			<StyledNavLink
@@ -52,6 +54,7 @@ function GuestNav({
 				onClick={onCloseMenu}
 				className={styles.loginLink}
 			>
+				<LogInIcon size={20} className="me-2" />
 				Inicia sesión
 			</StyledNavLink>
 		</div>

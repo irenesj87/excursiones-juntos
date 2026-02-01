@@ -5,9 +5,10 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 // Define placeholder dimensions as constants to avoid magic numbers and improve maintainability.
 const USER_NAV_SKELETON_SIZES = {
-	PROFILE_LINK_WIDTH: 99,
-	LOGOUT_BUTTON_WIDTH: 132,
+	PROFILE_LINK_WIDTH: 127, // +28px por el icono
+	LOGOUT_BUTTON_WIDTH: 160, // +28px por el icono
 	HEIGHT: 44,
+	BORDER_RADIUS: "50rem",
 };
 
 /**
@@ -27,12 +28,14 @@ function UserNavSkeleton() {
 				<Skeleton
 					width={USER_NAV_SKELETON_SIZES.PROFILE_LINK_WIDTH}
 					height={USER_NAV_SKELETON_SIZES.HEIGHT}
+					borderRadius={USER_NAV_SKELETON_SIZES.BORDER_RADIUS}
 					className="me-3"
 				/>
 				{/* Placeholder para el botón "Cerrar sesión" */}
 				<Skeleton
 					width={USER_NAV_SKELETON_SIZES.LOGOUT_BUTTON_WIDTH}
 					height={USER_NAV_SKELETON_SIZES.HEIGHT}
+					borderRadius={USER_NAV_SKELETON_SIZES.BORDER_RADIUS}
 				/>
 			</div>
 		</SkeletonTheme>

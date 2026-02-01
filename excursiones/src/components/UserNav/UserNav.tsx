@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ProfileIcon, LogOutIcon} from "../shared/Icons";
 import StyledNavLink from "../StyledNavLink";
 import StyledButton from "../StyledButton";
 import { logoutUser } from "../../services/authService";
@@ -47,9 +48,11 @@ function UserNav({
 				className={`${styles.profileLink} me-lg-3`}
 				aria-label="Tu perfil"
 			>
-				<span className="ms-2">Tu perfil</span>
+				<ProfileIcon size={20} className="me-2" />
+				Tu perfil
 			</StyledNavLink>
 			<StyledButton onClick={handleLogout} className={styles.logoutLink}>
+				<LogOutIcon size={20} className="me-2" />
 				Cierra sesión
 			</StyledButton>
 		</>

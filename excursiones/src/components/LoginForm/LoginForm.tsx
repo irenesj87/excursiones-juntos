@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import {
 	validateMail,
@@ -19,6 +19,13 @@ import styles from "./LoginForm.module.css";
 export function LoginForm() {
 	const [mail, setMail] = useState("");
 	const [password, setPassword] = useState("");
+	const emailInputRef = useRef<HTMLInputElement>(null);
+
+	// Enfoca el campo de correo electrónico al cargar el componente.
+	useEffect(() => {
+		const timer = setTimeout(() => emailInputRef.current?.focus(), 0);
+		return () => clearTimeout(timer);
+	}, []);
 
 	const formValues = { mail, password };
 
@@ -50,6 +57,7 @@ export function LoginForm() {
 			>
 				<div className={styles.fieldsContainer}>
 					<ValidatedFormGroup
+						ref={emailInputRef}
 						id="formLoginEmail"
 						name={FORM_TEXT.EMAIL_LABEL}
 						inputType="email"
