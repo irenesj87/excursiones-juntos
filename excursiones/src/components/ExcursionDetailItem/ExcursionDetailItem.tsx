@@ -27,17 +27,16 @@ function ExcursionDetailItem({
 	}
 
 	return (
-		<span
-			className={styles.detailItem}
-			title={label}
-			aria-label={label ? `${label}: ${text}` : text}
-		>
-			{icon ? (
+		<span className={styles.detailItem}>
+			{icon && (
 				<span className={styles.iconWrapper} aria-hidden="true">
 					{icon}
 				</span>
-			) : (
-				label && <span className={styles.detailLabel}>{label}: </span>
+			)}
+			{label && (
+				<span className={icon ? "visually-hidden" : styles.detailLabel}>
+					{label}:{" "}
+				</span>
 			)}
 			{text}
 		</span>

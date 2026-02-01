@@ -15,6 +15,7 @@ import {
 	LuCopyright,
 	LuUser,
 	LuUsers,
+	LuUserPlus,
 	LuPhone,
 	LuMail,
 	LuPencil,
@@ -64,6 +65,8 @@ export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
 export const UserIcon = LuUser as React.ComponentType<IconProps>;
 // Icono de usuario para campos de apellidos
 export const UsersIcon = LuUsers as React.ComponentType<IconProps>;
+// Icono para unirse a una excursión.
+export const JoinIcon = LuUserPlus as React.ComponentType<IconProps>;
 // Icono de teléfono
 export const PhoneIcon = LuPhone as React.ComponentType<IconProps>;
 // Icono de correo electrónico

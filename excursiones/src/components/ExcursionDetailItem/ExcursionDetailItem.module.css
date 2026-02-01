@@ -2,11 +2,12 @@
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	font-size: 1rem;
+	line-height: 1.5;
 }
 
 .detailLabel {
 	font-weight: 600;
-	color: var(--color-primary);
 }
 
 .iconWrapper {
