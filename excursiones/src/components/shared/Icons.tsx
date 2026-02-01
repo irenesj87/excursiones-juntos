@@ -5,6 +5,9 @@ import {
 	LuSearch,
 	LuMoon,
 	LuSun,
+	LuSquarePen,
+	LuLogIn,
+	LuLogOut,
 	LuImageOff,
 	LuFilter,
 	LuFilterX,
@@ -16,10 +19,13 @@ import {
 	LuUser,
 	LuUsers,
 	LuUserPlus,
+	LuCircleUser,
 	LuPhone,
 	LuMail,
 	LuPencil,
 	LuX,
+	LuEye,
+	LuEyeOff,
 } from "react-icons/lu";
 
 // Tipo base para las props de los iconos
@@ -44,6 +50,12 @@ export const XIcon = LuX as React.ComponentType<IconProps>;
 export const MoonIcon = LuMoon as React.ComponentType<IconProps>;
 // Icono de un sol para el cambio de tema.
 export const SunIcon = LuSun as React.ComponentType<IconProps>;
+// Icono para el enlace de registro.
+export const RegisterIcon = LuSquarePen as React.ComponentType<IconProps>;
+// Icono para el enlace de iniciar sesión.
+export const LogInIcon = LuLogIn as React.ComponentType<IconProps>;
+// Icono para el botón de cerrar sesión.
+export const LogOutIcon = LuLogOut as React.ComponentType<IconProps>;
 // Icono para mostrar que la excursión no tiene imagen
 export const NoImageIcon = LuImageOff as React.ComponentType<IconProps>;
 // Icono de un pin para la zona.
@@ -65,6 +77,8 @@ export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
 export const UserIcon = LuUser as React.ComponentType<IconProps>;
 // Icono de usuario para campos de apellidos
 export const UsersIcon = LuUsers as React.ComponentType<IconProps>;
+// Icono para el enlace de perfil en la navegación (Avatar)
+export const ProfileIcon = LuCircleUser as React.ComponentType<IconProps>;
 // Icono para unirse a una excursión.
 export const JoinIcon = LuUserPlus as React.ComponentType<IconProps>;
 // Icono de teléfono
@@ -73,3 +87,7 @@ export const PhoneIcon = LuPhone as React.ComponentType<IconProps>;
 export const MailIcon = LuMail as React.ComponentType<IconProps>;
 // Icono de lápiz para editar
 export const EditIcon = LuPencil as React.ComponentType<IconProps>;
+// Icono de ojo para mostrar contraseña
+export const EyeIcon = LuEye as React.ComponentType<IconProps>;
+// Icono de ojo tachado para ocultar contraseña
+export const EyeOffIcon = LuEyeOff as React.ComponentType<IconProps>;

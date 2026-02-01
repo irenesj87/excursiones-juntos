@@ -38,6 +38,7 @@
 	--color-stone-300: hsl(40, 10%, 75%);
 	--color-stone-400: hsl(40, 5%, 65%);
 	--color-stone-500: hsl(40, 5%, 50%);
+	--color-stone-600: hsl(40, 5%, 40%);
 	--color-stone-700: hsl(40, 10%, 30%);
 	--color-stone-800: hsl(40, 10%, 20%);
 	--color-stone-900: hsl(40, 10%, 15%);
@@ -48,7 +49,11 @@
 	--color-black-soft: var(--color-stone-900); /* Negro suave cálido */
 
 	/* Colores de Éxito, Advertencia y Peligro */
-	--color-success-light: hsl(145, 55%, 35%);
+	--color-success-light: hsl(
+		145,
+		60%,
+		25%
+	); /* Oscurecido para cumplir ratio 7:1 (AAA) */
 	--color-warning-light: hsl(40, 75%, 55%);
 	--color-danger-light: hsl(
 		0,

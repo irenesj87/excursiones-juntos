@@ -1,4 +1,7 @@
 .registerLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	color: var(--register-link-color);
 	user-select: none;
 }
@@ -17,16 +20,20 @@
 }
 
 .loginLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	background-color: var(--login-btn-bg);
 	color: var(--login-btn-text);
-	transition:
-		background-color 0.2s ease-out,
-		color 0.2s ease-out;
+	transition: none; /* Se mueve a :hover para evitar la animación en el cambio de tema */
 }
 
 .loginLink:hover {
 	background-color: var(--login-btn-bg-hover);
 	color: var(--login-btn-text-hover);
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out;
 }
 
 /* Restauramos el estilo de focus-visible para coincidir con el hover */

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Col, Form, Row, Alert } from "react-bootstrap";
 import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
 import {
@@ -51,6 +51,16 @@ function UserInfoForm(): React.ReactElement {
 	} = useUserInfoForm();
 
 	const { values, isEditing, isLoading, error, successMessage } = formState;
+
+	// Efecto para gestionar el foco. Cuando se entra en modo edición,
+	// el foco se mueve automáticamente al primer campo editable (Nombre).
+	useEffect(() => {
+		if (isEditing) {
+			// Usamos un pequeño timeout para asegurar que el input es visible y está listo para recibir el foco.
+			const timer = setTimeout(() => nameInputRef.current?.focus(), 50);
+			return () => clearTimeout(timer);
+		}
+	}, [isEditing, nameInputRef]);
 
 	// Configuración de los campos del formulario para renderizarlos dinámicamente.
 	const formFields: FormField[] = [

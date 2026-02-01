@@ -30,7 +30,7 @@ const excursions: Excursion[] = [
 		id: "1",
 		name: "Parque Natural de Somiedo",
 		description:
-			"Adéntrate en uno de los paisajes más vírgenes de Asturias, hogar del oso pardo. Esta ruta te llevará a través de valles verdes y te permitirá ver las tradicionales cabañas de teito, ofreciendo una experiencia inmersiva en la biosfera.",
+			"Adéntrate en uno de los paisajes más vírgenes de Asturias, hogar del oso pardo. Esta ruta te llevará a través de valles verdes y te permitirá ver las tradicionales cabañas de teito, ofreciendo una experiencia inmersiva.",
 		area: "Centro",
 		difficulty: "Baja",
 		time: "3 horas",
@@ -39,7 +39,7 @@ const excursions: Excursion[] = [
 		id: "2",
 		name: "Picos de Europa",
 		description:
-			"Un desafío para los amantes de la alta montaña. Esta ruta atraviesa senderos rocosos y ofrece vistas panorámicas inigualables de las cumbres calizas. Requiere buena forma física y equipo adecuado para terreno escarpado.",
+			"Un desafío para los amantes de la alta montaña. Esta ruta atraviesa senderos rocosos y ofrece vistas panorámicas inigualables. Requiere buena forma física y equipo adecuado para terreno escarpado.",
 		area: "Este",
 		difficulty: "Alta",
 		time: "5 horas",

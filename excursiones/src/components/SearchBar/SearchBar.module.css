@@ -6,11 +6,7 @@
 	display: flex;
 	align-items: center;
 
-	/* --- Estilo Glassmorphism --- */
-	/* Usamos variables del tema para soportar modo oscuro */
 	background-color: var(--search-bar-bg);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
 	border: 1px solid var(--search-bar-border);
 	border-radius: var(--border-radius-pill);
 	box-shadow: var(--search-bar-shadow);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import ValidatedFormGroup from "../ValidatedFormGroup";
 import {
@@ -33,6 +33,14 @@ const initialState: RegisterFormValues = {
  */
 function RegisterForm() {
 	const [values, setValues] = useState<RegisterFormValues>(initialState);
+	const nameInputRef = useRef<HTMLInputElement>(null);
+
+	// Enfoca el primer campo del formulario (nombre) cuando el componente se monta.
+	useEffect(() => {
+		// El timeout asegura que el foco se aplique después de que el DOM esté completamente listo.
+		const timer = setTimeout(() => nameInputRef.current?.focus(), 0);
+		return () => clearTimeout(timer);
+	}, []);
 
 	/**
 	 * Maneja el cambio de los campos del formulario.
@@ -88,6 +96,7 @@ function RegisterForm() {
 				validationFunction: validateName,
 				autocomplete: "given-name",
 				errorMessage: "El nombre no puede estar vacío.",
+				ref: nameInputRef,
 			},
 			{
 				id: "formGridSurname",
@@ -162,15 +171,20 @@ function RegisterForm() {
 					{formFieldsConfig.map((row, rowIndex) => (
 						// eslint-disable-next-line react/no-array-index-key
 						<Row key={`form-row-${rowIndex}`}>
-							{row.map((field) => (
-								<Col xs={12} md={6} key={field.id}>
+							{row.map(({ ref, ...fieldProps }) => (
+								<Col xs={12} md={6} key={fieldProps.id}>
+									{/*
+									 * NOTA: Para que esto funcione, el componente `ValidatedFormGroup`
+									 * debe estar envuelto en `React.forwardRef` para poder recibir la `ref`.
+									 */}
 									<ValidatedFormGroup
-										{...field}
-										value={values[field.field]}
+										{...fieldProps}
+										ref={ref}
+										value={values[fieldProps.field]}
 										inputToChange={(value) =>
-											handleInputChange(field.field, value)
+											handleInputChange(fieldProps.field, value)
 										}
-										message={true}
+										message
 									/>
 								</Col>
 							))}

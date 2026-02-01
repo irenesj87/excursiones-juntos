@@ -1,3 +1,27 @@
 .errorMessage {
 	font-size: 1.05rem;
 }
+
+/* Botón para mostrar/ocultar contraseña */
+.passwordToggle {
+	background-color: transparent;
+	border-color: var(--color-border-default);
+	color: var(--color-text-muted);
+	/* Aseguramos que el botón herede el radio del tema (16px) para mantener la simetría con el input */
+	border-radius: var(--border-radius-md);
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+}
+
+/* Aumentamos la especificidad con :global(.btn) para sobrescribir los estilos de Bootstrap */
+.passwordToggle:global(.btn):hover,
+.passwordToggle:global(.btn):focus,
+.passwordToggle:global(.btn):active {
+	background-color: var(--theme-toggle-btn-bg-hover);
+	color: var(--color-text-base);
+	border-color: var(--color-border-default);
+	/* Usamos z-index 2 para estar por encima del input en reposo (1), pero por debajo del input enfocado (3) */
+	z-index: 2;
+	box-shadow: none; /* Elimina el anillo azul/gris de Bootstrap al hacer click */
+}

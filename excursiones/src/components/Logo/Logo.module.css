@@ -1,14 +1,15 @@
 .logoContainer {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 0.5rem; /* 8px */
 	text-decoration: none;
 	transition: opacity 0.2s ease-in-out;
 	color: inherit;
-}
-
-.logoContainer:hover {
-	opacity: 0.85;
+	/* Añadimos padding y border-radius para que el focus-ring se vea bien */
+	padding: 0.25rem 0.5rem; /* 4px 8px */
+	border-radius: var(--border-radius-sm);
+	/* Ajuste para que el padding no desplace el logo */
+	margin: -0.25rem -0.5rem;
 }
 
 .logoIcon {
