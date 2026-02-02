@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import ValidatedFormGroup from "../../ui/Input/";
+import ValidatedFormGroup from "../../ui/Input";
 import {
 	validateName,
 	validateSurname,
