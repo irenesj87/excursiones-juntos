@@ -5,9 +5,9 @@ import {
 	validateName as isNotEmpty,
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
-import ValidatedFormGroup from "../ValidatedFormGroup";
-import ErrorMessageAlert from "../ErrorMessageAlert";
-import StyledButton from "../StyledButton";
+import ValidatedFormGroup from "../../ui/Input/Input";
+import ErrorMessageAlert from "../../ui/Alert/Alert";
+import Button from "../../ui/Button/Button";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import "bootstrap/dist/css/bootstrap.css";
@@ -81,14 +81,14 @@ export function LoginForm() {
 					/>
 				</div>
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<StyledButton
+					<Button
 						type="submit"
 						variant={formState.isButtonDisabled ? "secondary" : "primary"}
 						isLoading={formState.isLoading}
 						disabled={formState.isButtonDisabled}
 					>
 						Enviar
-					</StyledButton>
+					</Button>
 				</div>
 			</Form>
 		</>

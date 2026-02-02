@@ -7,7 +7,7 @@ import {
 	validatePhone,
 } from "../../validation/validations";
 import { useUserInfoForm, FormValues } from "./useUserInfoForm";
-import StyledButton from "../StyledButton/StyledButton";
+import StyledButton from "../../ui/Button/Button";
 import {
 	UserIcon,
 	UsersIcon,
@@ -16,7 +16,7 @@ import {
 	EditIcon,
 	XIcon,
 	CheckIcon,
-} from "../shared/Icons";
+} from "../../ui/Icons";
 import styles from "./UserInfoForm.module.css";
 
 /**

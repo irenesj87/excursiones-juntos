@@ -85,7 +85,7 @@
 }
 
 /* Detalles de la excursión (zona, dificultad, tiempo) */
-.excursionDetails {
+.infoItem {
 	margin-bottom: 1.5rem;
 	display: flex;
 	flex-wrap: wrap;

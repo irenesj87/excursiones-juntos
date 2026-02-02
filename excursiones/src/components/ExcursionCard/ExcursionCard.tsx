@@ -1,9 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import ExcursionDetailItem from "../ExcursionDetailItem";
-import ErrorMessageAlert from "../ErrorMessageAlert/ErrorMessageAlert";
+import InfoItem from "../../ui/InfoItem/InfoItem";
+import ErrorMessageAlert from "../../ui/Alert/Alert";
 import type { DifficultyLevel } from "../../types";
-import StyledButton from "../StyledButton";
+import Button from "../../ui/Button/Button";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import {
@@ -13,7 +13,7 @@ import {
 	ChartIcon,
 	ClockIcon,
 	JoinIcon,
-} from "../shared/Icons";
+} from "../../ui/Icons";
 import cn from "classnames";
 import styles from "./ExcursionCard.module.css";
 import { API } from "../../constants";
@@ -49,14 +49,14 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					Apuntado/a
 				</span>
 			) : (
-				<StyledButton
+				<Button
 					onClick={onJoin}
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
 					<JoinIcon className={styles.detailIcon} />
 					Apúntate
-				</StyledButton>
+				</Button>
 			)}
 		</div>
 	);
@@ -163,6 +163,7 @@ function ExcursionCard({
 			<div className={styles.imageContainer}>
 				{imageBaseUrl && !hasImageError ? (
 					<picture>
+						<source srcSet={`${imageBaseUrl}.avif`} type="image/avif" />
 						<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
 						<Card.Img
 							as="img"
@@ -196,18 +197,18 @@ function ExcursionCard({
 						{description}
 					</Card.Subtitle>
 					{/* Detalles de la excursión */}
-					<div className={styles.excursionDetails}>
-						<ExcursionDetailItem
+					<div className={styles.infoItem}>
+						<InfoItem
 							text={area}
 							label="Zona"
 							icon={<MapIcon size={18} />}
 						/>
-						<ExcursionDetailItem
+						<InfoItem
 							text={difficulty}
 							label="Dificultad"
 							icon={<ChartIcon size={18} />}
 						/>
-						<ExcursionDetailItem
+						<InfoItem
 							text={time}
 							label="Tiempo estimado"
 							icon={<ClockIcon size={18} />}

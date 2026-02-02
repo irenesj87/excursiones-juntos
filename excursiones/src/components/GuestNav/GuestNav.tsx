@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
-import { RegisterIcon, LogInIcon} from "../shared/Icons";
-import StyledNavLink from "../StyledNavLink";
+import { RegisterIcon, LogInIcon } from "../../ui/Icons";
+import StyledNavLink from "../../ui/Link";
 import { ROUTES } from "../../constants";
 import styles from "./GuestNav.module.css";
 

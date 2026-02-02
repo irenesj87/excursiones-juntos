@@ -63,16 +63,22 @@ html.light {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-color: var(--color-stone-700);
+	--navbar-color: var(
+		--color-stone-800
+	); /* Oscurecido para cumplir AAA (7:1) */
 	--navbar-brand-color: var(--color-black-soft);
-	--navbar-brand-icon: var(--color-green-500);
+	--navbar-brand-icon: var(
+		--color-green-700
+	); /* Oscurecido para cumplir AAA (7:1) */
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-stone-500);
 
 	/* --- Botones y Enlaces --- */
-	--theme-toggle-btn-color: var(--color-stone-700);
+	--theme-toggle-btn-color: var(
+		--color-stone-800
+	); /* Coincide con --navbar-color */
 	--theme-toggle-btn-icon: var(--color-stone-800);
 	--theme-toggle-btn-bg-hover: var(--color-stone-100);
 
@@ -211,7 +217,9 @@ html.dark {
 	/* --- Navbar --- */
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-stone-50);
-	--navbar-brand-icon: var(--color-green-300);
+	--navbar-brand-icon: var(
+		--color-green-200
+	); /* Aclarado para cumplir AAA (7:1) */
 	--navbar-toggler-border-color: var(--separator-color);
 	/* Usamos el token --color-green-dark-200 para el stroke del SVG (que era hsl(150, 15%, 88%)) */
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
@@ -221,6 +229,8 @@ html.dark {
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--navbar-color);
+	/* BUGFIX: El color del icono no estaba definido para el tema oscuro. */
+	--theme-toggle-btn-icon: var(--color-text-base);
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ProfileIcon, LogOutIcon} from "../shared/Icons";
-import StyledNavLink from "../StyledNavLink";
-import StyledButton from "../StyledButton";
+import { ProfileIcon, LogOutIcon } from "../../ui/Icons";
+import StyledNavLink from "../../ui/Link";
+import Button from "../../ui/Button/Button";
 import { logoutUser } from "../../services/authService";
 import { logout } from "../../slices/loginSlice";
 import { ROUTES } from "../../constants";
@@ -51,10 +51,10 @@ function UserNav({
 				<ProfileIcon size={20} className="me-2" />
 				Tu perfil
 			</StyledNavLink>
-			<StyledButton onClick={handleLogout} className={styles.logoutLink}>
+			<Button onClick={handleLogout} className={styles.logoutLink}>
 				<LogOutIcon size={20} className="me-2" />
 				Cierra sesión
-			</StyledButton>
+			</Button>
 		</>
 	);
 }

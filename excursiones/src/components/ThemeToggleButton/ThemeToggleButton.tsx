@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch, TypedUseSelectorHook } from "react-redux";
 import { toggleMode } from "../../slices/themeSlice";
-import { MoonIcon, SunIcon } from "../shared/Icons";
+import { MoonIcon, SunIcon } from "../../ui/Icons";
 import styles from "./ThemeToggleButton.module.css";
 import { RootState, AppDispatch } from "../../store/store"; // Asegúrate de que la ruta sea correcta
 
@@ -10,13 +10,12 @@ import { RootState, AppDispatch } from "../../store/store"; // Asegúrate de que
  * Props para el componente ThemeToggleButton.
  */
 interface ThemeToggleButtonProps {
-	className?: string; // Clases CSS adicionales para el botón.
-	showText?: boolean; // Si es true, muestra el texto junto al icono.
+	readonly className?: string; // Clases CSS adicionales para el botón.
+	readonly showText?: boolean; // Si es true, muestra el texto junto al icono.
 }
 
 // Asignamos el icono a una constante con el tipo React.ElementType
 // para asegurar a TypeScript que es un componente JSX válido.
-
 
 /**
  * Botón que permite al usuario cambiar entre el tema claro y oscuro.
@@ -27,10 +26,10 @@ const useAppDispatch = () => useDispatch<AppDispatch>();
 /**
  * Componente ThemeToggleButton.
  */
-const ThemeToggleButton = ({
+function ThemeToggleButton({
 	className = "",
 	showText = false,
-}: ThemeToggleButtonProps) => {
+}: ThemeToggleButtonProps){
 	const mode = useAppSelector((state: RootState) => state.themeReducer.mode);
 	const dispatch = useAppDispatch();
 
@@ -82,6 +81,6 @@ const ThemeToggleButton = ({
 			)}
 		</Button>
 	);
-};
+}
 
 export default ThemeToggleButton;

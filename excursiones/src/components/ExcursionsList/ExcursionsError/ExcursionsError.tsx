@@ -1,5 +1,5 @@
 import React from "react";
-import { AlertIcon } from "../../shared/Icons";
+import { AlertIcon } from "../../../ui/Icons";
 import styles from "./ExcursionsError.module.css";
 
 /**

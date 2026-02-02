@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchIcon } from "../../shared/Icons";
+import { SearchIcon } from "../../../ui/Icons";
 import styles from "./NoExcursionsFound.module.css";
 
 const TITLE_MESSAGE = "No se encontraron excursiones con esas características.";
