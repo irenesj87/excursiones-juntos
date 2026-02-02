@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import ExcursionDetailItem from "../../ui/InfoItem/InfoItem";
+import InfoItem from "../../ui/InfoItem/InfoItem";
 import ErrorMessageAlert from "../../ui/Alert/Alert";
 import type { DifficultyLevel } from "../../types";
 import Button from "../../ui/Button/Button";
@@ -197,18 +197,18 @@ function ExcursionCard({
 						{description}
 					</Card.Subtitle>
 					{/* Detalles de la excursión */}
-					<div className={styles.excursionDetails}>
-						<ExcursionDetailItem
+					<div className={styles.infoItem}>
+						<InfoItem
 							text={area}
 							label="Zona"
 							icon={<MapIcon size={18} />}
 						/>
-						<ExcursionDetailItem
+						<InfoItem
 							text={difficulty}
 							label="Dificultad"
 							icon={<ChartIcon size={18} />}
 						/>
-						<ExcursionDetailItem
+						<InfoItem
 							text={time}
 							label="Tiempo estimado"
 							icon={<ClockIcon size={18} />}

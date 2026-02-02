@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import cardStyles from "./ExcursionCard.module.css"; // Se reutiliza el CSS de la tarjeta real
-import detailItemStyles from "../../ui/InfoItem/InfoItem.module.css";
+import InfoItemStyles from "../../ui/InfoItem/InfoItem.module.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 /**
@@ -27,7 +27,7 @@ const SKELETON_SIZES = {
 	BUTTON_MIN_WIDTH: 120, // Ajustado a múltiplo de 4 (antes 117)
 };
 
-interface DetailItemSkeletonProps {
+interface InfoItemSkeletonProps {
 	/** El ancho del esqueleto de texto. */
 	readonly width: number | string;
 }
@@ -35,9 +35,9 @@ interface DetailItemSkeletonProps {
 /**
  * Componente auxiliar para renderizar el esqueleto de un ítem de detalle.
  */
-function DetailItemSkeleton({ width }: DetailItemSkeletonProps) {
+function InfoItemSkeleton({ width }: InfoItemSkeletonProps) {
 	return (
-		<div className={detailItemStyles.detailItem} aria-hidden="true">
+		<div className={InfoItemStyles.infoItem} aria-hidden="true">
 			<Skeleton circle width={18} height={18} />
 			<Skeleton width={width} />
 		</div>
@@ -87,12 +87,12 @@ function ExcursionCardSkeleton({
 							<Skeleton width="60%" />
 						</div>
 						{/* Detalles (Zona, Dificultad, Tiempo) */}
-						<div className={cardStyles.excursionDetails}>
-							<DetailItemSkeleton width={SKELETON_SIZES.AREA_TEXT_WIDTH} />
-							<DetailItemSkeleton
+						<div className={cardStyles.infoItem}>
+							<InfoItemSkeleton width={SKELETON_SIZES.AREA_TEXT_WIDTH} />
+							<InfoItemSkeleton
 								width={SKELETON_SIZES.DIFFICULTY_TEXT_WIDTH}
 							/>
-							<DetailItemSkeleton width={SKELETON_SIZES.TIME_TEXT_WIDTH} />
+							<InfoItemSkeleton width={SKELETON_SIZES.TIME_TEXT_WIDTH} />
 						</div>
 					</div>
 					{/* Botón de "Apuntarse" */}
