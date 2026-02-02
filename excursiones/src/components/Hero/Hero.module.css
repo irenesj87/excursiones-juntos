@@ -6,9 +6,9 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 60vh;
+	height: 50vh;
 	min-height: 400px;
-	max-height: 550px;
+	max-height: 480px;
 	padding: 0 24px;
 	text-align: center;
 	color: var(--color-white); /* Color de texto principal: blanco */
