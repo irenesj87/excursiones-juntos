@@ -5,7 +5,6 @@
 	text-decoration: none;
 	transition: opacity 0.2s ease-in-out;
 	color: inherit;
-	/* Añadimos padding y border-radius para que el focus-ring se vea bien */
 	/* Aumentamos padding vertical a 6px para llegar a 44px de altura total (32+6+6) */
 	padding: 0.375rem 0.5rem;
 	border-radius: var(--border-radius-sm);
@@ -14,7 +13,7 @@
 }
 
 .logoContainer:hover {
-	opacity: 0.8;
+	opacity: 0.7;
 }
 
 .logoIcon {
