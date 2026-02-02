@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FilterError.module.css";
-import { AlertIcon } from "../shared/Icons";
+import { AlertIcon } from "../../ui/Icons";
 
 /**
  * Componente para mostrar un mensaje de error cuando falla la carga de los filtros.
@@ -10,7 +10,10 @@ function FilterError() {
 	return (
 		<div className={styles.errorContainer} role="alert">
 			<AlertIcon className={styles.errorIcon} aria-hidden="true" />
-			<p className={styles.errorMessage}><span className="visually-hidden">Error: </span>{message}</p>
+			<p className={styles.errorMessage}>
+				<span className="visually-hidden">Error: </span>
+				{message}
+			</p>
 		</div>
 	);
 }

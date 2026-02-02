@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import ValidatedFormGroup from "../ValidatedFormGroup";
+import ValidatedFormGroup from "../../ui/Input/";
 import {
 	validateName,
 	validateSurname,
@@ -10,8 +10,8 @@ import {
 	validateSamePassword,
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
-import ErrorMessageAlert from "../ErrorMessageAlert";
-import StyledButton from "../StyledButton";
+import ErrorMessageAlert from "../../ui/Alert/Alert";
+import Button from "../../ui/Button/Button";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
 import { RegisterFormValues, FormFieldConfig } from "../../types";
@@ -209,14 +209,14 @@ function RegisterForm() {
 				</div>
 
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<StyledButton
+					<Button
 						type="submit"
 						variant={isButtonDisabled ? "secondary" : "primary"}
 						isLoading={formState.isLoading}
 						disabled={isButtonDisabled}
 					>
 						Enviar
-					</StyledButton>
+					</Button>
 				</div>
 			</Form>
 		</>

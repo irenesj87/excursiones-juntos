@@ -3,7 +3,7 @@ import { useSelector, shallowEqual } from "react-redux";
 import { searchExcursions } from "../../services/excursionService";
 import { Excursion } from "../../types";
 import { RootState } from "../../store/store";
-import { SearchIcon, XIcon } from "../shared/Icons";
+import { SearchIcon, XIcon } from "../../ui/Icons";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./SearchBar.module.css";
 

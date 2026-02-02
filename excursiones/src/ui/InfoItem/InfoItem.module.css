@@ -1,0 +1,18 @@
+.detailItem {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.detailLabel {
+	font-weight: 600;
+}
+
+.iconWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-primary);
+}

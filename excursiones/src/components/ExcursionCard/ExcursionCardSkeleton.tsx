@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import cardStyles from "./ExcursionCard.module.css"; // Se reutiliza el CSS de la tarjeta real
-import detailItemStyles from "../ExcursionDetailItem/ExcursionDetailItem.module.css";
+import detailItemStyles from "../../ui/InfoItem/InfoItem.module.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 /**

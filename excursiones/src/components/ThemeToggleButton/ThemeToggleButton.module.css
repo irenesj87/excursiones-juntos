@@ -11,7 +11,10 @@ button.themeToggleBtn {
 	align-items: center;
 	justify-content: center;
 	line-height: 1;
-	transition: transform 0.2s ease-in-out;
+	/* Transición suave para movimiento y color de fondo */
+	transition:
+		transform 0.2s ease-in-out,
+		background-color 0.2s ease-in-out;
 }
 
 .themeIcon {
@@ -20,9 +23,10 @@ button.themeToggleBtn {
 }
 
 /* Para el estado hover, solo aplicamos la transformación. */
-button.themeToggleBtn:hover {
-	background-color: transparent; /* Aseguramos que no haya un color de fondo al hacer hover */
-	transform: scale(1.15) translateY(-1px);
+button.themeToggleBtn:hover,
+button.themeToggleBtn:focus-visible {
+	background-color: var(--theme-toggle-btn-bg-hover);
+	transform: translateY(-2px);
 }
 
 /*
@@ -30,14 +34,11 @@ button.themeToggleBtn:hover {
  * Esta es la regla clave para eliminar el anillo azul al hacer clic.
  */
 button.themeToggleBtn:focus:not(:focus-visible) {
-	background-color: transparent; /* Aseguramos que no haya un color de fondo al hacer clic */
 	box-shadow: none;
 }
 
 /* Para el foco con teclado, aplicamos la transformación y nuestro anillo de foco personalizado. */
 button.themeToggleBtn:focus-visible {
-	background-color: transparent;
-	transform: scale(1.15) translateY(-1px);
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 	outline: 0; /* Aseguramos que no haya un outline nativo además del shadow */
 }
