@@ -1,10 +1,27 @@
 /* Clase contenedora para la alerta. Nos permite encapsular los overrides de Bootstrap. */
 .alert {
-	border: 1px solid var(--color-border-danger);
-	background-color: var(--color-bg-danger-subtle);
-	color: var(--color-text-danger);
+	border: 1px solid transparent; /* El color lo define la variante */
 	border-radius: var(--border-radius-lg);
 	box-shadow: var(--shadow-soft);
+}
+
+/* Variantes: Usamos :global para engancharnos a las clases de Bootstrap (alert-danger, etc.) */
+.alert:global(.alert-danger) {
+	background-color: var(--color-bg-danger-subtle);
+	border-color: var(--color-border-danger);
+	color: var(--color-text-danger);
+}
+
+.alert:global(.alert-success) {
+	background-color: var(--color-bg-success-subtle);
+	border-color: var(--color-border-success);
+	color: var(--color-text-success);
+}
+
+.alert:global(.alert-warning) {
+	background-color: var(--color-bg-warning-subtle);
+	border-color: var(--color-border-warning);
+	color: var(--color-text-warning);
 }
 
 /*
@@ -43,7 +60,7 @@
 .icon {
 	flex-shrink: 0;
 	margin-top: 0.25rem; /* Equivalente a mt-1 */
-	color: var(--color-text-danger);
+	color: inherit; /* Hereda el color del texto de la alerta (rojo, verde o amarillo) */
 }
 
 /* Título: Estilo semántico en lugar de clases utilitarias */

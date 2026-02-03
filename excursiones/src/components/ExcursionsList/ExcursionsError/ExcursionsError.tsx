@@ -1,5 +1,5 @@
 import React from "react";
-import { AlertIcon } from "../../../ui/Icons";
+import { CircleAlertIcon } from "../../../ui/Icons";
 import styles from "./ExcursionsError.module.css";
 
 /**
@@ -25,7 +25,7 @@ function ExcursionsError({
 	return (
 		<div className={styles.errorContainer}>
 			<div role="alert" className={styles.messageNotFound}>
-				<AlertIcon className={styles.messageIcon} aria-hidden="true" />
+				<CircleAlertIcon className={styles.messageIcon} aria-hidden="true" />
 				<p>{message}</p>
 			</div>
 		</div>

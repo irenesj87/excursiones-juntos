@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import InfoItem from "../../ui/InfoItem/InfoItem";
-import ErrorMessageAlert from "../../ui/Alert/Alert";
+import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import type { DifficultyLevel } from "../../types";
 import Button from "../../ui/Button/Button";
 import { useJoinExcursion } from "./useJoinExcursion";
@@ -198,11 +198,7 @@ function ExcursionCard({
 					</Card.Subtitle>
 					{/* Detalles de la excursión */}
 					<div className={styles.infoItem}>
-						<InfoItem
-							text={area}
-							label="Zona"
-							icon={<MapIcon size={18} />}
-						/>
+						<InfoItem text={area} label="Zona" icon={<MapIcon size={18} />} />
 						<InfoItem
 							text={difficulty}
 							label="Dificultad"
@@ -220,8 +216,9 @@ function ExcursionCard({
 					<div className="mt-auto">
 						<div className={styles.cardActionArea}>
 							{joinError && (
-								<ErrorMessageAlert
+								<FeedbackAlert
 									message={getSafeErrorMessage(joinError)}
+									variant="danger"
 									onClose={clearError}
 									className="mb-2"
 								/>

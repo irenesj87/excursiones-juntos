@@ -5,8 +5,8 @@ import {
 	validateName as isNotEmpty,
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
-import ValidatedFormGroup from "../../ui/Input/Input";
-import ErrorMessageAlert from "../../ui/Alert/Alert";
+import ValidatedFormGroup from "../../ui/Input/ValidatedInput";
+import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import Button from "../../ui/Button/Button";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
@@ -43,7 +43,8 @@ export function LoginForm() {
 	return (
 		<>
 			{formState.error && (
-				<ErrorMessageAlert
+				<FeedbackAlert
+					variant="danger"
 					message={formState.error}
 					onClose={() => formDispatch({ type: "CLEAR_ERROR" })}
 				/>

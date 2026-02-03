@@ -10,7 +10,7 @@ import {
 	validateSamePassword,
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
-import ErrorMessageAlert from "../../ui/Alert/Alert";
+import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import Button from "../../ui/Button/Button";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
@@ -155,7 +155,8 @@ function RegisterForm() {
 	return (
 		<>
 			{formState.error && (
-				<ErrorMessageAlert
+				<FeedbackAlert
+					variant="danger"
 					message={formState.error}
 					onClose={() => formDispatch({ type: "CLEAR_ERROR" })}
 				/>
