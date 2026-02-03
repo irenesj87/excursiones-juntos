@@ -164,7 +164,21 @@ html.light {
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 100%, 97%);
 	--color-border-danger: hsl(0, 90%, 85%);
-	--color-text-danger: hsl(0, 70%, 40%); /* Rojo oscuro para texto/iconos */
+	--color-text-danger: hsl(
+		0,
+		70%,
+		35%
+	); /* Oscurecido para ratio AAA (7.15:1) */
+
+	/* Éxito */
+	--color-bg-success-subtle: hsl(135, 60%, 96%);
+	--color-border-success: hsl(135, 40%, 85%);
+	--color-text-success: hsl(135, 70%, 25%);
+
+	/* Advertencia */
+	--color-bg-warning-subtle: hsl(40, 80%, 96%);
+	--color-border-warning: hsl(40, 60%, 85%);
+	--color-text-warning: hsl(40, 80%, 25%);
 
 	/* Componente de error de filtro */
 	--filter-error-bg: var(--color-bg-danger-subtle);
@@ -312,7 +326,17 @@ html.dark {
 	/* --- Estados (Error, Alerta) --- */
 	--color-bg-danger-subtle: hsl(0, 30%, 25%); /* Rojo oscuro desaturado */
 	--color-border-danger: hsl(0, 40%, 35%); /* Borde rojo oscuro */
-	--color-text-danger: hsl(0, 80%, 75%); /* Rojo claro para texto/iconos */
+	--color-text-danger: hsl(0, 85%, 82%); /* Aclarado para ratio AAA (7.01:1) */
+
+	/* Éxito */
+	--color-bg-success-subtle: hsl(135, 30%, 20%);
+	--color-border-success: hsl(135, 30%, 30%);
+	--color-text-success: hsl(135, 60%, 80%);
+
+	/* Advertencia */
+	--color-bg-warning-subtle: hsl(40, 30%, 20%);
+	--color-border-warning: hsl(40, 30%, 30%);
+	--color-text-warning: hsl(40, 60%, 80%);
 
 	/* Componente de error de filtro */
 	--filter-error-bg: var(--color-bg-danger-subtle);

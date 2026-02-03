@@ -1,6 +1,7 @@
 import React from "react";
 import {
 	LuMountainSnow,
+	LuCircleAlert,
 	LuTriangleAlert,
 	LuSearch,
 	LuMoon,
@@ -15,6 +16,7 @@ import {
 	LuChartNoAxesColumnIncreasing,
 	LuClock3,
 	LuCircleCheckBig,
+	LuCircleCheck,
 	LuCopyright,
 	LuUser,
 	LuUsers,
@@ -40,8 +42,13 @@ type IconProps = {
  */
 // Icono del logo
 export const LogoIcon = LuMountainSnow as React.ComponentType<IconProps>;
-// Icono de alerta.
-export const AlertIcon = LuTriangleAlert as React.ComponentType<IconProps>;
+// Icono de alerta circular para errores.
+export const CircleAlertIcon = LuCircleAlert as React.ComponentType<IconProps>;
+// Icono de check circular para éxito.
+export const CheckCircleIcon = LuCircleCheck as React.ComponentType<IconProps>;
+// Icono de alerta triangular.
+export const TriangleAlertIcon =
+	LuTriangleAlert as React.ComponentType<IconProps>;
 // Icono de la lupa para la barra de búsqueda.
 export const SearchIcon = LuSearch as React.ComponentType<IconProps>;
 // Icono de una "x" para limpiar la barra de búsqueda.

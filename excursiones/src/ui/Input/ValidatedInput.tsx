@@ -4,12 +4,12 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import { EyeIcon, EyeOffIcon } from "../Icons";
-import styles from "./Input.module.css";
+import styles from "./ValidatedInput.module.css";
 
 /**
- * Propiedades para el componente ValidatedFormGroup.
+ * Propiedades para el componente ValidatedInput.
  */
-interface ValidatedFormGroupProps {
+interface ValidatedInputProps {
 	/** ID único para el campo de formulario y la etiqueta. */
 	readonly id: string;
 	/** Texto para la etiqueta del campo. */
@@ -34,7 +34,7 @@ interface ValidatedFormGroupProps {
 
 const ValidatedFormGroup = forwardRef<
 	HTMLInputElement,
-	ValidatedFormGroupProps
+	ValidatedInputProps
 >((props, ref) => {
 	const {
 		id,

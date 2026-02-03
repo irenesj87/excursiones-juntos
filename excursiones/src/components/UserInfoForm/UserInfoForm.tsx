@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Col, Form, Row, Alert } from "react-bootstrap";
+import { Card, Col, Form, Row } from "react-bootstrap";
 import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
 import {
 	validateName,
@@ -8,6 +8,7 @@ import {
 } from "../../validation/validations";
 import { useUserInfoForm, FormValues } from "./useUserInfoForm";
 import StyledButton from "../../ui/Button/Button";
+import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import {
 	UserIcon,
 	UsersIcon,
@@ -138,24 +139,20 @@ function UserInfoForm(): React.ReactElement {
 						</legend>
 					)}
 					{successMessage && (
-						<Alert
+						<FeedbackAlert
 							variant="success"
+							message={successMessage}
 							onClose={clearMessages}
-							dismissible
 							className="mb-3"
-						>
-							{successMessage}
-						</Alert>
+						/>
 					)}
 					{isEditing && error && (
-						<Alert
+						<FeedbackAlert
 							variant="danger"
+							message={error}
 							onClose={clearMessages}
-							dismissible
 							className="mb-3"
-						>
-							{error}
-						</Alert>
+						/>
 					)}
 				</fieldset>
 
