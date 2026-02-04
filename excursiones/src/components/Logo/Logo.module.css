@@ -23,7 +23,7 @@
 }
 
 .logoText {
-	font-family: "Merriweather", "Georgia", serif;
+	font-family: "Georgia", serif;
 	font-size: 1.25rem; /* Tamaño base para breakpoints pequeños */
 	font-weight: 700;
 	color: var(--navbar-brand-color);

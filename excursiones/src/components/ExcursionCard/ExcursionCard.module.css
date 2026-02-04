@@ -59,7 +59,9 @@
 
 /* Título de la tarjeta */
 .excursionTitle {
-	font-size: 1.35rem;
+	font-size: var(
+		--font-size-xl
+	); /* Usamos token (24px) en lugar de valor arbitrario (1.35rem) */
 	font-weight: 700;
 	line-height: 1.4;
 	margin-bottom: 1rem;
@@ -70,7 +72,7 @@
 
 /* Descripción de la excursión */
 .excursionDescription {
-	font-size: 1.1rem;
+	font-size: var(--font-size-base); /* Usamos token (18px) para consistencia */
 	font-family: var(--font-family-sans);
 	line-height: 1.5;
 	color: var(--color-text-muted);

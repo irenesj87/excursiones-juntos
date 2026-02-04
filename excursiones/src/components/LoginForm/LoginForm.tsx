@@ -10,7 +10,6 @@ import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import Button from "../../ui/Button/Button";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
-import "bootstrap/dist/css/bootstrap.css";
 import styles from "./LoginForm.module.css";
 
 /**
@@ -32,7 +31,8 @@ export function LoginForm() {
 	/**
 	 * Comprueba si el formulario es válido.
 	 */
-	const isFormValid = validateMail(mail) && isNotEmpty(password);
+	const isFormValid =
+		validateMail(mail) === true && isNotEmpty(password) === true;
 
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
 		isFormValid,
