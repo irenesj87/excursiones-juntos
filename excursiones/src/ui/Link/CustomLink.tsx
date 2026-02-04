@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import { NavLink, type NavLinkProps } from "react-router-dom";
-import styles from "./Link.module.css";
+import styles from "./CustomLink.module.css";
 
 /**
  * Componente de enlace de navegación con estilos consistentes.
  * Soporta ref forwarding para accesibilidad y composición.
  */
-const StyledNavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
+const CustomLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
 	({ className, ...rest }, ref) => {
 		return (
 			<NavLink
@@ -14,7 +14,7 @@ const StyledNavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
 				className={(navLinkState) =>
 					[
 						"nav-link", // Clase base de Bootstrap para consistencia
-						styles.styledNavLink,
+						styles.customLink,
 						typeof className === "function" ? className(navLinkState) : className,
 					]
 						.filter(Boolean)
@@ -26,6 +26,6 @@ const StyledNavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
 	},
 );
 
-StyledNavLink.displayName = "StyledNavLink";
+CustomLink.displayName = "CustomLink";
 
-export default StyledNavLink;
+export default CustomLink;

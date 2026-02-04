@@ -47,8 +47,8 @@
 	opacity: 0;
 	transform: scale(1.05);
 	transition:
-		opacity 0.5s ease-out,
-		transform 0.5s ease-out;
+		opacity 0.2s ease-out,
+		transform 0.2s ease-out;
 	will-change: opacity, transform;
 
 	&.imageLoaded {
@@ -97,7 +97,7 @@
 }
 
 .cardActionArea {
-	min-height: 42px;
+	min-height: 2.75rem; /* 44px para coincidir con la altura estándar de botones y skeleton */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

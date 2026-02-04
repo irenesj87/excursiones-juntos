@@ -15,7 +15,5 @@
 }
 
 .infoMessage {
-	font-weight: normal;
-	font-style: italic;
 	color: var(--color-text-muted);
 }
