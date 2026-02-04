@@ -39,7 +39,6 @@ const excursions: Excursion[] = [
 		id: "2",
 		name: "Picos de Europa",
 		description:
-			"En esta excursión, atravesarás senderos rocosos que ofrecen vistas panorámicas inigualables. Requiere buena forma física y equipo adecuado para terreno escarpado.",
 			"En esta excursión atravesarás senderos rocosos de vistas panorámicas inigualables. Requiere buena forma física y equipo adecuado para terreno escarpado.",
 		area: "Este",
 		difficulty: "Alta",
