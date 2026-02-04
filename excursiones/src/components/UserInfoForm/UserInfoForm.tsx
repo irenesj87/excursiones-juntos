@@ -7,7 +7,7 @@ import {
 	validatePhone,
 } from "../../validation/validations";
 import { useUserInfoForm, FormValues } from "./useUserInfoForm";
-import StyledButton from "../../ui/Button/Button";
+import CustomButton from "../../ui/CustomButton/CustomButton";
 import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import {
 	UserIcon,
@@ -229,7 +229,7 @@ function UserInfoForm(): React.ReactElement {
 					<div className="mt-auto pt-3">
 						<Row className="justify-content-center justify-content-sm-end gx-0">
 							<Col xs={12} sm="auto">
-								<StyledButton
+								<CustomButton
 									onClick={startEdit}
 									className={`${styles.editButton} w-100`}
 									variant="primary"
@@ -240,7 +240,7 @@ function UserInfoForm(): React.ReactElement {
 										<EditIcon aria-hidden="true" />
 										Editar
 									</span>
-								</StyledButton>
+								</CustomButton>
 							</Col>
 						</Row>
 					</div>
@@ -250,7 +250,7 @@ function UserInfoForm(): React.ReactElement {
 						<Row className="justify-content-center justify-content-sm-end gx-2">
 							{/* En xs, los botones ocupan el ancho completo y se apilan. En sm+, se muestran en línea. */}
 							<Col xs={12} sm="auto" className="mb-2 mb-sm-0">
-								<StyledButton
+								<CustomButton
 									variant="danger"
 									onClick={cancelEdit}
 									className={`${styles.cancelButton} w-100`}
@@ -259,10 +259,10 @@ function UserInfoForm(): React.ReactElement {
 										<XIcon aria-hidden="true" />
 										Cancelar
 									</span>
-								</StyledButton>
+								</CustomButton>
 							</Col>
 							<Col xs={12} sm="auto">
-								<StyledButton
+								<CustomButton
 									variant={
 										!isFormValid || !isFormChanged ? "secondary" : "success"
 									}
@@ -275,7 +275,7 @@ function UserInfoForm(): React.ReactElement {
 										<CheckIcon aria-hidden="true" />
 										Guardar
 									</span>
-								</StyledButton>
+								</CustomButton>
 							</Col>
 						</Row>
 					</div>

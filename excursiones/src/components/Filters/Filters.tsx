@@ -2,7 +2,7 @@ import React from "react";
 import FiltersList from "../FiltersList";
 import { ChartIcon, ClockIcon, MapIcon, FilterXIcon } from "../../ui/Icons";
 import styles from "./Filters.module.css";
-import StyledButton from "../../ui/Button/Button";
+import StyledButton from "../../ui/CustomButton/CustomButton";
 import { useFiltersLogic } from "./useFiltersLogic";
 
 /**

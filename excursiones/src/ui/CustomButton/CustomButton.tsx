@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
-import styles from "./Button.module.css";
+import styles from "./CustomButton.module.css";
 
 /**
  * Props para el componente StyledButton.
  */
-interface StyledButtonProps {
+interface CustomButtonProps {
 	/** El contenido del botón. Puede ser texto, iconos o cualquier nodo renderizable. */
 	readonly children: React.ReactNode;
 	/** Función a ejecutar al hacer clic. */
@@ -30,7 +30,7 @@ interface StyledButtonProps {
  * Un componente de botón personalizado y reutilizable que extiende la funcionalidad
  * del botón de React Bootstrap.
  */
-const StyledButton = forwardRef<HTMLButtonElement, StyledButtonProps>(
+const CustomButton = forwardRef<HTMLButtonElement, CustomButtonProps>(
 	(
 		{
 			children,
@@ -46,7 +46,7 @@ const StyledButton = forwardRef<HTMLButtonElement, StyledButtonProps>(
 		ref,
 	) => {
 		// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
-		const buttonClass = `${styles.styledButton} ${styles[variant]} ${className}`;
+		const buttonClass = `${styles.customButton} ${styles[variant]} ${className}`;
 
 		return (
 			<Button
@@ -79,6 +79,6 @@ const StyledButton = forwardRef<HTMLButtonElement, StyledButtonProps>(
 	},
 );
 
-StyledButton.displayName = "StyledButton";
+CustomButton.displayName = "CustomButton";
 
-export default StyledButton;
+export default CustomButton;

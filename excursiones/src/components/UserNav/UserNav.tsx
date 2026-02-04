@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ProfileIcon, LogOutIcon } from "../../ui/Icons";
 import StyledNavLink from "../../ui/Link";
-import Button from "../../ui/Button/Button";
+import Button from "../../ui/CustomButton/CustomButton";
 import { logoutUser } from "../../services/authService";
 import { logout } from "../../slices/loginSlice";
 import { ROUTES } from "../../constants";

@@ -5,9 +5,9 @@ import {
 	validateName as isNotEmpty,
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
-import ValidatedFormGroup from "../../ui/Input/ValidatedInput";
+import ValidatedInput from "../../ui/ValidatedInput/ValidatedInput";
 import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
-import Button from "../../ui/Button/Button";
+import CustomButton from "../../ui/CustomButton/CustomButton";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./LoginForm.module.css";
@@ -57,7 +57,7 @@ export function LoginForm() {
 				className={`${styles.formLabel} fw-bold`}
 			>
 				<div className={styles.fieldsContainer}>
-					<ValidatedFormGroup
+					<ValidatedInput
 						ref={emailInputRef}
 						id="formLoginEmail"
 						name={FORM_TEXT.EMAIL_LABEL}
@@ -69,7 +69,7 @@ export function LoginForm() {
 						autocomplete="email"
 						errorMessage={FORM_TEXT.INVALID_EMAIL_FORMAT}
 					/>
-					<ValidatedFormGroup
+					<ValidatedInput
 						id="formLoginPassword"
 						inputType="password"
 						name={FORM_TEXT.PASSWORD_LABEL}
@@ -82,14 +82,14 @@ export function LoginForm() {
 					/>
 				</div>
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<Button
+					<CustomButton
 						type="submit"
 						variant={formState.isButtonDisabled ? "secondary" : "primary"}
 						isLoading={formState.isLoading}
 						disabled={formState.isButtonDisabled}
 					>
 						Enviar
-					</Button>
+					</CustomButton>
 				</div>
 			</Form>
 		</>

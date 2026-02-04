@@ -32,7 +32,7 @@ interface ValidatedInputProps {
 	readonly ariaDescribedBy?: string;
 }
 
-const ValidatedFormGroup = forwardRef<
+const ValidatedInput = forwardRef<
 	HTMLInputElement,
 	ValidatedInputProps
 >((props, ref) => {
@@ -149,6 +149,6 @@ const ValidatedFormGroup = forwardRef<
 	);
 });
 
-ValidatedFormGroup.displayName = "ValidatedFormGroup";
+ValidatedInput.displayName = "ValidatedInput";
 
-export default ValidatedFormGroup;
+export default ValidatedInput;
