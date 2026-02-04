@@ -1,4 +1,4 @@
-.styledButton {
+.customButton {
 	border-radius: var(--border-radius-pill);
 	font-weight: 600;
 	padding: 0.6rem 1.2rem;
@@ -9,12 +9,12 @@
 		box-shadow 0.2s ease;
 }
 
-.styledButton:hover:not(:disabled) {
+.customButton:hover:not(:disabled) {
 	transform: translateY(-2px);
 	box-shadow: var(--shadow-soft);
 }
 
-.styledButton:active:not(:disabled) {
+.customButton:active:not(:disabled) {
 	transform: translateY(0);
 	box-shadow: none;
 }
@@ -45,13 +45,13 @@
 }
 
 /* Aumentamos la especificidad para sobrescribir los estilos :active de Bootstrap */
-.styledButton.primary:active,
-.styledButton.primary:focus-visible {
+.customButton.primary:active,
+.customButton.primary:focus-visible {
 	background-color: var(--color-primary-hover);
 	border-color: transparent;
 }
 
-.styledButton.primary:focus-visible {
+.customButton.primary:focus-visible {
 	box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.5);
 }
 
@@ -66,8 +66,8 @@
 	); /* Oscurece ligeramente manteniendo el tono del tema */
 }
 
-.styledButton.secondary:active,
-.styledButton.secondary:focus-visible {
+.customButton.secondary:active,
+.customButton.secondary:focus-visible {
 	filter: brightness(0.85);
 	border-color: transparent;
 }
@@ -86,8 +86,8 @@
 	filter: brightness(0.9);
 }
 
-.styledButton.success:active,
-.styledButton.success:focus-visible {
+.customButton.success:active,
+.customButton.success:focus-visible {
 	filter: brightness(0.85);
 	border-color: transparent;
 }
@@ -101,8 +101,8 @@
 	filter: brightness(0.9);
 }
 
-.styledButton.danger:active,
-.styledButton.danger:focus-visible {
+.customButton.danger:active,
+.customButton.danger:focus-visible {
 	filter: brightness(0.85);
 	border-color: transparent;
 }

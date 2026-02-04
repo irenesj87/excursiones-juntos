@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import ValidatedFormGroup from "../../ui/Input";
+import ValidatedInput from "../../ui/ValidatedInput";
 import {
 	validateName,
 	validateSurname,
@@ -11,7 +11,7 @@ import {
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
 import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
-import Button from "../../ui/CustomButton/CustomButton";
+import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
 import { RegisterFormValues, FormFieldConfig } from "../../types";
@@ -178,7 +178,7 @@ function RegisterForm() {
 									 * NOTA: Para que esto funcione, el componente `ValidatedFormGroup`
 									 * debe estar envuelto en `React.forwardRef` para poder recibir la `ref`.
 									 */}
-									<ValidatedFormGroup
+									<ValidatedInput
 										{...fieldProps}
 										ref={ref}
 										value={values[fieldProps.field]}
@@ -210,14 +210,14 @@ function RegisterForm() {
 				</div>
 
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<Button
+					<CustomButton
 						type="submit"
 						variant={isButtonDisabled ? "secondary" : "primary"}
 						isLoading={formState.isLoading}
 						disabled={isButtonDisabled}
 					>
 						Enviar
-					</Button>
+					</CustomButton>
 				</div>
 			</Form>
 		</>

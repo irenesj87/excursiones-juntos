@@ -25,7 +25,7 @@ const IMG_WIDTH = 640;
 const IMG_HEIGHT = 360;
 /**
  * Función vacía que retorna una promesa resuelta inmediatamente.
- * Se utiliza como mecanismo de seguridad para el hook useJoinExcursions ya que en React los hooks
+ * Se utiliza como mecanismo de seguridad para el hook useJoinExcursions ya que en React los hooks 
  * no pueden ser condicionales, es decir, que siempre deben ejecutarse.
  */
 const NO_OP_JOIN = () => Promise.resolve();
@@ -87,7 +87,10 @@ function resolveImageBaseUrl(src?: string): string {
 	// renderice directamente el fallback sin intentar cargar nada.
 	if (!src) return "";
 
-	// Construimos la URL completa y eliminamos la extensión para poder añadir manualmente .webp, .avif, etc.
+	// Si es externa, la retorna tal cual.
+	if (src.startsWith("http")) return src;
+
+	// Si es interna, construimos la URL y eliminamos la extensión para gestionar formatos modernos.
 	return `${API.BASE_URL}${src}`.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 }
 
@@ -120,7 +123,7 @@ interface ExcursionCardProps {
 }
 
 /**
- * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los
+ * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los 
  * usuarios apuntarse a ella.
  */
 function ExcursionCard({
@@ -155,6 +158,7 @@ function ExcursionCard({
 	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
 	const [hasImageError, setHasImageError] = React.useState(false);
 	const imageBaseUrl = resolveImageBaseUrl(imgSrc);
+	const isExternalImage = imgSrc?.startsWith("http") ?? false;
 
 	return (
 		<Card
@@ -165,12 +169,16 @@ function ExcursionCard({
 			<div className={styles.imageContainer}>
 				{imageBaseUrl && !hasImageError ? (
 					<picture>
-						<source srcSet={`${imageBaseUrl}.avif`} type="image/avif" />
-						<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
+						{!isExternalImage && (
+							<>
+								<source srcSet={`${imageBaseUrl}.avif`} type="image/avif" />
+								<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
+							</>
+						)}
 						<Card.Img
 							as="img"
 							variant="top"
-							src={`${imageBaseUrl}.jpg`}
+							src={isExternalImage ? imageBaseUrl : `${imageBaseUrl}.jpg`}
 							alt={imgAlt ?? name}
 							loading="lazy"
 							decoding="async"

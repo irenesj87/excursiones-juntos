@@ -1,7 +1,7 @@
 /* ======================================== */
 /* ESTILOS PARA LOS ENLACES DE NAVEGACIÓN   */
 /* ======================================== */
-.styledNavLink {
+.customLink {
 	/* --- Estilos base del enlace --- */
 	display: inline-block;
 	text-align: center;
@@ -18,12 +18,12 @@
 }
 
 /* Micro-interacción: elevación sutil al pasar el ratón */
-.styledNavLink:hover {
+.customLink:hover {
 	transform: translateY(-1px);
 }
 
 /* --- Estado Activo (cuando el enlace corresponde a la página actual) --- */
-.styledNavLink.active {
+.customLink.active {
 	background-color: var(--nav-link-active-bg);
 	border-color: var(--nav-link-active-border);
 }
