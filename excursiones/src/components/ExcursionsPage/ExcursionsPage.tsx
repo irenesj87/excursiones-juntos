@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Col, Offcanvas } from "react-bootstrap";
 import Filters from "../Filters";
-import StyledButton from "../../ui/Button/Button";
+import StyledButton from "../../ui/CustomButton/CustomButton";
 import type { ExcursionsState } from "../../hooks/useExcursions";
 import ExcursionsList from "../ExcursionsList";
 import { FilterIcon } from "../../ui/Icons";

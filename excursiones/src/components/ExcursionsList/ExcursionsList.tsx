@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import ExcursionCard from "../ExcursionCard";
 import ExcursionsLoading from "./ExcursionsLoading";
-import ExcursionsError from "./ExcursionsError";
+import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import NoExcursionsFound from "./NoExcursionsFound";
 import styles from "./ExcursionsList.module.css";
 import {
@@ -30,7 +30,14 @@ function ExcursionsListView({
 		}
 		// 2. Prioridad: Error.
 		if (error) {
-			return <ExcursionsError />;
+			return (
+				<div className="d-flex justify-content-center my-5">
+					<FeedbackAlert
+						variant="danger"
+						message="Lo sentimos, ha ocurrido un error al cargar las excursiones."
+					/>
+				</div>
+			);
 		}
 		// 3. Prioridad: Estado vacío.
 		if (excursions.length === 0) {

@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import InfoItem from "../../ui/InfoItem/InfoItem";
 import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
 import type { DifficultyLevel } from "../../types";
-import Button from "../../ui/Button/Button";
+import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import {
@@ -23,6 +23,11 @@ import { API } from "../../constants";
  */
 const IMG_WIDTH = 640;
 const IMG_HEIGHT = 360;
+/**
+ * Función vacía que retorna una promesa resuelta inmediatamente.
+ * Se utiliza como mecanismo de seguridad para el hook useJoinExcursions ya que en React los hooks
+ * no pueden ser condicionales, es decir, que siempre deben ejecutarse.
+ */
 const NO_OP_JOIN = () => Promise.resolve();
 
 /**
@@ -38,7 +43,7 @@ interface JoinButtonProps {
 }
 
 /**
- * Renderiza el botón para unirse a una excursión. Muestra un botón "Apuntarse", un estado de carga o un estado "Apuntado/a".
+ * Renderiza el botón para unirse a una excursión. Muestra un botón, un estado de carga o un estado "Apuntado/a".
  */
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	return (
@@ -49,14 +54,14 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					Apuntado/a
 				</span>
 			) : (
-				<Button
+				<CustomButton
 					onClick={onJoin}
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
 					<JoinIcon className={styles.detailIcon} />
 					Apúntate
-				</Button>
+				</CustomButton>
 			)}
 		</div>
 	);
@@ -78,15 +83,12 @@ function ImageFallback() {
  * Helper para resolver la URL base de la imagen, sin la extensión del archivo.
  */
 function resolveImageBaseUrl(src?: string): string {
-	// Si no hay src explícito, devolvemos cadena vacía para que el componente
+	// Si no hay src explícito, se retorna cadena vacía para que el componente
 	// renderice directamente el fallback sin intentar cargar nada.
 	if (!src) return "";
 
-	// Si src empieza por http significa que es una ruta externa completa, así que la deja igual.
-	// Y si es una relativa, le añade la url de base.
-	const fullPath = src.startsWith("http") ? src : `${API.BASE_URL}${src}`;
-	// Elimina la extensión original del archivo para que después se le pueda añadir .webp o .jpg manuañmente.
-	return fullPath.replace(/\.(jpe?g|png|webp|avif)$/i, "");
+	// Construimos la URL completa y eliminamos la extensión para poder añadir manualmente .webp, .avif, etc.
+	return `${API.BASE_URL}${src}`.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 }
 
 /**
@@ -118,8 +120,8 @@ interface ExcursionCardProps {
 }
 
 /**
- * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los usuarios
- * apuntarse a ella.
+ * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los
+ * usuarios apuntarse a ella.
  */
 function ExcursionCard({
 	id,
@@ -137,8 +139,8 @@ function ExcursionCard({
 	/*
 	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para simplificar este componente y
 	 * hacerlo puramente presentacional.
-	 * Si onJoin no se proporciona, se pasa una función asíncrona vacía para satisfacer el tipado del hook y evitar errores
-	 * de TypeScript.
+	 * Si onJoin no se proporciona, se pasa una función asíncrona vacía para satisfacer el tipado del hook, ya que
+	 * los hooks siempre deben ejecutarse, y esta cumple los requisitos de tipado para evitar errores de TypeScript.
 	 */
 	const { isJoining, joinError, handleJoin, clearError } = useJoinExcursion(
 		onJoin ?? NO_OP_JOIN,

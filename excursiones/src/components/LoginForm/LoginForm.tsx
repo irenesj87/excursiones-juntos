@@ -7,7 +7,7 @@ import {
 import { ROUTES, FORM_TEXT } from "../../constants";
 import ValidatedFormGroup from "../../ui/Input/ValidatedInput";
 import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
-import Button from "../../ui/Button/Button";
+import Button from "../../ui/CustomButton/CustomButton";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./LoginForm.module.css";

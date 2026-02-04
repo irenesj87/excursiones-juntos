@@ -11,7 +11,7 @@ import {
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
 import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
-import Button from "../../ui/Button/Button";
+import Button from "../../ui/CustomButton/CustomButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
 import { RegisterFormValues, FormFieldConfig } from "../../types";

@@ -33,8 +33,8 @@ interface FeedbackAlertProps {
 	readonly variant: Variant;
 	/** El mensaje principal a mostrar. */
 	readonly message: string;
-	/** Función que se ejecuta cuando se cierra la alerta. */
-	readonly onClose: () => void;
+	/** Función opcional que se ejecuta cuando se cierra la alerta. Si se provee, se mostrará un botón para cerrar. */
+	readonly onClose?: () => void;
 	/** Título opcional de la alerta. Si no se provee, se usa uno por defecto según la variante. */
 	readonly title?: string;
 	/** Clases CSS adicionales para el contenedor de la alerta. */
@@ -57,7 +57,7 @@ function FeedbackAlert({
 		<Alert
 			variant={bootstrapVariant}
 			onClose={onClose}
-			dismissible
+			dismissible={!!onClose}
 			className={cn(styles.alert, className)}
 		>
 			<div className={styles.alertContent}>

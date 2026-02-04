@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Button, Spinner } from "react-bootstrap";
-import styles from "./Button.module.css";
+import styles from "./CustomButton.module.css";
 
 /**
  * Props para el componente StyledButton.
