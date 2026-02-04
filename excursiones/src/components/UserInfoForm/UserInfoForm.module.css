@@ -16,7 +16,7 @@
 .cardBody {
 	background-color: transparent; /* Aseguramos que el cuerpo de la tarjeta no sobreescriba el fondo */
 	padding: 1rem; /* Mobile: 16px para optimizar el espacio */
-	font-size: var(--font-size-base);
+	font-size: var(--font-size-base); /* Hereda 18px de Global.css */
 }
 
 /* Contenedor de la foto de perfil (Placeholder) */
@@ -40,21 +40,26 @@
 .formTitle {
 	color: var(--color-text-base);
 	font-family: var(--font-family-serif);
-	font-size: var(--font-size-xxl);
+	font-size: var(--font-size-xxl); /* 32px (2rem) definido en Global */
 	font-weight: 700;
 	margin-bottom: 0.5rem;
 	line-height: 1.1;
 }
 
 .formDescription {
-	color: var(--color-text-muted);
+	color: var(
+		--color-text-base
+	); /* AAA: Aumentamos contraste a 7:1 para texto normal */
 	margin-bottom: 0;
+	max-width: 65ch; /* AAA: Limitamos el ancho a ~65-80 caracteres para legibilidad (Criterio 1.4.8) */
 }
 
 .sectionTitle {
-	color: var(--color-text-muted);
+	color: var(
+		--color-text-base
+	); /* AAA: El texto pequeño/negrita necesita contraste 7:1 */
 	font-family: var(--font-family-serif);
-	font-size: var(--font-size-sm);
+	font-size: var(--font-size-lg); /* 20px (1.25rem) definido en Global */
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 	font-weight: 700;
