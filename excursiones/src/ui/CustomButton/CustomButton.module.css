@@ -1,12 +1,13 @@
 .customButton {
 	border-radius: var(--border-radius-pill);
 	font-weight: 600;
-	padding: 0.6rem 1.2rem;
+	line-height: 1.5; /* Unificado con CustomLink */
+	padding: 0.5rem 1rem; /* Unificado con CustomLink (8px 16px) */
 	border: none;
 	position: relative;
 	transition:
-		transform 0.2s ease-out,
-		box-shadow 0.2s ease;
+		transform var(--transition-base),
+		box-shadow var(--transition-base);
 }
 
 .customButton:hover:not(:disabled) {
@@ -15,8 +16,9 @@
 }
 
 .customButton:active:not(:disabled) {
-	transform: translateY(0);
-	box-shadow: none;
+	transform: translateY(0) scale(0.98);
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	transition: none;
 }
 
 .spinnerOverlay {

@@ -11,8 +11,8 @@
 	padding: 0.5rem 1rem;
 	border-radius: var(--border-radius-pill);
 	transition:
-		transform 0.2s ease-out,
-		box-shadow 0.2s ease;
+		transform var(--transition-base),
+		box-shadow var(--transition-base);
 	text-decoration: none;
 	border: 2px solid transparent; /* Borde transparente para evitar saltos de layout en :focus-visible */
 }
@@ -26,4 +26,17 @@
 .customLink.active {
 	background-color: var(--nav-link-active-bg);
 	border-color: var(--nav-link-active-border);
+}
+
+/* --- Feedback de Accesibilidad (Teclado) --- */
+.customLink:focus-visible {
+	outline: 2px solid var(--bs-primary);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 4px rgba(var(--bs-primary-rgb), 0.1);
+}
+
+/* --- Feedback de Acción (Presionar) --- */
+.customLink:active {
+	transform: translateY(0) scale(0.96);
+	transition: none;
 }

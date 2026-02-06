@@ -12,8 +12,7 @@ button.themeToggleBtn {
 	justify-content: center;
 	line-height: 1;
 	/* Transición suave para movimiento y color de fondo */
-	transition:
-		transform 0.2s ease-in-out,
+	transition: transform var(--transition-base);
 }
 
 .themeIcon {
@@ -55,4 +54,6 @@ button.themeToggleBtn:active {
 	background-color: var(--theme-toggle-btn-bg-hover);
 	border-color: transparent;
 	color: var(--theme-toggle-btn-color);
+	transform: translateY(0) scale(0.92);
+	transition: none;
 }
