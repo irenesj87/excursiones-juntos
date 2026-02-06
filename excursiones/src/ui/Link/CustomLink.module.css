@@ -11,8 +11,8 @@
 	padding: 0.5rem 1rem;
 	border-radius: var(--border-radius-pill);
 	transition:
-		transform 0.2s ease-out,
-		box-shadow 0.2s ease;
+		transform var(--transition-base),
+		box-shadow var(--transition-base);
 	text-decoration: none;
 	border: 2px solid transparent; /* Borde transparente para evitar saltos de layout en :focus-visible */
 }
@@ -37,6 +37,6 @@
 
 /* --- Feedback de Acción (Presionar) --- */
 .customLink:active {
-	transform: scale(0.96);
+	transform: translateY(0) scale(0.96);
 	transition: none;
 }

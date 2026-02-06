@@ -93,6 +93,9 @@
 	/* Funciona tanto en modo claro como oscuro. */
 	--shadow-soft:
 		0 16px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+
+	/* --- Animaciones --- */
+	--transition-base: 0.2s ease-out;
 }
 
 /* ======================================== */

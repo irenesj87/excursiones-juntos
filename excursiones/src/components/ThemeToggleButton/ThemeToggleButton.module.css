@@ -12,7 +12,7 @@ button.themeToggleBtn {
 	justify-content: center;
 	line-height: 1;
 	/* Transición suave para movimiento y color de fondo */
-	transition: transform 0.2s ease-in-out;
+	transition: transform var(--transition-base);
 }
 
 .themeIcon {

@@ -30,7 +30,7 @@
 	font-weight: 600;
 	color: var(
 		--color-text-base
-	); /* Uso de token semántico en lugar de inherit */
+	);
 	text-align: center;
 	margin-bottom: 0;
 }
