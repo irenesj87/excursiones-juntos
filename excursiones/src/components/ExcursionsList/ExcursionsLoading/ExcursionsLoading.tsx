@@ -10,6 +10,10 @@ import { RootState } from "../../../store/store";
  * Número de skeletons de tarjetas de excursión.
  */
 const SKELETON_COUNT = 8;
+/**
+ * Array estático para iterar los skeletons.
+ */
+const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
 
 /**
  * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
@@ -24,7 +28,7 @@ function ExcursionsLoading() {
 	return (
 		<SkeletonTheme {...skeletonThemeProps}>
 			<Row as="ul" className="gx-4 gy-5 list-unstyled">
-				{Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+				{SKELETON_ITEMS.map((_, index) => (
 					<Col
 						as="li"
 						xs={12}

@@ -27,3 +27,16 @@
 	background-color: var(--nav-link-active-bg);
 	border-color: var(--nav-link-active-border);
 }
+
+/* --- Feedback de Accesibilidad (Teclado) --- */
+.customLink:focus-visible {
+	outline: 2px solid var(--bs-primary);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 4px rgba(var(--bs-primary-rgb), 0.1);
+}
+
+/* --- Feedback de Acción (Presionar) --- */
+.customLink:active {
+	transform: scale(0.96);
+	transition: none;
+}

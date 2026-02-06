@@ -5,7 +5,8 @@
 	margin-top: 2rem;
 	margin-bottom: 2rem;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
+	padding-top: 3rem;
 	min-height: 40vh;
 }
 
@@ -15,12 +16,21 @@
 	align-items: center;
 	gap: 1rem;
 	max-width: 500px;
+	animation: fadeInUp 0.4s ease-out; /* Micro-interacción: entrada suave */
+}
+
+.messageIcon {
+	font-size: 3rem;
+	color: var(--color-text-muted);
+	margin-bottom: 0.5rem;
 }
 
 .primaryMessage {
 	font-size: 1.4rem;
 	font-weight: 600;
-	color: inherit;
+	color: var(
+		--color-text-base
+	); /* Uso de token semántico en lugar de inherit */
 	text-align: center;
 	margin-bottom: 0;
 }
@@ -32,8 +42,13 @@
 	margin-bottom: 0;
 }
 
-.messageIcon {
-	font-size: 3rem;
-	color: var(--color-text-muted);
-	margin-bottom: 0.5rem;
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
