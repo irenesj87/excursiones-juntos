@@ -11,6 +11,11 @@ import {
 	ExcursionsListViewProps,
 } from "./useExcursionsListLogic";
 
+const TEXTS = {
+	TITLE: "Próximas excursiones",
+	ERROR_MESSAGE: "Lo sentimos, ha ocurrido un error al cargar las excursiones.",
+} as const;
+
 /**
  * Este componente se encarga de mostrar las excursiones.
  */
@@ -32,10 +37,7 @@ function ExcursionsListView({
 		if (error) {
 			return (
 				<div className="d-flex justify-content-center my-5">
-					<FeedbackAlert
-						variant="danger"
-						message="Lo sentimos, ha ocurrido un error al cargar las excursiones."
-					/>
+					<FeedbackAlert variant="danger" message={TEXTS.ERROR_MESSAGE} />
 				</div>
 			);
 		}
@@ -86,7 +88,7 @@ function ExcursionsListView({
 			aria-labelledby="excursions-list-title"
 		>
 			<h2 id="excursions-list-title" className={styles.title}>
-				Próximas Excursiones
+				{TEXTS.TITLE}
 			</h2>
 			{renderContent()}
 		</section>

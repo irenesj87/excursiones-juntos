@@ -11,6 +11,8 @@ button.themeToggleBtn {
 	align-items: center;
 	justify-content: center;
 	line-height: 1;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent; /* Evita el parpadeo gris al tocar en iOS */
 	/* Transición suave para movimiento y color de fondo */
 	transition: transform var(--transition-base);
 }
@@ -28,25 +30,30 @@ button.themeToggleBtn:focus-visible {
 }
 
 /*
- * Para el foco con clic (no-teclado), anulamos explícitamente el box-shadow de Bootstrap.
- * Esta es la regla clave para eliminar el anillo azul al hacer clic.
+ * Para el foco general, anulamos explícitamente el box-shadow de Bootstrap.
+ * Usamos :focus en lugar de :not(:focus-visible) para asegurar compatibilidad con Safari,
+ * que a veces aplica estilos de foco nativos o de Bootstrap en el clic.
  */
-button.themeToggleBtn:focus:not(:focus-visible) {
-	box-shadow: none;
+button.themeToggleBtn:focus {
+	box-shadow: none !important;
+	outline: none !important;
 	background-color: transparent;
 	border-color: transparent;
 	color: var(--theme-toggle-btn-color);
 }
 
 /* Mantenemos el color de hover si estamos en foco (clic) y hover a la vez */
-button.themeToggleBtn:focus:not(:focus-visible):hover {
+button.themeToggleBtn:focus:hover {
 	background-color: var(--theme-toggle-btn-bg-hover);
 }
 
 /* Para el foco con teclado, aplicamos la transformación y nuestro anillo de foco personalizado. */
 button.themeToggleBtn:focus-visible {
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color) !important;
 	outline: 0; /* Aseguramos que no haya un outline nativo además del shadow */
+	background-color: var(
+		--theme-toggle-btn-bg-hover
+	); /* Restauramos el fondo anulado por :focus */
 }
 
 /* Eliminamos el fondo azul de Bootstrap en estado activo (mientras se presiona) */

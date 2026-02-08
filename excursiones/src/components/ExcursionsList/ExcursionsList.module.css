@@ -10,7 +10,9 @@
 	margin-bottom: 3rem; /* Separación generosa entre título y tarjetas */
 	padding-bottom: 0;
 	color: var(--color-text-base);
-	font-size: 2rem; /* 32px - Más presencia para el título de sección */
+	font-size: var(
+		--font-size-xxl
+	); /* 32px - Más presencia para el título de sección */
 	font-weight: bold;
 	text-align: center;
 	font-family: var(--font-family-serif); /* Tipografía Serif elegante */

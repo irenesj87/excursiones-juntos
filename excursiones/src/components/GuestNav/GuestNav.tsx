@@ -55,7 +55,7 @@ function GuestNav({
 				className={styles.loginLink}
 			>
 				<LogInIcon size={20} className="me-2" />
-				Inicia sesión
+				Iniciar sesión
 			</StyledNavLink>
 		</div>
 	);

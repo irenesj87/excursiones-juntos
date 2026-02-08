@@ -46,14 +46,14 @@ function UserNav({
 				to={ROUTES.USER}
 				onClick={onCloseMenu}
 				className={`${styles.profileLink} me-lg-3`}
-				aria-label="Tu perfil"
+				aria-label="Mi perfil"
 			>
 				<ProfileIcon size={20} className="me-2" />
-				Tu perfil
+				Mi perfil
 			</StyledNavLink>
 			<Button onClick={handleLogout} className={styles.logoutLink}>
 				<LogOutIcon size={20} className="me-2" />
-				Cierra sesión
+				Cerrar sesión
 			</Button>
 		</>
 	);

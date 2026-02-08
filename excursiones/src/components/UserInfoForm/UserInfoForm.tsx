@@ -119,7 +119,7 @@ function UserInfoForm(): React.ReactElement {
 						/>
 					</div>
 					<div className="text-center text-sm-start">
-						<h2 className={styles.formTitle}>Mi Perfil</h2>
+						<h2 className={styles.formTitle}>Mi perfil</h2>
 						<p className={styles.formDescription}>
 							Gestiona tu información personal y de contacto.
 						</p>
