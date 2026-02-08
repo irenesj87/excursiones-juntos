@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Button } from "react-bootstrap";
 import { useSelector, useDispatch, TypedUseSelectorHook } from "react-redux";
 import { toggleMode } from "../../slices/themeSlice";
 import { MoonIcon, SunIcon } from "../../ui/Icons";
@@ -29,7 +28,7 @@ const useAppDispatch = () => useDispatch<AppDispatch>();
 function ThemeToggleButton({
 	className = "",
 	showText = false,
-}: ThemeToggleButtonProps){
+}: ThemeToggleButtonProps) {
 	const mode = useAppSelector((state: RootState) => state.themeReducer.mode);
 	const dispatch = useAppDispatch();
 
@@ -66,7 +65,8 @@ function ThemeToggleButton({
 		);
 
 	return (
-		<Button
+		<button
+			type="button"
 			className={`${styles.themeToggleBtn} ${className}`}
 			onClick={toggleTheme}
 			aria-label={
@@ -76,10 +76,10 @@ function ThemeToggleButton({
 			{icon}
 			{showText && (
 				<span className="ms-2">
-					{mode === "light" ? "Modo Oscuro" : "Modo Claro"}
+					{mode === "light" ? "Modo oscuro" : "Modo claro"}
 				</span>
 			)}
-		</Button>
+		</button>
 	);
 }
 

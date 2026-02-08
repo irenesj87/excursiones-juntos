@@ -12,12 +12,20 @@
 	transition: none;
 	cursor: pointer;
 	user-select: none;
+	border-radius: 50rem; /* Añadido para coincidir con el esqueleto y que el foco sea redondeado */
 }
 
 .profileLink:hover {
 	background-color: var(--theme-toggle-btn-bg-hover);
 	outline: none;
 	box-shadow: none;
+}
+
+/* Estilo de foco consistente con el ThemeToggleButton (gris en lugar de verde) */
+.profileLink:focus-visible {
+	background-color: var(--theme-toggle-btn-bg-hover);
+	outline: none;
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 }
 
 .logoutLink {

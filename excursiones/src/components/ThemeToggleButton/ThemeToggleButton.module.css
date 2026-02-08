@@ -1,6 +1,5 @@
-/* Aumentamos la especificidad a button.themeToggleBtn para evitar que las reglas
- * globales de Bootstrap (ej: para .btn) sobrescriban el border-radius. */
-button.themeToggleBtn {
+/* Botón nativo para cambio de tema */
+.themeToggleBtn {
 	background-color: transparent;
 	color: var(--theme-toggle-btn-color);
 	border: none;
@@ -11,6 +10,8 @@ button.themeToggleBtn {
 	align-items: center;
 	justify-content: center;
 	line-height: 1;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent; /* Evita el parpadeo gris al tocar en iOS */
 	/* Transición suave para movimiento y color de fondo */
 	transition: transform var(--transition-base);
 }
@@ -21,36 +22,30 @@ button.themeToggleBtn {
 }
 
 /* Para el estado hover, solo aplicamos la transformación. */
-button.themeToggleBtn:hover,
-button.themeToggleBtn:focus-visible {
+.themeToggleBtn:hover,
+.themeToggleBtn:focus-visible {
 	background-color: var(--theme-toggle-btn-bg-hover);
 	transform: translateY(-2px);
 }
 
-/*
- * Para el foco con clic (no-teclado), anulamos explícitamente el box-shadow de Bootstrap.
- * Esta es la regla clave para eliminar el anillo azul al hacer clic.
- */
-button.themeToggleBtn:focus:not(:focus-visible) {
-	box-shadow: none;
-	background-color: transparent;
-	border-color: transparent;
-	color: var(--theme-toggle-btn-color);
+/* Eliminamos el outline por defecto en foco para gestionarlo con focus-visible */
+.themeToggleBtn:focus {
+	outline: none;
 }
 
 /* Mantenemos el color de hover si estamos en foco (clic) y hover a la vez */
-button.themeToggleBtn:focus:not(:focus-visible):hover {
+.themeToggleBtn:focus:hover {
 	background-color: var(--theme-toggle-btn-bg-hover);
 }
 
 /* Para el foco con teclado, aplicamos la transformación y nuestro anillo de foco personalizado. */
-button.themeToggleBtn:focus-visible {
+.themeToggleBtn:focus-visible {
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
-	outline: 0; /* Aseguramos que no haya un outline nativo además del shadow */
+	outline: none;
+	background-color: var(--theme-toggle-btn-bg-hover);
 }
 
-/* Eliminamos el fondo azul de Bootstrap en estado activo (mientras se presiona) */
-button.themeToggleBtn:active {
+.themeToggleBtn:active {
 	background-color: var(--theme-toggle-btn-bg-hover);
 	border-color: transparent;
 	color: var(--theme-toggle-btn-color);
