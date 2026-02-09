@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { joinExcursion as joinExcursionService } from "../../services/excursionService";
 import { updateUser } from "../../slices/loginSlice";
-import { User } from "../../types";
+import { userSchema } from "../../schemas/userSchema";
 
 /**
  * Este Custom Hook encapsula la lógica de negocio necesaria para que un usuario se apunte a una excursión.
@@ -17,53 +17,50 @@ const ERROR_MESSAGES = {
 	INVALID_RESPONSE: "La respuesta de la API no tiene el formato esperado.",
 };
 
-/**
- * Guarda de tipo para validar que un objeto es de tipo User.
- */
-function isUser(obj: unknown): obj is User {
-	// Si no es un objeto o es null
-	if (typeof obj !== "object" || obj === null) {
-		return false;
-	}
-	// El objeto se convierte temporalmente a Record<string, unknown> para poder leer sus propiedades sin que el
-	// compilador de problemas.
-	const candidate = obj as Record<string, unknown>;
-
-	// Validación exhaustiva del objeto hasta ahora desconocido.
-	return (
-		(typeof candidate.id === "string" || typeof candidate.id === "number") &&
-		typeof candidate.name === "string" &&
-		typeof candidate.surname === "string" &&
-		typeof candidate.mail === "string" &&
-		typeof candidate.phone === "string" &&
-		Array.isArray(candidate.excursions) &&
-		(candidate.excursions as unknown[]).every(
-			(id) => typeof id === "string" || typeof id === "number"
-		)
-	);
-}
-
 export const useJoinExcursionAction = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const { user, token } = useSelector((state: RootState) => state.loginReducer);
 
 	const joinExcursion = async (excursionId: string | number) => {
-		// Si no hay usuario, correo o token se lanza un error
-		if (!user?.mail || !token) {
+		// Si no hay usuario o token se lanza un error
+		if (!user || !token) {
 			throw new Error(ERROR_MESSAGES.NOT_AUTHENTICATED);
 		}
-		// Si no hay error, se procede a actualizar al usuario con la nueva excursión
-		const updatedUser = await joinExcursionService(
-			user.mail,
-			String(excursionId),
-			token
+
+		// Validamos el usuario actual con Zod antes de usar sus datos.
+		const validUser = userSchema.parse(user);
+
+		/**
+		 * Comprobación para evitar llamadas innecesarias a la API si el usuario ya está apuntado.
+		 */
+		const isAlreadyJoined = validUser.excursions.some(
+			(id) => String(id) === String(excursionId),
 		);
-		// Si es un usuario correcto entonces se actualiza su información en la store
-		if (isUser(updatedUser)) {
-			dispatch(updateUser({ user: updatedUser }));
-		} else {
-			throw new Error(ERROR_MESSAGES.INVALID_RESPONSE);
+
+		if (isAlreadyJoined) {
+			// Si el usuario ya está apuntado, no hacemos nada. La acción se considera completada.
+			if (process.env.NODE_ENV === "development") {
+				console.warn(
+					`Intento de unirse a una excursión ya apuntada (ID: ${excursionId}). Acción omitida.`,
+				);
+			}
+			return;
 		}
+
+		// Si no hay error, se procede a actualizar al usuario con la nueva excursión
+		const updatedUserFromApi = await joinExcursionService(
+			validUser.mail,
+			String(excursionId),
+			token,
+		);
+
+		// Validamos la respuesta de la API otra vez con Zod. Se hace para asegurarnos de que los datos que recibimos 
+		// son correctos y cumplen con el esquema definido, ya que la API podría tener un bug, estar en mantenimiento 
+		// o retornar datos inesperados. Con eso, se evita guardar datos corruptos o mal formados en Redux.
+		// .parse() lanza un error si la validación falla, que será capturado por el catch del hook superior.
+		// Si tiene éxito, retorna el objeto tipado y validado.
+		const validatedUser = userSchema.parse(updatedUserFromApi);
+		dispatch(updateUser({ user: validatedUser }));
 	};
 
 	return { joinExcursion };
