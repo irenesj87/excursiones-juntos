@@ -6,18 +6,18 @@ import { RootState } from "../../store/store";
 /** Define las propiedades esperadas por el componente ProtectedRoute. */
 interface ProtectedRouteProps {
 	/** El componente a renderizar si el usuario está autenticado. */
-	children: React.ReactNode;
+	readonly children: React.ReactNode;
 	/** Indica si la comprobación de autenticación inicial ha finalizado. */
-	isAuthCheckComplete: boolean;
+	readonly isAuthCheckComplete: boolean;
 }
 
 /**
  * Componente que protege rutas, redirigiendo a la página de login si el usuario no está autenticado.
  */
-const ProtectedRoute = ({
+function ProtectedRoute({
 	children,
 	isAuthCheckComplete,
-}: ProtectedRouteProps): React.ReactElement => {
+}: ProtectedRouteProps): React.ReactElement{
 	const { login: isLoggedIn } = useSelector(
 		(state: RootState) => state.loginReducer
 	);
@@ -36,6 +36,6 @@ const ProtectedRoute = ({
 	// Mientras la comprobación está en curso, el componente hijo (`LazyRouteWrapper`) mostrará un esqueleto de carga, evitando una
 	// pantalla en blanco.
 	return <>{children}</>;
-};
+}
 
 export default ProtectedRoute;

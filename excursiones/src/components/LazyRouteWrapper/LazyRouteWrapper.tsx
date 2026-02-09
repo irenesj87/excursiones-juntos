@@ -15,11 +15,11 @@ interface LazyRouteWrapperProps<P extends object> {
  * Componente que envuelve una ruta cargada de forma perezosa (lazy loading) con un esqueleto de carga.
  * Utiliza React.Suspense para mostrar un componente de esqueleto mientras se carga el componente de página.
  */
-const LazyRouteWrapper = <P extends object>({
+function LazyRouteWrapper<P extends object>({
 	PageComponent,
 	SkeletonComponent,
 	pageProps,
-}: LazyRouteWrapperProps<P>): JSX.Element => {
+}: LazyRouteWrapperProps<P>): JSX.Element{
 	return (
 		<Col xs={12}>
 			<Suspense fallback={<SkeletonComponent />}>
@@ -27,6 +27,6 @@ const LazyRouteWrapper = <P extends object>({
 			</Suspense>
 		</Col>
 	);
-};
+}
 
 export default LazyRouteWrapper;

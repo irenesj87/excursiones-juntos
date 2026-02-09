@@ -1,17 +1,11 @@
 import { RefObject } from "react";
+import * as schemas from "./schemas/userSchema";
+
+/** Re-exporta el tipo User del esquema para uso local y global. */
+export type User = schemas.User;
 
 /** Define los posibles valores para la dificultad de una excursión. */
 export type DifficultyLevel = "Baja" | "Media" | "Alta";
-
-/** Define la estructura de un usuario en la aplicación. */
-export interface User {
-	id: string | number;
-	name: string;
-	surname: string;
-	mail: string;
-	phone: string;
-	excursions: (string | number)[];
-}
 
 /** Define la estructura del estado de inicio de sesión. */
 export interface LoginState {
