@@ -1,4 +1,3 @@
-import React from "react";
 import { Row, Col } from "react-bootstrap";
 import ExcursionCard from "../ExcursionCard";
 import ExcursionsLoading from "./ExcursionsLoading";
@@ -19,7 +18,7 @@ const TEXTS = {
 /**
  * Este componente se encarga de mostrar las excursiones.
  */
-function ExcursionsListView({
+export function ExcursionsListView({
 	excursions,
 	isLoading,
 	error,

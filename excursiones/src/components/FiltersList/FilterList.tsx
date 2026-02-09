@@ -2,7 +2,7 @@ import React from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import FiltersListCheckbox from "../FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
-import FilterError from "../FilterError";
+import FeedbackAlert from "../../ui/FeedbackAlert";
 import { useFilters } from "./useFilters";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
@@ -47,7 +47,7 @@ function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
 	 * Muestra un mensaje de error si la carga de filtros falla.
 	 */
 	if (error) {
-		return <FilterError />;
+		return <FeedbackAlert variant="danger" message="Hubo un error al cargar los filtros." />;
 	}
 
 	// Muestra la lista de filtros una vez que la carga ha terminado y no hay errores.

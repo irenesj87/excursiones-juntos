@@ -4,6 +4,9 @@ import { RootState } from "../../store/store";
 import { Excursion } from "../../types";
 import { useJoinExcursionAction } from "./useJoinExcursionAction";
 
+const JOIN_EXCURSION_ERROR_MSG =
+	"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde.";
+
 /**
  * Define qué datos recibe el hook desde el componente padre (datos crudos, estado de carga).
  */
@@ -26,26 +29,30 @@ export interface ExcursionsListViewProps {
 }
 
 /**
- * Este hook actúa como un intermediario inteligente, dando a la UI un conjunto de datos y funciones ya procesados
- * y listos para usar. 
+ * Custom hook que actúa como el cerebro del listado de excursiones.
+ * Su objetivo principal es separar la lógica de negocio de la interfaz visual.
+ * Es el intermediario (controller) entre los datos crudos que vienen del padre (ExcursionsListProps) y lo que la UI
+ * necesita para renderizar (ExcursionsListViewProps).
+ * Además, integra la lógica de negocio para apuntarse a una excursión, utilizando otro hook especializado
+ * (useJoinExcursionAction).
  */
 export function useExcursionsListLogic({
 	excursionData = [],
 	isLoading,
 	error,
 }: ExcursionsListProps): ExcursionsListViewProps {
-	// se accede a Redux para saber si el usuario está logueado o no.
+	// Se accede a Redux para saber si el usuario está logueado o no.
 	const { login: isLoggedIn, user } = useSelector(
-		(state: RootState) => state.loginReducer
+		(state: RootState) => state.loginReducer,
 	);
 	// Se obtiene la función joinExcursion de otro hook.
 	const { joinExcursion } = useJoinExcursionAction();
 
 	// Mantenemos los resultados antiguos visibles mientras cargan los nuevos para evitar parpadeos (UX).
-    // Si simplemente se pasara excursionData, cuando el usuario refresca la vista, la pantalla podría parpadear,
-    // borrando lo que ya estaba viendo.
-    // Con el estado local displayedExcursions, se congela la lista antigua en pantalla mientras isLoading sea true.
-    // Solo cuando la carga termina, se actualiza la lista con los datos nuevos.
+	// Si simplemente se pasara excursionData, cuando el usuario refresca la vista, la pantalla podría parpadear,
+	// borrando lo que ya estaba viendo.
+	// Con el estado local displayedExcursions, se congela la lista antigua en pantalla mientras isLoading sea true.
+	// Solo cuando la carga termina, se actualiza la lista con los datos nuevos.
 	const [displayedExcursions, setDisplayedExcursions] =
 		useState<readonly Excursion[]>(excursionData);
 
@@ -56,10 +63,16 @@ export function useExcursionsListLogic({
 	}, [isLoading, excursionData]);
 
 	// Transformación a Set para búsquedas O(1) en el renderizado.
-    // Toma la lista de excursiones del usuario(si existe), convierte todos los IDs a texto para evitar errores de
-    // comparación y luego los guarda en un Set para ir más rápido.
+	// Toma la lista de excursiones a las que se ha apuntado el usuario(si existe), convierte todos los IDs a texto
+	// para evitar errores de comparación y luego los guarda en un Set para para que cuando el componente visual
+	// dibuje la lista y tenga que preguntar "¿el usuario se ha apuntado a esta excursión?" para cada tarjeta pueda 
+	// responder instantáneamente ya que la complejidad del Set es O(1) y no tenga que recorrer una array cuya 
+	// complejidad es O(n).
 	const joinedExcursionIds = new Set((user?.excursions || []).map(String));
 
+	// Función que la UI llamará cuando el usuario quiera apuntarse a una excursión. Si falla el intento de apuntarse
+	// a una excursión, captura el error técnico, lo loguea para los desarrolladores y luego lanza un error genérico 
+	// con un mensaje amigable para que la UI lo muestre al usuario, sin exponer detalles técnicos.
 	const handleJoinExcursion = async (excursionId: string | number) => {
 		try {
 			await joinExcursion(excursionId);
@@ -67,21 +80,22 @@ export function useExcursionsListLogic({
 			if (process.env.NODE_ENV === "development") {
 				console.error("Error detallado (dev):", caughtError);
 			} else {
-				const errorMessage = caughtError instanceof Error ? caughtError.message : "Error desconocido";
+				const errorMessage =
+					caughtError instanceof Error
+						? caughtError.message
+						: "Error desconocido";
 				console.error("Error técnico al unirse a la excursión:", errorMessage);
 			}
 			// Relanzamos un error genérico para que la UI pueda mostrar un mensaje amigable
 			// sin exponer detalles de la implementación.
-			throw new Error(
-				"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde."
-			);
+			throw new Error(JOIN_EXCURSION_ERROR_MSG);
 		}
 	};
 
 	return {
 		excursions: displayedExcursions,
 		// Indica si se están cargando excursiones. La UI utilizará este boolean para mostrar un estado de carga,
-		// en este caso, en skeleton.
+		// en este caso, un skeleton.
 		isLoading,
 		error,
 		isLoggedIn,
