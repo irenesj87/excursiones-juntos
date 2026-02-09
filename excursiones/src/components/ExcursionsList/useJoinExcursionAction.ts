@@ -6,8 +6,7 @@ import { User } from "../../types";
 
 /**
  * Este Custom Hook encapsula la lógica de negocio necesaria para que un usuario se apunte a una excursión.
- * Su objetivo principal es separar esta lógica de la interfaz de usuario (UI) en ExcursionsList.tsx,
- * siguiendo el principio de Separación de Responsabilidades.
+ * Su objetivo principal es separar esta lógica de la interfaz de usuario (UI) en ExcursionsList.tsx.
  */
 
 /**
