@@ -415,7 +415,7 @@ html.dark .btn-close {
 .offcanvas-header {
 	background-color: var(--excursion-card-bg); /* Unifica el fondo con el body */
 	color: var(--color-text-base); /* Mantiene el color del texto del tema */
-	border-bottom: 1px solid var(--separator-color);
+	border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .offcanvas-body {

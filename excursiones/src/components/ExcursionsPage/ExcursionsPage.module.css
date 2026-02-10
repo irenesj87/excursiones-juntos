@@ -47,13 +47,3 @@
 	color: var(--filter-title-color);
 	margin-bottom: 0; /* Eliminamos el margen para que la X se alinee perfectamente al centro */
 }
-
-/* Clase para redondear los bordes del Offcanvas (estética orgánica) */
-.offcanvasRounded {
-	border-top-right-radius: var(--border-radius-lg);
-	border-bottom-right-radius: var(--border-radius-lg);
-	overflow: hidden; /* Necesario para que el header no tape el redondeado */
-	border-right: none; /* Eliminamos borde derecho si existiera para limpieza visual */
-	/* Sobrescribimos la transición de Bootstrap para un efecto más orgánico (ease-out) */
-	transition: transform 0.3s ease-out !important;
-}

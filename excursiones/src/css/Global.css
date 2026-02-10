@@ -144,6 +144,19 @@ parecen inactivos. */
 	padding: 0;
 }
 
+/* 
+ * Clase global para redondear los bordes del Offcanvas (estética orgánica).
+ * Se define aquí para aumentar la especificidad (.offcanvas.offcanvasRounded) 
+ * y evitar el uso de !important en la transición.
+ */
+.offcanvas.offcanvasRounded {
+	border-top-right-radius: var(--border-radius-lg);
+	border-bottom-right-radius: var(--border-radius-lg);
+	overflow: hidden;
+	border-right: none;
+	transition: transform 0.3s ease-out;
+}
+
 /* --- Estilos Globales --- */
 /* Elimina transiciones por defecto para evitar parpadeos al cambiar de tema */
 .form-control,

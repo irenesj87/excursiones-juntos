@@ -95,7 +95,7 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 						show={showFilters}
 						onHide={handleCloseFilters}
 						placement="start"
-						className={`d-md-none ${styles.offcanvasRounded}`}
+						className="d-md-none offcanvasRounded"
 						id={MOBILE_FILTERS_ID}
 						aria-labelledby={MOBILE_FILTERS_TITLE_ID}
 					>
