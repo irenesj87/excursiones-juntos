@@ -32,7 +32,7 @@
 	background-color: var(--filters-toggle-btn-bg-active);
 	border-color: var(--filters-toggle-btn-border-active);
 	transform: translateY(-1px);
-	box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+	box-shadow: var(--shadow-lifted);
 }
 
 .filterIcon {
@@ -43,8 +43,7 @@
 .offcanvasTitle {
 	font-family: var(--font-family-serif);
 	font-weight: 600;
-	font-size: 1.5rem;
+	font-size: var(--font-size-xl); /* 1.5rem (24px) */
 	color: var(--filter-title-color);
-	text-transform: uppercase;
-	margin-bottom: 0; /* Alineación perfecta con el botón de cierre */
+	margin-bottom: 0; /* Eliminamos el margen para que la X se alinee perfectamente al centro */
 }

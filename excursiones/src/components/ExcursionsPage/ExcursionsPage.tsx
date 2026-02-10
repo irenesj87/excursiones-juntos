@@ -1,12 +1,21 @@
-import { useState } from "react";
-import { Col, Offcanvas } from "react-bootstrap";
+import { Suspense, lazy, useState } from "react";
+import {
+	Col,
+	OffcanvasBody,
+	OffcanvasHeader,
+	OffcanvasTitle,
+} from "react-bootstrap";
 import Filters from "../Filters";
 import StyledButton from "../../ui/CustomButton/CustomButton";
 import type { ExcursionsState } from "../../hooks/useExcursions";
 import ExcursionsList from "../ExcursionsList";
 import { FilterIcon } from "../../ui/Icons";
 import styles from "./ExcursionsPage.module.css";
-
+/**
+ * IDs para accesibilidad y control del Offcanvas.
+ */
+const MOBILE_FILTERS_ID = "mobile-filters-offcanvas";
+const MOBILE_FILTERS_TITLE_ID = "mobile-filters-title";
 /**
  * Este componente es el contenedor principal del diseño (layout) para la página de listado de escursiones y los
  * filtros, manejando la responsividad entre diferentes breakpoints.
@@ -17,6 +26,11 @@ interface ExcursionsPageProps {
 	// Estado de la petición de las excursiones. Contiene los datos, el estado de carga y posibles errores.
 	readonly excursionsState: ExcursionsState;
 }
+
+/**
+ * El componente Offcanvas se carga con lazy loading ya que sólo se utiliza en breakpoints pequeños.
+ */
+const LazyOffcanvas = lazy(() => import("react-bootstrap/esm/Offcanvas"));
 
 /**
  * Componente principal.
@@ -40,6 +54,7 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 			</Col>
 			{/* Contenido principal */}
 			<Col
+				as="main"
 				xs={12}
 				md={8}
 				lg={9}
@@ -49,10 +64,10 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 				{/* Botón para mostrar filtros (visible hasta 'md') */}
 				<div className={`d-md-none ${styles.mobileFiltersBar}`}>
 					<StyledButton
-						variant="secondary" /* El CSS module sobrescribe los colores, pero esto mantiene props válidas */
+						variant="secondary"
 						onClick={handleShowFilters}
 						className={styles.filtersToggleButton}
-						aria-controls="mobile-filters-offcanvas"
+						aria-controls={MOBILE_FILTERS_ID}
 						aria-label="Mostrar filtros"
 					>
 						<FilterIcon
@@ -75,26 +90,28 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 				/>
 
 				{/* Menú Offcanvas para los filtros en breakpoints hasta 'md'. */}
-				<Offcanvas
-					show={showFilters}
-					onHide={handleCloseFilters}
-					placement="start"
-					className="d-md-none"
-					id="mobile-filters-offcanvas"
-					aria-labelledby="mobile-filters-title"
-				>
-					<Offcanvas.Header closeButton className="pb-0">
-						<Offcanvas.Title
-							id="mobile-filters-title"
-							className={styles.offcanvasTitle}
-						>
-							Filtros
-						</Offcanvas.Title>
-					</Offcanvas.Header>
-					<Offcanvas.Body className="d-flex flex-column">
-						<Filters showTitle={false} />
-					</Offcanvas.Body>
-				</Offcanvas>
+				<Suspense fallback={null}>
+					<LazyOffcanvas
+						show={showFilters}
+						onHide={handleCloseFilters}
+						placement="start"
+						className="d-md-none offcanvasRounded"
+						id={MOBILE_FILTERS_ID}
+						aria-labelledby={MOBILE_FILTERS_TITLE_ID}
+					>
+						<OffcanvasHeader closeButton>
+							<OffcanvasTitle
+								id={MOBILE_FILTERS_TITLE_ID}
+								className={styles.offcanvasTitle}
+							>
+								Filtros
+							</OffcanvasTitle>
+						</OffcanvasHeader>
+						<OffcanvasBody className="d-flex flex-column">
+							<Filters showTitle={false} />
+						</OffcanvasBody>
+					</LazyOffcanvas>
+				</Suspense>
 			</Col>
 		</>
 	);

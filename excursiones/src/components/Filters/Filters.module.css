@@ -48,7 +48,6 @@
 /* Footer que contiene el botón de limpiar */
 .filtersFooter {
 	padding: 1rem 1.5rem;
-	border-top: 1px solid var(--color-border-subtle);
 	background-color: var(
 		--filter-container-bg
 	); /* Asegura que tenga fondo si el contenido hace scroll por detrás */
