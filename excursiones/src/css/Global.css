@@ -132,8 +132,10 @@ parecen inactivos. */
 
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
-	font-weight: bolder;
-	padding: 1rem 1.2rem;
+	/* Eliminamos el font-weight global para que el componente .offcanvasTitle tenga control total
+	   sobre la tipografía, permitiendo un estilo más refinado y específico. */
+	/* Usamos la escala espacial (16px y 24px) para un ritmo vertical consistente. */
+	padding: 1rem 1.5rem;
 }
 
 .offcanvas-body {
