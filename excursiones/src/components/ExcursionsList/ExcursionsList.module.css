@@ -38,6 +38,17 @@
 	}
 }
 
+/**
+ * Si el usuario ha indicado que prefiere reducir las animaciones, desactiva la animación y muestra las tarjetas 
+ * sin efectos.
+ */
+@media (prefers-reduced-motion: reduce) {
+	.cardItem {
+		animation: none;
+		opacity: 1;
+	}
+}
+
 /* Aplica la animación a cada tarjeta de la lista */
 .cardItem {
 	opacity: 0; /* Estado inicial invisible para evitar parpadeos */
