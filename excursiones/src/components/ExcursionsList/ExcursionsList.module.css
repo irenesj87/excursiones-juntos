@@ -10,9 +10,7 @@
 	margin-bottom: 3rem;
 	padding-bottom: 0;
 	color: var(--color-text-base);
-	font-size: var(
-		--font-size-xxl
-	);
+	font-size: var(--font-size-xxl);
 	font-weight: bold;
 	text-align: center;
 	font-family: var(--font-family-serif);
@@ -23,4 +21,29 @@
 	.title {
 		text-align: left;
 	}
+}
+
+/*
+ * Define la animación de entrada para las tarjetas.
+ * Empiezan ligeramente desplazadas y transparentes, y se animan hasta su posición final.
+ */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Aplica la animación a cada tarjeta de la lista */
+.cardItem {
+	opacity: 0; /* Estado inicial invisible para evitar parpadeos */
+	animation: fadeInUp 0.5s ease-out forwards;
+	/* El retardo se calcula en base a la variable CSS --animation-order, que se pasa desde el componente React */
+	animation-delay: calc(
+		var(--animation-order) * 80ms
+	); /* 80ms de retardo entre tarjetas */
 }

@@ -47,7 +47,7 @@ export function ExcursionsListView({
 
 		return (
 			<Row as="ul" className="gx-4 gy-5 list-unstyled">
-				{excursions.map((excursion) => {
+				{excursions.map((excursion, index) => {
 					const isJoined =
 						isLoggedIn && joinedExcursionIds.has(String(excursion.id));
 
@@ -59,7 +59,12 @@ export function ExcursionsListView({
 							lg={4}
 							key={excursion.id}
 							xl={3}
-							className="d-flex"
+							className={`d-flex ${styles.cardItem}`}
+							style={
+								{
+									"--animation-order": index,
+								} as React.CSSProperties
+							}
 						>
 							<ExcursionCard
 								id={excursion.id}
