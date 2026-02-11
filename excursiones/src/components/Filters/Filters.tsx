@@ -39,7 +39,7 @@ const filterSections = [
 	},
 	{
 		name: "time",
-		title: "Tiempo Estimado",
+		title: "Tiempo estimado",
 		icon: <ClockIcon className={styles.filterIcon} />,
 	},
 ] satisfies FilterSection[];
@@ -80,8 +80,10 @@ function Filters({ showTitle = true }: FiltersProps) {
 					className={styles.clearButton}
 					disabled={!hasActiveFilters}
 				>
-					<FilterXIcon className={styles.filterIcon} />
-					<span>Limpiar Filtros</span>
+					<span className={styles.buttonContent}>
+						<FilterXIcon className={styles.filterIcon} />
+						Limpiar filtros
+					</span>
 				</StyledButton>
 			</footer>
 		</div>
