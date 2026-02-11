@@ -80,8 +80,10 @@ function Filters({ showTitle = true }: FiltersProps) {
 					className={styles.clearButton}
 					disabled={!hasActiveFilters}
 				>
-					<FilterXIcon className={styles.filterIcon} />
-					<span>Limpiar Filtros</span>
+					<span className={styles.buttonContent}>
+						<FilterXIcon className={styles.filterIcon} />
+						Limpiar Filtros
+					</span>
 				</StyledButton>
 			</footer>
 		</div>

@@ -226,8 +226,12 @@ html.dark {
 		--color-stone-300
 	); /* Aclarado para AAA sobre fondo oscuro */
 	--color-text-on-primary: var(--color-black-soft);
-	--color-border-default: var(--color-green-dark-600);
-	--color-border-subtle: var(--color-green-dark-700);
+	--color-border-default: var(
+		--color-green-dark-500
+	); /* Aclarado para mayor contraste */
+	--color-border-subtle: var(
+		--color-green-dark-600
+	); /* Aclarado para ser visible sobre bg-800 */
 
 	/* --- 2b. Variables de Componente --- */
 
