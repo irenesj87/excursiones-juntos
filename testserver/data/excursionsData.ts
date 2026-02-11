@@ -28,7 +28,7 @@ const excursions: Excursion[] = [
 	},
 	{
 		id: "1",
-		name: "Parque Natural de Somiedo",
+		name: "Parque natural de Somiedo",
 		description:
 			"Hogar del oso pardo, esta ruta te llevará a través de valles verdes y te permitirá ver las tradicionales cabañas de teito.",
 		area: "Centro",
