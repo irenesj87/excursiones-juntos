@@ -37,10 +37,7 @@
 	font-family: var(--font-family-serif);
 }
 
-.filterTitle .filterIcon {
-	font-size: 1.25rem;
-}
-
+.filterTitle .filterIcon,
 .clearButton .filterIcon {
 	font-size: 1.25rem;
 }
