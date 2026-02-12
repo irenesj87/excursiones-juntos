@@ -16,7 +16,7 @@
 	margin: 0;
 	display: block;
 	width: 100%;
-	padding: 0.5rem 1rem; /* Más padding horizontal para elegancia */
+	padding: 0.5rem 1rem;
 	font-weight: 500;
 	color: var(--filter-pill-text);
 	background-color: var(--filter-pill-bg);
@@ -48,15 +48,15 @@
 	border-color: var(--filter-pill-border-checked);
 	color: var(
 		--filter-pill-text-checked
-	); /* Asegura contraste correcto (ej: texto oscuro sobre fondo claro en Dark Mode) */
+	);
 	box-shadow: var(--shadow-soft); /* Profundidad para el estado activo */
 }
 
 /* 
  * ACCESIBILIDAD (FOCUS BRIDGE):
  * Como el input está oculto (.visuallyHidden), el estilo global :focus-visible no se ve.
- * Usamos el selector de hermano adyacente (+) para aplicar el anillo de foco al label
- * cuando el input tiene el foco por teclado.
+ * Usamos el selector de hermano adyacente (+) para aplicar el anillo de foco al label cuando el input tiene el foco
+ * por teclado.
  */
 .visuallyHidden:focus-visible + .filterPill {
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
