@@ -71,7 +71,7 @@ export function useFilters(filterName: string): FiltersState {
 			dispatch({ type: "FETCH_INIT" });
 
 			// Función para manejar los errores de forma centralizada
-			// Esta función maneja tanto errores conocidos (instancias de Error) como errores desconocidos 
+			// Esta función maneja tanto errores conocidos (instancias de Error) como errores desconocidos
 			// (cualquier otro tipo).
 			// Al no saber el tipo de error se utiliza el unknown.
 			const handleError = (error: unknown) => {
@@ -86,11 +86,12 @@ export function useFilters(filterName: string): FiltersState {
 						error,
 					);
 
-					// Si ha habido un error al hacer fetch
-					if (
+					const isConnectionError =
 						error instanceof TypeError &&
-						error.message === FAILED_TO_FETCH_MESSAGE
-					) {
+						error.message === FAILED_TO_FETCH_MESSAGE;
+
+					// Si ha habido un error al hacer fetch
+					if (isConnectionError) {
 						console.error(
 							"Pista para el desarrollador: El servidor de la API no parece estar respondiendo. ¿Está en marcha?",
 						);
@@ -98,10 +99,7 @@ export function useFilters(filterName: string): FiltersState {
 
 					// Creamos un nuevo error con un mensaje más amigable para el usuario, y si es un error de conexión, añadimos un mensaje secundario.
 					let finalError: Error;
-					if (
-						error instanceof TypeError &&
-						error.message === FAILED_TO_FETCH_MESSAGE
-					) {
+					if (isConnectionError) {
 						finalError = new Error(CONNECTION_ERROR_MESSAGE);
 						(finalError as AppError).secondaryMessage =
 							CONNECTION_ERROR_SECONDARY_MESSAGE;
@@ -110,7 +108,7 @@ export function useFilters(filterName: string): FiltersState {
 							error.message || "No se pudieron cargar los filtros.",
 						);
 					}
-					// Se envía el error al reducer, asegurando que se respete el tiempo mínimo de visualización 
+					// Se envía el error al reducer, asegurando que se respete el tiempo mínimo de visualización
 					// del estado de carga.
 					dispatchWithMinDisplayTime({
 						type: "FETCH_FAILURE",
