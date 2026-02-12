@@ -1,14 +1,12 @@
 import { useId } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { toggleFilter } from "../../slices/filterSlice";
 import cn from "classnames";
+import { useFilterCheckboxLogic } from "./useFilterCheckboxLogic";
 import styles from "./FiltersListCheckbox.module.css";
 import type { FilterState } from "../../slices/filterSlice";
 
 interface FiltersListCheckboxProps {
 	readonly filterName: keyof FilterState; // Por ejemplo: 'area', 'difficulty', 'time'
-	readonly filter: string; // El valor específico del filtro, por ejemplo: 'Montaña', 'Baja'
+	readonly filter: string; // El valor específico del filtro, por ejemplo: 'Centro', 'Baja'
 }
 
 interface LabelProps {
@@ -17,7 +15,7 @@ interface LabelProps {
 	readonly isChecked: boolean;
 }
 
-// Componente interno para la etiqueta del filtro (unificado).
+// Componente interno para la etiqueta del filtro.
 function FilterLabel({ htmlFor, filter, isChecked }: LabelProps) {
 	return (
 		<label
@@ -32,26 +30,13 @@ function FilterLabel({ htmlFor, filter, isChecked }: LabelProps) {
 }
 
 function FiltersListCheckbox({ filterName, filter }: FiltersListCheckboxProps) {
-	const dispatch = useDispatch();
-
-	// Obtenemos los filtros seleccionados para esta categoría (ej. 'area') desde Redux
-	const selectedFilters = useSelector(
-		(state: RootState) => state.filterReducer[filterName],
+	// Usamos el hook personalizado para obtener el estado y la función manejadora.
+	const { isChecked, handleToggle } = useFilterCheckboxLogic(
+		filterName,
+		filter,
 	);
 
-	// El filtro está seleccionado si su valor está incluido en el array del estado de Redux
-	const isChecked = selectedFilters.includes(filter);
-
-	/**
-	 * Maneja el evento de cambio del checkbox.
-	 */
-	const handleToggle = () => {
-		dispatch(toggleFilter({ filterType: filterName, value: filter }));
-	};
-
-	/**
-	 * Genera un ID único para el checkbox y su etiqueta asociada.
-	 */
+	// Genera un ID único para el checkbox y su etiqueta asociada.
 	const id = useId();
 
 	// Renderizamos el checkbox oculto y la etiqueta estilizada como un "pill".
