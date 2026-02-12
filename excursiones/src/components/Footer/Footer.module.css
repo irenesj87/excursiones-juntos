@@ -7,7 +7,7 @@
 	text-align: center;
 	background-color: var(--footer-bg);
 	color: var(--footer-text-color);
-	border-top: 1px solid var(--color-border-subtle); /* Borde suave para consistencia */
+	border-top: 1px solid var(--color-border-subtle);
 	transition: none;
 }
 
@@ -29,7 +29,9 @@
 	height: 1em;
 	display: inline-block;
 	vertical-align: middle;
-	margin-right: 0.3em;
+	margin-right: 0.3em; /* Espacio entre el icono y el texto en breakpoints pequeños */
+	/* Ajuste vertical fino para alinear el icono con el centro del texto en breakpoints pequeños.
+	   En breakpoints grandes, se resetea y se usa flexbox para la alineación. */
 	transform: translateY(-0.15em);
 }
 

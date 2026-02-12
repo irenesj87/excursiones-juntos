@@ -5,6 +5,9 @@ import styles from "./Footer.module.css";
 
 const COPYRIGHT_TEXT = "Todos los derechos reservados.";
 
+/**
+ * Componente del pie de página que muestra la información de copyright y el año.
+ */
 function Footer(): JSX.Element {
 	const currentYear = new Date().getFullYear();
 	const yearDisplay =
