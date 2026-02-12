@@ -8,6 +8,9 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
 import type { FilterState } from "../../slices/filterSlice";
 
+const SKELETON_COUNT = 4;
+const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
+
 // Props del componente FiltersList.
 interface FiltersListProps {
 	readonly filterName: keyof FilterState; // El nombre de la categoría de filtro (ej. "area").
@@ -34,7 +37,7 @@ function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
 				</output>
 				<ul className={styles.filtersGrid} aria-hidden="true">
 					{/* Mostramos 4 esqueletos para simular mejor el contenido real y evitar saltos de layout */}
-					{Array.from({ length: 4 }).map((_, index) => (
+					{SKELETON_ITEMS.map((_, index) => (
 						<li key={`skeleton-${filterName}-${index}`}>
 							<FilterPillSkeleton />
 						</li>
@@ -47,7 +50,12 @@ function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
 	 * Muestra un mensaje de error si la carga de filtros falla.
 	 */
 	if (error) {
-		return <FeedbackAlert variant="danger" message="Hubo un error al cargar los filtros." />;
+		return (
+			<FeedbackAlert
+				variant="danger"
+				message="Hubo un error al cargar los filtros."
+			/>
+		);
 	}
 
 	// Muestra la lista de filtros una vez que la carga ha terminado y no hay errores.
