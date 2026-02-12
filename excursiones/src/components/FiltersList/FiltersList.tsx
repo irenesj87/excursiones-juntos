@@ -3,7 +3,7 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import FiltersListCheckbox from "../FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
 import FeedbackAlert from "../../ui/FeedbackAlert";
-import { useFilters } from "./useFilters";
+import { useFilters } from "./useFetchFilters";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
 import type { FilterState } from "../../slices/filterSlice";
@@ -36,7 +36,7 @@ function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
 					Cargando filtros de {filterName}...
 				</output>
 				<ul className={styles.filtersGrid} aria-hidden="true">
-					{/* Mostramos 4 esqueletos para simular mejor el contenido real y evitar saltos de layout */}
+					{/* Mostramos esqueletos para evitar saltos de layout */}
 					{SKELETON_ITEMS.map((_, index) => (
 						<li key={`skeleton-${filterName}-${index}`}>
 							<FilterPillSkeleton />
