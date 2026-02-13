@@ -30,7 +30,7 @@ function GuestNavSkeleton(): JSX.Element {
 					height={GUEST_NAV_SKELETON_SIZES.HEIGHT}
 					aria-hidden="true"
 					borderRadius={GUEST_NAV_SKELETON_SIZES.BORDER_RADIUS}
-					className="me-2" // Aplica el margen directamente al esqueleto
+					className="me-2"
 				/>
 				<Skeleton
 					width={GUEST_NAV_SKELETON_SIZES.LOGIN_LINK_WIDTH}
