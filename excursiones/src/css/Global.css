@@ -154,20 +154,21 @@ parecen inactivos. */
 	transition: transform 0.3s ease-out;
 }
 
-/* Estilos para Offcanvas que aparecen desde la derecha */
-.offcanvas.offcanvas-end {
-	border-top-left-radius: var(--border-radius-lg);
-	border-bottom-left-radius: var(--border-radius-lg);
+/* Estilos para Offcanvas que aparecen desde los lados */
+.offcanvas.offcanvas-end,
+.offcanvas.offcanvas-start {
 	box-shadow: var(--shadow-soft);
 	overflow: hidden; /* Recorta el contenido interior (cuadrado) para respetar los bordes redondeados */
 }
 
-/* Estilos para Offcanvas que aparecen desde la izquierda */
+.offcanvas.offcanvas-end {
+	border-top-left-radius: var(--border-radius-lg);
+	border-bottom-left-radius: var(--border-radius-lg);
+}
+
 .offcanvas.offcanvas-start {
 	border-top-right-radius: var(--border-radius-lg);
 	border-bottom-right-radius: var(--border-radius-lg);
-	box-shadow: var(--shadow-soft);
-	overflow: hidden; /* Recorta el contenido interior (cuadrado) para respetar los bordes redondeados */
 }
 
 /* Título del Offcanvas con tipografía Serif para consistencia con los encabezados */
