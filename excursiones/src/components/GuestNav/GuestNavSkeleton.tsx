@@ -3,12 +3,10 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
-// Define placeholder dimensions as constants to avoid magic numbers and improve maintainability.
 export const GUEST_NAV_SKELETON_SIZES = {
-	// Ajustados para reflejar de forma más precisa el tamaño real de los botones y minimizar el CLS.
-	REGISTER_LINK_WIDTH: 142, // +28px por el icono
-	LOGIN_LINK_WIDTH: 157, // +28px por el icono
-	HEIGHT: 44,
+	REGISTER_LINK_WIDTH: 152, 
+	LOGIN_LINK_WIDTH: 174, 
+	HEIGHT: 45,
 	BORDER_RADIUS: "50rem",
 };
 

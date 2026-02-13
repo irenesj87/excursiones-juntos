@@ -15,12 +15,15 @@ interface GuestNavProps {
 	readonly className?: string;
 }
 
+/** Tamaño estándar para los iconos de navegación. */
+const NAV_ICON_SIZE = 20;
+
 const NO_OP = () => {
 	/* no-op */
 };
 
 /**
- * Muestra los enlaces de navegación para un usuario invitado (no logueado). Permite cerrar un menú contenedor (como un Offcanvas)
+ * Muestra los enlaces de navegación para un usuario no logueado. Permite cerrar un menú contenedor (como un Offcanvas)
  * si se proporciona la función `onCloseMenu`.
  */
 function GuestNav({
@@ -46,15 +49,15 @@ function GuestNav({
 					"border-0": variant === "offcanvas",
 				})}
 			>
-				<RegisterIcon size={20} className="me-2" />
-				Regístrate
+				<RegisterIcon size={NAV_ICON_SIZE} className="me-2" />
+				Registrarse
 			</StyledNavLink>
 			<StyledNavLink
 				to={ROUTES.LOGIN}
 				onClick={onCloseMenu}
 				className={styles.loginLink}
 			>
-				<LogInIcon size={20} className="me-2" />
+				<LogInIcon size={NAV_ICON_SIZE} className="me-2" />
 				Iniciar sesión
 			</StyledNavLink>
 		</div>

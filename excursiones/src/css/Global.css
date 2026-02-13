@@ -132,9 +132,6 @@ parecen inactivos. */
 
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
-	/* Eliminamos el font-weight global para que el componente .offcanvasTitle tenga control total
-	   sobre la tipografía, permitiendo un estilo más refinado y específico. */
-	/* Usamos la escala espacial (16px y 24px) para un ritmo vertical consistente. */
 	padding: 1rem 1.5rem;
 }
 
@@ -155,6 +152,29 @@ parecen inactivos. */
 	overflow: hidden;
 	border-right: none;
 	transition: transform 0.3s ease-out;
+}
+
+/* Estilos para Offcanvas que aparecen desde la derecha */
+.offcanvas.offcanvas-end {
+	border-top-left-radius: var(--border-radius-lg);
+	border-bottom-left-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-soft);
+	overflow: hidden; /* Recorta el contenido interior (cuadrado) para respetar los bordes redondeados */
+}
+
+/* Estilos para Offcanvas que aparecen desde la izquierda */
+.offcanvas.offcanvas-start {
+	border-top-right-radius: var(--border-radius-lg);
+	border-bottom-right-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-soft);
+	overflow: hidden; /* Recorta el contenido interior (cuadrado) para respetar los bordes redondeados */
+}
+
+/* Título del Offcanvas con tipografía Serif para consistencia con los encabezados */
+.offcanvas-title {
+	font-family: var(--font-family-serif);
+	font-weight: bold;
+	font-size: var(--font-size-xl);
 }
 
 /* --- Estilos Globales --- */
@@ -181,7 +201,7 @@ body {
 	text-align: center;
 	padding: 0.6rem 1rem;
 	text-decoration: none;
-	border-radius: 0.375rem;
+	border-radius: var(--border-radius-pill);
 	border: 1px solid var(--separator-color);
 }
 

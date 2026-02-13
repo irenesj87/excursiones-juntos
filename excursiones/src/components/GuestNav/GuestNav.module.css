@@ -2,8 +2,8 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	border-radius: var(--border-radius-pill);
 	color: var(--register-link-color);
-	user-select: none;
 }
 
 .registerLink:hover {
@@ -13,7 +13,6 @@
 		color 0.2s ease-out;
 }
 
-/* Restauramos el cambio de fondo en focus-visible para dar feedback visual, manteniendo el anillo global */
 .registerLink:focus-visible {
 	background-color: var(--register-link-bg-hover);
 	outline: 0;
@@ -23,9 +22,10 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	border-radius: var(--border-radius-pill);
 	background-color: var(--login-btn-bg);
 	color: var(--login-btn-text);
-	transition: none; /* Se mueve a :hover para evitar la animación en el cambio de tema */
+	transition: none;
 }
 
 .loginLink:hover {
@@ -36,7 +36,6 @@
 		color 0.2s ease-out;
 }
 
-/* Restauramos el estilo de focus-visible para coincidir con el hover */
 .loginLink:focus-visible {
 	background-color: var(--login-btn-bg-hover);
 	color: var(--login-btn-text-hover);
