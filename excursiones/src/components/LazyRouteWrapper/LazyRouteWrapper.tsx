@@ -1,14 +1,16 @@
 import React, { Suspense } from "react";
-import { Col } from "react-bootstrap";
 
 /**
  * Props del componente LazyRouteWrapper.
  * Utiliza genéricos para permitir pasar props específicas al componente de página.
  */
 interface LazyRouteWrapperProps<P extends object> {
-	readonly PageComponent: React.ComponentType<P>; // Componente de página que se cargará de forma perezosa.
-	readonly SkeletonComponent: React.ComponentType; // Componente esqueleto que se mostrará mientras se carga la página.
-	readonly pageProps: P; // Props que se pasarán al PageComponent. Para componentes sin props, pasar un objeto vacío {}.
+	/** Componente de página que se cargará de forma perezosa. */
+	readonly PageComponent: React.ComponentType<P>;
+	/** Componente esqueleto que se mostrará mientras se carga la página. */
+	readonly SkeletonComponent: React.ComponentType;
+	/** Props que se pasarán al PageComponent. Para componentes sin props, pasar un objeto vacío {}. */
+	readonly pageProps: P;
 }
 
 /**
@@ -19,12 +21,10 @@ export function LazyRouteWrapper<P extends object>({
 	PageComponent,
 	SkeletonComponent,
 	pageProps,
-}: LazyRouteWrapperProps<P>): JSX.Element{
+}: LazyRouteWrapperProps<P>): JSX.Element {
 	return (
-		<Col xs={12}>
-			<Suspense fallback={<SkeletonComponent />}>
-				<PageComponent {...pageProps} />
-			</Suspense>
-		</Col>
+		<Suspense fallback={<SkeletonComponent />}>
+			<PageComponent {...pageProps} />
+		</Suspense>
 	);
 }
