@@ -5,8 +5,7 @@ import heroImageAvif from "../../assets/images/hero-background.avif";
 
 interface HeroProps {
 	/**
-	 * Elemento principal que se renderizará dentro del Hero,
-	 * idealmente el componente de búsqueda.
+	 * Elemento principal que se renderizará dentro del Hero.
 	 */
 	readonly children?: ReactNode;
 }
