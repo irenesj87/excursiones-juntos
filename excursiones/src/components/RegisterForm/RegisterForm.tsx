@@ -10,7 +10,7 @@ import {
 	validateSamePassword,
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
-import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
+import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
@@ -31,7 +31,7 @@ const initialState: RegisterFormValues = {
 /**
  * Componente de formulario de registro de usuario.
  */
-function RegisterForm() {
+export function RegisterForm() {
 	const [values, setValues] = useState<RegisterFormValues>(initialState);
 	const nameInputRef = useRef<HTMLInputElement>(null);
 
@@ -223,5 +223,3 @@ function RegisterForm() {
 		</>
 	);
 }
-
-export default RegisterForm;

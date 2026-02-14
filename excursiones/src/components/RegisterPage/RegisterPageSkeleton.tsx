@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import FormPageLayout from "../FormPageLayout/FormPageLayout";
+import { FormPageLayout } from "../FormPageLayout";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";

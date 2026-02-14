@@ -18,7 +18,7 @@ const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
 /**
  * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
  */
-function ExcursionsLoading() {
+export function ExcursionsLoading() {
 	const isLoggedIn = useSelector(
 		(state: RootState) => state.loginReducer.login,
 	);
@@ -47,4 +47,3 @@ function ExcursionsLoading() {
 	);
 }
 
-export default ExcursionsLoading;

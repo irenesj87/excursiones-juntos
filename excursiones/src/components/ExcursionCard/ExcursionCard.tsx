@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import InfoItem from "../../ui/InfoItem/InfoItem";
-import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
+import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import type { DifficultyLevel } from "../../types";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useJoinExcursion } from "./useJoinExcursion";
@@ -60,7 +60,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					isLoading={isJoining}
 				>
 					<JoinIcon className={styles.detailIcon} />
-					Apúntate
+					Apuntarse
 				</CustomButton>
 			)}
 		</div>
@@ -126,7 +126,7 @@ interface ExcursionCardProps {
  * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los 
  * usuarios apuntarse a ella.
  */
-function ExcursionCard({
+export function ExcursionCard({
 	id,
 	name,
 	description,
@@ -245,5 +245,3 @@ function ExcursionCard({
 		</Card>
 	);
 }
-
-export default ExcursionCard;

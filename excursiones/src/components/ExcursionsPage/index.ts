@@ -1,1 +1,1 @@
-export { default } from './ExcursionsPage';
+export { ExcursionsPage} from './ExcursionsPage';

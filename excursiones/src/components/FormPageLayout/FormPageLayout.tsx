@@ -28,7 +28,7 @@ interface FormPageLayoutProps {
  * Componente que proporciona un diseño de página reutilizable para formularios.
  * Centra el contenido del formulario en una tarjeta, adaptándose a diferentes breakpoints.
  */
-function FormPageLayout({
+export function FormPageLayout({
 	title,
 	subtitle,
 	children,
@@ -40,11 +40,10 @@ function FormPageLayout({
 
 	return (
 		<Container
-			as="main"
 			fluid
-			className={`${styles.container} h-100 ${containerClassName ?? ""}`}
+			className={`${styles.container} d-flex flex-column flex-grow-1 ${containerClassName ?? ""}`}
 		>
-			<Row className="justify-content-center align-items-center h-100">
+			<Row className="justify-content-center align-items-center flex-grow-1">
 				<Col xs={12} md={9} lg={8} xl={colWidth}>
 					<Card
 						as="section"
@@ -72,5 +71,3 @@ function FormPageLayout({
 		</Container>
 	);
 }
-
-export default FormPageLayout;

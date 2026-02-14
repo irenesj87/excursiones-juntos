@@ -6,7 +6,7 @@ import {
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
 import ValidatedInput from "../../ui/ValidatedInput/ValidatedInput";
-import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
+import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
@@ -95,5 +95,3 @@ export function LoginForm() {
 		</>
 	);
 }
-
-export default LoginForm;

@@ -1,1 +1,1 @@
-export { default } from './ExcursionCard';
+export { ExcursionCard } from './ExcursionCard';

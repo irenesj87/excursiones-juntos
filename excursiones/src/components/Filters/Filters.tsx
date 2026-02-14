@@ -50,7 +50,7 @@ const filterSections = [
  * @param props - Las props del componente.
  * @returns - El componente de filtros.
  */
-function Filters({ showTitle = true }: FiltersProps) {
+export function Filters({ showTitle = true }: FiltersProps) {
 	const { hasActiveFilters, handleClearFilters } = useFiltersLogic();
 
 	return (
@@ -89,5 +89,3 @@ function Filters({ showTitle = true }: FiltersProps) {
 		</div>
 	);
 }
-
-export default Filters;

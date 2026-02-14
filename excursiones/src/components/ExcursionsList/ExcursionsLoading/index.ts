@@ -1,1 +1,1 @@
-export { default } from './ExcursionsLoading';
+export { ExcursionsLoading } from './ExcursionsLoading';

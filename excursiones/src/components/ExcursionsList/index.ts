@@ -1,1 +1,1 @@
-export { default } from "./ExcursionsList";
+export { ExcursionsList } from "./ExcursionsList";

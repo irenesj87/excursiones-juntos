@@ -1,6 +1,6 @@
 import React from "react";
-import LoginForm from "../LoginForm";
-import FormPageLayout from "../FormPageLayout/FormPageLayout";
+import { LoginForm } from "../LoginForm";
+import { FormPageLayout } from "../FormPageLayout/FormPageLayout";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
 import styles from "./LoginPage.module.css";
 import "bootstrap/dist/css/bootstrap.css";

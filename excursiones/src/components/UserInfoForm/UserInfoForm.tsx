@@ -8,7 +8,7 @@ import {
 } from "../../validation/validations";
 import { useUserInfoForm, FormValues } from "./useUserInfoForm";
 import CustomButton from "../../ui/CustomButton/CustomButton";
-import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
+import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import {
 	UserIcon,
 	UsersIcon,
