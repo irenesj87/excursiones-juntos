@@ -1,1 +1,1 @@
-export { default } from "./LazyRouteWrapper";
+export { LazyRouteWrapper } from "./LazyRouteWrapper";

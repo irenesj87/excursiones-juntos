@@ -7,7 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { ExcursionsPage } from "../ExcursionsPage";
 import Footer from "../Footer";
 import ProtectedRoute from "../ProtectedRoute";
-import LazyRouteWrapper from "../LazyRouteWrapper";
+import { LazyRouteWrapper } from "../LazyRouteWrapper";
 import RegisterPageSkeleton from "../RegisterPage/RegisterPageSkeleton";
 import LoginPageSkeleton from "../LoginPage/LoginPageSkeleton";
 import UserPageSkeleton from "../UserPage/UserPageSkeleton";
