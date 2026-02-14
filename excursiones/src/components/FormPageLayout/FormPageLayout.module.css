@@ -3,15 +3,15 @@
 	flex-direction: column;
 	justify-content: center;
 	flex-grow: 1; /* Asegura que el contenedor ocupe el espacio vertical disponible */
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 }
 
-/* Media query para breakpoints pequeños (xs breakpoint de Bootstrap es <576px) */
-@media (max-width: 575.98px) {
+/* Media query para breakpoints más grandes */
+@media (min-width: 576px) {
 	.container {
-		padding-top: 1rem;
-		padding-bottom: 1rem;
+		padding-top: 4rem;
+		padding-bottom: 4rem;
 	}
 }
 
@@ -22,11 +22,11 @@
 	text-transform: uppercase;
 	font-family: var(
 		--font-family-serif
-	); /* Tipografía Serif para consistencia con el Hero */
+	);
 	font-size: 1.6rem;
 	letter-spacing: 0.5px;
 	padding-bottom: 0.75rem;
-	margin-bottom: 0.5rem; /* Reduce el espacio inferior para acercar el subtítulo */
+	margin-bottom: 0.5rem;
 }
 
 .cardSubtitle {
@@ -36,13 +36,13 @@
 	letter-spacing: 0.5px;
 	text-align: center;
 	margin-top: 0;
-	margin-bottom: 2.5rem; /* Espacio después del subtítulo y antes del formulario */
+	margin-bottom: 2.5rem;
 }
 
 .switcher {
 	text-align: center;
 	background-color: transparent;
-	border-top: none; /* Asegura que no haya borde superior, sobreescribiendo los estilos de Card.Footer */
+	border-top: none;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 	color: var(--color-text-base);
@@ -59,13 +59,12 @@
 }
 
 .contentPane {
-	/* Usa variables de tema para adaptarse al modo claro/oscuro */
 	background-color: var(
 		--excursion-card-bg
 			/* Reutilizamos el fondo de las tarjetas, como en ExcursionCard */
 	);
 	color: var(--color-text-base);
-	border: 1px solid var(--color-border-subtle); /* Borde sutil en lugar del borde duro */
+	border: 1px solid var(--color-border-subtle);
 	box-shadow: var(--shadow-soft); /* Sombra suave para elevación moderna */
 	border-radius: var(--border-radius-lg);
 	overflow: hidden; /* Asegura que el contenido (como el footer) respete los bordes redondeados */

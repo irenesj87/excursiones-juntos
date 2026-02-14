@@ -9,6 +9,7 @@ Aplicación web construida con React.js y Node.js que permite a los usuarios des
 - **Búsqueda y Filtrado Dinámico:** Busca excursiones por texto y filtra por zona, dificultad y duración.
 - **Autenticación de Usuarios:** Sistema completo de registro, inicio de sesión y cierre de sesión con JWT.
 - **Gestión de Perfil:** Los usuarios pueden ver y actualizar su información personal.
+- **Optimización Automática:** Gracias a **React Compiler**, el código se optimiza automáticamente, eliminando la necesidad de memoización manual.
 - **Interacción con Excursiones:** Los usuarios autenticados pueden apuntarse a las excursiones.
 
 ### Backend (Node.js)
@@ -22,11 +23,11 @@ Aplicación web construida con React.js y Node.js que permite a los usuarios des
 
 ## 🛠️ Tecnologías Utilizadas
 
-| Área         | Tecnología                                                                |
-| :----------- | :------------------------------------------------------------------------ |
-| **Frontend** | React (con React Compiler), React Router, Redux Toolkit, React Bootstrap. |
-| **Backend**  | Node.js, Express, JWT, Bcrypt.                                            |
-| **DevOps**   | SonarQube.                                                                |
+| Área         | Tecnología                                                                            |
+| :----------- | :------------------------------------------------------------------------------------ |
+| **Frontend** | React (con React Compiler), TypeScript, React Router, Redux Toolkit, React Bootstrap. |
+| **Backend**  | Node.js, Express, JWT, Bcrypt.                                                        |
+| **DevOps**   | SonarQube.                                                                            |
 
 ## 📁 Estructura del Proyecto
 

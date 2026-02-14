@@ -164,7 +164,7 @@ export function RegisterForm() {
 			{/* Formulario de registro */}
 			<Form
 				id="registerForm"
-				className={`${styles.formLabel} fw-bold`}
+				className={`${styles.registerForm} fw-bold`}
 				aria-busy={formState.isLoading}
 				onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
 			>

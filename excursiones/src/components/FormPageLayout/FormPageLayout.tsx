@@ -3,17 +3,24 @@ import { Container, Row, Col, Card, ColProps } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./FormPageLayout.module.css";
 
-// Definición de las props que acepta el componente FormPageLayout.
 interface FormPageLayoutProps {
-	readonly title: string; // El título principal que se mostrará en la tarjeta.
-	readonly subtitle?: string; // Un subtítulo opcional para dar más contexto.
-	readonly children: React.ReactNode; // El contenido del formulario a renderizar.
-	readonly colWidth?: ColProps["xl"]; // Ancho de la columna para el formulario.
-	readonly containerClassName?: string; // Clase CSS opcional para el contenedor principal.
+	/** El título principal que se mostrará en la tarjeta. */
+	readonly title: string;
+	/** Un subtítulo opcional para dar más contexto. */
+	readonly subtitle?: string;
+	/** El contenido del formulario a renderizar. */
+	readonly children: React.ReactNode;
+	/** Ancho de la columna para el formulario en pantallas XL. Por defecto "5". */
+	readonly colWidth?: ColProps["xl"];
+	/** Clase CSS opcional para el contenedor principal. */
+	readonly containerClassName?: string;
 	readonly switcher?: {
-		readonly prompt: string; // Texto que precede al enlace (ej. "¿No tienes cuenta?").
-		readonly linkText: string; // Texto del enlace (ej. "Regístrate").
-		readonly linkTo: string; // La ruta a la que debe navegar el enlace (ej. "/register").
+		/** Texto que precede al enlace (ej. "¿No tienes cuenta?"). */
+		readonly prompt: string;
+		/** Texto del enlace (ej. "Regístrate"). */
+		readonly linkText: string;
+		/** La ruta a la que debe navegar el enlace. */
+		readonly linkTo: string;
 	};
 }
 
@@ -29,7 +36,6 @@ export function FormPageLayout({
 	containerClassName,
 	switcher,
 }: FormPageLayoutProps) {
-	// Genera un ID único y estable para el título, garantizando la accesibilidad.
 	const titleId = useId();
 
 	return (
