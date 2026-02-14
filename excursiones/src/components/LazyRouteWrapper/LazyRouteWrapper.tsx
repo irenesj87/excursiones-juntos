@@ -5,11 +5,11 @@ import React, { Suspense } from "react";
  * Utiliza genéricos para permitir pasar props específicas al componente de página.
  */
 interface LazyRouteWrapperProps<P extends object> {
-	// Componente de página que se cargará de forma perezosa.
+	/** Componente de página que se cargará de forma perezosa. */
 	readonly PageComponent: React.ComponentType<P>;
-	// Componente esqueleto que se mostrará mientras se carga la página.
+	/** Componente esqueleto que se mostrará mientras se carga la página. */
 	readonly SkeletonComponent: React.ComponentType;
-	// Props que se pasarán al PageComponent. Para componentes sin props, pasar un objeto vacío {}.
+	/** Props que se pasarán al PageComponent. Para componentes sin props, pasar un objeto vacío {}. */
 	readonly pageProps: P;
 }
 
