@@ -19,7 +19,7 @@ interface FiltersListProps {
 /**
  * Componente que muestra una lista de filtros para una categoría específica (ej. área, dificultad, tiempo).
  */
-function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
+export function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
 	// El tipo para 'data' se infiere como `string[]` basándonos en su uso posterior.
 	// Usamos el hook personalizado para obtener los filtros y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
@@ -69,5 +69,3 @@ function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
 		</ul>
 	);
 }
-
-export default FiltersList;

@@ -10,7 +10,7 @@ import {
 	validateSamePassword,
 } from "../../validation/validations";
 import { registerUser } from "../../services/authService";
-import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
+import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./RegisterForm.module.css";
@@ -164,6 +164,7 @@ export function RegisterForm() {
 			{/* Formulario de registro */}
 			<Form
 				id="registerForm"
+				noValidate
 				className={`${styles.registerForm} fw-bold`}
 				aria-busy={formState.isLoading}
 				onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
@@ -212,7 +213,7 @@ export function RegisterForm() {
 				<div className="d-grid d-sm-flex justify-content-sm-end">
 					<CustomButton
 						type="submit"
-						variant={isButtonDisabled ? "secondary" : "primary"}
+						variant="primary"
 						isLoading={formState.isLoading}
 						disabled={isButtonDisabled}
 					>
