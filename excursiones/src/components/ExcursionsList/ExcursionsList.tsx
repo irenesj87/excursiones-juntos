@@ -1,8 +1,8 @@
 import { Row, Col } from "react-bootstrap";
-import ExcursionCard from "../ExcursionCard";
-import ExcursionsLoading from "./ExcursionsLoading";
-import FeedbackAlert from "../../ui/FeedbackAlert/FeedbackAlert";
-import NoExcursionsFound from "./NoExcursionsFound";
+import { ExcursionCard } from "../ExcursionCard";
+import { ExcursionsLoading } from "./ExcursionsLoading";
+import { FeedbackAlert } from "../../ui/FeedbackAlert";
+import { NoExcursionsFound } from "./NoExcursionsFound";
 import styles from "./ExcursionsList.module.css";
 import {
 	useExcursionsListLogic,
@@ -103,10 +103,8 @@ export function ExcursionsListView({
  * Componente Principal (Container).
  * Conecta la lógica (Hook) con la Vista (Componente).
  */
-function ExcursionsList(props: Readonly<ExcursionsListProps>) {
+export function ExcursionsList(props: Readonly<ExcursionsListProps>) {
 	const viewProps = useExcursionsListLogic(props);
 
 	return <ExcursionsListView {...viewProps} />;
 }
-
-export default ExcursionsList;

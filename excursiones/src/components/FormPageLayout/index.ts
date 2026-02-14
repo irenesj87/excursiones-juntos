@@ -1,1 +1,1 @@
-export { default } from './FormPageLayout';
+export { FormPageLayout } from './FormPageLayout';

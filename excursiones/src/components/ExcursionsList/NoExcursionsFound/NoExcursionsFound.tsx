@@ -9,7 +9,7 @@ const SUBTITLE_MESSAGE =
 /**
  * Muestra un mensaje cuando no se encuentran excursiones que coincidan con los criterios de búsqueda.
  */
-function NoExcursionsFound() {
+export function NoExcursionsFound() {
 	return (
 		<div className={styles.excursionsContainer} role="status">
 			<div className={styles.messageNotFound}>
@@ -21,4 +21,3 @@ function NoExcursionsFound() {
 	);
 }
 
-export default NoExcursionsFound;

@@ -1,4 +1,17 @@
 /* ======================================== */
+/* 0. RESET Y CONFIGURACIÓN GLOBAL */
+/* ======================================== */
+html {
+	box-sizing: border-box;
+	font-size: 16px; /* Establece la base para el cálculo de rem */
+}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+/* ======================================== */
 /* 1. PRIMITIVAS (TOKENS DE DISEÑO) */
 /* ======================================== */
 /* 

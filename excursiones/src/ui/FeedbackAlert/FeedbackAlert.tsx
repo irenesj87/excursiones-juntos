@@ -44,7 +44,7 @@ interface FeedbackAlertProps {
 /**
  * Componente que muestra una alerta de feedback personalizable.
  */
-function FeedbackAlert({
+export function FeedbackAlert({
 	variant,
 	message,
 	onClose,
@@ -73,4 +73,3 @@ function FeedbackAlert({
 	);
 }
 
-export default FeedbackAlert;

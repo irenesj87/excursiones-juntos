@@ -5,10 +5,10 @@ import {
 	OffcanvasHeader,
 	OffcanvasTitle,
 } from "react-bootstrap";
-import Filters from "../Filters";
+import { Filters } from "../Filters";
 import StyledButton from "../../ui/CustomButton/CustomButton";
 import type { ExcursionsState } from "../../hooks/useExcursions";
-import ExcursionsList from "../ExcursionsList";
+import { ExcursionsList } from "../ExcursionsList";
 import { FilterIcon } from "../../ui/Icons";
 import styles from "./ExcursionsPage.module.css";
 /**
@@ -35,7 +35,7 @@ const LazyOffcanvas = lazy(() => import("react-bootstrap/esm/Offcanvas"));
 /**
  * Componente principal.
  */
-function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
+export function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 	const [showFilters, setShowFilters] = useState(false);
 	const handleCloseFilters = () => setShowFilters(false);
 	const handleShowFilters = () => setShowFilters(true);
@@ -117,4 +117,3 @@ function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 	);
 }
 
-export default ExcursionsPage;

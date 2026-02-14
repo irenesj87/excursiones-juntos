@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
-import FormPageLayout from "../FormPageLayout/FormPageLayout";
+import { FormPageLayout } from "../FormPageLayout";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";

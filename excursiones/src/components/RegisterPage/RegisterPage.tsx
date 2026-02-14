@@ -1,6 +1,6 @@
 import React from "react";
-import RegisterForm from "../RegisterForm";
-import FormPageLayout from "../FormPageLayout/FormPageLayout";
+import { RegisterForm } from "../RegisterForm";
+import { FormPageLayout } from "../FormPageLayout/FormPageLayout";
 import styles from "./RegisterPage.module.css";
 
 /**
@@ -8,7 +8,7 @@ import styles from "./RegisterPage.module.css";
  * Utiliza `FormPageLayout` para proporcionar un diseño consistente con otras páginas de formulario, y renderiza `RegisterForm`
  * dentro de este layout.
  */
-function RegisterPage(){
+function RegisterPage() {
 	return (
 		<FormPageLayout
 			containerClassName={styles.pageContainer}
