@@ -11,11 +11,13 @@ import type { ExcursionsState } from "../../hooks/useExcursions";
 import { ExcursionsList } from "../ExcursionsList";
 import { FilterIcon } from "../../ui/Icons";
 import styles from "./ExcursionsPage.module.css";
+
 /**
  * IDs para accesibilidad y control del Offcanvas.
  */
 const MOBILE_FILTERS_ID = "mobile-filters-offcanvas";
 const MOBILE_FILTERS_TITLE_ID = "mobile-filters-title";
+
 /**
  * Este componente es el contenedor principal del diseño (layout) para la página de listado de escursiones y los
  * filtros, manejando la responsividad entre diferentes breakpoints.
@@ -116,4 +118,3 @@ export function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 		</>
 	);
 }
-

@@ -18,13 +18,13 @@ export const TEST_IDS = {
  * Define las dimensiones y anchos para los elementos del esqueleto para facilitar su mantenimiento.
  */
 const SKELETON_SIZES = {
-	TITLE_HEIGHT: 28, // Ajustado a 28px (aprox 1.75rem h3 line-height) para evitar CLS
+	TITLE_HEIGHT: 28,
 	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
 	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
 	DIFFICULTY_TEXT_WIDTH: 76, // Ancho del esqueleto del texto de dificultad
-	TIME_TEXT_WIDTH: 60, // Ajustado a múltiplo de 4 (antes 58)
-	BUTTON_HEIGHT: 40, // Ajustado a 44px para coincidir con el botón real (padding 0.5rem + border + line-height)
-	BUTTON_MIN_WIDTH: 138, // Ajustado a múltiplo de 4 (antes 117)
+	TIME_TEXT_WIDTH: 60, 
+	BUTTON_HEIGHT: 40,
+	BUTTON_MIN_WIDTH: 138,
 };
 
 interface InfoItemSkeletonProps {

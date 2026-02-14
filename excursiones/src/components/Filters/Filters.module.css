@@ -53,6 +53,26 @@
 
 .clearButton {
 	width: 100%;
+	/* Reservamos espacio para el borde para evitar saltos si StyledButton cambia bordes */
+	border: 1px solid transparent;
+	/* Forzamos la transición de transformación para que siempre sea suave */
+	transition: transform var(--transition-base);
+}
+
+.clearButton:hover:not(:disabled),
+.clearButton:focus-visible:not(:disabled) {
+	transform: translateY(-2px);
+}
+
+.clearButton:active:not(:disabled) {
+	transform: translateY(0) scale(0.98);
+	transition: none;
+}
+
+/* Aseguramos que al deshabilitarse (y perder el hover) la vuelta a su sitio sea animada */
+.clearButton:disabled {
+	transform: none;
+	transition: transform var(--transition-base);
 }
 
 .buttonContent {

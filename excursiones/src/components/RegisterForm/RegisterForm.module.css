@@ -1,4 +1,4 @@
-.registerForm {
+.formLabel {
 	font-size: var(--font-size-base);
 	font-family: var(--font-family-sans);
 }
@@ -6,12 +6,23 @@
 .fieldsContainer {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1.5rem; /* 24px */
 	margin-bottom: 1.5rem;
 }
 
 .fieldsContainer :global(.form-control) {
 	border-radius: var(--border-radius-md);
+}
+
+/* Eliminamos el icono de exclamación y restauramos el borde en estado inválido */
+.fieldsContainer :global(.form-control.is-invalid) {
+	background-image: none;
+	border-color: var(--bs-border-color, #ced4da);
+}
+
+.fieldsContainer :global(.form-control.is-invalid:focus) {
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	border-color: var(--bs-border-color, #ced4da);
 }
 
 .infoMessage {

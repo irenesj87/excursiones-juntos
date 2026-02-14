@@ -1,5 +1,5 @@
 import React from "react";
-import FiltersList from "../FiltersList";
+import { FiltersList } from "../FiltersList";
 import { ChartIcon, ClockIcon, MapIcon, FilterXIcon } from "../../ui/Icons";
 import styles from "./Filters.module.css";
 import StyledButton from "../../ui/CustomButton/CustomButton";
@@ -75,7 +75,7 @@ export function Filters({ showTitle = true }: FiltersProps) {
 			{/* El footer se mantiene en la parte inferior */}
 			<footer className={styles.filtersFooter}>
 				<StyledButton
-					variant={hasActiveFilters ? "danger" : "secondary"}
+					variant="danger"
 					onClick={handleClearFilters}
 					className={styles.clearButton}
 					disabled={!hasActiveFilters}

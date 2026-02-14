@@ -415,6 +415,24 @@ html.dark .btn-close {
 	color: var(--color-text-muted);
 }
 
+/* --- Botones Bootstrap (Override) --- */
+/* Sobrescribimos las variables internas de Bootstrap para que .btn-primary use nuestro tema */
+.btn-primary {
+	--bs-btn-color: var(--color-text-on-primary);
+	--bs-btn-bg: var(--color-primary);
+	--bs-btn-border-color: var(--color-primary);
+	--bs-btn-hover-color: var(--color-text-on-primary);
+	--bs-btn-hover-bg: var(--color-primary-hover);
+	--bs-btn-hover-border-color: var(--color-primary-hover);
+	--bs-btn-focus-shadow-rgb: var(--primary-color-rgb);
+	--bs-btn-active-color: var(--color-text-on-primary);
+	--bs-btn-active-bg: var(--color-primary-hover);
+	--bs-btn-active-border-color: var(--color-primary-hover);
+	--bs-btn-disabled-color: var(--color-text-on-primary);
+	--bs-btn-disabled-bg: var(--color-primary);
+	--bs-btn-disabled-border-color: var(--color-primary);
+}
+
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
 	background-color: var(--excursion-card-bg); /* Unifica el fondo con el body */
