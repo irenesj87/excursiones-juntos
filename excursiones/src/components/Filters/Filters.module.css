@@ -14,9 +14,10 @@
 
 /* Título principal */
 .title {
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 	font-weight: 600;
-	margin: 0 0 1.5rem;
+	text-transform: uppercase;
+	margin: 1.25rem 0 1.5rem; /* Ajuste fino para alinear visualmente con el título de la lista */
 	color: var(--filter-title-color);
 	font-family: var(--font-family-serif);
 }

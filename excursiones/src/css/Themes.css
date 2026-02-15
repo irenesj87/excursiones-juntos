@@ -138,15 +138,12 @@ html.light {
 	);
 
 	/* Píldoras de filtro (no seleccionadas) */
-	--filter-pill-bg: var(--color-stone-200);
+	--filter-pill-bg: var(--color-stone-100);
 	--filter-pill-text: var(--color-text-base);
-	--filter-pill-border: var(--color-stone-300);
 	--filter-pill-bg-hover: var(--color-stone-300);
-	--filter-pill-border-hover: var(--color-stone-500);
 	/* Píldoras de filtro (seleccionadas) */
-	--filter-pill-bg-checked: var(--color-green-700);
+	--filter-pill-bg-checked: var(--color-stone-800);
 	--filter-pill-text-checked: var(--color-white);
-	--filter-pill-border-checked: var(--color-green-700);
 	--filter-pill-shadow-checked: none;
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */

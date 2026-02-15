@@ -19,12 +19,12 @@
 	justify-content: space-between; /* Texto a la izquierda, X a la derecha */
 	gap: 0.5rem;
 	width: fit-content; /* Se ajusta al contenido para un look más orgánico */
-	padding: 0.4rem 0.75rem; /* Más compactos para reducir la sensación de espacio */
+	/*padding: 0.8rem 0.85rem; /* Más compactos para reducir la sensación de espacio */
 	font-weight: 500;
 	color: var(
-		--color-stone-900
+		--filter-pill-text
 	); /* Texto oscuro para contraste sobre fondo tierra claro */
-	background-color: var(--color-stone-100);
+	background-color: var(--filter-pill-bg);
 	border-radius: var(--border-radius-pill);
 	user-select: none; /* Evita que el texto se pueda seleccionar */
 	cursor: pointer; /* Añadimos cursor pointer al ser una etiqueta */
@@ -34,7 +34,7 @@
 }
 
 .filterPill:hover {
-	background-color: var(--color-stone-200);
+	background-color: var(--filter-pill-bg-hover);
 	transform: translateY(-2px); /* Elevación sutil al hacer hover */
 	box-shadow: var(
 		--shadow-soft
@@ -46,9 +46,9 @@
    manteniendo así la legibilidad y la apariencia de "seleccionado". */
 .checked,
 .checked:hover {
-	background-color: var(--color-stone-800); /* Gris oscuro para estado activo */
+	background-color: var(--filter-pill-bg-checked); /* Gris oscuro para estado activo */
 	color: var(
-		--color-white
+		--filter-pill-text-checked
 	); /* Texto blanco para contraste sobre fondo oscuro */
 	box-shadow: var(--shadow-soft); /* Profundidad para el estado activo */
 }
