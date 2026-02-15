@@ -1,6 +1,5 @@
 import React from "react";
 import cn from "classnames";
-import { RegisterIcon, LogInIcon } from "../../ui/Icons";
 import StyledNavLink from "../../ui/Link";
 import { ROUTES } from "../../constants";
 import styles from "./GuestNav.module.css";
@@ -14,9 +13,6 @@ interface GuestNavProps {
 	 */
 	readonly className?: string;
 }
-
-/** Tamaño estándar para los iconos de navegación. */
-const NAV_ICON_SIZE = 20;
 
 const NO_OP = () => {
 	/* no-op */
@@ -49,7 +45,6 @@ function GuestNav({
 					"border-0": variant === "offcanvas",
 				})}
 			>
-				<RegisterIcon size={NAV_ICON_SIZE} className="me-2" />
 				Registrarse
 			</StyledNavLink>
 			<StyledNavLink
@@ -57,7 +52,6 @@ function GuestNav({
 				onClick={onCloseMenu}
 				className={styles.loginLink}
 			>
-				<LogInIcon size={NAV_ICON_SIZE} className="me-2" />
 				Iniciar sesión
 			</StyledNavLink>
 		</div>

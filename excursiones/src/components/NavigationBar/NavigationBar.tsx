@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { Container, Navbar, Offcanvas } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { RootState } from "../../store/store";
 import Logo from "../Logo";
@@ -15,6 +16,7 @@ import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
 import ThemeToggleButton from "../ThemeToggleButton";
 import styles from "./NavigationBar.module.css";
 import "../../css/Themes.css";
+import { ROUTES } from "../../constants";
 
 // Estos componentes se cargan de forma perezosa (lazy).
 const UserNav = lazy(() => import("../UserNav"));
@@ -50,6 +52,10 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	/** Estado para controlar la visibilidad del componente Offcanvas (menú lateral). */
 	const [showMenu, setShowMenu] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
+
+	const location = useLocation();
+	// Detectamos si estamos en la Home para aplicar el estilo transparente
+	const isHomePage = location.pathname === ROUTES.HOME;
 
 	// Usamos useLayoutEffect para medir la altura de la barra de navegación después de que el DOM se haya actualizado,
 	// pero antes de que el navegador pinte la pantalla. Esto evita parpadeos.
@@ -129,10 +135,13 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 			className={`${styles.customNavbar} ${
 				// Se comprueba si estamos en la página de excursiones para saber si tenemos que eliminar el borde inferior.
 				isOnExcursionsPage ? styles.onExcursionsPage : ""
-			}`}
-			sticky="top"
+			} ${isHomePage ? styles.transparentNavbar : ""}`}
+			// En la Home quitamos el sticky para poder posicionarlo 'absolute' sobre el Hero mediante CSS.
+			// En el resto de páginas, mantenemos el comportamiento sticky estándar.
+			sticky={isHomePage ? undefined : "top"}
 		>
-			<Container fluid>
+			{/* Usamos Container estándar en lugar de fluid para que el logo y el menú se alineen con el contenido central de la página (efecto "hoja") */}
+			<Container>
 				{/* Agrupados con d-flex */}
 				<div className="d-flex flex-wrap align-items-center">
 					{/* Logo (siempre visible) */}

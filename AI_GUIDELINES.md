@@ -25,7 +25,6 @@
 ## 3. Accesibilidad y Color:
 
 - Cumple estrictamente con el estándar WCAG Nivel AAA.
-- No confíes únicamente en el color para transmitir información (usa también iconos o texto).
 - Para los iconos, utiliza el archivo Icons.tsx que está en la carpeta shared. Si necesitas añadir algún icono nuevo, añádelo de la forma en que se hace en ese archivo. Utiliza siempre la librería "Lucide" de react-icons. react-icons ya están instalados en este proyecto.
 - Utiliza tokens de diseño y variables semánticas. Los tokens de diseño están en Global.css y las variables semánticas en Themes.css.
 - Verifica la accesibilidad en todas las variantes del tema (modo claro y oscuro).

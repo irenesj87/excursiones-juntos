@@ -42,7 +42,8 @@ export function Hero({ children }: HeroProps) {
 				/>
 			</picture>
 			<div className={styles.heroOverlay} aria-hidden="true" />
-			<div className={styles.heroContent}>
+			{/* Añadimos pt-5 (padding-top) para separar visualmente el texto de la barra de navegación transparente */}
+			<div className={`${styles.heroContent} pt-5`}>
 				<div className={styles.titleContainer}>
 					<h1 className={styles.title}>Tu próxima aventura te espera</h1>
 					<p className={styles.subtitle}>
