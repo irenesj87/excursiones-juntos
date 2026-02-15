@@ -3,6 +3,7 @@ import cn from "classnames";
 import { useFilterCheckboxLogic } from "./useFilterCheckboxLogic";
 import styles from "./FiltersListCheckbox.module.css";
 import type { FilterState } from "../../slices/filterSlice";
+import { XIcon } from "../../ui/Icons";
 
 interface FiltersListCheckboxProps {
 	readonly filterName: keyof FilterState; // Por ejemplo: 'area', 'difficulty', 'time'
@@ -24,7 +25,10 @@ function FilterLabel({ htmlFor, filter, isChecked }: LabelProps) {
 				[styles.checked]: isChecked,
 			})}
 		>
-			{filter}
+			<span>{filter}</span>
+			{isChecked && (
+				<XIcon className={styles.closeIcon} size={20} aria-hidden="true" />
+			)}
 		</label>
 	);
 }

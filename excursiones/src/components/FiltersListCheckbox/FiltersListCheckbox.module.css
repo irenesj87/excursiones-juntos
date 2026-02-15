@@ -14,16 +14,19 @@
 	background: none;
 	font: inherit;
 	margin: 0;
-	display: block;
-	width: 100%;
-	padding: 0.5rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between; /* Texto a la izquierda, X a la derecha */
+	gap: 0.5rem;
+	width: fit-content; /* Se ajusta al contenido para un look más orgánico */
+	padding: 0.4rem 0.75rem; /* Más compactos para reducir la sensación de espacio */
 	font-weight: 500;
-	color: var(--filter-pill-text);
-	background-color: var(--filter-pill-bg);
-	border: 1px solid var(--filter-pill-border);
+	color: var(
+		--color-stone-900
+	); /* Texto oscuro para contraste sobre fondo tierra claro */
+	background-color: var(--color-stone-100);
 	border-radius: var(--border-radius-pill);
 	user-select: none; /* Evita que el texto se pueda seleccionar */
-	text-align: center;
 	cursor: pointer; /* Añadimos cursor pointer al ser una etiqueta */
 	transition:
 		transform 0.2s ease-out,
@@ -31,8 +34,7 @@
 }
 
 .filterPill:hover {
-	background-color: var(--filter-pill-bg-hover);
-	border-color: var(--filter-pill-border-hover);
+	background-color: var(--color-stone-200);
 	transform: translateY(-2px); /* Elevación sutil al hacer hover */
 	box-shadow: var(
 		--shadow-soft
@@ -44,12 +46,15 @@
    manteniendo así la legibilidad y la apariencia de "seleccionado". */
 .checked,
 .checked:hover {
-	background-color: var(--filter-pill-bg-checked);
-	border-color: var(--filter-pill-border-checked);
+	background-color: var(--color-stone-800); /* Gris oscuro para estado activo */
 	color: var(
-		--filter-pill-text-checked
-	);
+		--color-white
+	); /* Texto blanco para contraste sobre fondo oscuro */
 	box-shadow: var(--shadow-soft); /* Profundidad para el estado activo */
+}
+
+.closeIcon {
+	color: var(--color-white);
 }
 
 /* 
@@ -67,4 +72,11 @@
 	box-shadow:
 		0 0 0 0.25rem var(--focus-ring-color),
 		var(--shadow-soft);
+}
+
+/* Ajuste para escritorio: Reducimos el padding horizontal para que sean más compactos */
+@media (min-width: 992px) {
+	.filterPill {
+		padding: 0.4rem 0.6rem;
+	}
 }

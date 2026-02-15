@@ -3,9 +3,8 @@
 	align-items: center;
 	gap: 0.5rem; /* 8px */
 	text-decoration: none;
-	transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-out;
 	color: inherit;
-	/* Aumentamos padding vertical a 6px para llegar a 44px de altura total (32+6+6) */
 	padding: 0.375rem 0.5rem;
 	border-radius: var(--border-radius-sm);
 	/* Ajuste para que el padding no desplace el logo */
@@ -13,18 +12,17 @@
 }
 
 .logoContainer:hover {
-	opacity: 0.7;
+	opacity: 0.8;
 }
 
 .logoIcon {
-	font-size: 2rem; /* Tamaño base para breakpoints pequeños */
-	color: var(--navbar-brand-icon);
+	font-size: 2.2rem;
+	color: var(--navbar-brand-color);
 	flex-shrink: 0;
 }
 
 .logoText {
-	font-family: "Georgia", serif;
-	font-size: 1.25rem; /* Tamaño base para breakpoints pequeños */
+	font-size: var(--font-size-lg);
 	font-weight: 700;
 	color: var(--navbar-brand-color);
 	letter-spacing: -0.02em;
@@ -34,9 +32,9 @@
 /* Escala para breakpoints más grandes */
 @media (min-width: 768px) {
 	.logoIcon {
-		font-size: 2.5rem;
+		font-size: 2.6rem;
 	}
 	.logoText {
-		font-size: 1.5rem;
+		font-size: var(--font-size-xl);
 	}
 }

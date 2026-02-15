@@ -43,7 +43,7 @@ function UserNav({ onCloseMenu = NO_OP }: UserNavProps) {
 			<StyledNavLink
 				to={ROUTES.USER}
 				onClick={onCloseMenu}
-				className={`${styles.profileLink} me-lg-3`}
+				className={`${styles.profileLink} me-1`}
 				aria-label="Mi perfil"
 			>
 				Mi perfil

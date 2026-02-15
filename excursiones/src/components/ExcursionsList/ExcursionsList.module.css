@@ -10,10 +10,10 @@
 	margin-bottom: 3rem;
 	padding-bottom: 0;
 	color: var(--color-text-base);
-	font-size: var(--font-size-xxl);
-	font-weight: bold;
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-semibold);
 	text-align: center;
-	font-family: var(--font-family-serif);
+	text-transform: uppercase;
 }
 
 /* --- Media Queries --- */

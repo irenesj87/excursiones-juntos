@@ -25,7 +25,7 @@
 ## 3. Accesibilidad y Color:
 
 - Cumple estrictamente con el estándar WCAG Nivel AAA.
-- Para los iconos, utiliza el archivo Icons.tsx que está en la carpeta shared. Si necesitas añadir algún icono nuevo, añádelo de la forma en que se hace en ese archivo. Utiliza siempre la librería "Lucide" de react-icons. react-icons ya están instalados en este proyecto.
+- Para los iconos, utiliza el archivo Icons.tsx que está en la carpeta shared. Si necesitas añadir algún icono nuevo, añádelo de la forma en que se hace en ese archivo.
 - Utiliza tokens de diseño y variables semánticas. Los tokens de diseño están en Global.css y las variables semánticas en Themes.css.
 - Verifica la accesibilidad en todas las variantes del tema (modo claro y oscuro).
 - Gestiona el Foco (Focus Management). Asegúrate de que la navegación por teclado sea lógica y visible (outline). Nunca elimines el outline sin proporcionar una alternativa visual clara.
@@ -42,11 +42,11 @@
 - Utiliza Design Tokens o variables para espaciado, tipografía y colores.
 - Evita 'números mágicos' (ej: padding: 17px).
 - Usa una escala espacial consistente (ej: múltiplos de 4px o 8px) para mantener el ritmo vertical y el balance del espacio en blanco.
-- **Estética "Moderno y Orgánico"**:
-  - **Paleta**: Prioriza colores naturales (verdes bosque, tierras, beiges, blancos cálidos). Evita neones.
-  - **Tipografía**: Usa contraste tipográfico: Serif elegante para títulos (personalidad) y Sans-serif geométrica para texto (legibilidad).
-  - **Formas**: Prefiere bordes redondeados amplios (16px-24px) en tarjetas y modales para una sensación moderna y amigable.
-  - **Profundidad**: Utiliza sombras suaves y difusas (high blur, low opacity) en lugar de bordes negros para separar capas.
+- **Estética "Orgánica y Minimalista"**:
+  - **Paleta**: "Prioriza los colores que se ven en la naturaleza (verdes bosque, tierras suaves, cremas). Evita el negro puro; usa gris oscuro cálido para textos.
+  - **Tipografía**: Amigable y limpia. Sans-serif geométrica o humanista para todo. Títulos con peso moderado.
+  - **Formas**: Curvas orgánicas pero controladas. Usa radios de borde pequeños (4px - 12px) para una sensación suave.
+  - **Profundidad**: Suave y elevada. Sombras difusas y ligeras para dar sensación de flotabilidad.
 - Define los estilos base pensando en dispositivos móviles y utiliza media queries (`min-width`) para adaptar el diseño a pantallas más grandes.
 - La UI debe ser resiliente. Diseña y programa pensando en que el contenido puede desbordarse (textos largos) o faltar.
 - Jerarquía visual: Guía la vista del usuario hacia los elementos más importantes. Usa el tamaño, el color, el contraste y el espaciado para destacar las acciones principales.
