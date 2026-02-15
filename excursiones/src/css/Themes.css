@@ -112,11 +112,11 @@ html.light {
 
 	/* --- Filtros --- */
 	--filters-toggle-btn-color: var(--color-text-base);
-	--filters-toggle-btn-bg: var(--color-earth-300);
-	--filters-toggle-btn-border: var(--color-earth-300);
+	--filters-toggle-btn-bg: var(--color-stone-100);
+	--filters-toggle-btn-border: var(--color-stone-300);
 	--filters-toggle-btn-bg-hover: color-mix(
 		in srgb,
-		var(--color-earth-300),
+		var(--color-stone-200),
 		black 10%
 	);
 	--filters-toggle-btn-color-hover: var(--color-text-base);
@@ -125,11 +125,7 @@ html.light {
 		var(--color-earth-300),
 		black 10%
 	);
-	--filters-toggle-btn-bg-active: color-mix(
-		in srgb,
-		var(--color-earth-300),
-		black 15%
-	);
+	--filters-toggle-btn-bg-active: var(--color-stone-200);
 	--filters-toggle-btn-color-active: var(--color-text-base);
 	--filters-toggle-btn-border-active: color-mix(
 		in srgb,
