@@ -90,7 +90,7 @@ export function ExcursionsListView({
 			className={styles.excursionsContainer}
 			aria-labelledby="excursions-list-title"
 		>
-			<h2 id="excursions-list-title" className={`${styles.title}`}>
+			<h2 id="excursions-list-title" className={styles.title}>
 				{TEXTS.TITLE}
 			</h2>
 			{renderContent()}
