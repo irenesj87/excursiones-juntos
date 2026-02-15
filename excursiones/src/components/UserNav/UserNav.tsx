@@ -1,13 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ProfileIcon, LogOutIcon } from "../../ui/Icons";
 import StyledNavLink from "../../ui/Link";
 import Button from "../../ui/CustomButton/CustomButton";
 import { logoutUser } from "../../services/authService";
 import { logout } from "../../slices/loginSlice";
 import { ROUTES } from "../../constants";
-import "bootstrap/dist/css/bootstrap.css";
 import styles from "./UserNav.module.css";
 
 /**
@@ -17,16 +15,16 @@ interface UserNavProps {
 	readonly onCloseMenu?: () => void; // Función opcional para cerrar un menú (ej: en responsive).
 }
 
+const NO_OP = () => {
+	/* no-op */
+};
+
 /**
  * Componente que muestra los enlaces de navegación para un usuario logueado, incluyendo un enlace al perfil y un botón para cerrar
  * sesión.
  * Permite cerrar un menú contenedor (como un Offcanvas o un Dropdown) si se proporciona la función `onCloseMenu`.
  */
-function UserNav({
-	onCloseMenu = () => {
-		/* no-op */
-	},
-}: UserNavProps) {
+function UserNav({ onCloseMenu = NO_OP }: UserNavProps) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -48,11 +46,9 @@ function UserNav({
 				className={`${styles.profileLink} me-lg-3`}
 				aria-label="Mi perfil"
 			>
-				<ProfileIcon size={20} className="me-2" />
 				Mi perfil
 			</StyledNavLink>
 			<Button onClick={handleLogout} className={styles.logoutLink}>
-				<LogOutIcon size={20} className="me-2" />
 				Cerrar sesión
 			</Button>
 		</>
