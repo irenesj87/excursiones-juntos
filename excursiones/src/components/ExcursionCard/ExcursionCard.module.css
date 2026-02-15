@@ -4,7 +4,7 @@
 	flex-direction: column;
 	height: 100%;
 	background-color: var(--excursion-card-bg);
-	/* Borde muy sutil y sombra suave para profundidad (Estética Moderno y Orgánico) */
+	/* Borde sutil y sombra para dar profundidad (Estética Orgánica y Minimalista) */
 	border: 1px solid var(--color-border-subtle);
 	border-radius: var(--border-radius-md);
 	box-shadow: var(--shadow-lifted);
