@@ -24,7 +24,8 @@
 	--login-btn-text: var(--color-text-on-primary);
 
 	/* Footer */
-	--footer-bg: var(--navbar-bg);
+	--footer-bg: var(--color-stone-900);
+	--footer-text-color: var(--color-white-off);
 
 	/* Bootstrap Overrides Generales */
 	--bs-primary: var(--color-primary);
@@ -40,14 +41,14 @@ html.light {
 	color-scheme: light;
 	/* --- 2a. Variables Semánticas --- */
 	/* Usamos tonos oscuros para elementos principales para contrastar con el fondo claro */
-	--color-primary: var(--color-green-700);
+	--color-primary: var(--color-green-300); /* Verde Pastel */
 	/* 
 	 * RGB crudo necesario para utilidades de opacidad de Bootstrap (ej: bg-primary-subtle).
-	 * Corresponde a --color-green-700.
+	 * Corresponde a --color-green-300.
 	 */
-	--primary-color-rgb: 35, 92, 51; /* Aprox para hsl(135, 45%, 25%) */
-	--color-primary-hover: var(--color-green-800);
-	--color-accent: var(--color-earth-500); /* Acento terracota */
+	--primary-color-rgb: 120, 190, 140; /* Aprox para hsl(135, 30%, 60%) */
+	--color-primary-hover: var(--color-green-500);
+	--color-accent: var(--color-earth-300); /* Acento Tierra Pastel */
 	--color-background-body: var(
 		--color-white-off
 	); /* Fondo blanco cálido para un toque más orgánico */
@@ -56,7 +57,9 @@ html.light {
 	); /* Para tarjetas, modales, etc. */
 	--color-text-base: var(--color-stone-900);
 	--color-text-muted: var(--color-stone-700); /* Oscurecido para AAA */
-	--color-text-on-primary: var(--color-white);
+	--color-text-on-primary: var(
+		--color-stone-900
+	); /* Texto oscuro sobre pastel */
 	--color-border-default: var(--color-stone-300);
 	--color-border-subtle: var(--color-stone-100);
 
@@ -93,7 +96,7 @@ html.light {
 	); /* Green-700 para contraste AAA con texto blanco */
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
-	--login-btn-text-hover: var(--color-white);
+	--login-btn-text-hover: var(--color-text-on-primary);
 	--login-btn-border-hover: var(--color-primary-hover);
 
 	--logout-bg-color: var(--color-stone-700);
@@ -108,38 +111,36 @@ html.light {
 	--image-placeholder-bg: var(--color-stone-100); /* Beige arena suave */
 
 	/* --- Filtros --- */
-	--filters-toggle-btn-color: var(--color-white);
-	--filters-toggle-btn-bg: var(
-		--color-primary
-	); /* Green-700 para contraste AAA */
-	--filters-toggle-btn-border: var(--color-primary);
-	--filters-toggle-btn-bg-hover: var(--color-stone-200);
-	--filters-toggle-btn-color-hover: var(--color-primary);
-	--filters-toggle-btn-border-hover: var(--color-accent);
-	--filters-toggle-btn-bg-active: var(--color-green-700);
-	--filters-toggle-btn-color-active: var(--login-btn-text);
-	--filters-toggle-btn-border-active: var(--color-primary);
+	--filters-toggle-btn-color: var(--color-text-base);
+	--filters-toggle-btn-bg: var(--color-stone-100);
+	--filters-toggle-btn-border: var(--color-stone-300);
+	--filters-toggle-btn-bg-hover: color-mix(
+		in srgb,
+		var(--color-stone-200),
+		black 10%
+	);
+	--filters-toggle-btn-color-hover: var(--color-text-base);
+	--filters-toggle-btn-border-hover: color-mix(
+		in srgb,
+		var(--color-earth-300),
+		black 10%
+	);
+	--filters-toggle-btn-bg-active: var(--color-stone-200);
+	--filters-toggle-btn-color-active: var(--color-text-base);
+	--filters-toggle-btn-border-active: color-mix(
+		in srgb,
+		var(--color-earth-300),
+		black 15%
+	);
 
 	/* Píldoras de filtro (no seleccionadas) */
-	--filter-pill-bg: var(--color-stone-200);
+	--filter-pill-bg: var(--color-stone-100);
 	--filter-pill-text: var(--color-text-base);
-	--filter-pill-border: var(--color-stone-300);
 	--filter-pill-bg-hover: var(--color-stone-300);
-	--filter-pill-border-hover: var(--color-stone-500);
 	/* Píldoras de filtro (seleccionadas) */
-	--filter-pill-bg-checked: var(
-		--color-stone-700
-	); /* Oscurecido para contraste */
-	--filter-pill-text-checked: var(
-		--color-white
-	); /* Texto blanco para contraste AAA */
-	--filter-pill-border-checked: var(--color-stone-700);
+	--filter-pill-bg-checked: var(--color-stone-800);
+	--filter-pill-text-checked: var(--color-white);
 	--filter-pill-shadow-checked: none;
-
-	/* --- Footer --- */
-	--footer-text-color: var(--color-text-muted);
-	--footer-border-color: var(--color-stone-300);
-	--footer-border-top: var(--footer-border-color);
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */
 	/* Asignamos las variantes oscuras ('light' en nombre primitivo) para asegurar legibilidad */
@@ -287,13 +288,12 @@ html.dark {
 	); /* Gris verdoso oscuro para placeholder */
 
 	/* --- Filtros --- */
-	/* Texto oscuro sobre fondo claro (green-300) para contraste > 4.5:1 */
-	--filters-toggle-btn-color: var(--color-text-on-primary);
-	--filters-toggle-btn-bg: var(--color-green-300);
-	--filters-toggle-btn-border: var(--separator-color);
-	--filters-toggle-btn-bg-hover: var(--color-green-dark-600);
-	--filters-toggle-btn-color-hover: var(--color-accent);
-	--filters-toggle-btn-border-hover: var(--color-primary);
+	--filters-toggle-btn-color: var(--secondary-btn-text);
+	--filters-toggle-btn-bg: var(--secondary-btn-bg);
+	--filters-toggle-btn-border: var(--secondary-btn-border);
+	--filters-toggle-btn-bg-hover: var(--secondary-btn-bg-hover);
+	--filters-toggle-btn-color-hover: var(--secondary-btn-text);
+	--filters-toggle-btn-border-hover: var(--secondary-btn-border-hover);
 	--filters-toggle-btn-bg-active: var(--color-primary);
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
@@ -307,11 +307,6 @@ html.dark {
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
 	--filter-pill-shadow-checked: none;
-
-	/* --- Footer --- */
-	--footer-text-color: var(--color-text-muted);
-	--footer-border-color: var(--separator-color);
-	--footer-border-top: var(--footer-border-color);
 
 	/* --- Indicadores de Dificultad (Bootstrap Overrides) --- */
 	/* Asignamos las variantes claras ('dark' en nombre primitivo) para resaltar sobre fondo oscuro */

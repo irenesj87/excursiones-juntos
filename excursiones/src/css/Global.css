@@ -40,6 +40,7 @@ html {
 
 	/* Paleta de Tierras (Acento Rústico) */
 	--color-earth-100: hsl(35, 30%, 90%);
+	--color-earth-200: hsl(35, 35%, 80%);
 	--color-earth-300: hsl(35, 40%, 70%);
 	--color-earth-500: hsl(30, 45%, 50%); /* Terracota / Arcilla */
 	--color-earth-700: hsl(30, 50%, 35%);
@@ -82,7 +83,6 @@ html {
 	--color-danger-dark: hsl(355, 85%, 82%);
 
 	/* --- Tipografía y Formas (Moderno y Orgánico) --- */
-	--font-family-serif: "Georgia", "Times New Roman", serif;
 	--font-family-sans:
 		system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
 		sans-serif;
@@ -90,17 +90,23 @@ html {
 	/* Escala de tipografía modular para consistencia */
 	--font-size-xs: 0.75rem; /* 12px */
 	--font-size-sm: 0.875rem; /* 14px */
-	--font-size-base: 1.125rem; /* 18px: Base aumentada para WCAG AAA y estética moderna */
 	--font-size-lg: 1.25rem; /* 20px */
 	--font-size-xl: 1.5rem; /* 24px */
 	--font-size-xxl: 2rem; /* 32px */
 	--font-size-xxxl: 2.5rem; /* 40px */
 	--font-size-display: 3.5rem; /* 56px */
 
-	--border-radius-sm: 8px;
-	--border-radius-md: 16px;
-	--border-radius-lg: 24px;
-	--border-radius-pill: 50rem;
+	/* Pesos de fuente */
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	--border-radius-sm: 2px;
+	--border-radius-md: 6px;
+	--border-radius-lg: 12px;
+	--border-radius-pill: 12px; /* Redondeado suave, no píldora completa (50rem) */
 
 	/* Sombra suave y difusa de varias capas para una profundidad natural. */
 	/* Funciona tanto en modo claro como oscuro. */
@@ -116,11 +122,10 @@ html {
 /* ======================================== */
 body {
 	font-family: var(--font-family-sans);
-	font-size: var(--font-size-base); /* Propaga los 18px a toda la app */
 	line-height: 1.6; /* AAA: Interlineado global para mejorar legibilidad (Criterio 1.4.8) */
 }
 
-/* Aplicamos la fuente Serif a todos los encabezados para cumplir con la guía de diseño */
+/* Aplicamos la fuente Sans a todos los encabezados para cumplir con la guía de diseño */
 h1,
 h2,
 h3,
@@ -133,7 +138,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-	font-family: var(--font-family-serif);
+	font-family: var(--font-family-sans);
+	font-weight: 400;
 }
 
 /* Estilos para botones deshabilitados de forma accesible. Se mantienen en el DOM y son enfocables, pero visualmente
@@ -184,30 +190,14 @@ parecen inactivos. */
 	border-bottom-right-radius: var(--border-radius-lg);
 }
 
-/* Título del Offcanvas con tipografía Serif para consistencia con los encabezados */
+/* Título del Offcanvas con tipografía Sans para consistencia con los encabezados */
 .offcanvas-title {
-	font-family: var(--font-family-serif);
+	font-family: var(--font-family-sans);
 	font-weight: bold;
 	font-size: var(--font-size-xl);
 }
 
-/* --- Estilos Globales --- */
-/* Elimina transiciones por defecto para evitar parpadeos al cambiar de tema */
-.form-control,
-.page-link,
-.accordion-button,
-.accordion-body,
-body {
-	transition: none;
-}
-
-/* Reseteamos la opacidad que Bootstrap aplica por defecto a los campos deshabilitados */
-.form-control:disabled:not(.form-control-plaintext),
-.form-control[readonly]:not(.form-control-plaintext) {
-	opacity: 1;
-}
-
-/* --- Offcanvas (Menú y Filtros) --- */
+/* Estilos específicos para el Navbar Offcanvas */
 #offcanvasNavbar .offcanvas-body .nav-link {
 	display: block;
 	width: 95%;
@@ -232,4 +222,20 @@ body {
 	display: block;
 	width: 95%;
 	margin: 0 auto 0.6rem;
+}
+
+/* --- Estilos Globales --- */
+/* Elimina transiciones por defecto para evitar parpadeos al cambiar de tema */
+.form-control,
+.page-link,
+.accordion-button,
+.accordion-body,
+body {
+	transition: none;
+}
+
+/* Reseteamos la opacidad que Bootstrap aplica por defecto a los campos deshabilitados */
+.form-control:disabled:not(.form-control-plaintext),
+.form-control[readonly]:not(.form-control-plaintext) {
+	opacity: 1;
 }

@@ -24,7 +24,6 @@
 /* Para el estado hover, solo aplicamos la transformación. */
 .themeToggleBtn:hover,
 .themeToggleBtn:focus-visible {
-	background-color: var(--theme-toggle-btn-bg-hover);
 	transform: translateY(-2px);
 }
 
@@ -46,7 +45,7 @@
 }
 
 .themeToggleBtn:active {
-	background-color: var(--theme-toggle-btn-bg-hover);
+	background-color: transparent;
 	border-color: transparent;
 	color: var(--theme-toggle-btn-color);
 	transform: translateY(0) scale(0.92);

@@ -2,8 +2,9 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const PILL_HEIGHT = 46;
-const PILL_BORDER_RADIUS = 50;
+const PILL_HEIGHT = 38; // Ajustado al nuevo padding (0.4rem) + line-height
+const PILL_BORDER_RADIUS = 12; // Coincide con --border-radius-pill
+const PILL_WIDTH = 90; // Ancho promedio para simular el contenido en flexbox
 /**
  * La propiedad `vertical-align: 'middle'` soluciona el problema de alineación sin introducir espaciado vertical no
  * deseado.
@@ -21,6 +22,7 @@ function FilterPillSkeleton(): React.ReactElement {
 	return (
 		<Skeleton
 			height={PILL_HEIGHT}
+			width={PILL_WIDTH}
 			borderRadius={PILL_BORDER_RADIUS}
 			style={SKELETON_STYLE}
 		/>

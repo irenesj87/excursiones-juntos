@@ -69,7 +69,6 @@ export function ExcursionsListView({
 							<ExcursionCard
 								id={excursion.id}
 								name={excursion.name}
-								description={excursion.description}
 								area={excursion.area}
 								difficulty={excursion.difficulty}
 								time={excursion.time}

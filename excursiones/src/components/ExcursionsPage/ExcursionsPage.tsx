@@ -9,7 +9,6 @@ import { Filters } from "../Filters";
 import StyledButton from "../../ui/CustomButton/CustomButton";
 import type { ExcursionsState } from "../../hooks/useExcursions";
 import { ExcursionsList } from "../ExcursionsList";
-import { FilterIcon } from "../../ui/Icons";
 import styles from "./ExcursionsPage.module.css";
 
 /**
@@ -72,13 +71,10 @@ export function ExcursionsPage({ excursionsState }: ExcursionsPageProps) {
 						aria-controls={MOBILE_FILTERS_ID}
 						aria-label="Mostrar filtros"
 					>
-						<FilterIcon
-							className={`${styles.filterIcon} me-2`}
-							aria-hidden="true"
-						/>
-						Mostrar Filtros
+						Mostrar filtros
 					</StyledButton>
 				</div>
+
 				{/**
 				 * Renderiza el componente pasándole toda la información necesaria del estado actual de la
 				 * petición de datos.

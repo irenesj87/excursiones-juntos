@@ -25,7 +25,7 @@ const IMG_WIDTH = 640;
 const IMG_HEIGHT = 360;
 /**
  * Función vacía que retorna una promesa resuelta inmediatamente.
- * Se utiliza como mecanismo de seguridad para el hook useJoinExcursions ya que en React los hooks 
+ * Se utiliza como mecanismo de seguridad para el hook useJoinExcursions ya que en React los hooks
  * no pueden ser condicionales, es decir, que siempre deben ejecutarse.
  */
 const NO_OP_JOIN = () => Promise.resolve();
@@ -102,8 +102,6 @@ interface ExcursionCardProps {
 	readonly id: string | number;
 	/** Título de la excursión. */
 	readonly name: string;
-	/** Descripción breve de la excursión. */
-	readonly description: string;
 	/** Ubicación geográfica donde se lleva a cabo la excursión. */
 	readonly area: string;
 	/** Nivel de dificultad de la excursión. */
@@ -123,13 +121,12 @@ interface ExcursionCardProps {
 }
 
 /**
- * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los 
+ * Componente que se encarga de renderizar una tarjeta que muestra la información de una excursión y permite a los
  * usuarios apuntarse a ella.
  */
 export function ExcursionCard({
 	id,
 	name,
-	description,
 	area,
 	difficulty,
 	time,
@@ -202,22 +199,22 @@ export function ExcursionCard({
 					<Card.Title as="h3" className={styles.excursionTitle}>
 						{name}
 					</Card.Title>
-					{/* Descripción de la excursión */}
-					<Card.Subtitle className={styles.excursionDescription}>
-						{description}
-					</Card.Subtitle>
 					{/* Detalles de la excursión */}
 					<div className={styles.infoItem}>
-						<InfoItem text={area} label="Zona" icon={<MapIcon size={18} />} />
+						<InfoItem
+							text={area}
+							label="Zona"
+							icon={<MapIcon size={18} className={styles.infoIcon} />}
+						/>
 						<InfoItem
 							text={difficulty}
 							label="Dificultad"
-							icon={<ChartIcon size={18} />}
+							icon={<ChartIcon size={18} className={styles.infoIcon} />}
 						/>
 						<InfoItem
 							text={time}
 							label="Tiempo estimado"
-							icon={<ClockIcon size={18} />}
+							icon={<ClockIcon size={18} className={styles.infoIcon} />}
 						/>
 					</div>
 				</div>

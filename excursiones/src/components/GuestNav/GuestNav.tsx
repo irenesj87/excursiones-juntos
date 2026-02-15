@@ -32,7 +32,7 @@ function GuestNav({
 			className={cn(className, {
 				// Para la variante por defecto, usamos flexbox para alinear los elementos horizontalmente,
 				// replicando el comportamiento del esqueleto y asegurando una transición sin saltos (CLS).
-				"d-flex align-items-center": variant === "default",
+				"d-flex align-items-center gap-1": variant === "default",
 				[styles.offcanvasContainer]: variant === "offcanvas",
 				"w-100": variant === "offcanvas",
 			})}
@@ -41,7 +41,6 @@ function GuestNav({
 				to={ROUTES.REGISTER}
 				onClick={onCloseMenu}
 				className={cn(styles.registerLink, {
-					"me-2": variant === "default",
 					"border-0": variant === "offcanvas",
 				})}
 			>

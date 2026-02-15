@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { COMPANY_NAME, ROUTES } from "../../constants";
 import { LogoIcon } from "../../ui/Icons";

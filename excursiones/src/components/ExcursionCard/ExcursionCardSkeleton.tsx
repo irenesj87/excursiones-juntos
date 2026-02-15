@@ -81,11 +81,6 @@ function ExcursionCardSkeleton({
 							width={SKELETON_SIZES.TITLE_WIDTH}
 							className="mb-3"
 						/>
-						{/* Descripción: Simula un párrafo breve de 3 líneas */}
-						<div className="mb-4">
-							<Skeleton count={2} style={{ marginBottom: 6 }} />
-							<Skeleton width="60%" />
-						</div>
 						{/* Detalles (Zona, Dificultad, Tiempo) */}
 						<div className={cardStyles.infoItem}>
 							<InfoItemSkeleton width={SKELETON_SIZES.AREA_TEXT_WIDTH} />

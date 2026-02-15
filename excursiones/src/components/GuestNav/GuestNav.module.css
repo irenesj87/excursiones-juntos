@@ -4,13 +4,18 @@
 	justify-content: center;
 	border-radius: var(--border-radius-pill);
 	color: var(--register-link-color);
+	padding: 0.6rem 1rem; /* Área táctil segura para móvil */
+	line-height: 1.5; /* Estandarizamos altura de línea con UserNav y botones */
+	font-size: 1.1rem;
+	font-weight: var(--font-weight-medium);
+	transition:
+		transform 0.2s ease-out,
+		background-color 0.2s ease-out;
 }
 
 .registerLink:hover {
-	background-color: var(--register-link-bg-hover);
-	transition:
-		background-color 0.2s ease-out,
-		color 0.2s ease-out;
+	color: var(--register-link-color);
+	transform: translateY(-2px);
 }
 
 .registerLink:focus-visible {
@@ -25,15 +30,19 @@
 	border-radius: var(--border-radius-pill);
 	background-color: var(--login-btn-bg);
 	color: var(--login-btn-text);
-	transition: none;
+	padding: 0.6rem 1rem; /* Área táctil segura para breakpoints pequeños */
+	line-height: 1.5;
+	transition:
+		transform 0.2s ease-out,
+		box-shadow 0.2s ease-out,
+		background-color 0.2s ease-out;
+	font-size: 1.1rem;
+	font-weight: var(--font-weight-medium);
 }
 
 .loginLink:hover {
-	background-color: var(--login-btn-bg-hover);
 	color: var(--login-btn-text-hover);
-	transition:
-		background-color 0.2s ease-out,
-		color 0.2s ease-out;
+	transform: translateY(-2px);
 }
 
 .loginLink:focus-visible {
@@ -49,4 +58,13 @@
 	flex-direction: column;
 	gap: 0.5rem; /* Espacio entre los enlaces (8px) */
 	padding-top: 1rem; /* Añade espacio superior para separar del borde del offcanvas */
+}
+
+/* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
+@media (min-width: 992px) {
+	.registerLink,
+	.loginLink {
+		padding: 0.5rem;
+		font-size: 1.1rem;
+	}
 }

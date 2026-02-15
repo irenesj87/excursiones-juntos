@@ -50,6 +50,7 @@
 	width: 100%;
 	background-color: transparent; /* Fuerza la transparencia */
 	box-shadow: none; /* Elimina la sombra para que se vea plano sobre la imagen */
+	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 
 	/* --- Overrides de color para el modo transparente --- */
 	/* Sobrescribimos las variables semánticas localmente para forzar el blanco sobre el Hero oscuro */

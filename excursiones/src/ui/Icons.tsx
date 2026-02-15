@@ -1,17 +1,10 @@
 import React from "react";
+import { PiMountainsDuotone } from "react-icons/pi";
 import {
-	LuMountainSnow,
 	LuCircleAlert,
 	LuTriangleAlert,
 	LuSearch,
-	LuMoon,
-	LuSun,
-	LuSquarePen,
-	LuLogIn,
-	LuLogOut,
 	LuImageOff,
-	LuFilter,
-	LuFilterX,
 	LuMapPin,
 	LuChartNoAxesColumnIncreasing,
 	LuClock3,
@@ -29,6 +22,7 @@ import {
 	LuEye,
 	LuEyeOff,
 } from "react-icons/lu";
+import { AiFillMoon, AiFillSun } from "react-icons/ai";
 
 // Tipo base para las props de los iconos
 type IconProps = {
@@ -41,7 +35,7 @@ type IconProps = {
  * Archivo central para exportar los componentes de íconos de la aplicación.
  */
 // Icono del logo
-export const LogoIcon = LuMountainSnow as React.ComponentType<IconProps>;
+export const LogoIcon = PiMountainsDuotone as React.ComponentType<IconProps>;
 // Icono de alerta circular para errores.
 export const CircleAlertIcon = LuCircleAlert as React.ComponentType<IconProps>;
 // Icono de check circular para éxito.
@@ -54,15 +48,9 @@ export const SearchIcon = LuSearch as React.ComponentType<IconProps>;
 // Icono de una "x" para limpiar la barra de búsqueda.
 export const XIcon = LuX as React.ComponentType<IconProps>;
 // Icono de una luna para el botón de cambio de tema.
-export const MoonIcon = LuMoon as React.ComponentType<IconProps>;
+export const MoonIcon = AiFillMoon as React.ComponentType<IconProps>;
 // Icono de un sol para el cambio de tema.
-export const SunIcon = LuSun as React.ComponentType<IconProps>;
-// Icono para el enlace de registro.
-export const RegisterIcon = LuSquarePen as React.ComponentType<IconProps>;
-// Icono para el enlace de iniciar sesión.
-export const LogInIcon = LuLogIn as React.ComponentType<IconProps>;
-// Icono para el botón de cerrar sesión.
-export const LogOutIcon = LuLogOut as React.ComponentType<IconProps>;
+export const SunIcon = AiFillSun as React.ComponentType<IconProps>;
 // Icono para mostrar que la excursión no tiene imagen
 export const NoImageIcon = LuImageOff as React.ComponentType<IconProps>;
 // Icono de un pin para la zona.
@@ -72,10 +60,6 @@ export const ChartIcon =
 	LuChartNoAxesColumnIncreasing as React.ComponentType<IconProps>;
 // Icono para el tiempo estimado de las excursiones.
 export const ClockIcon = LuClock3 as React.ComponentType<IconProps>;
-// Icono para los filtros
-export const FilterIcon = LuFilter as React.ComponentType<IconProps>;
-// Icono para la opción de limpiar los filtros
-export const FilterXIcon = LuFilterX as React.ComponentType<IconProps>;
 // Icono de un check para verificar algo
 export const CheckIcon = LuCircleCheckBig as React.ComponentType<IconProps>;
 // Icono del copyright para el footer

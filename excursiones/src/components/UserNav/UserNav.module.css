@@ -3,22 +3,28 @@
 	align-items: center;
 	justify-content: center;
 	padding: 0.6rem 1rem;
-	font-weight: 600;
+	font-weight: var(--font-weight-light);
+	font-size: 1.1rem;
 	line-height: 1.5;
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
 	color: var(--register-link-color);
-	transition: none;
+	transition:
+		transform 0.2s ease-out,
+		background-color 0.2s ease-out;
 	cursor: pointer;
 	user-select: none;
-	border-radius: 50rem; /* Añadido para coincidir con el esqueleto y que el foco sea redondeado */
+	border-radius: var(
+		--border-radius-pill
+	);
 }
 
 .profileLink:hover {
 	background-color: var(--theme-toggle-btn-bg-hover);
 	outline: none;
 	box-shadow: none;
+	transform: translateY(-2px);
 }
 
 /* Estilo de foco consistente con el ThemeToggleButton (gris en lugar de verde) */
@@ -36,7 +42,12 @@
 	background-color: var(--logout-bg-color);
 	border-color: var(--logout-bg-color);
 	padding: 0.6rem 1rem;
-	transition: none;
+	font-weight: var(--font-weight-light);
+	font-size: 1.1rem;
+	transition:
+		transform 0.2s ease-out,
+		box-shadow 0.2s ease-out,
+		background-color 0.2s ease-out;
 }
 
 .logoutLink:hover,
@@ -44,4 +55,15 @@
 	color: var(--logout-text-color);
 	background-color: var(--logout-bg-color-hover);
 	border-color: var(--logout-bg-color-hover);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
+@media (min-width: 992px) {
+	.profileLink,
+	.logoutLink {
+		padding: 0.5rem;
+		font-size: 1.1rem;
+	}
 }

@@ -13,13 +13,13 @@
 .filtersToggleButton {
 	background-color: var(--filters-toggle-btn-bg);
 	color: var(--filters-toggle-btn-color);
-	border-color: var(--filters-toggle-btn-border);
-	font-weight: 600;
+	font-weight: var(--font-weight-semibold);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
 	border-radius: var(--border-radius-pill);
+	min-height: 44px; /* Asegura cumplimiento WCAG AAA para área táctil */
 	box-shadow: var(--shadow-soft); /* Sombra para que flote sobre el contenido */
 	transition:
 		transform 0.2s ease-out,

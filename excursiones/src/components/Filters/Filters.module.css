@@ -3,7 +3,6 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	border-bottom: 1px solid var(--color-border-subtle);
 }
 
 /* Contenedor para el contenido principal de los filtros, permite el scroll */
@@ -15,9 +14,10 @@
 
 /* Título principal */
 .title {
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 	font-weight: 600;
-	margin: 0 0 1.5rem;
+	text-transform: uppercase;
+	margin: 1.25rem 0 1.5rem; /* Ajuste fino para alinear visualmente con el título de la lista */
 	color: var(--filter-title-color);
 	font-family: var(--font-family-serif);
 }
@@ -37,56 +37,21 @@
 	font-family: var(--font-family-serif);
 }
 
-.filterTitle .filterIcon,
-.clearButton .filterIcon {
+.filterTitle .filterIcon {
 	font-size: 1.25rem;
-}
-
-/* Footer que contiene el botón de limpiar */
-.filtersFooter {
-	padding: 1rem 1.5rem;
-	background-color: var(
-		--filter-container-bg
-	); /* Asegura que tenga fondo si el contenido hace scroll por detrás */
-	flex-shrink: 0; /* Evita que el footer se encoja */
-}
-
-.clearButton {
-	width: 100%;
-	/* Reservamos espacio para el borde para evitar saltos si StyledButton cambia bordes */
-	border: 1px solid transparent;
-	/* Forzamos la transición de transformación para que siempre sea suave */
-	transition: transform var(--transition-base);
-}
-
-.clearButton:hover:not(:disabled),
-.clearButton:focus-visible:not(:disabled) {
-	transform: translateY(-2px);
-}
-
-.clearButton:active:not(:disabled) {
-	transform: translateY(0) scale(0.98);
-	transition: none;
-}
-
-/* Aseguramos que al deshabilitarse (y perder el hover) la vuelta a su sitio sea animada */
-.clearButton:disabled {
-	transform: none;
-	transition: transform var(--transition-base);
-}
-
-.buttonContent {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem; /* Espacio entre el icono y el texto */
-	width: 100%;
 }
 
 /* Aplicar borde solo en breakpoints más grandes */
 @media (min-width: 768px) {
 	.filtersContainer {
-		border-right: 1px solid var(--color-border-subtle);
-		border-bottom: none; /* Quitamos el borde inferior en desktop */
+		border-right: none;
+	}
+}
+
+/* Ajuste para escritorio: Limitamos el ancho del panel para que sea más elegante */
+@media (min-width: 992px) {
+	.filtersContainer {
+		max-width: 22rem;
+		width: 100%;
 	}
 }
