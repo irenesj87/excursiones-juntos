@@ -22,6 +22,9 @@ function Footer(): JSX.Element {
 					{yearDisplay}. {COPYRIGHT_TEXT}
 				</span>
 			</small>
+			<p className={styles.disclaimer}>
+				Proyecto de desarrollo web para portfolio. Sin fines comerciales.
+			</p>
 		</footer>
 	);
 }

@@ -14,13 +14,13 @@
 	display: block;
 	text-align: center;
 	margin: 0;
-	font-size: 1.125rem;
+	font-size: 1rem; /* Unificado para consistencia móvil/escritorio */
 	line-height: 1.5;
 	letter-spacing: 0.02em;
 }
 
 .companyName {
-	font-weight: 600;
+	font-weight: var(--font-weight-semibold);
 }
 
 .copyrightIcon {
@@ -40,11 +40,22 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-		font-size: 1rem;
 	}
 
 	.copyrightIcon {
 		margin: 0;
 		transform: none;
 	}
+
+	.disclaimer {
+		margin-top: 0; /* En desktop, reducimos el margen si es necesario, o lo dejamos fluir */
+	}
+}
+
+.disclaimer {
+	margin-top: 0.75rem;
+	font-size: var(--font-size-xs);
+	color: var(--footer-text-muted);
+	max-width: 40ch; /* Limita el ancho para lectura cómoda */
+	line-height: 1.4;
 }

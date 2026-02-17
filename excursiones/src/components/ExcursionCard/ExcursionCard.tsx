@@ -102,6 +102,8 @@ interface ExcursionCardProps {
 	readonly id: string | number;
 	/** Título de la excursión. */
 	readonly name: string;
+	/** Descripción de la excursión. */
+	readonly description: string;
 	/** Ubicación geográfica donde se lleva a cabo la excursión. */
 	readonly area: string;
 	/** Nivel de dificultad de la excursión. */
@@ -127,6 +129,7 @@ interface ExcursionCardProps {
 export function ExcursionCard({
 	id,
 	name,
+	description,
 	area,
 	difficulty,
 	time,
@@ -199,6 +202,10 @@ export function ExcursionCard({
 					<Card.Title as="h3" className={styles.excursionTitle}>
 						{name}
 					</Card.Title>
+					{/* Descripción de la excursión */}
+					<Card.Text className={styles.excursionDescription}>
+						{description}
+					</Card.Text>
 					{/* Detalles de la excursión */}
 					<div className={styles.infoItem}>
 						<InfoItem

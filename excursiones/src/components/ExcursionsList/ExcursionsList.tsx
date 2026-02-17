@@ -3,6 +3,7 @@ import { ExcursionCard } from "../ExcursionCard";
 import { ExcursionsLoading } from "./ExcursionsLoading";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import { NoExcursionsFound } from "./NoExcursionsFound";
+import { Pagination } from "../../ui/Pagination";
 import styles from "./ExcursionsList.module.css";
 import {
 	useExcursionsListLogic,
@@ -25,6 +26,9 @@ export function ExcursionsListView({
 	isLoggedIn,
 	joinedExcursionIds,
 	onJoin,
+	currentPage,
+	totalPages,
+	onPageChange,
 }: Readonly<ExcursionsListViewProps>) {
 	const renderContent = () => {
 		// 1. Prioridad: Carga inicial.
@@ -69,6 +73,7 @@ export function ExcursionsListView({
 							<ExcursionCard
 								id={excursion.id}
 								name={excursion.name}
+								description={excursion.description}
 								area={excursion.area}
 								difficulty={excursion.difficulty}
 								time={excursion.time}
@@ -84,7 +89,7 @@ export function ExcursionsListView({
 			</Row>
 		);
 	};
-
+	const shouldShowPagination = totalPages > 1 && !isLoading;
 	return (
 		<section
 			className={styles.excursionsContainer}
@@ -94,6 +99,13 @@ export function ExcursionsListView({
 				{TEXTS.TITLE}
 			</h2>
 			{renderContent()}
+			{shouldShowPagination && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={onPageChange}
+				/>
+			)}
 		</section>
 	);
 }

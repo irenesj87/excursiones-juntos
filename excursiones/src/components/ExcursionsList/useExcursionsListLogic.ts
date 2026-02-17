@@ -8,6 +8,30 @@ const JOIN_EXCURSION_ERROR_MSG =
 	"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde.";
 
 /**
+ * Hook personalizado para detectar si una media query de CSS coincide.
+ * @param query La media query a evaluar (ej: '(min-width: 768px)').
+ * @returns `true` si la media query coincide, `false` en caso contrario.
+ */
+function useMediaQuery(query: string): boolean {
+	const [matches, setMatches] = useState(() => {
+		if (globalThis.window === undefined) return false;
+		return globalThis.window.matchMedia(query).matches;
+	});
+
+	useEffect(() => {
+		if (globalThis.window === undefined) return;
+
+		const mediaQueryList = globalThis.window.matchMedia(query);
+		const listener = (event: MediaQueryListEvent) => setMatches(event.matches);
+
+		mediaQueryList.addEventListener("change", listener);
+		return () => mediaQueryList.removeEventListener("change", listener);
+	}, [query]);
+
+	return matches;
+}
+
+/**
  * Define qué datos recibe el hook desde el componente padre (datos crudos, estado de carga).
  */
 export interface ExcursionsListProps {
@@ -26,6 +50,9 @@ export interface ExcursionsListViewProps {
 	readonly isLoggedIn: boolean;
 	readonly joinedExcursionIds: ReadonlySet<string>;
 	readonly onJoin: (id: string | number) => Promise<void>;
+	readonly currentPage: number;
+	readonly totalPages: number;
+	readonly onPageChange: (page: number) => void;
 }
 
 /**
@@ -56,22 +83,40 @@ export function useExcursionsListLogic({
 	const [displayedExcursions, setDisplayedExcursions] =
 		useState<readonly Excursion[]>(excursionData);
 
+	// --- Lógica de Paginación ---
+	const [currentPage, setCurrentPage] = useState(1);
+	const isDesktop = useMediaQuery("(min-width: 992px)"); // Breakpoint 'lg' de Bootstrap
+	const ITEMS_PER_PAGE = isDesktop ? 8 : 4;
+
+	// Se calcula sobre la lista que se está mostrando para ser consistente con la UI.
+	const totalPages = Math.ceil(displayedExcursions.length / ITEMS_PER_PAGE);
+
+	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+	const paginatedExcursions = displayedExcursions.slice(
+		startIndex,
+		startIndex + ITEMS_PER_PAGE,
+	);
+
+	// --- Fin Lógica de Paginación ---
+
 	useEffect(() => {
 		if (!isLoading) {
 			setDisplayedExcursions(excursionData);
+			// Si los datos cambian (ej: por un filtro), volvemos a la página 1.
+			setCurrentPage(1);
 		}
 	}, [isLoading, excursionData]);
 
 	// Transformación a Set para búsquedas O(1) en el renderizado.
 	// Toma la lista de excursiones a las que se ha apuntado el usuario(si existe), convierte todos los IDs a texto
 	// para evitar errores de comparación y luego los guarda en un Set para para que cuando el componente visual
-	// dibuje la lista y tenga que preguntar "¿el usuario se ha apuntado a esta excursión?" para cada tarjeta pueda 
-	// responder instantáneamente ya que la complejidad del Set es O(1) y no tenga que recorrer una array cuya 
+	// dibuje la lista y tenga que preguntar "¿el usuario se ha apuntado a esta excursión?" para cada tarjeta pueda
+	// responder instantáneamente ya que la complejidad del Set es O(1) y no tenga que recorrer una array cuya
 	// complejidad es O(n).
 	const joinedExcursionIds = new Set((user?.excursions || []).map(String));
 
 	// Función que la UI llamará cuando el usuario quiera apuntarse a una excursión. Si falla el intento de apuntarse
-	// a una excursión, captura el error técnico, lo loguea para los desarrolladores y luego lanza un error genérico 
+	// a una excursión, captura el error técnico, lo loguea para los desarrolladores y luego lanza un error genérico
 	// con un mensaje amigable para que la UI lo muestre al usuario, sin exponer detalles técnicos.
 	const handleJoinExcursion = async (excursionId: string | number) => {
 		try {
@@ -89,7 +134,7 @@ export function useExcursionsListLogic({
 	};
 
 	return {
-		excursions: displayedExcursions,
+		excursions: paginatedExcursions,
 		// Indica si se están cargando excursiones. La UI utilizará este boolean para mostrar un estado de carga,
 		// en este caso, un skeleton.
 		isLoading,
@@ -101,5 +146,8 @@ export function useExcursionsListLogic({
 		// handleJoinExcursion, envuelve la lógica de joinExcursion(que viene de otro hook), gestiona los errores y se
 		// los comunica a la UI.
 		onJoin: handleJoinExcursion,
+		currentPage,
+		totalPages,
+		onPageChange: setCurrentPage,
 	};
 }

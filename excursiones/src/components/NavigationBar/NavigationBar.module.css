@@ -20,6 +20,11 @@
 	max-width: 300px;
 }
 
+.offcanvasTitle {
+	text-transform: uppercase;
+	letter-spacing: 0.05em; /* Añade un ligero espaciado para legibilidad */
+}
+
 /* Botón de menú (Hamburguesa) */
 .navbarToggler {
 	border: none;
@@ -65,6 +70,7 @@
 	--login-btn-bg: transparent;
 	--login-btn-border: transparent;
 	--login-btn-text: var(--color-white);
+	--login-btn-text-hover: var(--color-white);
 
 	/* Botones de acción (Tema y Menú) */
 	--theme-toggle-btn-color: var(--color-white);

@@ -1,5 +1,5 @@
 import React from "react";
-import { PiMountainsDuotone } from "react-icons/pi";
+import { PiMountainsFill } from "react-icons/pi";
 import {
 	LuCircleAlert,
 	LuTriangleAlert,
@@ -35,7 +35,7 @@ type IconProps = {
  * Archivo central para exportar los componentes de íconos de la aplicación.
  */
 // Icono del logo
-export const LogoIcon = PiMountainsDuotone as React.ComponentType<IconProps>;
+export const LogoIcon = PiMountainsFill as React.ComponentType<IconProps>;
 // Icono de alerta circular para errores.
 export const CircleAlertIcon = LuCircleAlert as React.ComponentType<IconProps>;
 // Icono de check circular para éxito.

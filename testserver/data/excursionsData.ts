@@ -17,34 +17,52 @@ export interface Excursion {
 const excursions: Excursion[] = [
 	{
 		id: "0",
-		name: "Cangas de Onís",
-		description:
-			"Una ruta histórica que comienza en el icónico Puente Romano sobre el río Sella. Perfecta para disfrutar en familia.",
-		area: "Centro-Este",
+		name: "Bustio - Pendueles",
+		description: `Un paseo sereno que teje su camino entre el valle fluvial de Bustio y la costa de Pendueles.
+		Perfecta para una escapada tranquila, donde el sonido de las olas marca el ritmo de tus pasos.`,
+		area: "Oeste",
 		difficulty: "Baja",
 		time: "3 horas",
+	},
+	{
+		id: "1",
+		name: "Cangas de Onís",
+		description: `Viaja en el tiempo cruzando el legendario Puente Romano, emblema de Cangas de Onís.
+		Sigue el murmullo del río Sella en una ruta familiar que combina historia y naturaleza.`,
+		area: "Centro-Este",
+		difficulty: "Baja",
+		time: "4 horas",
 		imgSrc: "/images/0.jpg",
 		imgAlt: "Puente Romano de Cangas de Onís sobre el río Sella",
 	},
 	{
-		id: "1",
+		id: "2",
 		name: "Parque natural de Somiedo",
-		description:
-			"Hogar del oso pardo, esta ruta te llevará a través de valles verdes y te permitirá ver las tradicionales cabañas de teito.",
+		description: `Explora el corazón salvaje de Somiedo, el reino del oso pardo. Descubre sus valles glaciares y las ancestrales cabañas de teito.
+		Una aventura en uno de los últimos paraísos naturales de Europa.`,
 		area: "Centro",
-		difficulty: "Baja",
-		time: "3 horas",
+		difficulty: "Media",
+		time: "5 horas",
 	},
 	{
-		id: "2",
+		id: "3",
 		name: "Picos de Europa",
-		description:
-			"En esta excursión atravesarás senderos rocosos de vistas panorámicas inigualables. Requiere buena forma física y equipo adecuado para terreno escarpado.",
+		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.
+		Una ruta exigente para espíritus aventureros que buscan la majestuosidad de la montaña.`,
 		area: "Este",
 		difficulty: "Alta",
-		time: "5 horas",
+		time: "6 horas",
 		imgSrc: "/images/2.jpg",
 		imgAlt: "Cumbres escarpadas de los Picos de Europa",
+	},
+	{
+		id: "4",
+		name: "Ruta del Silencio",
+		description: `Adéntrate en un santuario natural donde el tiempo se detiene. Recorre senderos ancestrales bajo la sombra de castaños y robles, entre praderas que invitan a la calma.
+		Una experiencia para reconectar con la esencia pura de la naturaleza.`,
+		area: "Oeste",
+		difficulty: "Alta",
+		time: "5 horas",
 	},
 ];
 

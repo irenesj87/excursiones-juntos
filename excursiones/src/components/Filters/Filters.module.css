@@ -51,7 +51,7 @@
 /* Ajuste para escritorio: Limitamos el ancho del panel para que sea más elegante */
 @media (min-width: 992px) {
 	.filtersContainer {
-		max-width: 22rem;
+		max-width: 25.8rem;
 		width: 100%;
 	}
 }

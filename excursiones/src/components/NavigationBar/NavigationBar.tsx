@@ -179,7 +179,9 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 					aria-label="Menú"
 				>
 					<Offcanvas.Header closeButton closeLabel="Cerrar menú">
-						<Offcanvas.Title>Menú</Offcanvas.Title>
+						<Offcanvas.Title className={styles.offcanvasTitle}>
+							Menú
+						</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						{/* 

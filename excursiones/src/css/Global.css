@@ -28,6 +28,14 @@ html {
 	--color-green-800: hsl(135, 45%, 20%);
 	--color-green-900: hsl(135, 40%, 15%);
 
+	/* Paleta de Musgo (Verdes Cálidos) */
+	--color-moss-100: hsl(95, 25%, 88%); /* Musgo muy claro */
+	--color-moss-200: hsl(95, 25%, 75%);
+	--color-moss-300: hsl(95, 30%, 60%); /* Musgo pastel */
+	--color-moss-500: hsl(95, 40%, 40%); /* Musgo hoja */
+	--color-moss-700: hsl(95, 30%, 28%); /* Verde musgo oscuro y cálido */
+	--color-moss-800: hsl(95, 30%, 23%); /* Sombra del musgo */
+
 	/* Paleta de Verdes Profundos (Base para Modo Oscuro - Desaturados) */
 	--color-green-dark-900: hsl(135, 30%, 12%); /* Fondo Body */
 	--color-green-dark-800: hsl(135, 25%, 18%); /* Fondo Surface */
@@ -201,12 +209,11 @@ parecen inactivos. */
 #offcanvasNavbar .offcanvas-body .nav-link {
 	display: block;
 	width: 95%;
-	margin: 0 auto 0.6rem; /* Centrado horizontalmente y con margen inferior */
+	margin: 0 auto 0rem; /* Centrado horizontalmente y con margen inferior */
 	text-align: center;
-	padding: 0.6rem 1rem;
+	padding: 0.5rem 0.8rem;
 	text-decoration: none;
 	border-radius: var(--border-radius-pill);
-	border: 1px solid var(--separator-color);
 }
 
 /* Alinea los iconos con el texto en los enlaces de navegación */

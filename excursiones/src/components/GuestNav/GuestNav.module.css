@@ -28,8 +28,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: var(--border-radius-pill);
-	background-color: var(--login-btn-bg);
-	color: var(--login-btn-text);
+	color: var(--register-link-color);
 	padding: 0.6rem 1rem; /* Área táctil segura para breakpoints pequeños */
 	line-height: 1.5;
 	transition:
@@ -41,13 +40,13 @@
 }
 
 .loginLink:hover {
-	color: var(--login-btn-text-hover);
+	color: var(--register-link-color);
 	transform: translateY(-2px);
 }
 
 .loginLink:focus-visible {
-	background-color: var(--login-btn-bg-hover);
-	color: var(--login-btn-text-hover);
+	background-color: var(--register-link-bg-hover);
+	color: var(--register-link-color);
 	outline: 0;
 }
 
