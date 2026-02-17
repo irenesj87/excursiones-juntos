@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Container, Row } from "react-bootstrap";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Hero } from "../Hero/Hero";
 import NavigationBar from "../NavigationBar";
@@ -74,13 +73,7 @@ export function Layout() {
 					{/* Define la ruta por defecto. */}
 					<Route
 						path="/"
-						element={
-							<Container fluid className="d-flex flex-column flex-grow-1">
-								<Row className="justify-content-start flex-grow-1 align-items-stretch">
-									<ExcursionsPage excursionsState={excursionsState} />
-								</Row>
-							</Container>
-						}
+						element={<ExcursionsPage excursionsState={excursionsState} />}
 					/>
 					{/* Define las rutas para los componentes RegisterPage, LoginPage y UserPage */}
 					<Route

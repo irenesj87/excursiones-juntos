@@ -61,7 +61,7 @@ html.light {
 		--color-white
 	); /* Para tarjetas, modales, etc. */
 	--color-text-base: var(--color-stone-900);
-	--color-text-muted: var(--color-stone-700); /* Oscurecido para AAA */
+	--color-text-muted: var(--color-stone-750); /* AAA robusto con fuente fina */
 	--color-text-on-primary: var(
 		--color-stone-900
 	); /* Texto oscuro sobre pastel */
@@ -76,7 +76,7 @@ html.light {
 	); /* Oscurecido para cumplir AAA (7:1) */
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(
-		--color-green-700
+		--color-moss-700
 	); /* Oscurecido para cumplir AAA (7:1) */
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
@@ -168,23 +168,19 @@ html.light {
 	);
 
 	/* --- Estados (Error, Alerta) --- */
-	--color-bg-danger-subtle: hsl(0, 100%, 97%);
-	--color-border-danger: hsl(0, 90%, 85%);
-	--color-text-danger: hsl(
-		0,
-		70%,
-		35%
-	); /* Oscurecido para ratio AAA (7.15:1) */
+	--color-bg-danger-subtle: var(--color-danger-bg-subtle-light);
+	--color-border-danger: var(--color-danger-border-subtle-light);
+	--color-text-danger: var(--color-danger-light);
 
 	/* Éxito */
-	--color-bg-success-subtle: hsl(135, 60%, 96%);
-	--color-border-success: hsl(135, 40%, 85%);
-	--color-text-success: hsl(135, 70%, 25%);
+	--color-bg-success-subtle: var(--color-success-bg-subtle-light);
+	--color-border-success: var(--color-success-border-subtle-light);
+	--color-text-success: var(--color-success-light);
 
 	/* Advertencia */
-	--color-bg-warning-subtle: hsl(40, 80%, 96%);
-	--color-border-warning: hsl(40, 60%, 85%);
-	--color-text-warning: hsl(40, 80%, 25%);
+	--color-bg-warning-subtle: var(--color-warning-bg-subtle-light);
+	--color-border-warning: var(--color-warning-border-subtle-light);
+	--color-text-warning: var(--color-warning-text-light);
 
 	/* Componente de error de filtro */
 	--filter-error-bg: var(--color-bg-danger-subtle);
@@ -197,8 +193,8 @@ html.light {
 	--search-bar-placeholder-text: var(--color-stone-600);
 	--search-bar-icon-color: var(--color-stone-600);
 	--search-bar-bg-focus: var(--color-white);
-	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.15);
+	--search-bar-shadow: var(--shadow-medium);
+	--search-bar-shadow-focus: var(--shadow-strong);
 	--search-bar-focus-ring-shadow: 0 0 0 0 transparent;
 	--search-bar-border-focus: var(--color-primary);
 
@@ -224,7 +220,7 @@ html.dark {
 	/* Corresponde a --color-moss-100 */
 	--primary-color-rgb: 223, 232, 217;
 	--color-primary-hover: var(--color-moss-200);
-	--color-accent: var(--color-green-300);
+	--color-accent: var(--color-moss-300);
 	--color-background-body: var(--color-green-dark-900);
 	--color-background-surface: var(--color-green-dark-800);
 	--color-text-base: var(--color-stone-100); /* Blanco hueso para texto */
@@ -245,7 +241,7 @@ html.dark {
 	--navbar-color: var(--color-text-base);
 	--navbar-brand-color: var(--color-stone-50);
 	--navbar-brand-icon: var(
-		--color-green-200
+		--color-moss-200
 	); /* Aclarado para cumplir AAA (7:1) */
 	--navbar-toggler-border-color: var(--separator-color);
 	/* Usamos el token --color-green-dark-200 para el stroke del SVG (que era hsl(150, 15%, 88%)) */
@@ -259,18 +255,18 @@ html.dark {
 	/* BUGFIX: El color del icono no estaba definido para el tema oscuro. */
 	--theme-toggle-btn-icon: var(--color-text-base);
 	--theme-toggle-btn-border-color: var(--separator-color);
-	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.1);
+	--theme-toggle-btn-bg-hover: var(--color-white-alpha-10);
 
 	--login-btn-bg: var(--color-primary); /* Aclarado para contraste AAA */
 	--login-btn-border: var(--separator-color);
-	--login-btn-bg-hover: rgba(255, 255, 255, 0.1);
+	--login-btn-bg-hover: var(--color-white-alpha-10);
 	--login-btn-text-hover: var(
 		--color-text-base
 	); /* Mantiene texto claro en hover */
 	--login-btn-border-hover: var(--separator-color);
 
 	--register-link-color: var(--navbar-color);
-	--register-link-bg-hover: rgba(255, 255, 255, 0.1);
+	--register-link-bg-hover: var(--color-white-alpha-10);
 	--nav-link-active-bg: hsl(150, 10%, 30%);
 	--nav-link-active-border: hsl(150, 10%, 40%);
 
@@ -331,19 +327,19 @@ html.dark {
 	);
 
 	/* --- Estados (Error, Alerta) --- */
-	--color-bg-danger-subtle: hsl(0, 30%, 25%); /* Rojo oscuro desaturado */
-	--color-border-danger: hsl(0, 40%, 35%); /* Borde rojo oscuro */
-	--color-text-danger: hsl(0, 85%, 82%); /* Aclarado para ratio AAA (7.01:1) */
+	--color-bg-danger-subtle: var(--color-danger-bg-subtle-dark);
+	--color-border-danger: var(--color-danger-border-subtle-dark);
+	--color-text-danger: var(--color-danger-text-dark);
 
 	/* Éxito */
-	--color-bg-success-subtle: hsl(135, 30%, 20%);
-	--color-border-success: hsl(135, 30%, 30%);
-	--color-text-success: hsl(135, 60%, 80%);
+	--color-bg-success-subtle: var(--color-success-bg-subtle-dark);
+	--color-border-success: var(--color-success-border-subtle-dark);
+	--color-text-success: var(--color-success-text-dark);
 
 	/* Advertencia */
-	--color-bg-warning-subtle: hsl(40, 30%, 20%);
-	--color-border-warning: hsl(40, 30%, 30%);
-	--color-text-warning: hsl(40, 60%, 80%);
+	--color-bg-warning-subtle: var(--color-warning-bg-subtle-dark);
+	--color-border-warning: var(--color-warning-border-subtle-dark);
+	--color-text-warning: var(--color-warning-text-dark);
 
 	/* Componente de error de filtro */
 	--filter-error-bg: var(--color-bg-danger-subtle);
@@ -356,8 +352,8 @@ html.dark {
 	--search-bar-placeholder-text: var(--color-stone-300);
 	--search-bar-icon-color: var(--color-stone-300);
 	--search-bar-bg-focus: var(--color-green-dark-800);
-	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.5);
+	--search-bar-shadow: var(--shadow-medium-dark);
+	--search-bar-shadow-focus: var(--shadow-strong-dark);
 	--search-bar-focus-ring-shadow: 0 0 0 0 transparent;
 	--search-bar-border-focus: var(--color-primary);
 
