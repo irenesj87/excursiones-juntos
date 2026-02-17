@@ -1,7 +1,7 @@
 .excursionsContainer {
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1;
+	flex: 1; /* Permite que el contenedor crezca y se encoja */
 	margin-block: 3rem;
 }
 

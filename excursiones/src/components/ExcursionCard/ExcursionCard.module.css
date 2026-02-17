@@ -1,5 +1,9 @@
 /* Estilos para la tarjeta de excursión */
 .excursionItemCard {
+	/* Variables locales para el dimensionamiento del componente */
+	--_card-image-height: 300px;
+	--_card-action-min-height: 2.75rem; /* 44px */
+
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -17,7 +21,7 @@
 
 /* Contenedor de la imagen para reservar espacio y evitar CLS */
 .imageContainer {
-	height: 300px;
+	height: var(--_card-image-height);
 	width: 100%;
 	background-color: var(--image-placeholder-bg);
 	position: relative;
@@ -26,7 +30,7 @@
 
 /* Contenedor específico para el skeleton de la imagen */
 .imageSkeletonContainer {
-	height: 300px;
+	height: var(--_card-image-height);
 	line-height: 0;
 }
 
@@ -64,8 +68,20 @@
 	font-weight: 700;
 	line-height: 1.4;
 	margin-bottom: 1rem;
-	font-family: var(--font-family-serif);
+	font-family: var(--font-family-sans);
 	color: var(--excursion-card-title-color);
+}
+
+.excursionDescription {
+	/* Respeta los saltos de línea del string pero colapsa espacios extra */
+	white-space: pre-line;
+	color: var(--color-text-muted);
+	margin-bottom: 1rem;
+	font-size: var(
+		--font-size-sm
+	); /* Corregido de -md a -sm para usar un token existente */
+	line-height: 1.7; /* Aumentamos ligeramente el interlineado para mayor legibilidad */
+	max-width: 60ch; /* Limita el ancho de línea a ~60 caracteres para una lectura cómoda */
 }
 
 /* Icono que sale cuando un usuario se ha apuntado a una excursión */
@@ -81,18 +97,18 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-sm);
 	color: var(
 		--color-text-muted
 	); /* Color suavizado para no competir con el contenido principal */
 }
 
 .infoIcon {
-	color: var(--color-stone-800);
+	color: var(--color-text-muted);
 }
 
 .cardActionArea {
-	min-height: 2.75rem; /* 44px para coincidir con la altura estándar de botones y skeleton */
+	min-height: var(--_card-action-min-height);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

@@ -23,9 +23,14 @@
 	--switcher-link-color: var(--color-primary);
 	--login-btn-text: var(--color-text-on-primary);
 
+	/* Offcanvas */
+	--offcanvas-header-bg: var(--color-moss-700);
+	--offcanvas-header-text-color: var(--color-white-off);
+
 	/* Footer */
 	--footer-bg: var(--color-stone-900);
 	--footer-text-color: var(--color-white-off);
+	--footer-text-muted: var(--color-stone-400);
 
 	/* Bootstrap Overrides Generales */
 	--bs-primary: var(--color-primary);
@@ -40,14 +45,14 @@
 html.light {
 	color-scheme: light;
 	/* --- 2a. Variables Semánticas --- */
-	/* Usamos tonos oscuros para elementos principales para contrastar con el fondo claro */
-	--color-primary: var(--color-green-300); /* Verde Pastel */
+	/* Usamos tonos musgo para el color primario, alineado con la estética orgánica */
+	--color-primary: var(--color-moss-300); /* Verde Musgo Pastel */
 	/* 
 	 * RGB crudo necesario para utilidades de opacidad de Bootstrap (ej: bg-primary-subtle).
-	 * Corresponde a --color-green-300.
+	 * Corresponde a --color-moss-300.
 	 */
-	--primary-color-rgb: 120, 190, 140; /* Aprox para hsl(135, 30%, 60%) */
-	--color-primary-hover: var(--color-green-500);
+	--primary-color-rgb: 148, 184, 122; /* Aprox para hsl(95, 30%, 60%) */
+	--color-primary-hover: var(--color-moss-500);
 	--color-accent: var(--color-earth-300); /* Acento Tierra Pastel */
 	--color-background-body: var(
 		--color-white-off
@@ -212,13 +217,13 @@ html.light body {
 html.dark {
 	color-scheme: dark;
 	/* --- 2a. Variables Semánticas --- */
-	/* Usamos tonos claros para elementos principales para contrastar con el fondo oscuro */
+	/* Usamos tonos musgo claros para el color primario, para un alto contraste sobre fondo oscuro */
 	--color-primary: var(
-		--color-green-100
+		--color-moss-100
 	); /* Muy claro para ratio 7:1 sobre fondo oscuro */
-	/* Corresponde a --color-green-100 */
-	--primary-color-rgb: 217, 242, 227;
-	--color-primary-hover: var(--color-green-200);
+	/* Corresponde a --color-moss-100 */
+	--primary-color-rgb: 223, 232, 217;
+	--color-primary-hover: var(--color-moss-200);
 	--color-accent: var(--color-green-300);
 	--color-background-body: var(--color-green-dark-900);
 	--color-background-surface: var(--color-green-dark-800);
@@ -430,9 +435,15 @@ html.dark .btn-close {
 
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
-	background-color: var(--excursion-card-bg); /* Unifica el fondo con el body */
-	color: var(--color-text-base); /* Mantiene el color del texto del tema */
-	border-bottom: 1px solid var(--color-border-subtle);
+	background-color: var(--offcanvas-header-bg);
+	color: var(--offcanvas-header-text-color);
+	border-bottom: 1px solid var(--color-moss-800); /* Borde más oscuro para separar del verde */
+}
+
+/* Asegura que el botón de cierre sea visible sobre el nuevo fondo oscuro del header */
+.offcanvas-header .btn-close {
+	/* Filtro para invertir el color del SVG a blanco */
+	filter: invert(1) grayscale(100%) brightness(200%);
 }
 
 .offcanvas-body {

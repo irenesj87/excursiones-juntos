@@ -41,9 +41,8 @@
 
 /* Estilo para el título del Offcanvas */
 .offcanvasTitle {
-	font-family: var(--font-family-serif);
 	font-weight: 600;
 	font-size: var(--font-size-xl); /* 1.5rem (24px) */
-	color: var(--filter-title-color);
+	text-transform: uppercase;
 	margin-bottom: 0; /* Eliminamos el margen para que la X se alinee perfectamente al centro */
 }
