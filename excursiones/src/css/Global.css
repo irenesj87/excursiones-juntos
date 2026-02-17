@@ -209,12 +209,11 @@ parecen inactivos. */
 #offcanvasNavbar .offcanvas-body .nav-link {
 	display: block;
 	width: 95%;
-	margin: 0 auto 0.6rem; /* Centrado horizontalmente y con margen inferior */
+	margin: 0 auto 0rem; /* Centrado horizontalmente y con margen inferior */
 	text-align: center;
-	padding: 0.6rem 1rem;
+	padding: 0.5rem 0.8rem;
 	text-decoration: none;
 	border-radius: var(--border-radius-pill);
-	border: 1px solid var(--separator-color);
 }
 
 /* Alinea los iconos con el texto en los enlaces de navegación */

@@ -24,7 +24,7 @@
 	--login-btn-text: var(--color-text-on-primary);
 
 	/* Offcanvas */
-	--offcanvas-header-bg: var(--color-moss-700);
+	--offcanvas-header-bg: var(--color-stone-900);
 	--offcanvas-header-text-color: var(--color-white-off);
 
 	/* Footer */
@@ -194,8 +194,8 @@ html.light {
 	/* --- SearchBar --- */
 	--search-bar-bg: var(--color-white);
 	--search-bar-border: var(--color-stone-300);
-	--search-bar-placeholder-text: var(--color-stone-700);
-	--search-bar-icon-color: var(--color-stone-700);
+	--search-bar-placeholder-text: var(--color-stone-600);
+	--search-bar-icon-color: var(--color-stone-600);
 	--search-bar-bg-focus: var(--color-white);
 	--search-bar-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 	--search-bar-shadow-focus: 0 12px 40px rgba(0, 0, 0, 0.15);

@@ -88,10 +88,12 @@ export function Pagination({
 		<BootstrapPagination className={styles.paginationContainer}>
 			<BootstrapPagination.Prev
 				onClick={() => handlePageClick(currentPage - 1)}
+				disabled={currentPage === 1}
 			/>
 			{renderPageNumbers()}
 			<BootstrapPagination.Next
 				onClick={() => handlePageClick(currentPage + 1)}
+				disabled={currentPage === totalPages}
 			/>
 		</BootstrapPagination>
 	);
