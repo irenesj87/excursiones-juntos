@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "@fontsource-variable/dm-sans";
 import "./css/Global.css";
 import "./css/Themes.css";
 import App from "./App";

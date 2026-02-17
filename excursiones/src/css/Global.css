@@ -19,14 +19,8 @@ html {
  * sin perder el tono (Hue). Estos valores son inmutables y no dependen del tema activo.
  */
 :root {
-	/* Paleta de Verdes (Bosque y Naturaleza - HSL 135) */
-	--color-green-100: hsl(135, 25%, 88%); /* Salvia muy claro */
 	--color-green-200: hsl(135, 25%, 75%);
-	--color-green-300: hsl(135, 30%, 60%);
-	--color-green-500: hsl(135, 40%, 40%); /* Verde hoja */
 	--color-green-700: hsl(135, 45%, 25%); /* Verde bosque profundo */
-	--color-green-800: hsl(135, 45%, 20%);
-	--color-green-900: hsl(135, 40%, 15%);
 
 	/* Paleta de Musgo (Verdes Cálidos) */
 	--color-moss-100: hsl(95, 25%, 88%); /* Musgo muy claro */
@@ -37,14 +31,18 @@ html {
 	--color-moss-800: hsl(95, 30%, 23%); /* Sombra del musgo */
 
 	/* Paleta de Verdes Profundos (Base para Modo Oscuro - Desaturados) */
-	--color-green-dark-900: hsl(135, 30%, 12%); /* Fondo Body */
-	--color-green-dark-800: hsl(135, 25%, 18%); /* Fondo Surface */
-	--color-green-dark-700: hsl(135, 20%, 20%); /* Borde Sutil */
-	--color-green-dark-600: hsl(135, 20%, 25%); /* Borde Default */
-	--color-green-dark-500: hsl(135, 15%, 35%); /* Fondos UI / Hover */
-	--color-green-dark-400: hsl(135, 15%, 50%); /* Separadores */
-	--color-green-dark-300: hsl(135, 15%, 65%); /* Textos secundarios / Iconos */
-	--color-green-dark-200: hsl(150, 15%, 88%); /* Iconos claros */
+	--color-green-dark-900: hsl(
+		95,
+		25%,
+		11%
+	); /* Fondo Body - Base Musgo Profundo */
+	--color-green-dark-800: hsl(95, 20%, 17%); /* Fondo Surface */
+	--color-green-dark-700: hsl(95, 15%, 22%); /* Borde Sutil */
+	--color-green-dark-600: hsl(95, 15%, 28%); /* Borde Default */
+	--color-green-dark-500: hsl(95, 15%, 38%); /* Fondos UI / Hover */
+	--color-green-dark-400: hsl(95, 15%, 50%); /* Separadores */
+	--color-green-dark-300: hsl(95, 20%, 70%); /* Textos secundarios / Iconos */
+	--color-green-dark-200: hsl(95, 25%, 88%); /* Iconos claros */
 
 	/* Paleta de Tierras (Acento Rústico) */
 	--color-earth-100: hsl(35, 30%, 90%);
@@ -62,6 +60,11 @@ html {
 	--color-stone-500: hsl(40, 5%, 50%);
 	--color-stone-600: hsl(40, 5%, 40%);
 	--color-stone-700: hsl(40, 10%, 30%);
+	--color-stone-750: hsl(
+		40,
+		10%,
+		25%
+	); /* Intermedio para contraste AAA en textos finos */
 	--color-stone-800: hsl(40, 10%, 20%);
 	--color-stone-900: hsl(40, 10%, 15%);
 
@@ -69,6 +72,12 @@ html {
 	--color-white: #ffffff;
 	--color-white-off: var(--color-stone-50); /* Blanco cálido */
 	--color-black-soft: var(--color-stone-900); /* Negro suave cálido */
+	--color-white-alpha-10: rgba(
+		255,
+		255,
+		255,
+		0.1
+	); /* Utilidad para hovers en oscuro */
 
 	/* Colores de Éxito, Advertencia y Peligro */
 	--color-success-light: hsl(
@@ -76,24 +85,45 @@ html {
 		60%,
 		25%
 	); /* Oscurecido para cumplir ratio 7:1 (AAA) */
+	--color-success-bg-subtle-light: hsl(135, 60%, 96%);
+	--color-success-border-subtle-light: hsl(135, 40%, 85%);
+
 	--color-warning-light: hsl(40, 75%, 55%);
+	--color-warning-bg-subtle-light: hsl(40, 80%, 96%);
+	--color-warning-border-subtle-light: hsl(40, 60%, 85%);
+	--color-warning-text-light: hsl(40, 80%, 25%);
+
 	--color-danger-light: hsl(
 		0,
-		60%,
+		70%,
 		28%
-	); /* Oscurecido para cumplir ratio 7:1 (AAA) con texto blanco */
+	); /* Oscurecido y saturado para cumplir ratio 7:1 (AAA) */
+	--color-danger-bg-subtle-light: hsl(0, 100%, 97%);
+	--color-danger-border-subtle-light: hsl(0, 90%, 85%);
+
 	--color-success-dark: hsl(
 		145,
 		45%,
 		75%
 	); /* Pastel claro para AAA sobre oscuro */
+	--color-success-bg-subtle-dark: hsl(135, 30%, 20%);
+	--color-success-border-subtle-dark: hsl(135, 30%, 30%);
+	--color-success-text-dark: hsl(135, 60%, 80%);
+
 	--color-warning-dark: hsl(43, 85%, 75%);
+	--color-warning-bg-subtle-dark: hsl(40, 30%, 20%);
+	--color-warning-border-subtle-dark: hsl(40, 30%, 30%);
+	--color-warning-text-dark: hsl(40, 60%, 80%);
+
 	--color-danger-dark: hsl(355, 85%, 82%);
+	--color-danger-bg-subtle-dark: hsl(0, 30%, 25%);
+	--color-danger-border-subtle-dark: hsl(0, 40%, 35%);
+	--color-danger-text-dark: hsl(0, 85%, 82%);
 
 	/* --- Tipografía y Formas (Moderno y Orgánico) --- */
 	--font-family-sans:
-		system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-		sans-serif;
+		"DM Sans Variable", "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
 
 	/* Escala de tipografía modular para consistencia */
 	--font-size-xs: 0.75rem; /* 12px */
@@ -115,11 +145,16 @@ html {
 	--border-radius-md: 6px;
 	--border-radius-lg: 12px;
 	--border-radius-pill: 12px; /* Redondeado suave, no píldora completa (50rem) */
+	--letter-spacing-tight: -0.02em; /* Ajuste óptico para títulos más elegantes */
 
 	/* Sombra suave y difusa de varias capas para una profundidad natural. */
 	/* Funciona tanto en modo claro como oscuro. */
 	--shadow-soft:
 		0 16px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+	--shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
+	--shadow-medium-dark: 0 8px 32px rgba(0, 0, 0, 0.2);
+	--shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.15);
+	--shadow-strong-dark: 0 12px 40px rgba(0, 0, 0, 0.5);
 
 	/* --- Animaciones --- */
 	--transition-base: 0.2s ease-out;
@@ -148,6 +183,7 @@ h6,
 .h6 {
 	font-family: var(--font-family-sans);
 	font-weight: 400;
+	letter-spacing: var(--letter-spacing-tight);
 }
 
 /* Estilos para botones deshabilitados de forma accesible. Se mantienen en el DOM y son enfocables, pero visualmente
