@@ -175,7 +175,7 @@ html.light {
 	/* Éxito */
 	--color-bg-success-subtle: var(--color-success-bg-subtle-light);
 	--color-border-success: var(--color-success-border-subtle-light);
-	--color-text-success: hsl(135, 70%, 25%);
+	--color-text-success: var(--color-success-light);
 
 	/* Advertencia */
 	--color-bg-warning-subtle: var(--color-warning-bg-subtle-light);
