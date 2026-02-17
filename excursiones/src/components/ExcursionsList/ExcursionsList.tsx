@@ -3,7 +3,7 @@ import { ExcursionCard } from "../ExcursionCard";
 import { ExcursionsLoading } from "./ExcursionsLoading";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import { NoExcursionsFound } from "./NoExcursionsFound";
-import { Pagination } from "../../ui/Pagination/Pagination";
+import { Pagination } from "../../ui/Pagination";
 import styles from "./ExcursionsList.module.css";
 import {
 	useExcursionsListLogic,
