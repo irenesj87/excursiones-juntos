@@ -12,16 +12,13 @@ html {
 }
 
 /* ======================================== */
-/* 1. PRIMITIVAS (TOKENS DE DISEÑO) */
+/* 1. TOKENS PRIMITIVOS */
 /* ======================================== */
 /* 
  * Definimos la paleta base usando HSL para facilitar ajustes de luminosidad y saturación
  * sin perder el tono (Hue). Estos valores son inmutables y no dependen del tema activo.
  */
 :root {
-	--color-green-200: hsl(135, 25%, 75%);
-	--color-green-700: hsl(135, 45%, 25%); /* Verde bosque profundo */
-
 	/* Paleta de Musgo (Verdes Cálidos) */
 	--color-moss-100: hsl(95, 25%, 88%); /* Musgo muy claro */
 	--color-moss-200: hsl(95, 25%, 75%);
