@@ -3,7 +3,7 @@
 /* ======================================== */
 html {
 	box-sizing: border-box;
-	font-size: 16px; /* Establece la base para el cálculo de rem */
+	font-size: 16px;
 }
 *,
 *::before,
