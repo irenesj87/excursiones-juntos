@@ -37,7 +37,7 @@ export function Hero() {
 						Descubre tu próxima aventura
 					</h1>
 					<p className="lead fw-normal mb-0">
-						Explora las mejores rutas de senderismo
+						Las mejores rutas de senderismo y excursiones.
 					</p>
 				</div>
 			</div>
