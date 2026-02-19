@@ -1,8 +1,8 @@
 /* Estilos para la tarjeta de excursión */
 .excursionItemCard {
 	/* Variables locales para el dimensionamiento del componente */
-	--_card-image-height: 300px;
 	--_card-action-min-height: 2.75rem; /* 44px */
+	--_card-image-min-height: 240px; /* Altura mínima para asegurar impacto visual en tablets/iPad */
 
 	display: flex;
 	flex-direction: column;
@@ -21,8 +21,9 @@
 
 /* Contenedor de la imagen para reservar espacio y evitar CLS */
 .imageContainer {
-	height: var(--_card-image-height);
 	width: 100%;
+	aspect-ratio: 16 / 9; /* Mantiene la proporción correcta (640x360) automáticamente */
+	min-height: var(--_card-image-min-height);
 	background-color: var(--image-placeholder-bg);
 	position: relative;
 	overflow: hidden;
@@ -30,7 +31,9 @@
 
 /* Contenedor específico para el skeleton de la imagen */
 .imageSkeletonContainer {
-	height: var(--_card-image-height);
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	min-height: var(--_card-image-min-height);
 	line-height: 0;
 }
 

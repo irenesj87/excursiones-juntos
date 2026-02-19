@@ -69,7 +69,7 @@ function ExcursionCardSkeleton({
 				aria-hidden="true"
 				data-testid={TEST_IDS.SKELETON_CARD}
 			>
-				{/* Skeleton de la Imagen: Altura fija para evitar CLS y coincidir con el diseño final */}
+				{/* Skeleton de la Imagen: Usamos aspect-ratio para evitar CLS y coincidir con el diseño final */}
 				<div className={cardStyles.imageSkeletonContainer}>
 					<Skeleton height="100%" containerClassName="h-100 w-100 d-block" />
 				</div>

@@ -141,16 +141,11 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 			sticky={isHomePage ? undefined : "top"}
 		>
 			{/* Usamos Container estándar en lugar de fluid para que el logo y el menú se alineen con el contenido central de la página (efecto "hoja") */}
-			<Container>
-				{/* Agrupados con d-flex */}
-				<div className="d-flex flex-wrap align-items-center">
-					{/* Logo (siempre visible) */}
-					<Navbar.Brand onClick={handleCloseMenu}>
-						<Logo />
-					</Navbar.Brand>
-				</div>
+			<Container className="d-flex justify-content-between align-items-center">
+				{/* Logo (siempre visible). */}
+				<Logo />
 				{/* --- Contenedor de la derecha: controles de usuario, tema y menú --- */}
-				<div className="d-flex align-items-center ms-auto ms-md-0 order-md-3 order-lg-3">
+				<div className="d-flex align-items-center ms-auto">
 					{/* Botón de tema */}
 					<ThemeToggleButton />
 

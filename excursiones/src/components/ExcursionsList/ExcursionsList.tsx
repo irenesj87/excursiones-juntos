@@ -62,7 +62,8 @@ export function ExcursionsListView({
 							md={6}
 							lg={4}
 							key={excursion.id}
-							xl={3}
+							xl={4} // Mantenemos 3 columnas en portátiles (1200px+) para que las tarjetas respiren mejor
+							xxl={3}
 							className={`d-flex ${styles.cardItem}`}
 							style={
 								{
