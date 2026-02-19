@@ -1,3 +1,18 @@
+.inputContainer :global(.form-control) {
+	border-radius: var(--border-radius-md);
+}
+
+/*
+ * Normalizamos el foco para todos los inputs:
+ * - Mantenemos el borde gris por defecto.
+ * - Quitamos el `outline` del navegador para evitar el doble borde.
+ * - Usamos `box-shadow` para crear un anillo de foco exterior consistente y accesible.
+ */
+.inputContainer :global(.form-control:focus) {
+	border-color: var(--bs-border-color);
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	outline: none;
+}
 .errorMessage {
 	font-size: 1.05rem;
 }

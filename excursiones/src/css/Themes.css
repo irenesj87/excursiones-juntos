@@ -96,13 +96,12 @@ html.light {
 	--nav-link-active-bg: var(--color-stone-200);
 	--nav-link-active-border: var(--color-stone-400);
 
-	--login-btn-bg: var(
-		--color-primary
-	); /* Green-700 para contraste AAA con texto blanco */
-	--login-btn-border: var(--color-primary);
-	--login-btn-bg-hover: var(--color-primary-hover);
-	--login-btn-text-hover: var(--color-text-on-primary);
-	--login-btn-border-hover: var(--color-primary-hover);
+	/* Botón primario: Usamos Moss-700 (oscuro) con texto blanco para cumplir WCAG AAA (Ratio > 7:1) */
+	--login-btn-text: var(--color-white);
+	--login-btn-bg: var(--color-moss-700);
+	--login-btn-border: var(--color-moss-700);
+	--login-btn-bg-hover: var(--color-moss-800);
+	--login-btn-border-hover: var(--color-moss-800);
 
 	--logout-bg-color: var(--color-stone-700);
 	--logout-bg-color-hover: var(--color-stone-800);
@@ -257,13 +256,12 @@ html.dark {
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: var(--color-white-alpha-10);
 
+	/* Botón primario: Mantenemos el primario claro (Moss-100) con texto oscuro */
+	--login-btn-text: var(--color-text-on-primary);
 	--login-btn-bg: var(--color-primary); /* Aclarado para contraste AAA */
-	--login-btn-border: var(--separator-color);
-	--login-btn-bg-hover: var(--color-white-alpha-10);
-	--login-btn-text-hover: var(
-		--color-text-base
-	); /* Mantiene texto claro en hover */
-	--login-btn-border-hover: var(--separator-color);
+	--login-btn-border: var(--color-primary);
+	--login-btn-bg-hover: var(--color-primary-hover);
+	--login-btn-border-hover: var(--color-primary-hover);
 
 	--register-link-color: var(--navbar-color);
 	--register-link-bg-hover: var(--color-white-alpha-10);
@@ -414,19 +412,21 @@ html.dark .btn-close {
 /* --- Botones Bootstrap (Override) --- */
 /* Sobrescribimos las variables internas de Bootstrap para que .btn-primary use nuestro tema */
 .btn-primary {
-	--bs-btn-color: var(--color-text-on-primary);
-	--bs-btn-bg: var(--color-primary);
-	--bs-btn-border-color: var(--color-primary);
-	--bs-btn-hover-color: var(--color-text-on-primary);
-	--bs-btn-hover-bg: var(--color-primary-hover);
-	--bs-btn-hover-border-color: var(--color-primary-hover);
-	--bs-btn-focus-shadow-rgb: var(--primary-color-rgb);
-	--bs-btn-active-color: var(--color-text-on-primary);
-	--bs-btn-active-bg: var(--color-primary-hover);
-	--bs-btn-active-border-color: var(--color-primary-hover);
-	--bs-btn-disabled-color: var(--color-text-on-primary);
-	--bs-btn-disabled-bg: var(--color-primary);
-	--bs-btn-disabled-border-color: var(--color-primary);
+	--bs-btn-color: var(--login-btn-text);
+	--bs-btn-bg: var(--login-btn-bg);
+	--bs-btn-border-color: var(--login-btn-border);
+	--bs-btn-hover-color: var(--login-btn-text);
+	--bs-btn-hover-bg: var(--login-btn-bg-hover);
+	--bs-btn-hover-border-color: var(--login-btn-border-hover);
+	--bs-btn-focus-shadow-rgb: var(
+		--primary-color-rgb
+	); /* Mantenemos el anillo del color de la marca */
+	--bs-btn-active-color: var(--login-btn-text);
+	--bs-btn-active-bg: var(--login-btn-bg-hover);
+	--bs-btn-active-border-color: var(--login-btn-border-hover);
+	--bs-btn-disabled-color: var(--login-btn-text);
+	--bs-btn-disabled-bg: var(--login-btn-bg);
+	--bs-btn-disabled-border-color: var(--login-btn-border);
 }
 
 /* --- Offcanvas (Menú y Filtros) --- */
