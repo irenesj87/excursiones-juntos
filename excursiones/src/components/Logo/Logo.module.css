@@ -7,14 +7,10 @@
 	color: inherit;
 	padding: 0.375rem 0.5rem;
 	border-radius: var(--border-radius-sm);
-	/* Ajuste para que el padding no desplace el logo */
-	margin: -0.375rem -0.5rem;
 }
 
 .logoContainer:hover {
-	transform: scale(
-		1.02
-	); /* Efecto orgánico de "respiración" sin perder contraste */
+	transform: translateY(-2px);
 }
 
 .logoIcon {

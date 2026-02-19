@@ -38,8 +38,7 @@ const excursions: Excursion[] = [
 	{
 		id: "2",
 		name: "Parque natural de Somiedo",
-		description: `Explora el corazón salvaje de Somiedo, el reino del oso pardo. Descubre sus valles glaciares y las ancestrales cabañas de teito.
-		Una aventura en uno de los últimos paraísos naturales de Europa.`,
+		description: `Explora el corazón salvaje de Somiedo, el reino del oso pardo. Descubre sus valles glaciares y las ancestrales cabañas de teito.`,
 		area: "Centro",
 		difficulty: "Media",
 		time: "5 horas",
@@ -48,7 +47,7 @@ const excursions: Excursion[] = [
 		id: "3",
 		name: "Picos de Europa",
 		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.
-		Una ruta exigente para espíritus aventureros que buscan la majestuosidad de la montaña.`,
+		Una ruta exigente para espíritus aventureros.`,
 		area: "Este",
 		difficulty: "Alta",
 		time: "6 horas",
@@ -58,8 +57,7 @@ const excursions: Excursion[] = [
 	{
 		id: "4",
 		name: "Ruta del Silencio",
-		description: `Adéntrate en un santuario natural donde el tiempo se detiene. Recorre senderos ancestrales bajo la sombra de castaños y robles, entre praderas que invitan a la calma.
-		Una experiencia para reconectar con la esencia pura de la naturaleza.`,
+		description: `Adéntrate en un santuario natural donde el tiempo se detiene. Recorre senderos ancestrales bajo la sombra de castaños y robles, entre praderas que invitan a la calma.`,
 		area: "Oeste",
 		difficulty: "Alta",
 		time: "5 horas",

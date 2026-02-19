@@ -18,6 +18,7 @@
 .offcanvasMenu {
 	background-color: var(--navbar-bg);
 	max-width: 300px;
+	overscroll-behavior: contain; /* Evita que el scroll se propague a la página de fondo */
 }
 
 .offcanvasTitle {
@@ -52,7 +53,7 @@
 	position: absolute; /* Se superpone al contenido (Hero) */
 	top: 0;
 	left: 0;
-	width: 100%;
+	right: 0;
 	background-color: transparent; /* Fuerza la transparencia */
 	box-shadow: none; /* Elimina la sombra para que se vea plano sobre la imagen */
 	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
