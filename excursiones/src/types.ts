@@ -21,8 +21,13 @@ export interface ThemeState {
 
 /** Define la estructura del estado de los filtros aplicados. */
 export interface FilterState {
-	[key: string]: string[]; // Permite indexar con cualquier string, y el valor es un array de strings
+	area: string[];
+	difficulty: string[];
+	time: string[];
 }
+
+/** Tipo para los nombres de las categorías de filtro. */
+export type FilterName = keyof FilterState;
 
 /** Define la estructura de una excursión. */
 export interface Excursion {

@@ -65,6 +65,7 @@ html.light {
 	--color-text-on-primary: var(
 		--color-stone-900
 	); /* Texto oscuro sobre pastel */
+	--color-text-brand: var(--color-moss-700);
 	--color-border-default: var(--color-stone-300);
 	--color-border-subtle: var(--color-stone-100);
 
@@ -227,6 +228,7 @@ html.dark {
 		--color-stone-300
 	); /* Aclarado para AAA sobre fondo oscuro */
 	--color-text-on-primary: var(--color-black-soft);
+	--color-text-brand: var(--color-moss-300);
 	--color-border-default: var(
 		--color-green-dark-500
 	); /* Aclarado para mayor contraste */

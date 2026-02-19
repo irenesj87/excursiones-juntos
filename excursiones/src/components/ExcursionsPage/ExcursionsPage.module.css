@@ -1,48 +1,5 @@
-.mobileFiltersBar {
-	/* Convertimos la barra en un contenedor flotante fijo abajo */
-	position: fixed;
-	bottom: 2rem;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 1030; /* Nivel 'fixed' estándar (igual que Navbar), debajo de modales y backdrops */
-	width: auto;
-	padding: 0;
-	margin: 0;
-}
-
-.filtersToggleButton {
-	background-color: var(--filters-toggle-btn-bg);
-	color: var(--filters-toggle-btn-color);
-	font-weight: var(--font-weight-semibold);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
-	border-radius: var(--border-radius-pill);
-	min-height: 44px; /* Asegura cumplimiento WCAG AAA para área táctil */
-	box-shadow: var(--shadow-soft); /* Sombra para que flote sobre el contenido */
-	transition:
-		transform 0.2s ease-out,
-		box-shadow 0.2s ease;
-}
-
-.filtersToggleButton:hover,
-.filtersToggleButton.active {
-	color: var(--filters-toggle-btn-color-active);
-	background-color: var(--filters-toggle-btn-bg-active);
-	border-color: var(--filters-toggle-btn-border-active);
-	transform: translateY(-1px);
-	box-shadow: var(--shadow-lifted);
-}
-
-.filterIcon {
-	font-size: 1.4rem;
-}
-
-/* Estilo para el título del Offcanvas */
-.offcanvasTitle {
-	font-weight: 600;
-	font-size: var(--font-size-xl); /* 1.5rem (24px) */
-	text-transform: uppercase;
-	margin-bottom: 0; /* Eliminamos el margen para que la X se alinee perfectamente al centro */
+.gridContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 2rem;
 }

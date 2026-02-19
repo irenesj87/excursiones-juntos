@@ -1,23 +1,12 @@
-import { ReactNode } from "react";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/images/hero-background.jpg";
 import heroImageAvif from "../../assets/images/hero-background.avif";
 
-interface HeroProps {
-	/**
-	 * Elemento principal que se renderizará dentro del Hero.
-	 */
-	readonly children?: ReactNode;
-}
-
 /**
  * Representa la sección principal de la cabecera (Hero) de la página.
- * Muestra una imagen de fondo inspiradora, un título y permite inyectar contenido.
- *
- * @param children - El componente a renderizar dentro del área de contenido.
- * @returns El componente Hero renderizado.
+ * Muestra una imagen de fondo inspiradora y el título principal.
  */
-export function Hero({ children }: HeroProps) {
+export function Hero() {
 	return (
 		<section
 			className={styles.hero}
@@ -43,13 +32,14 @@ export function Hero({ children }: HeroProps) {
 			</picture>
 			<div className={styles.heroOverlay} aria-hidden="true" />
 			<div className={styles.heroContent}>
-				<div className={styles.titleContainer}>
-					<h1 className={styles.title}>Tu próxima aventura te espera</h1>
-					<p className={styles.subtitle}>
-						Descubre y únete a excursiones con personas como tú.
+				<div className="text-center text-white px-3">
+					<h1 className="display-4 fw-bold mb-2">
+						Descubre tu próxima aventura
+					</h1>
+					<p className="lead fw-normal mb-0">
+						Las mejores rutas de senderismo y excursiones.
 					</p>
 				</div>
-				{children}
 			</div>
 		</section>
 	);

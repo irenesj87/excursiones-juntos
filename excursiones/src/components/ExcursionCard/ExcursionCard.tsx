@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import InfoItem from "../../ui/InfoItem/InfoItem";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import type { DifficultyLevel } from "../../types";
@@ -15,6 +16,7 @@ import {
 	JoinIcon,
 } from "../../ui/Icons";
 import cn from "classnames";
+import type { RootState } from "../../store/store";
 import styles from "./ExcursionCard.module.css";
 import { API } from "../../constants";
 
@@ -110,10 +112,6 @@ interface ExcursionCardProps {
 	readonly difficulty: DifficultyLevel;
 	/** Duración aproximada de la excursión. */
 	readonly time: string;
-	/** Booleano que indica si el usuario actual está autenticado. */
-	readonly isLoggedIn: boolean;
-	/** Booleano que indica si el usuario ya se ha unido a esta excursión. */
-	readonly isJoined: boolean;
 	/** Callback opcional que se invoca cuando el usuario intenta unirse a la excursión. */
 	readonly onJoin?: (_id: string | number) => Promise<void>;
 	/** URL de la imagen principal de la excursión. */
@@ -133,12 +131,18 @@ export function ExcursionCard({
 	area,
 	difficulty,
 	time,
-	isLoggedIn,
-	isJoined,
 	onJoin,
 	imgSrc,
 	imgAlt,
 }: ExcursionCardProps) {
+	/*
+	 * Se obtiene el usuario del store de Redux para determinar si está logueado y si ya se ha apuntado a esta excursión.
+	 * Esto hace que el componente sea más autónomo y evita el prop-drilling.
+	 */
+	const user = useSelector((state: RootState) => state.loginReducer.user);
+	const isLoggedIn = !!user;
+	const isJoined = user?.excursions.includes(id) ?? false;
+
 	/*
 	 * La lógica para unirse a la excursión se encapsula en un hook personalizado para simplificar este componente y
 	 * hacerlo puramente presentacional.
@@ -167,6 +171,12 @@ export function ExcursionCard({
 		>
 			{/* Sección de imagen */}
 			<div className={styles.imageContainer}>
+				{/* Badge Flotante de Zona (Estilo Dolomia) */}
+				<div className={styles.floatingBadge}>
+					<MapIcon size={14} className={styles.infoIcon} />
+					{area}
+				</div>
+
 				{imageBaseUrl && !hasImageError ? (
 					<picture>
 						{!isExternalImage && (
@@ -208,11 +218,6 @@ export function ExcursionCard({
 					</Card.Text>
 					{/* Detalles de la excursión */}
 					<div className={styles.infoItem}>
-						<InfoItem
-							text={area}
-							label="Zona"
-							icon={<MapIcon size={18} className={styles.infoIcon} />}
-						/>
 						<InfoItem
 							text={difficulty}
 							label="Dificultad"

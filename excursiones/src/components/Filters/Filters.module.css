@@ -1,57 +1,107 @@
-.filtersContainer {
-	background-color: var(--filter-container-bg);
-	height: 100%;
+.filtersSection {
 	display: flex;
 	flex-direction: column;
+	gap: 1rem;
 }
 
-/* Contenedor para el contenido principal de los filtros, permite el scroll */
-.scrollableContent {
-	flex-grow: 1; /* Ocupa todo el espacio vertical disponible */
-	overflow-y: auto;
-	padding: 1.5rem;
-}
-
-/* Título principal */
-.title {
-	font-size: 1.4rem;
-	font-weight: 600;
+.sectionTitle {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-base);
+	text-align: center;
 	text-transform: uppercase;
-	margin: 1.25rem 0 1.5rem; /* Ajuste fino para alinear visualmente con el título de la lista */
-	color: var(--filter-title-color);
-	font-family: var(--font-family-serif);
+	margin: 0;
 }
 
-.filterSection:not(:last-child) {
-	margin-bottom: 1.5rem;
+.filtersWrapper {
+	display: grid;
+	gap: 1rem;
+	width: 100%;
+	align-items: flex-start;
+	/* Crea columnas flexibles, mínimo 150px, máximo 1fr (fracción del espacio disponible) */
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* En pantallas pequeñas, los filtros se apilan verticalmente */
+@media (max-width: 600px) {
+	.filtersWrapper { grid-template-columns: 1fr; } /* Una sola columna en pantallas pequeñas */
+}
+
+.filtersContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	margin: 0 1rem;
+	padding: 1.25rem 1.5rem;
+	background-color: var(--color-background-surface);
+	border-radius: var(--border-radius-lg);
+	border: 1px solid var(--color-border-subtle);
+}
+
+.filterGroup {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	/* Permite que los elementos se envuelvan a la siguiente línea si no hay suficiente espacio */
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+/*
+ * Asegura que la lista de opciones de filtro (los botones dentro de cada grupo)
+ * se centre cuando los elementos se envuelven en una nueva línea en pantallas pequeñas.
+ * Esto soluciona el caso en que una fila no está completa y los elementos se alinean a la izquierda.
+ */
+.filterGroup > ul {
+	justify-content: center;
 }
 
 .filterTitle {
-	font-size: 1.25rem;
-	font-weight: 500;
-	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 0; /* Elimina el margen inferior */
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	gap: 0.5rem;
-	color: var(--filter-title-color);
-	font-family: var(--font-family-serif);
+	color: var(--color-text-base);
+	font-family: var(
+		--font-family-sans
+	); /* Sans-serif para elementos de UI funcionales */
+}
+
+.filterListContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .filterTitle .filterIcon {
-	font-size: 1.25rem;
+	font-size: 1.1rem;
+	color: var(--color-text-muted);
 }
 
-/* Aplicar borde solo en breakpoints más grandes */
-@media (min-width: 768px) {
-	.filtersContainer {
-		border-right: none;
-	}
+.clearButton {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	background: none;
+	border: none;
+	color: var(--color-primary);
+	font-weight: 600;
+	cursor: pointer;
+	padding: 0.5rem;
+	font-size: var(--font-size-base); /* Aumenta el tamaño del texto */
+	align-self: center; /* Lo centra verticalmente si los filtros ocupan más de una línea */
+	transition: color 0.2s ease;
+	white-space: nowrap; /* Evita que el texto se rompa */
 }
 
-/* Ajuste para escritorio: Limitamos el ancho del panel para que sea más elegante */
-@media (min-width: 992px) {
-	.filtersContainer {
-		max-width: 25.8rem;
-		width: 100%;
-	}
+.clearButton:hover {
+	color: var(--color-primary-hover);
+	text-decoration: underline;
 }
+
