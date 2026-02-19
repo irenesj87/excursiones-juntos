@@ -32,16 +32,10 @@
 	outline: none;
 }
 
-/* Mantenemos el color de hover si estamos en foco (clic) y hover a la vez */
-.themeToggleBtn:focus:hover {
-	background-color: var(--theme-toggle-btn-bg-hover);
-}
-
 /* Para el foco con teclado, aplicamos la transformación y nuestro anillo de foco personalizado. */
 .themeToggleBtn:focus-visible {
 	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
 	outline: none;
-	background-color: var(--theme-toggle-btn-bg-hover);
 }
 
 .themeToggleBtn:active {

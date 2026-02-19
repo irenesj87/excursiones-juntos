@@ -17,12 +17,15 @@ export interface Excursion {
 const excursions: Excursion[] = [
 	{
 		id: "0",
-		name: "Bustio - Pendueles",
-		description: `Un paseo sereno que teje su camino entre el valle fluvial de Bustio y la costa de Pendueles.
-		Perfecta para una escapada tranquila, donde el sonido de las olas marca el ritmo de tus pasos.`,
+		name: "Bulnes",
+		description: `Una excursión tranquila por el valle de Bulnes, rodeada de montañas y bosques. 
+		Elige entre la senda histórica que serpentea por el desfiladero o el funicular subterráneo.`,
 		area: "Oeste",
-		difficulty: "Baja",
-		time: "3 horas",
+		difficulty: "Media",
+		time: "4 horas",
+		imgSrc: "/images/0.jpg",
+		imgAlt:
+			"Vista del pueblo de Bulnes enclavado en un valle profundo, con las imponentes cumbres de los Picos de Europa al fondo.",
 	},
 	{
 		id: "1",
@@ -32,8 +35,9 @@ const excursions: Excursion[] = [
 		area: "Centro-Este",
 		difficulty: "Baja",
 		time: "4 horas",
-		imgSrc: "/images/0.jpg",
-		imgAlt: "Puente Romano de Cangas de Onís sobre el río Sella",
+		imgSrc: "/images/1.jpg",
+		imgAlt:
+			"El icónico Puente Romano de Cangas de Onís, con su arco peraltado y la Cruz de la Victoria colgando sobre el río Sella.",
 	},
 	{
 		id: "2",
@@ -52,7 +56,8 @@ const excursions: Excursion[] = [
 		difficulty: "Alta",
 		time: "6 horas",
 		imgSrc: "/images/2.jpg",
-		imgAlt: "Cumbres escarpadas de los Picos de Europa",
+		imgAlt:
+			"Afiladas cumbres de roca caliza de los Picos de Europa emergiendo por encima de un mar de nubes.",
 	},
 	{
 		id: "4",
