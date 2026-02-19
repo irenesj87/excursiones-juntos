@@ -20,7 +20,7 @@ const excursions: Excursion[] = [
 		name: "Bulnes",
 		description: `Una excursión tranquila por el valle de Bulnes, rodeada de montañas y bosques. 
 		Elige entre la senda histórica que serpentea por el desfiladero o el funicular subterráneo.`,
-		area: "Oeste",
+		area: "Este",
 		difficulty: "Media",
 		time: "4 horas",
 		imgSrc: "/images/0.jpg",

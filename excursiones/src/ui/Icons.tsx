@@ -23,6 +23,7 @@ import {
 	LuEyeOff,
 } from "react-icons/lu";
 import { AiFillMoon, AiFillSun } from "react-icons/ai";
+import { BsBackpack } from "react-icons/bs";
 
 // Tipo base para las props de los iconos
 type IconProps = {
@@ -82,3 +83,5 @@ export const EditIcon = LuPencil as React.ComponentType<IconProps>;
 export const EyeIcon = LuEye as React.ComponentType<IconProps>;
 // Icono de ojo tachado para ocultar contraseña
 export const EyeOffIcon = LuEyeOff as React.ComponentType<IconProps>;
+// Icono de mochila para la sección "Sobre Nosotros"
+export const BackpackIcon = BsBackpack as React.ComponentType<IconProps>;

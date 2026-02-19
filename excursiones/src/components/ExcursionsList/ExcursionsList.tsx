@@ -23,8 +23,6 @@ export function ExcursionsListView({
 	excursions,
 	isLoading,
 	error,
-	isLoggedIn,
-	joinedExcursionIds,
 	onJoin,
 	currentPage,
 	totalPages,
@@ -52,9 +50,6 @@ export function ExcursionsListView({
 		return (
 			<Row as="ul" className="gx-4 gy-5 list-unstyled">
 				{excursions.map((excursion, index) => {
-					const isJoined =
-						isLoggedIn && joinedExcursionIds.has(String(excursion.id));
-
 					return (
 						<Col
 							as="li"
@@ -80,8 +75,6 @@ export function ExcursionsListView({
 								time={excursion.time}
 								imgSrc={excursion.imgSrc}
 								imgAlt={excursion.imgAlt}
-								isLoggedIn={isLoggedIn}
-								isJoined={isJoined}
 								onJoin={onJoin}
 							/>
 						</Col>

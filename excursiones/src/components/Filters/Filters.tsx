@@ -1,18 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { FiltersList } from "../FiltersList";
-import { ChartIcon, ClockIcon, MapIcon } from "../../ui/Icons";
+import { ChartIcon, ClockIcon, MapIcon, XIcon } from "../../ui/Icons";
+import { clearAllFilters } from "../../slices/filterSlice";
 import styles from "./Filters.module.css";
 
-/**
- * Props para el componente `Filters`.
- */
-interface FiltersProps {
-	/**
-	 * Si es `true`, muestra el título principal "Filtros".
-	 * @default true
-	 */
-	readonly showTitle?: boolean;
-}
+const TEXTS = {
+	TITLE: "Afina tu búsqueda",
+} as const;
 
 /** Tipo para los nombres de las categorías de filtro. */
 type FilterName = "area" | "difficulty" | "time";
@@ -43,31 +38,63 @@ const filterSections = [
 ] satisfies FilterSection[];
 
 /**
- * Componente que renderiza el panel de filtros.
- * Muestra diferentes secciones de filtrado (zona, dificultad, tiempo) y un botón para limpiar todas las selecciones.
- * @param props - Las props del componente.
- * @returns - El componente de filtros.
+ * Componente que renderiza una barra de filtros horizontal.
+ * Agrupa los filtros por categoría y permite limpiar todas las selecciones.
  */
-export function Filters({ showTitle = true }: FiltersProps) {
+export function Filters() {
+	const dispatch = useDispatch();
+
+	const handleClearFilters = () => {
+		// Asume que tienes una acción `clearAllFilters` en tu slice de filtros.
+		dispatch(clearAllFilters());
+	};
+
 	return (
-		<div className={styles.filtersContainer}>
-			{/* Contenedor para el contenido que puede hacer scroll */}
-			<div className={styles.scrollableContent}>
-				{showTitle && <h2 className={styles.title}>Filtros</h2>}
-				{filterSections.map(({ name, title, icon }) => (
-					<section
-						key={name}
-						className={styles.filterSection}
-						aria-labelledby={`filter-title-${name}`}
-					>
-						<h3 id={`filter-title-${name}`} className={styles.filterTitle}>
-							{icon}
-							{title}
-						</h3>
-						<FiltersList filterName={name} />
-					</section>
-				))}
+		<section className={styles.filtersSection} aria-labelledby="filters-title">
+			<h2 id="filters-title" className={styles.sectionTitle}>
+				{TEXTS.TITLE}
+			</h2>
+			<div className={styles.filtersContainer}>
+				<div className={styles.filtersWrapper}>
+					<div className={styles.filterGroup}>
+						{filterSections
+							.slice(0, 2)
+							.map(({ name, title, icon }) =>
+								renderFilterSection(name, title, icon),
+							)}
+					</div>
+
+					<div className={styles.filterGroup}>
+						{filterSections
+							.slice(2)
+							.map(({ name, title, icon }) =>
+								renderFilterSection(name, title, icon),
+							)}
+					</div>
+				</div>
+				<button onClick={handleClearFilters} className={styles.clearButton}>
+					<XIcon size={16} />
+					Limpiar filtros
+				</button>
 			</div>
-		</div>
+		</section>
 	);
+
+	function renderFilterSection(
+		name: FilterName,
+		title: string,
+		icon: React.ReactNode,
+	) {
+		return (
+			<div key={name} className={styles.filterGroup}>
+				<h3 className={styles.filterTitle}>
+					{icon}
+					<span>{title}</span>
+				</h3>
+				<span className={styles.filterListContainer}>
+					<FiltersList filterName={name} />
+				</span>
+			</div>
+		);
+	}
 }
