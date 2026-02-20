@@ -65,13 +65,10 @@ function renderFilterSection(
  */
 export function Filters() {
 	const dispatch = useDispatch();
-	const { area, difficulty, time } = useSelector(
-		(state: RootState) => state.filterReducer,
-	);
-
-	// El botón solo se mostrará si hay al menos un filtro activo en cualquier categoría.
-	const isAnyFilterActive =
-		area.length > 0 || difficulty.length > 0 || time.length > 0;
+const isAnyFilterActive = useSelector((state: RootState) => {
+	const { area, difficulty, time } = state.filterReducer;
+	return area.length > 0 || difficulty.length > 0 || time.length > 0;
+});
 
 	const handleClearFilters = () => {
 		// Asume que tienes una acción `clearAllFilters` en tu slice de filtros.
