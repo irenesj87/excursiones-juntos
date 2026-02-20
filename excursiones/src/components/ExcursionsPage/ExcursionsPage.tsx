@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { Offcanvas } from "react-bootstrap";
 import { useExcursions } from "../../hooks/useExcursions";
 import SearchBar from "../SearchBar/SearchBar";
 import { Filters } from "../Filters";
 import { ExcursionsList } from "../ExcursionsList/ExcursionsList";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
+import CustomButton from "../../ui/CustomButton/CustomButton";
+import styles from "./ExcursionsPage.module.css";
 
 /**
  * Componente que gestiona y renderiza la página principal de excursiones,
@@ -12,6 +15,7 @@ import { getSafeErrorMessage } from "../../utils/errorUtils";
 export function ExcursionsPage() {
 	// 1. Lógica de estado y datos (movida desde Layout.tsx)
 	const [searchValue, setSearchValue] = useState("");
+	const [showFilters, setShowFilters] = useState(false);
 	const {
 		handleExcursionsFetchStart,
 		handleExcursionsFetchSuccess,
@@ -19,12 +23,31 @@ export function ExcursionsPage() {
 		handleExcursionsFetchEnd,
 	} = useExcursions();
 
+	const handleCloseFilters = () => setShowFilters(false);
+
+	const handleShowFilters = () => setShowFilters(true);
+
 	return (
 		// El fondo beige (--color-background-body) ya lo aplica el body
 		<div className="container py-4">
-			{/* 2. Barra de Búsqueda */}
-			<div className="row justify-content-center">
-				<div className="col-lg-8">
+			{/* Botón flotante para abrir filtros (visible solo en < lg) */}
+			<CustomButton
+				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? "d-none" : ""}`}
+				onClick={handleShowFilters}
+				aria-label="Mostrar filtros"
+			>
+				<span>Filtros</span>
+			</CustomButton>
+
+			<div className="row gx-5">
+				{/* Columna de Filtros (Visible solo en >= lg) */}
+				<aside className="col-lg-3 d-none d-lg-block">
+					<h2 className={styles.filtersTitle}>Filtros</h2>
+					<Filters />
+				</aside>
+
+				{/* Contenido Principal */}
+				<main className="col-lg-9">
 					<SearchBar
 						id="main-search-bar"
 						onFetchSuccess={handleExcursionsFetchSuccess}
@@ -33,30 +56,34 @@ export function ExcursionsPage() {
 						searchValue={searchValue}
 						onSearchChange={setSearchValue}
 					/>
-				</div>
+
+					<div className="mt-5">
+						<ExcursionsList
+							excursionData={excursionsState.data}
+							isLoading={excursionsState.status === "loading"}
+							error={
+								excursionsState.status === "error"
+									? new Error(getSafeErrorMessage(excursionsState.error))
+									: null
+							}
+						/>
+					</div>
+				</main>
 			</div>
 
-			{/* 3. Filtros Horizontales */}
-			<div className="row justify-content-center mt-5">
-				<div className="col-12">
+			{/* Offcanvas para filtros en móvil */}
+			<Offcanvas
+				show={showFilters}
+				onHide={handleCloseFilters}
+				placement="start"
+			>
+				<Offcanvas.Header closeButton>
+					<Offcanvas.Title>Filtros</Offcanvas.Title>
+				</Offcanvas.Header>
+				<Offcanvas.Body className="padded">
 					<Filters />
-				</div>
-			</div>
-
-			{/* 4. Lista de Resultados */}
-			<div className="row mt-5">
-				<div className="col-12">
-					<ExcursionsList
-						excursionData={excursionsState.data}
-						isLoading={excursionsState.status === "loading"}
-						error={
-							excursionsState.status === "error"
-								? new Error(getSafeErrorMessage(excursionsState.error))
-								: null
-						}
-					/>
-				</div>
-			</div>
+				</Offcanvas.Body>
+			</Offcanvas>
 		</div>
 	);
 }

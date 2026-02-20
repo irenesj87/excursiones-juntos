@@ -43,43 +43,45 @@ export function Layout() {
 				{/* Sección "Sobre Nosotros" - Solo visible en la página de inicio */}
 				{isOnExcursionsPage && <AboutUs />}
 
-				<Routes>
-					{/* Define la ruta por defecto. */}
-					<Route path="/" element={<ExcursionsPage />} />
-					{/* Define las rutas para los componentes RegisterPage, LoginPage y UserPage */}
-					<Route
-						path="registerPage"
-						element={
-							<LazyRouteWrapper
-								PageComponent={RegisterPage}
-								SkeletonComponent={RegisterPageSkeleton}
-								pageProps={{}}
-							/>
-						}
-					/>
-					<Route
-						path="loginPage"
-						element={
-							<LazyRouteWrapper
-								PageComponent={LoginPage}
-								SkeletonComponent={LoginPageSkeleton}
-								pageProps={{}}
-							/>
-						}
-					/>
-					<Route
-						path="userPage"
-						element={
-							<ProtectedRoute isAuthCheckComplete={isAuthCheckComplete}>
+				<div className={styles.pageContainer}>
+					<Routes>
+						{/* Define la ruta por defecto. */}
+						<Route path="/" element={<ExcursionsPage />} />
+						{/* Define las rutas para los componentes RegisterPage, LoginPage y UserPage */}
+						<Route
+							path="registerPage"
+							element={
 								<LazyRouteWrapper
-									PageComponent={UserPage}
-									SkeletonComponent={UserPageSkeleton}
+									PageComponent={RegisterPage}
+									SkeletonComponent={RegisterPageSkeleton}
 									pageProps={{}}
 								/>
-							</ProtectedRoute>
-						}
-					/>
-				</Routes>
+							}
+						/>
+						<Route
+							path="loginPage"
+							element={
+								<LazyRouteWrapper
+									PageComponent={LoginPage}
+									SkeletonComponent={LoginPageSkeleton}
+									pageProps={{}}
+								/>
+							}
+						/>
+						<Route
+							path="userPage"
+							element={
+								<ProtectedRoute isAuthCheckComplete={isAuthCheckComplete}>
+									<LazyRouteWrapper
+										PageComponent={UserPage}
+										SkeletonComponent={UserPageSkeleton}
+										pageProps={{}}
+									/>
+								</ProtectedRoute>
+							}
+						/>
+					</Routes>
+				</div>
 			</main>
 			<Footer />
 		</div>

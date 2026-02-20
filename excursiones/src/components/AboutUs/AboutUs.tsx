@@ -30,7 +30,7 @@ export function AboutUs() {
 							{/* Párrafo descriptivo */}
 							<p className={styles.description}>
 								En Excursiones Juntos, creemos que el camino es mejor cuando se
-								comparte. Nacimos de la pasión por la montaña y el deseo de
+								comparte. Nacimos de la pasión por el senderismo y el deseo de
 								conectar a personas que buscan escapar de la rutina y respirar
 								aire puro.
 							</p>

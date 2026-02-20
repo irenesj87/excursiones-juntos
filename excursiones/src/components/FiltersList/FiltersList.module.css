@@ -4,5 +4,6 @@
 	margin: 0;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-start; /* Asegura alineación a la izquierda */
 	gap: 0.75rem;
 }

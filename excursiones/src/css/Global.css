@@ -2,7 +2,7 @@
 /* 0. RESET Y CONFIGURACIÓN GLOBAL */
 /* ======================================== */
 html {
-	scrollbar-gutter: stable; /* Evita el salto de contenido al mostrar/ocultar la barra de desplazamiento */
+	scrollbar-gutter: stable;
 	box-sizing: border-box;
 	font-size: 16px;
 }
@@ -201,6 +201,11 @@ parecen inactivos. */
 	/* El padding por defecto de Bootstrap es 1rem. Lo eliminamos aquí para que los contenedores hijos
 	   puedan controlarlo. El Offcanvas de filtros, por ejemplo, tiene su propio padding interno. */
 	padding: 0;
+}
+
+/* Clase de utilidad para restaurar el padding estándar en Offcanvas que lo requieran (ej. Filtros) */
+.offcanvas-body.padded {
+	padding: 1rem 1.5rem;
 }
 
 /* 
