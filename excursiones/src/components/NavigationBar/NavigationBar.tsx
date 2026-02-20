@@ -92,9 +92,13 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 
 	/** Cierra el menú lateral (Offcanvas). */
 	const handleCloseMenu = () => setShowMenu(false);
-
 	/** Abre el menú lateral (Offcanvas). */
 	const handleShowMenu = () => setShowMenu(true);
+
+	// Determinamos si se debe mostrar la estructura de menú móvil (Toggler + Offcanvas).
+	// Solo es necesario si el usuario está logueado (tiene muchas opciones).
+	// Si es invitado, mostramos el botón de Login directamente.
+	const showMobileMenu = isAuthCheckComplete ? isLoggedIn : likelyLoggedIn;
 
 	const renderNavContent = () => {
 		// Mientras no se sabe si el usuario está autenticado, se muestra un esqueleto de carga.
@@ -150,51 +154,59 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 					<ThemeToggleButton />
 
 					{/* Contenido de navegación para breakpoints medianos (md y superior) */}
-					<div className="d-none d-md-flex align-items-center">
+					{/* Si NO hay menú móvil (es invitado), mostramos el contenido siempre (d-flex).
+					    Si HAY menú móvil (es usuario), lo ocultamos en pantallas pequeñas (d-none d-md-flex). */}
+					<div
+						className={`${showMobileMenu ? "d-none d-md-flex" : "d-flex"} align-items-center`}
+					>
 						{renderNavContent()}
 					</div>
 
 					{/* Botón para abrir el menú Offcanvas (solo visible en pantallas pequeñas) */}
-					<Navbar.Toggle
-						aria-controls="offcanvasNavbar"
-						label="Abrir menú de navegación"
-						onClick={handleShowMenu}
-						className={`d-md-none ${styles.navbarToggler}`}
-					/>
+					{showMobileMenu && (
+						<Navbar.Toggle
+							aria-controls="offcanvasNavbar"
+							label="Abrir menú de navegación"
+							onClick={handleShowMenu}
+							className={`d-md-none ${styles.navbarToggler}`}
+						/>
+					)}
 				</div>
 				{/* --- Componente Offcanvas --- */}
-				<Offcanvas
-					show={showMenu}
-					onHide={handleCloseMenu}
-					placement="end"
-					id="offcanvasNavbar"
-					scroll={true}
-					className={styles.offcanvasMenu}
-					backdrop={true}
-					aria-label="Menú"
-				>
-					<Offcanvas.Header closeButton closeLabel="Cerrar menú">
-						<Offcanvas.Title className={styles.offcanvasTitle}>
-							Menú
-						</Offcanvas.Title>
-					</Offcanvas.Header>
-					<Offcanvas.Body>
-						{/* 
+				{showMobileMenu && (
+					<Offcanvas
+						show={showMenu}
+						onHide={handleCloseMenu}
+						placement="end"
+						id="offcanvasNavbar"
+						scroll={true}
+						className={styles.offcanvasMenu}
+						backdrop={true}
+						aria-label="Menú"
+					>
+						<Offcanvas.Header closeButton closeLabel="Cerrar menú">
+							<Offcanvas.Title>Menú</Offcanvas.Title>
+						</Offcanvas.Header>
+						<Offcanvas.Body>
+							{/* 
 							Se replica la lógica de `renderNavContent` para el menú Offcanvas.
 							Esto asegura que los usuarios logueados vean `UserNav` y los invitados `GuestNav`.
 							Se usa Suspense para manejar la carga perezosa de los componentes.
 						*/}
-						<Suspense
-							fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
-						>
-							{isLoggedIn ? (
-								<UserNav onCloseMenu={handleCloseMenu} />
-							) : (
-								<GuestNav onCloseMenu={handleCloseMenu} variant="offcanvas" />
-							)}
-						</Suspense>
-					</Offcanvas.Body>
-				</Offcanvas>
+							<Suspense
+								fallback={
+									isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />
+								}
+							>
+								{isLoggedIn ? (
+									<UserNav onCloseMenu={handleCloseMenu} />
+								) : (
+									<GuestNav onCloseMenu={handleCloseMenu} variant="offcanvas" />
+								)}
+							</Suspense>
+						</Offcanvas.Body>
+					</Offcanvas>
+				)}
 			</Container>
 		</Navbar>
 	);

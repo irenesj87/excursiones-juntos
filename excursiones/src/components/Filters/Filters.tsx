@@ -65,10 +65,10 @@ function renderFilterSection(
  */
 export function Filters() {
 	const dispatch = useDispatch();
-const isAnyFilterActive = useSelector((state: RootState) => {
-	const { area, difficulty, time } = state.filterReducer;
-	return area.length > 0 || difficulty.length > 0 || time.length > 0;
-});
+	const isAnyFilterActive = useSelector((state: RootState) => {
+		const { area, difficulty, time } = state.filterReducer;
+		return area.length > 0 || difficulty.length > 0 || time.length > 0;
+	});
 
 	const handleClearFilters = () => {
 		// Asume que tienes una acción `clearAllFilters` en tu slice de filtros.
@@ -76,7 +76,7 @@ const isAnyFilterActive = useSelector((state: RootState) => {
 	};
 
 	return (
-		<section className={styles.filtersSection} aria-labelledby="filters-title">
+		<div className={styles.filtersSection}>
 			<div className={styles.filtersContainer}>
 				<div className={styles.filtersWrapper}>
 					{filterSections.map(({ name, title, icon }) =>
@@ -90,6 +90,6 @@ const isAnyFilterActive = useSelector((state: RootState) => {
 					)}
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }

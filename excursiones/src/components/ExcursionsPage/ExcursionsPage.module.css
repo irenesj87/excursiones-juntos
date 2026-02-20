@@ -10,10 +10,9 @@
 }
 
 .filtersTitle {
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-xl);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-base);
-	text-transform: uppercase;
 	margin-bottom: 1.5rem;
 	padding-bottom: 0.5rem;
 	border-bottom: 1px solid var(--color-border-default);
@@ -35,4 +34,8 @@
 		right: 1.5rem;
 		left: auto;
 	}
+}
+
+.offcanvasTitle {
+	font-size: var(--font-size-xl);
 }

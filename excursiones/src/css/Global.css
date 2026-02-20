@@ -42,6 +42,9 @@ html {
 	--color-green-dark-300: hsl(95, 20%, 70%); /* Textos secundarios / Iconos */
 	--color-green-dark-200: hsl(95, 25%, 88%); /* Iconos claros */
 
+	/* Color base para la superposición del Hero (formato RGB para usar con opacidad) */
+	--color-hero-overlay-base: 25, 42, 35;
+
 	/* Paleta de Tierras (Acento Rústico) */
 	--color-earth-100: hsl(35, 30%, 90%);
 	--color-earth-200: hsl(35, 35%, 80%);
@@ -126,6 +129,7 @@ html {
 	/* Escala de tipografía modular para consistencia */
 	--font-size-xs: 0.75rem; /* 12px */
 	--font-size-sm: 0.875rem; /* 14px */
+	--font-size-base: 1rem; /* 16px */
 	--font-size-lg: 1.25rem; /* 20px */
 	--font-size-xl: 1.5rem; /* 24px */
 	--font-size-xxl: 2rem; /* 32px */

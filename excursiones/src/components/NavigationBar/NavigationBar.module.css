@@ -21,11 +21,6 @@
 	overscroll-behavior: contain; /* Evita que el scroll se propague a la página de fondo */
 }
 
-.offcanvasTitle {
-	text-transform: uppercase;
-	letter-spacing: 0.05em; /* Añade un ligero espaciado para legibilidad */
-}
-
 /* Botón de menú (Hamburguesa) */
 .navbarToggler {
 	border: none;

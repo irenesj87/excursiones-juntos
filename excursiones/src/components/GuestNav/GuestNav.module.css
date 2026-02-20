@@ -1,35 +1,10 @@
-.registerLink {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: var(--border-radius-pill);
-	color: var(--register-link-color);
-	padding: 0.6rem 1rem; /* Área táctil segura para móvil */
-	line-height: 1.5; /* Estandarizamos altura de línea con UserNav y botones */
-	font-size: 1.1rem;
-	font-weight: var(--font-weight-medium);
-	transition:
-		transform 0.2s ease-out,
-		background-color 0.2s ease-out;
-}
-
-.registerLink:hover {
-	color: var(--register-link-color);
-	transform: translateY(-2px);
-}
-
-.registerLink:focus-visible {
-	background-color: var(--register-link-bg-hover);
-	outline: 0;
-}
-
 .loginLink {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: var(--border-radius-pill);
 	color: var(--register-link-color);
-	padding: 0.6rem 1rem; /* Área táctil segura para breakpoints pequeños */
+	padding: 0.5rem; /* Padding reducido por defecto para el modo icono (cuadrado) */
 	line-height: 1.5;
 	transition:
 		transform 0.2s ease-out,
@@ -37,6 +12,7 @@
 		background-color 0.2s ease-out;
 	font-size: 1.1rem;
 	font-weight: var(--font-weight-medium);
+	white-space: nowrap; /* Evita que el texto se rompa en pantallas muy estrechas */
 }
 
 .loginLink:hover {
@@ -50,6 +26,18 @@
 	outline: 0;
 }
 
+/* --- Control de visibilidad Icono vs Texto --- */
+
+/* Por defecto (móviles muy pequeños < 380px): Solo Icono */
+.linkText {
+	display: none;
+}
+
+.linkIcon {
+	display: block;
+	font-size: 1.4rem; /* Tamaño cómodo para el dedo */
+}
+
 /* Estilos para la variante 'offcanvas' */
 /* Asegura que el contenedor en offcanvas apile los botones verticalmente y los alinee. */
 .offcanvasContainer {
@@ -59,9 +47,35 @@
 	padding-top: 1rem; /* Añade espacio superior para separar del borde del offcanvas */
 }
 
+/* En el menú Offcanvas SIEMPRE queremos ver el texto, nunca el icono solo */
+.offcanvasContainer .linkText {
+	display: inline;
+}
+
+.offcanvasContainer .linkIcon {
+	display: none;
+}
+
+.offcanvasContainer .loginLink {
+	padding: 0.6rem 1rem; /* Restauramos padding rectangular */
+	justify-content: flex-start;
+}
+
+/* --- Media Query: A partir del breakpoint 'md' (tablets y escritorio), mostramos el texto --- */
+@media (min-width: 768px) {
+	.loginLink {
+		padding: 0.6rem 1rem; /* Restauramos padding rectangular */
+	}
+	.linkText {
+		display: inline;
+	}
+	.linkIcon {
+		display: none;
+	}
+}
+
 /* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
 @media (min-width: 992px) {
-	.registerLink,
 	.loginLink {
 		padding: 0.5rem;
 		font-size: 1.1rem;
