@@ -23,7 +23,7 @@ function Footer(): JSX.Element {
 				</span>
 			</small>
 			<p className={styles.disclaimer}>
-				Proyecto de desarrollo web para portfolio. Sin fines comerciales.
+				Proyecto de desarrollo web para portfolio.<br /> Sin fines comerciales.
 			</p>
 		</footer>
 	);

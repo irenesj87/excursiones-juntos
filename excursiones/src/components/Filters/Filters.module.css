@@ -1,7 +1,7 @@
 .filtersSection {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	width: 100%;
 }
 
 .sectionTitle {
@@ -14,74 +14,54 @@
 }
 
 .filtersWrapper {
-	display: grid;
-	gap: 1rem;
+	display: flex;
+	flex-direction: column; /* Apila los grupos de filtros verticalmente */
+	justify-content: flex-start;
+	align-items: stretch; /* Estira los grupos para que ocupen el ancho completo */
+	gap: 2.5rem; /* Aumentamos el espacio vertical entre grupos */
 	width: 100%;
-	align-items: flex-start;
-	/* Crea columnas flexibles, mínimo 150px, máximo 1fr (fracción del espacio disponible) */
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-/* En pantallas pequeñas, los filtros se apilan verticalmente */
-@media (max-width: 600px) {
-	.filtersWrapper { grid-template-columns: 1fr; } /* Una sola columna en pantallas pequeñas */
 }
 
 .filtersContainer {
+	/* Eliminamos posicionamiento absoluto y sombras de dropdown */
+	position: static;
+	width: 100%;
+	max-width: 100%;
+	box-shadow: none;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	margin-top: 0;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	gap: 1.5rem;
-	margin: 0 1rem;
-	padding: 1.25rem 1.5rem;
-	background-color: var(--color-background-surface);
-	border-radius: var(--border-radius-lg);
-	border: 1px solid var(--color-border-subtle);
 }
 
-.filterGroup {
+/* Contenedor de cada grupo (Zona, Dificultad, etc.) */
+.filterGroupContainer {
 	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	/* Permite que los elementos se envuelvan a la siguiente línea si no hay suficiente espacio */
-	flex-wrap: wrap;
-	gap: 0.5rem;
-}
-
-/*
- * Asegura que la lista de opciones de filtro (los botones dentro de cada grupo)
- * se centre cuando los elementos se envuelven en una nueva línea en pantallas pequeñas.
- * Esto soluciona el caso en que una fila no está completa y los elementos se alinean a la izquierda.
- */
-.filterGroup > ul {
-	justify-content: center;
+	flex-direction: column;
+	align-items: flex-start; /* Alinea el contenido (título y lista) a la izquierda */
+	gap: 0.75rem; /* Espacio entre título y lista de filtros */
 }
 
 .filterTitle {
-	font-size: 1rem;
+	font-size: 0.9rem;
 	font-weight: 600;
-	margin: 0; /* Elimina el margen inferior */
+	margin: 0;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: flex-start; /* Alinea el título a la izquierda */
 	gap: 0.5rem;
-	color: var(--color-text-base);
-	font-family: var(
-		--font-family-sans
-	); /* Sans-serif para elementos de UI funcionales */
-}
-
-.filterListContainer {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	flex-wrap: wrap;
+	color: var(--color-text-muted); /* Color más sutil para el título */
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
 }
 
 .filterTitle .filterIcon {
-	font-size: 1.1rem;
-	color: var(--color-text-muted);
+	font-size: 1rem;
 }
 
 .clearButton {
@@ -90,18 +70,18 @@
 	gap: 0.4rem;
 	background: none;
 	border: none;
-	color: var(--color-primary);
+	color: var(--clear-filters-color);
 	font-weight: 600;
 	cursor: pointer;
 	padding: 0.5rem;
 	font-size: var(--font-size-base); /* Aumenta el tamaño del texto */
-	align-self: center; /* Lo centra verticalmente si los filtros ocupan más de una línea */
+	align-self: flex-end; /* Alinea el botón a la derecha en el contenedor flex vertical */
 	transition: color 0.2s ease;
 	white-space: nowrap; /* Evita que el texto se rompa */
+	margin-top: 1rem; /* Espacio por encima del botón */
 }
 
 .clearButton:hover {
-	color: var(--color-primary-hover);
+	color: var(--clear-filters-color-hover);
 	text-decoration: underline;
 }
-

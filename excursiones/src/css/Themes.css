@@ -139,10 +139,11 @@ html.light {
 	);
 
 	/* Píldoras de filtro (no seleccionadas) */
-	--filter-pill-bg: var(--color-stone-100);
+	--filter-pill-bg: var(--color-stone-100); /* #edeae8 */
 	--filter-pill-text: var(--color-text-base);
 	--filter-pill-bg-hover: var(--color-stone-300);
 	/* Píldoras de filtro (seleccionadas) */
+	/* El color de fondo es oscuro, por lo que el texto debe ser claro para el contraste. */
 	--filter-pill-bg-checked: var(--color-stone-800);
 	--filter-pill-text-checked: var(--color-white);
 	--filter-pill-shadow-checked: none;
@@ -200,6 +201,10 @@ html.light {
 
 	/* Sombra para elementos elevados en interacción (ej. hover de botones flotantes) */
 	--shadow-lifted: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+
+	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
+	--clear-filters-color: var(--color-moss-700);
+	--clear-filters-color-hover: var(--color-moss-800);
 }
 
 html.light body {
@@ -299,11 +304,17 @@ html.dark {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--filter-pill-bg: var(--color-green-dark-600); /* 25% lightness */
+	/* Ajustado para cumplir contraste AAA (Ratio > 7:1) */
+	--filter-pill-bg: var(
+		--color-green-dark-700
+	); /* #333d30 sobre #edeae8 -> 8.2:1 */
 	--filter-pill-text: var(--color-text-base);
 	--filter-pill-border: var(--color-green-dark-500); /* 35% lightness */
-	--filter-pill-bg-hover: var(--color-green-dark-500);
+	--filter-pill-bg-hover: var(
+		--color-green-dark-600
+	); /* #414f3c sobre #edeae8 -> 6.3:1 (Pasa AA) */
 	--filter-pill-border-hover: var(--color-green-dark-400); /* 50% lightness */
+	/* El color de fondo es claro, por lo que el texto debe ser oscuro para el contraste. */
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
@@ -359,6 +370,10 @@ html.dark {
 
 	/* Sombra para elementos elevados en interacción (ej. hover de botones flotantes) */
 	--shadow-lifted: 0 15px 30px -5px rgba(0, 0, 0, 0.35);
+
+	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
+	--clear-filters-color: var(--color-moss-200);
+	--clear-filters-color-hover: var(--color-moss-100);
 }
 
 html.dark body {

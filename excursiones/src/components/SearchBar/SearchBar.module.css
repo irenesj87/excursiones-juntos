@@ -1,8 +1,8 @@
 .searchContainer {
 	position: relative;
 	width: 100%;
-	max-width: 600px; /* Limitamos el ancho para que se vea bien en el Hero */
-	margin: 0 auto; /* Centrado horizontal */
+	max-width: 100%; /* Permitimos que ocupe todo el ancho disponible del contenedor padre */
+	margin: 0; /* Alineación a la izquierda */
 	display: flex;
 	align-items: center;
 

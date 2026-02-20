@@ -37,19 +37,19 @@
 }
 
 .primary {
-	background-color: var(--bs-primary);
-	color: var(--color-text-on-primary);
+	background-color: var(--login-btn-bg);
+	color: var(--login-btn-text);
 }
 
 .primary:hover {
-	background-color: var(--color-primary-hover);
-	color: var(--color-text-on-primary); /* Asegura contraste en hover */
+	background-color: var(--login-btn-bg-hover);
+	color: var(--login-btn-text); /* Asegura contraste en hover */
 }
 
 /* Aumentamos la especificidad para sobrescribir los estilos :active de Bootstrap */
 .customButton.primary:active,
 .customButton.primary:focus-visible {
-	background-color: var(--color-primary-hover);
+	background-color: var(--login-btn-bg-hover);
 	border-color: transparent;
 }
 
