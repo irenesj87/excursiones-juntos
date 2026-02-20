@@ -24,7 +24,6 @@ export function ExcursionsPage() {
 	} = useExcursions();
 
 	const handleCloseFilters = () => setShowFilters(false);
-
 	const handleShowFilters = () => setShowFilters(true);
 
 	return (
@@ -78,7 +77,9 @@ export function ExcursionsPage() {
 				placement="start"
 			>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>Filtros</Offcanvas.Title>
+					<Offcanvas.Title className={styles.offcanvasTitle}>
+						Filtros
+					</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body className="padded">
 					<Filters />

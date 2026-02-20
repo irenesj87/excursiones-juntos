@@ -92,7 +92,6 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 
 	/** Cierra el menú lateral (Offcanvas). */
 	const handleCloseMenu = () => setShowMenu(false);
-
 	/** Abre el menú lateral (Offcanvas). */
 	const handleShowMenu = () => setShowMenu(true);
 

@@ -38,15 +38,6 @@ function GuestNav({
 			})}
 		>
 			<StyledNavLink
-				to={ROUTES.REGISTER}
-				onClick={onCloseMenu}
-				className={cn(styles.registerLink, {
-					"border-0": variant === "offcanvas",
-				})}
-			>
-				Registrarse
-			</StyledNavLink>
-			<StyledNavLink
 				to={ROUTES.LOGIN}
 				onClick={onCloseMenu}
 				className={styles.loginLink}

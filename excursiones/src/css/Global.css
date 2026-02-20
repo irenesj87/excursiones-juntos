@@ -42,6 +42,9 @@ html {
 	--color-green-dark-300: hsl(95, 20%, 70%); /* Textos secundarios / Iconos */
 	--color-green-dark-200: hsl(95, 25%, 88%); /* Iconos claros */
 
+	/* Color base para la superposición del Hero (formato RGB para usar con opacidad) */
+	--color-hero-overlay-base: 25, 42, 35;
+
 	/* Paleta de Tierras (Acento Rústico) */
 	--color-earth-100: hsl(35, 30%, 90%);
 	--color-earth-200: hsl(35, 35%, 80%);

@@ -32,6 +32,13 @@
 	--footer-text-color: var(--color-white-off);
 	--footer-text-muted: var(--color-stone-400);
 
+	/* Hero CTA */
+	--hero-cta-bg: var(--color-white);
+	--hero-cta-text: #000;
+	--hero-cta-bg-hover: #f0f0f0;
+	--hero-cta-shadow: var(--shadow-soft);
+	--hero-cta-shadow-hover: var(--shadow-medium);
+
 	/* Bootstrap Overrides Generales */
 	--bs-primary: var(--color-primary);
 
@@ -205,6 +212,13 @@ html.light {
 	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
 	--clear-filters-color: var(--color-moss-700);
 	--clear-filters-color-hover: var(--color-moss-800);
+
+	/* Hero CTA Button */
+	--hero-cta-bg: var(--color-white);
+	--hero-cta-text: rgb(var(--color-hero-overlay-base));
+	--hero-cta-bg-hover: var(--color-stone-50); /* Blanco cálido */
+	--hero-cta-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	--hero-cta-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 html.light body {
@@ -374,6 +388,13 @@ html.dark {
 	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
 	--clear-filters-color: var(--color-moss-200);
 	--clear-filters-color-hover: var(--color-moss-100);
+
+	/* Hero CTA Button */
+	--hero-cta-bg: var(--color-primary);
+	--hero-cta-text: var(--color-text-on-primary);
+	--hero-cta-bg-hover: var(--color-primary-hover);
+	--hero-cta-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+	--hero-cta-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 html.dark body {

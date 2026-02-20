@@ -1,6 +1,8 @@
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/images/hero-background.jpg";
 import heroImageAvif from "../../assets/images/hero-background.avif";
+import CustomLink from "../../ui/Link/CustomLink";
+import { ROUTES } from "../../constants";
 
 /**
  * Representa la sección principal de la cabecera (Hero) de la página.
@@ -32,13 +34,15 @@ export function Hero() {
 			</picture>
 			<div className={styles.heroOverlay} aria-hidden="true" />
 			<div className={styles.heroContent}>
-				<div className="text-center text-white px-3">
-					<h1 className="display-4 fw-bold mb-2">
-						Descubre tu próxima aventura
-					</h1>
-					<p className="lead fw-normal mb-0">
-						Las mejores rutas de senderismo y excursiones.
+				<div className={styles.titleContainer}>
+					<h1 className={styles.title}>Descubre tu próxima aventura</h1>
+					<p className={styles.subtitle}>
+						Conecta con la naturaleza, explora paisajes inolvidables y comparte
+						experiencias únicas con tus compañeros de viaje.
 					</p>
+					<CustomLink to={ROUTES.REGISTER} className={styles.ctaButton}>
+						Únete a la aventura
+					</CustomLink>
 				</div>
 			</div>
 		</section>

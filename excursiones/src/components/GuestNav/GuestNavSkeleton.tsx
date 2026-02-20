@@ -4,8 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 export const GUEST_NAV_SKELETON_SIZES = {
-	REGISTER_LINK_WIDTH: 110, 
-	LOGIN_LINK_WIDTH: 117, 
+	LOGIN_LINK_WIDTH: 120, 
 	HEIGHT: 42,
 	BORDER_RADIUS: "4px",
 };
@@ -25,13 +24,7 @@ function GuestNavSkeleton(): JSX.Element {
 				className="d-flex align-items-center"
 				data-testid="guest-nav-skeleton"
 			>
-				<Skeleton
-					width={GUEST_NAV_SKELETON_SIZES.REGISTER_LINK_WIDTH}
-					height={GUEST_NAV_SKELETON_SIZES.HEIGHT}
-					aria-hidden="true"
-					borderRadius={GUEST_NAV_SKELETON_SIZES.BORDER_RADIUS}
-					className="me-2"
-				/>
+				{/* Esqueleto para el enlace de inicio de sesión */}
 				<Skeleton
 					width={GUEST_NAV_SKELETON_SIZES.LOGIN_LINK_WIDTH}
 					height={GUEST_NAV_SKELETON_SIZES.HEIGHT}
