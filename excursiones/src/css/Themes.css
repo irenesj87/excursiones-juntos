@@ -72,7 +72,9 @@ html.light {
 	--color-text-on-primary: var(
 		--color-stone-900
 	); /* Texto oscuro sobre pastel */
-	--color-text-brand: var(--color-moss-700);
+	--color-text-brand: var(
+		--color-moss-800
+	); /* Oscurecido para cumplir AAA (Ratio > 7:1) */
 	--color-border-default: var(--color-stone-300);
 	--color-border-subtle: var(--color-stone-100);
 
@@ -244,7 +246,7 @@ html.dark {
 	--color-background-surface: var(--color-green-dark-800);
 	--color-text-base: var(--color-stone-100); /* Blanco hueso para texto */
 	--color-text-muted: var(
-		--color-stone-300
+		--color-stone-200
 	); /* Aclarado para AAA sobre fondo oscuro */
 	--color-text-on-primary: var(--color-black-soft);
 	--color-text-brand: var(--color-moss-300);
@@ -416,7 +418,7 @@ html.dark .btn-close {
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
 	border: 1px solid var(--color-border-default);
-	padding: 0.75rem 1rem; /* 12px 16px */
+	padding: var(--space-3) var(--space-4);
 	height: auto; /* Dejar que el padding defina la altura */
 	border-radius: var(--border-radius-md);
 	font-size: 1rem;
@@ -433,7 +435,7 @@ html.dark .btn-close {
 	color: var(--color-text-base);
 	background-color: var(--excursion-card-bg);
 	border-color: var(--color-primary);
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
 	outline: none;
 }
 
@@ -495,6 +497,6 @@ html.dark .btn-close {
 :focus-visible {
 	outline: none;
 	/* !important necesario para sobrescribir los estilos por defecto de Bootstrap (.btn:focus, etc.) */
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color) !important;
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color) !important;
 	transition: box-shadow 0.2s ease-in-out;
 }

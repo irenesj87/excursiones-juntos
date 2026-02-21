@@ -6,6 +6,8 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 export const GUEST_NAV_SKELETON_SIZES = {
 	LOGIN_LINK_WIDTH: 120,
 	HEIGHT: 42,
+	ICON_WIDTH: 35,
+	ICON_HEIGHT: 38,
 	BORDER_RADIUS: "4px",
 };
 
@@ -36,8 +38,8 @@ function GuestNavSkeleton(): JSX.Element {
 				<Skeleton
 					containerClassName="d-block d-md-none"
 					// Hacemos que el esqueleto sea cuadrado, como el botón de icono
-					width={GUEST_NAV_SKELETON_SIZES.HEIGHT}
-					height={GUEST_NAV_SKELETON_SIZES.HEIGHT}
+					width={GUEST_NAV_SKELETON_SIZES.ICON_WIDTH}
+					height={GUEST_NAV_SKELETON_SIZES.ICON_HEIGHT}
 					aria-hidden="true"
 					borderRadius={GUEST_NAV_SKELETON_SIZES.BORDER_RADIUS}
 				/>

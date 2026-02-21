@@ -41,7 +41,7 @@ export function Hero() {
 						experiencias únicas con tus compañeros de viaje.
 					</p>
 					<CustomLink to={ROUTES.REGISTER} className={styles.ctaButton}>
-						Únete
+						Únete ya
 					</CustomLink>
 				</div>
 			</div>

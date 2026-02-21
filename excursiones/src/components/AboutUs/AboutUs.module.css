@@ -1,44 +1,61 @@
 .aboutUsSection {
 	background-color: var(--color-background-surface);
-	padding-block: 2.5rem; /* Espaciado vertical generoso */
+	padding-block: calc(
+		var(--space-8) + var(--space-2)
+	); /* 2.5rem usando tokens */
+	padding-inline: var(--space-6);
 }
 
 .eyebrow {
-	font-weight: 600;
+	font-weight: var(--font-weight-semibold);
 	letter-spacing: 2px;
-	font-size: 0.75rem; /* Más pequeño y discreto */
+	font-size: var(--font-size-xs);
 	text-transform: uppercase;
-	color: var(--color-text-brand);
+	color: var(
+		--color-text-muted
+	); /* AAA Compliant: Mejor contraste para texto pequeño */
+	display: block;
+	margin-bottom: var(--space-2);
 }
 
 .heading {
-	font-weight: 300; /* Un peso más ligero para un look más elegante y moderno */
-	font-size: 2rem; /* Reducido de display-5 a un tamaño h2 más contenido */
+	font-weight: var(--font-weight-light);
+	font-size: var(--font-size-xxl);
 	color: var(--color-text-base);
 	line-height: 1.3;
+	text-wrap: balance; /* Equilibra las líneas de forma orgánica */
+	margin-bottom: var(--space-4);
 }
 
-.heading strong {
-	font-weight: 600; /* Semi-bold para la parte resaltada, más refinado que bold */
+.heading span {
+	font-weight: var(--font-weight-semibold);
 }
 
-/* Color Musgo específico: Usamos un tono más oscuro y natural para el texto */
 .textMoss {
 	color: var(--color-text-brand);
 }
 
 .icon {
-	font-size: 2rem;
-	margin-bottom: 1rem;
+	font-size: var(--font-size-xxl);
+	margin-bottom: var(--space-4);
 	color: var(--color-text-brand);
 }
 
-/* Estilos para el párrafo descriptivo */
 .description {
-	font-size: 1rem;
+	font-size: var(--font-size-base);
 	line-height: 1.5;
 	color: var(--color-text-base);
-	max-width: 600px; /* Limita el ancho para mejorar la legibilidad */
-	margin: 0 auto; /* Centra el párrafo */
-	margin-top: 1.5rem; /* Espacio entre el título y el párrafo */
+	max-width: 37.5rem;
+	margin: 0 auto;
+	margin-top: var(--space-6);
+}
+
+@media (min-width: 768px) {
+	.heading {
+		font-size: var(--font-size-xxxl);
+	}
+
+	.description {
+		font-size: var(--font-size-lg);
+	}
 }
