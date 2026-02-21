@@ -20,7 +20,7 @@ export const TEST_IDS = {
 const SKELETON_SIZES = {
 	TITLE_HEIGHT: 34, // 24px (font-size) * 1.4 (line-height) = 33.6px. Redondeado a 34.
 	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
-	DESCRIPTION_LINES: 4, // Número de líneas para el esqueleto de la descripción.
+	DESCRIPTION_LINES: 8, // Número de líneas para el esqueleto de la descripción.
 	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
 	DIFFICULTY_TEXT_WIDTH: 76, // Ancho del esqueleto del texto de dificultad
 	TIME_TEXT_WIDTH: 60,
@@ -86,9 +86,8 @@ function ExcursionCardSkeleton({
 						<div className={cardStyles.excursionDescription}>
 							<Skeleton count={SKELETON_SIZES.DESCRIPTION_LINES} />
 						</div>
-						{/* Detalles (Zona, Dificultad, Tiempo) */}
+						{/* Detalles (Dificultad, Tiempo) */}
 						<div className={cardStyles.infoItem}>
-							<InfoItemSkeleton width={SKELETON_SIZES.AREA_TEXT_WIDTH} />
 							<InfoItemSkeleton width={SKELETON_SIZES.DIFFICULTY_TEXT_WIDTH} />
 							<InfoItemSkeleton width={SKELETON_SIZES.TIME_TEXT_WIDTH} />
 						</div>

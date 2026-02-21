@@ -149,6 +149,18 @@ html {
 	--border-radius-pill: 12px; /* Redondeado suave, no píldora completa (50rem) */
 	--letter-spacing-tight: -0.02em; /* Ajuste óptico para títulos más elegantes */
 
+	/* Escala de Espaciado (Base 4px) */
+	--space-1: 0.25rem; /* 4px */
+	--space-2: 0.5rem; /* 8px */
+	--space-3: 0.75rem; /* 12px */
+	--space-4: 1rem; /* 16px */
+	--space-5: 1.25rem; /* 20px */
+	--space-6: 1.5rem; /* 24px */
+	--space-8: 2rem; /* 32px */
+
+	/* Iconografía */
+	--icon-stroke-width: 2.2; /* Grosor ligeramente acentuado para mejor legibilidad */
+
 	/* Sombra suave y difusa de varias capas para una profundidad natural. */
 	/* Funciona tanto en modo claro como oscuro. */
 	--shadow-soft:
@@ -198,7 +210,7 @@ parecen inactivos. */
 
 /* --- Offcanvas (Menú y Filtros) --- */
 .offcanvas-header {
-	padding: 1rem 1.5rem;
+	padding: var(--space-4) var(--space-6);
 }
 
 .offcanvas-body {
@@ -209,7 +221,7 @@ parecen inactivos. */
 
 /* Clase de utilidad para restaurar el padding estándar en Offcanvas que lo requieran (ej. Filtros) */
 .offcanvas-body.padded {
-	padding: 1rem 1.5rem;
+	padding: var(--space-4) var(--space-6);
 }
 
 /* 
@@ -252,10 +264,13 @@ parecen inactivos. */
 /* Estilos específicos para el Navbar Offcanvas */
 #offcanvasNavbar .offcanvas-body .nav-link {
 	display: block;
-	width: 95%;
-	margin: 0 auto 0rem; /* Centrado horizontalmente y con margen inferior */
+	width: auto;
+	margin-inline: var(
+		--space-2
+	); /* Margen lateral consistente en lugar de width 95% */
+	margin-bottom: 0;
 	text-align: center;
-	padding: 0.5rem 0.8rem;
+	padding: var(--space-2) var(--space-3);
 	text-decoration: none;
 	border-radius: var(--border-radius-pill);
 }
@@ -263,16 +278,18 @@ parecen inactivos. */
 /* Alinea los iconos con el texto en los enlaces de navegación */
 #offcanvasNavbar .offcanvas-body .nav-link svg,
 .navbar-nav .nav-link svg {
-	margin-right: 0.5rem; /* Espacio entre el icono y el texto */
+	margin-right: var(--space-2); /* Espacio entre el icono y el texto */
 	vertical-align: -0.125em; /* Alineación vertical fina */
 	font-size: 1.1em; /* Ligeramente más grande para mejor visibilidad */
-	stroke-width: 2.2; /* Hacemos el trazo del icono un poco más grueso */
+	stroke-width: var(
+		--icon-stroke-width
+	); /* Hacemos el trazo del icono un poco más grueso */
 }
 
 #offcanvasNavbar .offcanvas-body .logoutLink {
 	display: block;
-	width: 95%;
-	margin: 0 auto 0.6rem;
+	width: auto;
+	margin: 0 var(--space-2) var(--space-2);
 }
 
 /* --- Estilos Globales --- */
