@@ -13,6 +13,8 @@
 	font-size: var(--font-size-xl);
 	font-weight: var(--font-weight-semibold);
 	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 /* --- Media Queries --- */

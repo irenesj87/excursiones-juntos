@@ -1,8 +1,7 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
-import cardStyles from "./ExcursionCard.module.css"; // Se reutiliza el CSS de la tarjeta real
+import cardStyles from "./ExcursionCard.module.css";
 import InfoItemStyles from "../../ui/InfoItem/InfoItem.module.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -20,9 +19,8 @@ export const TEST_IDS = {
 const SKELETON_SIZES = {
 	TITLE_HEIGHT: 34, // 24px (font-size) * 1.4 (line-height) = 33.6px. Redondeado a 34.
 	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
-	DESCRIPTION_LINES: 8, // Número de líneas para el esqueleto de la descripción.
-	AREA_TEXT_WIDTH: 84, // Ancho del esqueleto del texto de área
-	DIFFICULTY_TEXT_WIDTH: 76, // Ancho del esqueleto del texto de dificultad
+	DESCRIPTION_LINES: 4, // Número de líneas para el esqueleto de la descripción.
+	DIFFICULTY_TEXT_WIDTH: 60, // Ancho del esqueleto del texto de dificultad
 	TIME_TEXT_WIDTH: 60,
 	BUTTON_HEIGHT: 40,
 	BUTTON_MIN_WIDTH: 138,
@@ -101,7 +99,7 @@ function ExcursionCardSkeleton({
 										height={SKELETON_SIZES.BUTTON_HEIGHT}
 										className="w-100"
 										style={{ minWidth: SKELETON_SIZES.BUTTON_MIN_WIDTH }}
-										borderRadius={12} // Coincide con --border-radius-pill
+										borderRadius={12}
 									/>
 								</div>
 							</div>

@@ -18,9 +18,7 @@ const excursions: Excursion[] = [
 	{
 		id: "0",
 		name: "Bulnes",
-		description: `Una excursión tranquila por el valle de Bulnes, rodeada de montañas y bosques. 
-		Elige entre la senda histórica que serpentea por el desfiladero o el funicular subterráneo para llegar
-		a él.`,
+		description: `Descubre un pueblo escondido entre montañas, accesible solo a pie o en funicular.`,
 		area: "Este",
 		difficulty: "Media",
 		time: "4 horas",
@@ -31,8 +29,7 @@ const excursions: Excursion[] = [
 	{
 		id: "1",
 		name: "Cangas de Onís",
-		description: `Viaja en el tiempo cruzando el legendario Puente Romano, emblema de Cangas de Onís.
-		Sigue el murmullo del río Sella en una ruta familiar que combina historia y naturaleza.`,
+		description: `Viaja en el tiempo cruzando el legendario Puente Romano, emblema de Cangas de Onís.`,
 		area: "Centro-Este",
 		difficulty: "Baja",
 		time: "4 horas",
@@ -42,8 +39,8 @@ const excursions: Excursion[] = [
 	},
 	{
 		id: "2",
-		name: "Parque natural de Somiedo",
-		description: `Explora el corazón salvaje de Somiedo, el reino del oso pardo. Descubre sus valles glaciares y las ancestrales cabañas de teito.`,
+		name: "Somiedo",
+		description: `Descubre sus valles glaciares y las ancestrales cabañas de teito.`,
 		area: "Centro",
 		difficulty: "Media",
 		time: "5 horas",
@@ -51,8 +48,7 @@ const excursions: Excursion[] = [
 	{
 		id: "3",
 		name: "Picos de Europa",
-		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.
-		Una ruta exigente para espíritus aventureros.`,
+		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.`,
 		area: "Este",
 		difficulty: "Alta",
 		time: "6 horas",
@@ -63,7 +59,7 @@ const excursions: Excursion[] = [
 	{
 		id: "4",
 		name: "Ruta del Silencio",
-		description: `Adéntrate en un santuario natural donde el tiempo se detiene. Recorre senderos ancestrales bajo la sombra de castaños y robles, entre praderas que invitan a la calma.`,
+		description: `Adéntrate en un santuario natural y recorre sus senderos ancestrales bajo la sombra de castaños y robles centenarios.`,
 		area: "Oeste",
 		difficulty: "Alta",
 		time: "5 horas",

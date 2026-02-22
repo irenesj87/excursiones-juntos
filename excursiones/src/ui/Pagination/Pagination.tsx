@@ -1,4 +1,3 @@
-import React from "react";
 import { Pagination as BootstrapPagination } from "react-bootstrap";
 import styles from "./Pagination.module.css";
 
@@ -85,16 +84,18 @@ export function Pagination({
 	};
 
 	return (
-		<BootstrapPagination className={styles.paginationContainer}>
-			<BootstrapPagination.Prev
-				onClick={() => handlePageClick(currentPage - 1)}
-				disabled={currentPage === 1}
-			/>
-			{renderPageNumbers()}
-			<BootstrapPagination.Next
-				onClick={() => handlePageClick(currentPage + 1)}
-				disabled={currentPage === totalPages}
-			/>
-		</BootstrapPagination>
+		<nav aria-label="Navegación de páginas de excursiones">
+			<BootstrapPagination className={styles.paginationContainer}>
+				<BootstrapPagination.Prev
+					onClick={() => handlePageClick(currentPage - 1)}
+					disabled={currentPage === 1}
+				/>
+				{renderPageNumbers()}
+				<BootstrapPagination.Next
+					onClick={() => handlePageClick(currentPage + 1)}
+					disabled={currentPage === totalPages}
+				/>
+			</BootstrapPagination>
+		</nav>
 	);
 }

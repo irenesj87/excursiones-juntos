@@ -10,19 +10,20 @@
 }
 
 .logoContainer:hover {
-	transform: translateY(-2px);
+	opacity: 0.8; /* Efecto sutil en lugar de movimiento para el logo */
+	transform: none;
 }
 
 .logoIcon {
-	font-size: 2rem;
+	font-size: 1.75rem; /* Ligeramente más pequeño para elegancia */
 	color: var(--navbar-brand-icon);
 	flex-shrink: 0;
 }
 
 .logoText {
-	font-size: var(--font-size-lg);
-	font-family: serif;
-	font-weight: var(--font-weight-bold);
+	font-size: 1.125rem; /* 18px */
+	font-family: var(--font-family-sans); /* Cambio a Sans para modernidad */
+	font-weight: 700;
 	color: var(--navbar-brand-color);
 	letter-spacing: var(--letter-spacing-tight);
 	line-height: 1.2;
@@ -31,9 +32,11 @@
 /* Escala para breakpoints más grandes */
 @media (min-width: 768px) {
 	.logoIcon {
-		font-size: 2.1rem;
+		font-size: 2rem;
 	}
 	.logoText {
-		font-size: var(--font-size-xl);
+		font-size: 1.25rem; /* 20px */
+		letter-spacing: 1px;
+		text-transform: uppercase;
 	}
 }

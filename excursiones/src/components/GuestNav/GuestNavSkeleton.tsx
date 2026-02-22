@@ -1,11 +1,10 @@
-import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 export const GUEST_NAV_SKELETON_SIZES = {
-	LOGIN_LINK_WIDTH: 120,
-	HEIGHT: 42,
+	LOGIN_LINK_WIDTH: 148,
+	HEIGHT: 40,
 	ICON_WIDTH: 35,
 	ICON_HEIGHT: 38,
 	BORDER_RADIUS: "4px",

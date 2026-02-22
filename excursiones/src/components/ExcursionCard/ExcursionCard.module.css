@@ -8,24 +8,28 @@
 	flex-direction: column;
 	height: 100%;
 	background-color: var(--excursion-card-bg);
-	/* Estilo Dolomia: Sin bordes visibles, sombra suave y bordes muy redondeados */
 	border: none;
-	border-radius: 1rem; /* ~16px para un look más orgánico */
-	box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05); /* Sombra base muy sutil */
+	border-radius: var(
+		--border-radius-lg
+	); /* 1rem (16px) para un look más orgánico */
+	box-shadow: var(
+		--excursion-card-shadow
+	); /* Usamos la variable de tema para consistencia */
 	transition:
 		transform 0.3s ease,
 		box-shadow 0.3s ease;
-
-	& .card-body {
-		background-color: transparent;
-		padding: 1.5rem; /* Espaciado generoso para un diseño aireado */
-	}
 }
 
-/* Efecto Hover: Elevación suave */
-.excursionItemCard:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+/* Añadimos gap para controlar el espacio entre el contenido y el área de acción */
+.cardBody {
+	gap: 1.5rem;
+	padding: 1.5rem; /* Espaciado generoso para un diseño aireado */
+}
+
+.cardContent {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem; /* Espacio consistente entre título, descripción e info */
 }
 
 /* Contenedor de la imagen para reservar espacio y evitar CLS */
@@ -74,17 +78,12 @@
 	}
 }
 
-/* Zoom de imagen al hacer hover en la tarjeta */
-.excursionItemCard:hover .cardImage {
-	transform: scale(1.1);
-}
-
 /* Título de la tarjeta */
 .excursionTitle {
 	font-size: 1.35rem;
 	font-weight: 600; /* Peso visual más ligero y elegante */
 	line-height: 1.4;
-	margin-bottom: 1rem;
+	margin-bottom: 0; /* El espaciado ahora lo gestiona el gap del contenedor */
 	font-family: var(--font-family-sans);
 	color: var(--excursion-card-title-color);
 }
@@ -93,7 +92,7 @@
 	/* Respeta los saltos de línea del string pero colapsa espacios extra */
 	white-space: pre-line;
 	color: var(--color-text-muted);
-	margin-bottom: 1rem;
+	margin-bottom: 0; /* El espaciado ahora lo gestiona el gap del contenedor */
 	font-size: var(
 		--font-size-sm
 	); /* Corregido de -md a -sm para usar un token existente */
@@ -108,9 +107,8 @@
 }
 
 /* Detalles de la excursión (zona, dificultad, tiempo) */
-.infoItem {
-	margin-top: 1.5rem;
-	margin-bottom: 1.5rem;
+.infoItemsContainer {
+	margin-block: 0; /* El espaciado ahora lo gestiona el gap del contenedor */
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
@@ -125,7 +123,6 @@
 	color: var(--color-text-brand);
 }
 
-/* Badge flotante sobre la imagen (Estilo Dolomia) */
 .floatingBadge {
 	position: absolute;
 	top: 1rem;
@@ -138,12 +135,34 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	box-shadow: var(
+		--shadow-medium
+	); /* Usamos la variable de tema para consistencia */
 	z-index: 2;
 	display: flex;
 	align-items: center;
 	gap: 0.4rem;
 	pointer-events: none; /* Permite hacer clic a través del badge si fuera necesario */
+}
+
+/* Contenedor del botón de acción */
+.joinButtonContainer {
+	display: grid; /* Botón a ancho completo en móvil */
+}
+
+.joinButton {
+	font-weight: 700;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 0.75rem 1.5rem;
+}
+
+@media (min-width: 1200px) {
+	.joinButtonContainer {
+		display: flex;
+		justify-content: flex-end;
+	}
 }
 
 .cardActionArea {

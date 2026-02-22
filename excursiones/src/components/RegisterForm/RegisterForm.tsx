@@ -165,7 +165,7 @@ export function RegisterForm() {
 			<Form
 				id="registerForm"
 				noValidate
-				className={`${styles.registerForm} fw-bold`}
+				className={styles.registerForm}
 				aria-busy={formState.isLoading}
 				onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
 			>
@@ -198,11 +198,9 @@ export function RegisterForm() {
 					id="password-requirements"
 					className={`${styles.infoMessage} mb-3`}
 				>
-					<p className="mb-1 fw-normal">
-						Tu contraseña debe contener al menos:
-					</p>
+					<p className="mb-1">Tu contraseña debe contener al menos:</p>
 					{/* ps-3 añade un poco de sangría a la lista para mejorar la legibilidad */}
-					<ul className="mb-0 ps-3 fw-normal">
+					<ul className="mb-0">
 						<li>8 caracteres.</li>
 						<li>Una letra.</li>
 						<li>Un número.</li>

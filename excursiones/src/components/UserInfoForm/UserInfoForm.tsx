@@ -14,9 +14,6 @@ import {
 	UsersIcon,
 	PhoneIcon,
 	MailIcon,
-	EditIcon,
-	XIcon,
-	CheckIcon,
 } from "../../ui/Icons";
 import styles from "./UserInfoForm.module.css";
 
@@ -164,7 +161,7 @@ function UserInfoForm(): React.ReactElement {
 						className="mb-0 gx-2 align-items-center"
 						controlId="formPlaintextEmail"
 					>
-						<Form.Label column sm="3" className="text-sm-end fw-bold">
+						<Form.Label column sm="3" className="text-sm-end">
 							<span className="d-flex align-items-center justify-content-sm-end gap-2">
 								<MailIcon className={styles.labelIcon} aria-hidden="true" />
 								<span className={styles.labelText}>Correo:</span>
@@ -198,7 +195,7 @@ function UserInfoForm(): React.ReactElement {
 							<Form.Label
 								column
 								sm="3"
-								className="text-sm-end fw-bold"
+								className="text-sm-end"
 								htmlFor={field.id}
 							>
 								<span className="d-flex align-items-center justify-content-sm-end gap-2">
@@ -237,7 +234,6 @@ function UserInfoForm(): React.ReactElement {
 									{/* Pasamos el icono y texto como children */}
 									{/* StyledButton maneja el layout interno, pero podemos añadir un span para el gap */}
 									<span className="d-flex align-items-center justify-content-center gap-2">
-										<EditIcon aria-hidden="true" />
 										Editar
 									</span>
 								</CustomButton>
@@ -256,7 +252,6 @@ function UserInfoForm(): React.ReactElement {
 									className={`${styles.cancelButton} w-100`}
 								>
 									<span className="d-flex align-items-center justify-content-center gap-2">
-										<XIcon aria-hidden="true" />
 										Cancelar
 									</span>
 								</CustomButton>
@@ -272,7 +267,6 @@ function UserInfoForm(): React.ReactElement {
 									isLoading={isLoading}
 								>
 									<span className="d-flex align-items-center justify-content-center gap-2">
-										<CheckIcon aria-hidden="true" />
 										Guardar
 									</span>
 								</CustomButton>

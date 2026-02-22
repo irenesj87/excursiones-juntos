@@ -16,6 +16,8 @@
 	margin-bottom: 1.5rem;
 	padding-bottom: 0.5rem;
 	border-bottom: 1px solid var(--color-border-default);
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 .floatingFilterBtn {
@@ -26,6 +28,11 @@
 	align-items: center;
 	gap: 0.5rem;
 	box-shadow: var(--shadow-lifted);
+	/* Estilo de botón consistente (uppercase) */
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	font-size: 0.875rem;
 }
 
 /* Posicionamiento unificado para Móvil y Tablet (< 992px): Abajo a la derecha */
@@ -38,4 +45,6 @@
 
 .offcanvasTitle {
 	font-size: var(--font-size-xl);
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }

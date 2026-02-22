@@ -54,7 +54,7 @@ export function LoginForm() {
 				noValidate
 				aria-busy={formState.isLoading}
 				onSubmit={handleSubmit}
-				className={`${styles.formLabel} fw-bold`}
+				className={styles.formLabel}
 			>
 				<div className={styles.fieldsContainer}>
 					<ValidatedInput

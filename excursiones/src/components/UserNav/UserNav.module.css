@@ -2,9 +2,11 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.6rem 1rem;
-	font-weight: var(--font-weight-light);
-	font-size: 1.1rem;
+	padding: 0.5rem 1.25rem;
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 	line-height: 1.5;
 	text-align: center;
 	text-decoration: none;
@@ -15,9 +17,7 @@
 		background-color 0.2s ease-out;
 	cursor: pointer;
 	user-select: none;
-	border-radius: var(
-		--border-radius-pill
-	);
+	border-radius: var(--border-radius-pill);
 }
 
 .profileLink:hover {
@@ -38,12 +38,16 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--logout-text-color);
-	background-color: var(--logout-bg-color);
-	border-color: var(--logout-bg-color);
-	padding: 0.6rem 1rem;
-	font-weight: var(--font-weight-light);
-	font-size: 1.1rem;
+	color: var(
+		--register-link-color
+	); /* Usamos el color del enlace para consistencia visual */
+	background-color: transparent;
+	border: 1px solid currentColor; /* Borde sutil */
+	padding: 0.5rem 1.25rem;
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 	transition:
 		transform 0.2s ease-out,
 		box-shadow 0.2s ease-out,
@@ -52,18 +56,16 @@
 
 .logoutLink:hover,
 .logoutLink:focus {
-	color: var(--logout-text-color);
-	background-color: var(--logout-bg-color-hover);
-	border-color: var(--logout-bg-color-hover);
+	background-color: var(--register-link-bg-hover);
+	color: var(--register-link-color);
 	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	box-shadow: var(--shadow-soft);
 }
 
 /* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
 @media (min-width: 992px) {
 	.profileLink,
 	.logoutLink {
-		padding: 0.5rem;
-		font-size: 1.1rem;
+		font-size: 0.9rem;
 	}
 }

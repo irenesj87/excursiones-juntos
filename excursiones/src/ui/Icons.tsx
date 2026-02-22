@@ -23,7 +23,7 @@ import {
 } from "react-icons/lu";
 import { AiFillMoon, AiFillSun } from "react-icons/ai";
 import { BsBackpack } from "react-icons/bs";
-import { HiMiniUser } from "react-icons/hi2";
+import { HiUser } from "react-icons/hi";
 
 // Tipo base para las props de los iconos
 type IconProps = {
@@ -66,7 +66,7 @@ export const CheckIcon = LuCircleCheckBig as React.ComponentType<IconProps>;
 // Icono del copyright para el footer
 export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
 // Icono de usuario para campos de nombre
-export const UserIcon = HiMiniUser as React.ComponentType<IconProps>;
+export const UserIcon = HiUser as React.ComponentType<IconProps>;
 // Icono de usuario para campos de apellidos
 export const UsersIcon = LuUsers as React.ComponentType<IconProps>;
 // Icono para el enlace de perfil en la navegación (Avatar)

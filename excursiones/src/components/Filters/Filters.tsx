@@ -77,18 +77,18 @@ export function Filters() {
 
 	return (
 		<div className={styles.filtersSection}>
-			<div className={styles.filtersContainer}>
-				<div className={styles.filtersWrapper}>
+			<div className={styles.filtersWrapper}>
+				<div className={styles.filterGroups}>
 					{filterSections.map(({ name, title, icon }) =>
 						renderFilterSection(name, title, icon),
 					)}
-					{isAnyFilterActive && (
-						<button onClick={handleClearFilters} className={styles.clearButton}>
-							<XIcon size={16} />
-							Limpiar filtros
-						</button>
-					)}
 				</div>
+				{isAnyFilterActive && (
+					<button onClick={handleClearFilters} className={styles.clearButton}>
+						<XIcon size={16} />
+						Limpiar filtros
+					</button>
+				)}
 			</div>
 		</div>
 	);
