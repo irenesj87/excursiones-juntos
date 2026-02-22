@@ -1,9 +1,13 @@
 .customNavbar {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+	padding-block: 1.25rem; /* Más aire vertical (20px) */
 	background-color: var(--navbar-bg);
+	backdrop-filter: var(--navbar-backdrop-filter); /* Efecto cristal */
 	box-shadow: var(--shadow-soft);
-	transition: none;
+	/* Transición suave para el cambio de color de fondo al hacer scroll */
+	transition:
+		background-color 0.3s ease,
+		padding 0.3s ease,
+		box-shadow 0.3s ease;
 	z-index: 1030;
 }
 
@@ -39,6 +43,7 @@
 
 /* Sobrescribe el ícono del toggler de Bootstrap para usar siempre la variable CSS del tema.
    Esto evita tener que usar la prop 'variant' en el componente Navbar. */
+/* Usamos :global para acceder a clases internas de Bootstrap */
 .customNavbar :global(.navbar-toggler-icon) {
 	background-image: var(--custom-toggler-icon-bg);
 }
@@ -50,6 +55,7 @@
 	left: 0;
 	right: 0;
 	background-color: transparent; /* Fuerza la transparencia */
+	backdrop-filter: none; /* Sin desenfoque en el estado inicial transparente */
 	box-shadow: none; /* Elimina la sombra para que se vea plano sobre la imagen */
 	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 
@@ -61,6 +67,7 @@
 	--navbar-brand-icon: var(--color-white);
 	--navbar-color: var(--color-white);
 	--register-link-color: var(--color-white);
+	--register-link-bg-hover: rgba(255, 255, 255, 0.15);
 
 	/* Hacemos que el botón de Login sea transparente (solo texto) en el Hero para reducir peso visual */
 	--login-btn-bg: transparent;
@@ -71,6 +78,7 @@
 	/* Botones de acción (Tema y Menú) */
 	--theme-toggle-btn-color: var(--color-white);
 	--theme-toggle-btn-icon: var(--color-white);
+	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.15);
 
 	/* Icono hamburguesa: Usamos la versión clara (del modo oscuro) para que se vea sobre el Hero */
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");

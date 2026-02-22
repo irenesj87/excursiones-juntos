@@ -49,7 +49,7 @@ interface JoinButtonProps {
  */
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	return (
-		<div className="d-grid d-xl-flex justify-content-xl-end">
+		<div className={styles.joinButtonContainer}>
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
 					<CheckIcon className={styles.detailIcon} />
@@ -171,7 +171,7 @@ export function ExcursionCard({
 		>
 			{/* Sección de imagen */}
 			<div className={styles.imageContainer}>
-				{/* Badge Flotante de Zona (Estilo Dolomia) */}
+				{/* Badge Flotante de Zona */}
 				<div className={styles.floatingBadge}>
 					<MapIcon size={14} className={styles.infoIcon} />
 					{area}
@@ -206,18 +206,20 @@ export function ExcursionCard({
 				)}
 			</div>
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
-			<Card.Body className="d-flex flex-column flex-grow-1">
-				<div>
+			<Card.Body
+				className={`d-flex flex-column flex-grow-1 ${styles.cardBody}`}
+			>
+				<div className={styles.cardContent}>
 					{/* Título de la excursión */}
 					<Card.Title as="h3" className={styles.excursionTitle}>
 						{name}
 					</Card.Title>
 					{/* Descripción de la excursión */}
-					<Card.Text className={styles.excursionDescription}>
+					<Card.Text as="p" className={styles.excursionDescription}>
 						{description}
 					</Card.Text>
 					{/* Detalles de la excursión */}
-					<div className={styles.infoItem}>
+					<div className={styles.infoItemsContainer}>
 						<InfoItem
 							text={difficulty}
 							label="Dificultad"

@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 3rem 2rem;
+	padding: 4rem 2rem; /* Más aire vertical para elegancia */
 	text-align: center;
 	background-color: var(--footer-bg);
 	color: var(--footer-text-color);
@@ -11,51 +11,42 @@
 }
 
 .footerText {
-	display: block;
-	text-align: center;
+	display: flex;
+	flex-direction: column; /* Apilado en móvil por defecto */
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 	margin: 0;
-	font-size: 1rem; /* Unificado para consistencia móvil/escritorio */
-	line-height: 1.5;
-	letter-spacing: 0.02em;
+	font-size: 0.875rem; /* 14px, más refinado */
+	line-height: 1.6;
+	letter-spacing: 0.03em;
 }
 
 .companyName {
-	font-weight: var(--font-weight-semibold);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 .copyrightIcon {
-	width: 1em;
-	height: 1em;
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 0.3em; /* Espacio entre el icono y el texto en breakpoints pequeños */
-	/* Ajuste vertical fino para alinear el icono con el centro del texto en breakpoints pequeños.
-	   En breakpoints grandes, se resetea y se usa flexbox para la alineación. */
-	transform: translateY(-0.15em);
+	font-size: 1.1em;
+	color: var(--footer-text-muted); /* Icono sutil */
 }
 
 @media (min-width: 640px) {
 	.footerText {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
+		flex-direction: row; /* En línea en desktop */
 	}
 
-	.copyrightIcon {
-		margin: 0;
-		transform: none;
-	}
-
-	.disclaimer {
-		margin-top: 0; /* En desktop, reducimos el margen si es necesario, o lo dejamos fluir */
-	}
+	/* Eliminamos reglas innecesarias ya que flexbox gestiona la alineación */
 }
 
 .disclaimer {
-	margin-top: 0.75rem;
-	font-size: var(--font-size-xs);
+	margin-top: 1.5rem; /* Más separación del bloque principal */
+	font-size: 0.75rem; /* 12px */
 	color: var(--footer-text-muted);
 	max-width: 40ch; /* Limita el ancho para lectura cómoda */
-	line-height: 1.4;
+	line-height: 1.5;
+	text-transform: uppercase; /* Estilo técnico y limpio */
+	letter-spacing: 0.5px;
 }

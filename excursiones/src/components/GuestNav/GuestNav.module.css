@@ -3,21 +3,23 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: var(--border-radius-pill);
-	color: var(--register-link-color);
+	color: var(--register-link-color); /* Se adapta a transparente/sólido */
 	padding: 0.5rem; /* Padding reducido por defecto para el modo icono (cuadrado) */
 	line-height: 1.5;
 	transition:
 		transform 0.2s ease-out,
-		box-shadow 0.2s ease-out,
 		background-color 0.2s ease-out;
-	font-size: 1.1rem;
-	font-weight: var(--font-weight-medium);
+	font-size: 0.95rem; /* Texto más refinado */
+	font-weight: 600; /* Semibold para legibilidad */
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
 	white-space: nowrap; /* Evita que el texto se rompa en pantallas muy estrechas */
 }
 
 .loginLink:hover {
 	color: var(--register-link-color);
 	transform: translateY(-2px);
+	background-color: var(--register-link-bg-hover);
 }
 
 .loginLink:focus-visible {
@@ -64,7 +66,7 @@
 /* --- Media Query: A partir del breakpoint 'md' (tablets y escritorio), mostramos el texto --- */
 @media (min-width: 768px) {
 	.loginLink {
-		padding: 0.6rem 1rem; /* Restauramos padding rectangular */
+		padding: 0.5rem 1.25rem; /* Más ancho horizontalmente */
 	}
 	.linkText {
 		display: inline;
@@ -77,7 +79,6 @@
 /* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
 @media (min-width: 992px) {
 	.loginLink {
-		padding: 0.5rem;
-		font-size: 1.1rem;
+		font-size: 0.9rem; /* Un poco más pequeño y elegante en escritorio */
 	}
 }

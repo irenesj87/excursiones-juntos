@@ -6,28 +6,16 @@
 
 .filtersWrapper {
 	display: flex;
-	flex-direction: column; /* Apila los grupos de filtros verticalmente */
-	justify-content: flex-start;
-	align-items: stretch; /* Estira los grupos para que ocupen el ancho completo */
-	gap: 2.5rem; /* Aumentamos el espacio vertical entre grupos */
+	flex-direction: column; /* Apilado vertical por defecto (móvil) */
+	gap: 2rem;
 	width: 100%;
 }
 
-.filtersContainer {
-	/* Eliminamos posicionamiento absoluto y sombras de dropdown */
-	position: static;
-	width: 100%;
-	max-width: 100%;
-	box-shadow: none;
-	background-color: transparent;
-	border: none;
-	padding: 0;
-	margin-top: 0;
-
+/* Contenedor para los grupos de filtros, para separarlos del botón de limpiar */
+.filterGroups {
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 1.5rem;
+	flex-direction: column; /* Apilado vertical en móvil */
+	gap: 2.5rem;
 }
 
 /* Contenedor de cada grupo (Zona, Dificultad, etc.) */
@@ -58,19 +46,22 @@
 	align-items: center;
 	gap: 0.4rem;
 	background: none;
-	border: none;
+	border: 1px solid transparent; /* Espacio para el borde en hover/focus */
 	color: var(--clear-filters-color);
 	font-weight: 600;
 	cursor: pointer;
-	padding: 0.5rem;
-	font-size: var(--font-size-base); /* Aumenta el tamaño del texto */
-	align-self: flex-end; /* Alinea el botón a la derecha en el contenedor flex vertical */
-	transition: color 0.2s ease;
+	padding: 0.5rem 1rem;
+	border-radius: var(--border-radius-pill);
+	font-size: var(--font-size-sm); /* Consistente con otros botones de acción */
+	transition:
+		color 0.2s ease,
+		background-color 0.2s ease;
 	white-space: nowrap; /* Evita que el texto se rompa */
-	margin-top: 1rem; /* Espacio por encima del botón */
+	align-self: flex-end; /* Alinea el botón a la derecha en el contenedor flex vertical */
 }
 
 .clearButton:hover {
 	color: var(--clear-filters-color-hover);
-	text-decoration: underline;
+	/* Usamos el mismo fondo de hover que el ThemeToggleButton para consistencia */
+	background-color: var(--theme-toggle-btn-bg-hover);
 }

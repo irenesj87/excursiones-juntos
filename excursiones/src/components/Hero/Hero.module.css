@@ -60,7 +60,7 @@
 .title {
 	font-family: var(--font-family-sans);
 	font-size: var(--font-size-xxxl);
-	font-weight: var(--font-weight-light);
+	font-weight: 400; /* Aumentamos el peso para mayor impacto y legibilidad */
 	line-height: 1.1;
 	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Sombra para legibilidad */
 }

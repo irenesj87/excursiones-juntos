@@ -9,12 +9,14 @@ interface SkeletonThemeProps {
 // Define los colores del esqueleto en un objeto centralizado para facilitar el mantenimiento.
 const SKELETON_COLORS: Record<"light" | "dark", SkeletonThemeProps> = {
 	light: {
-		baseColor: "#e0e0e0",
-		highlightColor: "#f5f5f5",
+		// Colores coordinados con --color-stone-100 y --color-white-off
+		baseColor: "hsl(40, 13%, 92%)", // #f2f0ee
+		highlightColor: "hsl(40, 13%, 97%)", // #f9f8f7
 	},
 	dark: {
-		baseColor: "#202020",
-		highlightColor: "#444",
+		// Colores coordinados con --color-green-dark-800 y --color-green-dark-700
+		baseColor: "hsl(150, 10%, 20%)", // #2e3833
+		highlightColor: "hsl(150, 10%, 25%)", // #3a473a
 	},
 };
 

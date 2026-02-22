@@ -8,7 +8,9 @@
 
 	background-color: var(--search-bar-bg);
 	border: 1px solid var(--search-bar-border);
-	border-radius: var(--border-radius-pill);
+	border-radius: var(
+		--border-radius-lg
+	); /* Coherencia con las tarjetas para un look más orgánico */
 	box-shadow: var(--search-bar-shadow);
 	transition:
 		box-shadow 0.3s ease,
@@ -33,10 +35,10 @@
 	background-color: transparent;
 	border: none;
 	color: var(--color-text-base);
-	padding: 0.8rem 4rem 0.8rem 3rem; /* Aumentamos padding derecho para evitar solapamiento con botón táctil */
-	font-size: 1.1rem;
+	padding: 0.75rem 3.5rem 0.75rem 3rem; /* Padding refinado */
+	font-size: 1rem; /* Coherencia con otros inputs */
 	font-weight: 500;
-	border-radius: var(--border-radius-pill);
+	border-radius: var(--border-radius-lg);
 	outline: none;
 	box-shadow: none; /* Asegura que no haya sombras nativas cuadradas */
 	width: 100%;
@@ -88,7 +90,9 @@
 }
 
 .clearButton:hover {
-	background-color: rgba(0, 0, 0, 0.05);
+	background-color: var(
+		--theme-toggle-btn-bg-hover
+	); /* Usamos variable de tema para consistencia */
 	color: var(--color-text-base);
 }
 

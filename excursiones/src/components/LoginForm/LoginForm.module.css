@@ -1,17 +1,14 @@
-.formLabel {
+.formLabel :global(.form-label) {
 	font-size: var(--font-size-base);
 	font-family: var(--font-family-sans);
+	font-weight: 600; /* Semibold para un look premium pero legible */
+	color: var(--color-text-muted);
+	margin-bottom: 0.75rem; /* Más espacio entre la etiqueta y el input */
 }
 
 .fieldsContainer {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem; /* 24px */
-	margin-bottom: 2rem;
-}
-
-/* Eliminamos el icono de exclamación y restauramos el borde en estado inválido */
-.fieldsContainer :global(.form-control.is-invalid) {
-	background-image: none;
-	border-color: var(--bs-border-color, #ced4da);
+	gap: 1.75rem; /* Aumentamos el espacio para un diseño más aireado */
+	margin-bottom: 2.5rem; /* Mayor separación antes del botón de acción */
 }

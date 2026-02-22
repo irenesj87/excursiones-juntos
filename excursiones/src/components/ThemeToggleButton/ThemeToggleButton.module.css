@@ -2,8 +2,8 @@
 .themeToggleBtn {
 	background-color: transparent;
 	color: var(--theme-toggle-btn-color);
-	border: none;
-	width: 2.75rem; /* 44px */
+	border: 1px solid transparent; /* Reserva espacio para borde en focus */
+	width: 2.75rem;
 	height: 2.75rem; /* 44px */
 	border-radius: 50%;
 	display: flex;
@@ -17,7 +17,7 @@
 }
 
 .themeIcon {
-	font-size: 1.4rem; /* Tamaño base del icono */
+	font-size: 1.25rem; /* Ligeramente más fino */
 	color: var(--theme-toggle-btn-icon);
 }
 
@@ -25,6 +25,7 @@
 .themeToggleBtn:hover,
 .themeToggleBtn:focus-visible {
 	transform: translateY(-2px);
+	background-color: var(--theme-toggle-btn-bg-hover);
 }
 
 /* Eliminamos el outline por defecto en foco para gestionarlo con focus-visible */

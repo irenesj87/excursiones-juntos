@@ -1,4 +1,3 @@
-import React from "react";
 import { COMPANY_NAME, START_YEAR } from "../../constants";
 import { CopyrightIcon } from "../../ui/Icons";
 import styles from "./Footer.module.css";
@@ -23,7 +22,7 @@ function Footer(): JSX.Element {
 				</span>
 			</small>
 			<p className={styles.disclaimer}>
-				Proyecto de desarrollo web para portfolio.<br /> Sin fines comerciales.
+				Proyecto de desarrollo web para portfolio. Sin fines comerciales.
 			</p>
 		</footer>
 	);

@@ -39,26 +39,26 @@
 
 .formTitle {
 	color: var(--color-text-base);
-	font-family: var(--font-family-serif);
-	font-size: var(--font-size-xxl); /* 32px (2rem) definido en Global */
+	font-family: var(--font-family-sans);
+	font-size: var(--font-size-xl);
 	font-weight: 700;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.25rem; /* Menos espacio para acercarlo a la descripción */
 	line-height: 1.1;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 .formDescription {
-	color: var(
-		--color-text-base
-	); /* AAA: Aumentamos contraste a 7:1 para texto normal */
+	color: var(--color-text-muted);
 	margin-bottom: 0;
 	max-width: 65ch; /* AAA: Limitamos el ancho a ~65-80 caracteres para legibilidad (Criterio 1.4.8) */
 }
 
 .sectionTitle {
 	color: var(
-		--color-text-base
-	); /* AAA: El texto pequeño/negrita necesita contraste 7:1 */
-	font-family: var(--font-family-serif);
+		--color-text-muted
+	); /* Color más sutil para los subtítulos de sección */
+	font-family: var(--font-family-sans);
 	font-size: var(--font-size-lg); /* 20px (1.25rem) definido en Global */
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
@@ -69,6 +69,11 @@
 .labelIcon {
 	color: var(--color-primary);
 	font-size: 1.1em;
+}
+
+.cardBody :global(.form-label) {
+	font-weight: 600;
+	color: var(--color-text-muted);
 }
 
 /* En breakpoints pequeños, el texto fluye naturalmente.
@@ -87,10 +92,12 @@
 }
 
 /* Alinea los iconos con el texto en los botones del formulario */
-.editButton svg,
-.cancelButton svg,
-.saveButton svg {
-	margin-right: 0.5rem;
-	vertical-align: -0.125em;
-	font-size: 1.1em;
+.editButton,
+.cancelButton,
+.saveButton {
+	font-weight: 700;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 0.75rem 1.5rem;
 }

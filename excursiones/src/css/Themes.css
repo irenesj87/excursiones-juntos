@@ -11,7 +11,7 @@
 :root {
 	/* Navbar y Estructura */
 	--navbar-bg: var(--color-background-surface);
-
+	--navbar-backdrop-filter: blur(12px); /* Efecto cristal esmerilado moderno */
 	/* Tarjetas (ExcursionCard) */
 	--excursion-card-bg: var(--color-background-surface);
 	--excursion-card-shadow: var(--shadow-soft);
@@ -81,12 +81,16 @@ html.light {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-color: var(
-		--color-stone-800
-	); /* Oscurecido para cumplir AAA (7:1) */
+	--navbar-bg: rgba(
+		255,
+		255,
+		255,
+		0.9
+	); /* Ligeramente translúcido para el efecto blur */
+	--navbar-color: var(--color-stone-800);
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(
-		--color-moss-700
+		/* Icono color musgo oscuro */ --color-moss-700
 	); /* Oscurecido para cumplir AAA (7:1) */
 	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
@@ -98,10 +102,18 @@ html.light {
 		--color-stone-800
 	); /* Coincide con --navbar-color */
 	--theme-toggle-btn-icon: var(--color-stone-800);
-	--theme-toggle-btn-bg-hover: var(--color-stone-100);
+	--theme-toggle-btn-bg-hover: color-mix(
+		in srgb,
+		var(--color-stone-900) 15%,
+		transparent
+	);
 
 	--register-link-color: var(--color-stone-800);
-	--register-link-bg-hover: var(--color-stone-200);
+	--register-link-bg-hover: color-mix(
+		in srgb,
+		var(--color-stone-900) 15%,
+		transparent
+	);
 
 	--nav-link-active-bg: var(--color-stone-200);
 	--nav-link-active-border: var(--color-stone-400);
@@ -260,7 +272,8 @@ html.dark {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-color: var(--color-text-base);
+	--navbar-bg: rgba(26, 31, 28, 0.9); /* --color-green-dark-800 con opacidad */
+	--navbar-color: var(--color-stone-100);
 	--navbar-brand-color: var(--color-stone-50);
 	--navbar-brand-icon: var(
 		--color-moss-200
@@ -437,6 +450,19 @@ html.dark .btn-close {
 	border-color: var(--color-primary);
 	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
 	outline: none;
+}
+
+/* Estilo para inputs inválidos, asegurando que el borde de error no se muestre en :focus,
+   donde el anillo de foco ya proporciona suficiente feedback. */
+.form-control.is-invalid:not(:focus),
+.form-select.is-invalid:not(:focus) {
+	border-color: var(--color-border-danger);
+}
+
+/* Eliminamos el icono de exclamación por defecto de Bootstrap para un look más limpio. */
+.form-control.is-invalid,
+.form-select.is-invalid {
+	background-image: none;
 }
 
 /* Estilos para inputs deshabilitados o de solo lectura, para que se adapten al tema */
