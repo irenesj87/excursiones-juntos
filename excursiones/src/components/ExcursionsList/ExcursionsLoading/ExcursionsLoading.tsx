@@ -1,10 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../../hooks/useSkeletonTheme";
 import ExcursionCardSkeleton from "../../ExcursionCard/ExcursionCardSkeleton";
-import { RootState } from "../../../store/store";
 
 /**
  * Número de skeletons de tarjetas de excursión.
@@ -19,10 +16,7 @@ const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
  * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
  */
 export function ExcursionsLoading() {
-	const isLoggedIn = useSelector(
-		(state: RootState) => state.loginReducer.login,
-	);
-
+	
 	const skeletonThemeProps = useSkeletonTheme();
 
 	return (
@@ -39,7 +33,7 @@ export function ExcursionsLoading() {
 						key={`skeleton-card-${index}`}
 						className="d-flex"
 					>
-						<ExcursionCardSkeleton isLoggedIn={isLoggedIn} />
+						<ExcursionCardSkeleton />
 					</Col>
 				))}
 			</Row>

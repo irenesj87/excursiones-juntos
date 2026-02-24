@@ -143,6 +143,7 @@ html {
 	--font-weight-semibold: 600;
 	--font-weight-bold: 700;
 
+	/* Radios de borde para una estética orgánica y suave */
 	--border-radius-sm: 2px;
 	--border-radius-md: 6px;
 	--border-radius-lg: 12px;

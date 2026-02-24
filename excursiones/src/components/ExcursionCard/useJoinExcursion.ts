@@ -7,7 +7,7 @@ import { getSafeErrorMessage } from "../../utils/errorUtils";
 type OnJoinFunction = (id: string | number) => Promise<void>;
 
 /**
- * Definimos los estados posibles mediante una Unión Discriminada.
+ * Define los posibles estados del proceso de unirse a una excursión.
  */
 type JoinState =
 	| { status: "idle" }
@@ -25,7 +25,8 @@ interface UseJoinExcursionReturn {
 }
 
 /**
- * Hook para gestionar la lógica de unirse a una excursión. Encapsula el estado de carga, el manejo de errores y la llamada a la API.
+ * Hook para gestionar la lógica de unirse a una excursión. Encapsula el estado de carga, el manejo de errores y la 
+ * llamada a la API.
  */
 export const useJoinExcursion = (
 	onJoin: OnJoinFunction
@@ -42,7 +43,8 @@ export const useJoinExcursion = (
 		};
 	}, []);
 
-	// Función que llama el componente ExcursionCard cuando el usuario hace click en el botón para apuntarse a la excursión
+	// Función que llama el componente ExcursionCard cuando el usuario hace click en el botón para apuntarse a la 
+	// excursión.
 	const handleJoin = async (id: string | number) => {
 		// Protección contra doble click basada en el estado actual
 		if (state.status === "joining") return;

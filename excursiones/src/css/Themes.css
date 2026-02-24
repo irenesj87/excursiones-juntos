@@ -135,6 +135,7 @@ html.light {
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
 	--excursion-card-joined-status-text: var(--color-success-light);
 	--image-placeholder-bg: var(--color-stone-100); /* Beige arena suave */
+	--floating-badge-shadow: var(--shadow-medium);
 
 	/* --- Filtros --- */
 	--filters-toggle-btn-color: var(--color-text-base);
@@ -321,6 +322,7 @@ html.dark {
 		10%,
 		25%
 	); /* Gris verdoso oscuro para placeholder */
+	--floating-badge-shadow: var(--shadow-medium-dark);
 
 	/* --- Filtros --- */
 	--filters-toggle-btn-color: var(--secondary-btn-text);
