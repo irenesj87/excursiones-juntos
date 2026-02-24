@@ -129,6 +129,7 @@
 	display: flex;
 	align-items: center;
 	gap: 0.4rem;
+	pointer-events: none; /* Permite hacer clic a través del badge si fuera necesario */
 }
 
 /* Contenedor del área de acción (botón) */
