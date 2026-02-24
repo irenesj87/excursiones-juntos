@@ -1,29 +1,23 @@
 import { Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
+import type { RootState } from "../../store/store";
 import cardStyles from "./ExcursionCard.module.css";
 import InfoItemStyles from "../../ui/InfoItem/InfoItem.module.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 /**
- * Identificadores para los elementos del componente para facilitar las pruebas.
- */
-export const TEST_IDS = {
-	SKELETON_CARD: "excursion-card-skeleton",
-	BUTTON_CONTAINER: "button-skeleton-container",
-};
-
-/**
  * Define las dimensiones y anchos para los elementos del esqueleto para facilitar su mantenimiento.
  */
 const SKELETON_SIZES = {
-	TITLE_HEIGHT: 34, // 24px (font-size) * 1.4 (line-height) = 33.6px. Redondeado a 34.
-	TITLE_WIDTH: "70%", // Ancho del esqueleto del título
-	DESCRIPTION_LINES: 4, // Número de líneas para el esqueleto de la descripción.
-	DIFFICULTY_TEXT_WIDTH: 60, // Ancho del esqueleto del texto de dificultad
+	TITLE_HEIGHT: 34,
+	TITLE_WIDTH: "70%",
+	DESCRIPTION_LINES: 4,
+	DIFFICULTY_TEXT_WIDTH: 60,
 	TIME_TEXT_WIDTH: 60,
-	BUTTON_HEIGHT: 40,
-	BUTTON_MIN_WIDTH: 138,
+	BUTTON_HEIGHT: 45,
+	BUTTON_WIDTH: 174,
 };
 
 interface InfoItemSkeletonProps {
@@ -43,18 +37,13 @@ function InfoItemSkeleton({ width }: InfoItemSkeletonProps) {
 	);
 }
 
-interface ExcursionCardSkeletonProps {
-	/** Indica si el usuario ha iniciado sesión para mostrar el placeholder del botón. */
-	readonly isLoggedIn?: boolean;
-}
-
 /**
  * Componente que muestra un esqueleto de carga para una ExcursionCard.
  */
-function ExcursionCardSkeleton({
-	isLoggedIn = false,
-}: ExcursionCardSkeletonProps) {
+function ExcursionCardSkeleton() {
 	const { baseColor, highlightColor } = useSkeletonTheme();
+	const user = useSelector((state: RootState) => state.loginReducer.user);
+	const isLoggedIn = !!user;
 
 	return (
 		<SkeletonTheme
@@ -65,40 +54,39 @@ function ExcursionCardSkeleton({
 			<Card
 				className={`${cardStyles.excursionItemCard} h-100 w-100 overflow-hidden`}
 				aria-hidden="true"
-				data-testid={TEST_IDS.SKELETON_CARD}
 			>
 				{/* Skeleton de la Imagen: Usamos aspect-ratio para evitar CLS y coincidir con el diseño final */}
 				<div className={cardStyles.imageSkeletonContainer}>
 					<Skeleton height="100%" containerClassName="h-100 w-100 d-block" />
 				</div>
 
-				<Card.Body className="d-flex flex-column flex-grow-1">
-					<div>
+				<Card.Body
+					className={`d-flex flex-column flex-grow-1 ${cardStyles.cardBody}`}
+				>
+					<div className={cardStyles.cardContent}>
 						{/* Título */}
 						<Skeleton
 							height={SKELETON_SIZES.TITLE_HEIGHT}
 							width={SKELETON_SIZES.TITLE_WIDTH}
-							className="mb-3"
 						/>
 						{/* Descripción */}
 						<div className={cardStyles.excursionDescription}>
 							<Skeleton count={SKELETON_SIZES.DESCRIPTION_LINES} />
 						</div>
 						{/* Detalles (Dificultad, Tiempo) */}
-						<div className={cardStyles.infoItem}>
+						<div className={cardStyles.infoItemsContainer}>
 							<InfoItemSkeleton width={SKELETON_SIZES.DIFFICULTY_TEXT_WIDTH} />
 							<InfoItemSkeleton width={SKELETON_SIZES.TIME_TEXT_WIDTH} />
 						</div>
 					</div>
 					{/* Botón de "Apuntarse" */}
 					{isLoggedIn && (
-						<div className="mt-auto" data-testid={TEST_IDS.BUTTON_CONTAINER}>
+						<div className="mt-auto">
 							<div className={cardStyles.cardActionArea}>
-								<div className="d-grid d-xl-flex justify-content-xl-end">
+								<div className={cardStyles.joinButtonContainer}>
 									<Skeleton
 										height={SKELETON_SIZES.BUTTON_HEIGHT}
 										className="w-100"
-										style={{ minWidth: SKELETON_SIZES.BUTTON_MIN_WIDTH }}
 										borderRadius={12}
 									/>
 								</div>

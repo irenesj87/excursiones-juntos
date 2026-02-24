@@ -8,7 +8,6 @@ import {
 	LuMapPin,
 	LuChartNoAxesColumnIncreasing,
 	LuClock3,
-	LuCircleCheckBig,
 	LuCircleCheck,
 	LuCopyright,
 	LuUsers,
@@ -61,8 +60,6 @@ export const ChartIcon =
 	LuChartNoAxesColumnIncreasing as React.ComponentType<IconProps>;
 // Icono para el tiempo estimado de las excursiones.
 export const ClockIcon = LuClock3 as React.ComponentType<IconProps>;
-// Icono de un check para verificar algo
-export const CheckIcon = LuCircleCheckBig as React.ComponentType<IconProps>;
 // Icono del copyright para el footer
 export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
 // Icono de usuario para campos de nombre

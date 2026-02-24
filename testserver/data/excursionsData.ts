@@ -39,14 +39,6 @@ const excursions: Excursion[] = [
 	},
 	{
 		id: "2",
-		name: "Somiedo",
-		description: `Descubre sus valles glaciares y las ancestrales cabañas de teito.`,
-		area: "Centro",
-		difficulty: "Media",
-		time: "5 horas",
-	},
-	{
-		id: "3",
 		name: "Picos de Europa",
 		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.`,
 		area: "Este",
@@ -55,14 +47,6 @@ const excursions: Excursion[] = [
 		imgSrc: "/images/2.jpg",
 		imgAlt:
 			"Afiladas cumbres de roca caliza de los Picos de Europa emergiendo por encima de un mar de nubes.",
-	},
-	{
-		id: "4",
-		name: "Ruta del Silencio",
-		description: `Adéntrate en un santuario natural y recorre sus senderos ancestrales bajo la sombra de castaños y robles centenarios.`,
-		area: "Oeste",
-		difficulty: "Alta",
-		time: "5 horas",
 	},
 ];
 

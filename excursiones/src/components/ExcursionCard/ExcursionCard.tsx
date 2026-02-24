@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import InfoItem from "../../ui/InfoItem/InfoItem";
@@ -9,11 +9,10 @@ import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import {
 	NoImageIcon,
-	CheckIcon,
+	CheckCircleIcon,
 	MapIcon,
 	ChartIcon,
 	ClockIcon,
-	JoinIcon,
 } from "../../ui/Icons";
 import cn from "classnames";
 import type { RootState } from "../../store/store";
@@ -25,6 +24,7 @@ import { API } from "../../constants";
  */
 const IMG_WIDTH = 640;
 const IMG_HEIGHT = 360;
+
 /**
  * Función vacía que retorna una promesa resuelta inmediatamente.
  * Se utiliza como mecanismo de seguridad para el hook useJoinExcursions ya que en React los hooks
@@ -52,7 +52,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 		<div className={styles.joinButtonContainer}>
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
-					<CheckIcon className={styles.detailIcon} />
+					<CheckCircleIcon className={styles.detailIcon} />
 					Apuntado/a
 				</span>
 			) : (
@@ -61,7 +61,6 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
-					<JoinIcon className={styles.detailIcon} />
 					Apuntarse
 				</CustomButton>
 			)}
@@ -89,10 +88,7 @@ function resolveImageBaseUrl(src?: string): string {
 	// renderice directamente el fallback sin intentar cargar nada.
 	if (!src) return "";
 
-	// Si es externa, la retorna tal cual.
-	if (src.startsWith("http")) return src;
-
-	// Si es interna, construimos la URL y eliminamos la extensión para gestionar formatos modernos.
+	// Construimos la URL base y eliminamos la extensión para gestionar formatos modernos.
 	return `${API.BASE_URL}${src}`.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 }
 
@@ -114,7 +110,7 @@ interface ExcursionCardProps {
 	readonly time: string;
 	/** Callback opcional que se invoca cuando el usuario intenta unirse a la excursión. */
 	readonly onJoin?: (_id: string | number) => Promise<void>;
-	/** URL de la imagen principal de la excursión. */
+	/** URL de la imagen de la excursión. */
 	readonly imgSrc?: string;
 	/** Texto alternativo para la imagen. */
 	readonly imgAlt?: string;
@@ -136,11 +132,13 @@ export function ExcursionCard({
 	imgAlt,
 }: ExcursionCardProps) {
 	/*
-	 * Se obtiene el usuario del store de Redux para determinar si está logueado y si ya se ha apuntado a esta excursión.
-	 * Esto hace que el componente sea más autónomo y evita el prop-drilling.
+	 * Se obtiene el usuario del store de Redux para determinar si está logueado y si ya se ha apuntado a esta
+	 * excursión.
 	 */
 	const user = useSelector((state: RootState) => state.loginReducer.user);
 	const isLoggedIn = !!user;
+	// La excursión ya se considera unida si el usuario existe y su lista de excursiones incluye el ID de esta 
+	// excursión. Si no hay usuario, se asume que no está unido.
 	const isJoined = user?.excursions.includes(id) ?? false;
 
 	/*
@@ -159,10 +157,9 @@ export function ExcursionCard({
 	};
 
 	// Estado para manejar la carga suave de la imagen y evitar parpadeos
-	const [isImageLoaded, setIsImageLoaded] = React.useState(false);
-	const [hasImageError, setHasImageError] = React.useState(false);
+	const [isImageLoaded, setIsImageLoaded] = useState(false);
+	const [hasImageError, setHasImageError] = useState(false);
 	const imageBaseUrl = resolveImageBaseUrl(imgSrc);
-	const isExternalImage = imgSrc?.startsWith("http") ?? false;
 
 	return (
 		<Card
@@ -179,16 +176,12 @@ export function ExcursionCard({
 
 				{imageBaseUrl && !hasImageError ? (
 					<picture>
-						{!isExternalImage && (
-							<>
-								<source srcSet={`${imageBaseUrl}.avif`} type="image/avif" />
-								<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
-							</>
-						)}
+						<source srcSet={`${imageBaseUrl}.avif`} type="image/avif" />
+						<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
 						<Card.Img
 							as="img"
 							variant="top"
-							src={isExternalImage ? imageBaseUrl : `${imageBaseUrl}.jpg`}
+							src={`${imageBaseUrl}.jpg`}
 							alt={imgAlt ?? name}
 							loading="lazy"
 							decoding="async"
