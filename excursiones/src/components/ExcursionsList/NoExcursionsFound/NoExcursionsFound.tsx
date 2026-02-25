@@ -1,4 +1,3 @@
-import React from "react";
 import { SearchIcon } from "../../../ui/Icons";
 import styles from "./NoExcursionsFound.module.css";
 
@@ -14,10 +13,9 @@ export function NoExcursionsFound() {
 		<div className={styles.excursionsContainer} role="status">
 			<div className={styles.messageNotFound}>
 				<SearchIcon className={styles.messageIcon} aria-hidden="true" />
-				<p className={styles.primaryMessage}>{TITLE_MESSAGE}</p>
+				<h3 className={styles.primaryMessage}>{TITLE_MESSAGE}</h3>
 				<p className={styles.secondaryMessage}>{SUBTITLE_MESSAGE}</p>
 			</div>
 		</div>
 	);
 }
-
