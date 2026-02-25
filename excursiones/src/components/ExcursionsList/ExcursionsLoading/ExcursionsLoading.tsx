@@ -16,12 +16,17 @@ const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
  * Componente para mostrar una animación de carga (esqueleto) mientras se obtienen las excursiones.
  */
 export function ExcursionsLoading() {
-	
 	const skeletonThemeProps = useSkeletonTheme();
 
 	return (
 		<SkeletonTheme {...skeletonThemeProps}>
-			<Row as="ul" className="gx-4 gy-5 list-unstyled">
+			<Row
+				as="ul"
+				className="gx-4 gy-5 list-unstyled"
+				role="region"
+				aria-label="Cargando excursiones"
+				aria-busy="true"
+			>
 				{SKELETON_ITEMS.map((_, index) => (
 					<Col
 						as="li"
@@ -40,4 +45,3 @@ export function ExcursionsLoading() {
 		</SkeletonTheme>
 	);
 }
-
