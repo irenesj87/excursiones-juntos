@@ -23,6 +23,7 @@ export function ExcursionsLoading() {
 			<Row
 				as="ul"
 				className="gx-4 gy-5 list-unstyled"
+				role="region"
 				aria-label="Cargando excursiones"
 				aria-busy="true"
 			>
