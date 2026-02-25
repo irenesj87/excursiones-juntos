@@ -85,7 +85,7 @@ export function useExcursionsListLogic({
 
 	// --- Lógica de Paginación ---
 	const [currentPage, setCurrentPage] = useState(1);
-	const isDesktop = useMediaQuery("(min-width: 992px)"); // Breakpoint 'lg' de Bootstrap
+	const isDesktop = useMediaQuery("(min-width: 992px)");
 	const ITEMS_PER_PAGE = isDesktop ? 8 : 4;
 
 	// Se calcula sobre la lista que se está mostrando para ser consistente con la UI.
