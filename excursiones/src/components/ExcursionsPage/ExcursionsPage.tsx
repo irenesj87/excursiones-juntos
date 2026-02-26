@@ -9,7 +9,7 @@ import CustomButton from "../../ui/CustomButton/CustomButton";
 import styles from "./ExcursionsPage.module.css";
 
 /**
- * Componente que gestiona y renderiza la página principal de excursiones, incluyendo la búsqueda, los filtros y 
+ * Componente que gestiona y renderiza la página principal de excursiones, incluyendo la búsqueda, los filtros y
  * la lista de resultados.
  */
 export function ExcursionsPage() {
@@ -30,11 +30,11 @@ export function ExcursionsPage() {
 		<div className="container py-4">
 			{/* Botón flotante para abrir filtros (visible solo en < lg) */}
 			<CustomButton
-				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? "d-none" : ""}`}
+				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? styles.floatingFilterBtnHidden : ""}`}
 				onClick={handleShowFilters}
 				aria-label="Mostrar filtros"
 			>
-				<span>Filtros</span>
+				Filtros
 			</CustomButton>
 
 			<div className="row gx-5">
