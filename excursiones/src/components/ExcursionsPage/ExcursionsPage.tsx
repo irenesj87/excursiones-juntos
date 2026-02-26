@@ -9,11 +9,11 @@ import CustomButton from "../../ui/CustomButton/CustomButton";
 import styles from "./ExcursionsPage.module.css";
 
 /**
- * Componente que gestiona y renderiza la página principal de excursiones,
- * incluyendo la búsqueda, los filtros y la lista de resultados.
+ * Componente que gestiona y renderiza la página principal de excursiones, incluyendo la búsqueda, los filtros y
+ * la lista de resultados.
  */
 export function ExcursionsPage() {
-	// 1. Lógica de estado y datos (movida desde Layout.tsx)
+	// 1. Lógica de estado y datos
 	const [searchValue, setSearchValue] = useState("");
 	const [showFilters, setShowFilters] = useState(false);
 	const {
@@ -27,15 +27,14 @@ export function ExcursionsPage() {
 	const handleShowFilters = () => setShowFilters(true);
 
 	return (
-		// El fondo beige (--color-background-body) ya lo aplica el body
 		<div className="container py-4">
 			{/* Botón flotante para abrir filtros (visible solo en < lg) */}
 			<CustomButton
-				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? "d-none" : ""}`}
+				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? styles.floatingFilterBtnHidden : ""}`}
 				onClick={handleShowFilters}
 				aria-label="Mostrar filtros"
 			>
-				<span>Filtros</span>
+				Filtros
 			</CustomButton>
 
 			<div className="row gx-5">
@@ -70,7 +69,7 @@ export function ExcursionsPage() {
 				</main>
 			</div>
 
-			{/* Offcanvas para filtros en móvil */}
+			{/* Offcanvas para filtros en breakpoints pequeños */}
 			<Offcanvas
 				show={showFilters}
 				onHide={handleCloseFilters}

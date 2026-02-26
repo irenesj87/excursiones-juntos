@@ -1,14 +1,3 @@
-.gridContainer {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-	gap: 2rem;
-}
-
-.filtersWrapper {
-	position: relative;
-	z-index: 10; /* Asegura que el dropdown quede por encima de los resultados */
-}
-
 .filtersTitle {
 	font-size: var(--font-size-xl);
 	font-weight: var(--font-weight-semibold);
@@ -22,25 +11,29 @@
 
 .floatingFilterBtn {
 	position: fixed;
-	z-index: 1040; /* Por encima del contenido pero debajo del backdrop del offcanvas */
+	z-index: 1030; /* Debajo del backdrop (1040) y el offcanvas (1045) */
 	bottom: 2rem;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 	box-shadow: var(--shadow-lifted);
-	/* Estilo de botón consistente (uppercase) */
+	right: 1.5rem;
+	left: auto;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	font-weight: 700;
+	font-weight: var(--font-weight-bold);
 	font-size: 0.875rem;
+	transition:
+		opacity 0.20s ease-in-out,
+		visibility 0.20s ease-in-out;
 }
 
-/* Posicionamiento unificado para Móvil y Tablet (< 992px): Abajo a la derecha */
-@media (max-width: 991.98px) {
-	.floatingFilterBtn {
-		right: 1.5rem;
-		left: auto;
-	}
+/* Estado oculto del botón flotante, más suave que 'd-none' */
+.floatingFilterBtnHidden {
+	opacity: 0;
+	visibility: hidden;
+	/* Evita que el botón sea interactivo mientras está oculto y en transición */
+	pointer-events: none;
 }
 
 .offcanvasTitle {
