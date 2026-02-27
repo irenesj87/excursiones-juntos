@@ -6,24 +6,24 @@
 
 .filtersWrapper {
 	display: flex;
-	flex-direction: column; /* Apilado vertical por defecto (móvil) */
-	gap: 2rem;
+	flex-direction: column;
+	gap: var(--space-8);
 	width: 100%;
 }
 
 /* Contenedor para los grupos de filtros, para separarlos del botón de limpiar */
 .filterGroups {
 	display: flex;
-	flex-direction: column; /* Apilado vertical en móvil */
-	gap: 2.5rem;
+	flex-direction: column;
+	gap: var(--space-12);
 }
 
 /* Contenedor de cada grupo (Zona, Dificultad, etc.) */
 .filterGroupContainer {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start; /* Alinea el contenido (título y lista) a la izquierda */
-	gap: 0.75rem; /* Espacio entre título y lista de filtros */
+	align-items: flex-start;
+	gap: var(--space-3);
 }
 
 .filterTitle {
@@ -32,36 +32,35 @@
 	margin: 0;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start; /* Alinea el título a la izquierda */
-	gap: 0.5rem;
-	color: var(--color-text-muted); /* Color más sutil para el título */
+	justify-content: flex-start;
+	gap: var(--space-2);
+	color: var(--color-text-muted);
 }
 
 .filterTitle .filterIcon {
-	font-size: 1rem;
+	font-size: var(--font-size-base);
 }
 
 .clearButton {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.4rem;
+	gap: var(--space-2);
 	background: none;
-	border: 1px solid transparent; /* Espacio para el borde en hover/focus */
+	border: 1px solid transparent;
 	color: var(--clear-filters-color);
 	font-weight: 600;
 	cursor: pointer;
 	padding: 0.5rem 1rem;
 	border-radius: var(--border-radius-pill);
-	font-size: var(--font-size-sm); /* Consistente con otros botones de acción */
+	font-size: var(--font-size-sm);
 	transition:
-		color 0.2s ease,
-		background-color 0.2s ease;
+		color var(--transition-base),
+		background-color var(--transition-base);
 	white-space: nowrap; /* Evita que el texto se rompa */
-	align-self: flex-end; /* Alinea el botón a la derecha en el contenedor flex vertical */
+	align-self: flex-end;
 }
 
 .clearButton:hover {
 	color: var(--clear-filters-color-hover);
-	/* Usamos el mismo fondo de hover que el ThemeToggleButton para consistencia */
 	background-color: var(--theme-toggle-btn-bg-hover);
 }

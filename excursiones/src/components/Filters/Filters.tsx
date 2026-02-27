@@ -1,10 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { FiltersList } from "../FiltersList";
 import { ChartIcon, ClockIcon, MapIcon, XIcon } from "../../ui/Icons";
-import { clearAllFilters } from "../../slices/filterSlice";
 import styles from "./Filters.module.css";
-import { RootState } from "../../store/store";
+import { useFiltersLogic } from "./useFiltersLogic";
 
 /** Tipo para los nombres de las categorías de filtro. */
 type FilterName = "area" | "difficulty" | "time";
@@ -36,7 +34,6 @@ const filterSections = [
 
 /**
  * Renderiza una sección de filtro individual con su título, icono y lista de opciones.
- * Es una función pura fuera del componente para mejorar la legibilidad y la estabilidad referencial.
  *
  * @param name - El nombre de la categoría de filtro.
  * @param title - El título visible de la sección.
@@ -60,20 +57,11 @@ function renderFilterSection(
 }
 
 /**
- * Componente que renderiza una barra de filtros horizontal.
- * Agrupa los filtros por categoría y permite limpiar todas las selecciones.
+ * Componente que renderiza una barra de filtros. Agrupa los filtros por categoría y permite limpiar todas las
+ * selecciones.
  */
 export function Filters() {
-	const dispatch = useDispatch();
-	const isAnyFilterActive = useSelector((state: RootState) => {
-		const { area, difficulty, time } = state.filterReducer;
-		return area.length > 0 || difficulty.length > 0 || time.length > 0;
-	});
-
-	const handleClearFilters = () => {
-		// Asume que tienes una acción `clearAllFilters` en tu slice de filtros.
-		dispatch(clearAllFilters());
-	};
+	const { hasActiveFilters, handleClearFilters } = useFiltersLogic();
 
 	return (
 		<div className={styles.filtersSection}>
@@ -83,7 +71,7 @@ export function Filters() {
 						renderFilterSection(name, title, icon),
 					)}
 				</div>
-				{isAnyFilterActive && (
+				{hasActiveFilters && (
 					<button onClick={handleClearFilters} className={styles.clearButton}>
 						<XIcon size={16} />
 						Limpiar filtros

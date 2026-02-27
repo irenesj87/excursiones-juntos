@@ -3,7 +3,7 @@ import { clearAllFilters } from "../../slices/filterSlice";
 import { RootState } from "../../store/store";
 
 /**
- * Selector para verificar si existen filtros activos en el estado global.
+ * Selector para verificar si existen filtros activos en la store.
  */
 export const selectHasActiveFilters = (state: RootState) => {
 	const { area, difficulty, time } = state.filterReducer;
@@ -27,7 +27,7 @@ export function useFiltersLogic() {
 		}
 	};
 
-	// Se retorna un objeto con el estado del botón para saber si hay que ponerle como habilitado o deshabilitado
+	// Se retorna un objeto con el estado del botón para saber si tiene que aparecer o no en la UI,
 	// y la función para ejecutar la acción.
 	return { hasActiveFilters, handleClearFilters };
 }
