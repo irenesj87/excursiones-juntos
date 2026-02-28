@@ -2,7 +2,7 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const PILL_HEIGHT = 38; // Ajustado al nuevo padding (0.4rem) + line-height
+const PILL_HEIGHT = 38;
 const PILL_BORDER_RADIUS = 12; // Coincide con --border-radius-pill
 const PILL_WIDTH = 90; // Ancho promedio para simular el contenido en flexbox
 /**
