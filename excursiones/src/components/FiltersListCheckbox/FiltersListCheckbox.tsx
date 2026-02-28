@@ -33,7 +33,7 @@ function FilterLabel({ htmlFor, filter, isChecked }: LabelProps) {
 	);
 }
 
-function FiltersListCheckbox({ filterName, filter }: FiltersListCheckboxProps) {
+export function FiltersListCheckbox({ filterName, filter }: FiltersListCheckboxProps) {
 	// Usamos el hook personalizado para obtener el estado y la función manejadora.
 	const { isChecked, handleToggle } = useFilterCheckboxLogic(
 		filterName,
@@ -59,5 +59,3 @@ function FiltersListCheckbox({ filterName, filter }: FiltersListCheckboxProps) {
 		</>
 	);
 }
-
-export default FiltersListCheckbox;
