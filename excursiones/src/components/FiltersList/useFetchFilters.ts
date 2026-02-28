@@ -97,7 +97,8 @@ export function useFilters(filterName: string): FiltersState {
 						);
 					}
 
-					// Creamos un nuevo error con un mensaje más amigable para el usuario, y si es un error de conexión, añadimos un mensaje secundario.
+					// Creamos un nuevo error con un mensaje más amigable para el usuario, y si es un error de 
+					// conexión, añadimos un mensaje secundario.
 					let finalError: Error;
 					if (isConnectionError) {
 						finalError = new Error(CONNECTION_ERROR_MESSAGE);

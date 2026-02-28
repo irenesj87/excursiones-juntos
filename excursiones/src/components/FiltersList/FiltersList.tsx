@@ -10,6 +10,7 @@ import type { FilterState } from "../../slices/filterSlice";
 
 const SKELETON_COUNT = 4;
 const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
+const EMPTY_MESSAGE = "No hay opciones disponibles para";
 
 // Props del componente FiltersList.
 interface FiltersListProps {
@@ -19,7 +20,9 @@ interface FiltersListProps {
 /**
  * Componente que muestra una lista de filtros para una categoría específica (ej. área, dificultad, tiempo).
  */
-export function FiltersList({ filterName }: FiltersListProps): React.ReactElement {
+export function FiltersList({
+	filterName,
+}: FiltersListProps): React.ReactElement {
 	// El tipo para 'data' se infiere como `string[]` basándonos en su uso posterior.
 	// Usamos el hook personalizado para obtener los filtros y el estado de carga/error.
 	const { data: arrayFilters, isLoading, error } = useFilters(filterName);
@@ -55,6 +58,15 @@ export function FiltersList({ filterName }: FiltersListProps): React.ReactElemen
 				variant="danger"
 				message="Hubo un error al cargar los filtros."
 			/>
+		);
+	}
+
+	// Estado Vacío: Si no hay errores pero tampoco datos.
+	if (arrayFilters.length === 0) {
+		return (
+			<p className={styles.emptyMessage} role="status">
+				{EMPTY_MESSAGE} {filterName}.
+			</p>
 		);
 	}
 
