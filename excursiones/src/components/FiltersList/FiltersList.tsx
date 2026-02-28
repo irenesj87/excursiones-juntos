@@ -10,6 +10,7 @@ import type { FilterState } from "../../slices/filterSlice";
 
 const SKELETON_COUNT = 4;
 const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT });
+const EMPTY_MESSAGE = "No hay opciones disponibles para";
 
 // Props del componente FiltersList.
 interface FiltersListProps {
@@ -64,7 +65,7 @@ export function FiltersList({
 	if (arrayFilters.length === 0) {
 		return (
 			<p className={styles.emptyMessage} role="status">
-				No hay opciones disponibles para {filterName}.
+				{EMPTY_MESSAGE} {filterName}.
 			</p>
 		);
 	}
