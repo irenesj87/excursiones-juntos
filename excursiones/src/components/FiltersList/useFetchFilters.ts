@@ -4,7 +4,7 @@ import { fetchFilters } from "../../services/filterService";
 import { AppError } from "../../types";
 
 const MIN_DISPLAY_TIME_MS = 300;
-const FAILED_TO_FETCH_MESSAGE = "No se pudo realizar la solicitud de red";
+const FAILED_TO_FETCH_MESSAGE = "Failed to fetch";
 const ABORT_ERROR_NAME = "AbortError";
 const CONNECTION_ERROR_MESSAGE = "Error de conexión";
 const CONNECTION_ERROR_SECONDARY_MESSAGE =
