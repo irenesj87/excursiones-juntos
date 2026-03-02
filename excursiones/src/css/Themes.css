@@ -30,7 +30,11 @@
 	/* Footer */
 	--footer-bg: var(--color-stone-900);
 	--footer-text-color: var(--color-white-off);
-	--footer-text-muted: var(--color-stone-400);
+	/* 
+	 * Ajustado a stone-200 para cumplir con el ratio de contraste 7:1 (WCAG AAA) 
+	 * sobre el fondo --footer-bg. El ratio ahora es > 9:1.
+	 */
+	--footer-text-muted: var(--color-stone-200);
 
 	/* Hero CTA */
 	--hero-cta-bg: var(--color-white);

@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 4rem 2rem; /* Más aire vertical para elegancia */
+	padding: 5rem var(--space-8);
 	text-align: center;
 	background-color: var(--footer-bg);
 	color: var(--footer-text-color);
@@ -11,42 +11,51 @@
 }
 
 .footerText {
-	display: flex;
-	flex-direction: column; /* Apilado en móvil por defecto */
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
-	margin: 0;
-	font-size: 0.875rem; /* 14px, más refinado */
+	margin-top: var(--space-6);
+	font-size: var(--font-size-sm);
 	line-height: 1.6;
 	letter-spacing: 0.03em;
 }
 
 .companyName {
-	font-weight: 700;
+	font-weight: var(--font-weight-bold);
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
 
 .copyrightIcon {
 	font-size: 1.1em;
-	color: var(--footer-text-muted); /* Icono sutil */
+	color: var(--footer-text-muted);
+	vertical-align: middle;
+	margin-bottom: 0.2em; /* Pequeño ajuste óptico para subirlo visualmente */
 }
 
 @media (min-width: 640px) {
 	.footerText {
-		flex-direction: row; /* En línea en desktop */
+		flex-direction: row;
 	}
+}
 
-	/* Eliminamos reglas innecesarias ya que flexbox gestiona la alineación */
+.contactLink {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+	color: var(--footer-text-muted);
+	text-decoration: none;
+	transition: color var(--transition-base);
+}
+
+.contactLink:hover {
+	color: var(--footer-text-color);
+	text-decoration: underline;
 }
 
 .disclaimer {
-	margin-top: 1.5rem; /* Más separación del bloque principal */
-	font-size: 0.75rem; /* 12px */
+	margin-top: var(--space-8);
+	font-size: var(--font-size-xs);
 	color: var(--footer-text-muted);
 	max-width: 40ch; /* Limita el ancho para lectura cómoda */
 	line-height: 1.5;
-	text-transform: uppercase; /* Estilo técnico y limpio */
+	text-transform: uppercase;
 	letter-spacing: 0.5px;
 }
