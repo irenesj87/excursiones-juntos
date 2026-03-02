@@ -1,6 +1,6 @@
 import React from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
-import FiltersListCheckbox from "../FiltersListCheckbox";
+import { FiltersListCheckbox } from "../FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import { useFilters } from "./useFetchFilters";

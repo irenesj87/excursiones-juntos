@@ -7,7 +7,7 @@ const COPYRIGHT_TEXT = "Todos los derechos reservados.";
 /**
  * Componente del pie de página que muestra la información de copyright y el año.
  */
-function Footer(): JSX.Element {
+export function Footer(): JSX.Element {
 	const currentYear = new Date().getFullYear();
 	const yearDisplay =
 		START_YEAR === currentYear ? START_YEAR : `${START_YEAR} - ${currentYear}`;
@@ -27,5 +27,3 @@ function Footer(): JSX.Element {
 		</footer>
 	);
 }
-
-export default Footer;
