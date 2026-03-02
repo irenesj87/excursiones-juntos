@@ -21,7 +21,7 @@ import {
 	LuEyeOff,
 } from "react-icons/lu";
 import { AiFillMoon, AiFillSun } from "react-icons/ai";
-import { BsBackpack } from "react-icons/bs";
+import { BsBackpack, BsEnvelopeAtFill } from "react-icons/bs";
 import { HiUser } from "react-icons/hi";
 
 // Tipo base para las props de los iconos
@@ -82,3 +82,5 @@ export const EyeIcon = LuEye as React.ComponentType<IconProps>;
 export const EyeOffIcon = LuEyeOff as React.ComponentType<IconProps>;
 // Icono de mochila para la sección "Sobre Nosotros"
 export const BackpackIcon = BsBackpack as React.ComponentType<IconProps>;
+// Icono de sobre para el contacto en el footer
+export const EnvelopeIcon = BsEnvelopeAtFill as React.ComponentType<IconProps>;
