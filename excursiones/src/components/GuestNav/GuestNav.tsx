@@ -1,8 +1,7 @@
-import React from "react";
 import cn from "classnames";
 import StyledNavLink from "../../ui/Link";
 import { ROUTES } from "../../constants";
-import { UserIcon } from "../../ui/Icons";
+import { LoginIcon } from "../../ui/Icons";
 import styles from "./GuestNav.module.css";
 
 interface GuestNavProps {
@@ -48,7 +47,7 @@ function GuestNav({
 				<span className={styles.linkText}>Iniciar sesión</span>
 
 				{/* Icono visible en pantallas < 380px */}
-				<UserIcon className={styles.linkIcon} aria-hidden="true" />
+				<LoginIcon className={styles.linkIcon} aria-hidden="true" />
 			</StyledNavLink>
 		</div>
 	);

@@ -40,6 +40,8 @@
 ## 5. Diseño y Estética
 
 - No uses !important.
+- Prohibido el uso de contenedores innecesarios. Cuando puedas aplicar el estilo directamente al hijo o mediante el padre, hazlo de esa manera.
+- Utiliza CSS Grid cuando haya estructuras que utilicen las dos dimensiones (ancho y alto).
 - Utiliza Design Tokens o variables para espaciado, tipografía y colores.
 - Evita 'números mágicos' (ej: padding: 17px).
 - Usa una escala espacial consistente (ej: múltiplos de 4px o 8px) para mantener el ritmo vertical y el balance del espacio en blanco.
@@ -67,17 +69,11 @@
 - Mantén todos los comentarios en español.
 - Evita comentar lo obvio. Los comentarios deben explicar el "porqué" de una decisión de código, no sólo el "qué" hace.
 
-## 7. Gestión de Estado (Redux Toolkit)
-
-- Utiliza `createSlice` para generar reducers y acciones, asegurando la inmutabilidad a través de Immer.
-- Para operaciones asíncronas, usa `createAsyncThunk` en lugar de lógica manual de `try/catch` en los componentes.
-- Emplea selectores (creados con `createSelector` de Reselect si es necesario) para desacoplar los componentes del estado de la store y optimizar el rendimiento.
-
-## 8. Calidad
+## 7. Calidad
 
 - Happy Path y Casos Borde: Cubre los flujos principales y los errores comunes, no busques el 100% de cobertura arbitraria si no aporta valor.
 
-## 9. Seguridad y Validación de Datos
+## 8. Seguridad y Validación de Datos
 
 - Evita inyectar HTML directamente (`dangerouslySetInnerHTML`). Si es estrictamente necesario, sanitiza el contenido antes de renderizarlo.
 - Valida y sanitiza siempre las entradas del usuario en el lado del cliente como primera línea de defensa, aunque la validación principal resida en el backend.

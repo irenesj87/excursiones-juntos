@@ -1,5 +1,6 @@
 import React, {
 	useState,
+	useEffect,
 	useLayoutEffect,
 	lazy,
 	Suspense,
@@ -49,6 +50,7 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	// Estado que indica si probablemente el usuario está autenticado basándonos en sessionStorage.
 	const [likelyLoggedIn] = useState(getInitialAuthState);
 
+	const [isScrolled, setIsScrolled] = useState(false);
 	/** Estado para controlar la visibilidad del componente Offcanvas (menú lateral). */
 	const [showMenu, setShowMenu] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
@@ -56,6 +58,25 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	const location = useLocation();
 	// Detectamos si estamos en la Home para aplicar el estilo transparente
 	const isHomePage = location.pathname === ROUTES.HOME;
+
+	// Efecto para gestionar el cambio de estilo de la barra de navegación al hacer scroll en la página de inicio.
+	useEffect(() => {
+		// Si no estamos en la página de inicio, no hacemos nada y reseteamos el estado.
+		if (!isHomePage) {
+			setIsScrolled(false);
+			return;
+		}
+
+		const handleScroll = () => {
+			// Se activa el estado 'scrolled' si el scroll es mayor a 10px.
+			setIsScrolled(window.scrollY > 10);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+
+		// Limpiamos el event listener al desmontar el componente.
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [isHomePage]);
 
 	// Usamos useLayoutEffect para medir la altura de la barra de navegación después de que el DOM se haya actualizado,
 	// pero antes de que el navegador pinte la pantalla. Esto evita parpadeos.
@@ -132,6 +153,7 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	};
 
 	// Componente principal de la barra de navegación.
+	const isTransparent = isHomePage && !isScrolled;
 	return (
 		<Navbar
 			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
@@ -139,10 +161,8 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 			className={`${styles.customNavbar} ${
 				// Se comprueba si estamos en la página de excursiones para saber si tenemos que eliminar el borde inferior.
 				isOnExcursionsPage ? styles.onExcursionsPage : ""
-			} ${isHomePage ? styles.transparentNavbar : ""}`}
-			// En la Home quitamos el sticky para poder posicionarlo 'absolute' sobre el Hero mediante CSS.
-			// En el resto de páginas, mantenemos el comportamiento sticky estándar.
-			sticky={isHomePage ? undefined : "top"}
+			} ${isTransparent ? styles.transparentNavbar : ""}`} // Aplica el estilo transparente en la Home (arriba)
+			fixed="top"
 		>
 			{/* Usamos Container estándar en lugar de fluid para que el logo y el menú se alineen con el contenido central de la página (efecto "hoja") */}
 			<Container className="d-flex justify-content-between align-items-center">

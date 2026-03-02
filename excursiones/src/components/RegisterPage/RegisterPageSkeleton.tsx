@@ -38,11 +38,6 @@ function RegisterPageSkeleton() {
 		<FormPageLayout
 			title="Bienvenido/a"
 			subtitle="Crea tu cuenta para empezar a explorar."
-			switcher={{
-				prompt: "¿Ya tienes una cuenta?",
-				linkText: "Inicia sesión",
-				linkTo: "/loginPage",
-			}}
 		>
 			<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
 				<div aria-hidden="true" className={registerFormStyles.formLabel}>

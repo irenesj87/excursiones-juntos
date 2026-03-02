@@ -39,7 +39,12 @@ export function Layout() {
 				{isOnExcursionsPage && <Hero />}
 			</header>
 			{/* Contenedor principal que alberga el contenido de la página */}
-			<main className={styles.mainContentWrapper}>
+			<main
+				className={styles.mainContentWrapper}
+				style={{
+					paddingTop: isOnExcursionsPage ? 0 : "var(--navbar-height)",
+				}}
+			>
 				{/* Sección "Sobre Nosotros" - Solo visible en la página de inicio */}
 				{isOnExcursionsPage && <AboutUs />}
 
