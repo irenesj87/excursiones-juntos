@@ -41,13 +41,7 @@ function FilterLabel({ htmlFor, filter, isChecked }: LabelProps) {
 			})}
 		>
 			<span>{filter}</span>
-			{isChecked && (
-				<XIcon
-					className={styles.closeIcon}
-					size={CLOSE_ICON_SIZE}
-					aria-hidden="true"
-				/>
-			)}
+			{isChecked && <XIcon size={CLOSE_ICON_SIZE} aria-hidden="true" />}
 		</label>
 	);
 }
