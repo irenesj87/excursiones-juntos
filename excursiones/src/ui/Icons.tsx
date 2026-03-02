@@ -37,10 +37,10 @@ type IconProps = {
 export const LoginIcon = LuLogIn as React.ComponentType<IconProps>;
 // Icono para el cierre de sesión
 export const LogoutIcon = LuLogOut as React.ComponentType<IconProps>;
-// Icono de alerta circular para errores.
 // Icono del logo
 export const LogoIcon = PiMountainsFill as React.ComponentType<IconProps>;
 // Icono de alerta circular para errores.
+
 export const CircleAlertIcon = LuCircleAlert as React.ComponentType<IconProps>;
 // Icono de check circular para éxito.
 export const CheckCircleIcon = LuCircleCheck as React.ComponentType<IconProps>;
