@@ -11,8 +11,6 @@ import CustomButton from "../../ui/CustomButton/CustomButton";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import {
 	UserIcon,
-	UsersIcon,
-	PhoneIcon,
 	MailIcon,
 } from "../../ui/Icons";
 import styles from "./UserInfoForm.module.css";
@@ -27,7 +25,6 @@ interface FormField {
 	ref?: React.RefObject<HTMLInputElement>;
 	validation: (value: string) => boolean;
 	errorMessage: string;
-	icon: React.ComponentType<{ className?: string }>;
 }
 
 /**
@@ -69,7 +66,6 @@ function UserInfoForm(): React.ReactElement {
 			ref: nameInputRef,
 			validation: validateName,
 			errorMessage: "El nombre no puede estar vacío y debe ser válido.",
-			icon: UserIcon,
 		},
 		{
 			id: "formPlaintextSurname",
@@ -77,7 +73,6 @@ function UserInfoForm(): React.ReactElement {
 			field: "surname",
 			validation: validateSurname,
 			errorMessage: "Los apellidos no pueden estar vacíos y deben ser válidos.",
-			icon: UsersIcon,
 		},
 		{
 			id: "formPlaintextPhone",
@@ -85,7 +80,6 @@ function UserInfoForm(): React.ReactElement {
 			field: "phone",
 			validation: validatePhone,
 			errorMessage: "El formato del teléfono no es válido (9 dígitos).",
-			icon: PhoneIcon,
 		},
 	];
 
@@ -199,7 +193,6 @@ function UserInfoForm(): React.ReactElement {
 								htmlFor={field.id}
 							>
 								<span className="d-flex align-items-center justify-content-sm-end gap-2">
-									<field.icon className={styles.labelIcon} aria-hidden="true" />
 									<span className={styles.labelText}>{field.label}:</span>
 								</span>
 							</Form.Label>

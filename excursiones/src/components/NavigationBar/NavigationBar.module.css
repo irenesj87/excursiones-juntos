@@ -3,12 +3,17 @@
 	background-color: var(--navbar-bg);
 	backdrop-filter: var(--navbar-backdrop-filter); /* Efecto cristal */
 	box-shadow: var(--shadow-soft);
-	/* Transición suave para el cambio de color de fondo al hacer scroll */
+	z-index: 1030;
+}
+
+/* Aplica la transición completa (incluido el fondo) solo cuando la barra NO es transparente.
+   Esto crea el efecto de "fade-in" al hacer scroll, pero evita el "fade-out" al navegar a la Home. */
+.customNavbar:not(.transparentNavbar) {
 	transition:
 		background-color 0.3s ease,
-		padding 0.3s ease,
-		box-shadow 0.3s ease;
-	z-index: 1030;
+		box-shadow 0.3s ease,
+		backdrop-filter 0.3s ease,
+		border-color 0.3s ease;
 }
 
 /* En breakpoints pequeños (<768px) y sólo en la página de excursiones, se elimina el borde para evitar duplicidad con 

@@ -85,12 +85,9 @@ html.light {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-bg: rgba(
-		255,
-		255,
-		255,
-		0.9
-	); /* Ligeramente translúcido para el efecto blur */
+	/* El fondo de la barra de navegación es opaco por defecto para asegurar la legibilidad del contenido que pasa por debajo.
+	   La transparencia solo se aplica en la página de inicio antes de hacer scroll. */
+	--navbar-bg: var(--color-white);
 	--navbar-color: var(--color-stone-800);
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(
@@ -277,7 +274,9 @@ html.dark {
 	/* --- 2b. Variables de Componente --- */
 
 	/* --- Navbar --- */
-	--navbar-bg: rgba(26, 31, 28, 0.9); /* --color-green-dark-800 con opacidad */
+	/* El fondo de la barra de navegación es opaco por defecto para asegurar la legibilidad del contenido que pasa por debajo.
+	   La transparencia solo se aplica en la página de inicio antes de hacer scroll. */
+	--navbar-bg: var(--color-green-dark-800);
 	--navbar-color: var(--color-stone-100);
 	--navbar-brand-color: var(--color-stone-50);
 	--navbar-brand-icon: var(

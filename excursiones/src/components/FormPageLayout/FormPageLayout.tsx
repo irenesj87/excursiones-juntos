@@ -10,10 +10,11 @@ interface FormPageLayoutProps {
 	readonly subtitle?: string;
 	/** El contenido del formulario a renderizar. */
 	readonly children: React.ReactNode;
-	/** Ancho de la columna para el formulario en pantallas XL. Por defecto "5". */
+	/** Ancho de la columna para el formulario en breakpoints grandes. Por defecto "5". */
 	readonly colWidth?: ColProps["xl"];
 	/** Clase CSS opcional para el contenedor principal. */
 	readonly containerClassName?: string;
+	/** Configuración opcional para mostrar un enlace de cambio de página (ej. "¿No tienes cuenta? Regístrate"). */
 	readonly switcher?: {
 		/** Texto que precede al enlace (ej. "¿No tienes cuenta?"). */
 		readonly prompt: string;
@@ -41,16 +42,16 @@ export function FormPageLayout({
 	return (
 		<Container
 			fluid
-			className={`${styles.container} d-flex flex-column flex-grow-1 ${containerClassName ?? ""}`}
+			className={`${styles.container} ${containerClassName ?? ""}`}
 		>
-			<Row className="justify-content-center align-items-center flex-grow-1">
+			<Row className="justify-content-center align-items-center">
 				<Col xs={12} md={9} lg={8} xl={colWidth}>
 					<Card
 						as="section"
 						className={styles.contentPane}
 						aria-labelledby={titleId}
 					>
-						<Card.Body className="p-4">
+						<Card.Body className={styles.cardBody}>
 							<Card.Title as="h2" id={titleId} className={styles.cardTitle}>
 								{title}
 							</Card.Title>
@@ -58,7 +59,9 @@ export function FormPageLayout({
 							{children}
 						</Card.Body>
 						{switcher && (
-							<Card.Footer className={`${styles.switcher} d-lg-none p-3`}>
+							<Card.Footer
+								className={`${styles.switcher} ${styles.cardFooter}`}
+							>
 								{switcher.prompt}{" "}
 								<Link to={switcher.linkTo} className={styles.switcherLink}>
 									{switcher.linkText}

@@ -1,4 +1,3 @@
-import React from "react";
 import { RegisterForm } from "../RegisterForm";
 import { FormPageLayout } from "../FormPageLayout/FormPageLayout";
 import styles from "./RegisterPage.module.css";
@@ -14,11 +13,6 @@ function RegisterPage() {
 			containerClassName={styles.pageContainer}
 			title="Bienvenido/a"
 			subtitle="Crea tu cuenta para empezar a explorar."
-			switcher={{
-				prompt: "¿Ya tienes una cuenta?",
-				linkText: "Inicia sesión",
-				linkTo: "/loginPage",
-			}}
 		>
 			<RegisterForm />
 		</FormPageLayout>

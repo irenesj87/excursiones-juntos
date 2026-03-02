@@ -1,55 +1,64 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	flex-grow: 1; /* Asegura que el contenedor ocupe el espacio vertical disponible */
-	padding-top: 3rem;
-	padding-bottom: 3rem;
+	justify-content: center;
+	padding-top: var(
+		--space-8
+	); /* El offset del navbar lo gestiona el Layout principal */
+	padding-bottom: var(
+		--space-12
+	); /* Mantenemos el padding inferior para el ritmo vertical */
 }
 
 /* Media query para breakpoints más grandes */
 @media (min-width: 576px) {
 	.container {
-		padding-top: 4rem;
-		padding-bottom: 4rem;
+		padding-top: var(
+			--space-12
+		); /* El offset del navbar lo gestiona el Layout principal */
+		padding-bottom: var(--space-16); /* Mantenemos el padding inferior */
 	}
+}
+
+.cardBody {
+	padding: var(--space-6);
+}
+
+.cardFooter {
+	padding: var(--space-4);
 }
 
 .cardTitle {
 	color: var(--color-text-base);
-	font-weight: bold;
+	font-family: var(--font-family-sans);
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-bold);
+	letter-spacing: var(--letter-spacing-tight);
+	margin-bottom: var(--space-2);
+	padding-bottom: var(--space-3);
 	text-align: center;
 	text-transform: uppercase;
-	font-family: var(
-		--font-family-serif
-	);
-	font-size: 1.6rem;
-	letter-spacing: 0.5px;
-	padding-bottom: 0.75rem;
-	margin-bottom: 0.5rem;
 }
 
 .cardSubtitle {
 	color: var(--color-text-base);
-	font-size: 1.2rem;
-	font-weight: 500;
-	letter-spacing: 0.5px;
-	text-align: center;
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-medium);
+	margin-bottom: var(--space-8);
 	margin-top: 0;
-	margin-bottom: 2.5rem;
+	text-align: center;
 }
 
 .switcher {
-	text-align: center;
 	background-color: transparent;
 	border-top: none;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
 	color: var(--color-text-base);
+	text-align: center;
 }
 
 .switcherLink {
-	font-weight: 600;
+	font-weight: var(--font-weight-semibold);
 	color: var(--switcher-link-color, var(--bs-link-color));
 	text-decoration: none;
 }
@@ -61,11 +70,10 @@
 .contentPane {
 	background-color: var(
 		--excursion-card-bg
-			/* Reutilizamos el fondo de las tarjetas, como en ExcursionCard */
 	);
 	color: var(--color-text-base);
 	border: 1px solid var(--color-border-subtle);
-	box-shadow: var(--shadow-soft); /* Sombra suave para elevación moderna */
+	box-shadow: var(--shadow-soft);
 	border-radius: var(--border-radius-lg);
 	overflow: hidden; /* Asegura que el contenido (como el footer) respete los bordes redondeados */
 }

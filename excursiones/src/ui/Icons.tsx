@@ -1,6 +1,8 @@
 import React from "react";
 import { PiMountainsFill } from "react-icons/pi";
 import {
+	LuLogIn,
+	LuLogOut,
 	LuCircleAlert,
 	LuTriangleAlert,
 	LuSearch,
@@ -10,12 +12,9 @@ import {
 	LuClock3,
 	LuCircleCheck,
 	LuCopyright,
-	LuUsers,
 	LuUserPlus,
 	LuCircleUser,
-	LuPhone,
 	LuMail,
-	LuPencil,
 	LuX,
 	LuEye,
 	LuEyeOff,
@@ -34,9 +33,14 @@ type IconProps = {
 /**
  * Archivo central para exportar los componentes de íconos de la aplicación.
  */
+// Icono para el inicio de sesión
+export const LoginIcon = LuLogIn as React.ComponentType<IconProps>;
+// Icono para el cierre de sesión
+export const LogoutIcon = LuLogOut as React.ComponentType<IconProps>;
 // Icono del logo
 export const LogoIcon = PiMountainsFill as React.ComponentType<IconProps>;
 // Icono de alerta circular para errores.
+
 export const CircleAlertIcon = LuCircleAlert as React.ComponentType<IconProps>;
 // Icono de check circular para éxito.
 export const CheckCircleIcon = LuCircleCheck as React.ComponentType<IconProps>;
@@ -64,18 +68,12 @@ export const ClockIcon = LuClock3 as React.ComponentType<IconProps>;
 export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
 // Icono de usuario para campos de nombre
 export const UserIcon = HiUser as React.ComponentType<IconProps>;
-// Icono de usuario para campos de apellidos
-export const UsersIcon = LuUsers as React.ComponentType<IconProps>;
 // Icono para el enlace de perfil en la navegación (Avatar)
 export const ProfileIcon = LuCircleUser as React.ComponentType<IconProps>;
 // Icono para unirse a una excursión.
 export const JoinIcon = LuUserPlus as React.ComponentType<IconProps>;
-// Icono de teléfono
-export const PhoneIcon = LuPhone as React.ComponentType<IconProps>;
 // Icono de correo electrónico
 export const MailIcon = LuMail as React.ComponentType<IconProps>;
-// Icono de lápiz para editar
-export const EditIcon = LuPencil as React.ComponentType<IconProps>;
 // Icono de ojo para mostrar contraseña
 export const EyeIcon = LuEye as React.ComponentType<IconProps>;
 // Icono de ojo tachado para ocultar contraseña
