@@ -15,11 +15,9 @@ export function Footer(): JSX.Element {
 
 	return (
 		<footer className={styles.footer}>
-			<div className={styles.contactSection}>
-				<a href={`mailto:${CONTACT_EMAIL}`} className={styles.contactLink}>
-					<EnvelopeIcon aria-hidden="true" /> {CONTACT_EMAIL}
-				</a>
-			</div>
+			<a href={`mailto:${CONTACT_EMAIL}`} className={styles.contactLink}>
+				<EnvelopeIcon aria-hidden="true" /> {CONTACT_EMAIL}
+			</a>
 			<small className={styles.footerText}>
 				<span>
 					<CopyrightIcon className={styles.copyrightIcon} aria-hidden="true" />{" "}
