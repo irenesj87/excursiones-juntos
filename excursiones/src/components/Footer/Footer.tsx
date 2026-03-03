@@ -1,5 +1,5 @@
 import { COMPANY_NAME, START_YEAR } from "../../constants";
-import { CopyrightIcon, EnvelopeIcon } from "../../ui/Icons";
+import { CopyrightIcon, MailIcon } from "../../ui/Icons";
 import styles from "./Footer.module.css";
 
 const COPYRIGHT_TEXT = "Todos los derechos reservados.";
@@ -16,7 +16,7 @@ export function Footer(): JSX.Element {
 	return (
 		<footer className={styles.footer}>
 			<a href={`mailto:${CONTACT_EMAIL}`} className={styles.contactLink}>
-				<EnvelopeIcon aria-hidden="true" /> {CONTACT_EMAIL}
+				<MailIcon aria-hidden="true" /> {CONTACT_EMAIL}
 			</a>
 			<small className={styles.footerText}>
 				<span>

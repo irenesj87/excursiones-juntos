@@ -9,10 +9,7 @@ import {
 import { useUserInfoForm, FormValues } from "./useUserInfoForm";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
-import {
-	UserIcon,
-	MailIcon,
-} from "../../ui/Icons";
+import { UserIcon } from "../../ui/Icons";
 import styles from "./UserInfoForm.module.css";
 
 /**
@@ -157,7 +154,6 @@ function UserInfoForm(): React.ReactElement {
 					>
 						<Form.Label column sm="3" className="text-sm-end">
 							<span className="d-flex align-items-center justify-content-sm-end gap-2">
-								<MailIcon className={styles.labelIcon} aria-hidden="true" />
 								<span className={styles.labelText}>Correo:</span>
 							</span>
 						</Form.Label>
