@@ -55,7 +55,7 @@ export const ChartIcon = LuChartLine as React.ComponentType<IconProps>;
 export const ClockIcon = LuClock3 as React.ComponentType<IconProps>;
 // Icono de la lupa para la barra de búsqueda.
 export const SearchIcon = LuSearch as React.ComponentType<IconProps>;
-// Icono de check circular para éxito.
+// Icono de check para éxito.
 export const CheckIcon = LuCheck as React.ComponentType<IconProps>;
 // Icono de alerta circular para errores.
 export const CircleAlertIcon = LuCircleAlert as React.ComponentType<IconProps>;
