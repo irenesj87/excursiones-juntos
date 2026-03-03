@@ -9,7 +9,7 @@ import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import {
 	NoImageIcon,
-	CheckCircleIcon,
+	CheckIcon,
 	MapIcon,
 	ChartIcon,
 	ClockIcon,
@@ -52,7 +52,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 		<div className={styles.joinButtonContainer}>
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
-					<CheckCircleIcon className={styles.detailIcon} />
+					<CheckIcon className={styles.detailIcon} />
 					Apuntado/a
 				</span>
 			) : (

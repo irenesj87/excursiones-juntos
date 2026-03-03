@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import cn from "classnames";
-import { CircleAlertIcon, TriangleAlertIcon, CheckCircleIcon } from "../Icons";
+import { CircleAlertIcon, TriangleAlertIcon, CheckIcon } from "../Icons";
 import styles from "./FeedbackAlert.module.css";
 
 const VARIANT_CONFIG = {
@@ -11,7 +11,7 @@ const VARIANT_CONFIG = {
 		bootstrapVariant: "danger",
 	},
 	success: {
-		Icon: CheckCircleIcon,
+		Icon: CheckIcon,
 		defaultTitle: "Éxito",
 		bootstrapVariant: "success",
 	},
