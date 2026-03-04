@@ -3,11 +3,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 export const GUEST_NAV_SKELETON_SIZES = {
-	LOGIN_LINK_WIDTH: 148,
+	LOGIN_LINK_WIDTH: 152,
+	ICON_SIZE: 40, // Tamaño cuadrado para consistencia con UserNavSkeleton y la altura del botón
 	HEIGHT: 40,
-	ICON_WIDTH: 35,
-	ICON_HEIGHT: 38,
-	BORDER_RADIUS: "4px",
+	BORDER_RADIUS: "6px", // Coincide con var(--border-radius-md)
 };
 
 /**
@@ -19,8 +18,7 @@ function GuestNavSkeleton(): JSX.Element {
 
 	return (
 		<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-			{/* Usamos un contenedor Flexbox para asegurar que los esqueletos se alineen horizontalmente,
-			    imitando el comportamiento de los enlaces de navegación finales. */}
+			{/* Contenedor Flexbox para alinear los esqueletos horizontalmente */}
 			<div
 				className="d-flex align-items-center"
 				data-testid="guest-nav-skeleton"
@@ -33,12 +31,11 @@ function GuestNavSkeleton(): JSX.Element {
 					aria-hidden="true"
 					borderRadius={GUEST_NAV_SKELETON_SIZES.BORDER_RADIUS}
 				/>
-				{/* Esqueleto para el botón de icono (visible en móvil) */}
+				{/* Esqueleto para el botón de icono */}
 				<Skeleton
 					containerClassName="d-block d-md-none"
-					// Hacemos que el esqueleto sea cuadrado, como el botón de icono
-					width={GUEST_NAV_SKELETON_SIZES.ICON_WIDTH}
-					height={GUEST_NAV_SKELETON_SIZES.ICON_HEIGHT}
+					width={GUEST_NAV_SKELETON_SIZES.ICON_SIZE}
+					height={GUEST_NAV_SKELETON_SIZES.ICON_SIZE}
 					aria-hidden="true"
 					borderRadius={GUEST_NAV_SKELETON_SIZES.BORDER_RADIUS}
 				/>

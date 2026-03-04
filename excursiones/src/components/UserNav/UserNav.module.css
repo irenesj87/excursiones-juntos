@@ -2,7 +2,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.5rem 1.25rem;
+	padding: 0.5rem; /* Padding reducido por defecto (móvil/icono) */
 	font-weight: 600;
 	font-size: 0.9rem;
 	text-transform: uppercase;
@@ -11,17 +11,19 @@
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
-	color: var(--register-link-color);
+	color: var(--nav-action-color);
 	transition:
 		transform 0.2s ease-out,
 		background-color 0.2s ease-out;
 	cursor: pointer;
 	user-select: none;
-	border-radius: var(--border-radius-pill);
+	border-radius: var(
+		--border-radius-md
+	); /* Bordes suaves consistentes con la app */
 }
 
 .profileLink:hover {
-	background-color: var(--theme-toggle-btn-bg-hover);
+	background-color: var(--nav-action-bg-hover);
 	outline: none;
 	box-shadow: none;
 	transform: translateY(-2px);
@@ -29,9 +31,8 @@
 
 /* Estilo de foco consistente con el ThemeToggleButton (gris en lugar de verde) */
 .profileLink:focus-visible {
-	background-color: var(--theme-toggle-btn-bg-hover);
-	outline: none;
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	/* Se añade un fondo para feedback y se deja que el :focus-visible global aplique el anillo (box-shadow) */
+	background-color: var(--nav-action-bg-hover);
 }
 
 .logoutLink {
@@ -39,11 +40,10 @@
 	align-items: center;
 	justify-content: center;
 	color: var(
-		--register-link-color
+		--nav-action-color
 	); /* Usamos el color del enlace para consistencia visual */
 	background-color: transparent;
-	border: 1px solid currentColor; /* Borde sutil */
-	padding: 0.5rem 1.25rem;
+	padding: 0.5rem; /* Padding reducido por defecto (móvil/icono) */
 	font-weight: 600;
 	font-size: 0.9rem;
 	text-transform: uppercase;
@@ -52,20 +52,46 @@
 		transform 0.2s ease-out,
 		box-shadow 0.2s ease-out,
 		background-color 0.2s ease-out;
+	border-radius: var(
+		--border-radius-md
+	); /* Bordes suaves consistentes con la app */
 }
 
 .logoutLink:hover,
 .logoutLink:focus {
-	background-color: var(--register-link-bg-hover);
-	color: var(--register-link-color);
+	background-color: var(--nav-action-bg-hover);
+	color: var(--nav-action-color);
 	transform: translateY(-2px);
 	box-shadow: var(--shadow-soft);
 }
 
-/* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
-@media (min-width: 992px) {
+/* --- Control de visibilidad Icono vs Texto --- */
+
+/* Por defecto (móviles < 768px): Solo Icono */
+.linkText {
+	display: none;
+}
+
+.linkIcon {
+	display: block;
+	font-size: 1.4rem;
+}
+
+/* --- Media Query: A partir del breakpoint 'md' (tablets y escritorio), mostramos el texto --- */
+@media (min-width: 768px) {
 	.profileLink,
 	.logoutLink {
-		font-size: 0.9rem;
+		padding: 0.5rem 1.25rem; /* Más ancho horizontalmente para el texto */
 	}
+	.linkText {
+		display: inline;
+	}
+	.linkIcon {
+		display: none;
+	}
+}
+
+/* Ajuste para escritorio grande */
+@media (min-width: 992px) {
+	/* Ajustes finos si fueran necesarios */
 }

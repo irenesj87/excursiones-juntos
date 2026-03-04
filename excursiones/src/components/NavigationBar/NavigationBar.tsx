@@ -6,7 +6,7 @@ import React, {
 	Suspense,
 	useRef,
 } from "react";
-import { Container, Navbar, Offcanvas } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
@@ -51,8 +51,6 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	const [likelyLoggedIn] = useState(getInitialAuthState);
 
 	const [isScrolled, setIsScrolled] = useState(false);
-	/** Estado para controlar la visibilidad del componente Offcanvas (menú lateral). */
-	const [showMenu, setShowMenu] = useState(false);
 	const navRef = useRef<HTMLElement>(null);
 
 	const location = useLocation();
@@ -111,16 +109,6 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 		return () => observer.disconnect();
 	}, []);
 
-	/** Cierra el menú lateral (Offcanvas). */
-	const handleCloseMenu = () => setShowMenu(false);
-	/** Abre el menú lateral (Offcanvas). */
-	const handleShowMenu = () => setShowMenu(true);
-
-	// Determinamos si se debe mostrar la estructura de menú móvil (Toggler + Offcanvas).
-	// Solo es necesario si el usuario está logueado (tiene muchas opciones).
-	// Si es invitado, mostramos el botón de Login directamente.
-	const showMobileMenu = isAuthCheckComplete ? isLoggedIn : likelyLoggedIn;
-
 	const renderNavContent = () => {
 		// Mientras no se sabe si el usuario está autenticado, se muestra un esqueleto de carga.
 		// Depende de likelyLoggedIn. Si es true, se muestra el esqueleto de usuario, si es false, el de invitado.
@@ -143,11 +131,7 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 			<Suspense
 				fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
 			>
-				{isLoggedIn ? (
-					<UserNav onCloseMenu={handleCloseMenu} />
-				) : (
-					<GuestNav onCloseMenu={handleCloseMenu} variant="default" />
-				)}
+				{isLoggedIn ? <UserNav /> : <GuestNav />}
 			</Suspense>
 		);
 	};
@@ -173,60 +157,9 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 					{/* Botón de tema */}
 					<ThemeToggleButton />
 
-					{/* Contenido de navegación para breakpoints medianos (md y superior) */}
-					{/* Si NO hay menú móvil (es invitado), mostramos el contenido siempre (d-flex).
-					    Si HAY menú móvil (es usuario), lo ocultamos en pantallas pequeñas (d-none d-md-flex). */}
-					<div
-						className={`${showMobileMenu ? "d-none d-md-flex" : "d-flex"} align-items-center`}
-					>
-						{renderNavContent()}
-					</div>
-
-					{/* Botón para abrir el menú Offcanvas (solo visible en pantallas pequeñas) */}
-					{showMobileMenu && (
-						<Navbar.Toggle
-							aria-controls="offcanvasNavbar"
-							label="Abrir menú de navegación"
-							onClick={handleShowMenu}
-							className={`d-md-none ${styles.navbarToggler}`}
-						/>
-					)}
+					{/* Contenido de navegación que ahora se adapta por sí mismo */}
+					<div className="d-flex align-items-center">{renderNavContent()}</div>
 				</div>
-				{/* --- Componente Offcanvas --- */}
-				{showMobileMenu && (
-					<Offcanvas
-						show={showMenu}
-						onHide={handleCloseMenu}
-						placement="end"
-						id="offcanvasNavbar"
-						scroll={true}
-						className={styles.offcanvasMenu}
-						backdrop={true}
-						aria-label="Menú"
-					>
-						<Offcanvas.Header closeButton closeLabel="Cerrar menú">
-							<Offcanvas.Title>Menú</Offcanvas.Title>
-						</Offcanvas.Header>
-						<Offcanvas.Body>
-							{/* 
-							Se replica la lógica de `renderNavContent` para el menú Offcanvas.
-							Esto asegura que los usuarios logueados vean `UserNav` y los invitados `GuestNav`.
-							Se usa Suspense para manejar la carga perezosa de los componentes.
-						*/}
-							<Suspense
-								fallback={
-									isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />
-								}
-							>
-								{isLoggedIn ? (
-									<UserNav onCloseMenu={handleCloseMenu} />
-								) : (
-									<GuestNav onCloseMenu={handleCloseMenu} variant="offcanvas" />
-								)}
-							</Suspense>
-						</Offcanvas.Body>
-					</Offcanvas>
-				)}
 			</Container>
 		</Navbar>
 	);
