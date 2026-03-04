@@ -109,10 +109,10 @@ html.light {
 		transparent
 	);
 
-	--register-link-color: var(--color-stone-800);
-	--register-link-bg-hover: color-mix(
+	--nav-action-color: var(--color-stone-800);
+	--nav-action-bg-hover: color-mix(
 		in srgb,
-		var(--color-stone-900) 15%,
+		var(--color-stone-900) 12%,
 		transparent
 	);
 
@@ -303,8 +303,8 @@ html.dark {
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-border-hover: var(--color-primary-hover);
 
-	--register-link-color: var(--navbar-color);
-	--register-link-bg-hover: var(--color-white-alpha-10);
+	--nav-action-color: var(--navbar-color);
+	--nav-action-bg-hover: var(--color-white-alpha-10);
 	--nav-link-active-bg: hsl(150, 10%, 30%);
 	--nav-link-active-border: hsl(150, 10%, 40%);
 

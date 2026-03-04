@@ -1,5 +1,5 @@
 .customNavbar {
-	padding-block: 1.25rem; /* Más aire vertical (20px) */
+	padding-block: 1.25rem;
 	background-color: var(--navbar-bg);
 	backdrop-filter: var(--navbar-backdrop-filter); /* Efecto cristal */
 	box-shadow: var(--shadow-soft);
@@ -24,35 +24,6 @@
 	}
 }
 
-.offcanvasMenu {
-	background-color: var(--navbar-bg);
-	max-width: 300px;
-	overscroll-behavior: contain; /* Evita que el scroll se propague a la página de fondo */
-}
-
-/* Botón de menú (Hamburguesa) */
-.navbarToggler {
-	border: none;
-	padding: 0.25rem 0.5rem;
-	border-radius: var(--border-radius-sm);
-	transition: background-color 0.2s ease-out;
-}
-
-.navbarToggler:hover {
-	background-color: var(--theme-toggle-btn-bg-hover);
-}
-
-.navbarToggler:focus-visible {
-	outline: none;
-}
-
-/* Sobrescribe el ícono del toggler de Bootstrap para usar siempre la variable CSS del tema.
-   Esto evita tener que usar la prop 'variant' en el componente Navbar. */
-/* Usamos :global para acceder a clases internas de Bootstrap */
-.customNavbar :global(.navbar-toggler-icon) {
-	background-image: var(--custom-toggler-icon-bg);
-}
-
 /* Estilo para integrar la barra en el Hero (Home) */
 .transparentNavbar {
 	position: absolute; /* Se superpone al contenido (Hero) */
@@ -71,8 +42,9 @@
 	--navbar-brand-color: var(--color-white);
 	--navbar-brand-icon: var(--color-white);
 	--navbar-color: var(--color-white);
-	--register-link-color: var(--color-white);
-	--register-link-bg-hover: rgba(255, 255, 255, 0.15);
+
+	/* Forzamos el color de los enlaces de acción de la navegación (Login, Perfil, etc.) a blanco */
+	--nav-action-color: var(--color-white);
 
 	/* Hacemos que el botón de Login sea transparente (solo texto) en el Hero para reducir peso visual */
 	--login-btn-bg: transparent;
@@ -84,7 +56,4 @@
 	--theme-toggle-btn-color: var(--color-white);
 	--theme-toggle-btn-icon: var(--color-white);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.15);
-
-	/* Icono hamburguesa: Usamos la versión clara (del modo oscuro) para que se vea sobre el Hero */
-	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }

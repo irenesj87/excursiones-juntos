@@ -1,4 +1,3 @@
-import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
@@ -6,9 +5,10 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 // Define placeholder dimensions as constants to avoid magic numbers and improve maintainability.
 const USER_NAV_SKELETON_SIZES = {
 	PROFILE_LINK_WIDTH: 127, // +28px por el icono
-	LOGOUT_BUTTON_WIDTH: 160, // +28px por el icono
-	HEIGHT: 44,
-	BORDER_RADIUS: "50rem",
+	LOGOUT_BUTTON_WIDTH: 150, // +28px por el icono
+	ICON_SIZE: 40, // Tamaño cuadrado para el modo icono
+	HEIGHT: 40,
+	BORDER_RADIUS: "6px", // Coincide con var(--border-radius-md)
 };
 
 /**
@@ -20,21 +20,36 @@ function UserNavSkeleton() {
 
 	return (
 		<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-			<div
-				className="d-flex justify-content-end align-items-center"
-				aria-hidden="true"
-			>
-				{/* Placeholder para el enlace "Perfil" */}
+			<div className="d-flex align-items-center gap-1" aria-hidden="true">
+				{/* --- PERFIL --- */}
+				{/* Desktop: Texto */}
 				<Skeleton
+					containerClassName="d-none d-md-block"
 					width={USER_NAV_SKELETON_SIZES.PROFILE_LINK_WIDTH}
 					height={USER_NAV_SKELETON_SIZES.HEIGHT}
 					borderRadius={USER_NAV_SKELETON_SIZES.BORDER_RADIUS}
-					className="me-3"
 				/>
-				{/* Placeholder para el botón "Cerrar sesión" */}
+				{/* Móvil: Icono */}
 				<Skeleton
+					containerClassName="d-block d-md-none"
+					width={USER_NAV_SKELETON_SIZES.ICON_SIZE}
+					height={USER_NAV_SKELETON_SIZES.ICON_SIZE}
+					borderRadius={USER_NAV_SKELETON_SIZES.BORDER_RADIUS}
+				/>
+
+				{/* --- LOGOUT --- */}
+				{/* Desktop: Texto */}
+				<Skeleton
+					containerClassName="d-none d-md-block"
 					width={USER_NAV_SKELETON_SIZES.LOGOUT_BUTTON_WIDTH}
 					height={USER_NAV_SKELETON_SIZES.HEIGHT}
+					borderRadius={USER_NAV_SKELETON_SIZES.BORDER_RADIUS}
+				/>
+				{/* Móvil: Icono */}
+				<Skeleton
+					containerClassName="d-block d-md-none"
+					width={USER_NAV_SKELETON_SIZES.ICON_SIZE}
+					height={USER_NAV_SKELETON_SIZES.ICON_SIZE}
 					borderRadius={USER_NAV_SKELETON_SIZES.BORDER_RADIUS}
 				/>
 			</div>

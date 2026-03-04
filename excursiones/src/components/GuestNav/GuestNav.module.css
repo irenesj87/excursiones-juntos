@@ -2,83 +2,52 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--border-radius-pill);
-	color: var(--register-link-color); /* Se adapta a transparente/sólido */
-	padding: 0.5rem; /* Padding reducido por defecto para el modo icono (cuadrado) */
+	border-radius: var(--border-radius-md);
+	color: var(--nav-action-color); /* Se adapta a transparente/sólido */
+	padding: 0.5rem;
+	font-size: var(--font-size-sm);
 	line-height: 1.5;
 	transition:
 		transform 0.2s ease-out,
 		background-color 0.2s ease-out;
-	font-size: 0.95rem; /* Texto más refinado */
-	font-weight: 600; /* Semibold para legibilidad */
+	font-weight: var(--font-weight-semibold);
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
-	white-space: nowrap; /* Evita que el texto se rompa en pantallas muy estrechas */
+	white-space: nowrap; /* Evita que el texto se rompa en breakpoints muy pequeños */
 }
 
 .loginLink:hover {
-	color: var(--register-link-color);
+	color: var(--nav-action-color);
 	transform: translateY(-2px);
-	background-color: var(--register-link-bg-hover);
+	background-color: var(--nav-action-bg-hover);
 }
 
 .loginLink:focus-visible {
-	background-color: var(--register-link-bg-hover);
-	color: var(--register-link-color);
-	outline: 0;
+	/* Se añade un fondo para feedback y se deja que el :focus-visible global aplique el anillo (box-shadow) */
+	background-color: var(--nav-action-bg-hover);
 }
 
 /* --- Control de visibilidad Icono vs Texto --- */
 
-/* Por defecto (móviles muy pequeños < 380px): Solo Icono */
+/* Por defecto (breakpoints < 768px): Solo Icono */
 .linkText {
 	display: none;
 }
 
 .linkIcon {
 	display: block;
-	font-size: 1.4rem; /* Tamaño cómodo para el dedo */
+	font-size: 1.4rem;
 }
 
-/* Estilos para la variante 'offcanvas' */
-/* Asegura que el contenedor en offcanvas apile los botones verticalmente y los alinee. */
-.offcanvasContainer {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem; /* Espacio entre los enlaces (8px) */
-	padding-top: 1rem; /* Añade espacio superior para separar del borde del offcanvas */
-}
-
-/* En el menú Offcanvas SIEMPRE queremos ver el texto, nunca el icono solo */
-.offcanvasContainer .linkText {
-	display: inline;
-}
-
-.offcanvasContainer .linkIcon {
-	display: none;
-}
-
-.offcanvasContainer .loginLink {
-	padding: 0.6rem 1rem; /* Restauramos padding rectangular */
-	justify-content: flex-start;
-}
-
-/* --- Media Query: A partir del breakpoint 'md' (tablets y escritorio), mostramos el texto --- */
+/* --- Media Query: A partir del breakpoint 'md', mostramos el texto --- */
 @media (min-width: 768px) {
 	.loginLink {
-		padding: 0.5rem 1.25rem; /* Más ancho horizontalmente */
+		padding: 0.5rem 1.25rem;
 	}
 	.linkText {
 		display: inline;
 	}
 	.linkIcon {
 		display: none;
-	}
-}
-
-/* Ajuste para escritorio: Reducimos el padding para que se vean más compactos y unidos */
-@media (min-width: 992px) {
-	.loginLink {
-		font-size: 0.9rem; /* Un poco más pequeño y elegante en escritorio */
 	}
 }
