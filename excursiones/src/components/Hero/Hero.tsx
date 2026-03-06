@@ -4,6 +4,13 @@ import heroImageAvif from "../../assets/images/hero-background.avif";
 import CustomLink from "../../ui/Link/CustomLink";
 import { ROUTES } from "../../constants";
 
+const HERO_CONTENT = {
+	title: "Descubre tu próxima aventura",
+	subtitle:
+		"Conecta con la naturaleza, explora paisajes inolvidables y comparte experiencias únicas con tus compañeros de viaje.",
+	cta: "Únete ya",
+};
+
 /**
  * Representa la sección principal de la cabecera (Hero) de la página.
  * Muestra una imagen de fondo inspiradora y el título principal.
@@ -35,13 +42,10 @@ export function Hero() {
 			<div className={styles.heroOverlay} aria-hidden="true" />
 			<div className={styles.heroContent}>
 				<div className={styles.titleContainer}>
-					<h1 className={styles.title}>Descubre tu próxima aventura</h1>
-					<p className={styles.subtitle}>
-						Conecta con la naturaleza, explora paisajes inolvidables y comparte
-						experiencias únicas con tus compañeros de viaje.
-					</p>
+					<h1 className={styles.title}>{HERO_CONTENT.title}</h1>
+					<p className={styles.subtitle}>{HERO_CONTENT.subtitle}</p>
 					<CustomLink to={ROUTES.REGISTER} className={styles.ctaButton}>
-						Únete ya
+						{HERO_CONTENT.cta}
 					</CustomLink>
 				</div>
 			</div>

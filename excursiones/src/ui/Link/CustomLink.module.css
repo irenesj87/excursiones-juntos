@@ -19,7 +19,7 @@
 
 /* Micro-interacción: elevación sutil al pasar el ratón */
 .customLink:hover {
-	transform: translateY(-1px);
+	transform: translateY(-2px);
 }
 
 /* --- Estado Activo (cuando el enlace corresponde a la página actual) --- */
@@ -33,6 +33,7 @@
 	outline: 2px solid var(--bs-primary);
 	outline-offset: 2px;
 	box-shadow: 0 0 0 4px rgba(var(--bs-primary-rgb), 0.1);
+	transform: translateY(-2px);
 }
 
 /* --- Feedback de Acción (Presionar) --- */
