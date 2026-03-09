@@ -14,17 +14,25 @@ const router = express.Router();
 const authorizeUserModification = (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	// Obtenemos el correo asociado al token, añadido por el middleware authenticateToken
 	const emailFromToken = req.userMail;
 	// Obtenemos el correo del usuario a modificar desde la URL
 	const targetMail = req.params["mail"];
 
-	// Comprobación de seguridad: Asegurarse de que ambas variables existen.
-	if (!emailFromToken || !targetMail) {
+	// Comprobación de seguridad y estrechamiento de tipos (type narrowing).
+	// Nos aseguramos de que `targetMail` es una cadena de texto no vacía.
+	if (typeof targetMail !== "string" || !targetMail) {
 		return res.status(400).json({
-			error: "Bad Request: No se pudo verificar la identidad del usuario.",
+			error:
+				"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+		});
+	}
+
+	if (!emailFromToken) {
+		return res.status(400).json({
+			error: "Bad Request: No se pudo verificar la identidad del token.",
 		});
 	}
 
@@ -33,7 +41,7 @@ const authorizeUserModification = (
 	if (emailFromToken.toLowerCase() !== targetMail.toLowerCase()) {
 		// ...se avisa del error
 		console.log(
-			`Authorization failed: Token email (${emailFromToken}) does not match target email (${targetMail}).`
+			`Authorization failed: Token email (${emailFromToken}) does not match target email (${targetMail}).`,
 		);
 		return res
 			.status(403)
@@ -112,7 +120,7 @@ router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 	// 2. Lógica de negocio (una vez que los datos son válidos)
 	// Se comprueba si ya hay un usuario con ese correo
 	const userFound = users.find(
-		(user) => user.mail.toLowerCase() === mail.toLowerCase()
+		(user) => user.mail.toLowerCase() === mail.toLowerCase(),
 	);
 
 	if (userFound) {
@@ -169,9 +177,17 @@ router.put(
 			// Obtenemos el correo del usuario a modificar
 			const targetMail = req.params["mail"];
 			console.log("Route Handler: Target user email from URL:", targetMail);
+
+			if (typeof targetMail !== "string" || !targetMail) {
+				return res.status(400).json({
+					error:
+						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+				});
+			}
+
 			// Buscamos el usuario a actualizar
 			const currentUser = users.find(
-				(user) => user.mail.toLowerCase() === targetMail.toLowerCase()
+				(user) => user.mail.toLowerCase() === targetMail.toLowerCase(),
 			);
 			// Comprobamos si el usuario existe
 			if (!currentUser) {
@@ -217,7 +233,7 @@ router.put(
 			console.error("Unexpected error in PUT /users/:mail:", error);
 			return res.status(500).json({ error: "Internal Server Error occurred." });
 		}
-	}
+	},
 );
 
 /** GET para obtener las excursiones a las que un usuario se ha apuntado */
@@ -229,9 +245,17 @@ router.get(
 	(req: Request, res: Response) => {
 		// El correo del usuario ya ha sido validado por los middlewares
 		const userMail = req.params.mail;
+
+		if (typeof userMail !== "string" || !userMail) {
+			return res.status(400).json({
+				error:
+					"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+			});
+		}
+
 		// Se busca al usuario por su correo electrónico
 		const user = users.find(
-			(u) => u.mail.toLowerCase() === userMail.toLowerCase()
+			(u) => u.mail.toLowerCase() === userMail.toLowerCase(),
 		);
 
 		// Aunque el middleware ya protege, esta es una comprobación de seguridad adicional
@@ -246,12 +270,12 @@ router.get(
 
 		// Se filtran las excursiones para obtener solo aquellas a las que el usuario está apuntado
 		const userExcursions = excursions.filter((excursion) =>
-			user.excursions.includes(String(excursion.id))
+			user.excursions.includes(String(excursion.id)),
 		);
 
 		// Se retornan las excursiones del usuario en formato JSON
 		res.json(userExcursions);
-	}
+	},
 );
 
 /** POST para que un usuario se apunte a una excursión */
@@ -262,13 +286,20 @@ router.post(
 	authorizeUserModification,
 	(req: Request, res: Response) => {
 		console.log(
-			`POST /users/${req.params["mail"]}/excursions - Request received.`
+			`POST /users/${req.params["mail"]}/excursions - Request received.`,
 		);
 		try {
 			// Obtenemos el correo del usuario a modificar desde la URL
 			const targetMail = req.params["mail"];
 			// Obtenemos el ID de la excursión desde el cuerpo de la petición
 			const { excursionId } = req.body;
+
+			if (typeof targetMail !== "string" || !targetMail) {
+				return res.status(400).json({
+					error:
+						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+				});
+			}
 
 			// Validamos que el excursionId se ha enviado.
 			if (excursionId === null || excursionId === undefined) {
@@ -286,7 +317,7 @@ router.post(
 
 			// Buscamos el usuario a actualizar
 			const currentUser = users.find(
-				(user) => user.mail.toLowerCase() === targetMail.toLowerCase()
+				(user) => user.mail.toLowerCase() === targetMail.toLowerCase(),
 			);
 			// Comprobamos si el usuario existe
 			if (!currentUser) {
@@ -309,7 +340,7 @@ router.post(
 			console.error("Unexpected error in POST /users/:mail/excursions:", error);
 			return res.status(500).json({ error: "Internal Server Error occurred." });
 		}
-	}
+	},
 );
 
 export default router;

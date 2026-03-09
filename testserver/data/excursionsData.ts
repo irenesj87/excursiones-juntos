@@ -1,15 +1,36 @@
 /**
- * Define el tipo para una excursión, asegurando que todos los objetos
- * del mock cumplan con la misma estructura que espera la aplicación.
+ * Constantes para los niveles de dificultad de las excursiones.
+ */
+export const DIFFICULTY_LEVELS = {
+	LOW: "Baja",
+	MEDIUM: "Media",
+	HIGH: "Alta",
+} as const;
+
+/**
+ * Extrae los valores del objeto `DIFFICULTY_LEVELS` para crear un tipo de unión.
+ */
+type Difficulty = (typeof DIFFICULTY_LEVELS)[keyof typeof DIFFICULTY_LEVELS];
+
+/**
+ * Define el tipo para una excursión.
  */
 export interface Excursion {
+	/** El identificador único de la excursión, utilizado para referencias internas. */
 	id: string;
+	/** El nombre de la excursión. */
 	name: string;
+	/** Una descripción detallada de la excursión, que puede incluir información sobre el paisaje, puntos de interés y recomendaciones. */
 	description: string;
+	/** La zona geográfica donde se realiza la excursión. */
 	area: string;
-	difficulty: "Baja" | "Media" | "Alta";
+	/** El nivel de dificultad, basado en las constantes predefinidas. */
+	difficulty: Difficulty;
+	/** La duración estimada de la excursión. */
 	time: string;
+	/** La URL de la imagen representativa de la excursión. */
 	imgSrc?: string;
+	/** El texto alternativo para la imagen, utilizado para accesibilidad y SEO. */
 	imgAlt?: string;
 }
 
@@ -20,7 +41,7 @@ const excursions: Excursion[] = [
 		name: "Bulnes",
 		description: `Descubre un pueblo escondido entre montañas, accesible solo a pie o en funicular.`,
 		area: "Este",
-		difficulty: "Media",
+		difficulty: DIFFICULTY_LEVELS.MEDIUM,
 		time: "4 horas",
 		imgSrc: "/images/0.jpg",
 		imgAlt:
@@ -31,7 +52,7 @@ const excursions: Excursion[] = [
 		name: "Cangas de Onís",
 		description: `Viaja en el tiempo cruzando el legendario Puente Romano, emblema de Cangas de Onís.`,
 		area: "Centro-Este",
-		difficulty: "Baja",
+		difficulty: DIFFICULTY_LEVELS.LOW,
 		time: "4 horas",
 		imgSrc: "/images/1.jpg",
 		imgAlt:
@@ -42,7 +63,7 @@ const excursions: Excursion[] = [
 		name: "Picos de Europa",
 		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.`,
 		area: "Este",
-		difficulty: "Alta",
+		difficulty: DIFFICULTY_LEVELS.HIGH,
 		time: "6 horas",
 		imgSrc: "/images/2.jpg",
 		imgAlt:

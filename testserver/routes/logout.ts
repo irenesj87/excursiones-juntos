@@ -30,8 +30,8 @@ router.delete(
 		const token = authHeader?.split(" ")[1];
 
 		if (token) {
-			// Añadir el token a la lista de bloqueo para invalidarlo
-			tokenBlocklist.push(token);
+			// Añadimos el token a la lista de bloqueo (Set) para invalidarlo.
+			tokenBlocklist.add(token);
 			return res
 				.status(200)
 				.json({ message: "La sesión se ha cerrado correctamente." });
@@ -39,7 +39,7 @@ router.delete(
 		return res
 			.status(400)
 			.json({ error: "No se pudo encontrar el token para invalidar." });
-	}
+	},
 );
 
 export default router;
