@@ -10,19 +10,19 @@ import type { CustomJwtPayload } from "./types/jwt";
 export const authenticateToken = (
 	req: Request,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) => {
 	// 1. Extraer el token de la cabecera 'Authorization'.
 	const authHeader = req.headers.authorization;
 	if (!authHeader?.startsWith("Bearer ")) {
 		return next(
-			createError(401, "Token no proporcionado o con formato incorrecto")
+			createError(401, "Token no proporcionado o con formato incorrecto"),
 		);
 	}
 	const token = authHeader.split(" ")[1];
 
 	// 2. Verificar si el token está en la lista negra (blocklist).
-	if (tokenBlocklist.includes(token)) {
+	if (tokenBlocklist.has(token)) {
 		return next(createError(403, "Token invalidado (cerró sesión)"));
 	}
 	try {
