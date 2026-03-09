@@ -19,12 +19,20 @@ const authorizeUserModification = (
 	// Obtenemos el correo asociado al token, añadido por el middleware authenticateToken
 	const emailFromToken = req.userMail;
 	// Obtenemos el correo del usuario a modificar desde la URL
-	const targetMail = req.params["mail"] as string;
+	const targetMail = req.params["mail"];
 
-	// Comprobación de seguridad: Asegurarse de que ambas variables existen.
-	if (!emailFromToken || !targetMail) {
+	// Comprobación de seguridad y estrechamiento de tipos (type narrowing).
+	// Nos aseguramos de que `targetMail` es una cadena de texto no vacía.
+	if (typeof targetMail !== "string" || !targetMail) {
 		return res.status(400).json({
-			error: "Bad Request: No se pudo verificar la identidad del usuario.",
+			error:
+				"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+		});
+	}
+
+	if (!emailFromToken) {
+		return res.status(400).json({
+			error: "Bad Request: No se pudo verificar la identidad del token.",
 		});
 	}
 
@@ -167,8 +175,16 @@ router.put(
 		console.log(`PUT /users/${req.params["mail"]} - Request received.`); // Log start
 		try {
 			// Obtenemos el correo del usuario a modificar
-			const targetMail = req.params["mail"] as string;
+			const targetMail = req.params["mail"];
 			console.log("Route Handler: Target user email from URL:", targetMail);
+
+			if (typeof targetMail !== "string" || !targetMail) {
+				return res.status(400).json({
+					error:
+						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+				});
+			}
+
 			// Buscamos el usuario a actualizar
 			const currentUser = users.find(
 				(user) => user.mail.toLowerCase() === targetMail.toLowerCase(),
@@ -228,7 +244,15 @@ router.get(
 	authorizeUserModification,
 	(req: Request, res: Response) => {
 		// El correo del usuario ya ha sido validado por los middlewares
-		const userMail = req.params.mail as string;
+		const userMail = req.params.mail;
+
+		if (typeof userMail !== "string" || !userMail) {
+			return res.status(400).json({
+				error:
+					"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+			});
+		}
+
 		// Se busca al usuario por su correo electrónico
 		const user = users.find(
 			(u) => u.mail.toLowerCase() === userMail.toLowerCase(),
@@ -266,9 +290,16 @@ router.post(
 		);
 		try {
 			// Obtenemos el correo del usuario a modificar desde la URL
-			const targetMail = req.params["mail"] as string;
+			const targetMail = req.params["mail"];
 			// Obtenemos el ID de la excursión desde el cuerpo de la petición
 			const { excursionId } = req.body;
+
+			if (typeof targetMail !== "string" || !targetMail) {
+				return res.status(400).json({
+					error:
+						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
+				});
+			}
 
 			// Validamos que el excursionId se ha enviado.
 			if (excursionId === null || excursionId === undefined) {
