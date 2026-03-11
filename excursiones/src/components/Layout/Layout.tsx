@@ -17,6 +17,9 @@ const RegisterPage = lazyWithMinTime(() => import("../RegisterPage"));
 const LoginPage = lazyWithMinTime(() => import("../LoginPage"));
 const UserPage = lazyWithMinTime(() => import("../UserPage"));
 
+// Objeto vacío para pasar como props a los componentes de página que no requieren props específicas.
+const EMPTY_PAGE_PROPS = {};
+
 /**
  * Componente principal de la aplicación. Gestiona el estado de las excursiones, la autenticación del usuario y la
  * estructura general de la página.
@@ -31,19 +34,17 @@ export function Layout() {
 	return (
 		<div className={styles.layout}>
 			<header>
-				{/* Componente de navegación. Se coloca arriba para una jerarquía visual correcta.
-				 * Recibe props para interactuar con el estado de las excursiones y la autenticación.
-				 */}
+				{/* Componente de navegación. Recibe props para interactuar con el estado de las excursiones y la autenticación. */}
 				<NavigationBar isOnExcursionsPage={isOnExcursionsPage} />
 
 				{isOnExcursionsPage && <Hero />}
 			</header>
 			{/* Contenedor principal que alberga el contenido de la página */}
-            <main
-				className={styles.mainContentWrapper}
-				style={isOnExcursionsPage ? { paddingTop: 0 } : undefined}
+			<main
+				className={`${styles.mainContentWrapper} ${
+					isOnExcursionsPage ? styles.noPaddingTop : ""
+				}`.trim()}
 			>
-
 				{/* Sección "Sobre Nosotros" - Solo visible en la página de inicio */}
 				{isOnExcursionsPage && <AboutUs />}
 
@@ -58,7 +59,7 @@ export function Layout() {
 								<LazyRouteWrapper
 									PageComponent={RegisterPage}
 									SkeletonComponent={RegisterPageSkeleton}
-									pageProps={{}}
+									pageProps={EMPTY_PAGE_PROPS}
 								/>
 							}
 						/>
@@ -68,7 +69,7 @@ export function Layout() {
 								<LazyRouteWrapper
 									PageComponent={LoginPage}
 									SkeletonComponent={LoginPageSkeleton}
-									pageProps={{}}
+									pageProps={EMPTY_PAGE_PROPS}
 								/>
 							}
 						/>
@@ -79,7 +80,7 @@ export function Layout() {
 									<LazyRouteWrapper
 										PageComponent={UserPage}
 										SkeletonComponent={UserPageSkeleton}
-										pageProps={{}}
+										pageProps={EMPTY_PAGE_PROPS}
 									/>
 								</ProtectedRoute>
 							}
