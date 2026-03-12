@@ -5,7 +5,10 @@ import { ExcursionsPage } from "../ExcursionsPage";
 import { Footer } from "../Footer";
 import { AboutUs } from "../AboutUs";
 import ProtectedRoute from "../ProtectedRoute";
-import { LazyRouteWrapper } from "../LazyRouteWrapper";
+import {
+	LazyRouteWrapper,
+	EMPTY_PAGE_PROPS,
+} from "../LazyRouteWrapper/LazyRouteWrapper";
 import RegisterPageSkeleton from "../RegisterPage/RegisterPageSkeleton";
 import LoginPageSkeleton from "../LoginPage/LoginPageSkeleton";
 import UserPageSkeleton from "../UserPage/UserPageSkeleton";
@@ -16,9 +19,6 @@ import styles from "./Layout.module.css";
 const RegisterPage = lazyWithMinTime(() => import("../RegisterPage"));
 const LoginPage = lazyWithMinTime(() => import("../LoginPage"));
 const UserPage = lazyWithMinTime(() => import("../UserPage"));
-
-// Objeto vacío para pasar como props a los componentes de página que no requieren props específicas.
-const EMPTY_PAGE_PROPS = {};
 
 /**
  * Componente principal de la aplicación. Gestiona el estado de las excursiones, la autenticación del usuario y la
@@ -41,9 +41,11 @@ export function Layout() {
 			</header>
 			{/* Contenedor principal que alberga el contenido de la página */}
 			<main
-				className={`${styles.mainContentWrapper} ${
-					isOnExcursionsPage ? styles.noPaddingTop : ""
-				}`.trim()}
+				className={
+					isOnExcursionsPage
+						? `${styles.mainContentWrapper} ${styles.noPaddingTop}`
+						: styles.mainContentWrapper
+				}
 			>
 				{/* Sección "Sobre Nosotros" - Solo visible en la página de inicio */}
 				{isOnExcursionsPage && <AboutUs />}
