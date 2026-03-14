@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import {
 	validateMail,
@@ -31,14 +31,19 @@ export function LoginForm() {
 	/**
 	 * Comprueba si el formulario es válido.
 	 */
-	const isFormValid =
-		validateMail(mail) === true && isNotEmpty(password) === true;
+	const isFormValid = validateMail(mail) && isNotEmpty(password);
 
+	// Utiliza el hook personalizado para manejar el estado del formulario y la lógica de envío.
 	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
 		isFormValid,
 		() => loginUser(formValues),
 		ROUTES.USER,
 	);
+
+	// Limpia el mensaje de error al cerrar la alerta.
+	const handleClearError = () => {
+		formDispatch({ type: "CLEAR_ERROR" });
+	};
 
 	return (
 		<>
@@ -46,7 +51,7 @@ export function LoginForm() {
 				<FeedbackAlert
 					variant="danger"
 					message={formState.error}
-					onClose={() => formDispatch({ type: "CLEAR_ERROR" })}
+					onClose={handleClearError}
 				/>
 			)}
 			<Form
