@@ -1,25 +1,39 @@
 import { Row, Col } from "react-bootstrap";
-import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
+import { ROUTES } from "../../constants";
+import { LOGIN_PAGE_TEXT } from "./loginConstants";
 import { FormPageLayout } from "../FormPageLayout";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import loginFormStyles from "../LoginForm/LoginForm.module.css";
 
+const INPUT_SKELETON_HEIGHT = 50;
+const BUTTON_SKELETON_HEIGHT = 44;
+const BUTTON_MIN_WIDTH = 85;
+const INPUT_SKELETON_WIDTH = "40%";
+
+/** Subcomponente para renderizar el placeholder de un input para evitar funciones inline */
+function InputPlaceholderSkeleton(): React.ReactElement {
+	return (
+		<div>
+			<Skeleton
+				width={INPUT_SKELETON_WIDTH}
+				containerClassName="d-block mb-2"
+			/>
+			<Skeleton
+				height={INPUT_SKELETON_HEIGHT}
+				borderRadius="var(--border-radius-md)"
+			/>
+		</div>
+	);
+}
+
 /**
  * Componente que muestra un esqueleto de carga para la página de inicio de sesión.
  * Simula la estructura del formulario de login mientras los componentes reales se cargan.
  */
-function LoginPageSkeleton(): React.ReactElement{
+function LoginPageSkeleton(): React.ReactElement {
 	const { baseColor, highlightColor } = useSkeletonTheme();
-
-	/** Renderiza un placeholder para un campo de formulario (etiqueta(label) + input). */
-	const renderInputPlaceholder = () => (
-		<div>
-			<Skeleton width="40%" containerClassName="d-block mb-2" />
-			<Skeleton height={50} borderRadius="var(--border-radius-md)" />
-		</div>
-	);
 
 	return (
 		// Utiliza FormPageLayout para mantener la estructura de la página de inicio de sesión.
@@ -36,8 +50,8 @@ function LoginPageSkeleton(): React.ReactElement{
 			<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
 				<div aria-hidden="true" className={loginFormStyles.formLabel}>
 					<div className={loginFormStyles.fieldsContainer}>
-						{renderInputPlaceholder()}
-						{renderInputPlaceholder()}
+						<InputPlaceholderSkeleton />
+						<InputPlaceholderSkeleton />
 					</div>
 					{/* Esqueleto para el botón de envío */}
 
@@ -51,10 +65,10 @@ function LoginPageSkeleton(): React.ReactElement{
 							  	columna `sm="auto"` colapse en breakpoints grandes.
 							*/}
 							<Skeleton
-								height={44}
+								height={BUTTON_SKELETON_HEIGHT}
 								className="w-100"
 								borderRadius="var(--border-radius-pill)"
-								style={{ minWidth: 85 }}
+								style={{ minWidth: BUTTON_MIN_WIDTH }}
 							/>
 						</Col>
 					</Row>
