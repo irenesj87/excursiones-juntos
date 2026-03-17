@@ -1,9 +1,9 @@
 import React from "react";
 import { LoginForm } from "../LoginForm";
 import { FormPageLayout } from "../FormPageLayout/FormPageLayout";
-import { ROUTES, LOGIN_PAGE_TEXT } from "../../constants";
+import { ROUTES } from "../../constants";
+import { LOGIN_PAGE_TEXT } from "./loginConstants";
 import styles from "./LoginPage.module.css";
-import "bootstrap/dist/css/bootstrap.css";
 
 /**
  * Componente que representa la página de inicio de sesión.
