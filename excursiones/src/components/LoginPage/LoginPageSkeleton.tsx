@@ -13,7 +13,7 @@ const BUTTON_MIN_WIDTH = 85;
 const INPUT_SKELETON_WIDTH = "40%";
 
 /** Subcomponente para renderizar el placeholder de un input para evitar funciones inline */
-function InputPlaceholderSkeleton() {
+function InputPlaceholderSkeleton(): React.ReactElement {
 	return (
 		<div>
 			<Skeleton
