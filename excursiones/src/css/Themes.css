@@ -93,7 +93,6 @@ html.light {
 	--navbar-brand-icon: var(
 		/* Icono color musgo oscuro */ --color-moss-700
 	); /* Oscurecido para cumplir AAA (7:1) */
-	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(40, 10%, 20%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-stone-500);
@@ -129,9 +128,6 @@ html.light {
 	--logout-bg-color: var(--color-stone-700);
 	--logout-bg-color-hover: var(--color-stone-800);
 	--logout-text-color: var(--color-text-on-primary);
-
-	/* --- Menú de navegación Offcanvas --- */
-	--offcanvas-text-color: var(--color-stone-100);
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
 	--excursion-card-joined-status-text: var(--color-success-light);
@@ -282,9 +278,6 @@ html.dark {
 	--navbar-brand-icon: var(
 		--color-moss-200
 	); /* Aclarado para cumplir AAA (7:1) */
-	--navbar-toggler-border-color: var(--separator-color);
-	/* Usamos el token --color-green-dark-200 para el stroke del SVG (que era hsl(150, 15%, 88%)) */
-	--custom-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='hsl(150, 15%, 88%)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-green-dark-400);

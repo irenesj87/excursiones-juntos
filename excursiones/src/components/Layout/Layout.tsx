@@ -35,7 +35,7 @@ export function Layout() {
 		<div className={styles.layout}>
 			<header>
 				{/* Componente de navegación. Recibe props para interactuar con el estado de las excursiones y la autenticación. */}
-				<NavigationBar isOnExcursionsPage={isOnExcursionsPage} />
+				<NavigationBar />
 
 				{isOnExcursionsPage && <Hero />}
 			</header>

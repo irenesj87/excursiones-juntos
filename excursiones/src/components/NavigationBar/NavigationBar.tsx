@@ -46,15 +46,10 @@ const getInitialAuthState = () => {
 	);
 };
 
-interface NavigationBarProps {
-	/** Indica si la página actual es la de excursiones. */
-	readonly isOnExcursionsPage: boolean;
-}
-
 /**
  * Componente para la barra de navegación.
  */
-export function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
+export function NavigationBar() {
 	// Estado global de Redux para saber si el usuario está autenticado.
 	const { login: isLoggedIn } = useSelector(
 		(state: RootState) => state.loginReducer,
@@ -164,10 +159,7 @@ export function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	return (
 		<Navbar
 			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
-			className={`${styles.customNavbar} ${
-				// Se comprueba si estamos en la página de excursiones para ajustar la sombra en breakòints pequeños.
-				isOnExcursionsPage ? styles.onExcursionsPage : ""
-			} ${isTransparent ? styles.transparentNavbar : ""}`} // Aplica el estilo transparente en la Home
+			className={`${styles.customNavbar} ${isTransparent ? styles.transparentNavbar : ""}`} // Aplica el estilo transparente en la Home
 			fixed="top"
 		>
 			{/* Usamos Container estándar en lugar de fluid para que el logo y el menú se alineen con el contenido central de la página (efecto "hoja") */}

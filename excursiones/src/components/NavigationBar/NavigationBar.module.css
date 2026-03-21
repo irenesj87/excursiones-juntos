@@ -3,7 +3,6 @@
 	background-color: var(--navbar-bg);
 	backdrop-filter: var(--navbar-backdrop-filter); /* Efecto cristal */
 	box-shadow: var(--shadow-soft);
-	z-index: 1030;
 }
 
 /* Aplica la transición solo cuando la barra NO es transparente.
