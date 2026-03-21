@@ -267,22 +267,7 @@ parecen inactivos. */
 	font-size: var(--font-size-xl);
 }
 
-/* Estilos específicos para el Navbar Offcanvas */
-#offcanvasNavbar .offcanvas-body .nav-link {
-	display: block;
-	width: auto;
-	margin-inline: var(
-		--space-2
-	); /* Margen lateral consistente en lugar de width 95% */
-	margin-bottom: 0;
-	text-align: center;
-	padding: var(--space-2) var(--space-3);
-	text-decoration: none;
-	border-radius: var(--border-radius-pill);
-}
-
 /* Alinea los iconos con el texto en los enlaces de navegación */
-#offcanvasNavbar .offcanvas-body .nav-link svg,
 .navbar-nav .nav-link svg {
 	margin-right: var(--space-2); /* Espacio entre el icono y el texto */
 	vertical-align: -0.125em; /* Alineación vertical fina */
@@ -290,12 +275,6 @@ parecen inactivos. */
 	stroke-width: var(
 		--icon-stroke-width
 	); /* Hacemos el trazo del icono un poco más grueso */
-}
-
-#offcanvasNavbar .offcanvas-body .logoutLink {
-	display: block;
-	width: auto;
-	margin: 0 var(--space-2) var(--space-2);
 }
 
 /* --- Estilos Globales --- */

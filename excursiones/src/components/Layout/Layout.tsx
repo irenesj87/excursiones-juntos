@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Hero } from "../Hero/Hero";
-import NavigationBar from "../NavigationBar";
+import { NavigationBar } from "../NavigationBar";
 import { ExcursionsPage } from "../ExcursionsPage";
 import { Footer } from "../Footer";
 import { AboutUs } from "../AboutUs";
