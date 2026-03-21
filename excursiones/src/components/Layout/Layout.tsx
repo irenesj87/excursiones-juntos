@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Hero } from "../Hero/Hero";
-import NavigationBar from "../NavigationBar";
+import { NavigationBar } from "../NavigationBar";
 import { ExcursionsPage } from "../ExcursionsPage";
 import { Footer } from "../Footer";
 import { AboutUs } from "../AboutUs";
@@ -35,7 +35,7 @@ export function Layout() {
 		<div className={styles.layout}>
 			<header>
 				{/* Componente de navegación. Recibe props para interactuar con el estado de las excursiones y la autenticación. */}
-				<NavigationBar isOnExcursionsPage={isOnExcursionsPage} />
+				<NavigationBar />
 
 				{isOnExcursionsPage && <Hero />}
 			</header>

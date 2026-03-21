@@ -1,4 +1,4 @@
-import React, {
+import {
 	useState,
 	useEffect,
 	useLayoutEffect,
@@ -19,38 +19,51 @@ import styles from "./NavigationBar.module.css";
 import "../../css/Themes.css";
 import { ROUTES } from "../../constants";
 
-// Estos componentes se cargan de forma perezosa (lazy).
+// Estos componentes se cargan de forma perezosa.
 const UserNav = lazy(() => import("../UserNav"));
 const GuestNav = lazy(() => import("../GuestNav"));
 
+/** Define cuantos píxeles debe bajar el usuario para que la barra de navegación cambie de transparente a sólida. */
+const SCROLL_THRESHOLD = 10;
+
+/**
+ * Función que intenta adivinar si el usuario está autenticado basándose si existe un token en sessionStorage antes
+ * de que Redux o la API respondan.
+ * Esto se hace para mostrar un esqueleto de carga más acorde con la situación mientras se comprueba el
+ * estado de autenticación real del usuario.
+ * @returns	Un booleano que indica si probablemente el usuario está autenticado (true) o no (false).
+ * @remarks	Esta función se ejecuta solo una vez al montar el componente, ya que se pasa como función inicializadora
+ * a useState. Si se ejecutara en cada renderizado, podría causar problemas de rendimiento y comportamiento inesperado.
+ */
 const getInitialAuthState = () => {
 	if (globalThis.window === undefined) {
 		return false;
 	}
-	return !!sessionStorage.getItem("token");
+	// Verificamos tanto el token directo como el fallback 'authState' para mantener la
+	// consistencia con la lógica de recuperación de sesión de useAuth.
+	return (
+		!!sessionStorage.getItem("token") || !!sessionStorage.getItem("authState")
+	);
 };
-
-interface NavigationBarProps {
-	/** Indica si la página actual es la de excursiones. */
-	readonly isOnExcursionsPage: boolean;
-}
 
 /**
  * Componente para la barra de navegación.
  */
-function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
+export function NavigationBar() {
 	// Estado global de Redux para saber si el usuario está autenticado.
 	const { login: isLoggedIn } = useSelector(
 		(state: RootState) => state.loginReducer,
 	);
 	// Estado del contexto de autenticación para saber si la comprobación inicial de autenticación ha finalizado.
-	// Dependiendo de ellos se muestra el esuqeleto para el invitado o para el usuario
+	// Dependiendo de ello se muestra el esqueleto para el invitado o para el usuario.
 	const { isAuthCheckComplete } = useAuthContext();
 
 	// Estado que indica si probablemente el usuario está autenticado basándonos en sessionStorage.
 	const [likelyLoggedIn] = useState(getInitialAuthState);
 
+	// Estado para controlar si la barra de navegación está en modo "scrolled" (sólida) o "top" (transparente).
 	const [isScrolled, setIsScrolled] = useState(false);
+	// Referencia al elemento DOM de la barra de navegación para medir su altura y actualizar la variable CSS.
 	const navRef = useRef<HTMLElement>(null);
 
 	const location = useLocation();
@@ -67,20 +80,25 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 
 		const handleScroll = () => {
 			// Se activa el estado 'scrolled' si el scroll es mayor a 10px.
-			setIsScrolled(window.scrollY > 10);
+			setIsScrolled(globalThis.window.scrollY > SCROLL_THRESHOLD);
 		};
 
-		window.addEventListener("scroll", handleScroll);
+		globalThis.window.addEventListener("scroll", handleScroll, {
+			passive: true,
+		});
 
 		// Limpiamos el event listener al desmontar el componente.
-		return () => window.removeEventListener("scroll", handleScroll);
+		return () => globalThis.window.removeEventListener("scroll", handleScroll);
 	}, [isHomePage]);
 
-	// Usamos useLayoutEffect para medir la altura de la barra de navegación después de que el DOM se haya actualizado,
-	// pero antes de que el navegador pinte la pantalla. Esto evita parpadeos.
-	// El resultado se guarda en --navbar-height.
-	// ¿Por qué se hace esto?: Como la barra es sticky, otros elementos de la página necesitan saber su altura para no quedar
-	// ocultos debajo de ella.
+	/**
+	 * Al ser la barra fixed y por lo tanto no ocupar espacio en el flujo normal, usamos useLayoutEffect para medir
+	 * la altura de la barra de navegación después de que el DOM se haya actualizado,
+	 * pero antes de que el navegador pinte la pantalla. Esto evita parpadeos.
+	 * El resultado se guarda en --navbar-height.
+	 * ¿Por qué se hace esto?: Como la barra es sticky, otros elementos de la página necesitan saber su altura para
+	 * no quedar ocultos debajo de ella (especialmente el Hero o el contenido principal).
+	 */
 	useLayoutEffect(() => {
 		// navRef.current: Referencia al elemento DOM de la barra de navegación.
 		const navElement = navRef.current;
@@ -121,12 +139,12 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 				</div>
 			);
 		}
-		// Una vez se sabe si el usuario está autenticado, se muestra el contenido real.
-		// Se usa ErrorBoundary para capturar cualquier error en los componentes lazy-loaded.
-		// Si hay un error, se muestra el esqueleto correspondiente.
-		// El esqueleto de invitado se usa como fallback inicial mientras se carga el componente.
-		// Si el usuario está autenticado, se muestra UserNav, si no, GuestNav.
-		// Ambos reciben la función handleCloseMenu para cerrar el menú al hacer alguna acción.
+		/**
+		 * Una vez se sabe si el usuario está autenticado, se muestra el contenido real.
+		 * Se usa ErrorBoundary para capturar cualquier error en los componentes con carga perezosa.
+		 * Si hay un error, se muestra el esqueleto correspondiente.
+		 * El esqueleto de invitado se usa como fallback inicial mientras se carga el componente.
+		 */
 		return (
 			<Suspense
 				fallback={isLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
@@ -141,28 +159,21 @@ function NavigationBar({ isOnExcursionsPage }: NavigationBarProps) {
 	return (
 		<Navbar
 			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
-			expand="md" // El menú se expande en breakpoints medianos (iPad Mini+).
-			className={`${styles.customNavbar} ${
-				// Se comprueba si estamos en la página de excursiones para saber si tenemos que eliminar el borde inferior.
-				isOnExcursionsPage ? styles.onExcursionsPage : ""
-			} ${isTransparent ? styles.transparentNavbar : ""}`} // Aplica el estilo transparente en la Home (arriba)
+			className={`${styles.customNavbar} ${isTransparent ? styles.transparentNavbar : ""}`} // Aplica el estilo transparente en la Home
 			fixed="top"
 		>
 			{/* Usamos Container estándar en lugar de fluid para que el logo y el menú se alineen con el contenido central de la página (efecto "hoja") */}
 			<Container className="d-flex justify-content-between align-items-center">
-				{/* Logo (siempre visible). */}
+				{/* Logo. */}
 				<Logo />
-				{/* --- Contenedor de la derecha: controles de usuario, tema y menú --- */}
+				{/* --- Contenedor de la derecha: tema y controles de usuario --- */}
 				<div className="d-flex align-items-center ms-auto">
 					{/* Botón de tema */}
 					<ThemeToggleButton />
-
-					{/* Contenido de navegación que ahora se adapta por sí mismo */}
+					{/* Contenido de navegación. */}
 					<div className="d-flex align-items-center">{renderNavContent()}</div>
 				</div>
 			</Container>
 		</Navbar>
 	);
 }
-
-export default NavigationBar;
