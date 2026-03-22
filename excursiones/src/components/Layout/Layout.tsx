@@ -4,7 +4,7 @@ import { NavigationBar } from "../NavigationBar";
 import { ExcursionsPage } from "../ExcursionsPage";
 import { Footer } from "../Footer";
 import { AboutUs } from "../AboutUs";
-import ProtectedRoute from "../ProtectedRoute";
+import { ProtectedRoute } from "../ProtectedRoute";
 import {
 	LazyRouteWrapper,
 	EMPTY_PAGE_PROPS,
