@@ -283,6 +283,7 @@ parecen inactivos. */
 .page-link,
 .accordion-button,
 .accordion-body,
+.infoMessage li,
 body {
 	transition: none;
 }

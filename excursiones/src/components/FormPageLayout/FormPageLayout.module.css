@@ -3,21 +3,15 @@
 	flex-direction: column;
 	flex-grow: 1; /* Asegura que el contenedor ocupe el espacio vertical disponible */
 	justify-content: center;
-	padding-top: var(
-		--space-8
-	); /* El offset del navbar lo gestiona el Layout principal */
-	padding-bottom: var(
-		--space-12
-	); /* Mantenemos el padding inferior para el ritmo vertical */
+	padding-top: var(--space-12);
+	padding-bottom: var(--space-12);
 }
 
 /* Media query para breakpoints más grandes */
 @media (min-width: 576px) {
 	.container {
-		padding-top: var(
-			--space-12
-		); /* El offset del navbar lo gestiona el Layout principal */
-		padding-bottom: var(--space-16); /* Mantenemos el padding inferior */
+		padding-top: var(--space-16);
+		padding-bottom: var(--space-16);
 	}
 }
 
@@ -68,9 +62,7 @@
 }
 
 .contentPane {
-	background-color: var(
-		--excursion-card-bg
-	);
+	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
 	border: 1px solid var(--color-border-subtle);
 	box-shadow: var(--shadow-soft);
