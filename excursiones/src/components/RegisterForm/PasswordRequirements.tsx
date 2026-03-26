@@ -16,10 +16,21 @@ export function PasswordRequirements({
 }: PasswordRequirementsProps) {
 	return (
 		<div id="password-requirements" className={`${styles.infoMessage} mb-3`}>
-			<p className="mb-1">Tu contraseña debe contener al menos:</p>
+			<p className="mb-1">Tu contraseña debe tener al menos:</p>
 			<ul className="mb-0">
 				{PASSWORD_REQUIREMENTS.map((req) => {
 					const isMet = req.isValid(password);
+					/**
+					 * Limpiamos el mensaje para evitar redundancia con el título "debe tener al menos:".
+					 * Eliminamos "al menos" o "debe tener al menos" del inicio y capitalizamos.
+					 */
+					const cleanMessage = req.message
+						.trim()
+						.replace(/^(debe tener al menos)\s+/i, "");
+
+					const displayMessage =
+						cleanMessage.charAt(0).toUpperCase() + cleanMessage.slice(1);
+
 					return (
 						<li
 							key={req.message}
@@ -50,7 +61,7 @@ export function PasswordRequirements({
 									</svg>
 								)}
 							</div>
-							{req.message}
+							{displayMessage}
 						</li>
 					);
 				})}

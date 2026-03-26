@@ -65,19 +65,19 @@ export const PASSWORD_REQUIREMENTS: {
 	isValid: (password: string) => boolean;
 }[] = [
 	{
-		message: "8 caracteres.",
+		message: "Debe tener al menos 8 caracteres",
 		isValid: (password) => password.length >= 8,
 	},
 	{
-		message: "Una letra.",
+		message: "Debe tener al menos una letra",
 		isValid: (password) => /[A-Za-z]/.test(password),
 	},
 	{
-		message: "Un número.",
+		message: "Debe tener al menos un número",
 		isValid: (password) => /\d/.test(password),
 	},
 	{
-		message: "Un carácter especial (ej: @$!%*?&.,_-).",
+		message: "Debe tener al menos un carácter especial (ej: @$!%*?&.,_-)",
 		isValid: (password) => /[@$!%*?&.,_-]/.test(password),
 	},
 ];

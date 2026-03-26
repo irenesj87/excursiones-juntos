@@ -34,7 +34,7 @@ export function useRegisterForm() {
 	const nameInputRef = useRef<HTMLInputElement>(null);
 
 	/**
-	 * Efecto que se ejecuta al montar el componente para establecer el foco en el campo de nombre. 
+	 * Efecto que se ejecuta al montar el componente para establecer el foco en el campo de nombre.
 	 * Utilizamos un setTimeout para asegurar que el DOM esté listo antes de intentar enfocar el input.
 	 */
 	useEffect(() => {
@@ -50,7 +50,7 @@ export function useRegisterForm() {
 	};
 
 	/**
-	 * Función que valida el formulario. Se utiliza para determinar si el botón de envío debe estar habilitado 
+	 * Función que valida el formulario. Se utiliza para determinar si el botón de envío debe estar habilitado
 	 * y para validar antes de enviar.
 	 * @returns - Un booleano que indica si el formulario es válido o no.
 	 */
@@ -66,8 +66,8 @@ export function useRegisterForm() {
 	};
 
 	/**
-	 * Función que se pasa a useAuthFormHandler para manejar el envío del formulario. Se encarga de llamar a la 
-	 * función de registro de usuario con los valores del formulario. Si el registro es exitoso, useAuthFormHandler 
+	 * Función que se pasa a useAuthFormHandler para manejar el envío del formulario. Se encarga de llamar a la
+	 * función de registro de usuario con los valores del formulario. Si el registro es exitoso, useAuthFormHandler
 	 * se encargará de redirigir al usuario a la página de inicio.
 	 * Si ocurre un error, useAuthFormHandler actualizará el estado del formulario para mostrar el mensaje de error.
 	 * @param values - Los valores actuales del formulario que se enviarán a la función de registro.
@@ -144,17 +144,19 @@ export function useRegisterForm() {
 				field: "samePassword",
 				inputType: "password",
 				validationFunction: (val: string) =>
-					values.password === val ? true : "Las contraseñas no coinciden.",
+					validateSamePassword(values.password, val),
 				autocomplete: "new-password",
+				errorMessage:
+					"Las contraseñas deben coincidir y cumplir los requisitos de seguridad (al menos 8 caracteres, una letra, un número y un símbolo).",
 			},
 		],
 	];
 
 	/**
-	 * Retorna toda la información y funciones necesarias para manejar el formulario de registro, incluyendo los 
-	 * valores actuales, la configuración de los campos, el estado del formulario, las funciones para manejar 
+	 * Retorna toda la información y funciones necesarias para manejar el formulario de registro, incluyendo los
+	 * valores actuales, la configuración de los campos, el estado del formulario, las funciones para manejar
 	 * cambios y envíos, y un booleano que indica si el botón de envío debe estar deshabilitado.
-	 * El componente RegisterForm consume esta información para renderizar el formulario y manejar la interacción 
+	 * El componente RegisterForm consume esta información para renderizar el formulario y manejar la interacción
 	 * del usuario.
 	 * @returns - Un objeto con toda la información y funciones necesarias para manejar el formulario de registro.
 	 */

@@ -7,6 +7,13 @@ import jwt from "jsonwebtoken";
 import excursions from "../data/excursionsData.js";
 import sanitizeHtml from "sanitize-html";
 import { authenticateToken } from "../authMiddleware.js";
+import {
+	validateName,
+	validateSurname,
+	validateMail,
+	validatePhone,
+	validatePassword,
+} from "../validations.js";
 
 const router = express.Router();
 
@@ -39,10 +46,6 @@ const authorizeUserModification = (
 	// Si el correo asociado al token no es el mismo que el correo del usuario que quiere actualizar su info...
 	// Esta comprobación de seguridad se hace para que otro usuario no pueda modificar la info del usuario actual
 	if (emailFromToken.toLowerCase() !== targetMail.toLowerCase()) {
-		// ...se avisa del error
-		console.log(
-			`Authorization failed: Token email (${emailFromToken}) does not match target email (${targetMail}).`,
-		);
 		return res
 			.status(403)
 			.json({ error: "Forbidden: You can only update your own profile." });
@@ -95,26 +98,32 @@ router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 		});
 	}
 
-	// Validar formato y contenido
-	if (typeof name !== "string" || name.trim() === "") {
-		return res.status(400).json({ error: "El nombre no es válido." });
+	// 1.2 Validaciones de formato y seguridad (Espejo exacto del Frontend)
+	if (!validateName(name)) {
+		return res.status(400).json({ error: "El nombre no puede estar vacío." });
 	}
-	if (typeof surname !== "string" || surname.trim() === "") {
-		return res.status(400).json({ error: "El apellido no es válido." });
+	if (!validateSurname(surname)) {
+		return res
+			.status(400)
+			.json({ error: "Los apellidos no pueden estar vacíos." });
 	}
-	// Regex para validación de email recomendada por OWASP para prevenir ataques ReDoS.
-	// Es más segura y específica que una expresión simple como /\S+@\S+\.\S+/.
-	const emailRegex =
-		/^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$/;
-	if (typeof mail !== "string" || !emailRegex.test(mail)) {
+	if (!validateMail(mail)) {
 		return res
 			.status(400)
 			.json({ error: "El formato del correo electrónico no es válido." });
 	}
-	if (typeof plainPassword !== "string" || plainPassword.length < 8) {
+
+	if (phone && !validatePhone(phone)) {
 		return res
 			.status(400)
-			.json({ error: "La contraseña debe tener al menos 8 caracteres." });
+			.json({ error: "El formato del número de teléfono no es válido." });
+	}
+
+	if (!validatePassword(plainPassword)) {
+		return res.status(400).json({
+			error:
+				"La contraseña debe tener al menos 8 caracteres, incluyendo una letra, un número y un carácter especial.",
+		});
 	}
 
 	// 2. Lógica de negocio (una vez que los datos son válidos)
@@ -154,9 +163,9 @@ router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 		const token = jwt.sign(payload, secretKey, { expiresIn: "1h" });
 
 		// Se crea una copia del objeto de usuario para la respuesta, excluyendo la contraseña hasheada.
-		const { password, ...userResponse } = user;
-		// Se construye la URL de forma segura, evitando usar `req.originalUrl` para prevenir vulnerabilidades de Open Redirect.
-		const locationUrl = `${req.protocol}://${req.get("host")}/users/${user.id}`;
+		const { password: _, ...userResponse } = user;
+		// Se usa una ruta relativa para evitar vulnerabilidades de Host Header Injection.
+		const locationUrl = `/users/${user.id}`;
 
 		return res
 			.status(201)
@@ -171,19 +180,21 @@ router.put(
 	apiLimiter,
 	authenticateToken,
 	authorizeUserModification,
-	(req: Request, res: Response) => {
-		console.log(`PUT /users/${req.params["mail"]} - Request received.`); // Log start
+	(req: Request, res: Response, next: NextFunction) => {
+		// Evitar loguear directamente el mail del usuario en logs de producción.
+		console.log(`PUT /users - Request received for user modification.`); // Log start
 		try {
 			// Obtenemos el correo del usuario a modificar
-			const targetMail = req.params["mail"];
-			console.log("Route Handler: Target user email from URL:", targetMail);
-
-			if (typeof targetMail !== "string" || !targetMail) {
+			const { mail: rawMail } = req.params;
+			if (typeof rawMail !== "string" || !rawMail) {
+				console.warn("Invalid 'mail' parameter in PUT /users/:mail request.");
 				return res.status(400).json({
 					error:
 						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
 				});
 			}
+			// Sanitizamos/limpiamos el parámetro para "descontaminar" el dato (untaint)
+			const targetMail = rawMail.trim().toLowerCase();
 
 			// Buscamos el usuario a actualizar
 			const currentUser = users.find(
@@ -191,17 +202,17 @@ router.put(
 			);
 			// Comprobamos si el usuario existe
 			if (!currentUser) {
-				console.log(`User with email ${targetMail} not found.`);
+				console.warn("User modification failed: target user not found.");
 				return res.status(404).json({ error: "User not found." });
 			}
-			console.log("Found target user:", currentUser.mail);
+
 			// Y si existe, actualizamos la info del usuario
 			// Actualización segura: Solo actualizamos los campos permitidos.
 			const { name, surname, phone } = req.body;
 
 			// Validación y actualización de campos
 			if (name !== undefined) {
-				if (typeof name !== "string" || name.trim() === "") {
+				if (!validateName(name)) {
 					return res
 						.status(400)
 						.json({ error: "El nombre proporcionado no es válido." });
@@ -210,7 +221,7 @@ router.put(
 			}
 
 			if (surname !== undefined) {
-				if (typeof surname !== "string" || surname.trim() === "") {
+				if (!validateSurname(surname)) {
 					return res
 						.status(400)
 						.json({ error: "El apellido proporcionado no es válido." });
@@ -219,7 +230,7 @@ router.put(
 			}
 
 			if (phone !== undefined) {
-				if (typeof phone !== "string") {
+				if (!validatePhone(phone)) {
 					return res
 						.status(400)
 						.json({ error: "El teléfono proporcionado no es válido." });
@@ -227,11 +238,11 @@ router.put(
 				currentUser.phone = sanitizeHtml(phone.trim(), sanitizeConfig);
 			}
 
-			const { password, ...userResponse } = currentUser;
+			const { password: _, ...userResponse } = currentUser;
 			return res.status(200).json(userResponse);
 		} catch (error) {
-			console.error("Unexpected error in PUT /users/:mail:", error);
-			return res.status(500).json({ error: "Internal Server Error occurred." });
+			// Pasamos el error al manejador global de app.ts
+			next(error);
 		}
 	},
 );
@@ -244,14 +255,17 @@ router.get(
 	authorizeUserModification,
 	(req: Request, res: Response) => {
 		// El correo del usuario ya ha sido validado por los middlewares
-		const userMail = req.params.mail;
+		const { mail: rawMail } = req.params;
 
-		if (typeof userMail !== "string" || !userMail) {
+		if (typeof rawMail !== "string" || !rawMail) {
 			return res.status(400).json({
 				error:
 					"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
 			});
 		}
+
+		// Limpiamos el dato antes de usarlo en la lógica de búsqueda
+		const userMail = rawMail.trim().toLowerCase();
 
 		// Se busca al usuario por su correo electrónico
 		const user = users.find(
@@ -284,22 +298,24 @@ router.post(
 	apiLimiter,
 	authenticateToken,
 	authorizeUserModification,
-	(req: Request, res: Response) => {
+	(req: Request, res: Response, next: NextFunction) => {
 		console.log(
-			`POST /users/${req.params["mail"]}/excursions - Request received.`,
+			`POST /users/excursions - Request received for user to join excursion.`,
 		);
 		try {
 			// Obtenemos el correo del usuario a modificar desde la URL
-			const targetMail = req.params["mail"];
-			// Obtenemos el ID de la excursión desde el cuerpo de la petición
+			const { mail: rawMail } = req.params;
 			const { excursionId } = req.body;
 
-			if (typeof targetMail !== "string" || !targetMail) {
+			if (typeof rawMail !== "string" || !rawMail) {
 				return res.status(400).json({
 					error:
 						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
 				});
 			}
+
+			// Untaint: Limpiamos el parámetro de la URL
+			const targetMail = rawMail.trim().toLowerCase();
 
 			// Validamos que el excursionId se ha enviado.
 			if (excursionId === null || excursionId === undefined) {
@@ -334,11 +350,11 @@ router.post(
 			// Se añade la excursión a su array de excursiones
 			currentUser.excursions.push(excursionId);
 			// Se retorna el usuario actualizado sin la contraseña
-			const { password, ...userResponse } = currentUser;
+			const { password: _, ...userResponse } = currentUser;
 			res.status(200).json(userResponse);
 		} catch (error) {
-			console.error("Unexpected error in POST /users/:mail/excursions:", error);
-			return res.status(500).json({ error: "Internal Server Error occurred." });
+			// Pasamos el error al manejador global de app.ts
+			next(error);
 		}
 	},
 );
