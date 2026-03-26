@@ -425,6 +425,31 @@ html.dark .btn-close {
 }
 
 /* --- Formularios (Inputs, etc.) --- */
+.form-label {
+	font-size: var(--font-size-base);
+	font-family: var(--font-family-sans);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-muted);
+	margin-bottom: var(--space-3);
+}
+
+/* Mensajes de validación (Error) */
+.invalid-feedback {
+	display: block; /* Controlamos la visibilidad desde el componente React */
+	font-size: var(--font-size-sm);
+	color: var(--color-text-danger);
+	margin-top: var(--space-2);
+	font-weight: var(--font-weight-medium);
+	min-height: 1.25rem; /* Evita el salto de línea al aparecer el error */
+}
+
+/* Textos de ayuda o informativos */
+.form-text {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	margin-top: var(--space-2);
+}
+
 .form-control {
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-base);
@@ -469,6 +494,28 @@ html.dark .btn-close {
 .form-control[readonly]:not(.form-control-plaintext) {
 	background-color: var(--excursion-card-bg);
 	color: var(--color-text-muted);
+}
+
+/* --- Ajustes para InputGroup (Password Fields) --- */
+/* Eliminamos el borde derecho y redondeado del input cuando va seguido del botón del ojo */
+.input-group > .form-control:not(:last-child),
+.input-group > .form-control:focus:not(:last-child) {
+	border-right: none;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+/* Ajustamos el botón del ojo para que se fusione perfectamente con el input */
+.input-group > .btn {
+	border-color: var(--color-border-default);
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	/* Aseguramos que el borde izquierdo del botón actúe como divisor único */
+	border-left: 1px solid var(--color-border-default);
+}
+
+.input-group > .btn:hover {
+	border-color: var(--color-border-default);
 }
 
 /* --- Botones Bootstrap (Override) --- */

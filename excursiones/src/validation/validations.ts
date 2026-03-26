@@ -60,30 +60,25 @@ export function validateMail(mail: string): boolean {
  * Lista de requisitos para validar la fortaleza de una contraseña.
  * Cada requisito tiene un mensaje de error y una función que verifica si la contraseña cumple con ese requisito.
  */
-const PASSWORD_REQUIREMENTS: {
+export const PASSWORD_REQUIREMENTS: {
 	message: string;
 	isValid: (password: string) => boolean;
 }[] = [
 	{
-		message: "Debe tener al menos 8 caracteres.",
+		message: "Debe tener al menos 8 caracteres",
 		isValid: (password) => password.length >= 8,
 	},
 	{
-		message: "Debe contener al menos una letra.",
+		message: "Debe tener al menos una letra",
 		isValid: (password) => /[A-Za-z]/.test(password),
 	},
 	{
-		message: "Debe contener al menos un número.",
+		message: "Debe tener al menos un número",
 		isValid: (password) => /\d/.test(password),
 	},
 	{
-		message: "Debe contener un carácter especial (ej: @$!%*?&.,_-).",
+		message: "Debe tener al menos un carácter especial (ej: @$!%*?&.,_-)",
 		isValid: (password) => /[@$!%*?&.,_-]/.test(password),
-	},
-	{
-		// Comprueba que no haya caracteres no permitidos.
-		message: "Contiene caracteres no permitidos.",
-		isValid: (password) => !/[^A-Za-z\d@$!%*?&.,_-]/.test(password),
 	},
 ];
 
@@ -111,7 +106,7 @@ export function validatePassword(password: string): true | string {
  */
 export function validateSamePassword(
 	password: string,
-	samePassword: string
+	samePassword: string,
 ): true | string {
 	const passwordValidationResult = validatePassword(samePassword);
 	if (passwordValidationResult !== true) {
