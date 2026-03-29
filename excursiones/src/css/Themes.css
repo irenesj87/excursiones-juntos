@@ -475,11 +475,24 @@ html.dark .btn-close {
 	outline: none;
 }
 
-/* Estilo para inputs inválidos, asegurando que el borde de error no se muestre en :focus,
-   donde el anillo de foco ya proporciona suficiente feedback. */
-.form-control.is-invalid:not(:focus),
-.form-select.is-invalid:not(:focus) {
+/* 
+ * Estilo para inputs inválidos. 
+ * Cuando NO tienen el foco, muestran el borde de peligro.
+ */
+.form-control.is-invalid:not(:focus) {
 	border-color: var(--color-border-danger);
+}
+
+/* 
+ * Cuando un input inválido tiene el foco, cambiamos el color del anillo de foco 
+ * a una versión sutil del color de peligro para que el error siga siendo visible.
+ */
+.form-control.is-invalid:focus,
+.form-control.is-invalid:focus-visible {
+	border-color: var(--color-text-danger);
+	/* Intensificamos el halo reduciendo la transparencia al 30% (70% de opacidad) */
+	box-shadow: 0 0 0 var(--space-1)
+		color-mix(in srgb, var(--color-text-danger), transparent 30%) !important;
 }
 
 /* Eliminamos el icono de exclamación por defecto de Bootstrap para un look más limpio. */
@@ -516,6 +529,13 @@ html.dark .btn-close {
 
 .input-group > .btn:hover {
 	border-color: var(--color-border-default);
+}
+
+/* Asegura que el borde de error se extienda al botón del ojo en los campos de contraseña */
+.input-group:has(.form-control.is-invalid) > .btn {
+	border-color: var(--color-border-danger);
+	/* Sincronizamos también el borde izquierdo que actúa como divisor */
+	border-left-color: var(--color-border-danger);
 }
 
 /* --- Botones Bootstrap (Override) --- */
