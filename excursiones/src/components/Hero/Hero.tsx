@@ -5,10 +5,10 @@ import CustomLink from "../../ui/Link/CustomLink";
 import { ROUTES } from "../../constants";
 
 const HERO_CONTENT = {
-	title: "Respira. Camina. Conecta.",
+	title: "Respira, Camina, Conecta",
 	subtitle:
-		"Descubre rutas que despiertan los sentidos y experiencias diseñadas para ser vividas sin prisas, en armonía con el entorno.",
-	cta: "Explorar el sendero",
+		"Conecta con la naturaleza, explora paisajes inolvidables y comparte experiencias únicas con tus compañeros de viaje.",
+	cta: "Explora el sendero",
 };
 
 /**

@@ -15,7 +15,7 @@
 
 .eyebrow {
 	font-weight: var(--font-weight-semibold);
-	letter-spacing: 0.15em; /* Un poco más de aire para el estilo 'eyebrow' */
+	letter-spacing: 0.15em;
 	font-size: var(--font-size-xs);
 	text-transform: uppercase;
 	color: var(--color-text-muted);

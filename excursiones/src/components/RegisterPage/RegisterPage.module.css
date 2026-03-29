@@ -1,6 +1,7 @@
-/* Asegura que el contenedor de la página crezca para ocupar todo el espacio del Layout */
 .pageContainer {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	width: 100%;
+	margin-bottom: var(--space-16);
 }

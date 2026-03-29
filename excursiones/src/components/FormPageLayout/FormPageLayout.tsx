@@ -8,6 +8,8 @@ interface FormPageLayoutProps {
 	readonly title: string;
 	/** Un subtítulo opcional para dar más contexto. */
 	readonly subtitle?: string;
+	/** ID opcional para el subtítulo para vinculación con aria-describedby. */
+	readonly subtitleId?: string;
 	/** El contenido del formulario a renderizar. */
 	readonly children: React.ReactNode;
 	/** Ancho de la columna para el formulario en breakpoints grandes. Por defecto "5". */
@@ -32,6 +34,7 @@ interface FormPageLayoutProps {
 export function FormPageLayout({
 	title,
 	subtitle,
+	subtitleId,
 	children,
 	colWidth = "5",
 	containerClassName,
@@ -41,21 +44,32 @@ export function FormPageLayout({
 
 	return (
 		<Container
+			as="main"
 			fluid
-			className={`${styles.container} ${containerClassName ?? ""}`}
+            className={styles.container + " " + (containerClassName ?? "")}
 		>
-			<Row className="justify-content-center align-items-center">
-				<Col xs={12} md={9} lg={8} xl={colWidth}>
+			<Row className="justify-content-center align-items-center flex-grow-1 m-0 w-100">
+				<Col
+					xs={12}
+					md={10}
+					lg={8}
+					xl={colWidth}
+					className="p-4 d-flex flex-column justify-content-center"
+				>
 					<Card
 						as="section"
 						className={styles.contentPane}
 						aria-labelledby={titleId}
 					>
 						<Card.Body className={styles.cardBody}>
-							<Card.Title as="h2" id={titleId} className={styles.cardTitle}>
+							<Card.Title as="h1" id={titleId} className={styles.cardTitle}>
 								{title}
 							</Card.Title>
-							{subtitle && <p className={styles.cardSubtitle}>{subtitle}</p>}
+							{subtitle && (
+								<p id={subtitleId} className={styles.cardSubtitle}>
+									{subtitle}
+								</p>
+							)}
 							{children}
 						</Card.Body>
 						{switcher && (
