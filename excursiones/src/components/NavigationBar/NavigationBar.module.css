@@ -1,25 +1,30 @@
 .customNavbar {
 	padding-block: 1.25rem;
 	background-color: var(--navbar-bg);
-	backdrop-filter: var(--navbar-backdrop-filter); /* Efecto cristal */
-	box-shadow: var(--shadow-soft);
+	backdrop-filter: var(--navbar-backdrop-filter);
+	box-shadow: var(--navbar-shadow);
+	border-bottom: var(--navbar-border-bottom);
 }
 
-/* Aplica la transición solo cuando la barra NO es transparente.
-   Esto crea el efecto de "fade-in" al hacer scroll, pero evita el "fade-out" al navegar a la Home. */
+/* Cuando la barra se materializa al hacer scroll, activamos el borde inferior sutil */
 .customNavbar:not(.transparentNavbar) {
-	transition:
-		box-shadow 0.3s ease,
-		backdrop-filter 0.3s ease,
-		border-color 0.3s ease;
+	border-bottom-color: var(--navbar-border-scrolled);
 }
 
 /* Estilo para integrar la barra en el Hero (Home) */
 .transparentNavbar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
 	background-color: transparent; /* Fuerza la transparencia */
 	backdrop-filter: none; /* Sin desenfoque en el estado inicial transparente */
 	box-shadow: none; /* Elimina la sombra para que se vea plano sobre la imagen */
-	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+	/* Borde blanco muy sutil para separar la barra del Hero sin añadir peso visual */
+	border-bottom-color: rgba(255, 255, 255, 0.15);
+	border-bottom-style: solid;
 
 	/* --- Overrides de color para el modo transparente --- */
 	/* Sobrescribimos las variables semánticas localmente para forzar el blanco sobre el Hero oscuro */
@@ -38,7 +43,10 @@
 	--login-btn-text: var(--color-white);
 	--login-btn-text-hover: var(--color-white);
 
-	/* Botones de acción (Tema y Menú) */
+	/* 
+	 * Botones de acción (Tema y Menú) 
+	 * Aplicamos una opacidad más baja al hover para que se sienta más "orgánico"
+	 */
 	--theme-toggle-btn-color: var(--color-white);
 	--theme-toggle-btn-icon: var(--color-white);
 	--theme-toggle-btn-bg-hover: rgba(255, 255, 255, 0.15);

@@ -14,6 +14,7 @@ import LoginPageSkeleton from "../LoginPage/LoginPageSkeleton";
 import UserPageSkeleton from "../UserPage/UserPageSkeleton";
 import { useAuth } from "../../hooks/useAuth";
 import { lazyWithMinTime } from "../../utils/lazyWithMinTime";
+import { ScrollToTop } from "../../ui/ScrollToTop/ScrollToTop";
 import styles from "./Layout.module.css";
 
 const RegisterPage = lazyWithMinTime(() => import("../RegisterPage"));
@@ -91,6 +92,7 @@ export function Layout() {
 				</div>
 			</main>
 			<Footer />
+			<ScrollToTop />
 		</div>
 	);
 }

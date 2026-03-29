@@ -1,6 +1,7 @@
 import { forwardRef, useState, useEffect, ChangeEvent } from "react";
 import { Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import { TriangleAlertIcon } from "../../ui/Icons";
 import styles from "./UserPageInputEdit.module.css";
 
 /**
@@ -25,7 +26,7 @@ interface UserPageInputEditProps {
 
 function UserPageInputEditComponent(
 	props: UserPageInputEditProps,
-	ref: React.Ref<HTMLInputElement>
+	ref: React.Ref<HTMLInputElement>,
 ): JSX.Element {
 	const {
 		id,
@@ -65,7 +66,7 @@ function UserPageInputEditComponent(
 			// Si es `false`, la validación falla, pero no hay mensaje específico,
 			// así que usamos un string vacío para indicar el error y mostrar el mensaje genérico.
 			setValidationError(
-				validationResult === true ? null : validationResult || ""
+				validationResult === true ? null : validationResult || "",
 			);
 		}
 	};
@@ -88,27 +89,25 @@ function UserPageInputEditComponent(
 				isInvalid={isInvalid}
 				aria-describedby={isInvalid ? errorId : undefined}
 			/>
-			{isInvalid && (
-				<Form.Control.Feedback
-					type="invalid"
-					id={errorId}
-					className={`${styles.errorMessage} text-danger fw-bold mt-1`}
-					// aria-live="polite" ensures that screen readers announce the error
-					// message when it appears, without interrupting the user's flow.
-					// This is crucial for dynamic, real-time validation feedback.
-					aria-live="polite"
-				>
+			<Form.Control.Feedback
+				type="invalid"
+				id={errorId}
+				className={`${styles.errorContainer} ${isInvalid ? styles.visible : ""} text-danger fw-bold`}
+				aria-live="polite"
+			>
+				<div className={styles.errorContent}>
+					<TriangleAlertIcon size={18} className={styles.errorIcon} />
 					{validationError ||
 						errorMessage ||
 						"Recuerda, no puedes dejar un campo vacío o en un formato incorrecto."}
-				</Form.Control.Feedback>
-			)}
+				</div>
+			</Form.Control.Feedback>
 		</>
 	);
 }
 
 const UserPageInputEdit = forwardRef<HTMLInputElement, UserPageInputEditProps>(
-	UserPageInputEditComponent
+	UserPageInputEditComponent,
 );
 
 UserPageInputEdit.displayName = "UserPageInputEdit";

@@ -1,9 +1,9 @@
-import React, { useState, ChangeEvent, forwardRef } from "react";
+import { useState, ChangeEvent, forwardRef } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
-import { EyeIcon, EyeOffIcon } from "../Icons";
+import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
 import styles from "./ValidatedInput.module.css";
 
 /**
@@ -108,16 +108,17 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 							{showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
 						</Button>
 						{/* Feedback debe ir dentro del InputGroup cuando se usa hasValidation */}
-						{isInvalid && (
-							<Form.Control.Feedback
-								type="invalid"
-								id={errorId}
-								className={`${styles.errorMessage} text-danger fw-bold mt-1`}
-								aria-live="polite"
-							>
+						<Form.Control.Feedback
+							type="invalid"
+							id={errorId}
+							className={`${styles.errorContainer} ${isInvalid ? styles.visible : ""} text-danger fw-bold`}
+							aria-live="polite"
+						>
+							<div className={styles.errorContent}>
+								<TriangleAlertIcon size={18} className={styles.errorIcon} />
 								{validationError || errorMessage || "Formato incorrecto."}
-							</Form.Control.Feedback>
-						)}
+							</div>
+						</Form.Control.Feedback>
 					</InputGroup>
 				) : (
 					<Form.Control
@@ -132,17 +133,18 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 					/>
 				)}
 
-				{/* Renderizamos el feedback aquí solo si NO es password, para evitar duplicados */}
-				{isInvalid && !isPasswordType && (
+				{/* Renderizamos el feedback fuera si NO es password */}
+				{!isPasswordType && (
 					<Form.Control.Feedback
 						type="invalid"
 						id={errorId}
-						className={`${styles.errorMessage} text-danger fw-bold mt-1`}
-						// aria-live="polite" hace que los lectores de pantalla anuncien el mensaje de error cuando aparece, sin interrumpir al usuario.
+						className={`${styles.errorContainer} ${isInvalid ? styles.visible : ""} text-danger fw-bold`}
 						aria-live="polite"
 					>
-						{/* Si la validación retorna un string, lo muestra. Si no, usa el `errorMessage` de las props. */}
-						{validationError || errorMessage || "Formato incorrecto."}
+						<div className={styles.errorContent}>
+							<TriangleAlertIcon size={18} className={styles.errorIcon} />
+							{validationError || errorMessage || "Formato incorrecto."}
+						</div>
 					</Form.Control.Feedback>
 				)}
 			</Form.Group>

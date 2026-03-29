@@ -10,12 +10,39 @@
  */
 :root {
 	/* Navbar y Estructura */
-	--navbar-bg: var(--color-background-surface);
-	--navbar-backdrop-filter: blur(12px); /* Efecto cristal esmerilado moderno */
+
+	/* --- Botones Premium --- */
+	--btn-transition:
+		background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease,
+		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+	--btn-hover-transform: scale(1.02);
+	--btn-active-transform: scale(0.97); /* Efecto de "presión" física */
+	--btn-hover-shadow:
+		0 8px 16px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
+	/* ------------------------ */
+
+	--navbar-backdrop-filter: blur(
+		16px
+	); /* Aumentamos el blur para un efecto más premium */
+	/* Definimos la transición core para la navbar */
+	--navbar-transition:
+		background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease,
+		border-color 0.4s ease;
+	/* Sombra sutil para cuando la navbar está sólida */
+	--navbar-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+	--navbar-border-bottom: 1px solid transparent;
+
 	/* Tarjetas (ExcursionCard) */
 	--excursion-card-bg: var(--color-background-surface);
-	--excursion-card-shadow: var(--shadow-soft);
+	/* 
+	 * Sombra estática para tarjetas informativas. 
+	 * Eliminamos efectos de hover ya que no son elementos interactivos.
+	 */
+	--excursion-card-shadow:
+		0 2px 4px rgba(0, 0, 0, 0.04), 0 12px 24px rgba(0, 0, 0, 0.06);
 	--excursion-card-title-color: var(--color-text-base);
+	/* Curva de transición 'out-back' para un efecto de elevación más orgánico */
+	--excursion-card-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 
 	/* Filtros y Botones Comunes */
 	--filter-container-bg: var(--color-background-surface);
@@ -88,6 +115,13 @@ html.light {
 	/* El fondo de la barra de navegación es opaco por defecto para asegurar la legibilidad del contenido que pasa por debajo.
 	   La transparencia solo se aplica en la página de inicio antes de hacer scroll. */
 	--navbar-bg: var(--color-white);
+	--navbar-bg-transparent: transparent;
+	--navbar-border-scrolled: color-mix(
+		in srgb,
+		var(--color-stone-200),
+		transparent 50%
+	);
+
 	--navbar-color: var(--color-stone-800);
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(
@@ -219,7 +253,8 @@ html.light {
 	--search-bar-border-focus: var(--color-primary);
 
 	/* Sombra para elementos elevados en interacción (ej. hover de botones flotantes) */
-	--shadow-lifted: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
+	--shadow-lifted:
+		0 12px 24px -6px rgba(0, 0, 0, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.05);
 
 	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
 	--clear-filters-color: var(--color-moss-700);
@@ -227,6 +262,7 @@ html.light {
 
 	/* Hero CTA Button */
 	--hero-cta-bg: var(--color-white);
+
 	--hero-cta-text: rgb(var(--color-hero-overlay-base));
 	--hero-cta-bg-hover: var(--color-stone-50); /* Blanco cálido */
 	--hero-cta-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -273,18 +309,22 @@ html.dark {
 	/* El fondo de la barra de navegación es opaco por defecto para asegurar la legibilidad del contenido que pasa por debajo.
 	   La transparencia solo se aplica en la página de inicio antes de hacer scroll. */
 	--navbar-bg: var(--color-green-dark-800);
+	--navbar-bg-transparent: transparent;
+	--navbar-border-scrolled: color-mix(
+		in srgb,
+		var(--color-green-dark-500),
+		transparent 60%
+	);
+
 	--navbar-color: var(--color-stone-100);
 	--navbar-brand-color: var(--color-stone-50);
-	--navbar-brand-icon: var(
-		--color-moss-200
-	); /* Aclarado para cumplir AAA (7:1) */
+	--navbar-brand-icon: var(--color-moss-200);
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-green-dark-400);
 
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(--navbar-color);
-	/* BUGFIX: El color del icono no estaba definido para el tema oscuro. */
 	--theme-toggle-btn-icon: var(--color-text-base);
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: var(--color-white-alpha-10);
@@ -398,6 +438,9 @@ html.dark {
 	/* Sombra para elementos elevados en interacción (ej. hover de botones flotantes) */
 	--shadow-lifted: 0 15px 30px -5px rgba(0, 0, 0, 0.35);
 
+	/* En modo oscuro, las sombras son menos visibles, así que usamos un halo de luz sutil */
+	--excursion-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+
 	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
 	--clear-filters-color: var(--color-moss-200);
 	--clear-filters-color-hover: var(--color-moss-100);
@@ -422,6 +465,44 @@ html.dark body {
 /* Invierte el color del botón de cierre en modo oscuro para que sea visible */
 html.dark .btn-close {
 	filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* --- Botones Interactivos (Estética Premium) --- */
+
+/* 
+ * Aplicamos la base a todos los botones para asegurar consistencia.
+ * La transición utiliza una curva 'back' para el transform, lo que le da 
+ * un toque orgánico y vivo al elevarse.
+ */
+.btn {
+	transition: var(--btn-transition) !important;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	font-weight: var(--font-weight-medium);
+}
+
+/* Estado Hover: Elevación sutil y sombra expansiva */
+.btn:hover:not(:disabled):not(.disabled) {
+	transform: var(--btn-hover-transform);
+	box-shadow: var(--btn-hover-shadow);
+}
+
+/* Estado Active: Feedback táctil al presionar */
+.btn:active:not(:disabled):not(.disabled),
+.btn:focus:active:not(:disabled):not(.disabled) {
+	transform: var(--btn-active-transform) !important;
+	box-shadow: var(--shadow-soft) !important;
+}
+
+/* Estado Disabled: Eliminamos interactividad visual */
+.btn:disabled,
+.btn.disabled {
+	transform: none !important;
+	box-shadow: none !important;
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 /* --- Formularios (Inputs, etc.) --- */
@@ -475,11 +556,24 @@ html.dark .btn-close {
 	outline: none;
 }
 
-/* Estilo para inputs inválidos, asegurando que el borde de error no se muestre en :focus,
-   donde el anillo de foco ya proporciona suficiente feedback. */
-.form-control.is-invalid:not(:focus),
-.form-select.is-invalid:not(:focus) {
+/* 
+ * Estilo para inputs inválidos. 
+ * Cuando NO tienen el foco, muestran el borde de peligro.
+ */
+.form-control.is-invalid:not(:focus) {
 	border-color: var(--color-border-danger);
+}
+
+/* 
+ * Cuando un input inválido tiene el foco, cambiamos el color del anillo de foco 
+ * a una versión sutil del color de peligro para que el error siga siendo visible.
+ */
+.form-control.is-invalid:focus,
+.form-control.is-invalid:focus-visible {
+	border-color: var(--color-text-danger);
+	/* Intensificamos el halo reduciendo la transparencia al 30% (70% de opacidad) */
+	box-shadow: 0 0 0 var(--space-1)
+		color-mix(in srgb, var(--color-text-danger), transparent 30%) !important;
 }
 
 /* Eliminamos el icono de exclamación por defecto de Bootstrap para un look más limpio. */
@@ -516,6 +610,13 @@ html.dark .btn-close {
 
 .input-group > .btn:hover {
 	border-color: var(--color-border-default);
+}
+
+/* Asegura que el borde de error se extienda al botón del ojo en los campos de contraseña */
+.input-group:has(.form-control.is-invalid) > .btn {
+	border-color: var(--color-border-danger);
+	/* Sincronizamos también el borde izquierdo que actúa como divisor */
+	border-left-color: var(--color-border-danger);
 }
 
 /* --- Botones Bootstrap (Override) --- */
@@ -570,4 +671,29 @@ html.dark .btn-close {
 	/* !important necesario para sobrescribir los estilos por defecto de Bootstrap (.btn:focus, etc.) */
 	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color) !important;
 	transition: box-shadow 0.2s ease-in-out;
+}
+
+/* --- Animaciones Premium --- */
+
+/* Efecto Shimmer para Skeletons: Desplazamiento de gradiente sutil */
+@keyframes skeleton-shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.skeleton-animated {
+	background: linear-gradient(
+		90deg,
+		var(--image-placeholder-bg) 25%,
+		color-mix(in srgb, var(--image-placeholder-bg), var(--color-text-muted) 10%)
+			50%,
+		var(--image-placeholder-bg) 75%
+	);
+	background-size: 200% 100%;
+	animation: skeleton-shimmer 2s infinite linear;
+	border-radius: var(--border-radius-md);
 }

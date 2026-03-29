@@ -21,6 +21,7 @@ import {
 	LuUser,
 	LuMail,
 	LuCopyright,
+	LuArrowUp
 } from "react-icons/lu";
 
 // Tipo base para las props de los iconos
@@ -76,3 +77,5 @@ export const UserIcon = LuUser as React.ComponentType<IconProps>;
 export const MailIcon = LuMail as React.ComponentType<IconProps>;
 // Icono del copyright para el footer
 export const CopyrightIcon = LuCopyright as React.ComponentType<IconProps>;
+// Icono de flecha hacia arriba para el botón de "Scroll to Top"
+export const ArrowUpIcon = LuArrowUp as React.ComponentType<IconProps>;
