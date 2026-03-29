@@ -15,6 +15,9 @@
 	--btn-transition:
 		background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease,
 		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+	/* Transición "espacial" que omite colores, usada durante el cambio de tema */
+	--btn-transition-spatial:
+		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 	--btn-hover-transform: scale(1.02);
 	--btn-active-transform: scale(0.97); /* Efecto de "presión" física */
 	--btn-hover-shadow:
@@ -484,6 +487,15 @@ body .btn {
 	font-weight: var(--font-weight-medium);
 }
 
+/* 
+ * Override para el cambio de tema:
+ * Cuando la clase .theme-toggling está presente, los botones ignoran las transiciones de color
+ * pero mantienen el feedback físico (transform/shadow).
+ */
+html.theme-toggling body .btn {
+	transition: var(--btn-transition-spatial);
+}
+
 /* Estado Hover: Elevación sutil y sombra expansiva */
 .btn:hover:not(:disabled):not(.disabled) {
 	transform: var(--btn-hover-transform);
@@ -695,5 +707,5 @@ html :focus-visible {
 	);
 	background-size: 200% 100%;
 	animation: skeleton-shimmer 2s infinite linear;
-	border-radius: var(--border-radius-md);
+	border-radius: var(--border-radius-lg);
 }
