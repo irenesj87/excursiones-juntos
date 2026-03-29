@@ -476,7 +476,7 @@ html.dark .btn-close {
  * Usamos 'body' para aumentar la especificidad y evitar !important contra Bootstrap.
  */
 body .btn {
-	transition: none;
+	transition: var(--btn-transition);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
