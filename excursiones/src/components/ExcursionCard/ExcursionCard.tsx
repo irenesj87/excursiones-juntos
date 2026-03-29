@@ -53,7 +53,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
 					<CheckIcon className={styles.detailIcon} />
-					Apuntado/a
+					Caminando juntos
 				</span>
 			) : (
 				<CustomButton
@@ -61,7 +61,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
-					Apuntarse
+					Caminar juntos
 				</CustomButton>
 			)}
 		</div>
@@ -137,7 +137,7 @@ export function ExcursionCard({
 	 */
 	const user = useSelector((state: RootState) => state.loginReducer.user);
 	const isLoggedIn = !!user;
-	// La excursión ya se considera unida si el usuario existe y su lista de excursiones incluye el ID de esta 
+	// La excursión ya se considera unida si el usuario existe y su lista de excursiones incluye el ID de esta
 	// excursión. Si no hay usuario, se asume que no está unido.
 	const isJoined = user?.excursions.includes(id) ?? false;
 

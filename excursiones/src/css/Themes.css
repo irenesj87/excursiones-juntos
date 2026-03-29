@@ -15,6 +15,9 @@
 	--btn-transition:
 		background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease,
 		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+	/* Transición "espacial" que omite colores, usada durante el cambio de tema */
+	--btn-transition-spatial:
+		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 	--btn-hover-transform: scale(1.02);
 	--btn-active-transform: scale(0.97); /* Efecto de "presión" física */
 	--btn-hover-shadow:
@@ -473,14 +476,24 @@ html.dark .btn-close {
  * Aplicamos la base a todos los botones para asegurar consistencia.
  * La transición utiliza una curva 'back' para el transform, lo que le da 
  * un toque orgánico y vivo al elevarse.
+ * Usamos 'body' para aumentar la especificidad y evitar !important contra Bootstrap.
  */
-.btn {
-	transition: var(--btn-transition) !important;
+body .btn {
+	transition: var(--btn-transition);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: var(--space-2);
 	font-weight: var(--font-weight-medium);
+}
+
+/* 
+ * Override para el cambio de tema:
+ * Cuando la clase .theme-toggling está presente, los botones ignoran las transiciones de color
+ * pero mantienen el feedback físico (transform/shadow).
+ */
+html.theme-toggling body .btn {
+	transition: var(--btn-transition-spatial);
 }
 
 /* Estado Hover: Elevación sutil y sombra expansiva */
@@ -490,17 +503,17 @@ html.dark .btn-close {
 }
 
 /* Estado Active: Feedback táctil al presionar */
-.btn:active:not(:disabled):not(.disabled),
-.btn:focus:active:not(:disabled):not(.disabled) {
-	transform: var(--btn-active-transform) !important;
-	box-shadow: var(--shadow-soft) !important;
+body .btn:active:not(:disabled):not(.disabled),
+body .btn:focus:active:not(:disabled):not(.disabled) {
+	transform: var(--btn-active-transform);
+	box-shadow: var(--shadow-soft);
 }
 
 /* Estado Disabled: Eliminamos interactividad visual */
-.btn:disabled,
-.btn.disabled {
-	transform: none !important;
-	box-shadow: none !important;
+body .btn:disabled,
+body .btn.disabled {
+	transform: none;
+	box-shadow: none;
 	opacity: 0.5;
 	cursor: not-allowed;
 }
@@ -568,12 +581,12 @@ html.dark .btn-close {
  * Cuando un input inválido tiene el foco, cambiamos el color del anillo de foco 
  * a una versión sutil del color de peligro para que el error siga siendo visible.
  */
-.form-control.is-invalid:focus,
-.form-control.is-invalid:focus-visible {
+body .form-control.is-invalid:focus,
+body .form-control.is-invalid:focus-visible {
 	border-color: var(--color-text-danger);
 	/* Intensificamos el halo reduciendo la transparencia al 30% (70% de opacidad) */
 	box-shadow: 0 0 0 var(--space-1)
-		color-mix(in srgb, var(--color-text-danger), transparent 30%) !important;
+		color-mix(in srgb, var(--color-text-danger), transparent 30%);
 }
 
 /* Eliminamos el icono de exclamación por defecto de Bootstrap para un look más limpio. */
@@ -666,11 +679,10 @@ html.dark .btn-close {
  * Centralizamos aquí el box-shadow para no repetirlo en módulos CSS.
  * Se aplica a cualquier elemento interactivo cuando recibe foco por teclado.
  */
-:focus-visible {
+html :focus-visible {
 	outline: none;
-	/* !important necesario para sobrescribir los estilos por defecto de Bootstrap (.btn:focus, etc.) */
-	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color) !important;
-	transition: box-shadow 0.2s ease-in-out;
+	/* Al usar 'html :focus-visible' ganamos a los selectores simples de Bootstrap */
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
 }
 
 /* --- Animaciones Premium --- */
@@ -695,5 +707,5 @@ html.dark .btn-close {
 	);
 	background-size: 200% 100%;
 	animation: skeleton-shimmer 2s infinite linear;
-	border-radius: var(--border-radius-md);
+	border-radius: var(--border-radius-lg);
 }

@@ -15,7 +15,7 @@
 
 .eyebrow {
 	font-weight: var(--font-weight-semibold);
-	letter-spacing: 2px;
+	letter-spacing: 0.15em; /* Un poco más de aire para el estilo 'eyebrow' */
 	font-size: var(--font-size-xs);
 	text-transform: uppercase;
 	color: var(--color-text-muted);
@@ -26,7 +26,8 @@
 	font-weight: var(--font-weight-light);
 	font-size: var(--font-size-xxl);
 	color: var(--color-text-base);
-	line-height: 1.2;
+	line-height: 1.1;
+	letter-spacing: var(--letter-spacing-tight);
 	text-wrap: balance;
 	margin-bottom: var(--space-4);
 }
@@ -47,7 +48,7 @@
 
 .description {
 	font-size: var(--font-size-base);
-	line-height: 1.5;
+	line-height: 1.8; /* Interlineado generoso para una lectura pausada y relajante */
 	color: var(--color-text-base);
 	max-width: 37.5rem;
 	margin-top: var(--space-6);
