@@ -50,17 +50,23 @@
   - **Tipografía**: Amigable y limpia. Sans-serif geométrica o humanista para todo. Títulos con peso moderado.
   - **Formas**: Curvas orgánicas pero controladas. Usa radios de borde pequeños (4px - 12px) para una sensación suave.
   - **Profundidad**: Suave y elevada. Sombras difusas y ligeras para dar sensación de flotabilidad.
+
+- **Estética "Premium" (Refinamiento)**:
+  - **Precisión Técnica**: Cuidado obsesivo por la alineación (ej. iconos alineados a la línea base del texto). "Pixel-perfect" no es una opción, es el estándar.
+  - **El Espacio como Lujo**: Uso generoso del espacio negativo para reducir la carga cognitiva y dar jerarquía.
+  - **Materialidad Moderna**: Uso de efectos de cristal (Glassmorphism/Backdrop-filter) y sombras multicapa para crear profundidad natural sin saturar.
+  - **Micro-interacciones con Propósito**: Las transiciones deben ser fluidas (0.2s - 0.3s) y orgánicas (desplazamientos sutiles + opacidad). Nada aparece o desaparece de golpe.
+  - **Rendimiento Percibido**: Uso de Skeletons y estados de carga refinados para que la interfaz se sienta instantánea y "viva".
+
 - Define los estilos base pensando en dispositivos móviles y utiliza media queries (`min-width`) para adaptar el diseño a pantallas más grandes.
 - La UI debe ser resiliente. Diseña y programa pensando en que el contenido puede desbordarse (textos largos) o faltar.
 - Jerarquía visual: Guía la vista del usuario hacia los elementos más importantes. Usa el tamaño, el color, el contraste y el espaciado para destacar las acciones principales.
 - Consistencia visual: Usa la misma paleta de colores, tipografías y estilos de iconos en toda la aplicación.
-- **Micro-interacciones**: La interfaz debe sentirse viva. Usa transiciones suaves (`0.2s ease-out`) para `hover` y `focus`. Los elementos interactivos deben dar feedback visual inmediato.
 - Estados de la aplicación:
   - Carga: Mostrar un spinner o un esqueleto (skeleton) para indicar que los datos se están cargando.
   - Vacío: Si una búsqueda no tiene resultados o una lista está vacía, se muestra con un mensaje amigable y, si es posible, una llamada a la acción ("No tienes tareas. ¡Crea la primera!").
   - Error: Si algo sale mal, explicar qué pasó de forma sencilla y ofrecer una solución.
   - Éxito: Confirmar que una acción se ha completado correctamente (ej. "¡Perfil actualizado con éxito!").
-- No tengas miedo a usar el espacio en blanco (whitespace).
 
 ## 6. Documentación
 

@@ -71,13 +71,6 @@ function UserPageInputEditComponent(
 		}
 	};
 
-	/**
-	 * Limpia el estado de error cuando el input pierde el foco.
-	 */
-	const handleBlur = () => {
-		setValidationError(null);
-	};
-
 	const isInvalid = message && validationError !== null;
 
 	return (
@@ -91,7 +84,6 @@ function UserPageInputEditComponent(
 				id={id}
 				type="text"
 				value={value}
-				onBlur={handleBlur}
 				onChange={handleChange}
 				disabled={!isEditing}
 				isInvalid={isInvalid}

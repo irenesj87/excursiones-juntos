@@ -67,13 +67,6 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			);
 		};
 
-		/**
-		 * Limpia el estado de error cuando el input pierde el foco.
-		 */
-		const handleBlur = () => {
-			setValidationError(null);
-		};
-
 		// Combina los IDs externos con el ID del error interno si es visible.
 		const isInvalid = message && validationError !== null;
 		const describedBy = [ariaDescribedBy, isInvalid ? errorId : null]
@@ -96,7 +89,6 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 						<Form.Control
 							ref={ref}
 							type={currentType}
-							onBlur={handleBlur}
 							onChange={nameChange}
 							name={name}
 							value={value}
@@ -132,7 +124,6 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 					<Form.Control
 						ref={ref}
 						type={inputType}
-						onBlur={handleBlur}
 						onChange={nameChange}
 						name={name}
 						value={value}

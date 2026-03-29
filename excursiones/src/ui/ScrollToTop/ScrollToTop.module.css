@@ -1,0 +1,57 @@
+.scrollToTop {
+	position: fixed;
+	bottom: var(--space-8);
+	right: var(--space-8);
+	width: 3.5rem;
+	height: 3.5rem;
+
+	/* Estética Neutra: Usamos la paleta de piedra para que sea una utilidad discreta */
+	background-color: var(--color-stone-200);
+	color: var(--color-stone-800);
+	border: none;
+
+	border-radius: 50% !important;
+	padding: 0;
+	z-index: 1000;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(20px);
+	transition:
+		opacity 0.3s ease,
+		transform 0.3s ease,
+		visibility 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--shadow-soft);
+}
+
+.scrollToTop:hover {
+	background-color: var(--color-stone-300);
+	color: var(--color-stone-900);
+}
+
+/* Estado activo para evitar la pérdida de color y dar feedback de presión */
+.scrollToTop:active {
+	background-color: var(--color-stone-400) !important;
+	color: var(--color-stone-950);
+	transition: none; /* Feedback instantáneo al presionar */
+}
+
+.visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+/* 
+ * En móviles, movemos el botón al lado izquierdo para equilibrar la interfaz.
+ * Las acciones (Filtros) a la derecha, la navegación (Top) a la izquierda.
+ */
+@media (max-width: 991px) {
+	.scrollToTop {
+		right: auto;
+		left: var(--space-8);
+		bottom: var(--space-8);
+	}
+}
