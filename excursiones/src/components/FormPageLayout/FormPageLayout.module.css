@@ -3,15 +3,16 @@
 	flex-direction: column;
 	flex-grow: 1; /* Asegura que el contenedor ocupe el espacio vertical disponible */
 	justify-content: center;
-	padding-top: var(--space-12);
-	padding-bottom: var(--space-12);
+	margin-top: 0;
+	margin-bottom: var(--space-4);
 }
 
 /* Media query para breakpoints más grandes */
 @media (min-width: 576px) {
 	.container {
-		padding-top: var(--space-16);
-		padding-bottom: var(--space-16);
+		/* En pantallas grandes como iPad Mini, mantenemos la proporción de seguridad */
+		padding-top: var(--space-6);
+		padding-bottom: var(--space-32);
 	}
 }
 
