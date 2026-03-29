@@ -31,11 +31,16 @@
 	color: var(--color-stone-900);
 }
 
-/* Estado activo para evitar la pérdida de color y dar feedback de presión */
-.scrollToTop:active {
-	background-color: var(--color-stone-400) !important;
+/* 
+ * Estado activo para evitar la pérdida de color y dar feedback de presión.
+ * Aumentamos la especificidad incluyendo .btn y :not(:disabled) para igualar 
+ * las reglas globales de Themes.css y asegurar que el color persista.
+ */
+:global(body) .scrollToTop:global(.btn):active:not(:disabled),
+:global(body) .scrollToTop:global(.btn):focus:active:not(:disabled) {
+	background-color: var(--color-stone-400);
 	color: var(--color-stone-950);
-	transition: none; /* Feedback instantáneo al presionar */
+	transition: none;
 }
 
 .visible {

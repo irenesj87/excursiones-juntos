@@ -50,7 +50,7 @@ const excursions: Excursion[] = [
 	{
 		id: "1",
 		name: "Cangas de Onís",
-		description: `Camina sobre el susurro del río Sella. Un encuentro con la historia bajo la silueta del Puente Romano, que invita a una pausa necesaria.`,
+		description: `Camina sobre el susurro del río Sella. Un encuentro con la historia bajo la silueta del Puente Romano, donde la piedra antigua te invita a una pausa necesaria.`,
 		area: "Centro-Este",
 		difficulty: DIFFICULTY_LEVELS.LOW,
 		time: "4 horas",
