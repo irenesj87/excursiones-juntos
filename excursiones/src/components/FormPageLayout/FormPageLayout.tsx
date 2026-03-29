@@ -46,7 +46,7 @@ export function FormPageLayout({
 		<Container
 			as="main"
 			fluid
-			className={`${styles.container} ${containerClassName ?? ""} p-0 d-flex flex-column flex-grow-1`}
+            className={styles.container + " " + (containerClassName ?? "")}
 		>
 			<Row className="justify-content-center align-items-center flex-grow-1 m-0 w-100">
 				<Col
