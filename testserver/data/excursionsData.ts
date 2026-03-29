@@ -39,7 +39,7 @@ const excursions: Excursion[] = [
 	{
 		id: "0",
 		name: "Bulnes",
-		description: `Descubre un pueblo escondido entre montañas, accesible solo a pie o en funicular.`,
+		description: `Un refugio tallado en la roca donde el silencio es el único habitante. Siente la paz de un rincón olvidado por las prisas, protegido por la sombra de los Picos de Europa.`,
 		area: "Este",
 		difficulty: DIFFICULTY_LEVELS.MEDIUM,
 		time: "4 horas",
@@ -50,7 +50,7 @@ const excursions: Excursion[] = [
 	{
 		id: "1",
 		name: "Cangas de Onís",
-		description: `Viaja en el tiempo cruzando el legendario Puente Romano, emblema de Cangas de Onís.`,
+		description: `Camina sobre el susurro del río Sella. Un encuentro con la historia bajo la silueta del Puente Romano, que invita a una pausa necesaria.`,
 		area: "Centro-Este",
 		difficulty: DIFFICULTY_LEVELS.LOW,
 		time: "4 horas",
@@ -61,7 +61,7 @@ const excursions: Excursion[] = [
 	{
 		id: "2",
 		name: "Picos de Europa",
-		description: `Conquista senderos que desafían las alturas y regalan vistas panorámicas que cortan la respiración.`,
+		description: `Encuentra la calma en la inmensidad de las alturas. Un diálogo entre las nubes y la caliza donde cada paso te acerca a la belleza de lo esencial.`,
 		area: "Este",
 		difficulty: DIFFICULTY_LEVELS.HIGH,
 		time: "6 horas",

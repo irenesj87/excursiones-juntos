@@ -2,13 +2,13 @@ import { BackpackIcon } from "../../ui/Icons";
 import styles from "./AboutUs.module.css";
 
 const CONTENT = {
-	eyebrow: "Sobre Nosotros",
+	eyebrow: "Nuestra Filosofía",
 	title: {
-		start: "Explorando la naturaleza,",
-		highlight: "creando recuerdos.",
+		start: "El arte de",
+		highlight: "caminar juntos.",
 	},
 	description:
-		"En Excursiones Juntos, creemos que el camino es mejor cuando se comparte. Nacimos de la pasión por el senderismo y el deseo de conectar a personas que buscan escapar de la rutina y respirar aire puro.",
+		"Para nosotros, la verdadera aventura no se mide en kilómetros, sino en la calma de un paisaje compartido y en las historias que nacen alrededor de un sendero. Nos une el respeto por el silencio de los bosques, la luz de la mañana y el compromiso de dejar una huella mínima en la tierra que tanto nos regala. Aquí no solo caminamos; aprendemos a mirar de nuevo.",
 };
 
 export function AboutUs() {
