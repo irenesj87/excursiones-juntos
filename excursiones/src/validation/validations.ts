@@ -61,23 +61,23 @@ export function validateMail(mail: string): boolean {
  * Cada requisito tiene un mensaje de error y una función que verifica si la contraseña cumple con ese requisito.
  */
 export const PASSWORD_REQUIREMENTS: {
-	message: string;
+	label: string;
 	isValid: (password: string) => boolean;
 }[] = [
 	{
-		message: "Debe tener al menos 8 caracteres",
+		label: "8 caracteres",
 		isValid: (password) => password.length >= 8,
 	},
 	{
-		message: "Debe tener al menos una letra",
+		label: "una letra",
 		isValid: (password) => /[A-Za-z]/.test(password),
 	},
 	{
-		message: "Debe tener al menos un número",
+		label: "un número",
 		isValid: (password) => /\d/.test(password),
 	},
 	{
-		message: "Debe tener al menos un carácter especial (ej: @$!%*?&.,_-)",
+		label: "un carácter especial (ej: @$!%*?&.,_-)",
 		isValid: (password) => /[@$!%*?&.,_-]/.test(password),
 	},
 ];
@@ -92,26 +92,22 @@ export function validatePassword(password: string): true | string {
 	// Itera sobre los requisitos y retorna el primer mensaje de error que encuentre.
 	for (const requirement of PASSWORD_REQUIREMENTS) {
 		if (!requirement.isValid(password)) {
-			return requirement.message;
+			return `Debe tener al menos ${requirement.label}.`;
 		}
 	}
 	return true;
 }
 
 /**
- * Comprueba que dos contraseñas coincidan y que la segunda contraseña cumpla con los requisitos de validación.
+ * Comprueba que dos contraseñas coincidan.
  * @param password - La contraseña original.
  * @param samePassword - La contraseña de confirmación.
- * @returns - Retorna `true` si ambas contraseñas son iguales y válidas, o un `string` con el mensaje de error.
+ * @returns - Retorna `true` si ambas contraseñas son iguales, o un `string` con el mensaje de error.
  */
 export function validateSamePassword(
 	password: string,
 	samePassword: string,
 ): true | string {
-	const passwordValidationResult = validatePassword(samePassword);
-	if (passwordValidationResult !== true) {
-		return passwordValidationResult; // Retorna el error específico de la validación de la contraseña.
-	}
 	if (password !== samePassword) {
 		return "Las contraseñas no coinciden.";
 	}

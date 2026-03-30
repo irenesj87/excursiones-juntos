@@ -46,7 +46,7 @@ function createFriendlyError(
 /**
  * Componente que maneja la barra de búsqueda y la aplicación de filtros para las excursiones.
  */
-function SearchBar({
+export function SearchBar({
 	onFetchSuccess,
 	onExcursionsFetchStart,
 	onExcursionsFetchEnd,
@@ -156,5 +156,3 @@ function SearchBar({
 		</form>
 	);
 }
-
-export default SearchBar;

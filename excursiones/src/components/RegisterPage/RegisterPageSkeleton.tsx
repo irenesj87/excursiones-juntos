@@ -67,7 +67,7 @@ function RegisterPageSkeleton() {
 						<ul className="mb-0 list-unstyled" aria-hidden="true">
 							{PASSWORD_REQUIREMENTS.map((req, index) => (
 								<li
-									key={req.message}
+									key={req.label}
 									className="d-flex align-items-center gap-2 mb-1"
 								>
 									<div className={registerFormStyles.requirementIcon}>

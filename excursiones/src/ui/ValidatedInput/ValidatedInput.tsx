@@ -69,6 +69,8 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 
 		// Combina los IDs externos con el ID del error interno si es visible.
 		const isInvalid = message && validationError !== null;
+		// Solo mostramos el mensaje si el campo es inválido Y tenemos un texto que mostrar.
+		const showErrorMessage = isInvalid && !!(validationError || errorMessage);
 		const describedBy = [ariaDescribedBy, isInvalid ? errorId : null]
 			.filter(Boolean)
 			.join(" ");
@@ -111,13 +113,15 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 						<Form.Control.Feedback
 							type="invalid"
 							id={errorId}
-							className={`${styles.errorContainer} ${isInvalid ? styles.visible : ""} text-danger fw-bold`}
+							className={`${styles.errorContainer} ${showErrorMessage ? styles.visible : ""} text-danger fw-bold`}
 							aria-live="polite"
 						>
-							<div className={styles.errorContent}>
-								<TriangleAlertIcon size={18} className={styles.errorIcon} />
-								{validationError || errorMessage || "Formato incorrecto."}
-							</div>
+							{showErrorMessage && (
+								<div className={styles.errorContent}>
+									<TriangleAlertIcon size={18} className={styles.errorIcon} />
+									{validationError || errorMessage}
+								</div>
+							)}
 						</Form.Control.Feedback>
 					</InputGroup>
 				) : (
@@ -138,13 +142,15 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 					<Form.Control.Feedback
 						type="invalid"
 						id={errorId}
-						className={`${styles.errorContainer} ${isInvalid ? styles.visible : ""} text-danger fw-bold`}
+						className={`${styles.errorContainer} ${showErrorMessage ? styles.visible : ""} text-danger fw-bold`}
 						aria-live="polite"
 					>
-						<div className={styles.errorContent}>
-							<TriangleAlertIcon size={18} className={styles.errorIcon} />
-							{validationError || errorMessage || "Formato incorrecto."}
-						</div>
+						{showErrorMessage && (
+							<div className={styles.errorContent}>
+								<TriangleAlertIcon size={18} className={styles.errorIcon} />
+								{validationError || errorMessage}
+							</div>
+						)}
 					</Form.Control.Feedback>
 				)}
 			</Form.Group>

@@ -71,7 +71,10 @@ function UserPageInputEditComponent(
 		}
 	};
 
+	// Es inválido si message es true y validationError no es null (puede ser "" o un string con error)
 	const isInvalid = message && validationError !== null;
+	// Mostramos el feedback solo si hay un mensaje real
+	const showFeedback = isInvalid && !!(validationError || errorMessage);
 
 	return (
 		/**
@@ -92,15 +95,15 @@ function UserPageInputEditComponent(
 			<Form.Control.Feedback
 				type="invalid"
 				id={errorId}
-				className={`${styles.errorContainer} ${isInvalid ? styles.visible : ""} text-danger fw-bold`}
+				className={`${styles.errorContainer} ${showFeedback ? styles.visible : ""} text-danger fw-bold`}
 				aria-live="polite"
 			>
-				<div className={styles.errorContent}>
-					<TriangleAlertIcon size={18} className={styles.errorIcon} />
-					{validationError ||
-						errorMessage ||
-						"Recuerda, no puedes dejar un campo vacío o en un formato incorrecto."}
-				</div>
+				{showFeedback && (
+					<div className={styles.errorContent}>
+						<TriangleAlertIcon size={18} className={styles.errorIcon} />
+						{validationError || errorMessage}
+					</div>
+				)}
 			</Form.Control.Feedback>
 		</>
 	);

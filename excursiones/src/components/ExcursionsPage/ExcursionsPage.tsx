@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
 import { useExcursions } from "../../hooks/useExcursions";
-import SearchBar from "../SearchBar/SearchBar";
+import { SearchBar } from "../SearchBar/SearchBar";
 import { Filters } from "../Filters";
 import { ExcursionsList } from "../ExcursionsList/ExcursionsList";
 import { getSafeErrorMessage } from "../../utils/errorUtils";

@@ -146,8 +146,6 @@ export function useRegisterForm() {
 				validationFunction: (val: string) =>
 					validateSamePassword(values.password, val),
 				autocomplete: "new-password",
-				errorMessage:
-					"Las contraseñas deben coincidir y cumplir los requisitos de seguridad (al menos 8 caracteres, una letra, un número y un símbolo).",
 			},
 		],
 	];
