@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
+import cn from "classnames";
 import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
 import styles from "./ValidatedInput.module.css";
 
@@ -46,31 +47,29 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			autocomplete,
 			ariaDescribedBy,
 		} = props;
-		// Estado para almacenar el mensaje de error de validación. `null` si es válido.
-		const [validationError, setValidationError] = useState<string | null>(null);
+
+		// Estado para saber si el usuario ha interactuado con el campo.
+		// Esto evita mostrar errores antes de que el usuario empiece a escribir.
+		const [touched, setTouched] = useState(false);
+
 		// Estado para controlar la visibilidad de la contraseña
 		const [showPassword, setShowPassword] = useState(false);
+
 		// ID único para el mensaje de error, para asociarlo con el input.
 		const errorId = `${id}-error`;
 
-		// Function that receives the information and updates it
+		/** Maneja el cambio en el input y marca el campo como tocado. */
 		const nameChange = (event: ChangeEvent<HTMLInputElement>) => {
-			const { value: newValue } = event.target;
-			inputToChange(newValue);
-			const validationResult = validationFunction(newValue);
-			// Si el resultado es `true`, la validación es correcta (sin error -> null).
-			// Si es un `string`, es el mensaje de error.
-			// Si es `false`, la validación falla, pero no hay mensaje específico,
-			// así que usamos un string vacío para indicar el error y mostrar el mensaje genérico.
-			setValidationError(
-				validationResult === true ? null : validationResult || "",
-			);
+			inputToChange(event.target.value);
+			if (!touched) setTouched(true);
 		};
 
-		// Combina los IDs externos con el ID del error interno si es visible.
-		const isInvalid = message && validationError !== null;
-		// Solo mostramos el mensaje si el campo es inválido Y tenemos un texto que mostrar.
-		const showErrorMessage = isInvalid && !!(validationError || errorMessage);
+		// Lógica derivada: La validez se calcula en cada render (optimizado por React Compiler).
+		const isValid = validationFunction(value) === true;
+		// Mostramos error solo si: el componente debe mostrar mensajes, ha sido tocado y no es válido.
+		const isInvalid = message && touched && !isValid;
+		const showErrorMessage = isInvalid && !!errorMessage;
+
 		const describedBy = [ariaDescribedBy, isInvalid ? errorId : null]
 			.filter(Boolean)
 			.join(" ");
@@ -83,21 +82,46 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			setShowPassword((prev) => !prev);
 		};
 
+		// Elementos comunes para evitar redundancia y cumplir con el principio DRY.
+		const controlElement = (
+			<Form.Control
+				ref={ref}
+				type={currentType}
+				onChange={nameChange}
+				name={name}
+				value={value}
+				autoComplete={autocomplete}
+				isInvalid={isInvalid}
+				aria-describedby={describedBy || undefined}
+			/>
+		);
+
+		const feedbackElement = (
+			<Form.Control.Feedback
+				type="invalid"
+				id={errorId}
+				className={cn(
+					styles.errorContainer,
+					{ [styles.visible]: showErrorMessage },
+					"text-danger fw-bold",
+				)}
+				aria-live="polite"
+			>
+				{showErrorMessage && (
+					<div className={styles.errorContent}>
+						<TriangleAlertIcon size={18} className={styles.errorIcon} />
+						{errorMessage}
+					</div>
+				)}
+			</Form.Control.Feedback>
+		);
+
 		return (
-			<Form.Group className={`${styles.inputContainer} mb-3`} controlId={id}>
+			<Form.Group className={cn(styles.inputContainer, "mb-3")} controlId={id}>
 				<Form.Label>{name}</Form.Label>
 				{isPasswordType ? (
 					<InputGroup hasValidation>
-						<Form.Control
-							ref={ref}
-							type={currentType}
-							onChange={nameChange}
-							name={name}
-							value={value}
-							autoComplete={autocomplete}
-							isInvalid={isInvalid}
-							aria-describedby={describedBy || undefined}
-						/>
+						{controlElement}
 						<Button
 							variant="outline-secondary"
 							className={styles.passwordToggle}
@@ -109,49 +133,13 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 						>
 							{showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
 						</Button>
-						{/* Feedback debe ir dentro del InputGroup cuando se usa hasValidation */}
-						<Form.Control.Feedback
-							type="invalid"
-							id={errorId}
-							className={`${styles.errorContainer} ${showErrorMessage ? styles.visible : ""} text-danger fw-bold`}
-							aria-live="polite"
-						>
-							{showErrorMessage && (
-								<div className={styles.errorContent}>
-									<TriangleAlertIcon size={18} className={styles.errorIcon} />
-									{validationError || errorMessage}
-								</div>
-							)}
-						</Form.Control.Feedback>
+						{feedbackElement}
 					</InputGroup>
 				) : (
-					<Form.Control
-						ref={ref}
-						type={inputType}
-						onChange={nameChange}
-						name={name}
-						value={value}
-						autoComplete={autocomplete}
-						isInvalid={isInvalid}
-						aria-describedby={describedBy || undefined}
-					/>
-				)}
-
-				{/* Renderizamos el feedback fuera si NO es password */}
-				{!isPasswordType && (
-					<Form.Control.Feedback
-						type="invalid"
-						id={errorId}
-						className={`${styles.errorContainer} ${showErrorMessage ? styles.visible : ""} text-danger fw-bold`}
-						aria-live="polite"
-					>
-						{showErrorMessage && (
-							<div className={styles.errorContent}>
-								<TriangleAlertIcon size={18} className={styles.errorIcon} />
-								{validationError || errorMessage}
-							</div>
-						)}
-					</Form.Control.Feedback>
+					<>
+						{controlElement}
+						{feedbackElement}
+					</>
 				)}
 			</Form.Group>
 		);

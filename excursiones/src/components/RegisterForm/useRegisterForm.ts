@@ -87,7 +87,7 @@ export function useRegisterForm() {
 		ROUTES.HOME,
 	);
 
-	// Se define la estrcutura visual del formulario.
+	// Se define la estructura visual del formulario.
 	const formFieldsConfig: FormFieldConfig<RegisterFormValues>[][] = [
 		[
 			{
@@ -146,6 +146,7 @@ export function useRegisterForm() {
 				validationFunction: (val: string) =>
 					validateSamePassword(values.password, val),
 				autocomplete: "new-password",
+				errorMessage: "Las contraseñas no coinciden.",
 			},
 		],
 	];

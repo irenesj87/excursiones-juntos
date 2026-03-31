@@ -4,7 +4,7 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import registerFormStyles from "../RegisterForm/RegisterForm.module.css";
-import { PASSWORD_REQUIREMENTS } from "../../validation/validations";
+import { PASSWORD_RULES } from "../../validation/validations";
 
 /**
  * Configuración para las filas del esqueleto del formulario. Cada sub-array representa una fila
@@ -65,11 +65,8 @@ function RegisterPageSkeleton() {
 							<Skeleton width="70%" />
 						</p>
 						<ul className="mb-0 list-unstyled" aria-hidden="true">
-							{PASSWORD_REQUIREMENTS.map((req, index) => (
-								<li
-									key={req.label}
-									className="d-flex align-items-center gap-2 mb-1"
-								>
+							{Object.keys(PASSWORD_RULES).map((key, index) => (
+								<li key={key} className="d-flex align-items-center gap-2 mb-1">
 									<div className={registerFormStyles.requirementIcon}>
 										<Skeleton
 											circle
