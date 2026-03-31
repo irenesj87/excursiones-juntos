@@ -64,6 +64,11 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			if (!touched) setTouched(true);
 		};
 
+		/** Marca el campo como tocado cuando pierde el foco, para mostrar errores de validación. */
+		const handleBlur = () => {
+			if (!touched) setTouched(true);
+		};
+
 		// Lógica derivada: La validez se calcula en cada render (optimizado por React Compiler).
 		const isValid = validationFunction(value) === true;
 		// Mostramos error solo si: el componente debe mostrar mensajes, ha sido tocado y no es válido.
@@ -88,6 +93,7 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 				ref={ref}
 				type={currentType}
 				onChange={nameChange}
+				onBlur={handleBlur}
 				name={name}
 				value={value}
 				autoComplete={autocomplete}
