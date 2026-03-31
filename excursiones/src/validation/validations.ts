@@ -57,59 +57,40 @@ export function validateMail(mail: string): boolean {
 }
 
 /**
- * Lista de requisitos para validar la fortaleza de una contraseña.
- * Cada requisito tiene un mensaje de error y una función que verifica si la contraseña cumple con ese requisito.
+ * Longitud mínima permitida para las contraseñas.
+ * Se exporta para que la UI pueda mostrar este valor dinámicamente.
  */
-export const PASSWORD_REQUIREMENTS: {
-	label: string;
-	isValid: (password: string) => boolean;
-}[] = [
-	{
-		label: "8 caracteres",
-		isValid: (password) => password.length >= 8,
-	},
-	{
-		label: "una letra",
-		isValid: (password) => /[A-Za-z]/.test(password),
-	},
-	{
-		label: "un número",
-		isValid: (password) => /\d/.test(password),
-	},
-	{
-		label: "un carácter especial (ej: @$!%*?&.,_-)",
-		isValid: (password) => /[@$!%*?&.,_-]/.test(password),
-	},
-];
+export const MIN_PASSWORD_LENGTH = 8;
+
+/**
+ * Reglas individuales para la validación de contraseñas.
+ */
+export const PASSWORD_RULES = {
+	hasMinLength: (password: string) => password.length >= MIN_PASSWORD_LENGTH,
+	hasLetter: (password: string) => /[A-Za-z]/.test(password),
+	hasNumber: (password: string) => /\d/.test(password),
+	hasSpecialChar: (password: string) => /[@$!%*?&.,_-]/.test(password),
+};
 
 /**
  * Valida la fortaleza de una contraseña.
- * Retorna `true` si es válida, o un `string` con el error específico si no lo es.
+ * Retorna `true` si cumple con todos los requisitos de seguridad establecidos.
  * @param password - La contraseña a validar.
- * @returns - Retorna `true` si la contraseña es válida, o un mensaje de error.
+ * @returns - Booleano que indica si la contraseña es válida.
  */
-export function validatePassword(password: string): true | string {
-	// Itera sobre los requisitos y retorna el primer mensaje de error que encuentre.
-	for (const requirement of PASSWORD_REQUIREMENTS) {
-		if (!requirement.isValid(password)) {
-			return `Debe tener al menos ${requirement.label}.`;
-		}
-	}
-	return true;
+export function validatePassword(password: string): boolean {
+	return Object.values(PASSWORD_RULES).every((rule) => rule(password));
 }
 
 /**
  * Comprueba que dos contraseñas coincidan.
  * @param password - La contraseña original.
  * @param samePassword - La contraseña de confirmación.
- * @returns - Retorna `true` si ambas contraseñas son iguales, o un `string` con el mensaje de error.
+ * @returns - Booleano que indica si ambas contraseñas son iguales.
  */
 export function validateSamePassword(
 	password: string,
 	samePassword: string,
-): true | string {
-	if (password !== samePassword) {
-		return "Las contraseñas no coinciden.";
-	}
-	return true;
+): boolean {
+	return password === samePassword;
 }
