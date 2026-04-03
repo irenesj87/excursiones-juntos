@@ -1,5 +1,8 @@
 .inputContainer :global(.form-control) {
 	border-radius: var(--border-radius-md);
+	transition:
+		border-color 0.2s ease-out,
+		box-shadow 0.2s ease-out;
 }
 
 /*
@@ -33,6 +36,8 @@
 	opacity: 0;
 	overflow: hidden;
 	font-size: 1.05rem;
+	color: var(--color-text-danger);
+	font-weight: var(--font-weight-bold, 700);
 	margin-top: 0;
 }
 
@@ -69,7 +74,10 @@
 	color: var(--color-text-muted);
 	/* Aseguramos que el botón herede el radio del tema (16px) para mantener la simetría con el input */
 	border-radius: var(--border-radius-md);
-	transition: none;
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out,
+		border-color 0.2s ease-out;
 	/* Accesibilidad: Aseguramos objetivo táctil mínimo de 44px de ancho */
 	min-width: 44px;
 	display: flex;

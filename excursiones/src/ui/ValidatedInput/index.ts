@@ -1,1 +1,1 @@
-export { default } from "./ValidatedInput";
+export { ValidatedInput } from "./ValidatedInput";

@@ -1,16 +1,12 @@
+import { API } from "../constants";
 import { AuthResponse, LoginCredentials, UserRegistration } from "../types";
-
-/**
- * El servicio encapsula la lógica para interactuar con la API de autenticación.
- */
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 /**
  * Realiza una petición fetch y maneja las respuestas de error comunes.
  */
 export async function fetchApi<T>(
 	url: string,
-	options: RequestInit
+	options: RequestInit,
 ): Promise<T> {
 	const response = await fetch(url, options);
 
@@ -24,7 +20,7 @@ export async function fetchApi<T>(
 		throw new Error(
 			errorMessages[response.status] ||
 				errorData.message ||
-				`Error: ${response.status}`
+				`Error: ${response.status}`,
 		);
 	}
 	return response.json();
@@ -34,9 +30,9 @@ export async function fetchApi<T>(
  * Inicia sesión de un usuario.
  */
 export const loginUser = async (
-	credentials: LoginCredentials
+	credentials: LoginCredentials,
 ): Promise<AuthResponse> => {
-	const url = `${API_BASE_URL}/login`;
+	const url = `${API.BASE_URL}/login`;
 	const options: RequestInit = {
 		method: "POST",
 		mode: "cors",
@@ -51,9 +47,9 @@ export const loginUser = async (
  * Registra un nuevo usuario.
  */
 export const registerUser = async (
-	userData: UserRegistration
+	userData: UserRegistration,
 ): Promise<AuthResponse> => {
-	const url = `${API_BASE_URL}/users`;
+	const url = `${API.BASE_URL}/users`;
 	const options: RequestInit = {
 		method: "POST",
 		mode: "cors",
@@ -68,11 +64,11 @@ export const registerUser = async (
  * Verifica el estado de autenticación de un usuario validando un token de sesión.
  */
 export const verifyToken = async (
-	token: string | null
+	token: string | null,
 ): Promise<AuthResponse | null> => {
 	if (!token) return null;
 
-	const url = `${API_BASE_URL}/token/verify`;
+	const url = `${API.BASE_URL}/token/verify`;
 	const options: RequestInit = {
 		method: "GET",
 		headers: { Authorization: `Bearer ${token}` },

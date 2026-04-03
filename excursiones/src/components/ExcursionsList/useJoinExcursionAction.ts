@@ -53,8 +53,8 @@ export const useJoinExcursionAction = () => {
 			token,
 		);
 
-		// Validamos la respuesta de la API otra vez con Zod. Se hace para asegurarnos de que los datos que recibimos 
-		// son correctos y cumplen con el esquema definido, ya que la API podría tener un bug, estar en mantenimiento 
+		// Validamos la respuesta de la API otra vez con Zod. Se hace para asegurarnos de que los datos que recibimos
+		// son correctos y cumplen con el esquema definido, ya que la API podría tener un bug, estar en mantenimiento
 		// o retornar datos inesperados. Con eso, se evita guardar datos corruptos o mal formados en Redux.
 		// .parse() lanza un error si la validación falla, que será capturado por el catch del hook superior.
 		// Si tiene éxito, retorna el objeto tipado y validado.
