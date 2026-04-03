@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store.ts";
-import { joinExcursion as joinExcursionService } from "../../services/excursionService.ts";
-import { updateUser } from "../../slices/loginSlice.ts";
-import { userSchema } from "../../schemas/userSchema.ts";
+import { AppDispatch, RootState } from "../../store/store";
+import { joinExcursion as joinExcursionService } from "../../services/excursionService";
+import { updateUser } from "../../slices/loginSlice";
+import { userSchema } from "../../schemas/userSchema";
 
 /**
  * Este Custom Hook encapsula la lógica de negocio necesaria para que un usuario se apunte a una excursión.
