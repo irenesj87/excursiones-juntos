@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { searchExcursions } from "../../services/excursionService.ts";
-import { Excursion } from "../../types.ts";
-import { RootState } from "../../store/store.ts";
-import { SearchIcon, XIcon } from "../../ui/Icons.tsx";
+import { searchExcursions } from "../../services/excursionService";
+import { Excursion } from "../../types";
+import { RootState } from "../../store/store";
+import { SearchIcon, XIcon } from "../../ui/Icons";
 import styles from "./SearchBar.module.css";
 
 // Constante para el tiempo de retraso del debounce
