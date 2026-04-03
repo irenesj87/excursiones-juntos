@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { searchExcursions } from "../../services/excursionService";
-import { Excursion } from "../../types";
-import { RootState } from "../../store/store";
-import { SearchIcon, XIcon } from "../../ui/Icons";
-import "bootstrap/dist/css/bootstrap.css";
+import { searchExcursions } from "../../services/excursionService.ts";
+import { Excursion } from "../../types.ts";
+import { RootState } from "../../store/store.ts";
+import { SearchIcon, XIcon } from "../../ui/Icons.tsx";
 import styles from "./SearchBar.module.css";
 
 // Constante para el tiempo de retraso del debounce
@@ -124,11 +123,16 @@ export function SearchBar({
 		fetchData();
 	}, [debouncedSearch, area, difficulty, time]);
 
+	/** Evita el envío del formulario por defecto. */
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+	};
+
 	return (
 		<form
 			role="search"
 			className={styles.searchContainer}
-			onSubmit={(e) => e.preventDefault()}
+			onSubmit={handleSubmit}
 		>
 			<SearchIcon className={styles.searchIcon} aria-hidden="true" />
 			<label htmlFor={id} className="visually-hidden">

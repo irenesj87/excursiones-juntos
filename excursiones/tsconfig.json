@@ -2,16 +2,16 @@
 	// Visit https://aka.ms/tsconfig to read more about this file
 	"compilerOptions": {
 		// --- Opciones Esenciales para React ---
-		"target": "es5", // Compila a JS compatible con navegadores antiguos. Tu bundler (Vite/CRA) puede sobreescribir esto.
+		"target": "ES2022", // Versión moderna de JS.
 		"lib": ["dom", "dom.iterable", "esnext"], // ¡MUY IMPORTANTE! Añade las APIs del navegador (document, window, etc.)
 		"jsx": "react-jsx", // Habilita el soporte para JSX
 		"module": "esnext", // Usa el sistema de módulos moderno que los bundlers entienden
-		"moduleResolution": "node",
+		"moduleResolution": "bundler", // Recomendado para entornos con bundlers modernos (Vite, Webpack).
 		"allowJs": true, // Permite una migración gradual, importando archivos .js
 		"jsxImportSource": "react",
 
 		// --- Opciones de Calidad de Código (Recomendadas) ---
-		"strict": true, // Habilita todas las comprobaciones estrictas. ¡La mejor opción!
+		"strict": true, // Habilita todas las comprobaciones estrictas.
 		"esModuleInterop": true, // Mejora la compatibilidad con librerías antiguas
 		"skipLibCheck": true, // Acelera la compilación omitiendo la revisión de librerías
 		"forceConsistentCasingInFileNames": true,
@@ -20,8 +20,10 @@
 		// --- Opciones para Bundlers Modernos (Vite, Create React App, etc.) ---
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"noEmit": true, // TypeScript solo revisa el código, el bundler lo compila.
-		"allowUmdGlobalAccess": true
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"allowUmdGlobalAccess": true,
+		"types": ["node"] // Habilita el reconocimiento de variables globales de Node como 'process'
 	},
 	// ¡MUY IMPORTANTE! Le dice a TypeScript que solo se preocupe de los archivos en 'src'
 	"include": ["src"]

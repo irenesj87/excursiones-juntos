@@ -1,7 +1,6 @@
-import { fetchApi } from "./authService";
-import { Excursion, User } from "../types";
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+import { API } from "../constants.ts";
+import { fetchApi } from "./authService.ts";
+import { Excursion, User } from "../types.ts";
 
 interface SearchExcursionsParams {
 	debouncedSearch?: string;
@@ -32,7 +31,7 @@ export const searchExcursions = async ({
 		}
 	}
 
-	const url = `${API_BASE_URL}/excursions?${params.toString()}`;
+	const url = `${API.BASE_URL}/excursions?${params.toString()}`;
 	// Usamos GET por defecto, no es necesario pasar 'options' si no hay headers o body.
 	return fetchApi<Excursion[]>(url, {});
 };
@@ -48,7 +47,7 @@ export const searchExcursions = async ({
 export const joinExcursion = async (
 	userMail: string,
 	excursionId: string | number,
-	token: string | null
+	token: string | null,
 ): Promise<User> => {
 	// La validación del ID debe ser explícita para permitir el ID 0.
 	if (excursionId === null || excursionId === undefined) {
@@ -58,7 +57,7 @@ export const joinExcursion = async (
 		throw new Error("Usuario no autenticado o información faltante.");
 	}
 
-	const url = `${API_BASE_URL}/users/${userMail}/excursions`;
+	const url = `${API.BASE_URL}/users/${userMail}/excursions`;
 	const options: RequestInit = {
 		method: "POST",
 		mode: "cors",

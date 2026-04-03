@@ -35,7 +35,9 @@ export const FORM_TEXT = {
 /**
  * Constantes relacionadas con la API.
  */
+const API_BASE_URL = process.env.REACT_APP_API_URL ?? "http://localhost:3001";
+
 export const API = {
-	BASE_URL: "http://localhost:3001",
-	STATIC_IMAGES_URL: "http://localhost:3001/images",
+	BASE_URL: API_BASE_URL,
+	STATIC_IMAGES_URL: `${API_BASE_URL}/images`,
 } as const;

@@ -5,7 +5,7 @@ import {
 	validateName as isNotEmpty,
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
-import ValidatedInput from "../../ui/ValidatedInput/ValidatedInput";
+import { ValidatedInput } from "../../ui/ValidatedInput/ValidatedInput";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { loginUser } from "../../services/authService";

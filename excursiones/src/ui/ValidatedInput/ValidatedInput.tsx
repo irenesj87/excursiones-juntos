@@ -2,9 +2,8 @@ import { useState, ChangeEvent, forwardRef } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.css";
 import cn from "classnames";
-import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
+import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons.tsx";
 import styles from "./ValidatedInput.module.css";
 
 /**
@@ -33,9 +32,9 @@ interface ValidatedInputProps {
 	readonly ariaDescribedBy?: string;
 }
 
-const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
-	(props, ref) => {
-		const {
+export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
+	(
+		{
 			id,
 			name,
 			inputType = "text",
@@ -46,8 +45,9 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			errorMessage,
 			autocomplete,
 			ariaDescribedBy,
-		} = props;
-
+		},
+		ref,
+	) => {
 		// Estado para saber si el usuario ha interactuado con el campo.
 		// Esto evita mostrar errores antes de que el usuario empiece a escribir.
 		const [touched, setTouched] = useState(false);
@@ -106,11 +106,9 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			<Form.Control.Feedback
 				type="invalid"
 				id={errorId}
-				className={cn(
-					styles.errorContainer,
-					{ [styles.visible]: showErrorMessage },
-					"text-danger fw-bold",
-				)}
+				className={cn(styles.errorContainer, {
+					[styles.visible]: showErrorMessage,
+				})}
 				aria-live="polite"
 			>
 				{showErrorMessage && (
@@ -153,5 +151,3 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 );
 
 ValidatedInput.displayName = "ValidatedInput";
-
-export default ValidatedInput;

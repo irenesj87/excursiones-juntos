@@ -1,5 +1,5 @@
 import { Row, Col, Form } from "react-bootstrap";
-import ValidatedInput from "../../ui/ValidatedInput";
+import { ValidatedInput } from "../../ui/ValidatedInput";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useRegisterForm } from "./useRegisterForm";
