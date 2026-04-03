@@ -1,4 +1,4 @@
-import { API } from "../constants.ts";
+import { API } from "../constants";
 import { AuthResponse, LoginCredentials, UserRegistration } from "../types";
 
 /**

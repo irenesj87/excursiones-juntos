@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import cn from "classnames";
-import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons.tsx";
+import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
 import styles from "./ValidatedInput.module.css";
 
 /**
@@ -48,8 +48,7 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 		},
 		ref,
 	) => {
-		// Estado para saber si el usuario ha interactuado con el campo.
-		// Esto evita mostrar errores antes de que el usuario empiece a escribir.
+		// Estado para saber si el usuario ha interactuado con el campo. Esto evita mostrar errores antes de que el usuario empiece a escribir.
 		const [touched, setTouched] = useState(false);
 
 		// Estado para controlar la visibilidad de la contraseña

@@ -1,6 +1,6 @@
-import { API } from "../constants.ts";
-import { fetchApi } from "./authService.ts";
-import { Excursion, User } from "../types.ts";
+import { API } from "../constants";
+import { fetchApi } from "./authService";
+import { Excursion, User } from "../types";
 
 interface SearchExcursionsParams {
 	debouncedSearch?: string;

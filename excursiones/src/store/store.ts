@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import filterSlice from "../slices/filterSlice.ts";
-import loginSlice from "../slices/loginSlice.ts";
-import themeSlice from "../slices/themeSlice.ts";
+import filterSlice from "../slices/filterSlice";
+import loginSlice from "../slices/loginSlice";
+import themeSlice from "../slices/themeSlice";
 
 // Exportamos el reducer raíz combinado para poder reutilizarlo en las pruebas.
 export const rootReducer = combineReducers({

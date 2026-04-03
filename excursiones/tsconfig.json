@@ -21,7 +21,6 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"allowImportingTsExtensions": true,
 		"allowUmdGlobalAccess": true,
 		"types": ["node"] // Habilita el reconocimiento de variables globales de Node como 'process'
 	},
