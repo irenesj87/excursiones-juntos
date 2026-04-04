@@ -137,6 +137,8 @@ export function useRegisterForm() {
 				validationFunction: validatePassword,
 				autocomplete: "new-password",
 				ariaDescribedBy: "password-requirements",
+				errorMessage:
+					"La contraseña es obligatoria y debe cumplir los requisitos.",
 			},
 			{
 				id: "confirm-password",
@@ -166,6 +168,5 @@ export function useRegisterForm() {
 		formDispatch,
 		handleSubmit,
 		handleInputChange,
-		isButtonDisabled: !isFormValid(),
 	};
 }

@@ -7,20 +7,17 @@ import { AuthResponse } from "../types";
 interface AuthFormState {
 	isLoading: boolean;
 	error: string | null;
-	isButtonDisabled: boolean;
 }
 
 type AuthFormAction =
 	| { type: "SUBMIT_START" }
 	| { type: "SUBMIT_SUCCESS" }
 	| { type: "SUBMIT_FAILURE"; payload: string }
-	| { type: "SET_VALIDITY"; payload: boolean }
 	| { type: "CLEAR_ERROR" };
 
 const initialState: AuthFormState = {
 	isLoading: false,
 	error: null,
-	isButtonDisabled: true,
 };
 
 /**
@@ -28,7 +25,7 @@ const initialState: AuthFormState = {
  */
 function authFormReducer(
 	state: AuthFormState,
-	action: AuthFormAction
+	action: AuthFormAction,
 ): AuthFormState {
 	switch (action.type) {
 		case "SUBMIT_START":
@@ -37,8 +34,6 @@ function authFormReducer(
 			return { ...state, isLoading: false };
 		case "SUBMIT_FAILURE":
 			return { ...state, isLoading: false, error: action.payload };
-		case "SET_VALIDITY":
-			return { ...state, isButtonDisabled: !(action.payload) };
 		case "CLEAR_ERROR":
 			return { ...state, error: null };
 		default: {
@@ -47,7 +42,7 @@ function authFormReducer(
 			// Incluimos el tipo de acción en el error para facilitar la depuración.
 			const unhandledAction = /** @type {{type: string}} */ action;
 			throw new Error(
-				`Acción no soportada: ${(unhandledAction as AuthFormAction).type}`
+				`Acción no soportada: ${(unhandledAction as AuthFormAction).type}`,
 			);
 		}
 	}
@@ -59,7 +54,7 @@ function authFormReducer(
 export function useAuthFormHandler(
 	isFormValid: boolean,
 	apiSubmitFunction: () => Promise<AuthResponse>,
-	successRedirectPath: string
+	successRedirectPath: string,
 ) {
 	const loginDispatch = useDispatch();
 	const navigate = useNavigate();
@@ -71,17 +66,12 @@ export function useAuthFormHandler(
 		apiSubmitFnRef.current = apiSubmitFunction;
 	}, [apiSubmitFunction]);
 
-	// Efecto para validar el formulario cuando los valores cambian.
-	useEffect(() => {
-		formDispatch({ type: "SET_VALIDITY", payload: isFormValid });
-	}, [isFormValid]);
-
 	/**
 	 * Maneja el envío del formulario.
 	 */
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (formState.isButtonDisabled || formState.isLoading) {
+		if (!isFormValid || formState.isLoading) {
 			return;
 		}
 		formDispatch({ type: "SUBMIT_START" });

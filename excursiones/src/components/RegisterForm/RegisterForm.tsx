@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { ValidatedInput } from "../../ui/ValidatedInput";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
@@ -16,10 +17,18 @@ export function RegisterForm() {
 		formFieldsConfig,
 		formState,
 		formDispatch,
-		handleSubmit,
+		handleSubmit: apiSubmit,
 		handleInputChange,
-		isButtonDisabled,
 	} = useRegisterForm();
+
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	/** Maneja el envío y activa la validación global. */
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setIsSubmitted(true);
+		apiSubmit(event);
+	};
 
 	return (
 		<>
@@ -55,8 +64,7 @@ export function RegisterForm() {
 										ref={ref}
 										value={values[field]}
 										inputToChange={(value) => handleInputChange(field, value)}
-										// Desactivamos el mensaje de error inferior solo para el campo password
-										message={field !== "password"}
+										message={isSubmitted}
 									/>
 								</Col>
 							))}
@@ -69,7 +77,6 @@ export function RegisterForm() {
 						type="submit"
 						variant="primary"
 						isLoading={formState.isLoading}
-						disabled={isButtonDisabled}
 					>
 						Enviar
 					</CustomButton>

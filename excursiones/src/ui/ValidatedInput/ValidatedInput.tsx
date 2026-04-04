@@ -48,30 +48,35 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 		},
 		ref,
 	) => {
-		// Estado para saber si el usuario ha interactuado con el campo. Esto evita mostrar errores antes de que el usuario empiece a escribir.
-		const [touched, setTouched] = useState(false);
-
-		// Estado para controlar la visibilidad de la contraseña
+		// Estado para controlar la visibilidad de la contraseña y si el campo ha recibido el foco alguna vez.
 		const [showPassword, setShowPassword] = useState(false);
+		const [wasFocused, setWasFocused] = useState(false);
 
 		// ID único para el mensaje de error, para asociarlo con el input.
 		const errorId = `${id}-error`;
 
-		/** Maneja el cambio en el input y marca el campo como tocado. */
+		/** Maneja el cambio en el input y marca que el usuario ya ha interactuado. */
 		const nameChange = (event: ChangeEvent<HTMLInputElement>) => {
+			setWasFocused(true);
 			inputToChange(event.target.value);
-			if (!touched) setTouched(true);
 		};
 
-		/** Marca el campo como tocado cuando pierde el foco, para mostrar errores de validación. */
+		/** Marca el campo como enfocado al perder el foco para validar campos vacíos que el usuario ignoró. */
 		const handleBlur = () => {
-			if (!touched) setTouched(true);
+			setWasFocused(true);
 		};
 
 		// Lógica derivada: La validez se calcula en cada render (optimizado por React Compiler).
 		const isValid = validationFunction(value) === true;
-		// Mostramos error solo si: el componente debe mostrar mensajes, ha sido tocado y no es válido.
-		const isInvalid = message && touched && !isValid;
+		/**
+		 * Mostramos error solo si:
+		 * 1. La validación falla Y...
+		 * 2. Se ha intentado enviar el formulario (message === true)
+		 *    O el usuario ha interactuado con el campo Y este no está vacío (Lazy Validation limpia).
+		 */
+		const isInvalid =
+			!isValid && (message || (wasFocused && value.trim() !== ""));
+
 		const showErrorMessage = isInvalid && !!errorMessage;
 
 		const describedBy = [ariaDescribedBy, isInvalid ? errorId : null]

@@ -2,28 +2,47 @@
 	// Visit https://aka.ms/tsconfig to read more about this file
 	"compilerOptions": {
 		// --- Opciones Esenciales para React ---
-		"target": "ES2022", // Versión moderna de JS.
-		"lib": ["dom", "dom.iterable", "esnext"], // ¡MUY IMPORTANTE! Añade las APIs del navegador (document, window, etc.)
-		"jsx": "react-jsx", // Habilita el soporte para JSX
-		"module": "esnext", // Usa el sistema de módulos moderno que los bundlers entienden
-		"moduleResolution": "bundler", // Recomendado para entornos con bundlers modernos (Vite, Webpack).
-		"allowJs": true, // Permite una migración gradual, importando archivos .js
+
+		// Define a qué versión de JavaScript se va transpilar el código. La recomendación oficial usa "es2015".
+		"target": "es2015",
+		// Especifica las bibliotecas que se incluirán durante la compilación.
+		"lib": ["dom", "dom.iterable", "esnext"],
+		// Habilita el soporte para JSX
+		"jsx": "react-jsx",
+		// Usa el sistema de módulos moderno que los bundlers actuales esperan.
+		"module": "esnext",
+		// Recomendación oficial
+		"moduleResolution": "bundler",
+		// Permite importar archivos JavaScript.
+		"allowJs": true,
+		/**
+		 * Cuando está activo se permite exportar módulos así: import React from 'react'; en vez de
+		 * import * as React from 'react'; cuando el módulo no tiene una exportación por defecto.
+		 */
+		"allowSyntheticDefaultImports": true,
 		"jsxImportSource": "react",
 
 		// --- Opciones de Calidad de Código (Recomendadas) ---
-		"strict": true, // Habilita todas las comprobaciones estrictas.
-		"esModuleInterop": true, // Mejora la compatibilidad con librerías antiguas
-		"skipLibCheck": true, // Acelera la compilación omitiendo la revisión de librerías
+
+		// Habilita todas las comprobaciones estrictas.
+		"strict": true,
+		"esModuleInterop": true,
+		// Acelera la compilación omitiendo la revisión de librerías
+		"skipLibCheck": true,
+		// Evita problemas de mayúsculas/minúsculas en los nombres de archivos.
 		"forceConsistentCasingInFileNames": true,
+		// Evita errores silenciosos en switch sin 'break', 'return' o 'throw'.
 		"noFallthroughCasesInSwitch": true,
 
 		// --- Opciones para Bundlers Modernos (Vite, Create React App, etc.) ---
+
+		// Permite importar archivos JSON como módulos.
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"allowUmdGlobalAccess": true,
-		"types": ["node"] // Habilita el reconocimiento de variables globales de Node como 'process'
+		// Mantenemos esto para que 'process.env' sea reconocido sin errores.
+		"types": ["node"]
 	},
-	// ¡MUY IMPORTANTE! Le dice a TypeScript que solo se preocupe de los archivos en 'src'
+	// Le dice a TypeScript que solo se preocupe de los archivos en 'src'
 	"include": ["src"]
 }

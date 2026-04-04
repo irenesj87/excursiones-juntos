@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import cn from "classnames";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/images/hero-background.jpg";
 import heroImageAvif from "../../assets/images/hero-background.avif";
@@ -8,7 +11,7 @@ const HERO_CONTENT = {
 	title: "Respira, Camina, Conecta",
 	subtitle:
 		"Conecta con la naturaleza, explora paisajes inolvidables y comparte experiencias únicas con tus compañeros de viaje.",
-	cta: "Explora el sendero",
+	cta: "Crea tu cuenta",
 };
 
 /**
@@ -16,6 +19,11 @@ const HERO_CONTENT = {
  * Muestra una imagen de fondo inspiradora y el título principal.
  */
 export function Hero() {
+	// Obtenemos el estado de login desde Redux.
+	const { login: isLoggedIn } = useSelector(
+		(state: RootState) => state.loginReducer,
+	);
+
 	return (
 		<section
 			className={styles.hero}
@@ -40,13 +48,19 @@ export function Hero() {
 				/>
 			</picture>
 			<div className={styles.heroOverlay} aria-hidden="true" />
-			<div className={styles.heroContent}>
+			<div
+				className={cn(styles.heroContent, {
+					[styles.heroContentLogged]: isLoggedIn,
+				})}
+			>
 				<div className={styles.titleContainer}>
 					<h1 className={styles.title}>{HERO_CONTENT.title}</h1>
 					<p className={styles.subtitle}>{HERO_CONTENT.subtitle}</p>
-					<CustomLink to={ROUTES.REGISTER} className={styles.ctaButton}>
-						{HERO_CONTENT.cta}
-					</CustomLink>
+					{!isLoggedIn && (
+						<CustomLink to={ROUTES.REGISTER} className={styles.ctaButton}>
+							{HERO_CONTENT.cta}
+						</CustomLink>
+					)}
 				</div>
 			</div>
 		</section>

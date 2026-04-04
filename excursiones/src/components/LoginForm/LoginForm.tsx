@@ -18,6 +18,7 @@ import styles from "./LoginForm.module.css";
 export function LoginForm() {
 	const [mail, setMail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isSubmitted, setIsSubmitted] = useState(false);
 	const emailInputRef = useRef<HTMLInputElement>(null);
 
 	// Enfoca el campo de correo electrónico al cargar el componente.
@@ -34,11 +35,18 @@ export function LoginForm() {
 	const isFormValid = validateMail(mail) && isNotEmpty(password);
 
 	// Utiliza el hook personalizado para manejar el estado del formulario y la lógica de envío.
-	const { formState, formDispatch, handleSubmit } = useAuthFormHandler(
-		isFormValid,
-		() => loginUser(formValues),
-		ROUTES.USER,
-	);
+	const {
+		formState,
+		formDispatch,
+		handleSubmit: apiSubmit,
+	} = useAuthFormHandler(isFormValid, () => loginUser(formValues), ROUTES.USER);
+
+	/** Maneja el envío del formulario y activa la visibilidad de los mensajes de error. */
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setIsSubmitted(true);
+		apiSubmit(event);
+	};
 
 	// Limpia el mensaje de error al cerrar la alerta.
 	const handleClearError = () => {
@@ -70,7 +78,7 @@ export function LoginForm() {
 						inputToChange={setMail}
 						validationFunction={validateMail}
 						value={mail}
-						message={true}
+						message={isSubmitted}
 						autocomplete="email"
 						errorMessage={FORM_TEXT.INVALID_EMAIL_FORMAT}
 					/>
@@ -81,7 +89,7 @@ export function LoginForm() {
 						inputToChange={setPassword}
 						validationFunction={isNotEmpty}
 						value={password}
-						message={true}
+						message={isSubmitted}
 						autocomplete="current-password"
 						errorMessage={FORM_TEXT.PASSWORD_CANNOT_BE_EMPTY}
 					/>
@@ -91,7 +99,10 @@ export function LoginForm() {
 						type="submit"
 						variant="primary"
 						isLoading={formState.isLoading}
-						disabled={formState.isButtonDisabled}
+						/**
+						 * Mantenemos el botón habilitado para permitir la validación visual al clicar
+						 * (Mejora de accesibilidad WCAG AAA).
+						 */
 					>
 						Enviar
 					</CustomButton>

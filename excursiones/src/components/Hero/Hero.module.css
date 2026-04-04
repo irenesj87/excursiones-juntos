@@ -44,9 +44,13 @@
 	width: 100%;
 	max-width: 1000px; /* Aumentado para permitir que el título vaya en una línea */
 	padding-top: calc(var(--navbar-height) + var(--space-12));
-	padding-bottom: calc(
-		var(--space-16) + var(--space-4)
-	);
+	padding-bottom: calc(var(--space-16) + var(--space-4));
+}
+
+/* Ajuste para cuando el botón no está presente, manteniendo el equilibrio visual */
+.heroContentLogged {
+	padding-bottom: var(--space-12);
+	gap: var(--space-4);
 }
 
 .titleContainer {
