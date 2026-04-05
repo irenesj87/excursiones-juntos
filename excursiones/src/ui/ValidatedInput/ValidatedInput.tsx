@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, forwardRef } from "react";
+import { useState, ChangeEvent, forwardRef, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
@@ -7,31 +7,49 @@ import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
 import styles from "./ValidatedInput.module.css";
 
 /**
- * Propiedades para el componente ValidatedInput.
+ * Propiedades del componente ValidatedInput.
  */
 interface ValidatedInputProps {
 	/** ID único para el campo de formulario y la etiqueta. */
 	readonly id: string;
+
 	/** Texto para la etiqueta del campo. */
 	readonly name: string;
+
 	/** Tipo de input (ej. "text", "email", "password"). El valor por defecto es "text". */
 	readonly inputType?: string;
+
 	/** Función para actualizar el estado del valor del input en el componente padre. */
 	readonly inputToChange: (value: string) => void;
+
 	/** Función que valida el valor del input. Retorna `true` si es válido, o un `string` con el mensaje de error. */
 	readonly validationFunction: (value: string) => boolean | string;
+
 	/** El valor actual del campo de formulario. */
 	readonly value: string;
+
 	/** Si es true, muestra un mensaje de error cuando la validación falla. */
 	readonly message: boolean;
+
 	/** Mensaje de error específico. Si no se proporciona, se usa uno genérico. */
 	readonly errorMessage?: string;
+
 	/** Valor para el atributo autocomplete del input. */
 	readonly autocomplete: string;
+
 	/** IDs adicionales para aria-describedby, separados por espacios. */
 	readonly ariaDescribedBy?: string;
 }
 
+/**
+ * Componente de entrada validada que maneja tanto la validación en tiempo real como la validación perezosa.
+ * Muestra mensajes de error solo después de que el usuario ha interactuado con el campo o ha intentado enviar el
+ * formulario.
+ * Se utiliza `forwardRef` para permitir que el componente padre pueda acceder al elemento input directamente,
+ * lo que es necesario para que librerías de validación puedan interactuar con el campo correctamente.
+ * También incluye una funcionalidad para mostrar/ocultar contraseñas si el tipo de input es "password".
+ * @returns Un componente de formulario con validación integrada y accesibilidad mejorada.
+ */
 export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 	(
 		{
@@ -48,35 +66,56 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 		},
 		ref,
 	) => {
-		// Estado para controlar la visibilidad de la contraseña y si el campo ha recibido el foco alguna vez.
+		// Estado para controlar la visibilidad de la contraseña (si es un campo de contraseña).
 		const [showPassword, setShowPassword] = useState(false);
-		const [wasFocused, setWasFocused] = useState(false);
+
+		// Estado para rastrear si el campo ha sido "tocado" por el usuario, lo que es necesario para la validación perezosa.
+		const [isTouched, setIsTouched] = useState(false);
+
+		/**
+		 * Ref para rastrear si el usuario ha interactuado físicamente con el campo.
+		 * Esto es imprescindible para distinguir entre un "autofocus" del navegador (pasivo)
+		 * y una acción real del usuario (activo).
+		 */
+		const wasManuallyInteracted = useRef(false);
 
 		// ID único para el mensaje de error, para asociarlo con el input.
 		const errorId = `${id}-error`;
 
-		/** Maneja el cambio en el input y marca que el usuario ya ha interactuado. */
+		/** Registra una interacción manual (clic o teclado). */
+		const handleManualInteraction = () => {
+			wasManuallyInteracted.current = true;
+		};
+
+		/** Actualiza el valor en el padre y marca la interacción manual. */
 		const nameChange = (event: ChangeEvent<HTMLInputElement>) => {
-			setWasFocused(true);
+			wasManuallyInteracted.current = true;
 			inputToChange(event.target.value);
 		};
 
-		/** Marca el campo como enfocado al perder el foco para validar campos vacíos que el usuario ignoró. */
+		/**
+		 * Al perder el foco, marcamos como "tocado" solo si el usuario interactuó
+		 * o si el campo ya tiene contenido. Esto evita que el error "salte"
+		 * al salir de una página donde el primer campo tenía autofocus.
+		 */
 		const handleBlur = () => {
-			setWasFocused(true);
+			if (wasManuallyInteracted.current || value.trim() !== "") {
+				setIsTouched(true);
+			}
 		};
 
-		// Lógica derivada: La validez se calcula en cada render (optimizado por React Compiler).
+		// Lógica derivada: La validez se calcula en cada render.
 		const isValid = validationFunction(value) === true;
-		/**
-		 * Mostramos error solo si:
-		 * 1. La validación falla Y...
-		 * 2. Se ha intentado enviar el formulario (message === true)
-		 *    O el usuario ha interactuado con el campo Y este no está vacío (Lazy Validation limpia).
-		 */
-		const isInvalid =
-			!isValid && (message || (wasFocused && value.trim() !== ""));
 
+		/**
+		 * Validación Perezosa: Mostramos error solo si la validación falla Y:
+		 * - El formulario ha intentado enviarse (message === true).
+		 * - O el usuario ha salido del campo al menos una vez (isTouched === true).
+		 */
+		const isInvalid = !isValid && (message || isTouched);
+
+		// Mostramos el mensaje de error solo si hay un mensaje específico y el campo es inválido para
+		// no renderizar contenedores de error vacíos.
 		const showErrorMessage = isInvalid && !!errorMessage;
 
 		const describedBy = [ariaDescribedBy, isInvalid ? errorId : null]
@@ -91,13 +130,14 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			setShowPassword((prev) => !prev);
 		};
 
-		// Elementos comunes para evitar redundancia y cumplir con el principio DRY.
 		const controlElement = (
 			<Form.Control
 				ref={ref}
 				type={currentType}
 				onChange={nameChange}
 				onBlur={handleBlur}
+				onPointerDown={handleManualInteraction}
+				onKeyDown={handleManualInteraction}
 				name={name}
 				value={value}
 				autoComplete={autocomplete}
