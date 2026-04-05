@@ -30,9 +30,9 @@
 	display: grid;
 	grid-template-rows: 0fr;
 	transition:
-		grid-template-rows 0.3s ease-out,
-		opacity 0.2s ease-out,
-		margin 0.3s ease-out;
+		grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.2s ease-in-out,
+		margin 0.25s ease-out;
 	opacity: 0;
 	overflow: hidden;
 	font-size: 1.05rem;
@@ -52,9 +52,9 @@
 	display: flex;
 	align-items: baseline;
 	gap: var(--space-2);
-	/* Un pequeño desplazamiento sutil al entrar */
-	transform: translateY(-5px);
-	transition: transform 0.3s ease-out;
+	/* Desplazamiento sutil para un efecto de entrada más orgánico */
+	transform: translateY(-8px);
+	transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .visible .errorContent {
