@@ -21,7 +21,6 @@
 .inputContainer :global(.form-control.is-invalid:focus),
 .inputContainer :global(.form-control.is-invalid:focus-visible) {
 	border-color: var(--color-text-danger);
-	/* La especificidad de este selector ya es suficiente para ganar a Bootstrap sin !important */
 	box-shadow: 0 0 0 0.25rem
 		color-mix(in srgb, var(--color-text-danger), transparent 30%);
 }
