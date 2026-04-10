@@ -66,7 +66,6 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 		},
 		ref,
 	) => {
-		// Estado para controlar la visibilidad de la contraseña (si es un campo de contraseña).
 		const [showPassword, setShowPassword] = useState(false);
 
 		// Estado para rastrear si el campo ha sido "tocado" por el usuario, lo que es necesario para la validación perezosa.
