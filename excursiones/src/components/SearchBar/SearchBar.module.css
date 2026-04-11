@@ -1,3 +1,11 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem; /* Espaciado orgánico entre buscador y posibles errores (Regla 5) */
+	width: 100%;
+	margin-bottom: 1.5rem;
+}
+
 .searchContainer {
 	position: relative;
 	width: 100%;
@@ -53,10 +61,10 @@
 
 /* Aseguramos que el input no tenga estilos de foco propios, ya que los maneja el contenedor */
 .searchInput:focus,
-.searchInput:focus-visible {
+.searchContainer .searchInput:focus-visible {
 	background-color: transparent;
-	box-shadow: none !important; /* Importante para anular el estilo global :focus-visible de Themes.css */
-	outline: none; /* Doble seguridad para evitar el borde cuadrado */
+	box-shadow: none; /* Elevamos especificidad con el padre para evitar !important */
+	outline: none;
 	color: var(--color-text-base);
 }
 
@@ -98,4 +106,19 @@
 
 .clearButton:focus-visible {
 	outline: none;
+}
+
+.errorWrapper {
+	animation: fadeInSlide 0.3s ease-out; /* Micro-interacción premium */
+}
+
+@keyframes fadeInSlide {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

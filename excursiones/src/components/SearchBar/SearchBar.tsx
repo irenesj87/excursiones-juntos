@@ -1,45 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, shallowEqual } from "react-redux";
-import { searchExcursions } from "../../services/excursionService";
+import React, { useRef } from "react";
 import { Excursion } from "../../types";
-import { RootState } from "../../store/store";
 import { SearchIcon, XIcon } from "../../ui/Icons";
+import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
+import { useSearchBarLogic } from "./useSearchBarLogic";
 import styles from "./SearchBar.module.css";
 
-// Constante para el tiempo de retraso del debounce
-const DEBOUNCE_DELAY_MS = 500;
-
-// Define las propiedades que acepta el componente SearchBar.
+// Propiedades del componente.
 interface SearchBarProps {
+	// Función que se llama cuando la búsqueda se realiza con éxito, recibiendo las excursiones encontradas.
 	readonly onFetchSuccess: (excursions: readonly Excursion[]) => void;
+
+	// Función que se llama al iniciar la búsqueda de excursiones, útil para mostrar un indicador de carga.
 	readonly onExcursionsFetchStart: () => void;
+
+	// Función que se llama al finalizar la búsqueda de excursiones, recibiendo un error si ocurrió alguno.
 	readonly onExcursionsFetchEnd: (
 		error: (Error & { secondaryMessage?: string }) | null,
 	) => void;
+
+	// Identificador único para el input de búsqueda, utilizado para accesibilidad.
 	readonly id: string;
+
+	// Valor actual del input de búsqueda, controlado desde el componente padre.
 	readonly searchValue: string;
+
+	// Función que se llama cuando el valor del input de búsqueda cambia, permitiendo actualizar el estado en el componente padre.
 	readonly onSearchChange: (value: string) => void;
-}
-
-/**
- * Genera un error amigable para el usuario basado en el error técnico capturado.
- */
-function createFriendlyError(
-	error: unknown,
-): Error & { secondaryMessage?: string } {
-	let userFriendlyError: Error & { secondaryMessage?: string };
-
-	if (error instanceof TypeError && error.message === "Failed to fetch") {
-		userFriendlyError = new Error("Error de conexión");
-		userFriendlyError.secondaryMessage =
-			"No se pudo conectar con el servidor. Por favor, revisa tu conexión a internet e inténtalo de nuevo.";
-	} else {
-		userFriendlyError = new Error("No se han podido cargar las excursiones.");
-		userFriendlyError.secondaryMessage =
-			"Por favor, inténtalo de nuevo más tarde.";
-	}
-
-	return userFriendlyError;
 }
 
 /**
@@ -53,110 +39,90 @@ export function SearchBar({
 	searchValue,
 	onSearchChange,
 }: SearchBarProps) {
-	const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
+	// Referencia al input de búsqueda para manejar el foco y otras interacciones. Se utiliza para darle el foco
+	// al usuario después de limpiar la búsqueda.
 	const searchInputRef = useRef<HTMLInputElement>(null);
 
-	const { area, difficulty, time } = useSelector(
-		(state: RootState) => state.filterReducer,
-		shallowEqual,
-	);
+	// Extraemos la lógica de negocio al hook personalizado.
+	const { error, clearError } = useSearchBarLogic({
+		searchValue,
+		onFetchSuccess,
+		onExcursionsFetchStart,
+		onExcursionsFetchEnd,
+	});
 
 	/**
-	 * Maneja el evento `onChange` del input de búsqueda, actualizando el estado `search`.
+	 * Maneja el evento `onChange` del input de búsqueda, actualizando el estado `search`. Notifica al componente
+	 * padre cada vez que el usuario teclea algo en el input, permitiendo que la búsqueda se ejecute con el nuevo
+	 * valor.
 	 */
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onSearchChange(event.target.value);
 	};
 
 	/**
-	 * Limpia el contenido del input de búsqueda y da el foco al mismo.
+	 * Limpia el contenido del input de búsqueda y da el foco al input para que el usuario pueda volver a escribir
+	 * sin tener quedar clicks innecesarios.
 	 */
 	const handleClearSearch = () => {
 		onSearchChange("");
 		searchInputRef.current?.focus();
 	};
 
-	// Efecto para aplicar el "debounce" al término de búsqueda.
-	// Solo actualiza `debouncedSearch` cuando el usuario deja de teclear por 500ms.
-	useEffect(() => {
-		const timerId = setTimeout(() => {
-			setDebouncedSearch(searchValue);
-		}, DEBOUNCE_DELAY_MS);
-
-		return () => clearTimeout(timerId);
-	}, [searchValue]);
-
-	// Usamos refs para almacenar las props de función y evitar que el useEffect se vuelva a ejecutar innecesariamente.
-	const onFetchSuccessRef = useRef(onFetchSuccess);
-	const onExcursionsFetchStartRef = useRef(onExcursionsFetchStart);
-	const onExcursionsFetchEndRef = useRef(onExcursionsFetchEnd);
-
-	// Mantenemos las refs actualizadas si las props cambian.
-	useEffect(() => {
-		onFetchSuccessRef.current = onFetchSuccess;
-		onExcursionsFetchStartRef.current = onExcursionsFetchStart;
-		onExcursionsFetchEndRef.current = onExcursionsFetchEnd;
-	}, [onFetchSuccess, onExcursionsFetchStart, onExcursionsFetchEnd]);
-
-	// Este efecto se ejecuta cada vez que el término de búsqueda "debounced" o los filtros cambian.
-	// De esta forma, los filtros se aplican instantáneamente, mientras que la búsqueda por texto espera.
-	useEffect(() => {
-		const fetchData = async () => {
-			onExcursionsFetchStartRef.current();
-			try {
-				const data = await searchExcursions({
-					debouncedSearch,
-					area,
-					difficulty,
-					time,
-				});
-				onFetchSuccessRef.current(data);
-				onExcursionsFetchEndRef.current(null);
-			} catch (error) {
-				console.error("Error técnico al buscar excursiones:", error);
-				onFetchSuccessRef.current([]);
-
-				onExcursionsFetchEndRef.current(createFriendlyError(error));
-			}
-		};
-
-		fetchData();
-	}, [debouncedSearch, area, difficulty, time]);
-
-	/** Evita el envío del formulario por defecto. */
+	/**
+	 * Evita que el navegador recargue la página si el usuario pulsa la tecla Enter.
+	 */
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 	};
 
 	return (
-		<form
-			role="search"
-			className={styles.searchContainer}
-			onSubmit={handleSubmit}
-		>
-			<SearchIcon className={styles.searchIcon} aria-hidden="true" />
-			<label htmlFor={id} className="visually-hidden">
-				Buscar excursiones por nombre
-			</label>
-			<input
-				ref={searchInputRef}
-				id={id}
-				className={styles.searchInput}
-				type="search"
-				placeholder="¿A dónde quieres ir?"
-				value={searchValue}
-				onChange={handleSearchChange}
-			/>
-			{searchValue && (
-				<button
-					type="button"
-					className={styles.clearButton}
-					onClick={handleClearSearch}
-					aria-label="Limpiar búsqueda"
-				>
-					<XIcon className={styles.clearIcon} aria-hidden="true" />
-				</button>
+		/* Contenedor principal de la barra de búsqueda, que incluye el formulario y el área de mensajes de error. */
+		<div className={styles.wrapper}>
+			<form
+				// Ayuda a los usuarios de tecnologías asistivas a identificar esta sección como un área de búsqueda.
+				role="search"
+				className={styles.searchContainer}
+				onSubmit={handleSubmit}
+			>
+				<SearchIcon className={styles.searchIcon} aria-hidden="true" />
+				<label htmlFor={id} className="visually-hidden">
+					Buscar excursiones por nombre
+				</label>
+				<input
+					ref={searchInputRef}
+					id={id}
+					className={styles.searchInput}
+					type="search"
+					placeholder="¿A dónde quieres ir?"
+					value={searchValue}
+					onChange={handleSearchChange}
+				/>
+				{/* Solo mostramos el botón de limpiar búsqueda si hay algo escrito en el input, para evitar 
+				confusión al usuario. */}
+				{searchValue && (
+					<button
+						type="button"
+						className={styles.clearButton}
+						onClick={handleClearSearch}
+						aria-label="Limpiar búsqueda"
+					>
+						<XIcon className={styles.clearIcon} aria-hidden="true" />
+					</button>
+				)}
+			</form>
+			{/* Si el hook detecta un error, mostramos un mensaje de error amigable para el usuario utilizando el 
+			componente FeedbackAlert. */}
+			{error && (
+				<div className={styles.errorWrapper}>
+					<FeedbackAlert
+						variant="danger"
+						title={error.message}
+						message={error.secondaryMessage || ""}
+						onClose={clearError}
+					/>
+				</div>
 			)}
-		</form>
+		</div>
 	);
 }
