@@ -13,35 +13,37 @@ const ERR_CONNECTION_MSG =
 const ERR_FETCH_TITLE = "Error al buscar";
 const ERR_FETCH_MSG =
 	"No se han podido cargar las excursiones. Inténtalo de nuevo más tarde.";
-/** Mensaje nativo que devuelven los navegadores ante errores de red. */
+/** Mensaje nativo que retornan los navegadores ante errores de red. */
 const MENSAJE_ERROR_RED_NATIVO = "Failed to fetch";
+
+/**
+ * Interfaz que extiende el Error estándar para incluir un mensaje secundario amigable.
+ * Sigue el principio de Single Source of Truth para la gestión de errores de búsqueda.
+ */
+export interface SearchError extends Error {
+	secondaryMessage?: string;
+}
 
 interface UseSearchBarLogicProps {
 	searchValue: string;
 	onFetchSuccess: (excursions: readonly Excursion[]) => void;
 	onExcursionsFetchStart: () => void;
-	onExcursionsFetchEnd: (
-		error: (Error & { secondaryMessage?: string }) | null,
-	) => void;
+	onExcursionsFetchEnd: (error: SearchError | null) => void;
 }
 
 /**
  * Genera un error amigable para el usuario basado en el error técnico capturado.
  */
-function createFriendlyError(
-	error: unknown,
-): Error & { secondaryMessage?: string } {
+function createFriendlyError(error: unknown): SearchError {
 	if (
 		error instanceof TypeError &&
 		error.message === MENSAJE_ERROR_RED_NATIVO
 	) {
-		const err: Error & { secondaryMessage?: string } = new Error(
-			ERR_CONNECTION_TITLE,
-		);
+		const err: SearchError = new Error(ERR_CONNECTION_TITLE);
 		err.secondaryMessage = ERR_CONNECTION_MSG;
 		return err;
 	}
-	const err: Error & { secondaryMessage?: string } = new Error(ERR_FETCH_TITLE);
+	const err: SearchError = new Error(ERR_FETCH_TITLE);
 	err.secondaryMessage = ERR_FETCH_MSG;
 	return err;
 }
@@ -56,9 +58,7 @@ export function useSearchBarLogic({
 	onExcursionsFetchEnd,
 }: UseSearchBarLogicProps) {
 	const [debouncedSearch, setDebouncedSearch] = useState(searchValue);
-	const [error, setError] = useState<
-		(Error & { secondaryMessage?: string }) | null
-	>(null);
+	const [error, setError] = useState<SearchError | null>(null);
 
 	const { area, difficulty, time } = useSelector(
 		(state: RootState) => state.filterReducer,
@@ -116,7 +116,6 @@ export function useSearchBarLogic({
 	};
 
 	return {
-		debouncedSearch,
 		error,
 		clearError,
 	};

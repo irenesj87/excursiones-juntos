@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Excursion } from "../../types";
 import { SearchIcon, XIcon } from "../../ui/Icons";
 import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
-import { useSearchBarLogic } from "./useSearchBarLogic";
+import { useSearchBarLogic, SearchError } from "./useSearchBarLogic";
 import styles from "./SearchBar.module.css";
 
 // Propiedades del componente.
@@ -14,9 +14,7 @@ interface SearchBarProps {
 	readonly onExcursionsFetchStart: () => void;
 
 	// Función que se llama al finalizar la búsqueda de excursiones, recibiendo un error si ocurrió alguno.
-	readonly onExcursionsFetchEnd: (
-		error: (Error & { secondaryMessage?: string }) | null,
-	) => void;
+	readonly onExcursionsFetchEnd: (error: SearchError | null) => void;
 
 	// Identificador único para el input de búsqueda, utilizado para accesibilidad.
 	readonly id: string;
