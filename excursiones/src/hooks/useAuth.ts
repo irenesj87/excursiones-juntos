@@ -122,8 +122,8 @@ export const useAuth = () => {
 			}
 
 			try {
-				// En una implementación real, pasaríamos controller.signal al servicio fetch.
-				// Esto permitiría cancelar la petición si el componente se desmonta antes de que la respuesta llegue.
+				// TODO: Hay que pasar una signal del controller al servicio fetch.
+				// Esto permitir ía cancelar la petición si el componente se desmonta antes de que la respuesta llegue.
 				const authData: AuthResponse | null = await verifyToken(sessionToken);
 
 				if (!controller.signal.aborted) {
@@ -162,7 +162,6 @@ export const useAuth = () => {
 		verifyAuthStatus();
 
 		// Función de limpieza que se ejecuta al desmontar el componente (por ejemplo si el usuario cierra la pestaña).
-		// Pone isMounted a false para prevenir que se intente actualizar el estado de un componente que ya no existe.
 		return () => {
 			controller.abort();
 		};
