@@ -7,27 +7,26 @@ import { useMinDisplayTime } from "./useMinDisplayTime";
 
 /**
  * Hook personalizado para verificar si un usuario ya tiene una sesión iniciada desde una visita anterior,
- * justo cuando la aplicación se carga por primera vez.
+ * cuando la aplicación se carga por primera vez.
  * Este hook es necesario para evitar el problema del parpadeo, que da una mala experiencia de usuario.
  * Sin useAuth pasaría esto:
  * 1. Un usuario que ya ha iniciado sesión vuelve a tu web o refresca la página.
  * 2. La aplicación se carga. El estado de Redux está vacío al principio, por lo que la aplicación cree que el
  * usuario no está logueado.
  * 3. Durante un instante, la barra de navegación mostraría "Iniciar sesión".
- * 4. Un segundo después, algún código leería el token de sessionStorage, validaría la sesión y actualizaría el 
+ * 4. Un segundo después, algún código leería el token de sessionStorage, validaría la sesión y actualizaría el
  * estado.
  * 5. La barra de navegación "parpadearía" y cambiaría para mostrar "Tu perfil" y "Cerrar sesión".
- *   Este estado es imprescindible para la lógica de renderizado condicional en la aplicación.
  *   Si isAuthCheckComplete es:
  *   - `false`: La comprobación del token de sesión está en curso. La UI debería mostrar un estado de carga
- *     (como un esqueleto o spinner) para evitar mostrar contenido incorrecto o una pantalla en blanco.
+ *     (skeleton) para evitar mostrar contenido incorrecto.
  *   - `true`: La comprobación ha finalizado. La aplicación ya sabe si el usuario está autenticado o no
  *     y puede renderizar de forma segura las rutas protegidas o redirigir a la página de login.
  */
 
 /**
  * Estado inicial para el reducer de autenticación.
- * isAuthCheckComplete se establece inicialmente en false para indicar que la verificación de autenticación aún no 
+ * isAuthCheckComplete se establece inicialmente en false para indicar que la verificación de autenticación aún no
  * ha comenzado.
  */
 const authInitialState: AuthState = {
@@ -68,6 +67,29 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 };
 
 /**
+ * Recupera el token de sesión de sessionStorage, buscando en la clave directao en el objeto de respaldo 'authState'.
+ */
+const getPersistedToken = (): string | null => {
+	// Primero intentamos obtener el token directamente.
+	const token = sessionStorage.getItem("token");
+	// Si encontramos un token directo, se retorna inmediatamente.
+	if (token) return token;
+	// Si no hay un token directo, intentamos obtenerlo del objeto de respaldo 'authState'.
+	const authState = sessionStorage.getItem("authState");
+	// Si no hay un objeto de respaldo, se retorna null.
+	if (!authState) return null;
+	// Si hay un objeto de respaldo, intentamos parsearlo como JSON para extraer el token.
+	try {
+		const parsed = JSON.parse(authState);
+		// Retornamos el token si existe, o null si no está presente en el objeto de respaldo.
+		return parsed?.token || null;
+	} catch (e) {
+		console.warn("Error al recuperar token de authState:", e);
+		return null;
+	}
+};
+
+/**
  * Hook personalizado para manejar la autenticación del usuario.
  * Verifica el token de sessionStorage en la carga inicial de la aplicación y actualiza el estado de Redux.
  */
@@ -92,47 +114,31 @@ export const useAuth = () => {
 		// Esta función se ejecuta una vez cuando el componente se monta por primera vez.
 		const verifyAuthStatus = async () => {
 			authDispatch({ type: "AUTH_START_CHECK" });
-			// Inicia el temporizador para asegurar que la UI se muestre durante un tiempo mínimo.
+			// Inicia el temporizador para asegurar que el skeleton se muestre durante un tiempo mínimo.
 			startTiming();
+			// Recuperamos el token de sesión de sessionStorage.
+			const sessionToken = getPersistedToken();
 
-			// Intentamos obtener el token directamente de sessionStorage.
-			// Esto es más seguro que depender del estado de Redux en el primer renderizado.
-			let sessionToken = sessionStorage.getItem("token");
-
-			// Si no encontramos la clave 'token', buscamos en el objeto 'authState' como respaldo.
-			// Esto cubre casos donde el usuario tiene una sesión antigua guardada antes de nuestra actualización.
+			// Si no hay token, no es necesario llamar al servidor. Limpiamos Redux y marcamos la comprobación como finalizada.
 			if (!sessionToken) {
-				const authState = sessionStorage.getItem("authState");
-				if (authState) {
-					try {
-						sessionToken = JSON.parse(authState).token;
-					} catch (e) {
-						console.warn("Error al recuperar token de authState:", e);
-					}
-				}
-			}
-			// Si después de buscar en sessionStorage y en el respaldo authState no tenemos token,
-			// no tiene sentido llamar al backend. Asumimos que no hay sesión válida.
-			if (!sessionToken) {
+				// Si el componente ya no está montado, no hacemos nada.
 				if (!controller.signal.aborted) {
 					reduxDispatch(logout()); // Aseguramos que Redux esté limpio
 					dispatchWithMinDisplayTime({ type: "AUTH_CHECK_COMPLETE" });
 				}
 				return;
 			}
-
+			// Si hay un token, verificamos su validez con el servidor.
 			try {
-				// TODO: Hay que pasar una signal del controller al servicio fetch.
-				// Esto permitir ía cancelar la petición si el componente se desmonta antes de que la respuesta llegue.
-				const authData: AuthResponse | null = await verifyToken(sessionToken);
+				// Pasamos la señal del controlador al servicio para cancelar la petición de red si es necesario.
+				const authData: AuthResponse | null = await verifyToken(
+					sessionToken,
+					controller.signal,
+				);
 
-				if (!controller.signal.aborted) {
-					// Si el token es válido, authData contendrá el usuario y el token.
-					if (authData) {
-						reduxDispatch(
-							login({ user: authData.user, token: authData.token }),
-						);
-					}
+				// Si la verificación es exitosa y el componente aún está montado, actualizamos el estado de Redux con los datos del usuario.
+				if (!controller.signal.aborted && authData) {
+					reduxDispatch(login({ user: authData.user, token: authData.token }));
 				}
 			} catch (error) {
 				if ((error as Error).name === "AbortError") return;
@@ -143,11 +149,9 @@ export const useAuth = () => {
 					(error as Error).message,
 				);
 				// Esto actualizará el estado de Redux para reflejar que el usuario no está autenticado.
-				// También se elimina el token del sessionStorage para limpiar la sesión.
 				// Si el componente ya no está montado, no hacemos nada.
 				if (!controller.signal.aborted) {
 					reduxDispatch(logout());
-					sessionStorage.removeItem("token");
 				}
 			} finally {
 				// Finalmente, independientemente de si la verificación fue exitosa o fallida,
@@ -159,6 +163,7 @@ export const useAuth = () => {
 				}
 			}
 		};
+		// Llamamos a la función para verificar el estado de autenticación cuando el componente se monta.
 		verifyAuthStatus();
 
 		// Función de limpieza que se ejecuta al desmontar el componente (por ejemplo si el usuario cierra la pestaña).

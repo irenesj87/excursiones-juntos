@@ -65,6 +65,7 @@ export const registerUser = async (
  */
 export const verifyToken = async (
 	token: string | null,
+	signal?: AbortSignal,
 ): Promise<AuthResponse | null> => {
 	if (!token) return null;
 
@@ -72,6 +73,7 @@ export const verifyToken = async (
 	const options: RequestInit = {
 		method: "GET",
 		headers: { Authorization: `Bearer ${token}` },
+		signal,
 	};
 	return fetchApi<AuthResponse>(url, options);
 };
