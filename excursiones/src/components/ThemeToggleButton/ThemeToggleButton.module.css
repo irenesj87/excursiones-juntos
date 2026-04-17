@@ -1,11 +1,10 @@
-/* Botón nativo para cambio de tema */
 .themeToggleBtn {
 	background-color: transparent;
 	color: var(--theme-toggle-btn-color);
-	border: 1px solid transparent; /* Reserva espacio para borde en focus */
-	width: 2.75rem;
-	height: 2.75rem; /* 44px */
-	border-radius: 50%;
+	border: 1px solid transparent;
+	width: 2.75rem; /* 44px - Touch target optimizado */
+	height: 2.75rem;
+	border-radius: var(--border-radius-full, 9999px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -13,15 +12,17 @@
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent; /* Evita el parpadeo gris al tocar en iOS */
 	/* Transición suave para movimiento y color de fondo */
-	transition: transform var(--transition-base);
+	transition:
+		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+		background-color 0.25s ease;
 }
 
 .themeIcon {
-	font-size: 1.25rem; /* Ligeramente más fino */
+	display: block;
 	color: var(--theme-toggle-btn-icon);
 }
 
-/* Para el estado hover, solo aplicamos la transformación. */
+/* Estado Hover: Elevación sutil para jerarquía visual */
 .themeToggleBtn:hover,
 .themeToggleBtn:focus-visible {
 	transform: translateY(-2px);
@@ -35,12 +36,13 @@
 
 /* Para el foco con teclado, aplicamos la transformación y nuestro anillo de foco personalizado. */
 .themeToggleBtn:focus-visible {
-	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
 	outline: none;
 }
 
+/* Estado Active: Micro-interacción de "compresión" orgánica */
 .themeToggleBtn:active {
-	background-color: transparent;
+	background-color: var(--theme-toggle-btn-bg-hover);
 	border-color: transparent;
 	color: var(--theme-toggle-btn-color);
 	transform: translateY(0) scale(0.92);
