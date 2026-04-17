@@ -7,9 +7,8 @@ import { RootState } from "../../store/store";
 import Logo from "../Logo";
 import UserNavSkeleton from "../UserNav/UserNavSkeleton";
 import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
-import ThemeToggleButton from "../ThemeToggleButton";
+import { ThemeToggleButton } from "../ThemeToggleButton";
 import styles from "./NavigationBar.module.css";
-import "../../css/Themes.css";
 import { ROUTES } from "../../constants";
 
 // Estos componentes se cargan de forma perezosa.

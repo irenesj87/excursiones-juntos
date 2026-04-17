@@ -1,1 +1,1 @@
-export { default } from "./ThemeToggleButton";
+export { ThemeToggleButton } from "./ThemeToggleButton";

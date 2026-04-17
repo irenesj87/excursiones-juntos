@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch, TypedUseSelectorHook } from "react-redux";
 import { toggleMode } from "../../slices/themeSlice";
 import { MoonIcon, SunIcon } from "../../ui/Icons";
@@ -6,29 +6,25 @@ import styles from "./ThemeToggleButton.module.css";
 import { RootState, AppDispatch } from "../../store/store"; // Asegúrate de que la ruta sea correcta
 
 /**
- * Props para el componente ThemeToggleButton.
+ * Prop del componente.
  */
 interface ThemeToggleButtonProps {
 	readonly className?: string; // Clases CSS adicionales para el botón.
-	readonly showText?: boolean; // Si es true, muestra el texto junto al icono.
 }
 
-// Asignamos el icono a una constante con el tipo React.ElementType
-// para asegurar a TypeScript que es un componente JSX válido.
-
 /**
- * Botón que permite al usuario cambiar entre el tema claro y oscuro.
+ * Custom hooks locales para mantener la consistencia con el Store de Redux.
  */
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 const useAppDispatch = () => useDispatch<AppDispatch>();
 
 /**
  * Componente ThemeToggleButton.
+ *
+ * Permite al usuario alternar entre modos de color (claro/oscuro).
+ * Implementa una técnica de bloqueo de transiciones para un cambio de tema instantáneo y fluido.
  */
-function ThemeToggleButton({
-	className = "",
-	showText = false,
-}: ThemeToggleButtonProps) {
+export function ThemeToggleButton({ className = "" }: ThemeToggleButtonProps) {
 	const mode = useAppSelector((state: RootState) => state.themeReducer.mode);
 	const dispatch = useAppDispatch();
 
@@ -41,11 +37,13 @@ function ThemeToggleButton({
 			// Se selecciona la etiqueta <html>
 			const root = document.documentElement;
 
-			// Añadimos clase temporal para bloquear transiciones de color
+			/**
+			 * Aplicamos la clase 'theme-toggling' para suspender las transiciones de color en el DOM.
+			 * Esto evita que el usuario vea un degradado extraño mientras las variables CSS se actualizan.
+			 */
 			root.classList.add("theme-toggling");
 
-			// Se asegura de que la etiqueta <html> no tiene las clases 'light' y 'dark' aplicadas antes que el código añada
-			// la correcta basada en 'mode'
+			// Limpieza y aplicación del nuevo modo
 			root.classList.remove("light", "dark");
 			// Añade la clase 'mode' ('light' o 'dark') a <html>
 			root.classList.add(mode);
@@ -54,13 +52,11 @@ function ThemeToggleButton({
 
 			/**
 			 * Forzamos un reflow para que el cambio de variables CSS se aplique instantáneamente.
-			 * Usamos getBoundingClientRect() porque, al ser una llamada a función, satisface las
-			 * reglas de linter de "expresiones no usadas" sin necesidad de crear variables.
 			 */
 			root.getBoundingClientRect();
 
 			// Eliminamos la clase en el siguiente ciclo para restaurar transiciones de hover
-			const timer = setTimeout(() => {
+			const timer = globalThis.setTimeout(() => {
 				root.classList.remove("theme-toggling");
 			}, 50);
 
@@ -77,28 +73,22 @@ function ThemeToggleButton({
 
 	const icon =
 		mode === "light" ? (
-			<MoonIcon className={styles.themeIcon} />
+			<MoonIcon size={20} className={styles.themeIcon} />
 		) : (
-			<SunIcon className={styles.themeIcon} />
+			<SunIcon size={20} className={styles.themeIcon} />
 		);
 
 	return (
 		<button
 			type="button"
-			className={`${styles.themeToggleBtn} ${className}`}
+			className={`${styles.themeToggleBtn} ${className}`.trim()}
 			onClick={toggleTheme}
+			aria-pressed={mode === "dark"}
 			aria-label={
 				mode === "light" ? "Activa el modo oscuro" : "Activa el modo claro"
 			}
 		>
 			{icon}
-			{showText && (
-				<span className="ms-2">
-					{mode === "light" ? "Modo oscuro" : "Modo claro"}
-				</span>
-			)}
 		</button>
 	);
 }
-
-export default ThemeToggleButton;
