@@ -36,7 +36,7 @@
 
 /* Para el foco con teclado, aplicamos la transformación y nuestro anillo de foco personalizado. */
 .themeToggleBtn:focus-visible {
-	box-shadow: 0 0 0 var(--space-1, 0.25rem) var(--focus-ring-color);
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
 	outline: none;
 }
 
