@@ -32,9 +32,9 @@ type FormAction =
 	| { type: "START_EDIT" }
 	| { type: "CANCEL_EDIT" }
 	| {
-		type: "UPDATE_FIELD";
-		payload: { field: keyof FormValues; value: string };
-    }
+			type: "UPDATE_FIELD";
+			payload: { field: keyof FormValues; value: string };
+	}
 	| { type: "SAVE_START" }
 	| { type: "SAVE_SUCCESS" }
 	| { type: "SAVE_FAILURE"; payload: string }
@@ -96,20 +96,18 @@ const formReducer = (state: FormState, action: FormAction): FormState => {
 export const useUserInfoForm = () => {
 	const loginDispatch = useAppDispatch();
 	const { user, token } = useAppSelector(
-		(state: RootState) => state.loginReducer
+		(state: RootState) => state.loginReducer,
 	);
 
+	const getUserValues = () => ({
+		name: user?.name ?? "",
+		surname: user?.surname ?? "",
+		phone: user?.phone ?? "",
+	});
+
 	const initialState: FormState = {
-		values: {
-			name: user?.name ?? "",
-			surname: user?.surname ?? "",
-			phone: user?.phone ?? "",
-		},
-		originalValues: {
-			name: user?.name ?? "",
-			surname: user?.surname ?? "",
-			phone: user?.phone ?? "",
-		},
+		values: getUserValues(),
+		originalValues: getUserValues(),
 		isEditing: false,
 		isLoading: false,
 		error: null,
@@ -138,7 +136,7 @@ export const useUserInfoForm = () => {
 		if (!isFormValid || !isFormChanged || formState.isLoading) return;
 		if (!user || !token) {
 			console.error(
-				"No se puede actualizar: falta el email del usuario o el token."
+				"No se puede actualizar: falta el email del usuario o el token.",
 			);
 			return;
 		}

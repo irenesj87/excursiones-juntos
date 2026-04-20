@@ -53,7 +53,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 			{isJoined ? (
 				<span className={styles.joinedStatus} role="status">
 					<CheckIcon className={styles.detailIcon} />
-					Caminando juntos
+					Unido/a
 				</span>
 			) : (
 				<CustomButton
@@ -61,7 +61,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
-					Caminar juntos
+					Unirse
 				</CustomButton>
 			)}
 		</div>

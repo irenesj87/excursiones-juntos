@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { RootState } from "../../store/store";
-import Logo from "../Logo";
+import { Logo } from "../Logo";
 import UserNavSkeleton from "../UserNav/UserNavSkeleton";
 import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
 import { ThemeToggleButton } from "../ThemeToggleButton";

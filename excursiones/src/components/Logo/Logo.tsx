@@ -6,7 +6,7 @@ import styles from "./Logo.module.css";
 /**
  * Componente que renderiza el logo de la aplicación con el texto "Excursiones Juntos".
  */
-function Logo(): JSX.Element {
+export function Logo(): JSX.Element {
 	return (
 		<Link
 			to={ROUTES.HOME}
@@ -18,5 +18,3 @@ function Logo(): JSX.Element {
 		</Link>
 	);
 }
-
-export default Logo;

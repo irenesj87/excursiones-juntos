@@ -27,7 +27,7 @@ interface FormField {
 /**
  * Componente que se encarga del menú de edición y muestra de los datos del usuario logueado en ese momento
  */
-function UserInfoForm(): React.ReactElement {
+export function UserInfoForm(): React.ReactElement {
 	const {
 		formState,
 		user,
@@ -147,23 +147,14 @@ function UserInfoForm(): React.ReactElement {
 				{/* Sección: Datos de Cuenta */}
 				<div className="mb-4">
 					<h3 className={styles.sectionTitle}>Cuenta</h3>
-					<Form.Group
-						as={Row}
-						className="mb-0 gx-2 align-items-center"
-						controlId="formPlaintextEmail"
-					>
-						<Form.Label column sm="3" className="text-sm-end">
-							<span className="d-flex align-items-center justify-content-sm-end gap-2">
-								<span className={styles.labelText}>Correo:</span>
-							</span>
-						</Form.Label>
-						<Col sm="9">
-							<Form.Control
-								plaintext
-								readOnly
-								defaultValue={user?.mail ?? ""}
-							/>
-						</Col>
+					<Form.Group controlId="formPlaintextEmail" className="mb-0">
+						<Form.Label className={styles.labelStacked}>Correo</Form.Label>
+						<Form.Control
+							plaintext
+							readOnly
+							defaultValue={user?.mail ?? ""}
+							className={styles.readonlyEmail}
+						/>
 					</Form.Group>
 				</div>
 
@@ -176,36 +167,22 @@ function UserInfoForm(): React.ReactElement {
 					{/* Renderizado dinámico de los campos del formulario */}
 					{formFields.map((field, index) => (
 						<Form.Group
-							as={Row}
 							key={field.id}
-							className={`${
-								index === formFields.length - 1 ? "mb-4" : "mb-3"
-							} gx-2 align-items-center`}
+							className={index === formFields.length - 1 ? "mb-4" : "mb-3"}
 						>
-							<Form.Label
-								column
-								sm="3"
-								className="text-sm-end"
-								htmlFor={field.id}
-							>
-								<span className="d-flex align-items-center justify-content-sm-end gap-2">
-									<span className={styles.labelText}>{field.label}:</span>
-								</span>
+							<Form.Label htmlFor={field.id} className={styles.labelStacked}>
+								{field.label}
 							</Form.Label>
-							<Col sm="9">
-								<UserPageInputEdit
-									ref={field.ref}
-									id={field.id}
-									isEditing={isEditing}
-									onInputChange={(value) =>
-										handleInputChange(field.field, value)
-									}
-									value={values[field.field]}
-									validationFunction={field.validation}
-									message={true}
-									errorMessage={field.errorMessage}
-								/>
-							</Col>
+							<UserPageInputEdit
+								ref={field.ref}
+								id={field.id}
+								isEditing={isEditing}
+								onInputChange={(value) => handleInputChange(field.field, value)}
+								value={values[field.field]}
+								validationFunction={field.validation}
+								message={true}
+								errorMessage={field.errorMessage}
+							/>
 						</Form.Group>
 					))}
 				</div>
@@ -267,5 +244,3 @@ function UserInfoForm(): React.ReactElement {
 		</Card>
 	);
 }
-
-export default UserInfoForm;

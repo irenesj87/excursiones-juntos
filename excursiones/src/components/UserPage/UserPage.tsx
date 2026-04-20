@@ -1,6 +1,5 @@
-import React from "react";
 import { Row, Col } from "react-bootstrap";
-import UserInfoForm from "../UserInfoForm";
+import { UserInfoForm } from "../UserInfoForm";
 import "bootstrap/dist/css/bootstrap.css";
 
 /**
