@@ -152,7 +152,7 @@ export function UserInfoForm(): React.ReactElement {
 						<Form.Control
 							plaintext
 							readOnly
-							defaultValue={user?.mail ?? ""}
+							value={user?.mail ?? ""}
 							className={styles.readonlyEmail}
 						/>
 					</Form.Group>

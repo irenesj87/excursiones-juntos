@@ -6,6 +6,10 @@ import userInfoStyles from "./UserInfoForm.module.css";
 const SKELETON_INPUT_HEIGHT = 38;
 const SKELETON_BUTTON_MIN_WIDTH = 70;
 const SKELETON_ROWS_COUNT = 2;
+/** Estilo estable para el esqueleto del botón para evitar re-renders innecesarios */
+const BUTTON_SKELETON_STYLE = {
+	minWidth: SKELETON_BUTTON_MIN_WIDTH,
+};
 
 /**
  * Renderiza un esqueleto para la tarjeta de información del usuario de la página de usuario.
@@ -122,7 +126,7 @@ function UserInfoSkeleton(): React.ReactElement {
 							<Skeleton
 								height={SKELETON_INPUT_HEIGHT}
 								className="w-100"
-								style={{ minWidth: SKELETON_BUTTON_MIN_WIDTH }}
+								style={BUTTON_SKELETON_STYLE}
 								baseColor={baseColor}
 								highlightColor={highlightColor}
 							/>
