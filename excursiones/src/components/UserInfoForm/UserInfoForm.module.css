@@ -66,32 +66,30 @@
 	margin-bottom: 1rem;
 }
 
-.labelIcon {
-	color: var(--color-primary);
-	font-size: 1.1em;
-}
-
 .cardBody :global(.form-label) {
 	font-weight: 600;
 	color: var(--color-text-muted);
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
 }
 
-/* En breakpoints pequeños, el texto fluye naturalmente.
-   En breakpoints sm+ (donde el label está a la derecha), fijamos un ancho
-   para que los iconos queden alineados verticalmente. */
-@media (min-width: 576px) {
-	.labelText {
-		min-width: 5.5rem;
-		text-align: right;
-	}
+.labelStacked {
+	display: block;
+}
 
+.readonlyEmail {
+	padding-left: 0;
+	font-weight: 500;
+	color: var(--color-text-base);
+}
+
+@media (min-width: 576px) {
 	/* Recuperamos el padding amplio en pantallas más grandes para mayor elegancia */
 	.cardBody {
 		padding: 1.5rem;
 	}
 }
 
-/* Alinea los iconos con el texto en los botones del formulario */
 .editButton,
 .cancelButton,
 .saveButton {
