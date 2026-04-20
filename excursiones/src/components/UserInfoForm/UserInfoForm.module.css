@@ -70,7 +70,7 @@
 	font-weight: 600;
 	color: var(--color-text-muted);
 	margin-bottom: 0.5rem;
-	font-size: 0.95rem; /* Un pelín más pequeño para elegancia */
+	font-size: 1rem;
 }
 
 .labelStacked {
