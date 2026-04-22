@@ -1,34 +1,38 @@
-html {
-	box-sizing: border-box; /* Establece la base para la herencia */
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	/* Definimos las variables fuera de @layer para máxima compatibilidad */
+	--background: 40 30% 98%; /* #fdfcfb */
+	--foreground: 20 10% 20%; /* #333333 */
+
+	--primary: 113 39% 25%; /* #2d5a27 */
+	--primary-foreground: 40 30% 98%;
+
+	--card: 40 30% 98%;
+	--muted: 40 10% 90%;
+	--muted-foreground: var(--color-text-muted);
+
+	--border: 35 15% 92%; /* Crema muy suave para que sea casi invisible en claro */
+	--input: 20 10% 90%;
+	--ring: 113 39% 25%;
+
+	--radius: 0.75rem; /* 12px para ese look orgánico suave */
 }
 
-*,
-*::before,
-*::after {
-	/* Hace que todos los elementos hereden box-sizing de html */
-	box-sizing: inherit;
+.dark {
+	--background: 95 25% 11%; /* var(--color-green-dark-900) - Musgo Profundo */
+	--foreground: 40 30% 98%;
+	--card: 95 20% 17%; /* var(--color-green-dark-800) - Verde musgo oscuro para el cuerpo */
+	--border: 95 25% 12%; /* Verde musgo casi negro para que se funda con el fondo */
 }
 
-body,
-#root {
-	/* #root y body heredarán box-sizing: border-box; de html */
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-body {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-tap-highlight-color: transparent; /* Elimina el fondo azul al hacer tap en móviles */
-}
-
-code {
-	font-family:
-		source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@layer base {
+	body {
+		@apply bg-background text-foreground antialiased;
+		font-feature-settings:
+			"rlig" 1,
+			"calt" 1;
+	}
 }

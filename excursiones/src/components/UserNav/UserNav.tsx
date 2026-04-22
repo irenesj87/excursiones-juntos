@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import StyledNavLink from "../../ui/Link";
-import Button from "../../ui/CustomButton/CustomButton";
+import { Button } from "../../ui/button";
 import { logoutUser } from "../../services/authService";
 import { logout } from "../../slices/loginSlice";
 import { ROUTES } from "../../constants";

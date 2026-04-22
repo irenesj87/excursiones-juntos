@@ -1,6 +1,6 @@
 import { forwardRef, useState, useEffect, ChangeEvent } from "react";
-import { Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
+import { cn } from "../../lib/utils";
+import { Input } from "../../ui/input";
 import { TriangleAlertIcon } from "../../ui/Icons";
 import styles from "./UserPageInputEdit.module.css";
 
@@ -80,32 +80,40 @@ function UserPageInputEditComponent(
 		/**
 		 * Renderiza el componente de control de formulario.
 		 */
-		<>
-			<Form.Control
+		<div className="w-full space-y-xs">
+			<Input
 				ref={ref}
-				className={styles.userInput}
+				className={cn(
+					"transition-all duration-200",
+					isInvalid &&
+						"border-destructive ring-destructive/20 focus-visible:ring-destructive",
+					!isEditing && "bg-muted/50 cursor-not-allowed border-transparent",
+				)}
 				id={id}
-				type="text"
 				value={value}
 				onChange={handleChange}
 				disabled={!isEditing}
-				isInvalid={isInvalid}
 				aria-describedby={isInvalid ? errorId : undefined}
+				aria-invalid={isInvalid}
 			/>
-			<Form.Control.Feedback
-				type="invalid"
+			<div
 				id={errorId}
-				className={`${styles.errorContainer} ${showFeedback ? styles.visible : ""} text-danger fw-bold`}
+				className={cn(styles.errorContainer, showFeedback && styles.visible)}
 				aria-live="polite"
 			>
 				{showFeedback && (
 					<div className={styles.errorContent}>
-						<TriangleAlertIcon size={18} className={styles.errorIcon} />
-						{validationError || errorMessage}
+						<TriangleAlertIcon
+							size={16}
+							className="text-destructive shrink-0"
+						/>
+						<span className="text-sm font-medium text-destructive">
+							{validationError || errorMessage}
+						</span>
 					</div>
 				)}
-			</Form.Control.Feedback>
-		</>
+			</div>
+		</div>
 	);
 }
 

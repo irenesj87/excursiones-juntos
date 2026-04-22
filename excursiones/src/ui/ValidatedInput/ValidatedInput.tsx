@@ -1,10 +1,6 @@
 import { useState, ChangeEvent, forwardRef, useRef } from "react";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Button from "react-bootstrap/Button";
-import cn from "classnames";
+import { cn } from "../../lib/utils";
 import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
-import styles from "./ValidatedInput.module.css";
 
 /**
  * Propiedades del componente ValidatedInput.
@@ -129,66 +125,60 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			setShowPassword((prev) => !prev);
 		};
 
-		const controlElement = (
-			<Form.Control
-				ref={ref}
-				type={currentType}
-				onChange={nameChange}
-				onBlur={handleBlur}
-				onPointerDown={handleManualInteraction}
-				onKeyDown={handleManualInteraction}
-				name={name}
-				value={value}
-				autoComplete={autocomplete}
-				isInvalid={isInvalid}
-				aria-describedby={describedBy || undefined}
-			/>
-		);
-
-		const feedbackElement = (
-			<Form.Control.Feedback
-				type="invalid"
-				id={errorId}
-				className={cn(styles.errorContainer, {
-					[styles.visible]: showErrorMessage,
-				})}
-				aria-live="polite"
-			>
-				{showErrorMessage && (
-					<div className={styles.errorContent}>
-						<TriangleAlertIcon size={18} className={styles.errorIcon} />
-						{errorMessage}
-					</div>
-				)}
-			</Form.Control.Feedback>
-		);
-
 		return (
-			<Form.Group className={cn(styles.inputContainer, "mb-3")} controlId={id}>
-				<Form.Label>{name}</Form.Label>
-				{isPasswordType ? (
-					<InputGroup hasValidation>
-						{controlElement}
-						<Button
-							variant="outline-secondary"
-							className={styles.passwordToggle}
-							onClick={togglePasswordVisibility}
+			<div className="flex flex-col gap-2 mb-4 w-full">
+				<label
+					htmlFor={id}
+					className="text-sm font-semibold text-earth-900/80 ml-1"
+				>
+					{name}
+				</label>
+
+				<div className="relative flex items-center">
+					<input
+						id={id}
+						ref={ref}
+						type={currentType}
+						onChange={nameChange}
+						onBlur={handleBlur}
+						onPointerDown={handleManualInteraction}
+						onKeyDown={handleManualInteraction}
+						name={name}
+						value={value}
+						autoComplete={autocomplete}
+						aria-describedby={describedBy || undefined}
+						className={cn(
+							"flex h-10 w-full rounded-lg border border-earth-100 bg-white px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nature-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200",
+							isInvalid && "border-red-500 focus-visible:ring-red-500",
+							isPasswordType && "pr-12",
+						)}
+					/>
+
+					{isPasswordType && (
+						<button
 							type="button"
+							onClick={togglePasswordVisibility}
+							className="absolute right-0 top-0 h-full px-3 py-2 text-earth-900/40 hover:text-nature-600 transition-colors focus-visible:outline-none"
 							aria-label={
 								showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
 							}
 						>
 							{showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
-						</Button>
-						{feedbackElement}
-					</InputGroup>
-				) : (
-					<>
-						{controlElement}
-						{feedbackElement}
-					</>
+						</button>
+					)}
+				</div>
+
+				{showErrorMessage && (
+					<div
+						id={errorId}
+						className="flex items-center gap-2 text-xs font-medium text-red-600 animate-in fade-in slide-in-from-top-1 duration-200"
+						aria-live="polite"
+					>
+						<TriangleAlertIcon size={14} className="shrink-0" />
+						{errorMessage}
+					</div>
 				)}
-			</Form.Group>
+			</div>
 		);
 	},
 );

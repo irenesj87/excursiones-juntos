@@ -1,295 +1,62 @@
 /* ======================================== */
 /* 0. RESET Y CONFIGURACIÓN GLOBAL */
 /* ======================================== */
-html {
-	scrollbar-gutter: stable;
-	box-sizing: border-box;
-	font-size: 16px;
-}
-*,
-*::before,
-*::after {
-	box-sizing: inherit;
-}
+/* Tailwind ya incluye un reset (Preflight) muy potente, 
+   así que solo mantenemos lo que es específico de nuestra UX. */
 
-/* ======================================== */
-/* 1. TOKENS PRIMITIVOS */
-/* ======================================== */
-/* 
- * Definimos la paleta base usando HSL para facilitar ajustes de luminosidad y saturación
- * sin perder el tono (Hue). Estos valores son inmutables y no dependen del tema activo.
- */
 :root {
-	/* Paleta de Musgo (Verdes Cálidos) */
-	--color-moss-100: hsl(95, 25%, 88%); /* Musgo muy claro */
-	--color-moss-200: hsl(95, 25%, 75%);
-	--color-moss-300: hsl(95, 30%, 60%); /* Musgo pastel */
-	--color-moss-500: hsl(95, 40%, 40%); /* Musgo hoja */
-	--color-moss-700: hsl(95, 30%, 28%); /* Verde musgo oscuro y cálido */
-	--color-moss-800: hsl(95, 30%, 23%); /* Sombra del musgo */
+	interpolate-size: allow-keywords; /* Mejora animaciones de height: auto */
 
-	/* Paleta de Verdes Profundos (Base para Modo Oscuro - Desaturados) */
-	--color-green-dark-900: hsl(
-		95,
-		25%,
-		11%
-	); /* Fondo Body - Base Musgo Profundo */
-	--color-green-dark-800: hsl(95, 20%, 17%); /* Fondo Surface */
-	--color-green-dark-700: hsl(95, 15%, 22%); /* Borde Sutil */
-	--color-green-dark-600: hsl(95, 15%, 28%); /* Borde Default */
-	--color-green-dark-500: hsl(95, 15%, 38%); /* Fondos UI / Hover */
-	--color-green-dark-400: hsl(95, 15%, 50%); /* Separadores */
-	--color-green-dark-300: hsl(95, 20%, 70%); /* Textos secundarios / Iconos */
-	--color-green-dark-200: hsl(95, 25%, 88%); /* Iconos claros */
+	/* --- 1. TOKENS PRIMITIVOS (HSL) --- */
+	--color-moss-100: 95 25% 88%;
+	--color-moss-300: 95 30% 60%;
+	--color-moss-500: 95 40% 40%;
+	--color-moss-700: 95 30% 28%;
+	--color-moss-800: 95 30% 23%;
 
-	/* Color base para la superposición del Hero (formato RGB para usar con opacidad) */
-	--color-hero-overlay-base: 25, 42, 35;
+	/* Verdes Profundos (Base Oscuro) */
+	--color-dark-900: 95 25% 11%;
+	--color-dark-800: 95 20% 17%;
+	--color-dark-500: 95 15% 38%;
 
-	/* Paleta de Tierras (Acento Rústico) */
-	--color-earth-100: hsl(35, 30%, 90%);
-	--color-earth-200: hsl(35, 35%, 80%);
-	--color-earth-300: hsl(35, 40%, 70%);
-	--color-earth-500: hsl(30, 45%, 50%); /* Terracota / Arcilla */
-	--color-earth-700: hsl(30, 50%, 35%);
+	/* Grises Cálidos (Stone) */
+	--color-stone-50: 40 20% 97%;
+	--color-stone-200: 40 10% 85%;
+	--color-stone-600: 40 5% 40%;
+	--color-stone-900: 40 10% 15%;
 
-	/* Paleta de Piedra (Grises Cálidos/Stone - HSL 40) */
-	--color-stone-50: hsl(40, 20%, 97%); /* Blanco hueso / Crema */
-	--color-stone-100: hsl(40, 15%, 92%);
-	--color-stone-200: hsl(40, 10%, 85%);
-	--color-stone-300: hsl(40, 10%, 75%);
-	--color-stone-400: hsl(40, 5%, 65%);
-	--color-stone-500: hsl(40, 5%, 50%);
-	--color-stone-600: hsl(40, 5%, 40%);
-	--color-stone-700: hsl(40, 10%, 30%);
-	--color-stone-750: hsl(
-		40,
-		10%,
-		25%
-	); /* Intermedio para contraste AAA en textos finos */
-	--color-stone-800: hsl(40, 10%, 20%);
-	--color-stone-900: hsl(40, 10%, 15%);
+	/* --- 2. DISEÑO ESTRUCTURAL (Unificado) --- */
+	--font-sans: "DM Sans Variable", sans-serif;
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-full: 9999px;
 
-	/* Blancos y Negros */
-	--color-white: #ffffff;
-	--color-white-off: var(--color-stone-50); /* Blanco cálido */
-	--color-black-soft: var(--color-stone-900); /* Negro suave cálido */
-	--color-white-alpha-10: rgba(
-		255,
-		255,
-		255,
-		0.1
-	); /* Utilidad para hovers en oscuro */
+	/* Sombras Multicapa Premium */
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-card:
+		0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-	/* Colores de Éxito, Advertencia y Peligro */
-	--color-success-light: hsl(
-		145,
-		60%,
-		25%
-	); /* Oscurecido para cumplir ratio 7:1 (AAA) */
-	--color-success-bg-subtle-light: hsl(135, 60%, 96%);
-	--color-success-border-subtle-light: hsl(135, 40%, 85%);
-
-	--color-warning-light: hsl(40, 75%, 55%);
-	--color-warning-bg-subtle-light: hsl(40, 80%, 96%);
-	--color-warning-border-subtle-light: hsl(40, 60%, 85%);
-	--color-warning-text-light: hsl(40, 80%, 25%);
-
-	--color-danger-light: hsl(
-		0,
-		70%,
-		28%
-	); /* Oscurecido y saturado para cumplir ratio 7:1 (AAA) */
-	--color-danger-bg-subtle-light: hsl(0, 100%, 97%);
-	--color-danger-border-subtle-light: hsl(0, 90%, 85%);
-
-	--color-success-dark: hsl(
-		145,
-		45%,
-		75%
-	); /* Pastel claro para AAA sobre oscuro */
-	--color-success-bg-subtle-dark: hsl(135, 30%, 20%);
-	--color-success-border-subtle-dark: hsl(135, 30%, 30%);
-	--color-success-text-dark: hsl(135, 60%, 80%);
-
-	--color-warning-dark: hsl(43, 85%, 75%);
-	--color-warning-bg-subtle-dark: hsl(40, 30%, 20%);
-	--color-warning-border-subtle-dark: hsl(40, 30%, 30%);
-	--color-warning-text-dark: hsl(40, 60%, 80%);
-
-	--color-danger-dark: hsl(355, 85%, 82%);
-	--color-danger-bg-subtle-dark: hsl(0, 30%, 25%);
-	--color-danger-border-subtle-dark: hsl(0, 40%, 35%);
-	--color-danger-text-dark: hsl(0, 85%, 82%);
-
-	/* --- Tipografía y Formas (Moderno y Orgánico) --- */
-	--font-family-sans:
-		"DM Sans Variable", "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial, sans-serif;
-
-	/* Escala de tipografía modular para consistencia */
-	--font-size-xs: 0.75rem; /* 12px */
-	--font-size-sm: 0.875rem; /* 14px */
-	--font-size-base: 1rem; /* 16px */
-	--font-size-lg: 1.25rem; /* 20px */
-	--font-size-xl: 1.5rem; /* 24px */
-	--font-size-xxl: 2rem; /* 32px */
-	--font-size-xxxl: 2.5rem; /* 40px */
-	--font-size-display: 3.5rem; /* 56px */
-
-	/* Pesos de fuente */
-	--font-weight-light: 300;
-	--font-weight-normal: 400;
-	--font-weight-medium: 500;
-	--font-weight-semibold: 600;
-	--font-weight-bold: 700;
-
-	/* Radios de borde para una estética orgánica y suave */
-	--border-radius-sm: 2px;
-	--border-radius-md: 6px;
-	--border-radius-lg: 12px;
-	--border-radius-pill: 12px; /* Redondeado suave, no píldora completa (50rem) */
-	--letter-spacing-tight: -0.02em; /* Ajuste óptico para títulos más elegantes */
-
-	/* Escala de Espaciado (Base 4px) */
-	--space-1: 0.25rem; /* 4px */
-	--space-2: 0.5rem; /* 8px */
-	--space-3: 0.75rem; /* 12px */
-	--space-4: 1rem; /* 16px */
-	--space-5: 1.25rem; /* 20px */
-	--space-6: 1.5rem; /* 24px */
-	--space-8: 2rem; /* 32px */
-	--space-12: 3rem; /* 48px */
-	--space-16: 4rem; /* 64px */
-
-	/* Iconografía */
-	--icon-stroke-width: 2.2; /* Grosor ligeramente acentuado para mejor legibilidad */
-
-	/* Sombra suave y difusa de varias capas para una profundidad natural. */
-	/* Funciona tanto en modo claro como oscuro. */
-	--shadow-soft:
-		0 16px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
-	--shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
-	--shadow-medium-dark: 0 8px 32px rgba(0, 0, 0, 0.2);
-	--shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.15);
-	--shadow-strong-dark: 0 12px 40px rgba(0, 0, 0, 0.5);
-
-	/* --- Animaciones --- */
-	--transition-base: 0.2s ease-out;
-
-	/* Variables de Layout (Dinámicas) */
-	--navbar-height: 5.3rem; /* ~85px. Valor fallback ajustado a la realidad */
+	/* Layout */
+	--navbar-height: 5rem;
 }
 
-/* ======================================== */
-/* TIPOGRAFÍA BASE Y CONTRASTE */
-/* ======================================== */
+/* Tipografía base fluida y accesible */
 body {
-	font-family: var(--font-family-sans);
-	line-height: 1.6; /* AAA: Interlineado global para mejorar legibilidad (Criterio 1.4.8) */
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
 }
 
-/* Aplicamos la fuente Sans a todos los encabezados para cumplir con la guía de diseño */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-	font-family: var(--font-family-sans);
-	font-weight: 400;
-	letter-spacing: var(--letter-spacing-tight);
-	text-wrap: balance; /* Equilibra las líneas de los títulos para evitar palabras huérfanas */
-}
-
-/* Estilos para botones deshabilitados de forma accesible. Se mantienen en el DOM y son enfocables, pero visualmente
-parecen inactivos. */
-.btn[aria-disabled="true"] {
-	opacity: 0.65;
-	cursor: not-allowed;
-}
-
-/* --- Offcanvas (Menú y Filtros) --- */
-.offcanvas-header {
-	padding: var(--space-4) var(--space-6);
-}
-
-.offcanvas-body {
-	/* El padding por defecto de Bootstrap es 1rem. Lo eliminamos aquí para que los contenedores hijos
-	   puedan controlarlo. El Offcanvas de filtros, por ejemplo, tiene su propio padding interno. */
-	padding: 0;
-}
-
-/* Clase de utilidad para restaurar el padding estándar en Offcanvas que lo requieran (ej. Filtros) */
-.offcanvas-body.padded {
-	padding: var(--space-4) var(--space-6);
-}
-
-/* 
- * Clase global para redondear los bordes del Offcanvas (estética orgánica).
- * Se define aquí para aumentar la especificidad (.offcanvas.offcanvasRounded) 
- * y evitar el uso de !important en la transición.
- */
-.offcanvas.offcanvasRounded {
-	border-top-right-radius: var(--border-radius-lg);
-	border-bottom-right-radius: var(--border-radius-lg);
-	overflow: hidden;
-	border-right: none;
-	transition: transform 0.3s ease-out;
-}
-
-/* Estilos para Offcanvas que aparecen desde los lados */
-.offcanvas.offcanvas-end,
-.offcanvas.offcanvas-start {
-	box-shadow: var(--shadow-soft);
-	overflow: hidden; /* Recorta el contenido interior (cuadrado) para respetar los bordes redondeados */
-}
-
-.offcanvas.offcanvas-end {
-	border-top-left-radius: var(--border-radius-lg);
-	border-bottom-left-radius: var(--border-radius-lg);
-}
-
-.offcanvas.offcanvas-start {
-	border-top-right-radius: var(--border-radius-lg);
-	border-bottom-right-radius: var(--border-radius-lg);
-}
-
-/* Título del Offcanvas con tipografía Sans para consistencia con los encabezados */
-.offcanvas-title {
-	font-family: var(--font-family-sans);
-	font-weight: bold;
-	font-size: var(--font-size-xl);
-}
-
-/* Alinea los iconos con el texto en los enlaces de navegación */
-.navbar-nav .nav-link svg {
-	margin-right: var(--space-2); /* Espacio entre el icono y el texto */
-	vertical-align: -0.125em; /* Alineación vertical fina */
-	font-size: 1.1em; /* Ligeramente más grande para mejor visibilidad */
-	stroke-width: var(
-		--icon-stroke-width
-	); /* Hacemos el trazo del icono un poco más grueso */
-}
-
-/* --- Estilos Globales --- */
-/* Elimina transiciones por defecto para evitar parpadeos al cambiar de tema */
-.form-control,
-.page-link,
-.accordion-button,
-.accordion-body,
-.infoMessage li,
-body {
-	transition: none;
-}
-
-/* Reseteamos la opacidad que Bootstrap aplica por defecto a los campos deshabilitados */
-.form-control:disabled:not(.form-control-plaintext),
-.form-control[readonly]:not(.form-control-plaintext) {
-	opacity: 1;
+/* Opt-out de animaciones en modo reducido por accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
