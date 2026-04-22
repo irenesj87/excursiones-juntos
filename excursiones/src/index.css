@@ -10,11 +10,8 @@
 
 @layer base {
 	body {
-		background-color: hsl(var(--background));
-		color: hsl(var(--foreground));
+		@apply bg-background text-foreground antialiased;
 		font-family: var(--font-sans);
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
 		text-rendering: optimizeLegibility;
 		font-feature-settings:
 			"rlig" 1,
