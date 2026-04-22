@@ -1,9 +1,6 @@
 /* ======================================== */
 /* 0. RESET Y CONFIGURACIÓN GLOBAL */
 /* ======================================== */
-/* Tailwind ya incluye un reset (Preflight) muy potente, 
-   así que solo mantenemos lo que es específico de nuestra UX. */
-
 :root {
 	interpolate-size: allow-keywords; /* Mejora animaciones de height: auto */
 
@@ -11,6 +8,7 @@
 	--color-moss-100: 95 25% 88%;
 	--color-moss-300: 95 30% 60%;
 	--color-moss-500: 95 40% 40%;
+	--color-moss-600: 95 35% 34%;
 	--color-moss-700: 95 30% 28%;
 	--color-moss-800: 95 30% 23%;
 
@@ -48,14 +46,6 @@
 
 	/* Layout */
 	--navbar-height: 5rem;
-}
-
-/* Tipografía base fluida y accesible */
-body {
-	font-family: var(--font-sans);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-rendering: optimizeLegibility;
 }
 
 /* Opt-out de animaciones en modo reducido por accesibilidad */
