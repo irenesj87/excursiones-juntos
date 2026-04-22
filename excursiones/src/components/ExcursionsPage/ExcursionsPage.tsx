@@ -6,7 +6,7 @@ import { Filters } from "../Filters";
 import { ExcursionsList } from "../ExcursionsList/ExcursionsList";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import { Button } from "../../ui/button";
-import styles from "./ExcursionsPage.module.css";
+import { cn } from "../../lib/utils";
 
 /**
  * Componente que gestiona y renderiza la página principal de excursiones, incluyendo la búsqueda, los filtros y
@@ -30,7 +30,10 @@ export function ExcursionsPage() {
 		<div className="container py-4">
 			{/* Botón flotante para abrir filtros (visible solo en < lg) */}
 			<Button
-				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? styles.floatingFilterBtnHidden : ""}`}
+				className={cn(
+					"fixed z-[1030] bottom-8 flex items-center gap-2 shadow-premium right-6 uppercase tracking-wide font-bold text-sm transition-opacity duration-200 ease-in-out lg:hidden",
+					showFilters && "opacity-0 invisible pointer-events-none",
+				)}
 				onClick={handleShowFilters}
 				aria-label="Mostrar filtros"
 			>
@@ -40,7 +43,9 @@ export function ExcursionsPage() {
 			<div className="row gx-5">
 				{/* Columna de Filtros (Visible solo en >= lg) */}
 				<aside className="col-lg-3 d-none d-lg-block">
-					<h2 className={styles.filtersTitle}>Filtros</h2>
+					<h2 className="text-xl font-semibold text-foreground mb-6 pb-2 border-b border-border uppercase tracking-wide">
+						Filtros
+					</h2>
 					<Filters />
 				</aside>
 
@@ -76,7 +81,7 @@ export function ExcursionsPage() {
 				placement="start"
 			>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title className={styles.offcanvasTitle}>
+					<Offcanvas.Title className="text-xl uppercase tracking-wide">
 						Filtros
 					</Offcanvas.Title>
 				</Offcanvas.Header>

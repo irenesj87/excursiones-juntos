@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, forwardRef, useRef } from "react";
 import { cn } from "../../lib/utils";
 import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
+import { Input } from "../input";
 
 /**
  * Propiedades del componente ValidatedInput.
@@ -135,7 +136,7 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 				</label>
 
 				<div className="relative flex items-center">
-					<input
+					<Input
 						id={id}
 						ref={ref}
 						type={currentType}
@@ -148,9 +149,16 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 						autoComplete={autocomplete}
 						aria-describedby={describedBy || undefined}
 						className={cn(
-							"flex h-10 w-full rounded-lg border border-earth-100 bg-white px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nature-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200",
-							isInvalid && "border-red-500 focus-visible:ring-red-500",
-							isPasswordType && "pr-12",
+							isInvalid &&
+								"border-red-500 focus-visible:ring-red-500 text-red-600",
+							isPasswordType && [
+								"pr-16",
+								"[&::-webkit-credentials-auto-fill-button]:mr-8",
+								"[&::-webkit-contacts-auto-fill-button]:mr-8",
+								"[&::-webkit-caps-lock-indicator]:mr-8",
+								"[&::-ms-reveal]:hidden",
+								"[&::-ms-clear]:hidden",
+							],
 						)}
 					/>
 
@@ -158,7 +166,7 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 						<button
 							type="button"
 							onClick={togglePasswordVisibility}
-							className="absolute right-0 top-0 h-full px-3 py-2 text-earth-900/40 hover:text-nature-600 transition-colors focus-visible:outline-none"
+							className="absolute right-0 top-0 h-full w-11 flex items-center justify-center text-earth-900/40 hover:text-nature-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nature-600 focus-visible:ring-inset rounded-r-md"
 							aria-label={
 								showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
 							}
@@ -168,16 +176,23 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 					)}
 				</div>
 
-				{showErrorMessage && (
+				<div
+					className={cn(
+						"grid transition-all duration-300 ease-in-out",
+						showErrorMessage
+							? "grid-rows-[1fr] opacity-100 mt-1"
+							: "grid-rows-[0fr] opacity-0",
+					)}
+				>
 					<div
 						id={errorId}
-						className="flex items-center gap-2 text-xs font-medium text-red-600 animate-in fade-in slide-in-from-top-1 duration-200"
+						className="flex items-center gap-2 text-xs font-semibold text-red-600 overflow-hidden"
 						aria-live="polite"
 					>
 						<TriangleAlertIcon size={14} className="shrink-0" />
 						{errorMessage}
 					</div>
-				)}
+				</div>
 			</div>
 		);
 	},
