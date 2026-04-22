@@ -47,12 +47,6 @@ export function Hero() {
 				/>
 			</picture>
 
-			{/* Overlay oscuro para contraste WCAG (Uso de color "Dark Moss" #192a23 al 50%) */}
-			<div
-				className="absolute inset-0 bg-[#192a23]/50 z-10"
-				aria-hidden="true"
-			/>
-
 			<div
 				className={cn(
 					"relative z-20 flex flex-col items-center gap-8 md:gap-12 w-full max-w-[1000px] pt-[calc(var(--navbar-height)+3rem)] pb-20 lg:pt-navbar lg:pb-8",
@@ -60,10 +54,10 @@ export function Hero() {
 				)}
 			>
 				<div className="flex flex-col items-center gap-4 w-full px-4">
-					<h1 className="font-sans text-[2.5rem] md:text-[3.5rem] font-normal leading-[1.1] tracking-tight [text-shadow:0_2px_8px_rgba(0,0,0,0.5)]">
+					<h1 className="font-sans text-[2.5rem] md:text-[3.5rem] font-normal leading-[1.1] tracking-tight [text-shadow:0_4px_12px_rgba(0,0,0,0.8)]">
 						{HERO_CONTENT.title}
 					</h1>
-					<p className="text-base md:text-lg lg:text-xl font-normal max-w-[600px] [text-shadow:0_1px_4px_rgba(0,0,0,0.5)]">
+					<p className="text-base md:text-lg lg:text-xl font-normal max-w-[600px] [text-shadow:0_2px_6px_rgba(0,0,0,0.8)]">
 						{HERO_CONTENT.subtitle}
 					</p>
 					{!isLoggedIn && (

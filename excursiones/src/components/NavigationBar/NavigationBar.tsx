@@ -147,7 +147,7 @@ export function NavigationBar() {
 					: [
 							"bg-background border-border shadow-soft py-4",
 							"text-foreground",
-							"[--nav-action-color:var(--color-stone-900)]",
+							"[--nav-action-color:hsl(var(--foreground))]",
 						],
 			)}
 		>

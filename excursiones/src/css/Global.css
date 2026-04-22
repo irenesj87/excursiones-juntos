@@ -23,7 +23,16 @@
 	--color-stone-50: 40 20% 97%;
 	--color-stone-200: 40 10% 85%;
 	--color-stone-600: 40 5% 40%;
+	--color-stone-700: 40 10% 30%;
 	--color-stone-900: 40 10% 15%;
+
+	/* Paleta de Tierras (Acento Rústico) */
+	--color-earth-100: 35 30% 90%;
+	--color-earth-200: 35 35% 80%;
+	--color-earth-300: 35 40% 70%;
+	--color-earth-500: 30 45% 50%;
+	--color-earth-700: 30 50% 35%;
+	--color-earth-900: 30 50% 15%;
 
 	/* --- 2. DISEÑO ESTRUCTURAL (Unificado) --- */
 	--font-sans: "DM Sans Variable", sans-serif;

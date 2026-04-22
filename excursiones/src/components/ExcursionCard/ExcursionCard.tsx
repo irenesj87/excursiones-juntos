@@ -167,7 +167,7 @@ export function ExcursionCard({
 			{/* Sección de imagen */}
 			<div className="relative aspect-video w-full min-h-[240px] overflow-hidden bg-muted/20">
 				{/* Badge Flotante de Zona */}
-				<div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-background/80 px-3.5 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground shadow-sm backdrop-blur-md border border-border dark:border-nature-700/50 pointer-events-none">
+				<div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-background/80 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-foreground shadow-sm backdrop-blur-md border border-border dark:border-nature-700/50 pointer-events-none">
 					<MapIcon size={14} className="text-nature-600" />
 					{area}
 				</div>

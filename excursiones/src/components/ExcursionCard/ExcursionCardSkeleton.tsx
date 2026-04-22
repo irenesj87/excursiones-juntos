@@ -80,7 +80,7 @@ function ExcursionCardSkeleton() {
 							<Skeleton
 								height={SKELETON_SIZES.BUTTON_HEIGHT}
 								className="w-full"
-								borderRadius={24}
+								borderRadius={12}
 							/>
 						</div>
 					)}

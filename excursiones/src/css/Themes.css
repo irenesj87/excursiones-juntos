@@ -8,13 +8,13 @@ html.light {
 	--card: 0 0% 100%;
 	--card-foreground: var(--color-stone-900);
 	--popover: 0 0% 100%;
-	--popover-foreground: var(--color-stone-950);
+	--popover-foreground: var(--color-stone-900);
 	--primary: var(--color-moss-700);
 	--primary-foreground: 0 0% 100%;
 	--secondary: var(--color-moss-100);
 	--secondary-foreground: var(--color-moss-800);
 	--muted: var(--color-stone-200);
-	--muted-foreground: var(--color-stone-600);
+	--muted-foreground: var(--color-stone-700);
 	--accent: var(--color-moss-100);
 	--accent-foreground: var(--color-moss-800);
 	--destructive: 0 84% 60%;

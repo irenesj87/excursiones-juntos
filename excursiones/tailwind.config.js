@@ -52,9 +52,19 @@ export default {
 					100: "hsl(var(--color-moss-100) / <alpha-value>)",
 					300: "hsl(var(--color-moss-300) / <alpha-value>)",
 					500: "hsl(var(--color-moss-500) / <alpha-value>)",
-					600: "hsl(var(--color-moss-500) / <alpha-value>)", // Alias para coherencia con AboutUs
+					600: "hsl(var(--color-moss-600) / <alpha-value>)", // Alias para coherencia con AboutUs
 					700: "hsl(var(--color-moss-700) / <alpha-value>)",
 					800: "hsl(var(--color-moss-800) / <alpha-value>)",
+					900: "hsl(var(--color-dark-900) / <alpha-value>)",
+				},
+				// Paleta "Earth" (Tokens Primitivos de Global.css)
+				earth: {
+					100: "hsl(var(--color-earth-100) / <alpha-value>)",
+					200: "hsl(var(--color-earth-200) / <alpha-value>)",
+					300: "hsl(var(--color-earth-300) / <alpha-value>)",
+					500: "hsl(var(--color-earth-500) / <alpha-value>)",
+					700: "hsl(var(--color-earth-700) / <alpha-value>)",
+					900: "hsl(var(--color-earth-900) / <alpha-value>)",
 				},
 			},
 			borderRadius: {
