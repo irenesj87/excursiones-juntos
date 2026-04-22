@@ -7,7 +7,7 @@ import {
 import { ROUTES, FORM_TEXT } from "../../constants";
 import { ValidatedInput } from "../../ui/ValidatedInput/ValidatedInput";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
-import CustomButton from "../../ui/CustomButton/CustomButton";
+import { Button } from "../../ui/button";
 import { loginUser } from "../../services/authService";
 import { useAuthFormHandler } from "../../hooks/useAuthFormHandler";
 import styles from "./LoginForm.module.css";
@@ -95,9 +95,8 @@ export function LoginForm() {
 					/>
 				</div>
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<CustomButton
+					<Button
 						type="submit"
-						variant="primary"
 						isLoading={formState.isLoading}
 						/**
 						 * Mantenemos el botón habilitado para permitir la validación visual al clicar
@@ -105,7 +104,7 @@ export function LoginForm() {
 						 */
 					>
 						Enviar
-					</CustomButton>
+					</Button>
 				</div>
 			</Form>
 		</>

@@ -5,7 +5,7 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Filters } from "../Filters";
 import { ExcursionsList } from "../ExcursionsList/ExcursionsList";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
-import CustomButton from "../../ui/CustomButton/CustomButton";
+import { Button } from "../../ui/button";
 import styles from "./ExcursionsPage.module.css";
 
 /**
@@ -29,13 +29,13 @@ export function ExcursionsPage() {
 	return (
 		<div className="container py-4">
 			{/* Botón flotante para abrir filtros (visible solo en < lg) */}
-			<CustomButton
+			<Button
 				className={`${styles.floatingFilterBtn} d-lg-none ${showFilters ? styles.floatingFilterBtnHidden : ""}`}
 				onClick={handleShowFilters}
 				aria-label="Mostrar filtros"
 			>
 				Filtros
-			</CustomButton>
+			</Button>
 
 			<div className="row gx-5">
 				{/* Columna de Filtros (Visible solo en >= lg) */}

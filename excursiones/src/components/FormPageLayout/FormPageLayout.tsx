@@ -1,7 +1,13 @@
 import { useId } from "react";
-import { Container, Row, Col, Card, ColProps } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import styles from "./FormPageLayout.module.css";
+import { cn } from "../../lib/utils";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardContent,
+	CardFooter,
+} from "../../ui/card";
 
 interface FormPageLayoutProps {
 	/** El título principal que se mostrará en la tarjeta. */
@@ -12,8 +18,6 @@ interface FormPageLayoutProps {
 	readonly subtitleId?: string;
 	/** El contenido del formulario a renderizar. */
 	readonly children: React.ReactNode;
-	/** Ancho de la columna para el formulario en breakpoints grandes. Por defecto "5". */
-	readonly colWidth?: ColProps["xl"];
 	/** Clase CSS opcional para el contenedor principal. */
 	readonly containerClassName?: string;
 	/** Configuración opcional para mostrar un enlace de cambio de página (ej. "¿No tienes cuenta? Regístrate"). */
@@ -36,55 +40,50 @@ export function FormPageLayout({
 	subtitle,
 	subtitleId,
 	children,
-	colWidth = "5",
 	containerClassName,
 	switcher,
 }: FormPageLayoutProps) {
 	const titleId = useId();
 
 	return (
-		<Container
-			as="main"
-			fluid
-            className={styles.container + " " + (containerClassName ?? "")}
+		<main
+			className={cn(
+				"min-h-[calc(100vh-var(--navbar-height))] w-full grid place-items-center p-md bg-background",
+				containerClassName,
+			)}
 		>
-			<Row className="justify-content-center align-items-center flex-grow-1 m-0 w-100">
-				<Col
-					xs={12}
-					md={10}
-					lg={8}
-					xl={colWidth}
-					className="p-4 d-flex flex-column justify-content-center"
+			<div className="w-full max-w-lg">
+				<Card
+					className="border-none shadow-premium bg-surface/50 backdrop-blur-sm"
+					aria-labelledby={titleId}
 				>
-					<Card
-						as="section"
-						className={styles.contentPane}
-						aria-labelledby={titleId}
-					>
-						<Card.Body className={styles.cardBody}>
-							<Card.Title as="h1" id={titleId} className={styles.cardTitle}>
-								{title}
-							</Card.Title>
-							{subtitle && (
-								<p id={subtitleId} className={styles.cardSubtitle}>
-									{subtitle}
-								</p>
-							)}
-							{children}
-						</Card.Body>
-						{switcher && (
-							<Card.Footer
-								className={`${styles.switcher} ${styles.cardFooter}`}
-							>
-								{switcher.prompt}{" "}
-								<Link to={switcher.linkTo} className={styles.switcherLink}>
-									{switcher.linkText}
-								</Link>
-							</Card.Footer>
+					<CardHeader className="space-y-sm text-center">
+						<CardTitle
+							id={titleId}
+							className="text-2xl font-semibold tracking-tight"
+						>
+							{title}
+						</CardTitle>
+						{subtitle && (
+							<p id={subtitleId} className="text-muted-foreground text-sm">
+								{subtitle}
+							</p>
 						)}
-					</Card>
-				</Col>
-			</Row>
-		</Container>
+					</CardHeader>
+					<CardContent>{children}</CardContent>
+					{switcher && (
+						<CardFooter className="justify-center text-sm text-muted-foreground border-t bg-muted/30 py-md">
+							{switcher.prompt}{" "}
+							<Link
+								to={switcher.linkTo}
+								className="ml-xs text-primary font-medium hover:underline"
+							>
+								{switcher.linkText}
+							</Link>
+						</CardFooter>
+					)}
+				</Card>
+			</div>
+		</main>
 	);
 }
