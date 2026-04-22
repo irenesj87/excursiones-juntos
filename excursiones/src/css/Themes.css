@@ -1,7 +1,7 @@
 /* ======================================== */
-/* 2. TOKENS SEMÁNTICOS (EL CEREBRO DEL TEMA) */
+/* 2. TOKENS SEMÁNTICOS */
 /* ======================================== */
-html.light {
+:root {
 	color-scheme: light;
 	--background: var(--color-stone-50);
 	--foreground: var(--color-stone-900);
@@ -24,7 +24,7 @@ html.light {
 	--ring: var(--color-moss-700);
 }
 
-html.dark {
+.dark {
 	color-scheme: dark;
 	--background: var(--color-dark-900);
 	--foreground: var(--color-stone-50);
@@ -45,9 +45,4 @@ html.dark {
 	--border: var(--color-dark-500);
 	--input: var(--color-dark-500);
 	--ring: var(--color-moss-300);
-}
-
-/* Estilos Base de Aplicación que usan los tokens anteriores */
-body {
-	@apply bg-background text-foreground;
 }

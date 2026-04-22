@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.css";
-import "./css/Global.css";
-import "./css/Themes.css";
 /* index.css (Tailwind) debe ser el último para asegurar que sus 
    utilidades tengan prioridad sobre Bootstrap y estilos globales */
 import "./index.css";
