@@ -22,7 +22,7 @@ function UserPageSkeleton(): JSX.Element {
 			className="flex justify-center pt-10 min-h-[calc(100vh-var(--navbar-height))] w-full bg-background"
 			aria-hidden="true"
 		>
-			<div className="w-[91.666667%] xl:w-[66.666667%] flex flex-col gap-8 pb-10">
+			<div className="w-11/12 xl:w-8/12 flex flex-col gap-8 pb-10">
 				{/* Simulación del encabezado del perfil */}
 				<div className="flex flex-col gap-4">
 					<Skeleton className="h-10 w-48 rounded-md" />
