@@ -1,24 +1,24 @@
-import React from "react";
-import { Alert } from "react-bootstrap";
-import cn from "classnames";
-import { CircleAlertIcon, TriangleAlertIcon, CheckIcon } from "../Icons";
-import styles from "./FeedbackAlert.module.css";
+import { Alert, AlertTitle, AlertDescription } from "../alert";
+import { cn } from "../../lib/utils";
+import { CircleAlertIcon, TriangleAlertIcon, CheckIcon, XIcon } from "../Icons";
+
+type AlertVariant = "destructive" | "success" | "warning" | "default";
 
 const VARIANT_CONFIG = {
 	danger: {
 		Icon: CircleAlertIcon,
 		defaultTitle: "Error",
-		bootstrapVariant: "danger",
+		uiVariant: "destructive" as const,
 	},
 	success: {
 		Icon: CheckIcon,
 		defaultTitle: "Éxito",
-		bootstrapVariant: "success",
+		uiVariant: "success" as const,
 	},
 	warning: {
 		Icon: TriangleAlertIcon,
 		defaultTitle: "Atención",
-		bootstrapVariant: "warning",
+		uiVariant: "warning" as const,
 	},
 } as const;
 
@@ -26,7 +26,7 @@ type Variant = keyof typeof VARIANT_CONFIG;
 
 /**
  * @component FeedbackAlert
- * @description Muestra un mensaje de feedback (éxito, error, advertencia) al usuario utilizando componentes de Bootstrap.
+ * @description Muestra un mensaje de feedback (éxito, error, advertencia) al usuario utilizando componentes de shadcn/ui y Tailwind CSS.
  */
 interface FeedbackAlertProps {
 	/** El tipo de alerta a mostrar. */
@@ -51,25 +51,40 @@ export function FeedbackAlert({
 	title,
 	className,
 }: FeedbackAlertProps) {
-	const { Icon, defaultTitle, bootstrapVariant } = VARIANT_CONFIG[variant];
+	const { Icon, defaultTitle, uiVariant } = VARIANT_CONFIG[variant] as {
+		Icon: typeof CircleAlertIcon;
+		defaultTitle: string;
+		uiVariant: AlertVariant;
+	};
 
 	return (
 		<Alert
-			variant={bootstrapVariant}
-			onClose={onClose}
-			dismissible={!!onClose}
-			className={cn(styles.alert, className)}
+			variant={uiVariant}
+			className={cn(
+				"relative flex items-start justify-between pr-12 shadow-sm transition-transform duration-200 ease-out",
+				className,
+			)}
 		>
-			<div className={styles.alertContent}>
-				<Icon size={24} className={styles.icon} aria-hidden="true" />
+			<div className="flex items-start gap-3">
+				<Icon size={20} className="mt-1 shrink-0" aria-hidden="true" />
 				<div>
-					<Alert.Heading as="h2" className={styles.title}>
+					<AlertTitle className="text-base font-semibold leading-none tracking-tight">
 						{title ?? defaultTitle}
-					</Alert.Heading>
-					<p className={styles.message}>{message}</p>
+					</AlertTitle>
+					<AlertDescription className="mt-2 text-sm opacity-90">
+						{message}
+					</AlertDescription>
 				</div>
 			</div>
+			{onClose && (
+				<button
+					onClick={onClose}
+					className="absolute top-4 right-4 flex h-6 w-6 items-center justify-center rounded-sm bg-transparent p-0 text-current opacity-60 transition-all duration-200 hover:bg-foreground/10 hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+					aria-label="Cerrar alerta"
+				>
+					<XIcon size={16} />
+				</button>
+			)}
 		</Alert>
 	);
 }
-

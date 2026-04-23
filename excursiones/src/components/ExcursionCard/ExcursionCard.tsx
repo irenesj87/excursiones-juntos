@@ -163,7 +163,7 @@ export function ExcursionCard({
 	const imageBaseUrl = resolveImageBaseUrl(imgSrc);
 
 	return (
-		<article className="group relative flex flex-col h-full w-full overflow-hidden bg-card rounded-lg shadow-sm transition-[transform,box-shadow] duration-300 hover:shadow-md hover:-translate-y-1">
+		<article className="relative flex flex-col h-full w-full overflow-hidden bg-card rounded-lg shadow-sm border border-border/40">
 			{/* Sección de imagen */}
 			<div className="relative aspect-video w-full min-h-[240px] overflow-hidden bg-muted/20">
 				{/* Badge Flotante de Zona */}
@@ -184,7 +184,7 @@ export function ExcursionCard({
 							width={IMG_WIDTH}
 							height={IMG_HEIGHT}
 							className={cn(
-								"h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105",
+								"h-full w-full object-cover transition-opacity duration-700 ease-out",
 								isImageLoaded ? "opacity-100" : "opacity-0",
 							)}
 							onLoad={() => setIsImageLoaded(true)}
