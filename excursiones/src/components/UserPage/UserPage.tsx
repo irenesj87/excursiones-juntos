@@ -7,7 +7,7 @@ function UserPage(): JSX.Element {
 	return (
 		<main className="flex justify-center pt-10 min-h-[calc(100vh-var(--navbar-height))] w-full bg-background transition-colors duration-200">
 			{/* Contenedor responsivo que replica el layout 11/12 (xs/md) y 8/12 (xl) de Bootstrap */}
-			<div className="w-[91.666667%] xl:w-[66.666667%] flex flex-col pb-10">
+			<div className="w-11/12 xl:w-8/12 flex flex-col pb-10">
 				<UserInfoForm />
 			</div>
 		</main>
