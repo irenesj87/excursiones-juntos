@@ -29,13 +29,17 @@ export function Hero() {
 			aria-label="Cabecera principal con imagen de musgo"
 		>
 			<picture className="contents">
-				{/* Si solo tenemos un archivo, evitamos engañar al srcSet para mantener la nitidez nativa */}
-				<source srcSet={heroImageAvif} type="image/avif" />
+				{/* Formato AVIF: Prioridad alta por ser más ligero */}
+				<source
+					srcSet={`${heroImageAvif} 1920w`}
+					sizes="100vw"
+					type="image/avif"
+				/>
 				{/* Fallback: JPG original para navegadores que no soporten AVIF */}
 				<img
 					className="absolute inset-0 w-full h-full object-cover object-[center_16%] z-0"
 					src={heroImage}
-					alt="Imagen de fondo de un sendero cubierto de musgo, evocando la conexión con la naturaleza y la aventura al aire libre."
+					alt=""
 					loading="eager" // Prioridad alta para LCP
 					fetchPriority="high" // Refuerza la prioridad de carga
 					width={1920}

@@ -12,9 +12,9 @@ const CONTENT = {
 
 export function AboutUs() {
 	return (
-		<section className="bg-card py-24 px-6" aria-labelledby="about-us-heading">
+		<section className="bg-card py-10 px-6" aria-labelledby="about-us-heading">
 			<div className="flex flex-col items-center text-center max-w-screen-xl mx-auto">
-				<div className="text-5xl mb-4 text-primary" aria-hidden="true">
+				<div className="text-5xl mb-4 text-nature-600" aria-hidden="true">
 					<BackpackIcon size={48} />
 				</div>
 				<div className="font-semibold tracking-[0.15em] text-xs uppercase text-muted-foreground mb-2">
@@ -25,7 +25,7 @@ export function AboutUs() {
 					className="font-light text-3xl md:text-4xl text-foreground leading-[1.1] tracking-tight text-balance mb-4"
 				>
 					{CONTENT.title.start}{" "}
-					<span className="font-semibold text-primary">
+					<span className="font-semibold text-nature-600">
 						{CONTENT.title.highlight}
 					</span>
 				</h2>
