@@ -2,7 +2,10 @@ import * as React from "react";
 import { cn } from "../lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "./Icons";
 
-function PaginationRoot({ className, ...props }: React.ComponentProps<"nav">) {
+function PaginationRoot({
+	className,
+	...props
+}: Readonly<React.ComponentProps<"nav">>) {
 	return (
 		<nav
 			role="navigation"
@@ -19,7 +22,7 @@ PaginationRoot.displayName = "Pagination";
 
 const PaginationContent = React.forwardRef<
 	HTMLUListElement,
-	React.ComponentProps<"ul">
+	Readonly<React.ComponentProps<"ul">>
 >(({ className, ...props }, ref) => (
 	<ul
 		ref={ref}
@@ -31,7 +34,7 @@ PaginationContent.displayName = "PaginationContent";
 
 const PaginationItem = React.forwardRef<
 	HTMLLIElement,
-	React.ComponentProps<"li">
+	Readonly<React.ComponentProps<"li">>
 >(({ className, ...props }, ref) => (
 	<li ref={ref} className={cn("", className)} {...props} />
 ));

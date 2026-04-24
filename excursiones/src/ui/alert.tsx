@@ -10,11 +10,11 @@ const alertVariants = cva(
 			variant: {
 				default: "bg-background text-foreground",
 				destructive:
-					"border-destructive/20 bg-red-50 text-red-900 dark:bg-red-950/30 dark:border-destructive/30 dark:text-red-200 [&>svg]:text-destructive",
+					"border-destructive/50 bg-destructive/10 text-destructive [&>svg]:text-destructive",
 				success:
-					"border-nature-500/30 bg-nature-100/50 text-nature-800 dark:bg-nature-900/20 dark:border-nature-700 dark:text-nature-200 [&>svg]:text-nature-600",
+					"border-nature-600/20 bg-nature-600/10 text-nature-800 dark:text-nature-200 [&>svg]:text-nature-600",
 				warning:
-					"border-earth-500/30 bg-earth-100/50 text-earth-800 dark:bg-earth-900/20 dark:border-earth-700 dark:text-earth-200 [&>svg]:text-earth-600",
+					"border-earth-600/20 bg-earth-600/10 text-earth-800 dark:text-earth-200 [&>svg]:text-earth-600",
 			},
 		},
 		defaultVariants: {
@@ -25,7 +25,9 @@ const alertVariants = cva(
 
 const Alert = React.forwardRef<
 	HTMLDivElement,
-	React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
+	Readonly<
+		React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
+	>
 >(({ className, variant, ...props }, ref) => (
 	<div
 		ref={ref}
@@ -38,7 +40,7 @@ Alert.displayName = "Alert";
 
 const AlertTitle = React.forwardRef<
 	HTMLHeadingElement,
-	React.HTMLAttributes<HTMLHeadingElement>
+	Readonly<React.HTMLAttributes<HTMLHeadingElement>>
 >(({ className, children, ...props }, ref) => (
 	<h5
 		ref={ref}
@@ -52,7 +54,7 @@ AlertTitle.displayName = "AlertTitle";
 
 const AlertDescription = React.forwardRef<
 	HTMLDivElement,
-	React.HTMLAttributes<HTMLDivElement>
+	Readonly<React.HTMLAttributes<HTMLDivElement>>
 >(({ className, children, ...props }, ref) => (
 	<div
 		ref={ref}
