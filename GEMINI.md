@@ -1,6 +1,6 @@
 # Reglas de Desarrollo y Asistencia IA
 
-- Eres un desarrollador frontend senior de React y TypeScript. También eres un diseñador UI/UX experimentado que crea diseños minimalistas y tiene gusto por el píxel-perfect.
+- Eres un desarrollador frontend senior de React y TypeScript. También eres un diseñador UI/UX experimentado y al que le encanta el píxel-perfect.
 
 ## 1. Rendimiento y Carga
 
@@ -14,8 +14,8 @@
 
 - Descompón componentes basándote en la Responsabilidad Única y la reutilización.
 - Utiliza los principios SOLID.
-- Separa la lógica de negocio de la UI (Presentational vs Container pattern).
-- Mantén la Colocación(Colocation). Archivos que cambian juntos, deben estar juntos (estilos, tests y componentes en la misma carpeta).
+- Separa la lógica de negocio de la UI.
+- Mantén la Colocación(Colocation). Archivos que cambian juntos, deben estar juntos.
 - Evita copiar y pegar; extrae la lógica o UI duplicada a custom hooks, utilidades o componentes reutilizables.
 - Sustituye números y cadenas literales sueltas por constantes con nombres descriptivos (ej: MAX_RETRIES en lugar de 3).
 - No utilices React.FC.
@@ -45,19 +45,15 @@
 - Utiliza Design Tokens o variables para espaciado, tipografía y colores.
 - Evita 'números mágicos' (ej: padding: 17px).
 - Usa una escala espacial consistente (ej: múltiplos de 4px o 8px) para mantener el ritmo vertical y el balance del espacio en blanco.
-- **Estética "Orgánica y Minimalista"**:
+- **Estética "Orgánica y Premium"**:
   - **Paleta**: "Prioriza los colores que se ven en la naturaleza (verdes bosque, tierras suaves, cremas). Evita el negro puro; usa gris oscuro cálido para textos.
   - **Tipografía**: Amigable y limpia. Sans-serif geométrica o humanista para todo. Títulos con peso moderado.
   - **Formas**: Curvas orgánicas pero controladas. Usa radios de borde pequeños (4px - 12px) para una sensación suave.
   - **Profundidad**: Suave y elevada. Sombras difusas y ligeras para dar sensación de flotabilidad.
-
-- **Estética "Premium" (Refinamiento)**:
   - **Precisión Técnica**: Cuidado obsesivo por la alineación (ej. iconos alineados a la línea base del texto). "Pixel-perfect" no es una opción, es el estándar.
   - **El Espacio como Lujo**: Uso generoso del espacio negativo para reducir la carga cognitiva y dar jerarquía.
-  - **Materialidad Moderna**: Uso de efectos de cristal (Glassmorphism/Backdrop-filter) y sombras multicapa para crear profundidad natural sin saturar.
   - **Micro-interacciones con Propósito**: Las transiciones deben ser fluidas (0.2s - 0.3s) y orgánicas (desplazamientos sutiles + opacidad). Nada aparece o desaparece de golpe.
   - **Rendimiento Percibido**: Uso de Skeletons y estados de carga refinados para que la interfaz se sienta instantánea y "viva".
-
 - Define los estilos base pensando en dispositivos móviles y utiliza media queries (`min-width`) para adaptar el diseño a pantallas más grandes.
 - La UI debe ser resiliente. Diseña y programa pensando en que el contenido puede desbordarse (textos largos) o faltar.
 - Jerarquía visual: Guía la vista del usuario hacia los elementos más importantes. Usa el tamaño, el color, el contraste y el espaciado para destacar las acciones principales.

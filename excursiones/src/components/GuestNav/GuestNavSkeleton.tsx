@@ -3,9 +3,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 
 export const GUEST_NAV_SKELETON_SIZES = {
-	LOGIN_LINK_WIDTH: 152,
+	LOGIN_LINK_WIDTH: 145,
 	ICON_SIZE: 40, // Tamaño cuadrado para consistencia con UserNavSkeleton y la altura del botón
-	HEIGHT: 40,
+	HEIGHT: 39,
 	BORDER_RADIUS: "6px", // Coincide con var(--border-radius-md)
 };
 

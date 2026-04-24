@@ -19,7 +19,7 @@ export function AboutUs() {
 		>
 			<div className={styles.container}>
 				<div className={styles.icon} aria-hidden="true">
-					<BackpackIcon />
+					<BackpackIcon size="100%" />
 				</div>
 				<div className={styles.eyebrow}>{CONTENT.eyebrow}</div>
 				<h2 id="about-us-heading" className={styles.heading}>
