@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import InfoItem from "../../ui/InfoItem/InfoItem";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
 import type { DifficultyLevel } from "../../types";
-import { Button } from "../../ui/button";
+import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import {
@@ -13,8 +14,9 @@ import {
 	ChartIcon,
 	ClockIcon,
 } from "../../ui/Icons";
-import { cn } from "../../lib/utils";
+import cn from "classnames";
 import type { RootState } from "../../store/store";
+import styles from "./ExcursionCard.module.css";
 import { API } from "../../constants";
 
 /**
@@ -47,23 +49,20 @@ interface JoinButtonProps {
  */
 function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 	return (
-		<div className="grid">
+		<div className={styles.joinButtonContainer}>
 			{isJoined ? (
-				<span
-					className="inline-flex justify-center items-center gap-2 text-nature-700 dark:text-nature-100 font-bold py-2.5 px-5 bg-nature-100/30 dark:bg-nature-700/20 border border-nature-600 dark:border-nature-700 rounded-full transition-colors duration-300"
-					role="status"
-				>
-					<CheckIcon size={18} className="text-nature-600" />
+				<span className={styles.joinedStatus} role="status">
+					<CheckIcon className={styles.detailIcon} />
 					Unido/a
 				</span>
 			) : (
-				<Button
+				<CustomButton
 					onClick={onJoin}
+					className={styles.joinButton}
 					isLoading={isJoining}
-					className="font-bold uppercase tracking-wider text-xs"
 				>
 					Unirse
-				</Button>
+				</CustomButton>
 			)}
 		</div>
 	);
@@ -74,7 +73,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
  */
 function ImageFallback() {
 	return (
-		<div className="flex items-center justify-center w-full h-full bg-muted/30 text-muted-foreground/40">
+		<div className={styles.imageFallback}>
 			<NoImageIcon size={48} aria-hidden="true" />
 			<span className="visually-hidden">Imagen no disponible</span>
 		</div>
@@ -163,30 +162,34 @@ export function ExcursionCard({
 	const imageBaseUrl = resolveImageBaseUrl(imgSrc);
 
 	return (
-		<article className="group relative flex flex-col h-full w-full overflow-hidden bg-card border border-border rounded-lg shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+		<Card
+			as="article"
+			className={cn(styles.excursionItemCard, "h-100 w-100 overflow-hidden")}
+		>
 			{/* Sección de imagen */}
-			<div className="relative aspect-video w-full min-h-[240px] overflow-hidden bg-muted/20">
+			<div className={styles.imageContainer}>
 				{/* Badge Flotante de Zona */}
-				<div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-background/80 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-foreground shadow-sm backdrop-blur-md border border-border dark:border-nature-700/50 pointer-events-none">
-					<MapIcon size={14} className="text-nature-600" />
+				<div className={styles.floatingBadge}>
+					<MapIcon size={14} className={styles.infoIcon} />
 					{area}
 				</div>
 
 				{imageBaseUrl && !hasImageError ? (
-					<picture className="block h-full w-full">
+					<picture>
 						<source srcSet={`${imageBaseUrl}.avif`} type="image/avif" />
 						<source srcSet={`${imageBaseUrl}.webp`} type="image/webp" />
-						<img
+						<Card.Img
+							as="img"
+							variant="top"
 							src={`${imageBaseUrl}.jpg`}
 							alt={imgAlt ?? name}
 							loading="lazy"
 							decoding="async"
 							width={IMG_WIDTH}
 							height={IMG_HEIGHT}
-							className={cn(
-								"h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105",
-								isImageLoaded ? "opacity-100" : "opacity-0",
-							)}
+							className={cn(styles.cardImage, {
+								[styles.imageLoaded]: isImageLoaded,
+							})}
 							onLoad={() => setIsImageLoaded(true)}
 							onError={() => setHasImageError(true)}
 						/>
@@ -195,46 +198,43 @@ export function ExcursionCard({
 					<ImageFallback />
 				)}
 			</div>
-
 			{/* Cuerpo de la tarjeta con detalles de la excursión y acciones. */}
-			<div className="flex flex-col flex-grow px-6 pt-6 pb-4 gap-3">
-				<div className="flex flex-col gap-3">
+			<Card.Body
+				className={`d-flex flex-column flex-grow-1 ${styles.cardBody}`}
+			>
+				<div className={styles.cardContent}>
 					{/* Título de la excursión */}
-					<h3 className="text-xl font-semibold tracking-tight text-foreground leading-snug">
+					<Card.Title as="h3" className={styles.excursionTitle}>
 						{name}
-					</h3>
+					</Card.Title>
 					{/* Descripción de la excursión */}
-					<p className="line-clamp-4 text-sm text-muted-foreground leading-relaxed max-w-[60ch]">
+					<Card.Text as="p" className={styles.excursionDescription}>
 						{description}
-					</p>
+					</Card.Text>
 					{/* Detalles de la excursión */}
-					<div className="flex flex-wrap items-center gap-x-5 gap-y-1 mt-1">
+					<div className={styles.infoItemsContainer}>
 						<InfoItem
 							text={difficulty}
 							label="Dificultad"
-							icon={
-								<ChartIcon size={16} className="text-nature-600 shrink-0" />
-							}
+							icon={<ChartIcon size={18} className={styles.infoIcon} />}
 						/>
 						<InfoItem
 							text={time}
 							label="Tiempo estimado"
-							icon={
-								<ClockIcon size={16} className="text-nature-600 shrink-0" />
-							}
+							icon={<ClockIcon size={18} className={styles.infoIcon} />}
 						/>
 					</div>
 				</div>
 				{/* Área de acción: botón para unirse a la excursión */}
 				{isLoggedIn && (
-					<div className="flex flex-col justify-center pt-4 border-t border-border/50 mt-4">
-						<div className="grid animate-in fade-in slide-in-from-bottom-1 duration-500">
+					<div className="mt-auto">
+						<div className={styles.cardActionArea}>
 							{joinError && (
 								<FeedbackAlert
 									message={getSafeErrorMessage(joinError)}
 									variant="danger"
 									onClose={clearError}
-									className="mb-3"
+									className="mb-2"
 								/>
 							)}
 							<JoinButton
@@ -245,7 +245,7 @@ export function ExcursionCard({
 						</div>
 					</div>
 				)}
-			</div>
-		</article>
+			</Card.Body>
+		</Card>
 	);
 }

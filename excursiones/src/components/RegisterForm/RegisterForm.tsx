@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { ValidatedInput } from "../../ui/ValidatedInput";
 import { FeedbackAlert } from "../../ui/FeedbackAlert";
-import { Button } from "../../ui/button";
+import CustomButton from "../../ui/CustomButton/CustomButton";
 import { useRegisterForm } from "./useRegisterForm";
 import { PasswordRequirements } from "./PasswordRequirements";
 import styles from "./RegisterForm.module.css";
@@ -73,12 +73,13 @@ export function RegisterForm() {
 				</div>
 				<PasswordRequirements password={values.password} />
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<Button
+					<CustomButton
 						type="submit"
+						variant="primary"
 						isLoading={formState.isLoading}
 					>
 						Enviar
-					</Button>
+					</CustomButton>
 				</div>
 			</Form>
 		</>

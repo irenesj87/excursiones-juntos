@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "@fontsource-variable/dm-sans";
 import "./css/Global.css";
 import "./css/Themes.css";
-/* index.css (Tailwind) debe ser el último para asegurar que sus 
-   utilidades tengan prioridad sobre Bootstrap y estilos globales */
-import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import Store from "./store/store";
@@ -30,5 +29,5 @@ root.render(
 				<App />
 			</BrowserRouter>
 		</Provider>
-	</React.StrictMode>,
+	</React.StrictMode>
 );
