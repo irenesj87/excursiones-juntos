@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils";
+import cn from "classnames";
 import StyledNavLink from "../../ui/Link";
 import { ROUTES } from "../../constants";
 import { LoginIcon } from "../../ui/Icons";
@@ -16,7 +16,7 @@ interface GuestNavProps {
  */
 function GuestNav({ className }: GuestNavProps): JSX.Element {
 	return (
-		<div className={cn("flex items-center gap-1", className)}>
+		<div className={cn(className, "d-flex align-items-center gap-1")}>
 			<StyledNavLink
 				to={ROUTES.LOGIN}
 				aria-label="Iniciar sesión"

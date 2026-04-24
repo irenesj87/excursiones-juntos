@@ -1,9 +1,6 @@
 import React from "react";
 import {
 	MountainSnow,
-	ChevronLeft,
-	ChevronRight,
-	MoreHorizontal,
 	Moon,
 	Sun,
 	LogIn,
@@ -40,14 +37,7 @@ type IconProps = {
  */
 // Icono del logo
 export const LogoIcon = MountainSnow as React.ComponentType<IconProps>;
-// Icono de una flecha hacia la izquierda para la paginación.
-export const ChevronLeftIcon = ChevronLeft as React.ComponentType<IconProps>;
-// Icono de una flecha hacia la derecha para la paginación.
-export const ChevronRightIcon = ChevronRight as React.ComponentType<IconProps>;
-// Icono de tres puntos para indicar más opciones en la paginación.
-export const MoreHorizontalIcon =
-	MoreHorizontal as React.ComponentType<IconProps>;
-// Icono de una luna para el cambio de tema.
+// Icono de una luna para el botón de cambio de tema.
 export const MoonIcon = Moon as React.ComponentType<IconProps>;
 // Icono de un sol para el cambio de tema.
 export const SunIcon = Sun as React.ComponentType<IconProps>;
