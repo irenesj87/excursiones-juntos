@@ -44,7 +44,7 @@ export interface ButtonProps
 	readonly isLoading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, Readonly<ButtonProps>>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	(
 		{
 			className,
