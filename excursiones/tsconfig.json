@@ -3,8 +3,8 @@
 	"compilerOptions": {
 		// --- Opciones Esenciales para React ---
 
-		// Compila a una versión moderna de JavaScript para mejor rendimiento.
-		"target": "ES2022",
+		// Define a qué versión de JavaScript se va transpilar el código. La recomendación oficial usa "es2015".
+		"target": "es2015",
 		// Especifica las bibliotecas que se incluirán durante la compilación.
 		"lib": ["dom", "dom.iterable", "esnext"],
 		// Habilita el soporte para JSX
@@ -40,14 +40,9 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-
-		// --- Resolución de Rutas (Moderno) ---
-
-		// Mantenemos node para process.env.
-		"types": ["node"],
-		"paths": {
-			"@/*": ["./src/*"]
-		}
+		// Mantenemos esto para que 'process.env' sea reconocido sin errores.
+		"types": ["node"]
 	},
-	"include": ["src", "tailwind.config.js"]
+	// Le dice a TypeScript que solo se preocupe de los archivos en 'src'
+	"include": ["src"]
 }

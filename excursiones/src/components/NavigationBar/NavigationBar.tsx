@@ -1,20 +1,14 @@
-import {
-	useState,
-	useLayoutEffect,
-	useEffect,
-	lazy,
-	Suspense,
-	useRef,
-} from "react";
+import { useState, useLayoutEffect, lazy, Suspense, useRef } from "react";
+import { Container, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { RootState } from "../../store/store";
-import { cn } from "../../lib/utils";
 import { Logo } from "../Logo";
 import UserNavSkeleton from "../UserNav/UserNavSkeleton";
 import GuestNavSkeleton from "../GuestNav/GuestNavSkeleton";
 import { ThemeToggleButton } from "../ThemeToggleButton";
+import styles from "./NavigationBar.module.css";
 import { ROUTES } from "../../constants";
 
 // Estos componentes se cargan de forma perezosa.
@@ -65,24 +59,6 @@ export function NavigationBar() {
 	// Referencia al elemento DOM de la barra de navegación para medir su altura y actualizar la variable CSS.
 	const navRef = useRef<HTMLElement>(null);
 
-	// Estado para controlar si el usuario ha hecho scroll.
-	const [isScrolled, setIsScrolled] = useState(false);
-
-	/**
-	 * Escuchamos el evento de scroll para cambiar el estado de la barra.
-	 * Se activa al primer píxel de scroll para garantizar que la transición gane al movimiento rápido.
-	 */
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 0);
-		};
-
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
-
 	/**
 	 * Medimos la altura de la barra para que otros elementos puedan posicionarse
 	 * correctamente si fuera necesario, aunque ya no sea fija.
@@ -109,7 +85,7 @@ export function NavigationBar() {
 		// Depende de likelyLoggedIn. Si es true, se muestra el esqueleto de usuario, si es false, el de invitado.
 		if (!isAuthCheckComplete) {
 			return (
-				<div className="flex items-center">
+				<div className="d-flex align-items-center">
 					<div className="ms-2">
 						{likelyLoggedIn ? <UserNavSkeleton /> : <GuestNavSkeleton />}
 					</div>
@@ -133,37 +109,22 @@ export function NavigationBar() {
 
 	// Componente principal de la barra de navegación.
 	return (
-		<nav
-			ref={navRef}
-			className={cn(
-				"fixed top-0 left-0 right-0 z-50 flex items-center w-full h-navbar border-b",
-				// La barra es transparente solo en la Home Y cuando no se ha hecho scroll.
-				isHomePage && !isScrolled
-					? [
-							"bg-transparent border-white/10 shadow-none py-6",
-							"text-white",
-							"[--nav-action-color:white] [--theme-btn-hover:rgba(255,255,255,0.15)]",
-						]
-					: [
-							"bg-background border-border shadow-soft py-4",
-							"text-foreground",
-							"[--nav-action-color:hsl(var(--foreground))]",
-						],
-			)}
+		<Navbar
+			ref={navRef} // Referencia al elemento DOM de la barra de navegación.
+			className={`${styles.customNavbar} ${isHomePage ? styles.transparentNavbar : ""}`}
 		>
-			<div className="container flex justify-between items-center h-full">
+			{/* Usamos Container estándar en lugar de fluid para que el logo y el menú se alineen con el contenido central de la página (efecto "hoja") */}
+			<Container className="d-flex justify-content-between align-items-center">
 				{/* Logo. */}
 				<Logo />
-
 				{/* --- Contenedor de la derecha: tema y controles de usuario --- */}
-				<div className="flex items-center gap-2 md:gap-4 ml-auto">
+				<div className="d-flex align-items-center ms-auto">
 					{/* Botón de tema */}
 					<ThemeToggleButton />
-
 					{/* Contenido de navegación. */}
-					<div className="flex items-center">{renderNavContent()}</div>
+					<div className="d-flex align-items-center">{renderNavContent()}</div>
 				</div>
-			</div>
-		</nav>
+			</Container>
+		</Navbar>
 	);
 }
