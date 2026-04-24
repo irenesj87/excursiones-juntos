@@ -50,7 +50,7 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 		<div className="grid">
 			{isJoined ? (
 				<span
-					className="inline-flex justify-center items-center gap-2 text-nature-700 dark:text-nature-100 font-bold py-2.5 px-5 bg-nature-100/30 dark:bg-nature-700/20 border border-nature-600 dark:border-nature-700 rounded-full"
+					className="inline-flex justify-center items-center gap-2 text-nature-700 dark:text-nature-100 font-bold py-2.5 px-5 bg-nature-100/30 dark:bg-nature-700/20 border border-nature-600 dark:border-nature-700 rounded-full transition-colors duration-300"
 					role="status"
 				>
 					<CheckIcon size={18} className="text-nature-600" />
@@ -163,11 +163,11 @@ export function ExcursionCard({
 	const imageBaseUrl = resolveImageBaseUrl(imgSrc);
 
 	return (
-		<article className="group relative flex flex-col h-full w-full overflow-hidden bg-card rounded-lg shadow-sm transition-[transform,box-shadow] duration-300 hover:shadow-md hover:-translate-y-1">
+		<article className="group relative flex flex-col h-full w-full overflow-hidden bg-card border border-border rounded-lg shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
 			{/* Sección de imagen */}
 			<div className="relative aspect-video w-full min-h-[240px] overflow-hidden bg-muted/20">
 				{/* Badge Flotante de Zona */}
-				<div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-background px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-foreground shadow-sm dark:border-nature-700/50 pointer-events-none">
+				<div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 rounded-full bg-background/80 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-foreground shadow-sm backdrop-blur-md border border-border dark:border-nature-700/50 pointer-events-none">
 					<MapIcon size={14} className="text-nature-600" />
 					{area}
 				</div>

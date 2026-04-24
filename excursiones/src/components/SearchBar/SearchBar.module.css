@@ -1,0 +1,125 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(
+		--space-4
+	); /* Espaciado orgánico entre buscador y posibles errores */
+	width: 100%;
+	margin-bottom: var(--space-6);
+}
+
+.searchContainer {
+	position: relative;
+	width: 100%;
+	max-width: 100%; /* Permitimos que ocupe todo el ancho disponible del contenedor padre */
+	margin: 0; /* Alineación a la izquierda */
+	display: flex;
+	align-items: center;
+
+	background-color: var(--search-bar-bg);
+	border: 1px solid var(--search-bar-border);
+	border-radius: var(
+		--border-radius-lg
+	); /* Coherencia con las tarjetas para un look más orgánico */
+	box-shadow: var(--search-bar-shadow);
+	transition:
+		box-shadow 0.3s ease,
+		transform 0.2s ease;
+}
+
+/* Estado de foco: Elevación y fondo sólido para máxima concentración */
+.searchContainer:focus-within {
+	outline: none;
+	z-index: 10; /* Asegura que el anillo y la sombra no queden recortados por elementos cercanos */
+	transform: translateY(-2px);
+	/* Combinamos el anillo de foco global (luz) con la sombra de elevación (profundidad) */
+	/* Usamos la variable completa 'shadow' para permitir desenfoque (glow) en modo oscuro */
+	box-shadow:
+		var(--search-bar-focus-ring-shadow), var(--search-bar-shadow-focus);
+	background-color: var(--search-bar-bg-focus);
+	border-color: var(--search-bar-border-focus);
+}
+
+.searchInput {
+	flex-grow: 1;
+	background-color: transparent;
+	border: none;
+	color: var(--color-text-base);
+	padding: var(--space-3) calc(44px + var(--space-3)) var(--space-3)
+		var(--space-12);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
+	border-radius: var(--border-radius-lg);
+	outline: none;
+	box-shadow: none; /* Asegura que no haya sombras nativas cuadradas */
+	width: 100%;
+	height: auto;
+}
+
+/* Eliminamos el estilo por defecto del navegador para el icono de 'limpiar' en inputs de tipo search */
+.searchInput::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+/* Aseguramos que el input no tenga estilos de foco propios, ya que los maneja el contenedor */
+.searchInput:focus,
+.searchContainer .searchInput:focus-visible {
+	background-color: transparent;
+	box-shadow: none;
+	outline: none;
+	color: var(--color-text-base);
+}
+
+.searchInput::placeholder {
+	color: var(--search-bar-placeholder-text);
+}
+
+.searchIcon {
+	position: absolute;
+	left: var(--space-5);
+	color: var(--search-bar-icon-color);
+	pointer-events: none; /* Evita que el icono intercepte clics */
+	font-size: var(--font-size-lg);
+	z-index: 1;
+}
+
+.clearButton {
+	position: absolute;
+	right: var(--space-3);
+	background: none;
+	border: none;
+	color: var(--search-bar-icon-color);
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	width: 44px; /* Mínimo 44x44px para accesibilidad táctil (WCAG/Mobile) */
+	height: 44px;
+}
+
+.clearButton:hover {
+	background-color: var(--theme-toggle-btn-bg-hover);
+	color: var(--color-text-base);
+}
+
+.clearButton:focus-visible {
+	outline: none;
+}
+
+.errorWrapper {
+	animation: fadeInSlide 0.3s ease-out;
+}
+
+@keyframes fadeInSlide {
+	from {
+		opacity: 0;
+		transform: translateY(calc(var(--space-2) * -1));
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
