@@ -1,0 +1,97 @@
+.inputContainer :global(.form-control) {
+	border-radius: var(--border-radius-md);
+	transition:
+		border-color 0.2s ease-out,
+		box-shadow 0.2s ease-out;
+}
+
+/*
+ * Normalizamos el foco para todos los inputs:
+ * - Mantenemos el borde gris por defecto.
+ * - Quitamos el `outline` del navegador para evitar el doble borde.
+ * - Usamos `box-shadow` para crear un anillo de foco exterior consistente y accesible.
+ */
+.inputContainer :global(.form-control:focus) {
+	border-color: var(--bs-border-color);
+	box-shadow: 0 0 0 0.25rem var(--focus-ring-color);
+	outline: none;
+}
+
+/* Asegura el halo rojo cuando el input es inválido y tiene el foco */
+.inputContainer :global(.form-control.is-invalid:focus),
+.inputContainer :global(.form-control.is-invalid:focus-visible) {
+	border-color: var(--color-text-danger);
+	box-shadow: 0 0 0 0.25rem
+		color-mix(in srgb, var(--color-text-danger), transparent 30%);
+}
+
+.errorContainer {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition:
+		grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.2s ease-in-out,
+		margin 0.25s ease-out;
+	opacity: 0;
+	overflow: hidden;
+	font-size: 1.05rem;
+	color: var(--color-text-danger);
+	font-weight: var(--font-weight-bold, 700);
+	margin-top: 0;
+}
+
+.errorContainer.visible {
+	grid-template-rows: 1fr;
+	opacity: 1;
+	margin-top: var(--space-2);
+}
+
+.errorContent {
+	min-height: 0;
+	display: flex;
+	align-items: baseline;
+	gap: var(--space-2);
+	/* Desplazamiento sutil para un efecto de entrada más orgánico */
+	transform: translateY(calc(var(--space-2) * -1));
+	transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.visible .errorContent {
+	transform: translateY(0);
+}
+
+.errorIcon {
+	flex-shrink: 0;
+	transform: translateY(2px);
+	color: currentColor;
+}
+
+/* Botón para mostrar/ocultar contraseña */
+.passwordToggle {
+	background-color: transparent;
+	border-color: var(--color-border-default);
+	color: var(--color-text-muted);
+	/* Aseguramos que el botón herede el radio del tema (16px) para mantener la simetría con el input */
+	border-radius: var(--border-radius-md);
+	transition:
+		background-color 0.2s ease-out,
+		color 0.2s ease-out,
+		border-color 0.2s ease-out;
+	/* Accesibilidad: Aseguramos objetivo táctil mínimo de 44px de ancho */
+	min-width: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Aumentamos la especificidad con :global(.btn) para sobrescribir los estilos de Bootstrap */
+.passwordToggle:global(.btn):hover,
+.passwordToggle:global(.btn):focus,
+.passwordToggle:global(.btn):active {
+	background-color: var(--theme-toggle-btn-bg-hover);
+	color: var(--color-text-base);
+	border-color: var(--color-border-default);
+	/* Usamos z-index 2 para estar por encima del input en reposo (1), pero por debajo del input enfocado (3) */
+	z-index: 2;
+	box-shadow: none; /* Elimina el anillo azul/gris de Bootstrap al hacer click */
+}

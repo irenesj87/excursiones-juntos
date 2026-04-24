@@ -1,10 +1,9 @@
-import { useRef, ChangeEvent, FormEvent } from "react";
+import React, { useRef } from "react";
 import { Excursion, AppError } from "../../types";
 import { SearchIcon, XIcon } from "../../ui/Icons";
 import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
 import { useSearchBarLogic } from "./useSearchBarLogic";
-import { Input } from "../../ui/input";
-import { cn } from "../../lib/utils";
+import styles from "./SearchBar.module.css";
 
 // Propiedades del componente.
 interface SearchBarProps {
@@ -55,7 +54,7 @@ export function SearchBar({
 	 * padre cada vez que el usuario teclea algo en el input, permitiendo que la búsqueda se ejecute con el nuevo
 	 * valor.
 	 */
-	const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		onSearchChange(event.target.value);
 	};
 
@@ -71,62 +70,49 @@ export function SearchBar({
 	/**
 	 * Evita que el navegador recargue la página si el usuario pulsa la tecla Enter.
 	 */
-	const handleSubmit = (e: FormEvent) => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 	};
 
 	return (
 		/* Contenedor principal de la barra de búsqueda, que incluye el formulario y el área de mensajes de error. */
-		<div className="flex flex-col gap-4 w-full mb-6">
+		<div className={styles.wrapper}>
 			<form
 				// Ayuda a los usuarios de tecnologías asistivas a identificar esta sección como un área de búsqueda.
 				role="search"
-				className="relative flex items-center w-full group"
+				className={styles.searchContainer}
 				onSubmit={handleSubmit}
 			>
-				<SearchIcon
-					className="absolute left-5 top-1/2 -translate-y-1/2 z-20 text-muted-foreground group-focus-within:text-nature-600 dark:group-focus-within:text-nature-400 pointer-events-none"
-					size={20}
-					aria-hidden="true"
-				/>
+				<SearchIcon className={styles.searchIcon} aria-hidden="true" />
 				<label htmlFor={id} className="visually-hidden">
 					Buscar excursiones por nombre
 				</label>
-				<Input
+				<input
 					ref={searchInputRef}
 					id={id}
+					className={styles.searchInput}
 					type="search"
 					placeholder="¿A dónde quieres ir?"
 					value={searchValue}
 					onChange={handleSearchChange}
-					className={cn(
-						"h-14 !pl-12 pr-14 text-base focus-visible:ring-nature-600 focus-visible:ring-offset-2 rounded-2xl",
-						// Modo Claro: Fondo card y borde estándar
-						"bg-card border-input text-foreground placeholder:text-muted-foreground shadow-premium",
-						// Modo Oscuro: Fondo verde bosque más claro que el body y sombra profunda para elevación
-						"dark:bg-nature-800/50 dark:border-nature-700/50 dark:shadow-2xl dark:shadow-black/60",
-						// Elimina el botón de cancelar búsqueda nativo de Webkit
-						"[&::-webkit-search-decoration]:appearance-none [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none",
-						searchValue && "pr-16",
-					)}
 				/>
 				{/* Solo mostramos el botón de limpiar búsqueda si hay algo escrito en el input, para evitar 
 				confusión al usuario. */}
 				{searchValue && (
 					<button
 						type="button"
-						className="absolute right-3 z-20 h-10 w-10 flex items-center justify-center rounded-full text-muted-foreground hover:text-nature-600 dark:hover:text-nature-400 hover:bg-accent active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nature-600"
+						className={styles.clearButton}
 						onClick={handleClearSearch}
 						aria-label="Limpiar búsqueda"
 					>
-						<XIcon size={18} aria-hidden="true" />
+						<XIcon className={styles.clearIcon} aria-hidden="true" />
 					</button>
 				)}
 			</form>
 			{/* Si el hook detecta un error, mostramos un mensaje de error amigable para el usuario utilizando el 
 			componente FeedbackAlert. */}
 			{error && (
-				<div className="animate-in fade-in slide-in-from-top-2 duration-300">
+				<div className={styles.errorWrapper}>
 					<FeedbackAlert
 						variant="danger"
 						title={error.message}
