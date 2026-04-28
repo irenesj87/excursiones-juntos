@@ -9,8 +9,8 @@ import { ProfileIcon, LogoutIcon } from "../../ui/Icons";
 import styles from "./UserNav.module.css";
 
 /**
- * Componente que muestra los enlaces de navegación para un usuario logueado, incluyendo un enlace al perfil y un botón para cerrar
- * sesión.
+ * Componente que muestra los enlaces de navegación para un usuario logueado, incluyendo un enlace al perfil y un 
+ * botón para cerrar sesión.
  * Muestra iconos en dispositivos móviles y texto en pantallas más grandes.
  */
 function UserNav() {

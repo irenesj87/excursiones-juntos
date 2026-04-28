@@ -37,6 +37,9 @@
 	/* Forzamos el color de los enlaces de acción de la navegación (Login, Perfil, etc.) a blanco */
 	--nav-action-color: var(--color-white);
 
+	/* Añadimos el fondo de hover para las acciones de navegación en el Hero */
+	--nav-action-bg-hover: rgba(255, 255, 255, 0.15);
+
 	/* Hacemos que el botón de Login sea transparente (solo texto) en el Hero para reducir peso visual */
 	--login-btn-bg: transparent;
 	--login-btn-border: transparent;

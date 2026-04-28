@@ -2,11 +2,11 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.5rem; /* Padding reducido por defecto (móvil/icono) */
+	padding: var(--space-2);
 	font-weight: 600;
-	font-size: 0.9rem;
+	font-size: var(--font-size-sm);
 	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	letter-spacing: var(--letter-spacing-tight);
 	line-height: 1.5;
 	text-align: center;
 	text-decoration: none;
@@ -14,19 +14,23 @@
 	color: var(--nav-action-color);
 	transition:
 		transform 0.2s ease-out,
-		background-color 0.2s ease-out;
+		background-color 0.2s ease-out,
+		box-shadow 0.2s ease-out,
+		color 0.2s ease-out;
 	cursor: pointer;
 	user-select: none;
-	border-radius: var(
-		--border-radius-md
-	); /* Bordes suaves consistentes con la app */
+	border-radius: var(--border-radius-md);
 }
 
-.profileLink:hover {
+.profileLink:hover,
+.profileLink:focus {
 	background-color: var(--nav-action-bg-hover);
+	color: var(
+		--nav-action-color
+	); /* Mantiene el color (blanco en hero) al hacer hover */
+	transform: var(--transform-lift-sm) scale(1.02);
+	box-shadow: var(--shadow-soft);
 	outline: none;
-	box-shadow: none;
-	transform: translateY(-2px);
 }
 
 /* Estilo de foco consistente con el ThemeToggleButton (gris en lugar de verde) */
@@ -41,47 +45,50 @@
 	justify-content: center;
 	color: var(
 		--nav-action-color
-	); /* Usamos el color del enlace para consistencia visual */
+	);
 	background-color: transparent;
-	padding: 0.5rem; /* Padding reducido por defecto (móvil/icono) */
+	padding: var(--space-2);
 	font-weight: 600;
-	font-size: 0.9rem;
+	font-size: var(--font-size-sm);
 	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	letter-spacing: var(--letter-spacing-tight);
 	transition:
 		transform 0.2s ease-out,
 		box-shadow 0.2s ease-out,
-		background-color 0.2s ease-out;
+		background-color 0.2s ease-out,
+		color 0.2s ease-out;
 	border-radius: var(
 		--border-radius-md
-	); /* Bordes suaves consistentes con la app */
+	);
 }
 
 .logoutLink:hover,
 .logoutLink:focus {
 	background-color: var(--nav-action-bg-hover);
-	color: var(--nav-action-color);
-	transform: translateY(-2px);
+	color: var(
+		--nav-action-color
+	);
+	transform: var(--transform-lift-sm) scale(1.02);
 	box-shadow: var(--shadow-soft);
 }
 
 /* --- Control de visibilidad Icono vs Texto --- */
 
-/* Por defecto (móviles < 768px): Solo Icono */
+/* Por defecto (breakpoints < 768px): Solo Icono */
 .linkText {
 	display: none;
 }
 
 .linkIcon {
-	display: block;
-	font-size: 1.4rem;
+	display: block; /* Asegura que el icono se muestre */
+	font-size: var(--font-size-icon-md);
 }
 
-/* --- Media Query: A partir del breakpoint 'md' (tablets y escritorio), mostramos el texto --- */
+/* --- Media Query: A partir del breakpoint 'md', mostramos el texto --- */
 @media (min-width: 768px) {
 	.profileLink,
 	.logoutLink {
-		padding: 0.5rem 1.25rem; /* Más ancho horizontalmente para el texto */
+		padding: var(--space-2) var(--space-5);
 	}
 	.linkText {
 		display: inline;
@@ -89,9 +96,4 @@
 	.linkIcon {
 		display: none;
 	}
-}
-
-/* Ajuste para escritorio grande */
-@media (min-width: 992px) {
-	/* Ajustes finos si fueran necesarios */
 }
