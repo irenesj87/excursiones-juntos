@@ -88,6 +88,7 @@ html {
 	); /* Oscurecido para cumplir ratio 7:1 (AAA) */
 	--color-success-bg-subtle-light: hsl(135, 60%, 96%);
 	--color-success-border-subtle-light: hsl(135, 40%, 85%);
+	--color-text-on-success-light: var(--color-white);
 
 	--color-warning-light: hsl(40, 75%, 55%);
 	--color-warning-bg-subtle-light: hsl(40, 80%, 96%);
@@ -101,6 +102,7 @@ html {
 	); /* Oscurecido y saturado para cumplir ratio 7:1 (AAA) */
 	--color-danger-bg-subtle-light: hsl(0, 100%, 97%);
 	--color-danger-border-subtle-light: hsl(0, 90%, 85%);
+	--color-text-on-danger-light: var(--color-white);
 
 	--color-success-dark: hsl(
 		145,

@@ -9,13 +9,16 @@ import {
 } from "../../validation/validations";
 import type { RootState, AppDispatch } from "../../store/store";
 
-// Hooks tipados de Redux
 const useAppDispatch = () => useDispatch<AppDispatch>();
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
+/** Valores de los campos del formulario de usuario. */
 export interface FormValues {
+	/** Nombre del usuario. */
 	name: string;
+	/** Apellidos del usuario. */
 	surname: string;
+	/** Teléfono de contacto. */
 	phone: string;
 }
 
@@ -93,11 +96,19 @@ const formReducer = (state: FormState, action: FormAction): FormState => {
 	}
 };
 
+/**
+ * Hook que gestiona la lógica de estado, validación y persistencia del formulario de perfil.
+ *
+ * @returns Un objeto con el estado del formulario, referencias para el foco y manejadores de eventos.
+ */
 export const useUserInfoForm = () => {
 	const loginDispatch = useAppDispatch();
 	const { user, token } = useAppSelector(
 		(state: RootState) => state.loginReducer,
 	);
+
+	/** Referencia al input de nombre para gestionar el foco inicial al editar. */
+	const nameInputRef = useRef<HTMLInputElement>(null);
 
 	const getUserValues = () => ({
 		name: user?.name ?? "",
@@ -118,8 +129,8 @@ export const useUserInfoForm = () => {
 	const { values, originalValues, isEditing, successMessage, error } =
 		formState;
 
-	const nameInputRef = useRef<HTMLInputElement>(null);
-	const alertRef = useRef<HTMLFieldSetElement | null>(null);
+	/** Referencia al contenedor de alertas para mover el foco tras una acción. */
+	const alertRef = useRef<HTMLFieldSetElement>(null);
 
 	const isFormValid =
 		validateName(values.name) &&
@@ -129,9 +140,12 @@ export const useUserInfoForm = () => {
 	const isFormChanged =
 		JSON.stringify(values) !== JSON.stringify(originalValues);
 
+	/** Activa el modo de edición. */
 	const startEdit = () => formDispatch({ type: "START_EDIT" });
+	/** Cancela la edición y restaura los valores originales. */
 	const cancelEdit = () => formDispatch({ type: "CANCEL_EDIT" });
 
+	/** Guarda los cambios realizados en el perfil del usuario. */
 	const saveEdit = async () => {
 		if (!isFormValid || !isFormChanged || formState.isLoading) return;
 		if (!user || !token) {
@@ -156,10 +170,12 @@ export const useUserInfoForm = () => {
 		}
 	};
 
+	/** Maneja el cambio de valor en un campo específico. */
 	const handleInputChange = (field: keyof FormValues, value: string) => {
 		formDispatch({ type: "UPDATE_FIELD", payload: { field, value } });
 	};
 
+	/** Limpia los mensajes de éxito o error. */
 	const clearMessages = () => formDispatch({ type: "CLEAR_MESSAGES" });
 
 	useEffect(() => {
@@ -173,8 +189,14 @@ export const useUserInfoForm = () => {
 		}
 	}, [user, originalValues]);
 
+	// Gestión del foco: Cuando se empieza a editar, ponemos el foco en el nombre.
 	useEffect(() => {
-		if (isEditing && nameInputRef.current) nameInputRef.current.focus();
+		if (isEditing) {
+			// Pequeño retardo para asegurar que el input sea interactuable tras el cambio de estado de 'readOnly'
+			const timer = setTimeout(() => nameInputRef.current?.focus(), 50);
+			return () => clearTimeout(timer);
+		}
+		return undefined;
 	}, [isEditing]);
 
 	useEffect(() => {

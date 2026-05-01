@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, Col, Form, Row } from "react-bootstrap";
 import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
 import {
@@ -24,8 +24,39 @@ interface FormField {
 	errorMessage: string;
 }
 
+/** Configuración estática de los campos del formulario para evitar re-creaciones en cada render. */
+const getFormFields = (
+	nameInputRef: React.RefObject<HTMLInputElement>,
+): FormField[] => [
+	{
+		id: "formPlaintextName",
+		label: "Nombre",
+		field: "name",
+		ref: nameInputRef,
+		validation: validateName,
+		errorMessage: "El nombre no puede estar vacío.",
+	},
+	{
+		id: "formPlaintextSurname",
+		label: "Apellidos",
+		field: "surname",
+		validation: validateSurname,
+		errorMessage: "Los apellidos no pueden estar vacíos.",
+	},
+	{
+		id: "formPlaintextPhone",
+		label: "Teléfono",
+		field: "phone",
+		validation: validatePhone,
+		errorMessage: "El formato del teléfono no es válido (9 dígitos).",
+	},
+];
+
 /**
- * Componente que se encarga del menú de edición y muestra de los datos del usuario logueado en ese momento
+ * Componente de interfaz para la gestión del perfil de usuario.
+ *
+ * Presenta la información de la cuenta y permite la edición de datos personales con validación en tiempo real y 
+ * gestión de errores.
  */
 export function UserInfoForm(): React.ReactElement {
 	const {
@@ -42,43 +73,17 @@ export function UserInfoForm(): React.ReactElement {
 		alertRef,
 	} = useUserInfoForm();
 
+	/**
+	 * Desestructuramos el estado del formulario para facilitar su uso en el JSX.
+	 * Esto incluye los valores actuales del formulario, el estado de edición, carga, y cualquier mensaje de error o éxito.
+	 */
 	const { values, isEditing, isLoading, error, successMessage } = formState;
 
-	// Efecto para gestionar el foco. Cuando se entra en modo edición,
-	// el foco se mueve automáticamente al primer campo editable (Nombre).
-	useEffect(() => {
-		if (isEditing) {
-			// Usamos un pequeño timeout para asegurar que el input es visible y está listo para recibir el foco.
-			const timer = setTimeout(() => nameInputRef.current?.focus(), 50);
-			return () => clearTimeout(timer);
-		}
-	}, [isEditing, nameInputRef]);
-
-	// Configuración de los campos del formulario para renderizarlos dinámicamente.
-	const formFields: FormField[] = [
-		{
-			id: "formPlaintextName",
-			label: "Nombre",
-			field: "name",
-			ref: nameInputRef,
-			validation: validateName,
-			errorMessage: "El nombre no puede estar vacío y debe ser válido.",
-		},
-		{
-			id: "formPlaintextSurname",
-			label: "Apellidos",
-			field: "surname",
-			validation: validateSurname,
-			errorMessage: "Los apellidos no pueden estar vacíos y deben ser válidos.",
-		},
-		{
-			id: "formPlaintextPhone",
-			label: "Teléfono",
-			field: "phone",
-			validation: validatePhone,
-			errorMessage: "El formato del teléfono no es válido (9 dígitos).",
-		},
-	];
+	/**
+	 * Obtenemos los campos del formulario.
+	 * Al usar la referencia del hook, mantenemos el control del foco centralizado.
+	 */
+	const formFields = getFormFields(nameInputRef);
 
 	// Determina el `aria-label` para el contenedor de la alerta.
 	// Esto proporciona un nombre accesible al grupo de alertas, que es anunciado por los lectores de pantalla al enfocarlo.
