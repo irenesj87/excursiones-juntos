@@ -12,7 +12,8 @@ const BUTTON_SKELETON_STYLE = {
 };
 
 /**
- * Renderiza un esqueleto para la tarjeta de información del usuario de la página de usuario.
+ * Componente que renderiza un esqueleto (skeleton) para la tarjeta de información del usuario.
+ * Utilizado para mejorar el rendimiento percibido durante la carga de datos del perfil.
  */
 function UserInfoSkeleton(): React.ReactElement {
 	const { baseColor, highlightColor } = useSkeletonTheme();

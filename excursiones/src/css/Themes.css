@@ -162,9 +162,16 @@ html.light {
 	--login-btn-bg-hover: var(--color-moss-800);
 	--login-btn-border-hover: var(--color-moss-800);
 
-	--logout-bg-color: var(--color-stone-700);
-	--logout-bg-color-hover: var(--color-stone-800);
-	--logout-text-color: var(--color-text-on-primary);
+	/* Botones de acción: Texto claro sobre fondos AAA oscuros */
+	--btn-success-text: var(--color-text-on-success-light);
+	--btn-success-bg: var(--color-success-light);
+	--btn-danger-text: var(--color-text-on-danger-light);
+	--btn-danger-bg: var(--color-danger-light);
+
+	/* Logout en modo claro: Fondo claro para permitir texto oscuro (AAA) */
+	--logout-bg-color: var(--color-stone-200);
+	--logout-bg-color-hover: var(--color-stone-300);
+	--logout-text-color: var(--color-stone-900);
 
 	/* --- Tarjetas (ExcursionCard, UserInfo) --- */
 	--excursion-card-joined-status-text: var(--color-success-light);
@@ -338,6 +345,12 @@ html.dark {
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-border-hover: var(--color-primary-hover);
+
+	/* Botones de acción: Texto oscuro sobre fondos pasteles */
+	--btn-success-text: var(--color-black-soft);
+	--btn-success-bg: var(--color-success-dark);
+	--btn-danger-text: var(--color-black-soft);
+	--btn-danger-bg: var(--color-danger-dark);
 
 	--nav-action-color: var(--navbar-color);
 	--nav-action-bg-hover: var(--color-white-alpha-10);
@@ -634,7 +647,8 @@ body .form-control.is-invalid:focus-visible {
 
 /* --- Botones Bootstrap (Override) --- */
 /* Sobrescribimos las variables internas de Bootstrap para que .btn-primary use nuestro tema */
-.btn-primary {
+body .btn-primary {
+	color: var(--login-btn-text);
 	--bs-btn-color: var(--login-btn-text);
 	--bs-btn-bg: var(--login-btn-bg);
 	--bs-btn-border-color: var(--login-btn-border);
@@ -650,6 +664,56 @@ body .form-control.is-invalid:focus-visible {
 	--bs-btn-disabled-color: var(--login-btn-text);
 	--bs-btn-disabled-bg: var(--login-btn-bg);
 	--bs-btn-disabled-border-color: var(--login-btn-border);
+}
+
+/* Sobrescribimos .btn-success para asegurar el contraste AAA en ambos temas */
+body .btn-success {
+	color: var(--btn-success-text);
+	--bs-btn-color: var(--btn-success-text);
+	--bs-btn-bg: var(--btn-success-bg);
+	--bs-btn-border-color: var(--btn-success-bg);
+	--bs-btn-hover-color: var(--btn-success-text);
+	--bs-btn-hover-bg: color-mix(in srgb, var(--btn-success-bg), black 15%);
+	--bs-btn-hover-border-color: color-mix(
+		in srgb,
+		var(--btn-success-bg),
+		black 15%
+	);
+	--bs-btn-active-color: var(--btn-success-text);
+	--bs-btn-active-bg: color-mix(in srgb, var(--btn-success-bg), black 20%);
+	--bs-btn-active-border-color: color-mix(
+		in srgb,
+		var(--btn-success-bg),
+		black 20%
+	);
+	--bs-btn-disabled-color: var(--btn-success-text);
+	--bs-btn-disabled-bg: var(--btn-success-bg);
+	--bs-btn-disabled-border-color: var(--btn-success-bg);
+}
+
+/* Sobrescribimos .btn-danger para asegurar el contraste AAA en ambos temas */
+body .btn-danger {
+	color: var(--btn-danger-text);
+	--bs-btn-color: var(--btn-danger-text);
+	--bs-btn-bg: var(--btn-danger-bg);
+	--bs-btn-border-color: var(--btn-danger-bg);
+	--bs-btn-hover-color: var(--btn-danger-text);
+	--bs-btn-hover-bg: color-mix(in srgb, var(--btn-danger-bg), black 15%);
+	--bs-btn-hover-border-color: color-mix(
+		in srgb,
+		var(--btn-danger-bg),
+		black 15%
+	);
+	--bs-btn-active-color: var(--btn-danger-text);
+	--bs-btn-active-bg: color-mix(in srgb, var(--btn-danger-bg), black 20%);
+	--bs-btn-active-border-color: color-mix(
+		in srgb,
+		var(--btn-danger-bg),
+		black 20%
+	);
+	--bs-btn-disabled-color: var(--btn-danger-text);
+	--bs-btn-disabled-bg: var(--btn-danger-bg);
+	--bs-btn-disabled-border-color: var(--btn-danger-bg);
 }
 
 /* --- Offcanvas (Menú y Filtros) --- */

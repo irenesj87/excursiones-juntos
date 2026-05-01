@@ -46,6 +46,17 @@
 	--login-btn-text: var(--color-white);
 	--login-btn-text-hover: var(--color-white);
 
+	/* Forzamos el texto de Logout a blanco en la Home (Hero) */
+	--logout-text-color: var(--color-white);
+	--logout-bg-color: rgba(255, 255, 255, 0.1);
+
+	/* En la Home, forzamos que el botón de logout ignore el tema y sea siempre claro */
+	.btnLogout,
+	.btnLogout span {
+		color: var(--logout-text-color);
+		background-color: var(--logout-bg-color);
+	}
+
 	/* 
 	 * Botones de acción (Tema y Menú) 
 	 * Aplicamos una opacidad más baja al hover para que se sienta más "orgánico"
