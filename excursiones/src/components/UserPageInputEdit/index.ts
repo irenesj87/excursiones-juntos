@@ -1,1 +1,1 @@
-export { default } from "./UserPageInputEdit";
+export { UserPageInputEdit } from "./UserPageInputEdit";

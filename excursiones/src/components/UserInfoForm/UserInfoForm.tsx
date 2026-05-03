@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Col, Form, Row } from "react-bootstrap";
-import UserPageInputEdit from "../UserPageInputEdit/UserPageInputEdit";
+import { UserPageInputEdit } from "../UserPageInputEdit/UserPageInputEdit";
 import {
 	validateName,
 	validateSurname,

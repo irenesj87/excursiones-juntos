@@ -1,6 +1,5 @@
 import { Row, Col } from "react-bootstrap";
 import { UserInfoForm } from "../UserInfoForm";
-import "bootstrap/dist/css/bootstrap.css";
 
 /**
  * Componente que representa la página de perfil del usuario.

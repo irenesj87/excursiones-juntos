@@ -1,6 +1,5 @@
 import { forwardRef, useState, useEffect, ChangeEvent } from "react";
 import { Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
 import { TriangleAlertIcon } from "../../ui/Icons";
 import styles from "./UserPageInputEdit.module.css";
 
@@ -24,11 +23,11 @@ interface UserPageInputEditProps {
 	readonly errorMessage?: string;
 }
 
+/**
+ * Componente interno que maneja la lógica de renderizado del input.
+ */
 function UserPageInputEditComponent(
-	props: UserPageInputEditProps,
-	ref: React.Ref<HTMLInputElement>,
-): JSX.Element {
-	const {
+	{
 		id,
 		value,
 		onInputChange,
@@ -36,7 +35,9 @@ function UserPageInputEditComponent(
 		validationFunction,
 		message,
 		errorMessage,
-	} = props;
+	}: UserPageInputEditProps,
+	ref: React.Ref<HTMLInputElement>,
+): JSX.Element {
 	// Estado para almacenar el mensaje de error de validación. `null` si es válido.
 	const [validationError, setValidationError] = useState<string | null>(null);
 	/**
@@ -109,10 +110,13 @@ function UserPageInputEditComponent(
 	);
 }
 
-const UserPageInputEdit = forwardRef<HTMLInputElement, UserPageInputEditProps>(
-	UserPageInputEditComponent,
-);
+/**
+ * Componente de entrada de texto especializado para la página de usuario.
+ * Permite la edición controlada y validación en tiempo real con soporte para `ref`.
+ */
+export const UserPageInputEdit = forwardRef<
+	HTMLInputElement,
+	UserPageInputEditProps
+>(UserPageInputEditComponent);
 
 UserPageInputEdit.displayName = "UserPageInputEdit";
-
-export default UserPageInputEdit;

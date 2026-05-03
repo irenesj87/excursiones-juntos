@@ -4,16 +4,16 @@ import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import userInfoStyles from "./UserInfoForm.module.css";
 
 const SKELETON_INPUT_HEIGHT = 38;
-const SKELETON_BUTTON_MIN_WIDTH = 70;
+const SKELETON_BUTTON_HEIGHT = 44;
+const SKELETON_BUTTON_MIN_WIDTH = 100;
+const SKELETON_BORDER_RADIUS = 6;
 const SKELETON_ROWS_COUNT = 2;
-/** Estilo estable para el esqueleto del botón para evitar re-renders innecesarios */
 const BUTTON_SKELETON_STYLE = {
 	minWidth: SKELETON_BUTTON_MIN_WIDTH,
 };
 
 /**
  * Componente que renderiza un esqueleto (skeleton) para la tarjeta de información del usuario.
- * Utilizado para mejorar el rendimiento percibido durante la carga de datos del perfil.
  */
 function UserInfoSkeleton(): React.ReactElement {
 	const { baseColor, highlightColor } = useSkeletonTheme();
@@ -21,7 +21,7 @@ function UserInfoSkeleton(): React.ReactElement {
 	return (
 		<Card className={`${userInfoStyles.profileCard} w-100 flex-grow-1`}>
 			<Card.Body className={`${userInfoStyles.cardBody} d-flex flex-column`}>
-				{/* Header Skeleton */}
+				{/* Header */}
 				<div className="d-flex flex-column flex-sm-row align-items-center gap-3 gap-sm-4 mb-4">
 					<Skeleton
 						circle
@@ -36,6 +36,7 @@ function UserInfoSkeleton(): React.ReactElement {
 							width="40%"
 							height={32}
 							className="mb-2"
+							borderRadius={SKELETON_BORDER_RADIUS}
 							baseColor={baseColor}
 							highlightColor={highlightColor}
 						/>
@@ -47,7 +48,7 @@ function UserInfoSkeleton(): React.ReactElement {
 					</div>
 				</div>
 
-				{/* Account Section Skeleton */}
+				{/* Información de la cuenta */}
 				<div className="mb-4">
 					<Skeleton
 						width="15%"
@@ -56,7 +57,7 @@ function UserInfoSkeleton(): React.ReactElement {
 						baseColor={baseColor}
 						highlightColor={highlightColor}
 					/>
-					{/* Simula el campo de Correo apilado */}
+					{/* Correo */}
 					<div className="mb-0">
 						<div className="mb-2">
 							<Skeleton
@@ -75,7 +76,7 @@ function UserInfoSkeleton(): React.ReactElement {
 
 				<hr className="border-secondary-subtle my-4 opacity-25" />
 
-				{/* Personal Info Section Skeleton */}
+				{/* Información personal */}
 				<div>
 					<Skeleton
 						width="25%"
@@ -100,6 +101,7 @@ function UserInfoSkeleton(): React.ReactElement {
 							</div>
 							<Skeleton
 								height={SKELETON_INPUT_HEIGHT}
+								borderRadius={SKELETON_BORDER_RADIUS}
 								baseColor={baseColor}
 								highlightColor={highlightColor}
 							/>
@@ -116,6 +118,7 @@ function UserInfoSkeleton(): React.ReactElement {
 						</div>
 						<Skeleton
 							height={SKELETON_INPUT_HEIGHT}
+							borderRadius={SKELETON_BORDER_RADIUS}
 							baseColor={baseColor}
 							highlightColor={highlightColor}
 						/>
@@ -125,7 +128,8 @@ function UserInfoSkeleton(): React.ReactElement {
 					<Row className="justify-content-sm-end gx-0">
 						<Col xs={12} sm="auto">
 							<Skeleton
-								height={SKELETON_INPUT_HEIGHT}
+								height={SKELETON_BUTTON_HEIGHT}
+								borderRadius={SKELETON_BORDER_RADIUS}
 								className="w-100"
 								style={BUTTON_SKELETON_STYLE}
 								baseColor={baseColor}
