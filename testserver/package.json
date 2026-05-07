@@ -7,7 +7,7 @@
 		"start": "node --loader ts-node/esm ./bin/www.ts"
 	},
 	"engines": {
-		"node": "22.9.0",
+		"node": ">=22.13.0",
 		"npm": "11.6.0"
 	},
 	"dependencies": {

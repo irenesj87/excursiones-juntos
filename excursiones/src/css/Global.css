@@ -179,7 +179,7 @@ html {
 	--transition-base: 0.2s ease-out;
 
 	/* Variables de Layout (Dinámicas) */
-	--navbar-height: 5.3rem; /* ~85px. Valor fallback ajustado a la realidad */
+	--navbar-height: 5.3rem;
 }
 
 /* ======================================== */
@@ -187,7 +187,7 @@ html {
 /* ======================================== */
 body {
 	font-family: var(--font-family-sans);
-	line-height: 1.6; /* AAA: Interlineado global para mejorar legibilidad (Criterio 1.4.8) */
+	line-height: 1.6; /* AAA: Interlineado global para mejorar legibilidad */
 }
 
 /* Aplicamos la fuente Sans a todos los encabezados para cumplir con la guía de diseño */
@@ -216,7 +216,7 @@ parecen inactivos. */
 	cursor: not-allowed;
 }
 
-/* --- Offcanvas (Menú y Filtros) --- */
+/* --- Offcanvas --- */
 .offcanvas-header {
 	padding: var(--space-4) var(--space-6);
 }
@@ -227,15 +227,13 @@ parecen inactivos. */
 	padding: 0;
 }
 
-/* Clase de utilidad para restaurar el padding estándar en Offcanvas que lo requieran (ej. Filtros) */
+/* Clase de utilidad para restaurar el padding estándar en Offcanvas que lo requieran */
 .offcanvas-body.padded {
 	padding: var(--space-4) var(--space-6);
 }
 
 /* 
  * Clase global para redondear los bordes del Offcanvas (estética orgánica).
- * Se define aquí para aumentar la especificidad (.offcanvas.offcanvasRounded) 
- * y evitar el uso de !important en la transición.
  */
 .offcanvas.offcanvasRounded {
 	border-top-right-radius: var(--border-radius-lg);

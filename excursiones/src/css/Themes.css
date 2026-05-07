@@ -2,16 +2,9 @@
 /* 2. VARIABLES SEMÁNTICAS Y DE COMPONENTES */
 /* ======================================== */
 
-/* --- VARIABLES COMPARTIDAS (Mapeos Estructurales) --- */
-/* 
- * Estas variables definen la estructura del diseño. Al depender de variables semánticas 
- * (como --color-primary o --color-background-surface) que ya cambian según el tema, 
- * podemos definirlas una sola vez aquí.
- */
+/* --- VARIABLES COMPARTIDAS --- */
 :root {
-	/* Navbar y Estructura */
-
-	/* --- Botones Premium --- */
+	/* --- Botones --- */
 	--btn-transition:
 		background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease,
 		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
@@ -26,7 +19,7 @@
 
 	--navbar-backdrop-filter: blur(
 		16px
-	); /* Aumentamos el blur para un efecto más premium */
+	); /* Aumentamos el blur */
 	/* Definimos la transición core para la navbar */
 	--navbar-transition:
 		background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease,
@@ -35,11 +28,10 @@
 	--navbar-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 	--navbar-border-bottom: 1px solid transparent;
 
-	/* Tarjetas (ExcursionCard) */
+	/* Tarjetas */
 	--excursion-card-bg: var(--color-background-surface);
 	/* 
 	 * Sombra estática para tarjetas informativas. 
-	 * Eliminamos efectos de hover ya que no son elementos interactivos.
 	 */
 	--excursion-card-shadow:
 		0 2px 4px rgba(0, 0, 0, 0.04), 0 12px 24px rgba(0, 0, 0, 0.06);
@@ -60,10 +52,6 @@
 	/* Footer */
 	--footer-bg: var(--color-stone-900);
 	--footer-text-color: var(--color-white-off);
-	/* 
-	 * Ajustado a stone-200 para cumplir con el ratio de contraste 7:1 (WCAG AAA) 
-	 * sobre el fondo --footer-bg. El ratio ahora es > 9:1.
-	 */
 	--footer-text-muted: var(--color-stone-200);
 
 	/* Hero CTA */
@@ -86,7 +74,7 @@
 html.light {
 	color-scheme: light;
 	/* --- 2a. Variables Semánticas --- */
-	/* Usamos tonos musgo para el color primario, alineado con la estética orgánica */
+	/* Usamos tonos musgo para el color primario */
 	--color-primary: var(--color-moss-300); /* Verde Musgo Pastel */
 	/* 
 	 * RGB crudo necesario para utilidades de opacidad de Bootstrap (ej: bg-primary-subtle).
@@ -102,13 +90,13 @@ html.light {
 		--color-white
 	); /* Para tarjetas, modales, etc. */
 	--color-text-base: var(--color-stone-900);
-	--color-text-muted: var(--color-stone-750); /* AAA robusto con fuente fina */
+	--color-text-muted: var(--color-stone-750);
 	--color-text-on-primary: var(
 		--color-stone-900
 	); /* Texto oscuro sobre pastel */
 	--color-text-brand: var(
 		--color-moss-800
-	); /* Oscurecido para cumplir AAA (Ratio > 7:1) */
+	);
 	--color-border-default: var(--color-stone-300);
 	--color-border-subtle: var(--color-stone-100);
 
@@ -129,7 +117,7 @@ html.light {
 	--navbar-brand-color: var(--color-black-soft);
 	--navbar-brand-icon: var(
 		/* Icono color musgo oscuro */ --color-moss-700
-	); /* Oscurecido para cumplir AAA (7:1) */
+	);
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-stone-500);
@@ -137,7 +125,7 @@ html.light {
 	/* --- Botones y Enlaces --- */
 	--theme-toggle-btn-color: var(
 		--color-stone-800
-	); /* Coincide con --navbar-color */
+	);
 	--theme-toggle-btn-icon: var(--color-stone-800);
 	--theme-toggle-btn-bg-hover: color-mix(
 		in srgb,
@@ -162,7 +150,7 @@ html.light {
 	--login-btn-bg-hover: var(--color-moss-800);
 	--login-btn-border-hover: var(--color-moss-800);
 
-	/* Botones de acción: Texto claro sobre fondos AAA oscuros */
+	/* Botones de acción */
 	--btn-success-text: var(--color-text-on-success-light);
 	--btn-success-bg: var(--color-success-light);
 	--btn-danger-text: var(--color-text-on-danger-light);
@@ -202,11 +190,10 @@ html.light {
 	);
 
 	/* Píldoras de filtro (no seleccionadas) */
-	--filter-pill-bg: var(--color-stone-100); /* #edeae8 */
+	--filter-pill-bg: var(--color-stone-100);
 	--filter-pill-text: var(--color-text-base);
 	--filter-pill-bg-hover: var(--color-stone-300);
 	/* Píldoras de filtro (seleccionadas) */
-	/* El color de fondo es oscuro, por lo que el texto debe ser claro para el contraste. */
 	--filter-pill-bg-checked: var(--color-stone-800);
 	--filter-pill-text-checked: var(--color-white);
 	--filter-pill-shadow-checked: none;
@@ -216,10 +203,9 @@ html.light {
 	--bs-success: var(--color-success-light);
 	--bs-warning: var(--color-warning-light);
 	--bs-danger: var(--color-danger-light);
-	/* Mapeamos Primary y Secondary para que StyledButton use el tema */
 	--bs-secondary: var(
 		--color-stone-200
-	); /* Gris claro para fondo, texto oscuro */
+	);
 	--bs-body-color: var(
 		--color-text-base
 	); /* Asegura que el texto dentro de botones herede bien si no se especifica */
@@ -266,7 +252,7 @@ html.light {
 	--shadow-lifted:
 		0 12px 24px -6px rgba(0, 0, 0, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.05);
 
-	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
+	/* Color para el botón de limpiar filtros */
 	--clear-filters-color: var(--color-moss-700);
 	--clear-filters-color-hover: var(--color-moss-800);
 
@@ -293,8 +279,7 @@ html.dark {
 	/* Usamos tonos musgo claros para el color primario, para un alto contraste sobre fondo oscuro */
 	--color-primary: var(
 		--color-moss-100
-	); /* Muy claro para ratio 7:1 sobre fondo oscuro */
-	/* Corresponde a --color-moss-100 */
+	);
 	--primary-color-rgb: 223, 232, 217;
 	--color-primary-hover: var(--color-moss-200);
 	--color-accent: var(--color-moss-300);
@@ -308,10 +293,10 @@ html.dark {
 	--color-text-brand: var(--color-moss-300);
 	--color-border-default: var(
 		--color-green-dark-500
-	); /* Aclarado para mayor contraste */
+	);
 	--color-border-subtle: var(
 		--color-green-dark-600
-	); /* Aclarado para ser visible sobre bg-800 */
+	);
 
 	/* --- 2b. Variables de Componente --- */
 
@@ -339,9 +324,9 @@ html.dark {
 	--theme-toggle-btn-border-color: var(--separator-color);
 	--theme-toggle-btn-bg-hover: var(--color-white-alpha-10);
 
-	/* Botón primario: Mantenemos el primario claro (Moss-100) con texto oscuro */
+	/* Botón primario */
 	--login-btn-text: var(--color-text-on-primary);
-	--login-btn-bg: var(--color-primary); /* Aclarado para contraste AAA */
+	--login-btn-bg: var(--color-primary);
 	--login-btn-border: var(--color-primary);
 	--login-btn-bg-hover: var(--color-primary-hover);
 	--login-btn-border-hover: var(--color-primary-hover);
@@ -387,17 +372,15 @@ html.dark {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	/* Ajustado para cumplir contraste AAA (Ratio > 7:1) */
 	--filter-pill-bg: var(
 		--color-green-dark-700
-	); /* #333d30 sobre #edeae8 -> 8.2:1 */
+	);
 	--filter-pill-text: var(--color-text-base);
-	--filter-pill-border: var(--color-green-dark-500); /* 35% lightness */
+	--filter-pill-border: var(--color-green-dark-500);
 	--filter-pill-bg-hover: var(
 		--color-green-dark-600
-	); /* #414f3c sobre #edeae8 -> 6.3:1 (Pasa AA) */
-	--filter-pill-border-hover: var(--color-green-dark-400); /* 50% lightness */
-	/* El color de fondo es claro, por lo que el texto debe ser oscuro para el contraste. */
+	);
+	--filter-pill-border-hover: var(--color-green-dark-400);
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
 	--filter-pill-border-checked: var(--color-primary);
@@ -411,7 +394,7 @@ html.dark {
 	/* Mapeamos Primary y Secondary */
 	--bs-secondary: var(
 		--secondary-btn-bg
-	); /* Gris oscuro real para contraste AAA */
+	);
 
 	/* --- Accesibilidad --- */
 	--focus-ring-color: color-mix(
@@ -457,7 +440,7 @@ html.dark {
 	/* En modo oscuro, las sombras son menos visibles, así que usamos un halo de luz sutil */
 	--excursion-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 
-	/* Color para el botón de limpiar filtros, garantizando contraste AAA */
+	/* Color para el botón de limpiar filtros */
 	--clear-filters-color: var(--color-moss-200);
 	--clear-filters-color-hover: var(--color-moss-100);
 
@@ -489,7 +472,6 @@ html.dark .btn-close {
  * Aplicamos la base a todos los botones para asegurar consistencia.
  * La transición utiliza una curva 'back' para el transform, lo que le da 
  * un toque orgánico y vivo al elevarse.
- * Usamos 'body' para aumentar la especificidad y evitar !important contra Bootstrap.
  */
 body .btn {
 	transition: var(--btn-transition);
@@ -597,7 +579,7 @@ body .btn.disabled {
 body .form-control.is-invalid:focus,
 body .form-control.is-invalid:focus-visible {
 	border-color: var(--color-text-danger);
-	/* Intensificamos el halo reduciendo la transparencia al 30% (70% de opacidad) */
+	/* Intensificamos el halo reduciendo la transparencia al 30% */
 	box-shadow: 0 0 0 var(--space-1)
 		color-mix(in srgb, var(--color-text-danger), transparent 30%);
 }
