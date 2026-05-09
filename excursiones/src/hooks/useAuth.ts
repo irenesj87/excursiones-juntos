@@ -4,13 +4,14 @@ import { verifyToken } from "../services/authService";
 import { AuthResponse } from "../types";
 import { login, logout } from "../slices/loginSlice";
 import { useMinDisplayTime } from "./useMinDisplayTime";
+import { getSafeErrorMessage } from "../utils/errorUtils";
 
 /**
  * Hook personalizado para verificar si un usuario ya tiene una sesión iniciada desde una visita anterior,
  * cuando la aplicación se carga por primera vez.
  * Este hook es necesario para evitar el problema del parpadeo, que da una mala experiencia de usuario.
  * Sin useAuth pasaría esto:
- * 1. Un usuario que ya ha iniciado sesión vuelve a tu web o refresca la página.
+ * 1. Un usuario que ya ha iniciado sesión vuelve a la web o refresca la página.
  * 2. La aplicación se carga. El estado de Redux está vacío al principio, por lo que la aplicación cree que el
  * usuario no está logueado.
  * 3. Durante un instante, la barra de navegación mostraría "Iniciar sesión".
@@ -67,7 +68,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 };
 
 /**
- * Recupera el token de sesión de sessionStorage, buscando en la clave directao en el objeto de respaldo 'authState'.
+ * Recupera el token de sesión de sessionStorage, buscando en la clave directa o en el objeto de respaldo 'authState'.
  */
 const getPersistedToken = (): string | null => {
 	// Primero intentamos obtener el token directamente.
@@ -145,8 +146,7 @@ export const useAuth = () => {
 
 				console.error(
 					"Error en la verificación del estado de autenticación:",
-					// Usamos error.message para un log más limpio, ya que el servicio ya formatea el error.
-					(error as Error).message,
+					getSafeErrorMessage(error),
 				);
 				// Esto actualizará el estado de Redux para reflejar que el usuario no está autenticado.
 				// Si el componente ya no está montado, no hacemos nada.
