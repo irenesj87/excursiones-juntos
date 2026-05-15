@@ -1,7 +1,7 @@
 import { useCallback, useRef, type Dispatch } from "react";
 
 /**
- * Define la forma del objeto que devuelve el hook `useMinDisplayTime`.
+ * Define la forma del objeto que retorna el hook `useMinDisplayTime`.
  */
 interface UseMinDisplayTimeReturn<A> {
 	/** Registra el tiempo de inicio. Debe llamarse justo antes de que comience la operación asíncrona. */

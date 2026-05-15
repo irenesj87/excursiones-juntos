@@ -3,7 +3,6 @@ import filterSlice from "../slices/filterSlice";
 import loginSlice from "../slices/loginSlice";
 import themeSlice from "../slices/themeSlice";
 
-// Exportamos el reducer raíz combinado para poder reutilizarlo en las pruebas.
 export const rootReducer = combineReducers({
 	loginReducer: loginSlice,
 	filterReducer: filterSlice,

@@ -9,7 +9,7 @@ interface ThemeState {
 }
 
 const getInitialMode = (): ThemeMode => {
-	// On the server, there's no localStorage or matchMedia, so return a default.
+	// Si no hay un objeto window (por ejemplo, durante la renderización del lado del servidor), retorna 'light' por defecto.
 	if (globalThis.window === undefined) {
 		return "light";
 	}
@@ -20,9 +20,9 @@ const getInitialMode = (): ThemeMode => {
 		return storedMode;
 	}
 	// Si no hay nada válido, usa la preferencia del sistema operativo.
-	const prefersDark =
-		globalThis.window.matchMedia &&
-		globalThis.window.matchMedia("(prefers-color-scheme: dark)").matches;
+	const prefersDark = globalThis.window.matchMedia?.(
+		"(prefers-color-scheme: dark)",
+	)?.matches;
 	return prefersDark ? "dark" : "light";
 };
 

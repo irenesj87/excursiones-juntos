@@ -32,9 +32,9 @@
 				// Este script se ejecuta antes de que React se cargue para evitar FOUC.
 				try {
 					const themeStored = localStorage.getItem("themeMode");
-					const prefersDark =
-						globalThis.matchMedia &&
-						globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
+					const prefersDark = globalThis.matchMedia?.(
+						"(prefers-color-scheme: dark)",
+					)?.matches;
 					let effectiveTheme;
 
 					if (themeStored === "dark" || themeStored === "light") {

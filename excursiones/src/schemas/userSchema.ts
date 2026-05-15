@@ -8,7 +8,6 @@ import {
 
 /**
  * Esquema de validación Zod para el objeto User.
- * Define la estructura esperada de forma declarativa y legible.
  * Es la **Fuente Única de Verdad** para la estructura del usuario.
  */
 export const userSchema = z.object({

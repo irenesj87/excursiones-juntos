@@ -37,9 +37,6 @@ function authFormReducer(
 		case "CLEAR_ERROR":
 			return { ...state, error: null };
 		default: {
-			// TypeScript nos ayuda a asegurar que todos los casos están cubiertos.
-			// Si llegamos aquí, es porque se ha pasado una acción no contemplada.
-			// Incluimos el tipo de acción en el error para facilitar la depuración.
 			const unhandledAction = /** @type {{type: string}} */ action;
 			throw new Error(
 				`Acción no soportada: ${(unhandledAction as AuthFormAction).type}`,
@@ -49,7 +46,7 @@ function authFormReducer(
 }
 
 /**
- * Hook personalizado para manejar la lógica de los formularios de autenticación (login y registro).
+ * Hook personalizado para manejar la lógica de los formularios de autenticación.
  */
 export function useAuthFormHandler(
 	isFormValid: boolean,

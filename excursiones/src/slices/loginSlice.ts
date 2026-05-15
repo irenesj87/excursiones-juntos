@@ -61,7 +61,7 @@ const initialState: LoginState =
 	loadStateFromSessionStorage() ?? defaultInitialState;
 
 export const loginSlice = createSlice({
-	name: "login", // Es una buena práctica usar un nombre simple para el slice.
+	name: "login",
 	initialState,
 	reducers: {
 		login: (state, action: PayloadAction<{ user: User; token: string }>) => {

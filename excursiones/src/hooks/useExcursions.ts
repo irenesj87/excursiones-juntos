@@ -2,7 +2,6 @@ import { useReducer } from "react";
 import { useMinDisplayTime } from "./useMinDisplayTime";
 import type { Excursion, AppError } from "../types";
 
-// Definimos los tipos de estado y acción con TypeScript
 export type ExcursionsState =
 	| { status: "loading"; readonly data: readonly Excursion[] }
 	| { status: "success"; readonly data: readonly Excursion[] }
@@ -37,8 +36,6 @@ const excursionsReducer = (
 		case "FETCH_ERROR":
 			return { status: "error", error: action.payload, data: [] };
 		default: {
-			// TypeScript se asegurará de que todos los casos de acción estén cubiertos.
-			// Si se añade una nueva acción y no se maneja aquí, TypeScript dará un error.
 			throw new Error(
 				`Acción no soportada: ${(action as { type: string }).type}`
 			);
