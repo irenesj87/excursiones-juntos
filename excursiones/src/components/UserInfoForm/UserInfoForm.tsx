@@ -7,8 +7,8 @@ import {
 	validatePhone,
 } from "../../validation/validations";
 import { useUserInfoForm, FormValues } from "./useUserInfoForm";
-import CustomButton from "../../ui/CustomButton/CustomButton";
-import { FeedbackAlert } from "../../ui/FeedbackAlert";
+import { Button } from "../../ui/Button";
+import { Alert } from "../../ui/Alert";
 import { UserIcon } from "../../ui/Icons";
 import styles from "./UserInfoForm.module.css";
 
@@ -55,7 +55,7 @@ const getFormFields = (
 /**
  * Componente de interfaz para la gestión del perfil de usuario.
  *
- * Presenta la información de la cuenta y permite la edición de datos personales con validación en tiempo real y 
+ * Presenta la información de la cuenta y permite la edición de datos personales con validación en tiempo real y
  * gestión de errores.
  */
 export function UserInfoForm(): React.ReactElement {
@@ -132,7 +132,7 @@ export function UserInfoForm(): React.ReactElement {
 						</legend>
 					)}
 					{successMessage && (
-						<FeedbackAlert
+						<Alert
 							variant="success"
 							message={successMessage}
 							onClose={clearMessages}
@@ -140,7 +140,7 @@ export function UserInfoForm(): React.ReactElement {
 						/>
 					)}
 					{isEditing && error && (
-						<FeedbackAlert
+						<Alert
 							variant="danger"
 							message={error}
 							onClose={clearMessages}
@@ -197,17 +197,13 @@ export function UserInfoForm(): React.ReactElement {
 					<div className="mt-auto pt-3">
 						<Row className="justify-content-center justify-content-sm-end gx-0">
 							<Col xs={12} sm="auto">
-								<CustomButton
+								<Button
 									onClick={startEdit}
 									className={`${styles.editButton} w-100`}
 									variant="primary"
 								>
-									{/* Pasamos el icono y texto como children */}
-									{/* StyledButton maneja el layout interno, pero podemos añadir un span para el gap */}
-									<span className="d-flex align-items-center justify-content-center gap-2">
-										Editar
-									</span>
-								</CustomButton>
+									Editar
+								</Button>
 							</Col>
 						</Row>
 					</div>
@@ -217,18 +213,16 @@ export function UserInfoForm(): React.ReactElement {
 						<Row className="justify-content-center justify-content-sm-end gx-2">
 							{/* En xs, los botones ocupan el ancho completo y se apilan. En sm+, se muestran en línea. */}
 							<Col xs={12} sm="auto" className="mb-2 mb-sm-0">
-								<CustomButton
+								<Button
 									variant="danger"
 									onClick={cancelEdit}
 									className={`${styles.cancelButton} w-100`}
 								>
-									<span className="d-flex align-items-center justify-content-center gap-2">
-										Cancelar
-									</span>
-								</CustomButton>
+									Cancelar
+								</Button>
 							</Col>
 							<Col xs={12} sm="auto">
-								<CustomButton
+								<Button
 									variant={
 										!isFormValid || !isFormChanged ? "secondary" : "success"
 									}
@@ -237,10 +231,8 @@ export function UserInfoForm(): React.ReactElement {
 									disabled={!isFormValid || !isFormChanged}
 									isLoading={isLoading}
 								>
-									<span className="d-flex align-items-center justify-content-center gap-2">
-										Guardar
-									</span>
-								</CustomButton>
+									Guardar
+								</Button>
 							</Col>
 						</Row>
 					</div>

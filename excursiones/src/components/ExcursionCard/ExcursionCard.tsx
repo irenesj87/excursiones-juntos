@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import InfoItem from "../../ui/InfoItem/InfoItem";
-import { FeedbackAlert } from "../../ui/FeedbackAlert";
+import { Alert } from "../../ui/Alert";
 import type { DifficultyLevel } from "../../types";
-import CustomButton from "../../ui/CustomButton/CustomButton";
+import { Button } from "../../ui/Button";
 import { useJoinExcursion } from "./useJoinExcursion";
 import { getSafeErrorMessage } from "../../utils/errorUtils";
 import {
@@ -56,13 +56,13 @@ function JoinButton({ isJoined, isJoining, onJoin }: JoinButtonProps) {
 					Unido/a
 				</span>
 			) : (
-				<CustomButton
+				<Button
 					onClick={onJoin}
 					className={styles.joinButton}
 					isLoading={isJoining}
 				>
 					Unirse
-				</CustomButton>
+				</Button>
 			)}
 		</div>
 	);
@@ -230,7 +230,7 @@ export function ExcursionCard({
 					<div className="mt-auto">
 						<div className={styles.cardActionArea}>
 							{joinError && (
-								<FeedbackAlert
+								<Alert
 									message={getSafeErrorMessage(joinError)}
 									variant="danger"
 									onClose={clearError}

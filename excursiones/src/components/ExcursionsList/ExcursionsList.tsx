@@ -1,7 +1,7 @@
 import { Row, Col } from "react-bootstrap";
 import { ExcursionCard } from "../ExcursionCard";
 import { ExcursionsLoading } from "./ExcursionsLoading";
-import { FeedbackAlert } from "../../ui/FeedbackAlert";
+import { Alert } from "../../ui/Alert";
 import { NoExcursionsFound } from "./NoExcursionsFound";
 import { Pagination } from "../../ui/Pagination";
 import styles from "./ExcursionsList.module.css";
@@ -38,7 +38,7 @@ export function ExcursionsListView({
 		if (error) {
 			return (
 				<div className="d-flex justify-content-center my-5">
-					<FeedbackAlert variant="danger" message={TEXTS.ERROR_MESSAGE} />
+					<Alert variant="danger" message={TEXTS.ERROR_MESSAGE} />
 				</div>
 			);
 		}

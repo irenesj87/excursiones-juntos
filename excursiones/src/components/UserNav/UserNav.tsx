@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import StyledNavLink from "../../ui/Link";
-import Button from "../../ui/CustomButton/CustomButton";
+import { Link } from "../../ui/Link";
+import { Button } from "../../ui/Button";
 import { logoutUser } from "../../services/authService";
 import { logout } from "../../slices/loginSlice";
 import { ROUTES } from "../../constants";
@@ -9,7 +9,7 @@ import { ProfileIcon, LogoutIcon } from "../../ui/Icons";
 import styles from "./UserNav.module.css";
 
 /**
- * Componente que muestra los enlaces de navegación para un usuario logueado, incluyendo un enlace al perfil y un 
+ * Componente que muestra los enlaces de navegación para un usuario logueado, incluyendo un enlace al perfil y un
  * botón para cerrar sesión.
  * Muestra iconos en dispositivos móviles y texto en pantallas más grandes.
  */
@@ -28,14 +28,14 @@ function UserNav() {
 
 	return (
 		<div className="d-flex align-items-center gap-1">
-			<StyledNavLink
+			<Link
 				to={ROUTES.USER}
 				className={styles.profileLink}
 				aria-label="Mi perfil"
 			>
 				<span className={styles.linkText}>Mi perfil</span>
 				<ProfileIcon className={styles.linkIcon} aria-hidden="true" />
-			</StyledNavLink>
+			</Link>
 
 			<Button
 				onClick={handleLogout}

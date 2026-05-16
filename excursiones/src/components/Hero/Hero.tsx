@@ -4,7 +4,7 @@ import cn from "classnames";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/images/hero-background.jpg";
 import heroImageAvif from "../../assets/images/hero-background.avif";
-import CustomLink from "../../ui/Link/CustomLink";
+import { Link } from "../../ui/Link";
 import { ROUTES } from "../../constants";
 
 const HERO_CONTENT = {
@@ -57,9 +57,9 @@ export function Hero() {
 					<h1 className={styles.title}>{HERO_CONTENT.title}</h1>
 					<p className={styles.subtitle}>{HERO_CONTENT.subtitle}</p>
 					{!isLoggedIn && (
-						<CustomLink to={ROUTES.REGISTER} className={styles.ctaButton}>
+						<Link to={ROUTES.REGISTER} className={styles.ctaButton}>
 							{HERO_CONTENT.cta}
-						</CustomLink>
+						</Link>
 					)}
 				</div>
 			</div>

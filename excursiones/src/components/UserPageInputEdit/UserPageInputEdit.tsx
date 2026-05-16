@@ -26,7 +26,10 @@ interface UserPageInputEditProps {
 /**
  * Componente interno que maneja la lógica de renderizado del input.
  */
-function UserPageInputEditComponent(
+export const UserPageInputEdit = forwardRef<
+	HTMLInputElement,
+	UserPageInputEditProps
+>(function UserPageInputEdit(
 	{
 		id,
 		value,
@@ -35,9 +38,9 @@ function UserPageInputEditComponent(
 		validationFunction,
 		message,
 		errorMessage,
-	}: UserPageInputEditProps,
-	ref: React.Ref<HTMLInputElement>,
-): JSX.Element {
+	},
+	ref,
+) {
 	// Estado para almacenar el mensaje de error de validación. `null` si es válido.
 	const [validationError, setValidationError] = useState<string | null>(null);
 	/**
@@ -108,15 +111,4 @@ function UserPageInputEditComponent(
 			</Form.Control.Feedback>
 		</>
 	);
-}
-
-/**
- * Componente de entrada de texto especializado para la página de usuario.
- * Permite la edición controlada y validación en tiempo real con soporte para `ref`.
- */
-export const UserPageInputEdit = forwardRef<
-	HTMLInputElement,
-	UserPageInputEditProps
->(UserPageInputEditComponent);
-
-UserPageInputEdit.displayName = "UserPageInputEdit";
+});

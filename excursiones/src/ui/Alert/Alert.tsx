@@ -1,8 +1,7 @@
-import React from "react";
-import { Alert } from "react-bootstrap";
+import { Alert as BootstrapAlert } from "react-bootstrap";
 import cn from "classnames";
 import { CircleAlertIcon, TriangleAlertIcon, CheckIcon } from "../Icons";
-import styles from "./FeedbackAlert.module.css";
+import styles from "./Alert.module.css";
 
 const VARIANT_CONFIG = {
 	danger: {
@@ -24,11 +23,7 @@ const VARIANT_CONFIG = {
 
 type Variant = keyof typeof VARIANT_CONFIG;
 
-/**
- * @component FeedbackAlert
- * @description Muestra un mensaje de feedback (éxito, error, advertencia) al usuario utilizando componentes de Bootstrap.
- */
-interface FeedbackAlertProps {
+interface AlertProps {
 	/** El tipo de alerta a mostrar. */
 	readonly variant: Variant;
 	/** El mensaje principal a mostrar. */
@@ -44,32 +39,35 @@ interface FeedbackAlertProps {
 /**
  * Componente que muestra una alerta de feedback personalizable.
  */
-export function FeedbackAlert({
+export function Alert({
 	variant,
 	message,
 	onClose,
 	title,
 	className,
-}: FeedbackAlertProps) {
+}: AlertProps) {
 	const { Icon, defaultTitle, bootstrapVariant } = VARIANT_CONFIG[variant];
 
 	return (
-		<Alert
+		<BootstrapAlert
 			variant={bootstrapVariant}
 			onClose={onClose}
 			dismissible={!!onClose}
 			className={cn(styles.alert, className)}
 		>
 			<div className={styles.alertContent}>
-				<Icon size={24} className={styles.icon} aria-hidden="true" />
+				<div className={styles.iconWrapper}>
+					<Icon size={24} className={styles.icon} aria-hidden="true" />
+				</div>
 				<div>
-					<Alert.Heading as="h2" className={styles.title}>
+					{/* Usamos h3 para mantener una jerarquía semántica correcta, 
+					    ya que el título de la página suele ser h2 */}
+					<BootstrapAlert.Heading as="h3" className={styles.title}>
 						{title ?? defaultTitle}
-					</Alert.Heading>
+					</BootstrapAlert.Heading>
 					<p className={styles.message}>{message}</p>
 				</div>
 			</div>
-		</Alert>
+		</BootstrapAlert>
 	);
 }
-

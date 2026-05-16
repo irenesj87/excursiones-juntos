@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { ValidatedInput } from "../../ui/ValidatedInput";
-import { FeedbackAlert } from "../../ui/FeedbackAlert";
-import CustomButton from "../../ui/CustomButton/CustomButton";
+import { Alert } from "../../ui/Alert";
+import { Button } from "../../ui/Button";
 import { useRegisterForm } from "./useRegisterForm";
 import { PasswordRequirements } from "./PasswordRequirements";
 import styles from "./RegisterForm.module.css";
@@ -34,7 +34,7 @@ export function RegisterForm() {
 		<>
 			{/* Muestra un mensaje de error si existe */}
 			{formState.error && (
-				<FeedbackAlert
+				<Alert
 					variant="danger"
 					message={formState.error}
 					onClose={() => formDispatch({ type: "CLEAR_ERROR" })}
@@ -73,13 +73,13 @@ export function RegisterForm() {
 				</div>
 				<PasswordRequirements password={values.password} />
 				<div className="d-grid d-sm-flex justify-content-sm-end">
-					<CustomButton
+					<Button
 						type="submit"
 						variant="primary"
 						isLoading={formState.isLoading}
 					>
 						Enviar
-					</CustomButton>
+					</Button>
 				</div>
 			</Form>
 		</>

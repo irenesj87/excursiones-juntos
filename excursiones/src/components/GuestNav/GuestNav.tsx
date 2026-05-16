@@ -1,5 +1,5 @@
 import cn from "classnames";
-import StyledNavLink from "../../ui/Link";
+import { Link } from "../../ui/Link";
 import { ROUTES } from "../../constants";
 import { LoginIcon } from "../../ui/Icons";
 import styles from "./GuestNav.module.css";
@@ -17,7 +17,7 @@ interface GuestNavProps {
 function GuestNav({ className }: GuestNavProps): JSX.Element {
 	return (
 		<div className={cn(className, "d-flex align-items-center gap-1")}>
-			<StyledNavLink
+			<Link
 				to={ROUTES.LOGIN}
 				aria-label="Iniciar sesión"
 				className={styles.loginLink}
@@ -27,7 +27,7 @@ function GuestNav({ className }: GuestNavProps): JSX.Element {
 
 				{/* Icono visible en breakpoints < 768px */}
 				<LoginIcon className={styles.linkIcon} aria-hidden="true" />
-			</StyledNavLink>
+			</Link>
 		</div>
 	);
 }

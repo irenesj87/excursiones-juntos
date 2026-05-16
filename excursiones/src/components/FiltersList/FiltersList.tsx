@@ -2,7 +2,7 @@ import React from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { FiltersListCheckbox } from "../FiltersListCheckbox";
 import FilterPillSkeleton from "./FilterPillSkeleton";
-import { FeedbackAlert } from "../../ui/FeedbackAlert";
+import { Alert } from "../../ui/Alert";
 import { useFilters } from "./useFetchFilters";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import styles from "./FiltersList.module.css";
@@ -54,7 +54,7 @@ export function FiltersList({
 	 */
 	if (error) {
 		return (
-			<FeedbackAlert
+			<Alert
 				variant="danger"
 				message="Hubo un error al cargar los filtros."
 			/>

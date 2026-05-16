@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Excursion, AppError } from "../../types";
 import { SearchIcon, XIcon } from "../../ui/Icons";
-import { FeedbackAlert } from "../../ui/FeedbackAlert/FeedbackAlert";
+import { Alert } from "../../ui/Alert";
 import { useSearchBarLogic } from "./useSearchBarLogic";
 import styles from "./SearchBar.module.css";
 
@@ -113,7 +113,7 @@ export function SearchBar({
 			componente FeedbackAlert. */}
 			{error && (
 				<div className={styles.errorWrapper}>
-					<FeedbackAlert
+					<Alert
 						variant="danger"
 						title={error.message}
 						message={error.secondaryMessage || ""}
