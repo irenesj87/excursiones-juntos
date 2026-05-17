@@ -35,7 +35,6 @@
 	top: 50%;
 	transform: translateY(-50%);
 	right: 1rem;
-	/* Estética: Hacemos el foco circular para que coincida con el diseño orgánico */
 	border-radius: 50%;
 	/* Forzamos dimensiones cuadradas explícitas y centrado para evitar deformaciones */
 	width: 2rem;
@@ -53,26 +52,24 @@
 .alertContent {
 	display: flex;
 	align-items: flex-start;
-	gap: 1rem; /* Equivalente a gap-3 */
+	gap: var(--space-4);
 }
 
 /* Icono: Evita que se encoja y ajusta su alineación vertical */
 .icon {
 	flex-shrink: 0;
-	margin-top: 0.25rem; /* Equivalente a mt-1 */
+	margin-top: var(--space-1);
 	color: inherit; /* Hereda el color del texto de la alerta (rojo, verde o amarillo) */
 }
 
-/* Título: Estilo semántico en lugar de clases utilitarias */
 .title {
-	font-family: var(--font-family-serif);
+	font-family: var(--font-family-sans);
 	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 1.2;
 	margin-bottom: 0.5rem;
 }
 
-/* Mensaje */
 .message {
 	margin-bottom: 0;
 }

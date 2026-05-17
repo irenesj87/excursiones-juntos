@@ -3,6 +3,9 @@ import cn from "classnames";
 import { CircleAlertIcon, TriangleAlertIcon, CheckIcon } from "../Icons";
 import styles from "./Alert.module.css";
 
+/**
+ * Configuración visual y semántica por cada variante de alerta.
+ */
 const VARIANT_CONFIG = {
 	danger: {
 		Icon: CircleAlertIcon,
@@ -23,6 +26,10 @@ const VARIANT_CONFIG = {
 
 type Variant = keyof typeof VARIANT_CONFIG;
 
+/**
+ * Propiedades para el componente Alert.
+ * @interface AlertProps
+ */
 interface AlertProps {
 	/** El tipo de alerta a mostrar. */
 	readonly variant: Variant;
@@ -38,6 +45,9 @@ interface AlertProps {
 
 /**
  * Componente que muestra una alerta de feedback personalizable.
+ *
+ * @param {AlertProps} props - Propiedades del componente.
+ * @returns {JSX.Element} Un componente de alerta estilizado.
  */
 export function Alert({
 	variant,
@@ -56,12 +66,8 @@ export function Alert({
 			className={cn(styles.alert, className)}
 		>
 			<div className={styles.alertContent}>
-				<div className={styles.iconWrapper}>
-					<Icon size={24} className={styles.icon} aria-hidden="true" />
-				</div>
+				<Icon size={24} className={styles.icon} aria-hidden="true" />
 				<div>
-					{/* Usamos h3 para mantener una jerarquía semántica correcta, 
-					    ya que el título de la página suele ser h2 */}
 					<BootstrapAlert.Heading as="h3" className={styles.title}>
 						{title ?? defaultTitle}
 					</BootstrapAlert.Heading>
