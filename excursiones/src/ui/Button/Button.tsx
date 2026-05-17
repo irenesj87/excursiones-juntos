@@ -1,13 +1,14 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { Button as BootstrapButton, Spinner } from "react-bootstrap";
+import cn from "classnames";
 import styles from "./Button.module.css";
 
 /**
  * Props para el componente Button.
  */
 interface ButtonProps {
-	/** El contenido del botón. Puede ser texto, iconos o cualquier nodo renderizable. */
-	readonly children: React.ReactNode;
+	/** El texto que se mostrará dentro del botón. */
+	readonly children: string;
 	/** Función a ejecutar al hacer clic. */
 	readonly onClick?: () => void;
 	/** El tipo de botón. */
@@ -20,15 +21,18 @@ interface ButtonProps {
 	readonly disabled?: boolean;
 	/** Si el botón está en estado de carga. */
 	readonly isLoading?: boolean;
-	/** ID del elemento que controla este botón (A11y). */
+	/** ID del elemento que controla este botón. */
 	readonly "aria-controls"?: string;
-	/** Etiqueta accesible para el botón (A11y). */
+	/** Etiqueta accesible para el botón. */
 	readonly "aria-label"?: string;
 }
 
 /**
  * Un componente de botón personalizado y reutilizable que extiende la funcionalidad
  * del botón de React Bootstrap.
+ *
+ * @param {ButtonProps} props - Propiedades del componente.
+ * @param {React.Ref<HTMLButtonElement>} ref - Referencia al elemento botón subyacente.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	(
@@ -45,8 +49,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		},
 		ref,
 	) => {
-		// Combina las clases: la base, la variante y cualquier clase extra pasada por props.
-		const buttonClass = `${styles.button} ${styles[variant]} ${className}`;
+		const buttonClass = cn(styles.button, styles[variant], className);
 
 		return (
 			<BootstrapButton

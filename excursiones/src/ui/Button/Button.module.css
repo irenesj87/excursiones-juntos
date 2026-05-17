@@ -1,8 +1,8 @@
 .button {
 	border-radius: var(--border-radius-pill);
 	font-weight: 600;
-	line-height: 1.5; /* Unificado con CustomLink */
-	padding: 0.5rem 1rem; /* Unificado con CustomLink (8px 16px) */
+	line-height: var(--line-height-base);
+	padding: var(--space-2) var(--space-4);
 	border: none;
 	position: relative;
 	transition:
@@ -17,7 +17,9 @@
 
 .button:active:not(:disabled) {
 	transform: translateY(0) scale(0.98);
-	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	box-shadow: var(
+		--shadow-inner
+	);
 	transition: none;
 }
 
@@ -43,7 +45,7 @@
 
 .primary:hover {
 	background-color: var(--login-btn-bg-hover);
-	color: var(--login-btn-text); /* Asegura contraste en hover */
+	color: var(--login-btn-text);
 }
 
 /* Aumentamos la especificidad para sobrescribir los estilos :active de Bootstrap */
@@ -54,12 +56,12 @@
 }
 
 .button.primary:focus-visible {
-	box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.5);
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
 }
 
 .secondary {
 	background-color: var(--bs-secondary);
-	color: var(--color-text-base); /* Usa el color de texto base del tema */
+	color: var(--color-text-base);
 }
 
 .secondary:hover {
