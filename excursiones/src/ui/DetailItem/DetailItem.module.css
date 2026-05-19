@@ -1,13 +1,13 @@
-.infoItem {
+.detailItem {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
-	font-size: 1rem;
+	gap: var(--space-2);
+	font-size: var(--font-size-base);
 	line-height: 1.5;
 }
 
-.infoLabel {
-	font-weight: 600;
+.detailLabel {
+	font-weight: var(--font-weight-semibold);
 }
 
 .iconWrapper {

@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./InfoItem.module.css";
+import styles from "./DetailItem.module.css";
 
 /**
- * Props para el componente InfoItem.
+ * Props para el componente DetailItem.
  */
-interface InfoItemProps {
+interface DetailItemProps {
 	/** El valor del detalle a mostrar (ej. "Media", "4 horas"). */
 	readonly text?: string;
 	/** Etiqueta descriptiva (ej. "Dificultad"). */
@@ -14,27 +14,27 @@ interface InfoItemProps {
 }
 
 /**
- * Componente para mostrar un detalle específico de una excursión.
+ * Componente para mostrar un detalle específico de una excursión o información.
  */
-function InfoItem({
+export function DetailItem({
 	text,
 	label,
 	icon,
-}: InfoItemProps): JSX.Element | null {
+}: DetailItemProps): JSX.Element | null {
 	if (!text) {
 		// Si no hay texto, no renderizamos nada.
 		return null;
 	}
 
 	return (
-		<span className={styles.infoItem}>
+		<span className={styles.detailItem}>
 			{icon && (
 				<span className={styles.iconWrapper} aria-hidden="true">
 					{icon}
 				</span>
 			)}
 			{label && (
-				<span className={icon ? "visually-hidden" : styles.infoLabel}>
+				<span className={icon ? "visually-hidden" : styles.detailLabel}>
 					{label}:{" "}
 				</span>
 			)}
@@ -42,5 +42,3 @@ function InfoItem({
 		</span>
 	);
 }
-
-export default InfoItem;

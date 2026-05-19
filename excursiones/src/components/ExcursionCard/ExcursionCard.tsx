@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import InfoItem from "../../ui/InfoItem/InfoItem";
+import { DetailItem } from "../../ui/DetailItem";
 import { Alert } from "../../ui/Alert";
 import type { DifficultyLevel } from "../../types";
 import { Button } from "../../ui/Button";
@@ -213,12 +213,12 @@ export function ExcursionCard({
 					</Card.Text>
 					{/* Detalles de la excursión */}
 					<div className={styles.infoItemsContainer}>
-						<InfoItem
+						<DetailItem
 							text={difficulty}
 							label="Dificultad"
 							icon={<ChartIcon size={18} className={styles.infoIcon} />}
 						/>
-						<InfoItem
+						<DetailItem
 							text={time}
 							label="Tiempo estimado"
 							icon={<ClockIcon size={18} className={styles.infoIcon} />}

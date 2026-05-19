@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useSkeletonTheme } from "../../hooks/useSkeletonTheme";
 import type { RootState } from "../../store/store";
 import cardStyles from "./ExcursionCard.module.css";
-import InfoItemStyles from "../../ui/InfoItem/InfoItem.module.css";
+import DetailItemStyles from "../../ui/DetailItem/DetailItem.module.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 /**
@@ -30,7 +30,7 @@ interface InfoItemSkeletonProps {
  */
 function InfoItemSkeleton({ width }: InfoItemSkeletonProps) {
 	return (
-		<div className={InfoItemStyles.infoItem} aria-hidden="true">
+		<div className={DetailItemStyles.infoItem} aria-hidden="true">
 			<Skeleton circle width={18} height={18} />
 			<Skeleton width={width} />
 		</div>
