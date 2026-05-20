@@ -4,22 +4,20 @@
 
 /* --- VARIABLES COMPARTIDAS --- */
 :root {
-	/* --- Botones --- */
-	--btn-transition:
+	/* --- Feedback de Elevación (Elementos Interactivos) --- */
+	--feedback-lift-transition:
 		background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease,
 		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 	/* Transición "espacial" que omite colores, usada durante el cambio de tema */
-	--btn-transition-spatial:
+	--feedback-lift-transition-spatial:
 		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-	--btn-hover-transform: scale(1.02);
-	--btn-active-transform: scale(0.97); /* Efecto de "presión" física */
-	--btn-hover-shadow:
+	--feedback-lift-hover-transform: translateY(-2px);
+	--feedback-lift-active-transform: translateY(0) scale(0.98); /* Efecto de "presión" física */
+	--feedback-lift-hover-shadow:
 		0 8px 16px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
 	/* ------------------------ */
 
-	--navbar-backdrop-filter: blur(
-		16px
-	); /* Aumentamos el blur */
+	--navbar-backdrop-filter: blur(16px); /* Aumentamos el blur */
 	/* Definimos la transición core para la navbar */
 	--navbar-transition:
 		background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease,
@@ -94,9 +92,7 @@ html.light {
 	--color-text-on-primary: var(
 		--color-stone-900
 	); /* Texto oscuro sobre pastel */
-	--color-text-brand: var(
-		--color-moss-800
-	);
+	--color-text-brand: var(--color-moss-800);
 	--color-border-default: var(--color-stone-300);
 	--color-border-subtle: var(--color-stone-100);
 
@@ -115,17 +111,13 @@ html.light {
 
 	--navbar-color: var(--color-stone-800);
 	--navbar-brand-color: var(--color-black-soft);
-	--navbar-brand-icon: var(
-		/* Icono color musgo oscuro */ --color-moss-700
-	);
+	--navbar-brand-icon: var(/* Icono color musgo oscuro */ --color-moss-700);
 
 	/* --- Bordes y Separadores --- */
 	--separator-color: var(--color-stone-500);
 
 	/* --- Botones y Enlaces --- */
-	--theme-toggle-btn-color: var(
-		--color-stone-800
-	);
+	--theme-toggle-btn-color: var(--color-stone-800);
 	--theme-toggle-btn-icon: var(--color-stone-800);
 	--theme-toggle-btn-bg-hover: color-mix(
 		in srgb,
@@ -203,9 +195,7 @@ html.light {
 	--bs-success: var(--color-success-light);
 	--bs-warning: var(--color-warning-light);
 	--bs-danger: var(--color-danger-light);
-	--bs-secondary: var(
-		--color-stone-200
-	);
+	--bs-secondary: var(--color-stone-200);
 	--bs-body-color: var(
 		--color-text-base
 	); /* Asegura que el texto dentro de botones herede bien si no se especifica */
@@ -277,9 +267,7 @@ html.dark {
 	color-scheme: dark;
 	/* --- 2a. Variables Semánticas --- */
 	/* Usamos tonos musgo claros para el color primario, para un alto contraste sobre fondo oscuro */
-	--color-primary: var(
-		--color-moss-100
-	);
+	--color-primary: var(--color-moss-100);
 	--primary-color-rgb: 223, 232, 217;
 	--color-primary-hover: var(--color-moss-200);
 	--color-accent: var(--color-moss-300);
@@ -291,12 +279,8 @@ html.dark {
 	); /* Aclarado para AAA sobre fondo oscuro */
 	--color-text-on-primary: var(--color-black-soft);
 	--color-text-brand: var(--color-moss-300);
-	--color-border-default: var(
-		--color-green-dark-500
-	);
-	--color-border-subtle: var(
-		--color-green-dark-600
-	);
+	--color-border-default: var(--color-green-dark-500);
+	--color-border-subtle: var(--color-green-dark-600);
 
 	/* --- 2b. Variables de Componente --- */
 
@@ -372,14 +356,10 @@ html.dark {
 	--filters-toggle-btn-color-active: var(--login-btn-text);
 	--filters-toggle-btn-border-active: var(--color-primary);
 
-	--filter-pill-bg: var(
-		--color-green-dark-700
-	);
+	--filter-pill-bg: var(--color-green-dark-700);
 	--filter-pill-text: var(--color-text-base);
 	--filter-pill-border: var(--color-green-dark-500);
-	--filter-pill-bg-hover: var(
-		--color-green-dark-600
-	);
+	--filter-pill-bg-hover: var(--color-green-dark-600);
 	--filter-pill-border-hover: var(--color-green-dark-400);
 	--filter-pill-bg-checked: var(--color-primary);
 	--filter-pill-text-checked: var(--color-text-on-primary);
@@ -392,9 +372,7 @@ html.dark {
 	--bs-warning: var(--color-warning-dark);
 	--bs-danger: var(--color-danger-dark);
 	/* Mapeamos Primary y Secondary */
-	--bs-secondary: var(
-		--secondary-btn-bg
-	);
+	--bs-secondary: var(--secondary-btn-bg);
 
 	/* --- Accesibilidad --- */
 	--focus-ring-color: color-mix(
@@ -474,7 +452,7 @@ html.dark .btn-close {
  * un toque orgánico y vivo al elevarse.
  */
 body .btn {
-	transition: var(--btn-transition);
+	transition: var(--feedback-lift-transition);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -488,19 +466,19 @@ body .btn {
  * pero mantienen el feedback físico (transform/shadow).
  */
 html.theme-toggling body .btn {
-	transition: var(--btn-transition-spatial);
+	transition: var(--feedback-lift-transition-spatial);
 }
 
 /* Estado Hover: Elevación sutil y sombra expansiva */
 .btn:hover:not(:disabled):not(.disabled) {
-	transform: var(--btn-hover-transform);
-	box-shadow: var(--btn-hover-shadow);
+	transform: var(--feedback-lift-hover-transform);
+	box-shadow: var(--feedback-lift-hover-shadow);
 }
 
 /* Estado Active: Feedback táctil al presionar */
 body .btn:active:not(:disabled):not(.disabled),
 body .btn:focus:active:not(:disabled):not(.disabled) {
-	transform: var(--btn-active-transform);
+	transform: var(--feedback-lift-active-transform);
 	box-shadow: var(--shadow-soft);
 }
 

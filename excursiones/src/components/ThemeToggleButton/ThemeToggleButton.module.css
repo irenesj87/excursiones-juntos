@@ -11,10 +11,9 @@
 	line-height: 1;
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent; /* Evita el parpadeo gris al tocar en iOS */
-	/* Transición suave para movimiento y color de fondo */
-	transition:
-		transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-		background-color 0.25s ease;
+	/* Sincronización con el sistema de feedback global */
+	transition: var(--feedback-lift-transition);
+	will-change: transform; /* Previene desplazamientos sub-pixel (jiggles) al iniciar la animación */
 }
 
 .themeIcon {
@@ -25,8 +24,9 @@
 /* Estado Hover: Elevación sutil para jerarquía visual */
 .themeToggleBtn:hover,
 .themeToggleBtn:focus-visible {
-	transform: translateY(-2px);
+	transform: var(--feedback-lift-hover-transform);
 	background-color: var(--theme-toggle-btn-bg-hover);
+	box-shadow: var(--feedback-lift-hover-shadow);
 }
 
 /* Eliminamos el outline por defecto en foco para gestionarlo con focus-visible */
@@ -45,6 +45,6 @@
 	background-color: var(--theme-toggle-btn-bg-hover);
 	border-color: transparent;
 	color: var(--theme-toggle-btn-color);
-	transform: translateY(0) scale(0.92);
+	transform: var(--feedback-lift-active-transform);
 	transition: none;
 }
