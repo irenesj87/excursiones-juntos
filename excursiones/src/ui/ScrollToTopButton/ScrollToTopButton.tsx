@@ -1,18 +1,28 @@
 import { useState, useEffect } from "react";
 import { ArrowUpIcon } from "../Icons";
-import styles from "./ScrollToTop.module.css";
+import styles from "./ScrollToTopButton.module.css";
+
+/**
+ * Umbral de scroll en píxeles a partir del cual el botón se hace visible.
+ * Se elige un valor bajo (100px) para que sea útil rápidamente.
+ */
+const SCROLL_THRESHOLD_PX = 100;
 
 /**
  * Botón flotante que permite al usuario volver a la parte superior de la página.
  * Aparece solo cuando el usuario ha hecho scroll hacia abajo.
+ *
+ * @returns Un elemento de botón con comportamiento de scroll suave.
  */
-export function ScrollToTop() {
+export function ScrollToTopButton() {
 	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {
+		/**
+		 * Evalúa la posición actual del scroll para determinar la visibilidad del botón.
+		 */
 		const toggleVisibility = () => {
-			// Umbral reducido a 100px para que el botón sea más persistente y útil
-			setIsVisible(globalThis.window.scrollY > 100);
+			setIsVisible(globalThis.window.scrollY > SCROLL_THRESHOLD_PX);
 		};
 
 		globalThis.window.addEventListener("scroll", toggleVisibility, {
@@ -22,6 +32,9 @@ export function ScrollToTop() {
 			globalThis.window.removeEventListener("scroll", toggleVisibility);
 	}, []);
 
+	/**
+	 * Realiza un desplazamiento suave hacia el inicio del documento.
+	 */
 	const scrollToTop = () => {
 		globalThis.window.scrollTo({
 			top: 0,
@@ -32,8 +45,7 @@ export function ScrollToTop() {
 	return (
 		<button
 			type="button"
-			/* Eliminamos btn-primary para usar nuestros propios estilos neutros y evitar distracciones */
-			className={`${styles.scrollToTop} ${isVisible ? styles.visible : ""} btn`}
+			className={`${styles.scrollToTopButton} ${isVisible ? styles.visible : ""} btn`}
 			onClick={scrollToTop}
 			aria-label="Volver arriba"
 		>

@@ -8,7 +8,7 @@ const CONTENT = {
 		highlight: "explorar.",
 	},
 	description:
-		"Para nosotros, la verdadera aventura no se mide en kilómetros, sino en la calma de un paisaje compartido y en las historias que nacen alrededor de un sendero. Nos une el respeto por el silencio de los bosques, la luz de la mañana y el compromiso de dejar una huella mínima en la tierra que tanto nos regala.",
+		"Para nosotros, la verdadera aventura no se mide en kilómetros, sino en la calma de un paisaje compartido y en las historias que nacen alrededor de un sendero. Nos une el respeto por el silencio de los bosques y el compromiso de dejar una huella mínima en la tierra que tanto nos regala.",
 };
 
 export function AboutUs() {

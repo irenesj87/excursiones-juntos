@@ -1,0 +1,67 @@
+.scrollToTopButton {
+	position: fixed;
+	bottom: var(--space-8);
+	left: var(--space-8);
+	right: auto;
+
+	width: 3.5rem;
+	height: 3.5rem;
+	z-index: var(--z-index-fixed, 1000);
+
+	background-color: var(--color-stone-200);
+	color: var(--color-stone-800);
+	border: none;
+
+	border-radius: 50%;
+	padding: 0;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(20px);
+	transition:
+		opacity 0.3s ease,
+		transform 0.3s ease,
+		visibility 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--shadow-soft);
+}
+
+/* Soporte para navegación por teclado */
+.scrollToTopButton:focus-visible {
+	/* Usamos el anillo de foco definido en Themes.css para consistencia global */
+	outline: none;
+	box-shadow: 0 0 0 var(--space-1) var(--focus-ring-color);
+}
+
+.scrollToTopButton:hover,
+.scrollToTopButton:focus {
+	background-color: var(--color-stone-300);
+	color: var(--color-stone-900);
+	transform: translateY(-2px);
+}
+
+/* 
+ * Estado activo para evitar la pérdida de color y dar feedback de presión.
+ */
+:global(body) .scrollToTopButton:global(.btn):active:not(:disabled),
+:global(body) .scrollToTopButton:global(.btn):focus:active:not(:disabled) {
+	background-color: var(--color-stone-400);
+	color: var(--color-stone-900);
+	transform: var(--feedback-lift-active-transform);
+	transition: none;
+}
+
+.visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+/* Desktop: Movemos el botón a la derecha para un balance visual clásico */
+@media (min-width: 992px) {
+	.scrollToTopButton {
+		left: auto;
+		right: var(--space-8);
+	}
+}
