@@ -21,7 +21,9 @@ import {
 	User,
 	Mail,
 	Copyright,
-	ArrowUp
+	ArrowUp,
+	ChevronLeft,
+	ChevronRight,
 } from "lucide-react";
 
 // Tipo base para las props de los iconos
@@ -79,3 +81,7 @@ export const MailIcon = Mail as React.ComponentType<IconProps>;
 export const CopyrightIcon = Copyright as React.ComponentType<IconProps>;
 // Icono de flecha hacia arriba para el botón de "Scroll to Top"
 export const ArrowUpIcon = ArrowUp as React.ComponentType<IconProps>;
+// Icono de flecha izquierda para la paginación
+export const ChevronLeftIcon = ChevronLeft as React.ComponentType<IconProps>;
+// Icono de flecha derecha para la paginación
+export const ChevronRightIcon = ChevronRight as React.ComponentType<IconProps>;

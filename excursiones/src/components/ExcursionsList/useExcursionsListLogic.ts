@@ -7,6 +7,11 @@ import { useJoinExcursionAction } from "./useJoinExcursionAction";
 const JOIN_EXCURSION_ERROR_MSG =
 	"No ha sido posible apuntarse a la excursión. Por favor, inténtalo de nuevo más tarde.";
 
+/** Constantes de paginación */
+const ITEMS_PER_PAGE_MOBILE = 4;
+const ITEMS_PER_PAGE_TABLET = 6;
+const ITEMS_PER_PAGE_DESKTOP = 8;
+
 /**
  * Hook personalizado para detectar si una media query de CSS coincide.
  * @param query La media query a evaluar (ej: '(min-width: 768px)').
@@ -85,8 +90,16 @@ export function useExcursionsListLogic({
 
 	// --- Lógica de Paginación ---
 	const [currentPage, setCurrentPage] = useState(1);
-	const isDesktop = useMediaQuery("(min-width: 992px)");
-	const ITEMS_PER_PAGE = isDesktop ? 8 : 4;
+	const isTablet = useMediaQuery("(min-width: 768px)");
+	const isLargeDesktop = useMediaQuery("(min-width: 1200px)");
+
+	let itemsPerPage = ITEMS_PER_PAGE_MOBILE;
+	if (isLargeDesktop) {
+		itemsPerPage = ITEMS_PER_PAGE_DESKTOP;
+	} else if (isTablet) {
+		itemsPerPage = ITEMS_PER_PAGE_TABLET;
+	}
+	const ITEMS_PER_PAGE = itemsPerPage;
 
 	// Se calcula sobre la lista que se está mostrando para ser consistente con la UI.
 	const totalPages = Math.ceil(displayedExcursions.length / ITEMS_PER_PAGE);
@@ -106,6 +119,14 @@ export function useExcursionsListLogic({
 			setCurrentPage(1);
 		}
 	}, [isLoading, excursionData]);
+
+	// Evita que el usuario se quede en una página inexistente si cambia el tamaño de la pantalla
+	// (ej. de 6 ítems/página a 8 ítems/página).
+	useEffect(() => {
+		if (currentPage > totalPages && totalPages > 0) {
+			setCurrentPage(totalPages);
+		}
+	}, [totalPages, currentPage]);
 
 	// Transformación a Set para búsquedas O(1) en el renderizado.
 	// Toma la lista de excursiones a las que se ha apuntado el usuario(si existe), convierte todos los IDs a texto

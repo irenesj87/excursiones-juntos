@@ -31,9 +31,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-wrap: wrap; /* Asegura que no se desborde en pantallas muy pequeñas */
+	flex-wrap: wrap; /* Asegura que no se desborde en breakpoints muy pequeños */
 	gap: 0.5rem; /* Espacio entre los botones */
-	margin-top: 3rem;
+	margin-top: var(
+		--space-12
+	);
 	padding: 0;
 }
 
@@ -41,6 +43,10 @@
 .paginationContainer :global(.page-link) {
 	box-shadow: var(--shadow-soft);
 	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
 	transition:
 		transform 0.2s ease-out,
 		box-shadow 0.2s ease-out;
@@ -60,13 +66,7 @@
 	transform: translateY(-2px); /* Ligera elevación para destacar */
 }
 
-/* Ajuste para los iconos de Prev/Next para que estén centrados visualmente */
-.paginationContainer :global(.page-link span) {
-	line-height: 1;
-	display: block;
-}
-
-/* En pantallas grandes, alinea la paginación a la izquierda para que coincida con el título de la sección. */
+/* En breakpoints grandes, alinea la paginación a la izquierda para que coincida con el título de la sección. */
 @media (min-width: 992px) {
 	.paginationContainer {
 		justify-content: flex-start;
