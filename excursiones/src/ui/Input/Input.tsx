@@ -1,41 +1,50 @@
-import { useState, ChangeEvent, forwardRef, useRef } from "react";
+import {
+	useState,
+	ChangeEvent,
+	forwardRef,
+	useRef,
+	HTMLInputTypeAttribute,
+} from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import cn from "classnames";
 import { EyeIcon, EyeOffIcon, TriangleAlertIcon } from "../Icons";
-import styles from "./ValidatedInput.module.css";
+import styles from "./Input.module.css";
 
 /**
- * Propiedades del componente ValidatedInput.
+ * Propiedades del componente Input.
  */
-interface ValidatedInputProps {
+interface InputProps {
 	/** ID único para el campo de formulario y la etiqueta. */
 	readonly id: string;
 
 	/** Texto para la etiqueta del campo. */
 	readonly name: string;
 
-	/** Tipo de input (ej. "text", "email", "password"). El valor por defecto es "text". */
-	readonly inputType?: string;
+	/** Tipo de input HTML. El valor por defecto es "text". */
+	readonly inputType?: HTMLInputTypeAttribute;
 
 	/** Función para actualizar el estado del valor del input en el componente padre. */
 	readonly inputToChange: (value: string) => void;
 
-	/** Función que valida el valor del input. Retorna `true` si es válido, o un `string` con el mensaje de error. */
-	readonly validationFunction: (value: string) => boolean | string;
+	/** Función que valida el valor del input. Retorna true si es válido o un string/boolean si no lo es. */
+	readonly validationFunction: (
+		value: string,
+		secondValue?: string,
+	) => boolean | string;
 
 	/** El valor actual del campo de formulario. */
 	readonly value: string;
 
-	/** Si es true, muestra un mensaje de error cuando la validación falla. */
-	readonly message: boolean;
+	/** Indica si el formulario ha intentado ser enviado para forzar la validación. */
+	readonly isSubmitted: boolean;
 
 	/** Mensaje de error específico. Si no se proporciona, se usa uno genérico. */
 	readonly errorMessage?: string;
 
-	/** Valor para el atributo autocomplete del input. */
-	readonly autocomplete: string;
+	/** Valor para el atributo autocomplete del input (estándar HTML/Config). */
+	readonly autocomplete?: string;
 
 	/** IDs adicionales para aria-describedby, separados por espacios. */
 	readonly ariaDescribedBy?: string;
@@ -50,7 +59,7 @@ interface ValidatedInputProps {
  * También incluye una funcionalidad para mostrar/ocultar contraseñas si el tipo de input es "password".
  * @returns Un componente de formulario con validación integrada y accesibilidad mejorada.
  */
-export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
 	(
 		{
 			id,
@@ -59,7 +68,7 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 			inputToChange,
 			validationFunction,
 			value,
-			message,
+			isSubmitted,
 			errorMessage,
 			autocomplete,
 			ariaDescribedBy,
@@ -108,10 +117,10 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 
 		/**
 		 * Validación Perezosa: Mostramos error solo si la validación falla Y:
-		 * - El formulario ha intentado enviarse (message === true).
+		 * - El formulario ha intentado enviarse (isSubmitted === true).
 		 * - O el usuario ha salido del campo al menos una vez (isTouched === true).
 		 */
-		const isInvalid = !isValid && (message || isTouched);
+		const isInvalid = !isValid && (isSubmitted || isTouched);
 
 		// Mostramos el mensaje de error solo si hay un mensaje específico y el campo es inválido para
 		// no renderizar contenedores de error vacíos.
@@ -193,4 +202,4 @@ export const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
 	},
 );
 
-ValidatedInput.displayName = "ValidatedInput";
+Input.displayName = "Input";

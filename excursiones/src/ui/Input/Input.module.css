@@ -1,7 +1,6 @@
 .inputContainer :global(.form-control) {
 	border-radius: var(--border-radius-md);
 	transition:
-		border-color 0.2s ease-out,
 		box-shadow 0.2s ease-out;
 }
 
@@ -71,7 +70,6 @@
 	background-color: transparent;
 	border-color: var(--color-border-default);
 	color: var(--color-text-muted);
-	/* Aseguramos que el botón herede el radio del tema (16px) para mantener la simetría con el input */
 	border-radius: var(--border-radius-md);
 	transition:
 		background-color 0.2s ease-out,

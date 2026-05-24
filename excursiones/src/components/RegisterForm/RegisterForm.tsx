@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import { ValidatedInput } from "../../ui/ValidatedInput";
+import { Input } from "../../ui/Input";
 import { Alert } from "../../ui/Alert";
 import { Button } from "../../ui/Button";
 import { useRegisterForm } from "./useRegisterForm";
@@ -59,12 +59,12 @@ export function RegisterForm() {
 						<Row key={row.map((f) => f.id).join("-")}>
 							{row.map(({ ref, field, ...fieldProps }) => (
 								<Col xs={12} md={6} key={fieldProps.id}>
-									<ValidatedInput
+									<Input
 										{...fieldProps}
 										ref={ref}
 										value={values[field]}
 										inputToChange={(value) => handleInputChange(field, value)}
-										message={isSubmitted}
+										isSubmitted={isSubmitted}
 									/>
 								</Col>
 							))}

@@ -5,7 +5,7 @@ import {
 	validateName as isNotEmpty,
 } from "../../validation/validations";
 import { ROUTES, FORM_TEXT } from "../../constants";
-import { ValidatedInput } from "../../ui/ValidatedInput/ValidatedInput";
+import { Input } from "../../ui/Input";
 import { Button } from "../../ui/Button";
 import { Alert } from "../../ui/Alert";
 import { loginUser } from "../../services/authService";
@@ -70,7 +70,7 @@ export function LoginForm() {
 				className={styles.formLabel}
 			>
 				<div className={styles.fieldsContainer}>
-					<ValidatedInput
+					<Input
 						ref={emailInputRef}
 						id="formLoginEmail"
 						name={FORM_TEXT.EMAIL_LABEL}
@@ -78,18 +78,18 @@ export function LoginForm() {
 						inputToChange={setMail}
 						validationFunction={validateMail}
 						value={mail}
-						message={isSubmitted}
+						isSubmitted={isSubmitted}
 						autocomplete="email"
 						errorMessage={FORM_TEXT.INVALID_EMAIL_FORMAT}
 					/>
-					<ValidatedInput
+					<Input
 						id="formLoginPassword"
 						inputType="password"
 						name={FORM_TEXT.PASSWORD_LABEL}
 						inputToChange={setPassword}
 						validationFunction={isNotEmpty}
 						value={password}
-						message={isSubmitted}
+						isSubmitted={isSubmitted}
 						autocomplete="current-password"
 						errorMessage={FORM_TEXT.PASSWORD_CANNOT_BE_EMPTY}
 					/>
