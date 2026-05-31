@@ -1,5 +1,5 @@
 /**
- * Valida que el nombre no esté vacío después de quitarle los espacios en blanco.
+ * Valida que el nombre del usuario no esté vacío después de quitarle los espacios en blanco.
  * @param name - El nombre a validar.
  * @returns - Retorna true si el nombre es válido, de lo contrario false.
  */
@@ -8,9 +8,9 @@ export function validateName(name: string): boolean {
 }
 
 /**
- * Valida que el apellido no esté vacío después de quitarle los espacios en blanco.
- * @param surname - El apellido a validar.
- * @returns - Retorna true si el apellido es válido, de lo contrario false.
+ * Valida que los apellidos del usuario no estén vacíos después de quitarles los espacios en blanco.
+ * @param surname - Los apellidos a validar.
+ * @returns - Retorna true si los apellidos son válidos, de lo contrario false.
  */
 export function validateSurname(surname: string): boolean {
 	// Reutiliza la misma lógica de validación que para el nombre para evitar duplicación.
