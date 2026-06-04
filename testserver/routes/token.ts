@@ -5,11 +5,11 @@ import { authenticateToken } from "../authMiddleware.js";
 
 const router = express.Router();
 
-// Rate limiter para proteger el endpoint de verificación de token contra ataques de fuerza bruta o DoS.
+// Límite para proteger el endpoint de verificación de token contra ataques de fuerza bruta o DoS.
 const verifyLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutos
 	max: 100, // Limita cada IP a 100 peticiones por ventana de tiempo
-	standardHeaders: true, // Devuelve la información del rate limit en las cabeceras `RateLimit-*`
+	standardHeaders: true, // Retorna la información del rate limit en las cabeceras `RateLimit-*`
 	legacyHeaders: false, // Deshabilita las cabeceras `X-RateLimit-*`
 	message:
 		"Demasiadas peticiones desde esta IP, por favor intente de nuevo después de 15 minutos.",
@@ -48,7 +48,7 @@ router.get(
 				.json({ message: "Usuario asociado al token no encontrado." });
 		}
 
-		// Recuperamos el token de la cabecera para devolverlo al cliente.
+		// Recuperamos el token de la cabecera para retornarlo al cliente.
 		// Esto asegura que el frontend siempre reciba el token explícitamente tras verificar.
 		const authHeader = req.headers.authorization;
 		const token = authHeader?.split(" ")[1];

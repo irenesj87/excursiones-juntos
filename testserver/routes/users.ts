@@ -17,15 +17,15 @@ import {
 
 const router = express.Router();
 
-// Middleware que dice si un usuario puede modificar info o no
+// Middleware que dice si un usuario puede modificar info o no.
 const authorizeUserModification = (
 	req: Request,
 	res: Response,
 	next: NextFunction,
 ) => {
-	// Obtenemos el correo asociado al token, añadido por el middleware authenticateToken
+	// Obtenemos el correo asociado al token, añadido por el middleware authenticateToken.
 	const emailFromToken = req.userMail;
-	// Obtenemos el correo del usuario a modificar desde la URL
+	// Obtenemos el correo del usuario a modificar desde la URL.
 	const targetMail = req.params["mail"];
 
 	// Comprobación de seguridad y estrechamiento de tipos (type narrowing).
@@ -60,7 +60,7 @@ router.get("/", (req: Request, res: Response) => {
 	res.status(200).json(response);
 });
 
-// Rate limiter para la creación de usuarios, para prevenir la creación masiva de cuentas.
+// Límite para la creación de usuarios, para prevenir la creación masiva de cuentas.
 const createUserLimiter = rateLimit({
 	windowMs: 60 * 60 * 1000, // 1 hora
 	max: 5, // Limita cada IP a 5 creaciones de cuenta por hora
@@ -70,7 +70,7 @@ const createUserLimiter = rateLimit({
 		"Demasiadas cuentas creadas desde esta IP, por favor intente de nuevo después de una hora.",
 });
 
-// Rate limiter para proteger otros endpoints de API contra el abuso por parte de usuarios autenticados.
+// Límite para proteger otros endpoints de API contra el abuso por parte de usuarios autenticados.
 const apiLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutos
 	max: 200, // Limita cada IP a 200 peticiones por ventana de tiempo. Es un límite generoso para uso normal.
@@ -98,7 +98,7 @@ router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 		});
 	}
 
-	// 1.2 Validaciones de formato y seguridad (Espejo exacto del Frontend)
+	// Validaciones de formato y seguridad (Espejo exacto del Frontend)
 	if (!validateName(name)) {
 		return res.status(400).json({ error: "El nombre no puede estar vacío." });
 	}
@@ -126,7 +126,7 @@ router.post("/", createUserLimiter, async (req: Request, res: Response) => {
 		});
 	}
 
-	// 2. Lógica de negocio (una vez que los datos son válidos)
+	// Lógica de negocio (una vez que los datos son válidos)
 	// Se comprueba si ya hay un usuario con ese correo
 	const userFound = users.find(
 		(user) => user.mail.toLowerCase() === mail.toLowerCase(),
@@ -182,7 +182,7 @@ router.put(
 	authorizeUserModification,
 	(req: Request, res: Response, next: NextFunction) => {
 		// Evitar loguear directamente el mail del usuario en logs de producción.
-		console.log(`PUT /users - Request received for user modification.`); // Log start
+		console.log(`PUT /users - Request received for user modification.`);
 		try {
 			// Obtenemos el correo del usuario a modificar
 			const { mail: rawMail } = req.params;
@@ -193,7 +193,7 @@ router.put(
 						"Bad Request: El parámetro 'mail' en la URL es requerido y debe ser una cadena de texto.",
 				});
 			}
-			// Sanitizamos/limpiamos el parámetro para "descontaminar" el dato (untaint)
+			// Sanitizamos el parámetro para "descontaminar" el dato (untaint)
 			const targetMail = rawMail.trim().toLowerCase();
 
 			// Buscamos el usuario a actualizar
@@ -277,7 +277,7 @@ router.get(
 			return res.status(404).json({ error: "Usuario no encontrado" });
 		}
 
-		// Si el usuario no tiene excursiones, se devuelve un array vacío para evitar trabajo innecesario
+		// Si el usuario no tiene excursiones, se retorna un array vacío para evitar trabajo innecesario
 		if (!user.excursions || user.excursions.length === 0) {
 			return res.json([]);
 		}
@@ -314,7 +314,7 @@ router.post(
 				});
 			}
 
-			// Untaint: Limpiamos el parámetro de la URL
+			// Limpiamos el parámetro de la URL
 			const targetMail = rawMail.trim().toLowerCase();
 
 			// Validamos que el excursionId se ha enviado.

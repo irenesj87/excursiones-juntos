@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-// Rate limiter para proteger el endpoint de login contra ataques de fuerza bruta.
+// Límite para proteger el endpoint de login contra ataques de fuerza bruta.
 const loginLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutos
 	max: 5, // Limita cada IP a 5 intentos de login por ventana de tiempo. Es bajo para ser más seguro.
@@ -18,7 +18,7 @@ const loginLimiter = rateLimit({
 
 /** LOGIN */
 router.post("/", loginLimiter, async (req: Request, res: Response) => {
-	// Obtenemos el correo y la contraseña del usuario que se quiere loguear
+	// Obtenemos el correo y la contraseña del usuario que se quiere loguear.
 	const { mail, password } = req.body;
 
 	// 1. Buscamos al usuario solo por su correo electrónico.
@@ -32,13 +32,13 @@ router.post("/", loginLimiter, async (req: Request, res: Response) => {
 		? await bcrypt.compare(password, foundUser.password)
 		: false;
 
-	// Si el usuario no existe o la contraseña no coincide, devolvemos un error genérico.
+	// Si el usuario no existe o la contraseña no coincide, se retorna un error genérico.
 	if (!foundUser || !passwordMatch) {
 		return res
 			.status(401)
 			.json({ error: "Datos erróneos. Inténtalo de nuevo." });
 	} else {
-		// 1. Crear el payload (la información que queremos guardar en el token)
+		// 1. Crear el payload (la información que queremos guardar en el token).
 		const payload = { mail: foundUser.mail };
 
 		// 2. Firmar el token con una clave secreta y establecer una expiración (ej: 1 hora)

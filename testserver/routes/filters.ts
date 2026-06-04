@@ -17,7 +17,7 @@ const isAllowedFilter = (type: any): type is AllowedFilter => {
 // http://localhost:3001/filters?type=difficulty
 // http://localhost:3001/filters?type=time
 router.get("/", (req: Request, res: Response) => {
-	// Variable que tiene el tipo de filtro que se necesita en ese momento
+	// Variable que tiene el tipo de filtro que se necesita en ese momento.
 	const filterType = req.query["type"];
 
 	// Usamos la guarda de tipo para validar el parámetro de la query.

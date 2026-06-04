@@ -5,7 +5,7 @@ import tokenBlocklist from "../data/tokenBlocklist.js";
 
 const router = express.Router();
 
-// Rate limiter para proteger el endpoint de logout contra el abuso.
+// Límite para proteger el endpoint de logout contra el abuso de peticiones.
 const logoutLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutos
 	max: 50, // Limita cada IP a 50 peticiones de logout por ventana de tiempo.

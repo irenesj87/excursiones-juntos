@@ -4,7 +4,7 @@ import excursions, { Excursion } from "../data/excursionsData.js";
 const router = express.Router();
 
 /**
- * Función auxiliar para aplicar filtros. Ahora maneja tanto un string como un array de valores.
+ * Función auxiliar para aplicar filtros. Maneja tanto un string como un array de valores.
  * @param data - El array de excursiones a filtrar.
  * @param filterValue - El valor del parámetro de la query (ej: "Centro" o ["Centro", "Este"]).
  * @param property - La propiedad del objeto excursión a comparar (ej: "area").
@@ -13,7 +13,7 @@ const router = express.Router();
 const applyListFilter = (
 	data: Excursion[],
 	filterValue: unknown,
-	property: keyof Pick<Excursion, "area" | "difficulty" | "time">
+	property: keyof Pick<Excursion, "area" | "difficulty" | "time">,
 ): Excursion[] => {
 	// Si el valor del filtro no es una cadena o un array, no se puede procesar.
 	if (typeof filterValue !== "string" && !Array.isArray(filterValue)) {
@@ -30,14 +30,13 @@ const applyListFilter = (
 		.filter(Boolean); // .filter(Boolean) elimina strings vacíos
 
 	// Si no hay items de filtro válidos después de limpiar, no se aplica ningún filtro.
-	// Este bloque ahora es alcanzable si el usuario envía filtros vacíos (ej: ?area=,).
 	if (filterItems.length === 0) {
 		return data;
 	}
 
 	// Se filtran los datos retornando sólo aquellos cuya propiedad coincide con los items del filtro.
 	return data.filter((excursion) =>
-		filterItems.includes(excursion[property].toLowerCase())
+		filterItems.includes(excursion[property].toLowerCase()),
 	);
 };
 
@@ -46,7 +45,8 @@ router.get("/", (req: Request, res: Response) => {
 	/* req.query: En Express.js, req representa la petición HTTP. Es una propiedad de este objeto que tiene cualquier
      parámetro enviado en la URL. Por ejemplo, si alguien accede a /excursions?q=hiking&difficulty=easy, entonces
      req.query será { q:'hiking', difficulty:'easy' }. Se utiliza la letra 'q' porque viene de query, normalmente los desarrolladores 
-	 utilizan esa letra cuando se hacen búsquedas */
+	 utilizan esa letra cuando se hacen búsquedas 
+	 */
 	/* Variable que guarda el valor del parámetro 'q' de la petición HTTP. Si 'q' existe, su valor se guarda en 'search'.
 	 * Si el parámetro 'q' no existe, la variable guarda un string vacío. Esto previene errores y asegura que 'search' siempre tenga un
 	 * string con el que trabajar
@@ -60,7 +60,7 @@ router.get("/", (req: Request, res: Response) => {
 	if (search) {
 		const searchLower = search.toLowerCase();
 		filteredExcursions = filteredExcursions.filter((excursion) =>
-			excursion.name.toLowerCase().includes(searchLower)
+			excursion.name.toLowerCase().includes(searchLower),
 		);
 	}
 
@@ -78,7 +78,7 @@ router.get("/", (req: Request, res: Response) => {
 			}
 			return currentExcursions;
 		},
-		filteredExcursions
+		filteredExcursions,
 	);
 	res.status(200).json(filteredExcursions);
 });
